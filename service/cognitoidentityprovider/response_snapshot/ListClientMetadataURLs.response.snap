@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.ListClientMetadataURLs
+
+{"ClientMetadataURLs":[{"CachedDate":946684800,"ExpirationDate":946684800,"URL":"__URL__"},{"CachedDate":946684800,"ExpirationDate":946684800,"URL":"__URL__"}],"NextToken":"__NextToken__"}

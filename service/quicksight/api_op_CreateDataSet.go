@@ -118,6 +118,11 @@ type CreateDataSetInput struct {
 	// the dataset.
 	Tags []types.Tag
 
+	// A list of unmaterialized calculated columns for the dataset. These columns are
+	// computed at analysis time and are not stored in the prepared data. You can only
+	// use this with the new data preparation experience.
+	UnmaterializedCalculatedColumns []types.UnmaterializedCalculatedColumn
+
 	// The usage of the dataset. RLS_RULES must be specified for RLS permission
 	// datasets.
 	UseAs types.DataSetUseAs
@@ -200,6 +205,9 @@ func (v *CreateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Tags != nil {
 		serializeTagList(s, schemas.CreateDataSetRequest_Tags, v.Tags)
+	}
+	if v.UnmaterializedCalculatedColumns != nil {
+		serializeUnmaterializedCalculatedColumnList(s, schemas.CreateDataSetRequest_UnmaterializedCalculatedColumns, v.UnmaterializedCalculatedColumns)
 	}
 	if v.UseAs != "" {
 		s.WriteString(schemas.CreateDataSetRequest_UseAs, string(v.UseAs))

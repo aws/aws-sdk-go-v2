@@ -15,11 +15,25 @@ var AcceptChannelHandshake = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/AcceptChannelHandshake",
 	Code: 200})
 
+var CancelChannelContract = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "CancelChannelContract",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/CancelChannelContract",
+	Code: 200})
+
 var CancelChannelHandshake = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "CancelChannelHandshake",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CancelChannelHandshake",
+	Code: 200})
+
+var CreateChannelContract = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "CreateChannelContract",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/CreateChannelContract",
 	Code: 200})
 
 var CreateChannelHandshake = smithy.NewSchema(smithy.ShapeID{
@@ -57,11 +71,25 @@ var DeleteRelationship = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/DeleteRelationship",
 	Code: 200})
 
+var GetChannelContract = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "GetChannelContract",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/GetChannelContract",
+	Code: 200})
+
 var GetRelationship = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "GetRelationship",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetRelationship",
+	Code: 200})
+
+var ListChannelContracts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ListChannelContracts",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/ListChannelContracts",
 	Code: 200})
 
 var ListChannelHandshakes = smithy.NewSchema(smithy.ShapeID{
@@ -164,6 +192,35 @@ var _AccountIdList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _AccountIdList_member *smithy.Schema
 
+var AccountScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "AccountScope",
+}, smithy.ShapeTypeEnum, 2)
+var AccountScope_ENTIRE_ORGANIZATION *smithy.Schema
+
+var AccountScope_SPECIFIC_MEMBER_ACCOUNTS *smithy.Schema
+
+var Address = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "Address",
+}, smithy.ShapeTypeStructure, 6, &smithytraits.Sensitive{})
+var Address_city *smithy.Schema
+
+var Address_stateOrRegion *smithy.Schema
+
+var Address_postalCode *smithy.Schema
+
+var Address_countryCode *smithy.Schema
+
+var Address_addressLine *smithy.Schema
+
+var Address_addressLine2 *smithy.Schema
+
+var _AddressLine = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "AddressLine",
+}, smithy.ShapeTypeString, 0)
+
 var _Arn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "Arn",
@@ -188,18 +245,32 @@ var _AssociatedResourceIdentifierList_member *smithy.Schema
 var AssociationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "AssociationType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var AssociationType_DOWNSTREAM_SELLER *smithy.Schema
 
 var AssociationType_END_CUSTOMER *smithy.Schema
 
 var AssociationType_INTERNAL *smithy.Schema
 
+var AssociationType_MANAGED_SERVICES_END_CUSTOMER *smithy.Schema
+
 var _AssociationTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "AssociationTypeList",
 }, smithy.ShapeTypeList, 1)
 var _AssociationTypeList_member *smithy.Schema
+
+var CancelChannelContractDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "CancelChannelContractDetail",
+}, smithy.ShapeTypeStructure, 4)
+var CancelChannelContractDetail_id *smithy.Schema
+
+var CancelChannelContractDetail_arn *smithy.Schema
+
+var CancelChannelContractDetail_status *smithy.Schema
+
+var CancelChannelContractDetail_cancellationReason *smithy.Schema
 
 var CancelChannelHandshakeDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
@@ -211,10 +282,142 @@ var CancelChannelHandshakeDetail_arn *smithy.Schema
 
 var CancelChannelHandshakeDetail_status *smithy.Schema
 
+var _CancellationReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "CancellationReason",
+}, smithy.ShapeTypeString, 0)
+
 var _Catalog = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "Catalog",
 }, smithy.ShapeTypeString, 0)
+
+var ChannelContractDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractDetail",
+}, smithy.ShapeTypeStructure, 10)
+var ChannelContractDetail_id *smithy.Schema
+
+var ChannelContractDetail_arn *smithy.Schema
+
+var ChannelContractDetail_catalog *smithy.Schema
+
+var ChannelContractDetail_contractType *smithy.Schema
+
+var ChannelContractDetail_status *smithy.Schema
+
+var ChannelContractDetail_createdAt *smithy.Schema
+
+var ChannelContractDetail_updatedAt *smithy.Schema
+
+var ChannelContractDetail_respondedAt *smithy.Schema
+
+var ChannelContractDetail_cancellationReason *smithy.Schema
+
+var ChannelContractDetail_details *smithy.Schema
+
+var ChannelContractDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractDetails",
+}, smithy.ShapeTypeUnion, 1)
+var ChannelContractDetails_managedServicesAttestationDetails *smithy.Schema
+
+var _ChannelContractId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractId",
+}, smithy.ShapeTypeString, 0)
+
+var _ChannelContractIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var _ChannelContractLegalEntityName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractLegalEntityName",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _ChannelContractLegalEntityNameFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractLegalEntityNameFilterList",
+}, smithy.ShapeTypeList, 1)
+var _ChannelContractLegalEntityNameFilterList_member *smithy.Schema
+
+var ChannelContractPayload = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractPayload",
+}, smithy.ShapeTypeUnion, 1)
+var ChannelContractPayload_managedServicesAttestationPayload *smithy.Schema
+
+var _ChannelContractSignatoryEmail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractSignatoryEmail",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var _ChannelContractSignatoryName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractSignatoryName",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var ChannelContractStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractStatus",
+}, smithy.ShapeTypeEnum, 5)
+var ChannelContractStatus_PENDING *smithy.Schema
+
+var ChannelContractStatus_ACCEPTED *smithy.Schema
+
+var ChannelContractStatus_EXPIRED *smithy.Schema
+
+var ChannelContractStatus_CANCELED *smithy.Schema
+
+var ChannelContractStatus_INACTIVE *smithy.Schema
+
+var _ChannelContractStatusFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractStatusFilterList",
+}, smithy.ShapeTypeList, 1)
+var _ChannelContractStatusFilterList_member *smithy.Schema
+
+var _ChannelContractSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractSummaries",
+}, smithy.ShapeTypeList, 1)
+var _ChannelContractSummaries_member *smithy.Schema
+
+var ChannelContractSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractSummary",
+}, smithy.ShapeTypeStructure, 9)
+var ChannelContractSummary_id *smithy.Schema
+
+var ChannelContractSummary_arn *smithy.Schema
+
+var ChannelContractSummary_catalog *smithy.Schema
+
+var ChannelContractSummary_contractType *smithy.Schema
+
+var ChannelContractSummary_status *smithy.Schema
+
+var ChannelContractSummary_createdAt *smithy.Schema
+
+var ChannelContractSummary_updatedAt *smithy.Schema
+
+var ChannelContractSummary_respondedAt *smithy.Schema
+
+var ChannelContractSummary_details *smithy.Schema
+
+var ChannelContractSummaryDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractSummaryDetails",
+}, smithy.ShapeTypeUnion, 1)
+var ChannelContractSummaryDetails_managedServicesAttestationDetails *smithy.Schema
+
+var ChannelContractType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ChannelContractType",
+}, smithy.ShapeTypeEnum, 1)
+var ChannelContractType_MANAGED_SERVICES_ATTESTATION *smithy.Schema
 
 var _ChannelHandshakeId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
@@ -270,6 +473,11 @@ var ChannelHandshakeSummary_updatedAt *smithy.Schema
 
 var ChannelHandshakeSummary_status *smithy.Schema
 
+var _City = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "City",
+}, smithy.ShapeTypeString, 0)
+
 var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "ClientToken",
@@ -286,6 +494,11 @@ var ConflictException_resourceId *smithy.Schema
 
 var ConflictException_resourceType *smithy.Schema
 
+var _CountryCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "CountryCode",
+}, smithy.ShapeTypeString, 0)
+
 var Coverage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "Coverage",
@@ -293,6 +506,14 @@ var Coverage = smithy.NewSchema(smithy.ShapeID{
 var Coverage_ENTIRE_ORGANIZATION *smithy.Schema
 
 var Coverage_MANAGEMENT_ACCOUNT_ONLY *smithy.Schema
+
+var CreateChannelContractDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "CreateChannelContractDetail",
+}, smithy.ShapeTypeStructure, 2)
+var CreateChannelContractDetail_id *smithy.Schema
+
+var CreateChannelContractDetail_arn *smithy.Schema
 
 var CreateChannelHandshakeDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
@@ -370,6 +591,18 @@ var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
 
+var ListChannelContractsTypeFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ListChannelContractsTypeFilters",
+}, smithy.ShapeTypeUnion, 1)
+var ListChannelContractsTypeFilters_managedServicesAttestationTypeFilters *smithy.Schema
+
+var ListChannelContractsTypeSort = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ListChannelContractsTypeSort",
+}, smithy.ShapeTypeUnion, 1)
+var ListChannelContractsTypeSort_managedServicesAttestationTypeSort *smithy.Schema
+
 var ListChannelHandshakesTypeFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "ListChannelHandshakesTypeFilters",
@@ -418,6 +651,120 @@ var ListRelationshipsSortName = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var ListRelationshipsSortName_UPDATED_AT *smithy.Schema
 
+var ManagedServicesAttestationDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ManagedServicesAttestationDetails",
+}, smithy.ShapeTypeStructure, 9)
+var ManagedServicesAttestationDetails_legalEntityName *smithy.Schema
+
+var ManagedServicesAttestationDetails_relationshipIdentifier *smithy.Schema
+
+var ManagedServicesAttestationDetails_programManagementAccountIdentifier *smithy.Schema
+
+var ManagedServicesAttestationDetails_memberAccountIds *smithy.Schema
+
+var ManagedServicesAttestationDetails_endDate *smithy.Schema
+
+var ManagedServicesAttestationDetails_supportedServices *smithy.Schema
+
+var ManagedServicesAttestationDetails_signatoryName *smithy.Schema
+
+var ManagedServicesAttestationDetails_signatoryEmail *smithy.Schema
+
+var ManagedServicesAttestationDetails_legalEntityAddress *smithy.Schema
+
+var ManagedServicesAttestationPayload = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ManagedServicesAttestationPayload",
+}, smithy.ShapeTypeStructure, 9)
+var ManagedServicesAttestationPayload_legalEntityName *smithy.Schema
+
+var ManagedServicesAttestationPayload_relationshipIdentifier *smithy.Schema
+
+var ManagedServicesAttestationPayload_programManagementAccountIdentifier *smithy.Schema
+
+var ManagedServicesAttestationPayload_memberAccountIds *smithy.Schema
+
+var ManagedServicesAttestationPayload_endDate *smithy.Schema
+
+var ManagedServicesAttestationPayload_supportedServices *smithy.Schema
+
+var ManagedServicesAttestationPayload_legalEntityAddress *smithy.Schema
+
+var ManagedServicesAttestationPayload_signatoryName *smithy.Schema
+
+var ManagedServicesAttestationPayload_signatoryEmail *smithy.Schema
+
+var ManagedServicesAttestationSummaryDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ManagedServicesAttestationSummaryDetails",
+}, smithy.ShapeTypeStructure, 6)
+var ManagedServicesAttestationSummaryDetails_legalEntityName *smithy.Schema
+
+var ManagedServicesAttestationSummaryDetails_relationshipIdentifier *smithy.Schema
+
+var ManagedServicesAttestationSummaryDetails_programManagementAccountIdentifier *smithy.Schema
+
+var ManagedServicesAttestationSummaryDetails_memberAccountIds *smithy.Schema
+
+var ManagedServicesAttestationSummaryDetails_endDate *smithy.Schema
+
+var ManagedServicesAttestationSummaryDetails_supportedServices *smithy.Schema
+
+var ManagedServicesAttestationTypeFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ManagedServicesAttestationTypeFilters",
+}, smithy.ShapeTypeStructure, 2)
+var ManagedServicesAttestationTypeFilters_relationshipIdentifiers *smithy.Schema
+
+var ManagedServicesAttestationTypeFilters_legalEntityNames *smithy.Schema
+
+var ManagedServicesAttestationTypeSort = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ManagedServicesAttestationTypeSort",
+}, smithy.ShapeTypeStructure, 2)
+var ManagedServicesAttestationTypeSort_sortOrder *smithy.Schema
+
+var ManagedServicesAttestationTypeSort_sortBy *smithy.Schema
+
+var ManagedServicesAttestationTypeSortName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ManagedServicesAttestationTypeSortName",
+}, smithy.ShapeTypeEnum, 1)
+var ManagedServicesAttestationTypeSortName_UPDATED_AT *smithy.Schema
+
+var ManagedServicesSupportedService = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ManagedServicesSupportedService",
+}, smithy.ShapeTypeEnum, 8)
+var ManagedServicesSupportedService_MONITORING *smithy.Schema
+
+var ManagedServicesSupportedService_PATCHING *smithy.Schema
+
+var ManagedServicesSupportedService_SECURITY *smithy.Schema
+
+var ManagedServicesSupportedService_BACKUP_AND_DISASTER_RECOVERY *smithy.Schema
+
+var ManagedServicesSupportedService_FINANCIAL_OPERATIONS *smithy.Schema
+
+var ManagedServicesSupportedService_INFRASTRUCTURE_AS_CODE_AND_AUTOMATION *smithy.Schema
+
+var ManagedServicesSupportedService_WELL_ARCHITECTED *smithy.Schema
+
+var ManagedServicesSupportedService_ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS *smithy.Schema
+
+var _ManagedServicesSupportedServiceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ManagedServicesSupportedServiceList",
+}, smithy.ShapeTypeList, 1)
+var _ManagedServicesSupportedServiceList_member *smithy.Schema
+
+var _MemberAccountIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "MemberAccountIdList",
+}, smithy.ShapeTypeList, 1)
+var _MemberAccountIdList_member *smithy.Schema
+
 var _MinimumNoticeDays = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "MinimumNoticeDays",
@@ -456,15 +803,22 @@ var _PartnerProfileDisplayName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PartnerProfileDisplayName",
 }, smithy.ShapeTypeString, 0)
 
+var _PostalCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "PostalCode",
+}, smithy.ShapeTypeString, 0)
+
 var Program = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "Program",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var Program_SOLUTION_PROVIDER *smithy.Schema
 
 var Program_DISTRIBUTION *smithy.Schema
 
 var Program_DISTRIBUTION_SELLER *smithy.Schema
+
+var Program_MANAGED_SERVICES_PROVIDER *smithy.Schema
 
 var _ProgramList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
@@ -530,7 +884,7 @@ var _ProgramManagementAccountSummaries_member *smithy.Schema
 var ProgramManagementAccountSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "ProgramManagementAccountSummary",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var ProgramManagementAccountSummary_id *smithy.Schema
 
 var ProgramManagementAccountSummary_revision *smithy.Schema
@@ -552,6 +906,16 @@ var ProgramManagementAccountSummary_updatedAt *smithy.Schema
 var ProgramManagementAccountSummary_startDate *smithy.Schema
 
 var ProgramManagementAccountSummary_status *smithy.Schema
+
+var ProgramManagementAccountSummary_type *smithy.Schema
+
+var ProgramManagementAccountType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ProgramManagementAccountType",
+}, smithy.ShapeTypeEnum, 2)
+var ProgramManagementAccountType_RESALE_BILLING_TRANSFER *smithy.Schema
+
+var ProgramManagementAccountType_MANAGED_SERVICES *smithy.Schema
 
 var ProgramManagementAccountTypeFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
@@ -594,7 +958,7 @@ var RejectChannelHandshakeDetail_status *smithy.Schema
 var RelationshipDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "RelationshipDetail",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 16)
 var RelationshipDetail_arn *smithy.Schema
 
 var RelationshipDetail_id *smithy.Schema
@@ -615,11 +979,17 @@ var RelationshipDetail_resaleAccountModel *smithy.Schema
 
 var RelationshipDetail_sector *smithy.Schema
 
+var RelationshipDetail_accountScope *smithy.Schema
+
+var RelationshipDetail_channelContractId *smithy.Schema
+
 var RelationshipDetail_createdAt *smithy.Schema
 
 var RelationshipDetail_updatedAt *smithy.Schema
 
 var RelationshipDetail_startDate *smithy.Schema
+
+var RelationshipDetail_endDate *smithy.Schema
 
 var _RelationshipDisplayName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
@@ -641,6 +1011,12 @@ var _RelationshipIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "RelationshipIdentifier",
 }, smithy.ShapeTypeString, 0)
+
+var _RelationshipIdentifierFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "RelationshipIdentifierFilterList",
+}, smithy.ShapeTypeList, 1)
+var _RelationshipIdentifierFilterList_member *smithy.Schema
 
 var _RelationshipSummaries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
@@ -857,6 +1233,11 @@ var StartServicePeriodTypeSortName = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var StartServicePeriodTypeSortName_UPDATED_AT *smithy.Schema
 
+var _StateOrRegion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "StateOrRegion",
+}, smithy.ShapeTypeString, 0)
+
 var SupportPlan = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "SupportPlan",
@@ -986,6 +1367,24 @@ var AcceptChannelHandshakeResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var AcceptChannelHandshakeResponse_channelHandshakeDetail *smithy.Schema
 
+var CancelChannelContractRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "CancelChannelContractRequest",
+}, smithy.ShapeTypeStructure, 4)
+var CancelChannelContractRequest_catalog *smithy.Schema
+
+var CancelChannelContractRequest_identifier *smithy.Schema
+
+var CancelChannelContractRequest_reason *smithy.Schema
+
+var CancelChannelContractRequest_clientToken *smithy.Schema
+
+var CancelChannelContractResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "CancelChannelContractResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CancelChannelContractResponse_channelContractDetail *smithy.Schema
+
 var CancelChannelHandshakeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "CancelChannelHandshakeRequest",
@@ -999,6 +1398,26 @@ var CancelChannelHandshakeResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CancelChannelHandshakeResponse",
 }, smithy.ShapeTypeStructure, 1)
 var CancelChannelHandshakeResponse_channelHandshakeDetail *smithy.Schema
+
+var CreateChannelContractRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "CreateChannelContractRequest",
+}, smithy.ShapeTypeStructure, 5)
+var CreateChannelContractRequest_contractType *smithy.Schema
+
+var CreateChannelContractRequest_catalog *smithy.Schema
+
+var CreateChannelContractRequest_payload *smithy.Schema
+
+var CreateChannelContractRequest_clientToken *smithy.Schema
+
+var CreateChannelContractRequest_tags *smithy.Schema
+
+var CreateChannelContractResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "CreateChannelContractResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateChannelContractResponse_channelContractDetail *smithy.Schema
 
 var CreateChannelHandshakeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
@@ -1025,7 +1444,7 @@ var CreateChannelHandshakeResponse_channelHandshakeDetail *smithy.Schema
 var CreateProgramManagementAccountRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "CreateProgramManagementAccountRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var CreateProgramManagementAccountRequest_catalog *smithy.Schema
 
 var CreateProgramManagementAccountRequest_program *smithy.Schema
@@ -1038,6 +1457,8 @@ var CreateProgramManagementAccountRequest_clientToken *smithy.Schema
 
 var CreateProgramManagementAccountRequest_tags *smithy.Schema
 
+var CreateProgramManagementAccountRequest_type *smithy.Schema
+
 var CreateProgramManagementAccountResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "CreateProgramManagementAccountResponse",
@@ -1047,7 +1468,7 @@ var CreateProgramManagementAccountResponse_programManagementAccountDetail *smith
 var CreateRelationshipRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "CreateRelationshipRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var CreateRelationshipRequest_catalog *smithy.Schema
 
 var CreateRelationshipRequest_associationType *smithy.Schema
@@ -1067,6 +1488,10 @@ var CreateRelationshipRequest_clientToken *smithy.Schema
 var CreateRelationshipRequest_tags *smithy.Schema
 
 var CreateRelationshipRequest_requestedSupportPlan *smithy.Schema
+
+var CreateRelationshipRequest_accountScope *smithy.Schema
+
+var CreateRelationshipRequest_startDate *smithy.Schema
 
 var CreateRelationshipResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
@@ -1106,6 +1531,20 @@ var DeleteRelationshipResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteRelationshipResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var GetChannelContractRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "GetChannelContractRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetChannelContractRequest_catalog *smithy.Schema
+
+var GetChannelContractRequest_identifier *smithy.Schema
+
+var GetChannelContractResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "GetChannelContractResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetChannelContractResponse_channelContractDetail *smithy.Schema
+
 var GetRelationshipRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "GetRelationshipRequest",
@@ -1121,6 +1560,32 @@ var GetRelationshipResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetRelationshipResponse",
 }, smithy.ShapeTypeStructure, 1)
 var GetRelationshipResponse_relationshipDetail *smithy.Schema
+
+var ListChannelContractsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ListChannelContractsRequest",
+}, smithy.ShapeTypeStructure, 7)
+var ListChannelContractsRequest_catalog *smithy.Schema
+
+var ListChannelContractsRequest_contractType *smithy.Schema
+
+var ListChannelContractsRequest_statuses *smithy.Schema
+
+var ListChannelContractsRequest_contractTypeFilters *smithy.Schema
+
+var ListChannelContractsRequest_contractTypeSort *smithy.Schema
+
+var ListChannelContractsRequest_maxResults *smithy.Schema
+
+var ListChannelContractsRequest_nextToken *smithy.Schema
+
+var ListChannelContractsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.partnercentralchannel",
+	Name:      "ListChannelContractsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListChannelContractsResponse_items *smithy.Schema
+
+var ListChannelContractsResponse_nextToken *smithy.Schema
 
 var ListChannelHandshakesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
@@ -1155,7 +1620,7 @@ var ListChannelHandshakesResponse_nextToken *smithy.Schema
 var ListProgramManagementAccountsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
 	Name:      "ListProgramManagementAccountsRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var ListProgramManagementAccountsRequest_catalog *smithy.Schema
 
 var ListProgramManagementAccountsRequest_maxResults *smithy.Schema
@@ -1171,6 +1636,8 @@ var ListProgramManagementAccountsRequest_statuses *smithy.Schema
 var ListProgramManagementAccountsRequest_sort *smithy.Schema
 
 var ListProgramManagementAccountsRequest_nextToken *smithy.Schema
+
+var ListProgramManagementAccountsRequest_type *smithy.Schema
 
 var ListProgramManagementAccountsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.partnercentralchannel",
@@ -1325,6 +1792,22 @@ func init() {
 
 	_AccountIdList_member = _AccountIdList.AddMember("member", _AccountId)
 
+	AccountScope_ENTIRE_ORGANIZATION = AccountScope.AddMember("ENTIRE_ORGANIZATION", smithyprelude.Unit)
+
+	AccountScope_SPECIFIC_MEMBER_ACCOUNTS = AccountScope.AddMember("SPECIFIC_MEMBER_ACCOUNTS", smithyprelude.Unit)
+
+	Address_city = Address.AddMember("city", _City)
+
+	Address_stateOrRegion = Address.AddMember("stateOrRegion", _StateOrRegion)
+
+	Address_postalCode = Address.AddMember("postalCode", _PostalCode)
+
+	Address_countryCode = Address.AddMember("countryCode", _CountryCode)
+
+	Address_addressLine = Address.AddMember("addressLine", _AddressLine)
+
+	Address_addressLine2 = Address.AddMember("addressLine2", _AddressLine)
+
 	_AssociatedResourceIdentifierList_member = _AssociatedResourceIdentifierList.AddMember("member", _AssociatedResourceIdentifier)
 
 	AssociationType_DOWNSTREAM_SELLER = AssociationType.AddMember("DOWNSTREAM_SELLER", smithyprelude.Unit)
@@ -1333,13 +1816,153 @@ func init() {
 
 	AssociationType_INTERNAL = AssociationType.AddMember("INTERNAL", smithyprelude.Unit)
 
+	AssociationType_MANAGED_SERVICES_END_CUSTOMER = AssociationType.AddMember("MANAGED_SERVICES_END_CUSTOMER", smithyprelude.Unit)
+
 	_AssociationTypeList_member = _AssociationTypeList.AddMember("member", AssociationType)
+
+	ChannelContractStatus_PENDING = ChannelContractStatus.AddMember("PENDING", smithyprelude.Unit)
+
+	ChannelContractStatus_ACCEPTED = ChannelContractStatus.AddMember("ACCEPTED", smithyprelude.Unit)
+
+	ChannelContractStatus_EXPIRED = ChannelContractStatus.AddMember("EXPIRED", smithyprelude.Unit)
+
+	ChannelContractStatus_CANCELED = ChannelContractStatus.AddMember("CANCELED", smithyprelude.Unit)
+
+	ChannelContractStatus_INACTIVE = ChannelContractStatus.AddMember("INACTIVE", smithyprelude.Unit)
+
+	CancelChannelContractDetail_id = CancelChannelContractDetail.AddMember("id", _ChannelContractId)
+
+	CancelChannelContractDetail_arn = CancelChannelContractDetail.AddMember("arn", _Arn)
+
+	CancelChannelContractDetail_status = CancelChannelContractDetail.AddMember("status", ChannelContractStatus)
+
+	CancelChannelContractDetail_cancellationReason = CancelChannelContractDetail.AddMember("cancellationReason", _CancellationReason)
 
 	CancelChannelHandshakeDetail_id = CancelChannelHandshakeDetail.AddMember("id", _ChannelHandshakeId)
 
 	CancelChannelHandshakeDetail_arn = CancelChannelHandshakeDetail.AddMember("arn", _Arn)
 
 	CancelChannelHandshakeDetail_status = CancelChannelHandshakeDetail.AddMember("status", HandshakeStatus)
+
+	ChannelContractType_MANAGED_SERVICES_ATTESTATION = ChannelContractType.AddMember("MANAGED_SERVICES_ATTESTATION", smithyprelude.Unit)
+
+	_MemberAccountIdList_member = _MemberAccountIdList.AddMember("member", _AccountId)
+
+	ManagedServicesSupportedService_MONITORING = ManagedServicesSupportedService.AddMember("MONITORING", smithyprelude.Unit)
+
+	ManagedServicesSupportedService_PATCHING = ManagedServicesSupportedService.AddMember("PATCHING", smithyprelude.Unit)
+
+	ManagedServicesSupportedService_SECURITY = ManagedServicesSupportedService.AddMember("SECURITY", smithyprelude.Unit)
+
+	ManagedServicesSupportedService_BACKUP_AND_DISASTER_RECOVERY = ManagedServicesSupportedService.AddMember("BACKUP_AND_DISASTER_RECOVERY", smithyprelude.Unit)
+
+	ManagedServicesSupportedService_FINANCIAL_OPERATIONS = ManagedServicesSupportedService.AddMember("FINANCIAL_OPERATIONS", smithyprelude.Unit)
+
+	ManagedServicesSupportedService_INFRASTRUCTURE_AS_CODE_AND_AUTOMATION = ManagedServicesSupportedService.AddMember("INFRASTRUCTURE_AS_CODE_AND_AUTOMATION", smithyprelude.Unit)
+
+	ManagedServicesSupportedService_WELL_ARCHITECTED = ManagedServicesSupportedService.AddMember("WELL_ARCHITECTED", smithyprelude.Unit)
+
+	ManagedServicesSupportedService_ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS = ManagedServicesSupportedService.AddMember("ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS", smithyprelude.Unit)
+
+	_ManagedServicesSupportedServiceList_member = _ManagedServicesSupportedServiceList.AddMember("member", ManagedServicesSupportedService)
+
+	ManagedServicesAttestationDetails_legalEntityName = ManagedServicesAttestationDetails.AddMember("legalEntityName", _ChannelContractLegalEntityName)
+
+	ManagedServicesAttestationDetails_relationshipIdentifier = ManagedServicesAttestationDetails.AddMember("relationshipIdentifier", _RelationshipIdentifier)
+
+	ManagedServicesAttestationDetails_programManagementAccountIdentifier = ManagedServicesAttestationDetails.AddMember("programManagementAccountIdentifier", _ProgramManagementAccountIdentifier)
+
+	ManagedServicesAttestationDetails_memberAccountIds = ManagedServicesAttestationDetails.AddMember("memberAccountIds", _MemberAccountIdList)
+
+	ManagedServicesAttestationDetails_endDate = ManagedServicesAttestationDetails.AddMember("endDate", _DateTime)
+
+	ManagedServicesAttestationDetails_supportedServices = ManagedServicesAttestationDetails.AddMember("supportedServices", _ManagedServicesSupportedServiceList)
+
+	ManagedServicesAttestationDetails_signatoryName = ManagedServicesAttestationDetails.AddMember("signatoryName", _ChannelContractSignatoryName)
+
+	ManagedServicesAttestationDetails_signatoryEmail = ManagedServicesAttestationDetails.AddMember("signatoryEmail", _ChannelContractSignatoryEmail)
+
+	ManagedServicesAttestationDetails_legalEntityAddress = ManagedServicesAttestationDetails.AddMember("legalEntityAddress", Address)
+
+	ChannelContractDetails_managedServicesAttestationDetails = ChannelContractDetails.AddMember("managedServicesAttestationDetails", ManagedServicesAttestationDetails)
+
+	ChannelContractDetail_id = ChannelContractDetail.AddMember("id", _ChannelContractId)
+
+	ChannelContractDetail_arn = ChannelContractDetail.AddMember("arn", _Arn)
+
+	ChannelContractDetail_catalog = ChannelContractDetail.AddMember("catalog", _Catalog)
+
+	ChannelContractDetail_contractType = ChannelContractDetail.AddMember("contractType", ChannelContractType)
+
+	ChannelContractDetail_status = ChannelContractDetail.AddMember("status", ChannelContractStatus)
+
+	ChannelContractDetail_createdAt = ChannelContractDetail.AddMember("createdAt", _DateTime)
+
+	ChannelContractDetail_updatedAt = ChannelContractDetail.AddMember("updatedAt", _DateTime)
+
+	ChannelContractDetail_respondedAt = ChannelContractDetail.AddMember("respondedAt", _DateTime)
+
+	ChannelContractDetail_cancellationReason = ChannelContractDetail.AddMember("cancellationReason", _CancellationReason)
+
+	ChannelContractDetail_details = ChannelContractDetail.AddMember("details", ChannelContractDetails)
+
+	_ChannelContractLegalEntityNameFilterList_member = _ChannelContractLegalEntityNameFilterList.AddMember("member", _ChannelContractLegalEntityName)
+
+	ManagedServicesAttestationPayload_legalEntityName = ManagedServicesAttestationPayload.AddMember("legalEntityName", _ChannelContractLegalEntityName)
+
+	ManagedServicesAttestationPayload_relationshipIdentifier = ManagedServicesAttestationPayload.AddMember("relationshipIdentifier", _RelationshipIdentifier)
+
+	ManagedServicesAttestationPayload_programManagementAccountIdentifier = ManagedServicesAttestationPayload.AddMember("programManagementAccountIdentifier", _ProgramManagementAccountIdentifier)
+
+	ManagedServicesAttestationPayload_memberAccountIds = ManagedServicesAttestationPayload.AddMember("memberAccountIds", _MemberAccountIdList)
+
+	ManagedServicesAttestationPayload_endDate = ManagedServicesAttestationPayload.AddMember("endDate", _DateTime)
+
+	ManagedServicesAttestationPayload_supportedServices = ManagedServicesAttestationPayload.AddMember("supportedServices", _ManagedServicesSupportedServiceList)
+
+	ManagedServicesAttestationPayload_legalEntityAddress = ManagedServicesAttestationPayload.AddMember("legalEntityAddress", Address)
+
+	ManagedServicesAttestationPayload_signatoryName = ManagedServicesAttestationPayload.AddMember("signatoryName", _ChannelContractSignatoryName)
+
+	ManagedServicesAttestationPayload_signatoryEmail = ManagedServicesAttestationPayload.AddMember("signatoryEmail", _ChannelContractSignatoryEmail)
+
+	ChannelContractPayload_managedServicesAttestationPayload = ChannelContractPayload.AddMember("managedServicesAttestationPayload", ManagedServicesAttestationPayload)
+
+	_ChannelContractStatusFilterList_member = _ChannelContractStatusFilterList.AddMember("member", ChannelContractStatus)
+
+	ManagedServicesAttestationSummaryDetails_legalEntityName = ManagedServicesAttestationSummaryDetails.AddMember("legalEntityName", _ChannelContractLegalEntityName)
+
+	ManagedServicesAttestationSummaryDetails_relationshipIdentifier = ManagedServicesAttestationSummaryDetails.AddMember("relationshipIdentifier", _RelationshipIdentifier)
+
+	ManagedServicesAttestationSummaryDetails_programManagementAccountIdentifier = ManagedServicesAttestationSummaryDetails.AddMember("programManagementAccountIdentifier", _ProgramManagementAccountIdentifier)
+
+	ManagedServicesAttestationSummaryDetails_memberAccountIds = ManagedServicesAttestationSummaryDetails.AddMember("memberAccountIds", _MemberAccountIdList)
+
+	ManagedServicesAttestationSummaryDetails_endDate = ManagedServicesAttestationSummaryDetails.AddMember("endDate", _DateTime)
+
+	ManagedServicesAttestationSummaryDetails_supportedServices = ManagedServicesAttestationSummaryDetails.AddMember("supportedServices", _ManagedServicesSupportedServiceList)
+
+	ChannelContractSummaryDetails_managedServicesAttestationDetails = ChannelContractSummaryDetails.AddMember("managedServicesAttestationDetails", ManagedServicesAttestationSummaryDetails)
+
+	ChannelContractSummary_id = ChannelContractSummary.AddMember("id", _ChannelContractId)
+
+	ChannelContractSummary_arn = ChannelContractSummary.AddMember("arn", _Arn)
+
+	ChannelContractSummary_catalog = ChannelContractSummary.AddMember("catalog", _Catalog)
+
+	ChannelContractSummary_contractType = ChannelContractSummary.AddMember("contractType", ChannelContractType)
+
+	ChannelContractSummary_status = ChannelContractSummary.AddMember("status", ChannelContractStatus)
+
+	ChannelContractSummary_createdAt = ChannelContractSummary.AddMember("createdAt", _DateTime)
+
+	ChannelContractSummary_updatedAt = ChannelContractSummary.AddMember("updatedAt", _DateTime)
+
+	ChannelContractSummary_respondedAt = ChannelContractSummary.AddMember("respondedAt", _DateTime)
+
+	ChannelContractSummary_details = ChannelContractSummary.AddMember("details", ChannelContractSummaryDetails)
+
+	_ChannelContractSummaries_member = _ChannelContractSummaries.AddMember("member", ChannelContractSummary)
 
 	ServicePeriodType_MINIMUM_NOTICE_PERIOD = ServicePeriodType.AddMember("MINIMUM_NOTICE_PERIOD", smithyprelude.Unit)
 
@@ -1395,6 +2018,8 @@ func init() {
 
 	Program_DISTRIBUTION_SELLER = Program.AddMember("DISTRIBUTION_SELLER", smithyprelude.Unit)
 
+	Program_MANAGED_SERVICES_PROVIDER = Program.AddMember("MANAGED_SERVICES_PROVIDER", smithyprelude.Unit)
+
 	ProgramManagementAccountHandshakeDetail_program = ProgramManagementAccountHandshakeDetail.AddMember("program", Program)
 
 	HandshakeDetail_startServicePeriodHandshakeDetail = HandshakeDetail.AddMember("startServicePeriodHandshakeDetail", StartServicePeriodHandshakeDetail)
@@ -1441,6 +2066,10 @@ func init() {
 
 	Coverage_MANAGEMENT_ACCOUNT_ONLY = Coverage.AddMember("MANAGEMENT_ACCOUNT_ONLY", smithyprelude.Unit)
 
+	CreateChannelContractDetail_id = CreateChannelContractDetail.AddMember("id", _ChannelContractId)
+
+	CreateChannelContractDetail_arn = CreateChannelContractDetail.AddMember("arn", _Arn)
+
 	CreateChannelHandshakeDetail_id = CreateChannelHandshakeDetail.AddMember("id", _ChannelHandshakeId)
 
 	CreateChannelHandshakeDetail_arn = CreateChannelHandshakeDetail.AddMember("arn", _Arn)
@@ -1457,6 +2086,26 @@ func init() {
 
 	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
 
+	_RelationshipIdentifierFilterList_member = _RelationshipIdentifierFilterList.AddMember("member", _RelationshipIdentifier)
+
+	ManagedServicesAttestationTypeFilters_relationshipIdentifiers = ManagedServicesAttestationTypeFilters.AddMember("relationshipIdentifiers", _RelationshipIdentifierFilterList)
+
+	ManagedServicesAttestationTypeFilters_legalEntityNames = ManagedServicesAttestationTypeFilters.AddMember("legalEntityNames", _ChannelContractLegalEntityNameFilterList)
+
+	ListChannelContractsTypeFilters_managedServicesAttestationTypeFilters = ListChannelContractsTypeFilters.AddMember("managedServicesAttestationTypeFilters", ManagedServicesAttestationTypeFilters)
+
+	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
+
+	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
+
+	ManagedServicesAttestationTypeSortName_UPDATED_AT = ManagedServicesAttestationTypeSortName.AddMember("UPDATED_AT", smithyprelude.Unit)
+
+	ManagedServicesAttestationTypeSort_sortOrder = ManagedServicesAttestationTypeSort.AddMember("sortOrder", SortOrder)
+
+	ManagedServicesAttestationTypeSort_sortBy = ManagedServicesAttestationTypeSort.AddMember("sortBy", ManagedServicesAttestationTypeSortName)
+
+	ListChannelContractsTypeSort_managedServicesAttestationTypeSort = ListChannelContractsTypeSort.AddMember("managedServicesAttestationTypeSort", ManagedServicesAttestationTypeSort)
+
 	_ServicePeriodTypeList_member = _ServicePeriodTypeList.AddMember("member", ServicePeriodType)
 
 	StartServicePeriodTypeFilters_servicePeriodTypes = StartServicePeriodTypeFilters.AddMember("servicePeriodTypes", _ServicePeriodTypeList)
@@ -1472,10 +2121,6 @@ func init() {
 	ListChannelHandshakesTypeFilters_revokeServicePeriodTypeFilters = ListChannelHandshakesTypeFilters.AddMember("revokeServicePeriodTypeFilters", RevokeServicePeriodTypeFilters)
 
 	ListChannelHandshakesTypeFilters_programManagementAccountTypeFilters = ListChannelHandshakesTypeFilters.AddMember("programManagementAccountTypeFilters", ProgramManagementAccountTypeFilters)
-
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
 
 	StartServicePeriodTypeSortName_UPDATED_AT = StartServicePeriodTypeSortName.AddMember("UPDATED_AT", smithyprelude.Unit)
 
@@ -1539,6 +2184,10 @@ func init() {
 
 	_ProgramManagementAccountStatusList_member = _ProgramManagementAccountStatusList.AddMember("member", ProgramManagementAccountStatus)
 
+	ProgramManagementAccountType_RESALE_BILLING_TRANSFER = ProgramManagementAccountType.AddMember("RESALE_BILLING_TRANSFER", smithyprelude.Unit)
+
+	ProgramManagementAccountType_MANAGED_SERVICES = ProgramManagementAccountType.AddMember("MANAGED_SERVICES", smithyprelude.Unit)
+
 	ProgramManagementAccountSummary_id = ProgramManagementAccountSummary.AddMember("id", _ProgramManagementAccountId)
 
 	ProgramManagementAccountSummary_revision = ProgramManagementAccountSummary.AddMember("revision", _Revision)
@@ -1560,6 +2209,8 @@ func init() {
 	ProgramManagementAccountSummary_startDate = ProgramManagementAccountSummary.AddMember("startDate", _DateTime)
 
 	ProgramManagementAccountSummary_status = ProgramManagementAccountSummary.AddMember("status", ProgramManagementAccountStatus)
+
+	ProgramManagementAccountSummary_type = ProgramManagementAccountSummary.AddMember("type", ProgramManagementAccountType)
 
 	_ProgramManagementAccountSummaries_member = _ProgramManagementAccountSummaries.AddMember("member", ProgramManagementAccountSummary)
 
@@ -1601,11 +2252,17 @@ func init() {
 
 	RelationshipDetail_sector = RelationshipDetail.AddMember("sector", Sector)
 
+	RelationshipDetail_accountScope = RelationshipDetail.AddMember("accountScope", AccountScope)
+
+	RelationshipDetail_channelContractId = RelationshipDetail.AddMember("channelContractId", _ChannelContractId)
+
 	RelationshipDetail_createdAt = RelationshipDetail.AddMember("createdAt", _DateTime)
 
 	RelationshipDetail_updatedAt = RelationshipDetail.AddMember("updatedAt", _DateTime)
 
 	RelationshipDetail_startDate = RelationshipDetail.AddMember("startDate", _DateTime)
+
+	RelationshipDetail_endDate = RelationshipDetail.AddMember("endDate", _DateTime)
 
 	_RelationshipDisplayNameList_member = _RelationshipDisplayNameList.AddMember("member", _RelationshipDisplayName)
 
@@ -1721,11 +2378,33 @@ func init() {
 
 	AcceptChannelHandshakeResponse_channelHandshakeDetail = AcceptChannelHandshakeResponse.AddMember("channelHandshakeDetail", AcceptChannelHandshakeDetail)
 
+	CancelChannelContractRequest_catalog = CancelChannelContractRequest.AddMember("catalog", _Catalog)
+
+	CancelChannelContractRequest_identifier = CancelChannelContractRequest.AddMember("identifier", _ChannelContractIdentifier)
+
+	CancelChannelContractRequest_reason = CancelChannelContractRequest.AddMember("reason", _CancellationReason)
+
+	CancelChannelContractRequest_clientToken = CancelChannelContractRequest.AddMember("clientToken", _ClientToken)
+
+	CancelChannelContractResponse_channelContractDetail = CancelChannelContractResponse.AddMember("channelContractDetail", CancelChannelContractDetail)
+
 	CancelChannelHandshakeRequest_catalog = CancelChannelHandshakeRequest.AddMember("catalog", _Catalog)
 
 	CancelChannelHandshakeRequest_identifier = CancelChannelHandshakeRequest.AddMember("identifier", _ChannelHandshakeIdentifier)
 
 	CancelChannelHandshakeResponse_channelHandshakeDetail = CancelChannelHandshakeResponse.AddMember("channelHandshakeDetail", CancelChannelHandshakeDetail)
+
+	CreateChannelContractRequest_contractType = CreateChannelContractRequest.AddMember("contractType", ChannelContractType)
+
+	CreateChannelContractRequest_catalog = CreateChannelContractRequest.AddMember("catalog", _Catalog)
+
+	CreateChannelContractRequest_payload = CreateChannelContractRequest.AddMember("payload", ChannelContractPayload)
+
+	CreateChannelContractRequest_clientToken = CreateChannelContractRequest.AddMember("clientToken", _ClientToken)
+
+	CreateChannelContractRequest_tags = CreateChannelContractRequest.AddMember("tags", _TagList)
+
+	CreateChannelContractResponse_channelContractDetail = CreateChannelContractResponse.AddMember("channelContractDetail", CreateChannelContractDetail)
 
 	CreateChannelHandshakeRequest_handshakeType = CreateChannelHandshakeRequest.AddMember("handshakeType", HandshakeType)
 
@@ -1753,6 +2432,8 @@ func init() {
 
 	CreateProgramManagementAccountRequest_tags = CreateProgramManagementAccountRequest.AddMember("tags", _TagList)
 
+	CreateProgramManagementAccountRequest_type = CreateProgramManagementAccountRequest.AddMember("type", ProgramManagementAccountType)
+
 	CreateProgramManagementAccountResponse_programManagementAccountDetail = CreateProgramManagementAccountResponse.AddMember("programManagementAccountDetail", CreateProgramManagementAccountDetail)
 
 	CreateRelationshipRequest_catalog = CreateRelationshipRequest.AddMember("catalog", _Catalog)
@@ -1775,6 +2456,10 @@ func init() {
 
 	CreateRelationshipRequest_requestedSupportPlan = CreateRelationshipRequest.AddMember("requestedSupportPlan", SupportPlan)
 
+	CreateRelationshipRequest_accountScope = CreateRelationshipRequest.AddMember("accountScope", AccountScope)
+
+	CreateRelationshipRequest_startDate = CreateRelationshipRequest.AddMember("startDate", _DateTime)
+
 	CreateRelationshipResponse_relationshipDetail = CreateRelationshipResponse.AddMember("relationshipDetail", CreateRelationshipDetail)
 
 	DeleteProgramManagementAccountRequest_catalog = DeleteProgramManagementAccountRequest.AddMember("catalog", _Catalog)
@@ -1791,6 +2476,12 @@ func init() {
 
 	DeleteRelationshipRequest_clientToken = DeleteRelationshipRequest.AddMember("clientToken", _ClientToken)
 
+	GetChannelContractRequest_catalog = GetChannelContractRequest.AddMember("catalog", _Catalog)
+
+	GetChannelContractRequest_identifier = GetChannelContractRequest.AddMember("identifier", _ChannelContractIdentifier)
+
+	GetChannelContractResponse_channelContractDetail = GetChannelContractResponse.AddMember("channelContractDetail", ChannelContractDetail)
+
 	GetRelationshipRequest_catalog = GetRelationshipRequest.AddMember("catalog", _Catalog)
 
 	GetRelationshipRequest_programManagementAccountIdentifier = GetRelationshipRequest.AddMember("programManagementAccountIdentifier", _ProgramManagementAccountIdentifier)
@@ -1798,6 +2489,24 @@ func init() {
 	GetRelationshipRequest_identifier = GetRelationshipRequest.AddMember("identifier", _RelationshipIdentifier)
 
 	GetRelationshipResponse_relationshipDetail = GetRelationshipResponse.AddMember("relationshipDetail", RelationshipDetail)
+
+	ListChannelContractsRequest_catalog = ListChannelContractsRequest.AddMember("catalog", _Catalog)
+
+	ListChannelContractsRequest_contractType = ListChannelContractsRequest.AddMember("contractType", ChannelContractType)
+
+	ListChannelContractsRequest_statuses = ListChannelContractsRequest.AddMember("statuses", _ChannelContractStatusFilterList)
+
+	ListChannelContractsRequest_contractTypeFilters = ListChannelContractsRequest.AddMember("contractTypeFilters", ListChannelContractsTypeFilters)
+
+	ListChannelContractsRequest_contractTypeSort = ListChannelContractsRequest.AddMember("contractTypeSort", ListChannelContractsTypeSort)
+
+	ListChannelContractsRequest_maxResults = ListChannelContractsRequest.AddMember("maxResults", smithyprelude.Integer)
+
+	ListChannelContractsRequest_nextToken = ListChannelContractsRequest.AddMember("nextToken", _NextToken)
+
+	ListChannelContractsResponse_items = ListChannelContractsResponse.AddMember("items", _ChannelContractSummaries)
+
+	ListChannelContractsResponse_nextToken = ListChannelContractsResponse.AddMember("nextToken", _NextToken)
 
 	ListChannelHandshakesRequest_handshakeType = ListChannelHandshakesRequest.AddMember("handshakeType", HandshakeType)
 
@@ -1836,6 +2545,8 @@ func init() {
 	ListProgramManagementAccountsRequest_sort = ListProgramManagementAccountsRequest.AddMember("sort", ListProgramManagementAccountsSortBase)
 
 	ListProgramManagementAccountsRequest_nextToken = ListProgramManagementAccountsRequest.AddMember("nextToken", _NextToken)
+
+	ListProgramManagementAccountsRequest_type = ListProgramManagementAccountsRequest.AddMember("type", ProgramManagementAccountType)
 
 	ListProgramManagementAccountsResponse_items = ListProgramManagementAccountsResponse.AddMember("items", _ProgramManagementAccountSummaries)
 

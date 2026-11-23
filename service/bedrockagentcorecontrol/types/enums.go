@@ -1702,6 +1702,25 @@ func (Monitoring) Values() []Monitoring {
 	}
 }
 
+type NestedVirtualization string
+
+// Enum values for NestedVirtualization
+const (
+	NestedVirtualizationEnabled  NestedVirtualization = "ENABLED"
+	NestedVirtualizationDisabled NestedVirtualization = "DISABLED"
+)
+
+// Values returns all known values for NestedVirtualization. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NestedVirtualization) Values() []NestedVirtualization {
+	return []NestedVirtualization{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type NetworkMode string
 
 // Enum values for NetworkMode
@@ -1965,6 +1984,7 @@ type PaymentConnectorType string
 const (
 	PaymentConnectorTypeCoinbaseCdp PaymentConnectorType = "CoinbaseCDP"
 	PaymentConnectorTypeStripePrivy PaymentConnectorType = "StripePrivy"
+	PaymentConnectorTypeAwsBilling  PaymentConnectorType = "AwsBilling"
 )
 
 // Values returns all known values for PaymentConnectorType. Note that this can be
@@ -1975,6 +1995,7 @@ func (PaymentConnectorType) Values() []PaymentConnectorType {
 	return []PaymentConnectorType{
 		"CoinbaseCDP",
 		"StripePrivy",
+		"AwsBilling",
 	}
 }
 
@@ -2186,6 +2207,25 @@ func (PrincipalMatchOperator) Values() []PrincipalMatchOperator {
 	}
 }
 
+type PrivilegeMode string
+
+// Enum values for PrivilegeMode
+const (
+	PrivilegeModeStandard   PrivilegeMode = "STANDARD"
+	PrivilegeModePrivileged PrivilegeMode = "PRIVILEGED"
+)
+
+// Values returns all known values for PrivilegeMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrivilegeMode) Values() []PrivilegeMode {
+	return []PrivilegeMode{
+		"STANDARD",
+		"PRIVILEGED",
+	}
+}
+
 type Provider string
 
 // Enum values for Provider
@@ -2361,6 +2401,25 @@ func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"SYSTEM",
 		"CUSTOM",
+	}
+}
+
+type ResponseInterceptionMode string
+
+// Enum values for ResponseInterceptionMode
+const (
+	ResponseInterceptionModeBuffered ResponseInterceptionMode = "BUFFERED"
+	ResponseInterceptionModeStream   ResponseInterceptionMode = "STREAM"
+)
+
+// Values returns all known values for ResponseInterceptionMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResponseInterceptionMode) Values() []ResponseInterceptionMode {
+	return []ResponseInterceptionMode{
+		"BUFFERED",
+		"STREAM",
 	}
 }
 

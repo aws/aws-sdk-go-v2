@@ -77,6 +77,21 @@ type UpdateComputeNodeGroupInput struct {
 	// [IAM instance profiles for PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/security-instance-profiles.html
 	IamInstanceProfileArn *string
 
+	// The instance health check settings for the compute node group. Instance health
+	// checks detect faults on instances in the compute node group and respond with the
+	// repair action that you choose. You can configure health monitoring, deep health
+	// checks, or both. You can't specify an empty object ( {} ). Instance health
+	// checks require Slurm version 26.05 or later.
+	//
+	// The settings that you specify replace all of the current instance health check
+	// settings of the compute node group. Include every setting that you want to keep.
+	// If you omit this member, the current settings don't change. If you omit
+	// healthMonitoring or deepHealthChecks , that check is turned off. You can also
+	// turn off a check: set healthMonitoring.mode or deepHealthChecks.onStart.profile
+	// to NONE and omit its repairAction . When you change these settings, PCS drains
+	// and replaces the instances in the compute node group.
+	InstanceHealthChecks *types.UpdateInstanceHealthChecksRequest
+
 	// Specifies whether the compute node group uses a custom launch template or a
 	// launch template that PCS manages. Omit this value to keep the current mode.
 	//
@@ -177,6 +192,11 @@ func (v *UpdateComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer)
 	}
 	if v.IamInstanceProfileArn != nil {
 		s.WriteString(schemas.UpdateComputeNodeGroupRequest_iamInstanceProfileArn, *v.IamInstanceProfileArn)
+	}
+	if v.InstanceHealthChecks != nil {
+		s.WriteStruct(schemas.UpdateComputeNodeGroupRequest_instanceHealthChecks)
+		v.InstanceHealthChecks.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.LaunchTemplateMode != "" {
 		s.WriteString(schemas.UpdateComputeNodeGroupRequest_launchTemplateMode, string(v.LaunchTemplateMode))

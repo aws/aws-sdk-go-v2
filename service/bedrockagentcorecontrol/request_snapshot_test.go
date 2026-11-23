@@ -594,6 +594,11 @@ func TestCheckRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -927,6 +932,9 @@ func TestCheckRequestSnapshot_CreateCapacityProvider(t *testing.T) {
 						InstanceProfileArn: ptr.String("__InstanceProfileArn__"),
 						PropagatedTags: map[string]string{
 							"key0": "__Value__",
+						},
+						CpuOptions: &types.CpuOptions{
+							NestedVirtualization: types.NestedVirtualization("ENABLED"),
 						},
 					},
 				},
@@ -1458,6 +1466,10 @@ func TestCheckRequestSnapshot_CreateGateway(t *testing.T) {
 						},
 					},
 				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
+				},
 			},
 			{
 				Interceptor: &types.InterceptorConfigurationMemberLambda{
@@ -1481,6 +1493,10 @@ func TestCheckRequestSnapshot_CreateGateway(t *testing.T) {
 							},
 						},
 					},
+				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
 				},
 			},
 		},
@@ -6674,6 +6690,11 @@ func TestCheckRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
 		AllowedPorts: []types.AllowedPort{
@@ -7169,6 +7190,10 @@ func TestCheckRequestSnapshot_UpdateGateway(t *testing.T) {
 						},
 					},
 				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
+				},
 			},
 			{
 				Interceptor: &types.InterceptorConfigurationMemberLambda{
@@ -7192,6 +7217,10 @@ func TestCheckRequestSnapshot_UpdateGateway(t *testing.T) {
 							},
 						},
 					},
+				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
 				},
 			},
 		},
@@ -9487,6 +9516,11 @@ func TestUpdateRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -9820,6 +9854,9 @@ func TestUpdateRequestSnapshot_CreateCapacityProvider(t *testing.T) {
 						InstanceProfileArn: ptr.String("__InstanceProfileArn__"),
 						PropagatedTags: map[string]string{
 							"key0": "__Value__",
+						},
+						CpuOptions: &types.CpuOptions{
+							NestedVirtualization: types.NestedVirtualization("ENABLED"),
 						},
 					},
 				},
@@ -10351,6 +10388,10 @@ func TestUpdateRequestSnapshot_CreateGateway(t *testing.T) {
 						},
 					},
 				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
+				},
 			},
 			{
 				Interceptor: &types.InterceptorConfigurationMemberLambda{
@@ -10374,6 +10415,10 @@ func TestUpdateRequestSnapshot_CreateGateway(t *testing.T) {
 							},
 						},
 					},
+				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
 				},
 			},
 		},
@@ -15567,6 +15612,11 @@ func TestUpdateRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
 		AllowedPorts: []types.AllowedPort{
@@ -16062,6 +16112,10 @@ func TestUpdateRequestSnapshot_UpdateGateway(t *testing.T) {
 						},
 					},
 				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
+				},
 			},
 			{
 				Interceptor: &types.InterceptorConfigurationMemberLambda{
@@ -16085,6 +16139,10 @@ func TestUpdateRequestSnapshot_UpdateGateway(t *testing.T) {
 							},
 						},
 					},
+				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
 				},
 			},
 		},

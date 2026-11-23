@@ -36,10 +36,10 @@ type GetOfferSetInput struct {
 	// This member is required.
 	OfferSetId *string
 
-	// A BCP 47 language tag or comma-separated priority list specifying the preferred
-	// locale for response content. See Locale for supported values, constraints,
-	// fallback behavior, and the default locale. If omitted, the service returns
-	// content in the default locale.
+	// The preferred locale for response content, as a Best Current Practice 47 (BCP
+	// 47) language tag or a comma-separated priority list of language tags. See Locale
+	// for supported values, constraints, fallback behavior, and the default locale. If
+	// you omit this field, the service returns content in the default locale.
 	Locale *string
 
 	noSmithyDocumentSerde
@@ -68,7 +68,7 @@ type GetOfferSetOutput struct {
 	AssociatedEntities []types.OfferSetAssociatedEntity
 
 	// Badges indicating special attributes of the offer set, such as private pricing
-	// or future dated.
+	// or future-dated.
 	//
 	// This member is required.
 	Badges []types.PurchaseOptionBadge
@@ -88,20 +88,20 @@ type GetOfferSetOutput struct {
 	// This member is required.
 	SellerOfRecord *types.SellerInformation
 
-	// The date and time when the offer set became available to the buyer.
+	// The date and time when the offer set became available to you.
 	AvailableFromTime *time.Time
 
-	// Detailed information about the offer set that helps buyers understand its
-	// purpose and contents.
+	// Detailed information about the offer set that helps you understand its purpose
+	// and contents.
 	BuyerNotes *string
 
 	// The date and time when the offer set expires and is no longer available for
 	// procurement.
 	ExpirationTime *time.Time
 
-	// The locale of the returned content. Indicates whether the response contains
-	// content in the requested locale, or fell back to the default locale. See Locale
-	// for details.
+	// The locale of the returned content. This value indicates whether the response
+	// contains content in the requested locale or fell back to the default locale. See
+	// Locale for details.
 	Locale *string
 
 	// The display name of the offer set.

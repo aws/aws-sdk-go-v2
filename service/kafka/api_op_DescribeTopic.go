@@ -64,6 +64,9 @@ type DescribeTopicOutput struct {
 	// The partition count of the topic.
 	PartitionCount *int32
 
+	// The broker IDs hosting replicas of this topic's partitions.
+	ReplicaIds []int32
+
 	// The replication factor of the topic.
 	ReplicationFactor *int32
 
@@ -95,6 +98,9 @@ func (v *DescribeTopicOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PartitionCount != nil {
 		s.WriteInt32(schemas.DescribeTopicResponse_PartitionCount, *v.PartitionCount)
 	}
+	if v.ReplicaIds != nil {
+		serialize__listOf__integer(s, schemas.DescribeTopicResponse_ReplicaIds, v.ReplicaIds)
+	}
 	if v.ReplicationFactor != nil {
 		s.WriteInt32(schemas.DescribeTopicResponse_ReplicationFactor, *v.ReplicationFactor)
 	}
@@ -117,6 +123,8 @@ func (v *DescribeTopicOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DescribeTopicResponse_PartitionCount:
 			v.PartitionCount = new(int32)
 			return d.ReadInt32(schemas.DescribeTopicResponse_PartitionCount, v.PartitionCount)
+		case schemas.DescribeTopicResponse_ReplicaIds:
+			return deserialize__listOf__integer(d, schemas.DescribeTopicResponse_ReplicaIds, &v.ReplicaIds)
 		case schemas.DescribeTopicResponse_ReplicationFactor:
 			v.ReplicationFactor = new(int32)
 			return d.ReadInt32(schemas.DescribeTopicResponse_ReplicationFactor, v.ReplicationFactor)

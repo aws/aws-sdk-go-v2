@@ -19,8 +19,8 @@ import (
 // unique inference parameters, you can also pass those unique parameters to the
 // model.
 //
-// Amazon Bedrock doesn't store any text, images, or documents that you provide as
-// content. The data is only used to generate the response.
+// Data retention for this request depends on the applicable account or project
+// configuration and the model's data retention policy.
 //
 // You can submit a prompt by including it in the messages field, specifying the
 // modelId of a foundation model or inference profile to run inference on it, and
@@ -41,7 +41,9 @@ import (
 //
 // For example code, see Converse API examples in the Amazon Bedrock User Guide.
 //
-// This operation requires permission for the bedrock:InvokeModel action.
+// This operation requires permission for the bedrock:InvokeModel action on both
+// the inference target and the project. If you omit projectIdentifier or specify
+// default , this includes permission on the default project for your account.
 //
 // To deny all inference access to resources that you specify in the modelId
 // field, you need to deny access to the bedrock:InvokeModel and
@@ -150,6 +152,16 @@ type ConverseInput struct {
 	// Model performance settings for the request.
 	PerformanceConfig *types.PerformanceConfiguration
 
+	// The ID or Amazon Resource Name (ARN) of the project to use for this invocation.
+	// The project must be active and belong to your AWS account and the AWS Region to
+	// which you send the request. Specify default or omit this field to use the
+	// default project for your account.
+	//
+	// For a non-default project, the inference target must resolve to a foundation
+	// model or system-defined inference profile. Application inference profiles don't
+	// support non-default projects.
+	ProjectIdentifier *string
+
 	// Contains a map of variables in a prompt from Prompt management to objects
 	// containing the values to fill in for them when running model invocation. This
 	// field is ignored if you don't specify a prompt resource in the modelId field.
@@ -214,6 +226,9 @@ func (v *ConverseInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteStruct(schemas.ConverseRequest_performanceConfig)
 		v.PerformanceConfig.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.ProjectIdentifier != nil {
+		s.WriteString(schemas.ConverseRequest_projectIdentifier, *v.ProjectIdentifier)
 	}
 	if v.PromptVariables != nil {
 		serializePromptVariableMap(s, schemas.ConverseRequest_promptVariables, v.PromptVariables)

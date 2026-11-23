@@ -39,10 +39,10 @@ type GetMarketplaceRevenueShareAllocationInput struct {
 	// This member is required.
 	MarketplaceRevenueShareAllocationId *string
 
-	// The AWS Marketplace product identifier of the parent revenue share.
+	// The parent marketplace revenue share, by ID (mrs-...) or ARN.
 	//
 	// This member is required.
-	ProductId *string
+	MarketplaceRevenueShareIdentifier *string
 
 	// The revision of the parent marketplace revenue share at which to retrieve the
 	// allocation. Omit to return the latest.
@@ -64,35 +64,56 @@ func (v *GetMarketplaceRevenueShareAllocationInput) SerializeMembers(s smithy.Sh
 	if v.MarketplaceRevenueShareAllocationId != nil {
 		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareAllocationId, *v.MarketplaceRevenueShareAllocationId)
 	}
+	if v.MarketplaceRevenueShareIdentifier != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareIdentifier, *v.MarketplaceRevenueShareIdentifier)
+	}
 	if v.MarketplaceRevenueShareRevision != nil {
 		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationInput_MarketplaceRevenueShareRevision, *v.MarketplaceRevenueShareRevision)
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationInput_ProductId, *v.ProductId)
 	}
 }
 
 type GetMarketplaceRevenueShareAllocationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the allocation.
+	// The date when the allocation was created.
 	//
 	// This member is required.
-	Arn *string
+	CreatedDate *time.Time
 
 	// The effective start date of the allocation.
 	//
 	// This member is required.
 	EffectiveFrom *string
 
+	// The effective end date of the allocation.
+	//
+	// This member is required.
+	EffectiveUntil *string
+
+	// The date when the allocation was last modified.
+	//
+	// This member is required.
+	LastModifiedDate *time.Time
+
 	// The unique identifier of the allocation.
 	//
 	// This member is required.
 	MarketplaceRevenueShareAllocationId *string
 
-	// The AWS Marketplace product identifier.
+	// The parent marketplace revenue share, short ID form (mrs-...).
 	//
 	// This member is required.
-	ProductId *string
+	MarketplaceRevenueShareIdentifier *string
+
+	// The latest revision of the parent marketplace revenue share.
+	//
+	// This member is required.
+	MarketplaceRevenueShareLatestRevision *string
+
+	// The revision of the parent marketplace revenue share at which the allocation
+	// was read.
+	//
+	// This member is required.
+	MarketplaceRevenueShareRevision *string
 
 	// The revenue share percentage.
 	//
@@ -103,21 +124,6 @@ type GetMarketplaceRevenueShareAllocationOutput struct {
 	//
 	// This member is required.
 	Status types.AllocationStatus
-
-	// The date when the allocation was created.
-	CreatedDate *time.Time
-
-	// The effective end date of the allocation, or null if open-ended.
-	EffectiveUntil *string
-
-	// The date when the allocation was last modified.
-	LastModifiedDate *time.Time
-
-	// The latest revision of the parent marketplace revenue share.
-	LatestMarketplaceRevenueShareRevision *string
-
-	// The display name of the AWS Marketplace product.
-	ProductName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -132,9 +138,6 @@ func (v *GetMarketplaceRevenueShareAllocationOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *GetMarketplaceRevenueShareAllocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_Arn, *v.Arn)
-	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.GetMarketplaceRevenueShareAllocationOutput_CreatedDate, *v.CreatedDate)
 	}
@@ -147,17 +150,17 @@ func (v *GetMarketplaceRevenueShareAllocationOutput) SerializeMembers(s smithy.S
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.GetMarketplaceRevenueShareAllocationOutput_LastModifiedDate, *v.LastModifiedDate)
 	}
-	if v.LatestMarketplaceRevenueShareRevision != nil {
-		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision, *v.LatestMarketplaceRevenueShareRevision)
-	}
 	if v.MarketplaceRevenueShareAllocationId != nil {
 		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId, *v.MarketplaceRevenueShareAllocationId)
 	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_ProductId, *v.ProductId)
+	if v.MarketplaceRevenueShareIdentifier != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareIdentifier, *v.MarketplaceRevenueShareIdentifier)
 	}
-	if v.ProductName != nil {
-		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_ProductName, *v.ProductName)
+	if v.MarketplaceRevenueShareLatestRevision != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareLatestRevision, *v.MarketplaceRevenueShareLatestRevision)
+	}
+	if v.MarketplaceRevenueShareRevision != nil {
+		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareRevision, *v.MarketplaceRevenueShareRevision)
 	}
 	if v.RevenueSharePercent != nil {
 		s.WriteString(schemas.GetMarketplaceRevenueShareAllocationOutput_RevenueSharePercent, *v.RevenueSharePercent)
@@ -169,9 +172,6 @@ func (v *GetMarketplaceRevenueShareAllocationOutput) SerializeMembers(s smithy.S
 func (v *GetMarketplaceRevenueShareAllocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMarketplaceRevenueShareAllocationOutput, func(s *smithy.Schema) error {
 		switch s {
-		case schemas.GetMarketplaceRevenueShareAllocationOutput_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.GetMarketplaceRevenueShareAllocationOutput_Arn, v.Arn)
 		case schemas.GetMarketplaceRevenueShareAllocationOutput_CreatedDate:
 			v.CreatedDate = new(time.Time)
 			return d.ReadTime(schemas.GetMarketplaceRevenueShareAllocationOutput_CreatedDate, v.CreatedDate)
@@ -184,18 +184,18 @@ func (v *GetMarketplaceRevenueShareAllocationOutput) Deserialize(d smithy.ShapeD
 		case schemas.GetMarketplaceRevenueShareAllocationOutput_LastModifiedDate:
 			v.LastModifiedDate = new(time.Time)
 			return d.ReadTime(schemas.GetMarketplaceRevenueShareAllocationOutput_LastModifiedDate, v.LastModifiedDate)
-		case schemas.GetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision:
-			v.LatestMarketplaceRevenueShareRevision = new(string)
-			return d.ReadString(schemas.GetMarketplaceRevenueShareAllocationOutput_LatestMarketplaceRevenueShareRevision, v.LatestMarketplaceRevenueShareRevision)
 		case schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId:
 			v.MarketplaceRevenueShareAllocationId = new(string)
 			return d.ReadString(schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareAllocationId, v.MarketplaceRevenueShareAllocationId)
-		case schemas.GetMarketplaceRevenueShareAllocationOutput_ProductId:
-			v.ProductId = new(string)
-			return d.ReadString(schemas.GetMarketplaceRevenueShareAllocationOutput_ProductId, v.ProductId)
-		case schemas.GetMarketplaceRevenueShareAllocationOutput_ProductName:
-			v.ProductName = new(string)
-			return d.ReadString(schemas.GetMarketplaceRevenueShareAllocationOutput_ProductName, v.ProductName)
+		case schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareIdentifier:
+			v.MarketplaceRevenueShareIdentifier = new(string)
+			return d.ReadString(schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareIdentifier, v.MarketplaceRevenueShareIdentifier)
+		case schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareLatestRevision:
+			v.MarketplaceRevenueShareLatestRevision = new(string)
+			return d.ReadString(schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareLatestRevision, v.MarketplaceRevenueShareLatestRevision)
+		case schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareRevision:
+			v.MarketplaceRevenueShareRevision = new(string)
+			return d.ReadString(schemas.GetMarketplaceRevenueShareAllocationOutput_MarketplaceRevenueShareRevision, v.MarketplaceRevenueShareRevision)
 		case schemas.GetMarketplaceRevenueShareAllocationOutput_RevenueSharePercent:
 			v.RevenueSharePercent = new(string)
 			return d.ReadString(schemas.GetMarketplaceRevenueShareAllocationOutput_RevenueSharePercent, v.RevenueSharePercent)

@@ -1846,6 +1846,12 @@ var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AwsAccountId",
 }, smithy.ShapeTypeString, 0)
 
+var AwsBillingConnectorConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AwsBillingConnectorConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var AwsBillingConnectorConfiguration_iamRoleArn *smithy.Schema
+
 var _BatchPutLimitEntries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "BatchPutLimitEntries",
@@ -2060,8 +2066,10 @@ var _CapacityProviderArn = smithy.NewSchema(smithy.ShapeID{
 var CapacityProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CapacityProviderConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var CapacityProviderConfiguration_capacityProviderArn *smithy.Schema
+
+var CapacityProviderConfiguration_operatingSystemConfiguration *smithy.Schema
 
 var _CapacityProviderId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -2884,6 +2892,12 @@ var ContentType = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var ContentType_MEMORY_RECORDS *smithy.Schema
 
+var CpuOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "CpuOptions",
+}, smithy.ShapeTypeStructure, 1)
+var CpuOptions_nestedVirtualization *smithy.Schema
+
 var CredentialProvider = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CredentialProvider",
@@ -3000,10 +3014,12 @@ var CredentialRotationConfig_coinbaseCDP *smithy.Schema
 var CredentialsProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CredentialsProviderConfiguration",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var CredentialsProviderConfiguration_coinbaseCDP *smithy.Schema
 
 var CredentialsProviderConfiguration_stripePrivy *smithy.Schema
+
+var CredentialsProviderConfiguration_awsBilling *smithy.Schema
 
 var _CredentialsProviderConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -4150,7 +4166,7 @@ var FallbackTriggers_errors *smithy.Schema
 var FilesystemConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "FilesystemConfiguration",
-}, smithy.ShapeTypeUnion, 4)
+}, smithy.ShapeTypeUnion, 5)
 var FilesystemConfiguration_sessionStorage *smithy.Schema
 
 var FilesystemConfiguration_s3FilesAccessPoint *smithy.Schema
@@ -4158,6 +4174,8 @@ var FilesystemConfiguration_s3FilesAccessPoint *smithy.Schema
 var FilesystemConfiguration_efsAccessPoint *smithy.Schema
 
 var FilesystemConfiguration_capacityProviderVolume *smithy.Schema
+
+var FilesystemConfiguration_s3BucketMount *smithy.Schema
 
 var _FilesystemConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -4305,12 +4323,16 @@ var _GatewayInterceptionPoints_member *smithy.Schema
 var GatewayInterceptorConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "GatewayInterceptorConfiguration",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var GatewayInterceptorConfiguration_interceptor *smithy.Schema
 
 var GatewayInterceptorConfiguration_interceptionPoints *smithy.Schema
 
 var GatewayInterceptorConfiguration_inputConfiguration *smithy.Schema
+
+var GatewayInterceptorConfiguration_responseInterceptionMode *smithy.Schema
+
+var GatewayInterceptorConfiguration_responseStreamingConfiguration *smithy.Schema
 
 var _GatewayInterceptorConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -5885,7 +5907,7 @@ var LambdaTransformConfiguration_arn *smithy.Schema
 var LaunchParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "LaunchParameters",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var LaunchParameters_operatingSystem *smithy.Schema
 
 var LaunchParameters_instanceRequirements *smithy.Schema
@@ -5903,6 +5925,8 @@ var LaunchParameters_sshKeyName *smithy.Schema
 var LaunchParameters_instanceProfileArn *smithy.Schema
 
 var LaunchParameters_propagatedTags *smithy.Schema
+
+var LaunchParameters_cpuOptions *smithy.Schema
 
 var LaunchTemplateSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -5989,6 +6013,12 @@ var LinkedinOauth2ProviderConfigOutput = smithy.NewSchema(smithy.ShapeID{
 var LinkedinOauth2ProviderConfigOutput_oauthDiscovery *smithy.Schema
 
 var LinkedinOauth2ProviderConfigOutput_clientId *smithy.Schema
+
+var LinuxOperatingSystemConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "LinuxOperatingSystemConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var LinuxOperatingSystemConfiguration_privilegeMode *smithy.Schema
 
 var ListDatasetExamplesFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -6164,6 +6194,11 @@ var _MatchValueStringList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "MatchValueStringList",
 }, smithy.ShapeTypeList, 1)
 var _MatchValueStringList_member *smithy.Schema
+
+var _MaxEventsPerInvocation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "MaxEventsPerInvocation",
+}, smithy.ShapeTypeInteger, 0)
 
 var _MaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -6716,6 +6751,14 @@ var _NaturalLanguage = smithy.NewSchema(smithy.ShapeID{
 	Name:      "NaturalLanguage",
 }, smithy.ShapeTypeString, 0)
 
+var NestedVirtualization = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "NestedVirtualization",
+}, smithy.ShapeTypeEnum, 2)
+var NestedVirtualization_ENABLED *smithy.Schema
+
+var NestedVirtualization_DISABLED *smithy.Schema
+
 var NetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "NetworkConfiguration",
@@ -7059,6 +7102,12 @@ var OperatingSystem_LINUX_X86_64 *smithy.Schema
 
 var OperatingSystem_LINUX_ARM64 *smithy.Schema
 
+var OperatingSystemConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "OperatingSystemConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var OperatingSystemConfiguration_linux *smithy.Schema
+
 var _OptionalLogGroupName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "OptionalLogGroupName",
@@ -7193,10 +7242,12 @@ var PaymentConnectorSummary_lastUpdatedAt *smithy.Schema
 var PaymentConnectorType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "PaymentConnectorType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var PaymentConnectorType_COINBASE_CDP *smithy.Schema
 
 var PaymentConnectorType_STRIPE_PRIVY *smithy.Schema
+
+var PaymentConnectorType_AWS_BILLING *smithy.Schema
 
 var _PaymentCredentialProviderArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -7732,6 +7783,14 @@ var PrivateKeySource = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeUnion, 1)
 var PrivateKeySource_kmsKeySource *smithy.Schema
 
+var PrivilegeMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "PrivilegeMode",
+}, smithy.ShapeTypeEnum, 2)
+var PrivilegeMode_STANDARD *smithy.Schema
+
+var PrivilegeMode_PRIVILEGED *smithy.Schema
+
 var _Prompt = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "Prompt",
@@ -8152,11 +8211,25 @@ var ResourceType_SYSTEM *smithy.Schema
 
 var ResourceType_CUSTOM *smithy.Schema
 
+var ResponseInterceptionMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ResponseInterceptionMode",
+}, smithy.ShapeTypeEnum, 2)
+var ResponseInterceptionMode_BUFFERED *smithy.Schema
+
+var ResponseInterceptionMode_STREAM *smithy.Schema
+
 var _ResponseListType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ResponseListType",
 }, smithy.ShapeTypeList, 1)
 var _ResponseListType_member *smithy.Schema
+
+var ResponseStreamingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ResponseStreamingConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ResponseStreamingConfiguration_maxEventsPerInvocation *smithy.Schema
 
 var _ResponseType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -8282,6 +8355,20 @@ var RuntimeTargetConfiguration_arn *smithy.Schema
 var RuntimeTargetConfiguration_qualifier *smithy.Schema
 
 var RuntimeTargetConfiguration_schema *smithy.Schema
+
+var S3BucketMountConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "S3BucketMountConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var S3BucketMountConfiguration_bucket *smithy.Schema
+
+var S3BucketMountConfiguration_mountPath *smithy.Schema
+
+var S3BucketMountConfiguration_prefix *smithy.Schema
+
+var S3BucketMountConfiguration_s3BucketOwner *smithy.Schema
+
+var S3BucketMountConfiguration_s3BucketRegion *smithy.Schema
 
 var _S3BucketUri = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -15048,6 +15135,8 @@ func init() {
 
 	AuthorizerType_AUTHENTICATE_ONLY = AuthorizerType.AddMember("AUTHENTICATE_ONLY", smithyprelude.Unit)
 
+	AwsBillingConnectorConfiguration_iamRoleArn = AwsBillingConnectorConfiguration.AddMember("iamRoleArn", _RoleArn)
+
 	_DimensionKeys_member = _DimensionKeys.AddMember("member", _DimensionKey)
 
 	_Dimensions_key = _Dimensions.AddMember("key", _DimensionKey)
@@ -15202,7 +15291,17 @@ func init() {
 
 	BuildLifecycleHooks_warmup = BuildLifecycleHooks.AddMember("warmup", LifecycleHook)
 
+	PrivilegeMode_STANDARD = PrivilegeMode.AddMember("STANDARD", smithyprelude.Unit)
+
+	PrivilegeMode_PRIVILEGED = PrivilegeMode.AddMember("PRIVILEGED", smithyprelude.Unit)
+
+	LinuxOperatingSystemConfiguration_privilegeMode = LinuxOperatingSystemConfiguration.AddMember("privilegeMode", PrivilegeMode)
+
+	OperatingSystemConfiguration_linux = OperatingSystemConfiguration.AddMember("linux", LinuxOperatingSystemConfiguration)
+
 	CapacityProviderConfiguration_capacityProviderArn = CapacityProviderConfiguration.AddMember("capacityProviderArn", _CapacityProviderArn)
+
+	CapacityProviderConfiguration_operatingSystemConfiguration = CapacityProviderConfiguration.AddMember("operatingSystemConfiguration", OperatingSystemConfiguration)
 
 	CapacityProviderStatus_CREATING = CapacityProviderStatus.AddMember("CREATING", smithyprelude.Unit)
 
@@ -15458,6 +15557,12 @@ func init() {
 
 	_LicenseSpecificationList_member = _LicenseSpecificationList.AddMember("member", LicenseSpecification)
 
+	NestedVirtualization_ENABLED = NestedVirtualization.AddMember("ENABLED", smithyprelude.Unit)
+
+	NestedVirtualization_DISABLED = NestedVirtualization.AddMember("DISABLED", smithyprelude.Unit)
+
+	CpuOptions_nestedVirtualization = CpuOptions.AddMember("nestedVirtualization", NestedVirtualization)
+
 	LaunchParameters_operatingSystem = LaunchParameters.AddMember("operatingSystem", OperatingSystem)
 
 	LaunchParameters_instanceRequirements = LaunchParameters.AddMember("instanceRequirements", InstanceRequirements)
@@ -15475,6 +15580,8 @@ func init() {
 	LaunchParameters_instanceProfileArn = LaunchParameters.AddMember("instanceProfileArn", _InstanceProfileArn)
 
 	LaunchParameters_propagatedTags = LaunchParameters.AddMember("propagatedTags", _TagsMap)
+
+	LaunchParameters_cpuOptions = LaunchParameters.AddMember("cpuOptions", CpuOptions)
 
 	LaunchTemplateSource_launchParameters = LaunchTemplateSource.AddMember("launchParameters", LaunchParameters)
 
@@ -15857,6 +15964,8 @@ func init() {
 	CredentialsProviderConfiguration_coinbaseCDP = CredentialsProviderConfiguration.AddMember("coinbaseCDP", PaymentCredentialProviderConfiguration)
 
 	CredentialsProviderConfiguration_stripePrivy = CredentialsProviderConfiguration.AddMember("stripePrivy", PaymentCredentialProviderConfiguration)
+
+	CredentialsProviderConfiguration_awsBilling = CredentialsProviderConfiguration.AddMember("awsBilling", AwsBillingConnectorConfiguration)
 
 	_CredentialsProviderConfigurations_member = _CredentialsProviderConfigurations.AddMember("member", CredentialsProviderConfiguration)
 
@@ -16468,6 +16577,16 @@ func init() {
 
 	S3FilesAccessPointConfiguration_mountPath = S3FilesAccessPointConfiguration.AddMember("mountPath", _MountPath)
 
+	S3BucketMountConfiguration_bucket = S3BucketMountConfiguration.AddMember("bucket", smithyprelude.String)
+
+	S3BucketMountConfiguration_mountPath = S3BucketMountConfiguration.AddMember("mountPath", _MountPath)
+
+	S3BucketMountConfiguration_prefix = S3BucketMountConfiguration.AddMember("prefix", smithyprelude.String)
+
+	S3BucketMountConfiguration_s3BucketOwner = S3BucketMountConfiguration.AddMember("s3BucketOwner", smithyprelude.String)
+
+	S3BucketMountConfiguration_s3BucketRegion = S3BucketMountConfiguration.AddMember("s3BucketRegion", smithyprelude.String)
+
 	FilesystemConfiguration_sessionStorage = FilesystemConfiguration.AddMember("sessionStorage", SessionStorageConfiguration)
 
 	FilesystemConfiguration_s3FilesAccessPoint = FilesystemConfiguration.AddMember("s3FilesAccessPoint", S3FilesAccessPointConfiguration)
@@ -16475,6 +16594,8 @@ func init() {
 	FilesystemConfiguration_efsAccessPoint = FilesystemConfiguration.AddMember("efsAccessPoint", EfsAccessPointConfiguration)
 
 	FilesystemConfiguration_capacityProviderVolume = FilesystemConfiguration.AddMember("capacityProviderVolume", CapacityProviderVolumeConfiguration)
+
+	FilesystemConfiguration_s3BucketMount = FilesystemConfiguration.AddMember("s3BucketMount", S3BucketMountConfiguration)
 
 	_FilesystemConfigurations_member = _FilesystemConfigurations.AddMember("member", FilesystemConfiguration)
 
@@ -16586,11 +16707,21 @@ func init() {
 
 	InterceptorInputConfiguration_payloadFilter = InterceptorInputConfiguration.AddMember("payloadFilter", InterceptorPayloadFilter)
 
+	ResponseInterceptionMode_BUFFERED = ResponseInterceptionMode.AddMember("BUFFERED", smithyprelude.Unit)
+
+	ResponseInterceptionMode_STREAM = ResponseInterceptionMode.AddMember("STREAM", smithyprelude.Unit)
+
+	ResponseStreamingConfiguration_maxEventsPerInvocation = ResponseStreamingConfiguration.AddMember("maxEventsPerInvocation", _MaxEventsPerInvocation)
+
 	GatewayInterceptorConfiguration_interceptor = GatewayInterceptorConfiguration.AddMember("interceptor", InterceptorConfiguration)
 
 	GatewayInterceptorConfiguration_interceptionPoints = GatewayInterceptorConfiguration.AddMember("interceptionPoints", _GatewayInterceptionPoints)
 
 	GatewayInterceptorConfiguration_inputConfiguration = GatewayInterceptorConfiguration.AddMember("inputConfiguration", InterceptorInputConfiguration)
+
+	GatewayInterceptorConfiguration_responseInterceptionMode = GatewayInterceptorConfiguration.AddMember("responseInterceptionMode", ResponseInterceptionMode)
+
+	GatewayInterceptorConfiguration_responseStreamingConfiguration = GatewayInterceptorConfiguration.AddMember("responseStreamingConfiguration", ResponseStreamingConfiguration)
 
 	_GatewayInterceptorConfigurations_member = _GatewayInterceptorConfigurations.AddMember("member", GatewayInterceptorConfiguration)
 
@@ -17925,6 +18056,8 @@ func init() {
 	PaymentConnectorType_COINBASE_CDP = PaymentConnectorType.AddMember("COINBASE_CDP", smithyprelude.Unit)
 
 	PaymentConnectorType_STRIPE_PRIVY = PaymentConnectorType.AddMember("STRIPE_PRIVY", smithyprelude.Unit)
+
+	PaymentConnectorType_AWS_BILLING = PaymentConnectorType.AddMember("AWS_BILLING", smithyprelude.Unit)
 
 	PaymentConnectorSummary_paymentConnectorId = PaymentConnectorSummary.AddMember("paymentConnectorId", _PaymentConnectorId)
 

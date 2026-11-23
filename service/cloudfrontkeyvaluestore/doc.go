@@ -3,6 +3,9 @@
 // Package cloudfrontkeyvaluestore provides the API client, operations, and
 // parameter types for Amazon CloudFront KeyValueStore.
 //
-// Amazon CloudFront KeyValueStore Service to View and Update Data in a KVS
-// Resource
+// You can use Amazon CloudFront KeyValueStore to view and update data in a key
+// value store resource. For more information, see [Using CloudFront KeyValueStore]in the Amazon CloudFront
+// Developer Guide.
+//
+// [Using CloudFront KeyValueStore]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/kvs-with-functions.html
 package cloudfrontkeyvaluestore

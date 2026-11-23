@@ -201,6 +201,61 @@ func (v *AllQueryArguments) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Specifies the security analytics configuration for the web ACL. Security
+// analytics shows the web ACL's request log data from multiple Amazon Web Services
+// Regions in a single dashboard in the WAF console.
+//
+// When you enable security analytics, you authorize Amazon Web Services to
+// transfer and store full request logs outside the Amazon Web Services Region
+// where the web ACL is hosted. For regional web ACLs, security analytics is
+// disabled by default when you omit this configuration. For web ACLs that protect
+// CloudFront distributions (global web ACLs), security analytics is enabled by
+// default. For more information, see [Enabling security analytics for a protection pack (web ACL)]in the WAF Developer Guide.
+//
+// [Enabling security analytics for a protection pack (web ACL)]: https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-security-analytics-enabling.html
+type AnalyticsConfig struct {
+
+	// The security analytics mode for the web ACL. Valid values:
+	//
+	//   - CROSS_REGION - Enables security analytics. WAF transfers and stores the web
+	//   ACL's request logs outside the Amazon Web Services Region where the web ACL is
+	//   hosted, for aggregation and processing.
+	//
+	//   - DISABLED - Disables security analytics. WAF stops transferring the web ACL's
+	//   request logs.
+	//
+	// This member is required.
+	Mode AnalyticsMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *AnalyticsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyticsConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyticsConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.AnalyticsConfig_Mode, string(v.Mode))
+	}
+}
+func (v *AnalyticsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalyticsConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalyticsConfig_Mode:
+			var ev string
+			if err := d.ReadString(schemas.AnalyticsConfig_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = AnalyticsMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A logical rule statement used to combine other rule statements with AND logic.
 // You provide more than one Statementwithin the AndStatement .
 type AndStatement struct {
@@ -294,6 +349,205 @@ func (v *APIKeySummary) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeTokenDomains(d, schemas.APIKeySummary_TokenDomains, &v.TokenDomains)
 		case schemas.APIKeySummary_Version:
 			return d.ReadInt32(schemas.APIKeySummary_Version, &v.Version)
+		}
+		return nil
+	})
+}
+
+// An API endpoint pattern that an API security event involves.
+type ApiPattern struct {
+
+	// The domains that the API pattern was observed on. For example, api.example.com .
+	Domains []string
+
+	// The HTTP method of the API pattern. For example, GET or POST .
+	Method *string
+
+	// The normalized URI path of the API pattern. Templated path segments are shown
+	// in braces. For example, /api/v1/accounts/{id} .
+	PathPattern *string
+
+	// The port of the API pattern. For example, 443 .
+	Port int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ApiPattern) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiPattern)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApiPattern) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domains != nil {
+		serializeDomainList(s, schemas.ApiPattern_Domains, v.Domains)
+	}
+	if v.Method != nil {
+		s.WriteString(schemas.ApiPattern_Method, *v.Method)
+	}
+	if v.PathPattern != nil {
+		s.WriteString(schemas.ApiPattern_PathPattern, *v.PathPattern)
+	}
+	if v.Port != 0 {
+		s.WriteInt32(schemas.ApiPattern_Port, v.Port)
+	}
+}
+func (v *ApiPattern) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiPattern, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiPattern_Domains:
+			return deserializeDomainList(d, schemas.ApiPattern_Domains, &v.Domains)
+		case schemas.ApiPattern_Method:
+			v.Method = new(string)
+			return d.ReadString(schemas.ApiPattern_Method, v.Method)
+		case schemas.ApiPattern_PathPattern:
+			v.PathPattern = new(string)
+			return d.ReadString(schemas.ApiPattern_PathPattern, v.PathPattern)
+		case schemas.ApiPattern_Port:
+			return d.ReadInt32(schemas.ApiPattern_Port, &v.Port)
+		}
+		return nil
+	})
+}
+
+// An API pattern to filter events by, used in ListEvents and ListEventsByWebACL.
+type ApiPatternFilter struct {
+
+	// The domains that you want the filter to match. You can specify up to 10 domains.
+	Domains []string
+
+	// The HTTP method that you want the filter to match. For example, GET or POST .
+	Method *string
+
+	// The normalized URI path that you want the filter to match. For example,
+	// /api/v1/accounts/{id} .
+	PathPattern *string
+
+	// The port that you want the filter to match. For example, 443 .
+	Port int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ApiPatternFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiPatternFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApiPatternFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domains != nil {
+		serializeApiPatternDomainList(s, schemas.ApiPatternFilter_Domains, v.Domains)
+	}
+	if v.Method != nil {
+		s.WriteString(schemas.ApiPatternFilter_Method, *v.Method)
+	}
+	if v.PathPattern != nil {
+		s.WriteString(schemas.ApiPatternFilter_PathPattern, *v.PathPattern)
+	}
+	if v.Port != 0 {
+		s.WriteInt32(schemas.ApiPatternFilter_Port, v.Port)
+	}
+}
+func (v *ApiPatternFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiPatternFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiPatternFilter_Domains:
+			return deserializeApiPatternDomainList(d, schemas.ApiPatternFilter_Domains, &v.Domains)
+		case schemas.ApiPatternFilter_Method:
+			v.Method = new(string)
+			return d.ReadString(schemas.ApiPatternFilter_Method, v.Method)
+		case schemas.ApiPatternFilter_PathPattern:
+			v.PathPattern = new(string)
+			return d.ReadString(schemas.ApiPatternFilter_PathPattern, v.PathPattern)
+		case schemas.ApiPatternFilter_Port:
+			return d.ReadInt32(schemas.ApiPatternFilter_Port, &v.Port)
+		}
+		return nil
+	})
+}
+
+// The API security details of an event.
+type ApiSecurityEventDetail struct {
+
+	// The API patterns that the event involves. The list contains up to 20 API
+	// patterns.
+	ApiPatterns []ApiPattern
+
+	// The API security threat category of the event. For example, API2:2023 .
+	Category *string
+
+	// The confidence level of the event detection: LOW , MEDIUM , or HIGH .
+	Confidence Confidence
+
+	// The event actors that are associated with the event. The list contains up to 20
+	// event actors. To retrieve the details of an event actor, provide its
+	// EventActorId to GetEventActor.
+	EventActors []EventActorReference
+
+	// The fully qualified name of the label that WAF assigned to the event. For
+	// example, awswaf:managed:aws:api-security:credential-stuffing-high .
+	Label *string
+
+	// The changes to the event's label, confidence, and API patterns over time,
+	// ordered from oldest to newest. The list contains up to 32 entries.
+	//
+	// For ListEvents and ListEventsByWebACL, this is returned only if you specify TIMELINE in the request Include
+	// setting.
+	Timeline []EventTimelineEntry
+
+	noSmithyDocumentSerde
+}
+
+func (v *ApiSecurityEventDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiSecurityEventDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApiSecurityEventDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiPatterns != nil {
+		serializeApiPatternList(s, schemas.ApiSecurityEventDetail_ApiPatterns, v.ApiPatterns)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.ApiSecurityEventDetail_Category, *v.Category)
+	}
+	if v.Confidence != "" {
+		s.WriteString(schemas.ApiSecurityEventDetail_Confidence, string(v.Confidence))
+	}
+	if v.EventActors != nil {
+		serializeEventActorReferenceList(s, schemas.ApiSecurityEventDetail_EventActors, v.EventActors)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.ApiSecurityEventDetail_Label, *v.Label)
+	}
+	if v.Timeline != nil {
+		serializeEventTimelineEntryList(s, schemas.ApiSecurityEventDetail_Timeline, v.Timeline)
+	}
+}
+func (v *ApiSecurityEventDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiSecurityEventDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiSecurityEventDetail_ApiPatterns:
+			return deserializeApiPatternList(d, schemas.ApiSecurityEventDetail_ApiPatterns, &v.ApiPatterns)
+		case schemas.ApiSecurityEventDetail_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.ApiSecurityEventDetail_Category, v.Category)
+		case schemas.ApiSecurityEventDetail_Confidence:
+			var ev string
+			if err := d.ReadString(schemas.ApiSecurityEventDetail_Confidence, &ev); err != nil {
+				return err
+			}
+			v.Confidence = Confidence(ev)
+			return nil
+		case schemas.ApiSecurityEventDetail_EventActors:
+			return deserializeEventActorReferenceList(d, schemas.ApiSecurityEventDetail_EventActors, &v.EventActors)
+		case schemas.ApiSecurityEventDetail_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.ApiSecurityEventDetail_Label, v.Label)
+		case schemas.ApiSecurityEventDetail_Timeline:
+			return deserializeEventTimelineEntryList(d, schemas.ApiSecurityEventDetail_Timeline, &v.Timeline)
 		}
 		return nil
 	})
@@ -428,14 +682,14 @@ func (v *AsnMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // Use this to customize the maximum size of the request body that your protected
 // resources forward to WAF for inspection. You can customize this setting for
-// CloudFront, API Gateway, Amazon Cognito, App Runner, or Verified Access
-// resources. The default setting is 16 KB (16,384 bytes).
+// Application Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner,
+// or Verified Access resources. The default setting is 8 KB (8,192 bytes) for
+// Application Load Balancer and 16 KB (16,384 bytes) for the other resource types.
 //
 // You are charged additional fees when your protected resources forward body
 // sizes that are larger than the default. For more information, see [WAF Pricing].
 //
-// For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192
-// bytes).
+// For AppSync, the limit is fixed at 8 KB (8,192 bytes).
 //
 // You can also use this to have your CloudFront distributions insert the WAF
 // challenge JavaScript SDK into the HTML responses that they return. For more
@@ -479,18 +733,20 @@ type AssociationConfig struct {
 	// [Automatic SDK integration for CloudFront distributions]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-challenge-javascript-sdk-injection.html
 	ChallengeJavascriptSdkInjection map[string]ChallengeJavascriptSdkInjectionConfig
 
-	// Customizes the maximum size of the request body that your protected CloudFront,
-	// API Gateway, Amazon Cognito, App Runner, and Verified Access resources forward
-	// to WAF for inspection. The default size is 16 KB (16,384 bytes). You can change
-	// the setting for any of the available resource types.
+	// Customizes the maximum size of the request body that your protected Application
+	// Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
+	// Access resources forward to WAF for inspection. The default size is 8 KB (8,192
+	// bytes) for Application Load Balancer and 16 KB (16,384 bytes) for the other
+	// resource types. You can change the setting for any of the available resource
+	// types.
 	//
 	// You are charged additional fees when your protected resources forward body
 	// sizes that are larger than the default. For more information, see [WAF Pricing].
 	//
-	// Example JSON:  { "API_GATEWAY": "KB_48", "APP_RUNNER_SERVICE": "KB_32" }
+	// Example JSON:  { "API_GATEWAY": "KB_48", "APP_RUNNER_SERVICE": "KB_32",
+	// "APPLICATION_LOAD_BALANCER": "KB_16" }
 	//
-	// For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192
-	// bytes).
+	// For AppSync, the limit is fixed at 8 KB (8,192 bytes).
 	//
 	// [WAF Pricing]: http://aws.amazon.com/waf/pricing/
 	RequestBody map[string]RequestBodyAssociatedResourceTypeConfig
@@ -635,6 +891,49 @@ func (v *AWSManagedRulesACFPRuleSet) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.AWSManagedRulesACFPRuleSet_ResponseInspection:
 			v.ResponseInspection = &ResponseInspection{}
 			return v.ResponseInspection.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Configures the use of the AI security managed rule group,
+// AWSManagedRulesAISecurityRuleSet . This configuration is used in
+// ManagedRuleGroupConfig .
+//
+// The rule group always runs its own inspections. The configuration that you
+// provide here determines whether the rule group also uses Amazon Bedrock
+// Guardrails to inspect web requests, or web requests and responses.
+//
+// Use of this rule group is not supported in Firewall Manager.
+type AWSManagedRulesAISecurityRuleSet struct {
+
+	// Specifies whether and how the rule group uses Amazon Bedrock Guardrails.
+	//
+	// This member is required.
+	BedrockGuardrails *BedrockGuardrails
+
+	noSmithyDocumentSerde
+}
+
+func (v *AWSManagedRulesAISecurityRuleSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AWSManagedRulesAISecurityRuleSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AWSManagedRulesAISecurityRuleSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BedrockGuardrails != nil {
+		s.WriteStruct(schemas.AWSManagedRulesAISecurityRuleSet_BedrockGuardrails)
+		v.BedrockGuardrails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AWSManagedRulesAISecurityRuleSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AWSManagedRulesAISecurityRuleSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AWSManagedRulesAISecurityRuleSet_BedrockGuardrails:
+			v.BedrockGuardrails = &BedrockGuardrails{}
+			return v.BedrockGuardrails.Deserialize(d)
 		}
 		return nil
 	})
@@ -879,6 +1178,154 @@ func (v *AWSManagedRulesBotControlRuleSet) Deserialize(d smithy.ShapeDeserialize
 	})
 }
 
+// Specifies whether the AI security managed rule group,
+// AWSManagedRulesAISecurityRuleSet , uses Amazon Bedrock Guardrails to inspect web
+// requests, or web requests and responses.
+//
+// Specify exactly one of the following settings: Disable , ProtectRequestOnly , or
+// ProtectRequestAndResponse .
+type BedrockGuardrails struct {
+
+	// Turns off the use of Amazon Bedrock Guardrails. The rule group continues to run
+	// its own inspections.
+	//
+	// JSON specification: "Disable": {}
+	Disable *DisableBedrockGuardrails
+
+	// Uses Amazon Bedrock Guardrails to inspect web requests and the responses to
+	// them.
+	ProtectRequestAndResponse *BedrockGuardrailsRequestAndResponse
+
+	// Uses Amazon Bedrock Guardrails to inspect web requests.
+	ProtectRequestOnly *BedrockGuardrailsRequestOnly
+
+	noSmithyDocumentSerde
+}
+
+func (v *BedrockGuardrails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BedrockGuardrails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BedrockGuardrails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Disable != nil {
+		s.WriteStruct(schemas.BedrockGuardrails_Disable)
+		v.Disable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProtectRequestAndResponse != nil {
+		s.WriteStruct(schemas.BedrockGuardrails_ProtectRequestAndResponse)
+		v.ProtectRequestAndResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProtectRequestOnly != nil {
+		s.WriteStruct(schemas.BedrockGuardrails_ProtectRequestOnly)
+		v.ProtectRequestOnly.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BedrockGuardrails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BedrockGuardrails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BedrockGuardrails_Disable:
+			v.Disable = &DisableBedrockGuardrails{}
+			return v.Disable.Deserialize(d)
+		case schemas.BedrockGuardrails_ProtectRequestAndResponse:
+			v.ProtectRequestAndResponse = &BedrockGuardrailsRequestAndResponse{}
+			return v.ProtectRequestAndResponse.Deserialize(d)
+		case schemas.BedrockGuardrails_ProtectRequestOnly:
+			v.ProtectRequestOnly = &BedrockGuardrailsRequestOnly{}
+			return v.ProtectRequestOnly.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Configures the AI security managed rule group to use Amazon Bedrock Guardrails
+// to inspect web requests and the responses to them.
+//
+// This is used in the BedrockGuardrails setting of
+// AWSManagedRulesAISecurityRuleSet .
+type BedrockGuardrailsRequestAndResponse struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role that WAF uses to call Amazon
+	// Bedrock Guardrails for the rule group. The role must be in the same Amazon Web
+	// Services account as the web ACL.
+	//
+	// To specify the role, you must have permission to call iam:PassRole on it, to
+	// pass it to the WAF service principal wafv2.amazonaws.com .
+	//
+	// This member is required.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BedrockGuardrailsRequestAndResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BedrockGuardrailsRequestAndResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BedrockGuardrailsRequestAndResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleArn != nil {
+		s.WriteString(schemas.BedrockGuardrailsRequestAndResponse_RoleArn, *v.RoleArn)
+	}
+}
+func (v *BedrockGuardrailsRequestAndResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BedrockGuardrailsRequestAndResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BedrockGuardrailsRequestAndResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.BedrockGuardrailsRequestAndResponse_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
+// Configures the AI security managed rule group to use Amazon Bedrock Guardrails
+// to inspect web requests.
+//
+// This is used in the BedrockGuardrails setting of
+// AWSManagedRulesAISecurityRuleSet .
+type BedrockGuardrailsRequestOnly struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role that WAF uses to call Amazon
+	// Bedrock Guardrails for the rule group. The role must be in the same Amazon Web
+	// Services account as the web ACL.
+	//
+	// To specify the role, you must have permission to call iam:PassRole on it, to
+	// pass it to the WAF service principal wafv2.amazonaws.com .
+	//
+	// This member is required.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BedrockGuardrailsRequestOnly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BedrockGuardrailsRequestOnly)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BedrockGuardrailsRequestOnly) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleArn != nil {
+		s.WriteString(schemas.BedrockGuardrailsRequestOnly_RoleArn, *v.RoleArn)
+	}
+}
+func (v *BedrockGuardrailsRequestOnly) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BedrockGuardrailsRequestOnly, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BedrockGuardrailsRequestOnly_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.BedrockGuardrailsRequestOnly_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
 // Specifies that WAF should block the request and optionally defines additional
 // custom handling for the response to the web request.
 //
@@ -935,8 +1382,10 @@ type Body struct {
 	// larger than the limit, the underlying host service only forwards the contents
 	// that are within the limit to WAF for inspection.
 	//
-	//   - For Application Load Balancer and AppSync, the limit is fixed at 8 KB
-	//   (8,192 bytes).
+	//   - For AppSync, the limit is fixed at 8 KB (8,192 bytes).
+	//
+	//   - For Application Load Balancer, the default limit is 8 KB (8,192 bytes), and
+	//   you can change the limit in the web ACL AssociationConfig .
 	//
 	//   - For CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
 	//   Access, the default limit is 16 KB (16,384 bytes), and you can increase the
@@ -1113,8 +1562,10 @@ type ByteMatchStatement struct {
 	//   Application Load Balancers. Match against the request's JA3 fingerprint. The JA3
 	//   fingerprint is a 32-character hash derived from the TLS Client Hello of an
 	//   incoming request. This fingerprint serves as a unique identifier for the
-	//   client's TLS configuration. You can use this choice only with a string match
-	//   ByteMatchStatement with the PositionalConstraint set to EXACTLY .
+	//   client's TLS configuration. You can use this choice with a ByteMatchStatement
+	//   , RegexMatchStatement , RegexPatternSetReferenceStatement , or
+	//   SizeConstraintStatement . You can't use it with SqliMatchStatement or
+	//   XssMatchStatement .
 	//
 	// You can obtain the JA3 fingerprint for client requests from the web ACL logs.
 	//   If WAF is able to calculate the fingerprint, it includes it in the logs. For
@@ -1584,8 +2035,8 @@ type ClientSideAction struct {
 	//   - If usage is enabled:
 	//
 	//   - The managed rule group adds the label
-	//   awswaf:managed:aws:anti-ddos:challengeable-request to any web request whose
-	//   URL does NOT match the regular expressions provided in the ClientSideAction
+	//   awswaf:managed:aws:anti-ddos:challengeable-request to any web request that
+	//   does not match the regular expressions provided in the ClientSideAction
 	//   setting ExemptUriRegularExpressions .
 	//
 	//   - The two rules are evaluated against web requests for protected resources
@@ -1614,18 +2065,26 @@ type ClientSideAction struct {
 	// This member is required.
 	UsageOfAction UsageOfAction
 
-	// The regular expression to match against the web request URI, used to identify
-	// requests that can't handle a silent browser challenge. When the ClientSideAction
-	// setting UsageOfAction is enabled, the managed rule group uses this setting to
-	// determine which requests to label with
-	// awswaf:managed:aws:anti-ddos:challengeable-request . If UsageOfAction is
+	// The regular expression to match against the request's host followed by its
+	// normalized URI path, used to identify requests that can't handle a silent
+	// browser challenge. When the ClientSideAction setting UsageOfAction is enabled,
+	// the managed rule group uses this setting to determine which requests to label
+	// with awswaf:managed:aws:anti-ddos:challengeable-request . If UsageOfAction is
 	// disabled, this setting has no effect and the managed rule group doesn't add the
 	// label to any requests.
 	//
+	// WAF matches against the host immediately followed by the normalized URI path
+	// and doesn't include the scheme, the query string, or the fragment. For example,
+	// www.example.com/api/orders . Because the match begins with the host, a pattern
+	// anchored to the start of the path, such as ^/api/ , never matches. WAF
+	// normalizes the path first, removing empty segments (including a trailing slash)
+	// and single-dot ( . ) segments and resolving double-dot ( .. ) segments, so /api/
+	// is evaluated as /api . Only GET requests are challengeable.
+	//
 	// The anti-DDoS managed rule group doesn't evaluate the rules
-	// ChallengeDDoSRequests or ChallengeAllDuringEvent for web requests whose URIs
-	// match this regex. This is true regardless of whether you override the rule
-	// action for either of the rules in your web ACL configuration.
+	// ChallengeDDoSRequests or ChallengeAllDuringEvent for web requests that match
+	// this regex. This is true regardless of whether you override the rule action for
+	// either of the rules in your web ACL configuration.
 	//
 	// Amazon Web Services recommends using a regular expression.
 	//
@@ -1635,7 +2094,7 @@ type ClientSideAction struct {
 	// Amazon Web Services recommends starting with the following setting. Review and
 	// update it for your application's needs:
 	//
-	//     \/api\/|\.(acc|avi|css|gif|jpe?g|js|mp[34]|ogg|otf|pdf|png|tiff?|ttf|webm|webp|woff2?)$
+	//     \/api(\/|$)|\.(acc|avi|css|gif|jpe?g|js|mp[34]|ogg|otf|pdf|png|tiff?|ttf|webm|webp|woff2?)$
 	ExemptUriRegularExpressions []Regex
 
 	// The sensitivity that the rule group rule ChallengeDDoSRequests uses when
@@ -2687,6 +3146,33 @@ func (v *DefaultAction) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Turns off the use of Amazon Bedrock Guardrails in the AI security managed rule
+// group. The rule group continues to run its own inspections.
+//
+// This is used in the BedrockGuardrails setting of
+// AWSManagedRulesAISecurityRuleSet .
+//
+// JSON specification: "Disable": {}
+type DisableBedrockGuardrails struct {
+	noSmithyDocumentSerde
+}
+
+func (v *DisableBedrockGuardrails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableBedrockGuardrails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableBedrockGuardrails) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableBedrockGuardrails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableBedrockGuardrails, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // A WAF feature that is not supported by the CloudFront pricing plan associated
 // with the web ACL.
 type DisallowedFeature struct {
@@ -2780,6 +3266,625 @@ func (v *EmailField) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A change to the network attributes of an event actor.
+type EventActorChange struct {
+
+	// The autonomous system number (ASN) that is associated with the client IP
+	// address after the change.
+	Asn *string
+
+	// The name of the organization that owns the ASN after the change.
+	AsnOrganization *string
+
+	// The time of the change.
+	ChangeTime *time.Time
+
+	// The client IP address of the event actor after the change.
+	ClientIp *string
+
+	// The country of the client IP address after the change.
+	Country *string
+
+	// The TLS fingerprint of the event actor after the change, such as a JA3 or JA4
+	// fingerprint.
+	TlsFingerprint *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventActorChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventActorChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventActorChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Asn != nil {
+		s.WriteString(schemas.EventActorChange_Asn, *v.Asn)
+	}
+	if v.AsnOrganization != nil {
+		s.WriteString(schemas.EventActorChange_AsnOrganization, *v.AsnOrganization)
+	}
+	if v.ChangeTime != nil {
+		s.WriteTime(schemas.EventActorChange_ChangeTime, *v.ChangeTime)
+	}
+	if v.ClientIp != nil {
+		s.WriteString(schemas.EventActorChange_ClientIp, *v.ClientIp)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.EventActorChange_Country, *v.Country)
+	}
+	if v.TlsFingerprint != nil {
+		s.WriteString(schemas.EventActorChange_TlsFingerprint, *v.TlsFingerprint)
+	}
+}
+func (v *EventActorChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventActorChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventActorChange_Asn:
+			v.Asn = new(string)
+			return d.ReadString(schemas.EventActorChange_Asn, v.Asn)
+		case schemas.EventActorChange_AsnOrganization:
+			v.AsnOrganization = new(string)
+			return d.ReadString(schemas.EventActorChange_AsnOrganization, v.AsnOrganization)
+		case schemas.EventActorChange_ChangeTime:
+			v.ChangeTime = new(time.Time)
+			return d.ReadTime(schemas.EventActorChange_ChangeTime, v.ChangeTime)
+		case schemas.EventActorChange_ClientIp:
+			v.ClientIp = new(string)
+			return d.ReadString(schemas.EventActorChange_ClientIp, v.ClientIp)
+		case schemas.EventActorChange_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.EventActorChange_Country, v.Country)
+		case schemas.EventActorChange_TlsFingerprint:
+			v.TlsFingerprint = new(string)
+			return d.ReadString(schemas.EventActorChange_TlsFingerprint, v.TlsFingerprint)
+		}
+		return nil
+	})
+}
+
+// The details of an event actor, returned by GetEventActor.
+type EventActorDetail struct {
+
+	// The latest observed attributes of the event actor.
+	//
+	// This member is required.
+	Summary *EventActorDetailSummary
+
+	// The history of changes to the network attributes of the event actor, ordered
+	// from oldest to newest. The list contains up to 20 entries.
+	Changes []EventActorChange
+
+	// The API security events that the event actor is associated with. The list
+	// contains up to 20 events.
+	Events []RelatedEvent
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventActorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventActorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventActorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Changes != nil {
+		serializeEventActorChangeList(s, schemas.EventActorDetail_Changes, v.Changes)
+	}
+	if v.Events != nil {
+		serializeRelatedEventList(s, schemas.EventActorDetail_Events, v.Events)
+	}
+	if v.Summary != nil {
+		s.WriteStruct(schemas.EventActorDetail_Summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EventActorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventActorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventActorDetail_Changes:
+			return deserializeEventActorChangeList(d, schemas.EventActorDetail_Changes, &v.Changes)
+		case schemas.EventActorDetail_Events:
+			return deserializeRelatedEventList(d, schemas.EventActorDetail_Events, &v.Events)
+		case schemas.EventActorDetail_Summary:
+			v.Summary = &EventActorDetailSummary{}
+			return v.Summary.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The latest observed attributes of an event actor.
+type EventActorDetailSummary struct {
+
+	// The unique identifier of the event actor.
+	//
+	// This member is required.
+	EventActorId *string
+
+	// The autonomous system number (ASN) that is associated with the client IP
+	// address of the event actor.
+	Asn *string
+
+	// The name of the organization that owns the ASN. For example, AMAZON-02 .
+	AsnOrganization *string
+
+	// A hash of the authentication credentials that the client of the event actor
+	// provides in the request. These can include a JSON Web Token (JWT), a JSON Web
+	// Encryption (JWE) token, an Amazon Web Services Signature Version 4 (SigV4)
+	// signature, or basic authentication credentials. You can use the fingerprint to
+	// match the same client across events and in your WAF logs.
+	AuthFingerprint *string
+
+	// The client IP address of the event actor.
+	ClientIp *string
+
+	// The country of the client IP address of the event actor.
+	Country *string
+
+	// The time when WAF first observed the event actor.
+	CreatedAt *time.Time
+
+	// The TLS fingerprint of the event actor, such as a JA3 or JA4 fingerprint.
+	TlsFingerprint *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventActorDetailSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventActorDetailSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventActorDetailSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Asn != nil {
+		s.WriteString(schemas.EventActorDetailSummary_Asn, *v.Asn)
+	}
+	if v.AsnOrganization != nil {
+		s.WriteString(schemas.EventActorDetailSummary_AsnOrganization, *v.AsnOrganization)
+	}
+	if v.AuthFingerprint != nil {
+		s.WriteString(schemas.EventActorDetailSummary_AuthFingerprint, *v.AuthFingerprint)
+	}
+	if v.ClientIp != nil {
+		s.WriteString(schemas.EventActorDetailSummary_ClientIp, *v.ClientIp)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.EventActorDetailSummary_Country, *v.Country)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.EventActorDetailSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.EventActorId != nil {
+		s.WriteString(schemas.EventActorDetailSummary_EventActorId, *v.EventActorId)
+	}
+	if v.TlsFingerprint != nil {
+		s.WriteString(schemas.EventActorDetailSummary_TlsFingerprint, *v.TlsFingerprint)
+	}
+}
+func (v *EventActorDetailSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventActorDetailSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventActorDetailSummary_Asn:
+			v.Asn = new(string)
+			return d.ReadString(schemas.EventActorDetailSummary_Asn, v.Asn)
+		case schemas.EventActorDetailSummary_AsnOrganization:
+			v.AsnOrganization = new(string)
+			return d.ReadString(schemas.EventActorDetailSummary_AsnOrganization, v.AsnOrganization)
+		case schemas.EventActorDetailSummary_AuthFingerprint:
+			v.AuthFingerprint = new(string)
+			return d.ReadString(schemas.EventActorDetailSummary_AuthFingerprint, v.AuthFingerprint)
+		case schemas.EventActorDetailSummary_ClientIp:
+			v.ClientIp = new(string)
+			return d.ReadString(schemas.EventActorDetailSummary_ClientIp, v.ClientIp)
+		case schemas.EventActorDetailSummary_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.EventActorDetailSummary_Country, v.Country)
+		case schemas.EventActorDetailSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.EventActorDetailSummary_CreatedAt, v.CreatedAt)
+		case schemas.EventActorDetailSummary_EventActorId:
+			v.EventActorId = new(string)
+			return d.ReadString(schemas.EventActorDetailSummary_EventActorId, v.EventActorId)
+		case schemas.EventActorDetailSummary_TlsFingerprint:
+			v.TlsFingerprint = new(string)
+			return d.ReadString(schemas.EventActorDetailSummary_TlsFingerprint, v.TlsFingerprint)
+		}
+		return nil
+	})
+}
+
+// A reference to an event actor that is associated with an API security event.
+type EventActorReference struct {
+
+	// The unique identifier of the event actor. You provide this to GetEventActor to retrieve the
+	// details of the event actor.
+	EventActorId *string
+
+	// The observed identifier of the event actor. For example, a client IP address or
+	// an authentication fingerprint.
+	EventActorValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventActorReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventActorReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventActorReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventActorId != nil {
+		s.WriteString(schemas.EventActorReference_EventActorId, *v.EventActorId)
+	}
+	if v.EventActorValue != nil {
+		s.WriteString(schemas.EventActorReference_EventActorValue, *v.EventActorValue)
+	}
+}
+func (v *EventActorReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventActorReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventActorReference_EventActorId:
+			v.EventActorId = new(string)
+			return d.ReadString(schemas.EventActorReference_EventActorId, v.EventActorId)
+		case schemas.EventActorReference_EventActorValue:
+			v.EventActorValue = new(string)
+			return d.ReadString(schemas.EventActorReference_EventActorValue, v.EventActorValue)
+		}
+		return nil
+	})
+}
+
+// High-level information about an event actor, returned by ListEventActors.
+type EventActorSummary struct {
+
+	// The unique identifier of the event actor. You provide this to GetEventActor to retrieve the
+	// details of the event actor.
+	//
+	// This member is required.
+	EventActorId *string
+
+	// The autonomous system number (ASN) that is associated with the client IP
+	// address of the event actor.
+	Asn *string
+
+	// The name of the organization that owns the ASN. For example, AMAZON-02 .
+	AsnOrganization *string
+
+	// A hash of the authentication credentials that the client of the event actor
+	// provides in the request. These can include a JSON Web Token (JWT), a JSON Web
+	// Encryption (JWE) token, an Amazon Web Services Signature Version 4 (SigV4)
+	// signature, or basic authentication credentials. You can use the fingerprint to
+	// match the same client across events and in your WAF logs.
+	AuthFingerprint *string
+
+	// The client IP address of the event actor.
+	ClientIp *string
+
+	// The country of the client IP address of the event actor.
+	Country *string
+
+	// The time when WAF first observed the event actor.
+	CreatedAt *time.Time
+
+	// The number of API security events that the event actor is associated with in
+	// the requested time window.
+	EventCount int32
+
+	// The TLS fingerprint of the event actor, such as a JA3 or JA4 fingerprint.
+	TlsFingerprint *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventActorSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventActorSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventActorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Asn != nil {
+		s.WriteString(schemas.EventActorSummary_Asn, *v.Asn)
+	}
+	if v.AsnOrganization != nil {
+		s.WriteString(schemas.EventActorSummary_AsnOrganization, *v.AsnOrganization)
+	}
+	if v.AuthFingerprint != nil {
+		s.WriteString(schemas.EventActorSummary_AuthFingerprint, *v.AuthFingerprint)
+	}
+	if v.ClientIp != nil {
+		s.WriteString(schemas.EventActorSummary_ClientIp, *v.ClientIp)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.EventActorSummary_Country, *v.Country)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.EventActorSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.EventActorId != nil {
+		s.WriteString(schemas.EventActorSummary_EventActorId, *v.EventActorId)
+	}
+	if v.EventCount != 0 {
+		s.WriteInt32(schemas.EventActorSummary_EventCount, v.EventCount)
+	}
+	if v.TlsFingerprint != nil {
+		s.WriteString(schemas.EventActorSummary_TlsFingerprint, *v.TlsFingerprint)
+	}
+}
+func (v *EventActorSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventActorSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventActorSummary_Asn:
+			v.Asn = new(string)
+			return d.ReadString(schemas.EventActorSummary_Asn, v.Asn)
+		case schemas.EventActorSummary_AsnOrganization:
+			v.AsnOrganization = new(string)
+			return d.ReadString(schemas.EventActorSummary_AsnOrganization, v.AsnOrganization)
+		case schemas.EventActorSummary_AuthFingerprint:
+			v.AuthFingerprint = new(string)
+			return d.ReadString(schemas.EventActorSummary_AuthFingerprint, v.AuthFingerprint)
+		case schemas.EventActorSummary_ClientIp:
+			v.ClientIp = new(string)
+			return d.ReadString(schemas.EventActorSummary_ClientIp, v.ClientIp)
+		case schemas.EventActorSummary_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.EventActorSummary_Country, v.Country)
+		case schemas.EventActorSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.EventActorSummary_CreatedAt, v.CreatedAt)
+		case schemas.EventActorSummary_EventActorId:
+			v.EventActorId = new(string)
+			return d.ReadString(schemas.EventActorSummary_EventActorId, v.EventActorId)
+		case schemas.EventActorSummary_EventCount:
+			return d.ReadInt32(schemas.EventActorSummary_EventCount, &v.EventCount)
+		case schemas.EventActorSummary_TlsFingerprint:
+			v.TlsFingerprint = new(string)
+			return d.ReadString(schemas.EventActorSummary_TlsFingerprint, v.TlsFingerprint)
+		}
+		return nil
+	})
+}
+
+// Information about an API security event, returned by ListEvents, ListEventsByWebACL, and GetEvent.
+type EventDetailSummary struct {
+
+	// The unique identifier of the event. You provide this to GetEvent to retrieve the
+	// details of the event.
+	//
+	// This member is required.
+	EventId *string
+
+	// The API security details of the event, such as the label, category, confidence,
+	// API patterns, and event actors.
+	ApiSecurityEventDetail *ApiSecurityEventDetail
+
+	// The time when the event ended. This is not populated while the event is ongoing.
+	EndTime *time.Time
+
+	// The category of the event. The only supported value is API_SECURITY .
+	EventCategory EventCategory
+
+	// The current status of the event.
+	EventStatus EventStatus
+
+	// The time when the event was last updated.
+	LastUpdatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the protected resource that the event is
+	// associated with.
+	ResourceArn *string
+
+	// The time when the event started.
+	StartTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the web ACL that the event is associated with.
+	WebAclArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventDetailSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventDetailSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventDetailSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiSecurityEventDetail != nil {
+		s.WriteStruct(schemas.EventDetailSummary_ApiSecurityEventDetail)
+		v.ApiSecurityEventDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.EventDetailSummary_EndTime, *v.EndTime)
+	}
+	if v.EventCategory != "" {
+		s.WriteString(schemas.EventDetailSummary_EventCategory, string(v.EventCategory))
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.EventDetailSummary_EventId, *v.EventId)
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.EventDetailSummary_EventStatus, string(v.EventStatus))
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.EventDetailSummary_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.EventDetailSummary_ResourceArn, *v.ResourceArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.EventDetailSummary_StartTime, *v.StartTime)
+	}
+	if v.WebAclArn != nil {
+		s.WriteString(schemas.EventDetailSummary_WebAclArn, *v.WebAclArn)
+	}
+}
+func (v *EventDetailSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventDetailSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventDetailSummary_ApiSecurityEventDetail:
+			v.ApiSecurityEventDetail = &ApiSecurityEventDetail{}
+			return v.ApiSecurityEventDetail.Deserialize(d)
+		case schemas.EventDetailSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.EventDetailSummary_EndTime, v.EndTime)
+		case schemas.EventDetailSummary_EventCategory:
+			var ev string
+			if err := d.ReadString(schemas.EventDetailSummary_EventCategory, &ev); err != nil {
+				return err
+			}
+			v.EventCategory = EventCategory(ev)
+			return nil
+		case schemas.EventDetailSummary_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.EventDetailSummary_EventId, v.EventId)
+		case schemas.EventDetailSummary_EventStatus:
+			var ev string
+			if err := d.ReadString(schemas.EventDetailSummary_EventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = EventStatus(ev)
+			return nil
+		case schemas.EventDetailSummary_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.EventDetailSummary_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.EventDetailSummary_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.EventDetailSummary_ResourceArn, v.ResourceArn)
+		case schemas.EventDetailSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.EventDetailSummary_StartTime, v.StartTime)
+		case schemas.EventDetailSummary_WebAclArn:
+			v.WebAclArn = new(string)
+			return d.ReadString(schemas.EventDetailSummary_WebAclArn, v.WebAclArn)
+		}
+		return nil
+	})
+}
+
+// A filter to narrow the events that are returned by ListEvents and ListEventsByWebACL.
+type EventFilter struct {
+
+	// The name of the field to filter on. Valid values:
+	//
+	//   - EVENT_CATEGORY - Filter by event category. The only supported filter value
+	//   is API_SECURITY .
+	//
+	//   - RESOURCE_ARN - Filter by protected resource. The filter values are the
+	//   Amazon Resource Name (ARN)s of the protected resources.
+	//
+	// This member is required.
+	Name EventFilterKey
+
+	// The values to filter on. You can specify up to 10 values.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.EventFilter_Name, string(v.Name))
+	}
+	if v.Values != nil {
+		serializeFilterValueList(s, schemas.EventFilter_Values, v.Values)
+	}
+}
+func (v *EventFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.EventFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = EventFilterKey(ev)
+			return nil
+		case schemas.EventFilter_Values:
+			return deserializeFilterValueList(d, schemas.EventFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// A change to the label, confidence, or API patterns of an API security event.
+type EventTimelineEntry struct {
+
+	// The API patterns that the event involved at the time of the change.
+	ApiPatterns []ApiPattern
+
+	// The time of the change.
+	ChangeTime *time.Time
+
+	// The confidence level of the event detection at the time of the change: LOW ,
+	// MEDIUM , or HIGH .
+	Confidence Confidence
+
+	// The fully qualified name of the label that was assigned to the event at the
+	// time of the change.
+	Label *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventTimelineEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventTimelineEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventTimelineEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiPatterns != nil {
+		serializeApiPatternList(s, schemas.EventTimelineEntry_ApiPatterns, v.ApiPatterns)
+	}
+	if v.ChangeTime != nil {
+		s.WriteTime(schemas.EventTimelineEntry_ChangeTime, *v.ChangeTime)
+	}
+	if v.Confidence != "" {
+		s.WriteString(schemas.EventTimelineEntry_Confidence, string(v.Confidence))
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.EventTimelineEntry_Label, *v.Label)
+	}
+}
+func (v *EventTimelineEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventTimelineEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventTimelineEntry_ApiPatterns:
+			return deserializeApiPatternList(d, schemas.EventTimelineEntry_ApiPatterns, &v.ApiPatterns)
+		case schemas.EventTimelineEntry_ChangeTime:
+			v.ChangeTime = new(time.Time)
+			return d.ReadTime(schemas.EventTimelineEntry_ChangeTime, v.ChangeTime)
+		case schemas.EventTimelineEntry_Confidence:
+			var ev string
+			if err := d.ReadString(schemas.EventTimelineEntry_Confidence, &ev); err != nil {
+				return err
+			}
+			v.Confidence = Confidence(ev)
+			return nil
+		case schemas.EventTimelineEntry_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.EventTimelineEntry_Label, v.Label)
+		}
+		return nil
+	})
+}
+
 // Specifies a single rule in a rule group whose action you want to override to
 // Count .
 //
@@ -2865,8 +3970,10 @@ type FieldToMatch struct {
 	// larger than the limit, the underlying host service only forwards the contents
 	// that are within the limit to WAF for inspection.
 	//
-	//   - For Application Load Balancer and AppSync, the limit is fixed at 8 KB
-	//   (8,192 bytes).
+	//   - For AppSync, the limit is fixed at 8 KB (8,192 bytes).
+	//
+	//   - For Application Load Balancer, the default limit is 8 KB (8,192 bytes), and
+	//   you can change the limit in the web ACL AssociationConfig .
 	//
 	//   - For CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
 	//   Access, the default limit is 16 KB (16,384 bytes), and you can increase the
@@ -2916,8 +4023,9 @@ type FieldToMatch struct {
 	// Client Hello information for the calculation. Almost all web requests include
 	// this information.
 	//
-	// You can use this choice only with a string match ByteMatchStatement with the
-	// PositionalConstraint set to EXACTLY .
+	// You can use this choice with a ByteMatchStatement , RegexMatchStatement ,
+	// RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
+	// it with SqliMatchStatement or XssMatchStatement .
 	//
 	// You can obtain the JA3 fingerprint for client requests from the web ACL logs.
 	// If WAF is able to calculate the fingerprint, it includes it in the logs. For
@@ -2925,7 +4033,8 @@ type FieldToMatch struct {
 	//
 	// Provide the JA3 fingerprint string from the logs in your string match statement
 	// specification, to match with any future requests that have the same TLS
-	// configuration.
+	// configuration. To match a group of TLS configurations with a single pattern, use
+	// a regex statement.
 	//
 	// [Log fields]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
 	JA3Fingerprint *JA3Fingerprint
@@ -2938,8 +4047,9 @@ type FieldToMatch struct {
 	// Client Hello information for the calculation. Almost all web requests include
 	// this information.
 	//
-	// You can use this choice only with a string match ByteMatchStatement with the
-	// PositionalConstraint set to EXACTLY .
+	// You can use this choice with a ByteMatchStatement , RegexMatchStatement ,
+	// RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
+	// it with SqliMatchStatement or XssMatchStatement .
 	//
 	// You can obtain the JA4 fingerprint for client requests from the web ACL logs.
 	// If WAF is able to calculate the fingerprint, it includes it in the logs. For
@@ -2947,7 +4057,8 @@ type FieldToMatch struct {
 	//
 	// Provide the JA4 fingerprint string from the logs in your string match statement
 	// specification, to match with any future requests that have the same TLS
-	// configuration.
+	// configuration. To match a group of TLS configurations with a single pattern, use
+	// a regex statement.
 	//
 	// [Log fields]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
 	JA4Fingerprint *JA4Fingerprint
@@ -2962,8 +4073,10 @@ type FieldToMatch struct {
 	// larger than the limit, the underlying host service only forwards the contents
 	// that are within the limit to WAF for inspection.
 	//
-	//   - For Application Load Balancer and AppSync, the limit is fixed at 8 KB
-	//   (8,192 bytes).
+	//   - For AppSync, the limit is fixed at 8 KB (8,192 bytes).
+	//
+	//   - For Application Load Balancer, the default limit is 8 KB (8,192 bytes), and
+	//   you can change the limit in the web ACL AssociationConfig .
 	//
 	//   - For CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
 	//   Access, the default limit is 16 KB (16,384 bytes), and you can increase the
@@ -4384,8 +5497,9 @@ func (v *IPSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
 // Client Hello information for the calculation. Almost all web requests include
 // this information.
 //
-// You can use this choice only with a string match ByteMatchStatement with the
-// PositionalConstraint set to EXACTLY .
+// You can use this choice with a ByteMatchStatement , RegexMatchStatement ,
+// RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
+// it with SqliMatchStatement or XssMatchStatement .
 //
 // You can obtain the JA3 fingerprint for client requests from the web ACL logs.
 // If WAF is able to calculate the fingerprint, it includes it in the logs. For
@@ -4393,7 +5507,8 @@ func (v *IPSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // Provide the JA3 fingerprint string from the logs in your string match statement
 // specification, to match with any future requests that have the same TLS
-// configuration.
+// configuration. To match a group of TLS configurations with a single pattern, use
+// a regex statement.
 //
 // [Log fields]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
 type JA3Fingerprint struct {
@@ -4448,8 +5563,9 @@ func (v *JA3Fingerprint) Deserialize(d smithy.ShapeDeserializer) error {
 // Client Hello information for the calculation. Almost all web requests include
 // this information.
 //
-// You can use this choice only with a string match ByteMatchStatement with the
-// PositionalConstraint set to EXACTLY .
+// You can use this choice with a ByteMatchStatement , RegexMatchStatement ,
+// RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
+// it with SqliMatchStatement or XssMatchStatement .
 //
 // You can obtain the JA4 fingerprint for client requests from the web ACL logs.
 // If WAF is able to calculate the fingerprint, it includes it in the logs. For
@@ -4457,7 +5573,8 @@ func (v *JA3Fingerprint) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // Provide the JA4 fingerprint string from the logs in your string match statement
 // specification, to match with any future requests that have the same TLS
-// configuration.
+// configuration. To match a group of TLS configurations with a single pattern, use
+// a regex statement.
 //
 // [Log fields]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
 type JA4Fingerprint struct {
@@ -4569,8 +5686,10 @@ type JsonBody struct {
 	// larger than the limit, the underlying host service only forwards the contents
 	// that are within the limit to WAF for inspection.
 	//
-	//   - For Application Load Balancer and AppSync, the limit is fixed at 8 KB
-	//   (8,192 bytes).
+	//   - For AppSync, the limit is fixed at 8 KB (8,192 bytes).
+	//
+	//   - For Application Load Balancer, the default limit is 8 KB (8,192 bytes), and
+	//   you can change the limit in the web ACL AssociationConfig .
 	//
 	//   - For CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
 	//   Access, the default limit is 16 KB (16,384 bytes), and you can increase the
@@ -5252,6 +6371,11 @@ func (v *ManagedProductDescriptor) Deserialize(d smithy.ShapeDeserializer) error
 //     account creation request payload of data, such as the user email and phone
 //     number fields.
 //
+//   - Use the AWSManagedRulesAISecurityRuleSet configuration object to configure
+//     the AI security managed rule group. The configuration specifies whether the rule
+//     group uses Amazon Bedrock Guardrails to inspect web requests, or web requests
+//     and responses, and the IAM role that WAF uses to call Amazon Bedrock Guardrails.
+//
 //   - Use the AWSManagedRulesAntiDDoSRuleSet configuration object to configure the
 //     anti-DDoS managed rule group. The configuration includes the sensitivity levels
 //     to use in the rules that typically block and challenge requests that might be
@@ -5281,6 +6405,17 @@ type ManagedRuleGroupConfig struct {
 	// [WAF Fraud Control account creation fraud prevention (ACFP) rule group]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-acfp.html
 	// [WAF Fraud Control account creation fraud prevention (ACFP)]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-acfp.html
 	AWSManagedRulesACFPRuleSet *AWSManagedRulesACFPRuleSet
+
+	// Additional configuration for using the AI security managed rule group,
+	// AWSManagedRulesAISecurityRuleSet . Use this to specify whether the rule group
+	// uses Amazon Bedrock Guardrails to inspect web requests, or web requests and
+	// responses.
+	//
+	// For information about the Amazon Web Services Managed Rules rule groups, see [Amazon Web Services Managed Rules rule groups list]
+	// in the WAF Developer Guide.
+	//
+	// [Amazon Web Services Managed Rules rule groups list]: https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-list
+	AWSManagedRulesAISecurityRuleSet *AWSManagedRulesAISecurityRuleSet
 
 	// Additional configuration for using the account takeover prevention (ATP)
 	// managed rule group, AWSManagedRulesATPRuleSet . Use this to provide login
@@ -5362,6 +6497,11 @@ func (v *ManagedRuleGroupConfig) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AWSManagedRulesACFPRuleSet.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.AWSManagedRulesAISecurityRuleSet != nil {
+		s.WriteStruct(schemas.ManagedRuleGroupConfig_AWSManagedRulesAISecurityRuleSet)
+		v.AWSManagedRulesAISecurityRuleSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.AWSManagedRulesATPRuleSet != nil {
 		s.WriteStruct(schemas.ManagedRuleGroupConfig_AWSManagedRulesATPRuleSet)
 		v.AWSManagedRulesATPRuleSet.SerializeMembers(s)
@@ -5400,6 +6540,9 @@ func (v *ManagedRuleGroupConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ManagedRuleGroupConfig_AWSManagedRulesACFPRuleSet:
 			v.AWSManagedRulesACFPRuleSet = &AWSManagedRulesACFPRuleSet{}
 			return v.AWSManagedRulesACFPRuleSet.Deserialize(d)
+		case schemas.ManagedRuleGroupConfig_AWSManagedRulesAISecurityRuleSet:
+			v.AWSManagedRulesAISecurityRuleSet = &AWSManagedRulesAISecurityRuleSet{}
+			return v.AWSManagedRulesAISecurityRuleSet.Deserialize(d)
 		case schemas.ManagedRuleGroupConfig_AWSManagedRulesATPRuleSet:
 			v.AWSManagedRulesATPRuleSet = &AWSManagedRulesATPRuleSet{}
 			return v.AWSManagedRulesATPRuleSet.Deserialize(d)
@@ -5477,6 +6620,11 @@ type ManagedRuleGroupStatement struct {
 	//   the registration and sign-up pages of your application and the locations in the
 	//   account creation request payload of data, such as the user email and phone
 	//   number fields.
+	//
+	//   - Use the AWSManagedRulesAISecurityRuleSet configuration object to configure
+	//   the AI security managed rule group. The configuration specifies whether the rule
+	//   group uses Amazon Bedrock Guardrails to inspect web requests, or web requests
+	//   and responses, and the IAM role that WAF uses to call Amazon Bedrock Guardrails.
 	//
 	//   - Use the AWSManagedRulesAntiDDoSRuleSet configuration object to configure the
 	//   anti-DDoS managed rule group. The configuration includes the sensitivity levels
@@ -8270,6 +9418,86 @@ func (v *RegexPatternSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// An API security event that an event actor is associated with.
+type RelatedEvent struct {
+
+	// The API patterns that the event involves.
+	ApiPatterns []ApiPattern
+
+	// The API security threat category of the event. For example, API2:2023 .
+	Category *string
+
+	// The confidence level of the event detection: LOW , MEDIUM , or HIGH .
+	Confidence Confidence
+
+	// The unique identifier of the event. You provide this to GetEvent to retrieve the
+	// details of the event.
+	EventId *string
+
+	// The fully qualified name of the label that WAF assigned to the event.
+	Label *string
+
+	// The time when the event started.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *RelatedEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RelatedEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RelatedEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiPatterns != nil {
+		serializeApiPatternList(s, schemas.RelatedEvent_ApiPatterns, v.ApiPatterns)
+	}
+	if v.Category != nil {
+		s.WriteString(schemas.RelatedEvent_Category, *v.Category)
+	}
+	if v.Confidence != "" {
+		s.WriteString(schemas.RelatedEvent_Confidence, string(v.Confidence))
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.RelatedEvent_EventId, *v.EventId)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.RelatedEvent_Label, *v.Label)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.RelatedEvent_StartTime, *v.StartTime)
+	}
+}
+func (v *RelatedEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RelatedEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RelatedEvent_ApiPatterns:
+			return deserializeApiPatternList(d, schemas.RelatedEvent_ApiPatterns, &v.ApiPatterns)
+		case schemas.RelatedEvent_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.RelatedEvent_Category, v.Category)
+		case schemas.RelatedEvent_Confidence:
+			var ev string
+			if err := d.ReadString(schemas.RelatedEvent_Confidence, &ev); err != nil {
+				return err
+			}
+			v.Confidence = Confidence(ev)
+			return nil
+		case schemas.RelatedEvent_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.RelatedEvent_EventId, v.EventId)
+		case schemas.RelatedEvent_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.RelatedEvent_Label, v.Label)
+		case schemas.RelatedEvent_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.RelatedEvent_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // High level information for an SDK release.
 type ReleaseSummary struct {
 
@@ -8310,18 +9538,20 @@ func (v *ReleaseSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Customizes the maximum size of the request body that your protected CloudFront,
-// API Gateway, Amazon Cognito, App Runner, and Verified Access resources forward
-// to WAF for inspection. The default size is 16 KB (16,384 bytes). You can change
-// the setting for any of the available resource types.
+// Customizes the maximum size of the request body that your protected Application
+// Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
+// Access resources forward to WAF for inspection. The default size is 8 KB (8,192
+// bytes) for Application Load Balancer and 16 KB (16,384 bytes) for the other
+// resource types. You can change the setting for any of the available resource
+// types.
 //
 // You are charged additional fees when your protected resources forward body
 // sizes that are larger than the default. For more information, see [WAF Pricing].
 //
-// Example JSON:  { "API_GATEWAY": "KB_48", "APP_RUNNER_SERVICE": "KB_32" }
+// Example JSON:  { "API_GATEWAY": "KB_48", "APP_RUNNER_SERVICE": "KB_32",
+// "APPLICATION_LOAD_BALANCER": "KB_16" }
 //
-// For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192
-// bytes).
+// For AppSync, the limit is fixed at 8 KB (8,192 bytes).
 //
 // This is used in the AssociationConfig of the web ACL.
 //
@@ -8329,11 +9559,15 @@ func (v *ReleaseSummary) Deserialize(d smithy.ShapeDeserializer) error {
 type RequestBodyAssociatedResourceTypeConfig struct {
 
 	// Specifies the maximum size of the web request body component that an associated
-	// CloudFront, API Gateway, Amazon Cognito, App Runner, or Verified Access resource
-	// should send to WAF for inspection. This applies to statements in the web ACL
-	// that inspect the body or JSON body.
+	// Application Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner,
+	// or Verified Access resource should send to WAF for inspection. This applies to
+	// statements in the web ACL that inspect the body or JSON body.
 	//
-	// Default: 16 KB (16,384 bytes)
+	// You can specify KB_8 only for Application Load Balancer, with the
+	// APPLICATION_LOAD_BALANCER resource type.
+	//
+	// Default: 8 KB (8,192 bytes) for Application Load Balancer and 16 KB (16,384
+	// bytes) for the other resource types
 	//
 	// This member is required.
 	DefaultSizeInspectionLimit SizeInspectionLimit
@@ -11572,6 +12806,10 @@ type WebACL struct {
 	// This member is required.
 	VisibilityConfig *VisibilityConfig
 
+	// The security analytics configuration for the web ACL. For more information, see AnalyticsConfig
+	// .
+	AnalyticsConfig *AnalyticsConfig
+
 	// Returns a list of ApplicationAttribute s.
 	ApplicationConfig *ApplicationConfig
 
@@ -11580,14 +12818,14 @@ type WebACL struct {
 	//
 	// Use this to customize the maximum size of the request body that your protected
 	// resources forward to WAF for inspection. You can customize this setting for
-	// CloudFront, API Gateway, Amazon Cognito, App Runner, or Verified Access
-	// resources. The default setting is 16 KB (16,384 bytes).
+	// Application Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner,
+	// or Verified Access resources. The default setting is 8 KB (8,192 bytes) for
+	// Application Load Balancer and 16 KB (16,384 bytes) for the other resource types.
 	//
 	// You are charged additional fees when your protected resources forward body
 	// sizes that are larger than the default. For more information, see [WAF Pricing].
 	//
-	// For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192
-	// bytes).
+	// For AppSync, the limit is fixed at 8 KB (8,192 bytes).
 	//
 	// You can also use this to have your CloudFront distributions insert the WAF
 	// challenge JavaScript SDK into the HTML responses that they return. For more
@@ -11735,6 +12973,11 @@ func (v *WebACL) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ARN != nil {
 		s.WriteString(schemas.WebACL_ARN, *v.ARN)
 	}
+	if v.AnalyticsConfig != nil {
+		s.WriteStruct(schemas.WebACL_AnalyticsConfig)
+		v.AnalyticsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ApplicationConfig != nil {
 		s.WriteStruct(schemas.WebACL_ApplicationConfig)
 		v.ApplicationConfig.SerializeMembers(s)
@@ -11823,6 +13066,9 @@ func (v *WebACL) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.WebACL_ARN:
 			v.ARN = new(string)
 			return d.ReadString(schemas.WebACL_ARN, v.ARN)
+		case schemas.WebACL_AnalyticsConfig:
+			v.AnalyticsConfig = &AnalyticsConfig{}
+			return v.AnalyticsConfig.Deserialize(d)
 		case schemas.WebACL_ApplicationConfig:
 			v.ApplicationConfig = &ApplicationConfig{}
 			return v.ApplicationConfig.Deserialize(d)

@@ -2027,16 +2027,17 @@ func (v *CodeLocation) Deserialize(d smithy.ShapeDeserializer) error {
 // Represents a code remediation task that was initiated to fix a security finding.
 type CodeRemediationTask struct {
 
-	// The current status of the code remediation task.
+	// The current status of the overall code remediation task.
 	//
 	// This member is required.
 	Status CodeRemediationTaskStatus
 
-	// The reason for the current status of the code remediation task.
+	// The reason for the current status of the overall code remediation task.
 	StatusReason *string
 
-	// The list of details for the code remediation task, including repository name,
-	// code diff link, and pull request link.
+	// The list of details for a code remediation task, including repository names,
+	// status of code remediation for each associated repository, and generated code
+	// diff or pull request links.
 	TaskDetails []CodeRemediationTaskDetails
 
 	noSmithyDocumentSerde
@@ -2089,8 +2090,17 @@ type CodeRemediationTaskDetails struct {
 	// The link to the pull request created for the remediation.
 	PullRequestLink *string
 
-	// The name of the repository where the remediation was applied.
+	// The name of an associated repository where the remediation was applied.
 	RepoName *string
+
+	// The current status of the code remediation task for the particular repository.
+	Status CodeRemediationJobStatus
+
+	// A category classifier if a repository's code remediation fails.
+	StatusCode *string
+
+	// A descriptive reason when a repository's code remediation fails.
+	StatusReason *string
 
 	noSmithyDocumentSerde
 }
@@ -2111,6 +2121,15 @@ func (v *CodeRemediationTaskDetails) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RepoName != nil {
 		s.WriteString(schemas.CodeRemediationTaskDetails_repoName, *v.RepoName)
 	}
+	if v.Status != "" {
+		s.WriteString(schemas.CodeRemediationTaskDetails_status, string(v.Status))
+	}
+	if v.StatusCode != nil {
+		s.WriteString(schemas.CodeRemediationTaskDetails_statusCode, *v.StatusCode)
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.CodeRemediationTaskDetails_statusReason, *v.StatusReason)
+	}
 }
 func (v *CodeRemediationTaskDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CodeRemediationTaskDetails, func(s *smithy.Schema) error {
@@ -2124,6 +2143,19 @@ func (v *CodeRemediationTaskDetails) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.CodeRemediationTaskDetails_repoName:
 			v.RepoName = new(string)
 			return d.ReadString(schemas.CodeRemediationTaskDetails_repoName, v.RepoName)
+		case schemas.CodeRemediationTaskDetails_status:
+			var ev string
+			if err := d.ReadString(schemas.CodeRemediationTaskDetails_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CodeRemediationJobStatus(ev)
+			return nil
+		case schemas.CodeRemediationTaskDetails_statusCode:
+			v.StatusCode = new(string)
+			return d.ReadString(schemas.CodeRemediationTaskDetails_statusCode, v.StatusCode)
+		case schemas.CodeRemediationTaskDetails_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.CodeRemediationTaskDetails_statusReason, v.StatusReason)
 		}
 		return nil
 	})
@@ -6633,6 +6665,10 @@ type PentestJob struct {
 	// The date and time the pentest job was last updated, in UTC format.
 	UpdatedAt *time.Time
 
+	// The version of the pentest job. The version increases each time the job is
+	// resumed. This value is absent for jobs created before versions were recorded.
+	Version *string
+
 	// The VPC configuration for the pentest job.
 	VpcConfig *VpcConfig
 
@@ -6765,6 +6801,9 @@ func (v *PentestJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.PentestJob_updatedAt, *v.UpdatedAt)
 	}
+	if v.Version != nil {
+		s.WriteString(schemas.PentestJob_version, *v.Version)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.PentestJob_vpcConfig)
 		v.VpcConfig.SerializeMembers(s)
@@ -6880,6 +6919,9 @@ func (v *PentestJob) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PentestJob_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.PentestJob_updatedAt, v.UpdatedAt)
+		case schemas.PentestJob_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.PentestJob_version, v.Version)
 		case schemas.PentestJob_vpcConfig:
 			v.VpcConfig = &VpcConfig{}
 			return v.VpcConfig.Deserialize(d)
@@ -6919,6 +6961,10 @@ type PentestJobSummary struct {
 	// The date and time the pentest job was last updated, in UTC format.
 	UpdatedAt *time.Time
 
+	// The version of the pentest job. The version increases each time the job is
+	// resumed. This value is absent for jobs created before versions were recorded.
+	Version *string
+
 	noSmithyDocumentSerde
 }
 
@@ -6952,6 +6998,9 @@ func (v *PentestJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.PentestJobSummary_updatedAt, *v.UpdatedAt)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.PentestJobSummary_version, *v.Version)
 	}
 }
 func (v *PentestJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
@@ -6989,6 +7038,9 @@ func (v *PentestJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PentestJobSummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.PentestJobSummary_updatedAt, v.UpdatedAt)
+		case schemas.PentestJobSummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.PentestJobSummary_version, v.Version)
 		}
 		return nil
 	})

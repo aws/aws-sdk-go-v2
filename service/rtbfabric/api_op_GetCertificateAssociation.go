@@ -81,6 +81,10 @@ type GetCertificateAssociationOutput struct {
 	// The timestamp of when the certificate was associated.
 	AssociatedAt *time.Time
 
+	// The causes of the failure, such as a deleted subnet. Present only when the
+	// resource has failed.
+	ErrorDetails []types.ErrorDetail
+
 	// The timestamp of when the certificate association was last updated.
 	UpdatedAt *time.Time
 
@@ -103,6 +107,9 @@ func (v *GetCertificateAssociationOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.AssociatedAt != nil {
 		s.WriteTime(schemas.GetCertificateAssociationResponse_associatedAt, *v.AssociatedAt)
 	}
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.GetCertificateAssociationResponse_errorDetails, v.ErrorDetails)
+	}
 	if v.GatewayId != nil {
 		s.WriteString(schemas.GetCertificateAssociationResponse_gatewayId, *v.GatewayId)
 	}
@@ -122,6 +129,8 @@ func (v *GetCertificateAssociationOutput) Deserialize(d smithy.ShapeDeserializer
 		case schemas.GetCertificateAssociationResponse_associatedAt:
 			v.AssociatedAt = new(time.Time)
 			return d.ReadTime(schemas.GetCertificateAssociationResponse_associatedAt, v.AssociatedAt)
+		case schemas.GetCertificateAssociationResponse_errorDetails:
+			return deserializeErrorDetails(d, schemas.GetCertificateAssociationResponse_errorDetails, &v.ErrorDetails)
 		case schemas.GetCertificateAssociationResponse_gatewayId:
 			v.GatewayId = new(string)
 			return d.ReadString(schemas.GetCertificateAssociationResponse_gatewayId, v.GatewayId)

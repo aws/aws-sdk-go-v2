@@ -289,6 +289,7 @@ func TestCheckRequestSnapshot_CreateAgentSpace(t *testing.T) {
 		Preferences: map[string]bool{
 			"key0": true,
 		},
+		AwsSourceMode: types.AwsSourceMode("standalone"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1838,6 +1839,7 @@ func TestCheckRequestSnapshot_UpdateAgentSpace(t *testing.T) {
 		Preferences: map[string]bool{
 			"key0": true,
 		},
+		AwsSourceMode: types.AwsSourceMode("standalone"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2360,6 +2362,7 @@ func TestUpdateRequestSnapshot_CreateAgentSpace(t *testing.T) {
 		Preferences: map[string]bool{
 			"key0": true,
 		},
+		AwsSourceMode: types.AwsSourceMode("standalone"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3909,6 +3912,7 @@ func TestUpdateRequestSnapshot_UpdateAgentSpace(t *testing.T) {
 		Preferences: map[string]bool{
 			"key0": true,
 		},
+		AwsSourceMode: types.AwsSourceMode("standalone"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

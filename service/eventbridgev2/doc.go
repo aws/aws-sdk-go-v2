@@ -3,6 +3,8 @@
 // Package eventbridgev2 provides the API client, operations, and parameter types
 // for Amazon EventBridgeV2.
 //
+// # Amazon EventBridge Custom Event Bus
+//
 // Amazon EventBridge event bus API. An event bus receives events published by
 // your applications and AWS services, stores them for a configurable retention
 // period, and delivers them to subscribers. A subscriber filters events,

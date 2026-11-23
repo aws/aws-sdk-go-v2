@@ -205,6 +205,7 @@ func TestCheckResponseSnapshot_CreateMicrovmImage(t *testing.T) {
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
 		},
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -276,7 +277,8 @@ func TestCheckResponseSnapshot_CreateMicrovmImage(t *testing.T) {
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
 		},
-		Name: ptr.String("__Name__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		Name:             ptr.String("__Name__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -383,6 +385,7 @@ func TestCheckResponseSnapshot_GetMicrovm(t *testing.T) {
 		StartedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		TerminatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		StateReason:              ptr.String("__StateReason__"),
+		KmsKeyIdentifier:         ptr.String("__KmsKeyIdentifier__"),
 		IngressNetworkConnectors: []string{
 			"__Member__",
 			"__Member__",
@@ -539,13 +542,14 @@ func TestCheckResponseSnapshot_GetMicrovmImageVersion(t *testing.T) {
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
 		},
-		ImageArn:     ptr.String("__ImageArn__"),
-		ImageVersion: ptr.String("__ImageVersion__"),
-		State:        types.MicrovmImageVersionState("PENDING"),
-		Status:       types.MicrovmImageVersionStatus("ACTIVE"),
-		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		StateReason:  ptr.String("__StateReason__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		ImageArn:         ptr.String("__ImageArn__"),
+		ImageVersion:     ptr.String("__ImageVersion__"),
+		State:            types.MicrovmImageVersionState("PENDING"),
+		Status:           types.MicrovmImageVersionStatus("ACTIVE"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StateReason:      ptr.String("__StateReason__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -777,13 +781,14 @@ func TestCheckResponseSnapshot_ListMicrovmImageVersions(t *testing.T) {
 				EnvironmentVariables: map[string]string{
 					"key0": "__Value__",
 				},
-				ImageArn:     ptr.String("__ImageArn__"),
-				ImageVersion: ptr.String("__ImageVersion__"),
-				State:        types.MicrovmImageVersionState("PENDING"),
-				Status:       types.MicrovmImageVersionStatus("ACTIVE"),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				StateReason:  ptr.String("__StateReason__"),
+				KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+				ImageArn:         ptr.String("__ImageArn__"),
+				ImageVersion:     ptr.String("__ImageVersion__"),
+				State:            types.MicrovmImageVersionState("PENDING"),
+				Status:           types.MicrovmImageVersionStatus("ACTIVE"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StateReason:      ptr.String("__StateReason__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -845,13 +850,14 @@ func TestCheckResponseSnapshot_ListMicrovmImageVersions(t *testing.T) {
 				EnvironmentVariables: map[string]string{
 					"key0": "__Value__",
 				},
-				ImageArn:     ptr.String("__ImageArn__"),
-				ImageVersion: ptr.String("__ImageVersion__"),
-				State:        types.MicrovmImageVersionState("PENDING"),
-				Status:       types.MicrovmImageVersionStatus("ACTIVE"),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				StateReason:  ptr.String("__StateReason__"),
+				KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+				ImageArn:         ptr.String("__ImageArn__"),
+				ImageVersion:     ptr.String("__ImageVersion__"),
+				State:            types.MicrovmImageVersionState("PENDING"),
+				Status:           types.MicrovmImageVersionStatus("ACTIVE"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				StateReason:      ptr.String("__StateReason__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -1027,6 +1033,7 @@ func TestCheckResponseSnapshot_RunMicrovm(t *testing.T) {
 		StartedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		TerminatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		StateReason:              ptr.String("__StateReason__"),
+		KmsKeyIdentifier:         ptr.String("__KmsKeyIdentifier__"),
 		IngressNetworkConnectors: []string{
 			"__Member__",
 			"__Member__",
@@ -1064,6 +1071,7 @@ func TestCheckResponseSnapshot_RunMicrovm(t *testing.T) {
 		Logging: &types.LoggingMemberDisabled{
 			Value: types.LoggingDisabled{},
 		},
+		KmsKeyIdentifier:         ptr.String("__KmsKeyIdentifier__"),
 		RunHookPayload:           ptr.String("__RunHookPayload__"),
 		MaximumDurationInSeconds: ptr.Int32(1),
 		ClientToken:              ptr.String("__ClientToken__"),
@@ -1231,8 +1239,9 @@ func TestCheckResponseSnapshot_UpdateMicrovmImage(t *testing.T) {
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
 		},
-		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ImageVersion: ptr.String("__ImageVersion__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ImageVersion:     ptr.String("__ImageVersion__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateMicrovmImage.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1299,8 +1308,9 @@ func TestCheckResponseSnapshot_UpdateMicrovmImage(t *testing.T) {
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
 		},
-		ImageIdentifier: ptr.String("__ImageIdentifier__"),
-		ClientToken:     ptr.String("__ClientToken__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		ImageIdentifier:  ptr.String("__ImageIdentifier__"),
+		ClientToken:      ptr.String("__ClientToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -1368,13 +1378,14 @@ func TestCheckResponseSnapshot_UpdateMicrovmImageVersion(t *testing.T) {
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
 		},
-		ImageArn:     ptr.String("__ImageArn__"),
-		ImageVersion: ptr.String("__ImageVersion__"),
-		State:        types.MicrovmImageVersionState("PENDING"),
-		Status:       types.MicrovmImageVersionStatus("ACTIVE"),
-		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		StateReason:  ptr.String("__StateReason__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		ImageArn:         ptr.String("__ImageArn__"),
+		ImageVersion:     ptr.String("__ImageVersion__"),
+		State:            types.MicrovmImageVersionState("PENDING"),
+		Status:           types.MicrovmImageVersionStatus("ACTIVE"),
+		CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		StateReason:      ptr.String("__StateReason__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1506,6 +1517,7 @@ func TestCheckResponseSnapshot_Error_InsufficientCapacityException(t *testing.T)
 		Logging: &types.LoggingMemberDisabled{
 			Value: types.LoggingDisabled{},
 		},
+		KmsKeyIdentifier:         ptr.String("__KmsKeyIdentifier__"),
 		RunHookPayload:           ptr.String("__RunHookPayload__"),
 		MaximumDurationInSeconds: ptr.Int32(1),
 		ClientToken:              ptr.String("__ClientToken__"),
@@ -1757,7 +1769,8 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
 		},
-		Name: ptr.String("__Name__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		Name:             ptr.String("__Name__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},

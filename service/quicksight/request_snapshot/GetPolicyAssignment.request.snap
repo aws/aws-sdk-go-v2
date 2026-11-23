@@ -1,0 +1,3 @@
+GET /governance-policy-mgmt/accounts/__AccountId__/policy-assignments?PolicyType=LIMITS_PROFILE&PrincipalArn=__PrincipalArn__
+
+

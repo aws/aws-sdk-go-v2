@@ -153,6 +153,83 @@
                 "target": "com.amazonaws.partnercentralchannel#AccountId"
             }
         },
+        "com.amazonaws.partnercentralchannel#AccountScope": {
+            "type": "enum",
+            "members": {
+                "ENTIRE_ORGANIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTIRE_ORGANIZATION"
+                    }
+                },
+                "SPECIFIC_MEMBER_ACCOUNTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPECIFIC_MEMBER_ACCOUNTS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.partnercentralchannel#Address": {
+            "type": "structure",
+            "members": {
+                "city": {
+                    "target": "com.amazonaws.partnercentralchannel#City",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city or locality.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stateOrRegion": {
+                    "target": "com.amazonaws.partnercentralchannel#StateOrRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state, province, or prefecture.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "postalCode": {
+                    "target": "com.amazonaws.partnercentralchannel#PostalCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "countryCode": {
+                    "target": "com.amazonaws.partnercentralchannel#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The two-letter ISO 3166-1 country code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "addressLine": {
+                    "target": "com.amazonaws.partnercentralchannel#AddressLine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first line of the street address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "addressLine2": {
+                    "target": "com.amazonaws.partnercentralchannel#AddressLine",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The second line of the street address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The postal address of a legal entity.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#AddressLine": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^\\p{Z}*[^\\p{C}\\p{Z}][^\\p{C}]*$"
+            }
+        },
         "com.amazonaws.partnercentralchannel#Arn": {
             "type": "string",
             "traits": {
@@ -208,6 +285,12 @@
                     "traits": {
                         "smithy.api#enumValue": "INTERNAL"
                     }
+                },
+                "MANAGED_SERVICES_END_CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED_SERVICES_END_CUSTOMER"
+                    }
                 }
             }
         },
@@ -215,6 +298,144 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.partnercentralchannel#AssociationType"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#CancelChannelContract": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.partnercentralchannel#CancelChannelContractRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.partnercentralchannel#CancelChannelContractResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.partnercentralchannel#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels a pending channel contract created within the last 30 days. A request for a channel contract that isn't PENDING, including one that is already CANCELED, fails with a ValidationException.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example for CancelChannelContract",
+                        "input": {
+                            "catalog": "AWS",
+                            "identifier": "cc-4fj3bd2o3vb91",
+                            "reason": "No longer providing managed services for this customer",
+                            "clientToken": "clientToken"
+                        },
+                        "output": {
+                            "channelContractDetail": {
+                                "id": "cc-4fj3bd2o3vb91",
+                                "arn": "arn:aws:partnercentral:us-east-1:111122223333:catalog/AWS/channel-contract/cc-4fj3bd2o3vb91",
+                                "status": "CANCELED",
+                                "cancellationReason": "No longer providing managed services for this customer"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/CancelChannelContract",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#CancelChannelContractDetail": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the canceled channel contract.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.partnercentralchannel#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the canceled channel contract.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the canceled channel contract.</p>"
+                    }
+                },
+                "cancellationReason": {
+                    "target": "com.amazonaws.partnercentralchannel#CancellationReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the channel contract was canceled, if one was provided.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a canceled channel contract.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#CancelChannelContractRequest": {
+            "type": "structure",
+            "members": {
+                "catalog": {
+                    "target": "com.amazonaws.partnercentralchannel#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog identifier for the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the channel contract to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.partnercentralchannel#CancellationReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for canceling the channel contract. Later requests don't change or remove it.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.partnercentralchannel#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#CancelChannelContractResponse": {
+            "type": "structure",
+            "members": {
+                "channelContractDetail": {
+                    "target": "com.amazonaws.partnercentralchannel#CancelChannelContractDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the canceled channel contract.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.partnercentralchannel#CancelChannelHandshake": {
@@ -330,6 +551,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.partnercentralchannel#CancellationReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F]*$"
+            }
+        },
         "com.amazonaws.partnercentralchannel#Catalog": {
             "type": "string",
             "traits": {
@@ -338,6 +569,333 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z]*$"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractDetail": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.partnercentralchannel#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "catalog": {
+                    "target": "com.amazonaws.partnercentralchannel#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog identifier associated with the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contractType": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.partnercentralchannel#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the channel contract was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.partnercentralchannel#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the channel contract was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "respondedAt": {
+                    "target": "com.amazonaws.partnercentralchannel#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the channel contract was accepted, if applicable.</p>"
+                    }
+                },
+                "cancellationReason": {
+                    "target": "com.amazonaws.partnercentralchannel#CancellationReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the channel contract was canceled, if one was provided.</p>"
+                    }
+                },
+                "details": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type-specific details of the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information about a channel contract.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractDetails": {
+            "type": "union",
+            "members": {
+                "managedServicesAttestationDetails": {
+                    "target": "com.amazonaws.partnercentralchannel#ManagedServicesAttestationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details specific to managed services attestation channel contracts. Applies only to managed services attestation channel contracts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about different types of channel contracts.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^cc-[a-z0-9]{13}$"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^(arn:[a-z-]+:partnercentral:[a-z0-9-]+:[0-9]{12}:catalog/[a-zA-Z]+/channel-contract/)?cc-[a-z0-9]{13}$"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractLegalEntityName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 300
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractLegalEntityNameFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralchannel#ChannelContractLegalEntityName"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractPayload": {
+            "type": "union",
+            "members": {
+                "managedServicesAttestationPayload": {
+                    "target": "com.amazonaws.partnercentralchannel#ManagedServicesAttestationPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Payload for creating a managed services attestation channel contract. Applies only to managed services attestation channel contracts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the payload data for different types of channel contracts.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractResource": {
+            "type": "resource",
+            "identifiers": {
+                "identifier": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractIdentifier"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.partnercentralchannel#CreateChannelContract"
+            },
+            "read": {
+                "target": "com.amazonaws.partnercentralchannel#GetChannelContract"
+            },
+            "list": {
+                "target": "com.amazonaws.partnercentralchannel#ListChannelContracts"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.partnercentralchannel#CancelChannelContract"
+                }
+            ]
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractSignatoryEmail": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractSignatoryName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "ACCEPTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCEPTED"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                },
+                "CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELED"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractStatusFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralchannel#ChannelContractStatus"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralchannel#ChannelContractSummary"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.partnercentralchannel#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "catalog": {
+                    "target": "com.amazonaws.partnercentralchannel#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog identifier associated with the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contractType": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.partnercentralchannel#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the channel contract was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.partnercentralchannel#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the channel contract was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "respondedAt": {
+                    "target": "com.amazonaws.partnercentralchannel#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the channel contract was accepted, if applicable.</p>"
+                    }
+                },
+                "details": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractSummaryDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type-specific summary details of the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a channel contract.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractSummaryDetails": {
+            "type": "union",
+            "members": {
+                "managedServicesAttestationDetails": {
+                    "target": "com.amazonaws.partnercentralchannel#ManagedServicesAttestationSummaryDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary details specific to managed services attestation channel contracts. Applies only to managed services attestation channel contracts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about different types of channel contracts.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ChannelContractType": {
+            "type": "enum",
+            "members": {
+                "MANAGED_SERVICES_ATTESTATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED_SERVICES_ATTESTATION"
+                    }
+                }
             }
         },
         "com.amazonaws.partnercentralchannel#ChannelHandshakeId": {
@@ -497,6 +1055,16 @@
                 "smithy.api#documentation": "<p>Summary information about a channel handshake.</p>"
             }
         },
+        "com.amazonaws.partnercentralchannel#City": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^\\p{Z}*[^\\p{C}\\p{Z}][^\\p{C}]*$"
+            }
+        },
         "com.amazonaws.partnercentralchannel#ClientToken": {
             "type": "string",
             "traits": {
@@ -538,6 +1106,16 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.partnercentralchannel#CountryCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "smithy.api#pattern": "^[A-Z]{2}$"
+            }
+        },
         "com.amazonaws.partnercentralchannel#Coverage": {
             "type": "enum",
             "members": {
@@ -553,6 +1131,164 @@
                         "smithy.api#enumValue": "MANAGEMENT_ACCOUNT_ONLY"
                     }
                 }
+            }
+        },
+        "com.amazonaws.partnercentralchannel#CreateChannelContract": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.partnercentralchannel#CreateChannelContractRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.partnercentralchannel#CreateChannelContractResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.partnercentralchannel#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new channel contract and sends it to the signatory for signature. In the Sandbox catalog, the channel contract is accepted automatically.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example for CreateChannelContract - MANAGED_SERVICES_ATTESTATION",
+                        "input": {
+                            "contractType": "MANAGED_SERVICES_ATTESTATION",
+                            "catalog": "AWS",
+                            "payload": {
+                                "managedServicesAttestationPayload": {
+                                    "legalEntityName": "Example Partner Corp",
+                                    "signatoryName": "Mary Major",
+                                    "signatoryEmail": "mary.major@example.com",
+                                    "programManagementAccountIdentifier": "pma-abcdef123456g",
+                                    "relationshipIdentifier": "rs-abc123def456g",
+                                    "endDate": "2027-03-31T00:00:00Z",
+                                    "supportedServices": [
+                                        "MONITORING",
+                                        "SECURITY"
+                                    ],
+                                    "memberAccountIds": [
+                                        "111122224444"
+                                    ],
+                                    "legalEntityAddress": {
+                                        "addressLine": "123 Any Street",
+                                        "addressLine2": "Suite 100",
+                                        "city": "Anytown",
+                                        "stateOrRegion": "WA",
+                                        "postalCode": "98101",
+                                        "countryCode": "US"
+                                    }
+                                }
+                            },
+                            "clientToken": "clientToken"
+                        },
+                        "output": {
+                            "channelContractDetail": {
+                                "id": "cc-4fj3bd2o3vb91",
+                                "arn": "arn:aws:partnercentral:us-east-1:111122223333:catalog/AWS/channel-contract/cc-4fj3bd2o3vb91"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/CreateChannelContract",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#CreateChannelContractDetail": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the created channel contract.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.partnercentralchannel#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created channel contract.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a newly created channel contract.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#CreateChannelContractRequest": {
+            "type": "structure",
+            "members": {
+                "contractType": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of channel contract to create (for example, managed services attestation).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "catalog": {
+                    "target": "com.amazonaws.partnercentralchannel#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog identifier for the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractPayload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payload containing specific details for the contract type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.partnercentralchannel#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.partnercentralchannel#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs to associate with the channel contract.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#CreateChannelContractResponse": {
+            "type": "structure",
+            "members": {
+                "channelContractDetail": {
+                    "target": "com.amazonaws.partnercentralchannel#CreateChannelContractDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the created channel contract.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.partnercentralchannel#CreateChannelHandshake": {
@@ -811,6 +1547,23 @@
                                 "arn": "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-u8ic702rtzng8"
                             }
                         }
+                    },
+                    {
+                        "title": "Example for CreateProgramManagementAccount - MANAGED_SERVICES",
+                        "input": {
+                            "catalog": "AWS",
+                            "program": "MANAGED_SERVICES_PROVIDER",
+                            "displayName": "TestManagedServices",
+                            "accountId": "111122223333",
+                            "clientToken": "clientToken",
+                            "type": "MANAGED_SERVICES"
+                        },
+                        "output": {
+                            "programManagementAccountDetail": {
+                                "id": "pma-abcdef123456g",
+                                "arn": "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-abcdef123456g"
+                            }
+                        }
                     }
                 ],
                 "smithy.api#http": {
@@ -902,6 +1655,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs to associate with the program management account.</p>"
                     }
+                },
+                "type": {
+                    "target": "com.amazonaws.partnercentralchannel#ProgramManagementAccountType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the program management account (for example, resale billing transfer, managed services), required for the managed services provider program.</p>"
+                    }
                 }
             },
             "traits": {
@@ -972,6 +1731,26 @@
                             "relationshipDetail": {
                                 "arn": "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-u8ic702rtzng8/relationship/rs-l9o4fj3b5zb91",
                                 "id": "rs-l9o4fj3b5zb91"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Example for CreateRelationship - MANAGED_SERVICES_END_CUSTOMER",
+                        "input": {
+                            "catalog": "AWS",
+                            "associationType": "MANAGED_SERVICES_END_CUSTOMER",
+                            "programManagementAccountIdentifier": "pma-abcdef123456g",
+                            "associatedAccountId": "987654321012",
+                            "displayName": "TestManagedCustomer",
+                            "sector": "COMMERCIAL",
+                            "accountScope": "ENTIRE_ORGANIZATION",
+                            "startDate": "2026-10-01T00:00:00Z",
+                            "clientToken": "clientToken"
+                        },
+                        "output": {
+                            "relationshipDetail": {
+                                "arn": "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-abcdef123456g/relationship/rs-abc123def456g",
+                                "id": "rs-abc123def456g"
                             }
                         }
                     }
@@ -1051,8 +1830,7 @@
                 "associatedAccountId": {
                     "target": "com.amazonaws.partnercentralchannel#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID to associate in this relationship.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The AWS account ID to associate in this relationship.</p>"
                     }
                 },
                 "displayName": {
@@ -1065,7 +1843,7 @@
                 "resaleAccountModel": {
                     "target": "com.amazonaws.partnercentralchannel#ResaleAccountModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resale account model for the relationship.</p>"
+                        "smithy.api#documentation": "<p>The resale account model for the relationship. Applies only to billing transfer relationships.</p>"
                     }
                 },
                 "sector": {
@@ -1091,7 +1869,19 @@
                 "requestedSupportPlan": {
                     "target": "com.amazonaws.partnercentralchannel#SupportPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>The support plan requested for this relationship.</p>"
+                        "smithy.api#documentation": "<p>The support plan requested for this relationship. Applies only to billing transfer relationships.</p>"
+                    }
+                },
+                "accountScope": {
+                    "target": "com.amazonaws.partnercentralchannel#AccountScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account scope for a managed services relationship (for example, entire organization, specific member accounts). Applies only to managed services relationships.</p>"
+                    }
+                },
+                "startDate": {
+                    "target": "com.amazonaws.partnercentralchannel#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date of the managed services relationship. Applies only to managed services relationships.</p>"
                     }
                 }
             },
@@ -1297,6 +2087,166 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.partnercentralchannel#GetChannelContract": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.partnercentralchannel#GetChannelContractRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.partnercentralchannel#GetChannelContractResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.partnercentralchannel#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves details of a specific channel contract.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example for GetChannelContract - MANAGED_SERVICES_ATTESTATION",
+                        "input": {
+                            "catalog": "AWS",
+                            "identifier": "cc-4fj3bd2o3vb91"
+                        },
+                        "output": {
+                            "channelContractDetail": {
+                                "id": "cc-4fj3bd2o3vb91",
+                                "arn": "arn:aws:partnercentral:us-east-1:111122223333:catalog/AWS/channel-contract/cc-4fj3bd2o3vb91",
+                                "catalog": "AWS",
+                                "contractType": "MANAGED_SERVICES_ATTESTATION",
+                                "status": "PENDING",
+                                "createdAt": "2026-09-08T16:18:16.000Z",
+                                "updatedAt": "2026-09-08T16:18:16.000Z",
+                                "details": {
+                                    "managedServicesAttestationDetails": {
+                                        "legalEntityName": "Example Partner Corp",
+                                        "signatoryName": "Mary Major",
+                                        "signatoryEmail": "mary.major@example.com",
+                                        "programManagementAccountIdentifier": "pma-abcdef123456g",
+                                        "relationshipIdentifier": "rs-abc123def456g",
+                                        "endDate": "2027-03-31T00:00:00Z",
+                                        "supportedServices": [
+                                            "MONITORING",
+                                            "SECURITY"
+                                        ],
+                                        "memberAccountIds": [
+                                            "111122224444"
+                                        ],
+                                        "legalEntityAddress": {
+                                            "addressLine": "123 Any Street",
+                                            "addressLine2": "Suite 100",
+                                            "city": "Anytown",
+                                            "stateOrRegion": "WA",
+                                            "postalCode": "98101",
+                                            "countryCode": "US"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "title": "Example for GetChannelContract - CANCELED",
+                        "input": {
+                            "catalog": "AWS",
+                            "identifier": "cc-9xq4rt6w2zp81"
+                        },
+                        "output": {
+                            "channelContractDetail": {
+                                "id": "cc-9xq4rt6w2zp81",
+                                "arn": "arn:aws:partnercentral:us-east-1:111122223333:catalog/AWS/channel-contract/cc-9xq4rt6w2zp81",
+                                "catalog": "AWS",
+                                "contractType": "MANAGED_SERVICES_ATTESTATION",
+                                "status": "CANCELED",
+                                "createdAt": "2026-09-08T16:18:16.000Z",
+                                "updatedAt": "2026-09-10T09:30:00.000Z",
+                                "cancellationReason": "No longer providing managed services for this customer",
+                                "details": {
+                                    "managedServicesAttestationDetails": {
+                                        "legalEntityName": "Example Partner Corp",
+                                        "signatoryName": "Mary Major",
+                                        "signatoryEmail": "mary.major@example.com",
+                                        "programManagementAccountIdentifier": "pma-abcdef123456g",
+                                        "relationshipIdentifier": "rs-abc123def456g",
+                                        "endDate": "2027-03-31T00:00:00Z",
+                                        "supportedServices": [
+                                            "MONITORING",
+                                            "SECURITY"
+                                        ],
+                                        "memberAccountIds": [
+                                            "111122224444"
+                                        ],
+                                        "legalEntityAddress": {
+                                            "addressLine": "123 Any Street",
+                                            "addressLine2": "Suite 100",
+                                            "city": "Anytown",
+                                            "stateOrRegion": "WA",
+                                            "postalCode": "98101",
+                                            "countryCode": "US"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/GetChannelContract",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#GetChannelContractRequest": {
+            "type": "structure",
+            "members": {
+                "catalog": {
+                    "target": "com.amazonaws.partnercentralchannel#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog identifier for the channel contract.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "identifier": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the channel contract to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#GetChannelContractResponse": {
+            "type": "structure",
+            "members": {
+                "channelContractDetail": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the requested channel contract.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.partnercentralchannel#GetRelationship": {
             "type": "operation",
             "input": {
@@ -1345,6 +2295,32 @@
                                 "sector": "COMMERCIAL",
                                 "createdAt": "2024-04-29T16:18:16Z",
                                 "updatedAt": "2024-05-02T16:18:16Z"
+                            }
+                        }
+                    },
+                    {
+                        "title": "Example for GetRelationship - MANAGED_SERVICES_END_CUSTOMER",
+                        "input": {
+                            "catalog": "AWS",
+                            "programManagementAccountIdentifier": "pma-abcdef123456g",
+                            "identifier": "rs-abc123def456g"
+                        },
+                        "output": {
+                            "relationshipDetail": {
+                                "arn": "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/program-management-account/pma-abcdef123456g/relationship/rs-abc123def456g",
+                                "id": "rs-abc123def456g",
+                                "revision": "2",
+                                "associationType": "MANAGED_SERVICES_END_CUSTOMER",
+                                "programManagementAccountId": "pma-abcdef123456g",
+                                "associatedAccountId": "987654321012",
+                                "displayName": "TestManagedCustomer",
+                                "sector": "COMMERCIAL",
+                                "accountScope": "ENTIRE_ORGANIZATION",
+                                "channelContractId": "cc-4fj3bd2o3vb91",
+                                "createdAt": "2026-09-08T16:18:16Z",
+                                "updatedAt": "2026-09-10T09:30:00Z",
+                                "startDate": "2026-10-01T00:00:00Z",
+                                "endDate": "2027-03-31T00:00:00Z"
                             }
                         }
                     }
@@ -1506,6 +2482,211 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ListChannelContracts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.partnercentralchannel#ListChannelContractsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.partnercentralchannel#ListChannelContractsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.partnercentralchannel#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralchannel#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists channel contracts based on specified criteria.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example for ListChannelContracts - MANAGED_SERVICES_ATTESTATION",
+                        "input": {
+                            "catalog": "AWS",
+                            "contractType": "MANAGED_SERVICES_ATTESTATION",
+                            "statuses": [
+                                "PENDING"
+                            ],
+                            "contractTypeFilters": {
+                                "managedServicesAttestationTypeFilters": {
+                                    "relationshipIdentifiers": [
+                                        "rs-abc123def456g"
+                                    ],
+                                    "legalEntityNames": [
+                                        "Example Partner Corp"
+                                    ]
+                                }
+                            },
+                            "contractTypeSort": {
+                                "managedServicesAttestationTypeSort": {
+                                    "sortBy": "UpdatedAt",
+                                    "sortOrder": "Descending"
+                                }
+                            },
+                            "maxResults": 20
+                        },
+                        "output": {
+                            "items": [
+                                {
+                                    "id": "cc-4fj3bd2o3vb91",
+                                    "arn": "arn:aws:partnercentral:us-east-1:111122223333:catalog/AWS/channel-contract/cc-4fj3bd2o3vb91",
+                                    "catalog": "AWS",
+                                    "contractType": "MANAGED_SERVICES_ATTESTATION",
+                                    "status": "PENDING",
+                                    "createdAt": "2026-09-08T16:18:16.000Z",
+                                    "updatedAt": "2026-09-08T16:18:16.000Z",
+                                    "details": {
+                                        "managedServicesAttestationDetails": {
+                                            "legalEntityName": "Example Partner Corp",
+                                            "relationshipIdentifier": "rs-abc123def456g",
+                                            "programManagementAccountIdentifier": "pma-abcdef123456g",
+                                            "memberAccountIds": [
+                                                "111122224444"
+                                            ],
+                                            "endDate": "2027-03-31T00:00:00Z",
+                                            "supportedServices": [
+                                                "MONITORING",
+                                                "SECURITY"
+                                            ]
+                                        }
+                                    }
+                                }
+                            ],
+                            "nextToken": "nextToken"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/ListChannelContracts",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ListChannelContractsRequest": {
+            "type": "structure",
+            "members": {
+                "catalog": {
+                    "target": "com.amazonaws.partnercentralchannel#Catalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog identifier to filter channel contracts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contractType": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results by contract type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statuses": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractStatusFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results by channel contract status.</p>"
+                    }
+                },
+                "contractTypeFilters": {
+                    "target": "com.amazonaws.partnercentralchannel#ListChannelContractsTypeFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type-specific filters for channel contracts.</p>"
+                    }
+                },
+                "contractTypeSort": {
+                    "target": "com.amazonaws.partnercentralchannel#ListChannelContractsTypeSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type-specific sorting options for channel contracts.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 20,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.partnercentralchannel#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for retrieving the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ListChannelContractsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of channel contracts matching the criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.partnercentralchannel#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for retrieving the next page of results, if available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ListChannelContractsTypeFilters": {
+            "type": "union",
+            "members": {
+                "managedServicesAttestationTypeFilters": {
+                    "target": "com.amazonaws.partnercentralchannel#ManagedServicesAttestationTypeFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters specific to managed services attestation channel contracts. Applies only to managed services attestation channel contracts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Type-specific filters for listing channel contracts.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ListChannelContractsTypeSort": {
+            "type": "union",
+            "members": {
+                "managedServicesAttestationTypeSort": {
+                    "target": "com.amazonaws.partnercentralchannel#ManagedServicesAttestationTypeSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sorting options specific to managed services attestation channel contracts. Applies only to managed services attestation channel contracts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Type-specific sorting options for listing channel contracts.</p>"
             }
         },
         "com.amazonaws.partnercentralchannel#ListChannelHandshakes": {
@@ -2025,6 +3206,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Token for retrieving the next page of results.</p>"
                     }
+                },
+                "type": {
+                    "target": "com.amazonaws.partnercentralchannel#ProgramManagementAccountType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by program management account type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2393,6 +3580,312 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.partnercentralchannel#ManagedServicesAttestationDetails": {
+            "type": "structure",
+            "members": {
+                "legalEntityName": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractLegalEntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The legal name of the end customer's legal entity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relationshipIdentifier": {
+                    "target": "com.amazonaws.partnercentralchannel#RelationshipIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the relationship covered by the attestation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "programManagementAccountIdentifier": {
+                    "target": "com.amazonaws.partnercentralchannel#ProgramManagementAccountIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the program management account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "memberAccountIds": {
+                    "target": "com.amazonaws.partnercentralchannel#MemberAccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account IDs of the end customer's member accounts covered by the managed services.</p>"
+                    }
+                },
+                "endDate": {
+                    "target": "com.amazonaws.partnercentralchannel#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date of the managed services attestation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "supportedServices": {
+                    "target": "com.amazonaws.partnercentralchannel#ManagedServicesSupportedServiceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The managed services that the partner provides to the end customer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "signatoryName": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractSignatoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the person who signs the attestation for the end customer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "signatoryEmail": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractSignatoryEmail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address of the signatory.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "legalEntityAddress": {
+                    "target": "com.amazonaws.partnercentralchannel#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address of the end customer's legal entity, if available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details specific to managed services attestation channel contracts. Applies only to managed services attestation channel contracts.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ManagedServicesAttestationPayload": {
+            "type": "structure",
+            "members": {
+                "legalEntityName": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractLegalEntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The legal name of the end customer's legal entity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relationshipIdentifier": {
+                    "target": "com.amazonaws.partnercentralchannel#RelationshipIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the managed services relationship to cover with the attestation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "programManagementAccountIdentifier": {
+                    "target": "com.amazonaws.partnercentralchannel#ProgramManagementAccountIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the program management account for the relationship.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "memberAccountIds": {
+                    "target": "com.amazonaws.partnercentralchannel#MemberAccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account IDs of the end customer's member accounts to cover, not allowed when the account scope is the entire organization.</p>"
+                    }
+                },
+                "endDate": {
+                    "target": "com.amazonaws.partnercentralchannel#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date of the attestation, which must be after the start date of the relationship.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "supportedServices": {
+                    "target": "com.amazonaws.partnercentralchannel#ManagedServicesSupportedServiceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The managed services that the partner provides to the end customer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "legalEntityAddress": {
+                    "target": "com.amazonaws.partnercentralchannel#Address",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The address of the end customer's legal entity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "signatoryName": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractSignatoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the person who signs the attestation for the end customer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "signatoryEmail": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractSignatoryEmail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address to which the attestation is sent for signature.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Payload for managed services attestation channel contract requests. Applies only to managed services attestation channel contracts.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ManagedServicesAttestationSummaryDetails": {
+            "type": "structure",
+            "members": {
+                "legalEntityName": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractLegalEntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The legal name of the end customer's legal entity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relationshipIdentifier": {
+                    "target": "com.amazonaws.partnercentralchannel#RelationshipIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the relationship covered by the attestation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "programManagementAccountIdentifier": {
+                    "target": "com.amazonaws.partnercentralchannel#ProgramManagementAccountIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the program management account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "memberAccountIds": {
+                    "target": "com.amazonaws.partnercentralchannel#MemberAccountIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account IDs of the end customer's member accounts covered by the managed services.</p>"
+                    }
+                },
+                "endDate": {
+                    "target": "com.amazonaws.partnercentralchannel#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date of the managed services attestation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "supportedServices": {
+                    "target": "com.amazonaws.partnercentralchannel#ManagedServicesSupportedServiceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The managed services that the partner provides to the end customer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a managed services attestation channel contract. Applies only to managed services attestation channel contracts.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ManagedServicesAttestationTypeFilters": {
+            "type": "structure",
+            "members": {
+                "relationshipIdentifiers": {
+                    "target": "com.amazonaws.partnercentralchannel#RelationshipIdentifierFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by relationship identifiers.</p>"
+                    }
+                },
+                "legalEntityNames": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractLegalEntityNameFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by legal entity names.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters specific to managed services attestation channel contracts. Applies only to managed services attestation channel contracts.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ManagedServicesAttestationTypeSort": {
+            "type": "structure",
+            "members": {
+                "sortOrder": {
+                    "target": "com.amazonaws.partnercentralchannel#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order (ascending or descending).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.partnercentralchannel#ManagedServicesAttestationTypeSortName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field to sort by.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sorting options specific to managed services attestation channel contracts. Applies only to managed services attestation channel contracts.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ManagedServicesAttestationTypeSortName": {
+            "type": "enum",
+            "members": {
+                "UPDATED_AT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdatedAt"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ManagedServicesSupportedService": {
+            "type": "enum",
+            "members": {
+                "MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONITORING"
+                    }
+                },
+                "PATCHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PATCHING"
+                    }
+                },
+                "SECURITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECURITY"
+                    }
+                },
+                "BACKUP_AND_DISASTER_RECOVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BACKUP_AND_DISASTER_RECOVERY"
+                    }
+                },
+                "FINANCIAL_OPERATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FINANCIAL_OPERATIONS"
+                    }
+                },
+                "INFRASTRUCTURE_AS_CODE_AND_AUTOMATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFRASTRUCTURE_AS_CODE_AND_AUTOMATION"
+                    }
+                },
+                "WELL_ARCHITECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WELL_ARCHITECTED"
+                    }
+                },
+                "ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARTIFICIAL_INTELLIGENCE_AND_MACHINE_LEARNING_OPERATIONS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ManagedServicesSupportedServiceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralchannel#ManagedServicesSupportedService"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#MemberAccountIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralchannel#AccountId"
+            }
+        },
         "com.amazonaws.partnercentralchannel#MinimumNoticeDays": {
             "type": "string",
             "traits": {
@@ -2456,6 +3949,9 @@
             ],
             "resources": [
                 {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractResource"
+                },
+                {
                     "target": "com.amazonaws.partnercentralchannel#ChannelHandshakeResource"
                 },
                 {
@@ -2509,6 +4005,11 @@
                         "type": "String",
                         "relativeDocumentation": "page.html#ChannelHandshakeType",
                         "documentation": "ChannelHandshakeType"
+                    },
+                    "partnercentral:ChannelContractType": {
+                        "type": "String",
+                        "relativeDocumentation": "page.html#ChannelContractType",
+                        "documentation": "ChannelContractType"
                     },
                     "aws:RequestTag/${TagKey}": {
                         "type": "String",
@@ -3246,6 +4747,16 @@
                 "smithy.api#pattern": "^[\\x00-\\x7E\\xA9\\xAE\\xA2-\\xA5\\u202F]+$"
             }
         },
+        "com.amazonaws.partnercentralchannel#PostalCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^\\p{Z}*[^\\p{C}\\p{Z}][^\\p{C}]*$"
+            }
+        },
         "com.amazonaws.partnercentralchannel#Program": {
             "type": "enum",
             "members": {
@@ -3265,6 +4776,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DISTRIBUTION_SELLER"
+                    }
+                },
+                "MANAGED_SERVICES_PROVIDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED_SERVICES_PROVIDER"
                     }
                 }
             }
@@ -3454,10 +4971,33 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the program management account.</p>"
                     }
+                },
+                "type": {
+                    "target": "com.amazonaws.partnercentralchannel#ProgramManagementAccountType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the program management account.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Summary information about a program management account.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#ProgramManagementAccountType": {
+            "type": "enum",
+            "members": {
+                "RESALE_BILLING_TRANSFER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESALE_BILLING_TRANSFER"
+                    }
+                },
+                "MANAGED_SERVICES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANAGED_SERVICES"
+                    }
+                }
             }
         },
         "com.amazonaws.partnercentralchannel#ProgramManagementAccountTypeFilters": {
@@ -3691,13 +5231,25 @@
                 "resaleAccountModel": {
                     "target": "com.amazonaws.partnercentralchannel#ResaleAccountModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resale account model for the relationship.</p>"
+                        "smithy.api#documentation": "<p>The resale account model for the relationship. Applies only to billing transfer relationships.</p>"
                     }
                 },
                 "sector": {
                     "target": "com.amazonaws.partnercentralchannel#Sector",
                     "traits": {
                         "smithy.api#documentation": "<p>The business sector for the relationship.</p>"
+                    }
+                },
+                "accountScope": {
+                    "target": "com.amazonaws.partnercentralchannel#AccountScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account scope of the managed services relationship. Applies only to managed services relationships.</p>"
+                    }
+                },
+                "channelContractId": {
+                    "target": "com.amazonaws.partnercentralchannel#ChannelContractId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the channel contract currently in effect for the relationship. Applies only to managed services relationships.</p>"
                     }
                 },
                 "createdAt": {
@@ -3716,6 +5268,12 @@
                     "target": "com.amazonaws.partnercentralchannel#DateTime",
                     "traits": {
                         "smithy.api#documentation": "<p>The start date of the relationship.</p>"
+                    }
+                },
+                "endDate": {
+                    "target": "com.amazonaws.partnercentralchannel#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date of the relationship.</p>"
                     }
                 }
             },
@@ -3757,6 +5315,12 @@
                     "max": 1011
                 },
                 "smithy.api#pattern": "^(arn:[a-z-]+:partnercentral:[a-z0-9-]+:[0-9]{12}:catalog/[a-zA-Z]+/program-management-account/pma-[a-z0-9]{13}/relationship/)?rs-[a-z0-9]{13}$"
+            }
+        },
+        "com.amazonaws.partnercentralchannel#RelationshipIdentifierFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralchannel#RelationshipIdentifier"
             }
         },
         "com.amazonaws.partnercentralchannel#RelationshipResource": {
@@ -4319,6 +5883,16 @@
                 }
             }
         },
+        "com.amazonaws.partnercentralchannel#StateOrRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^\\p{Z}*[^\\p{C}\\p{Z}][^\\p{C}]*$"
+            }
+        },
         "com.amazonaws.partnercentralchannel#SupportPlan": {
             "type": "union",
             "members": {
@@ -4432,6 +6006,19 @@
                             ]
                         },
                         "output": {}
+                    },
+                    {
+                        "title": "Example for TagResource - ChannelContract",
+                        "input": {
+                            "resourceArn": "arn:aws:partnercentral:us-east-1:123456789012:catalog/AWS/channel-contract/cc-4fj3bd2o3vb91",
+                            "tags": [
+                                {
+                                    "key": "ExampleKey",
+                                    "value": "ExampleValue"
+                                }
+                            ]
+                        },
+                        "output": {}
                     }
                 ],
                 "smithy.api#http": {
@@ -4508,7 +6095,7 @@
                     "min": 1,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:[a-z-]+:partnercentral:[a-z0-9-]+:[0-9]{12}:catalog/[a-zA-Z]+/(program-management-account/pma-[a-z0-9]{13}(/relationship/rs-[a-z0-9]{13})?|channel-handshake/ch-[a-z0-9]{13})$"
+                "smithy.api#pattern": "^arn:[a-z-]+:partnercentral:[a-z0-9-]+:[0-9]{12}:catalog/[a-zA-Z]+/(program-management-account/pma-[a-z0-9]{13}(/relationship/rs-[a-z0-9]{13})?|channel-handshake/ch-[a-z0-9]{13}|channel-contract/cc-[a-z0-9]{13})$"
             }
         },
         "com.amazonaws.partnercentralchannel#ThrottlingException": {
@@ -4906,7 +6493,7 @@
                 "requestedSupportPlan": {
                     "target": "com.amazonaws.partnercentralchannel#SupportPlan",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated support plan for the relationship.</p>"
+                        "smithy.api#documentation": "<p>The updated support plan for the relationship. Applies only to billing transfer relationships.</p>"
                     }
                 }
             },

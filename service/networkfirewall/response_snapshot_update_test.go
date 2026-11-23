@@ -382,6 +382,9 @@ func TestUpdateResponseSnapshot_CreateFirewall(t *testing.T) {
 				},
 			},
 			AvailabilityZoneChangeProtection: true,
+			IgwFirewallConfiguration: &types.IgwFirewallConfiguration{
+				EnforcementMode: types.EnforcementMode("POLICY_CONTROLLED"),
+			},
 			NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 				{
 					SubnetId: ptr.String("__SubnetId__"),
@@ -453,6 +456,16 @@ func TestUpdateResponseSnapshot_CreateFirewall(t *testing.T) {
 						"key0": {
 							SyncStatus:  types.PerObjectSyncStatus("PENDING"),
 							UpdateToken: ptr.String("__UpdateToken__"),
+						},
+					},
+					AddressTranslations: &types.AddressTranslations{
+						PublicIPv6Addresses: []string{
+							"__Member__",
+							"__Member__",
+						},
+						PublicIPv4Addresses: []string{
+							"__Member__",
+							"__Member__",
 						},
 					},
 					NatGatewayAttachments: []types.NatGatewayAttachment{
@@ -921,6 +934,9 @@ func TestUpdateResponseSnapshot_DeleteFirewall(t *testing.T) {
 				},
 			},
 			AvailabilityZoneChangeProtection: true,
+			IgwFirewallConfiguration: &types.IgwFirewallConfiguration{
+				EnforcementMode: types.EnforcementMode("POLICY_CONTROLLED"),
+			},
 			NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 				{
 					SubnetId: ptr.String("__SubnetId__"),
@@ -992,6 +1008,16 @@ func TestUpdateResponseSnapshot_DeleteFirewall(t *testing.T) {
 						"key0": {
 							SyncStatus:  types.PerObjectSyncStatus("PENDING"),
 							UpdateToken: ptr.String("__UpdateToken__"),
+						},
+					},
+					AddressTranslations: &types.AddressTranslations{
+						PublicIPv6Addresses: []string{
+							"__Member__",
+							"__Member__",
+						},
+						PublicIPv4Addresses: []string{
+							"__Member__",
+							"__Member__",
 						},
 					},
 					NatGatewayAttachments: []types.NatGatewayAttachment{
@@ -1573,6 +1599,9 @@ func TestUpdateResponseSnapshot_DescribeFirewall(t *testing.T) {
 				},
 			},
 			AvailabilityZoneChangeProtection: true,
+			IgwFirewallConfiguration: &types.IgwFirewallConfiguration{
+				EnforcementMode: types.EnforcementMode("POLICY_CONTROLLED"),
+			},
 			NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 				{
 					SubnetId: ptr.String("__SubnetId__"),
@@ -1644,6 +1673,16 @@ func TestUpdateResponseSnapshot_DescribeFirewall(t *testing.T) {
 						"key0": {
 							SyncStatus:  types.PerObjectSyncStatus("PENDING"),
 							UpdateToken: ptr.String("__UpdateToken__"),
+						},
+					},
+					AddressTranslations: &types.AddressTranslations{
+						PublicIPv6Addresses: []string{
+							"__Member__",
+							"__Member__",
+						},
+						PublicIPv4Addresses: []string{
+							"__Member__",
+							"__Member__",
 						},
 					},
 					NatGatewayAttachments: []types.NatGatewayAttachment{

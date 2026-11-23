@@ -214,9 +214,6 @@
                     "target": "com.amazonaws.glue#DeleteAsset"
                 },
                 {
-                    "target": "com.amazonaws.glue#DeleteAssetType"
-                },
-                {
                     "target": "com.amazonaws.glue#DeleteAttachment"
                 },
                 {
@@ -740,9 +737,6 @@
                 },
                 {
                     "target": "com.amazonaws.glue#PutAsset"
-                },
-                {
-                    "target": "com.amazonaws.glue#PutAssetType"
                 },
                 {
                     "target": "com.amazonaws.glue#PutAttachment"
@@ -2842,7 +2836,13 @@
             }
         },
         "com.amazonaws.glue#AssetDescription": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
         },
         "com.amazonaws.glue#AssetFormEntry": {
             "type": "structure",
@@ -2864,8 +2864,43 @@
                 "smithy.api#documentation": "<p>A form on an asset, consisting of the form type identifier and its JSON content.</p>"
             }
         },
+        "com.amazonaws.glue#AssetFormInput": {
+            "type": "structure",
+            "members": {
+                "FormTypeIdentifier": {
+                    "target": "com.amazonaws.glue#FormTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the form type that defines this form's schema. This field is required.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.glue#FormContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON content of the form, conforming to the schema of the specified form type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A form to set on an asset, consisting of the form type identifier and its JSON content.</p>"
+            }
+        },
+        "com.amazonaws.glue#AssetFormInputMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#AssetFormKey"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#AssetFormInput"
+            }
+        },
         "com.amazonaws.glue#AssetFormKey": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
         },
         "com.amazonaws.glue#AssetFormMap": {
             "type": "map",
@@ -2887,7 +2922,13 @@
             }
         },
         "com.amazonaws.glue#AssetName": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
         },
         "com.amazonaws.glue#AssetTypeFormKey": {
             "type": "string",
@@ -2899,34 +2940,27 @@
                 "smithy.api#pattern": "^(?![0-9_])\\w+$|^_\\w*[a-zA-Z0-9]\\w*$"
             }
         },
-        "com.amazonaws.glue#AssetTypeFormReference": {
+        "com.amazonaws.glue#AssetTypeFormOutput": {
             "type": "structure",
             "members": {
-                "FormTypeIdentifier": {
+                "FormTypeId": {
                     "target": "com.amazonaws.glue#FormTypeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the referenced form type.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The identifier of the form type that defines the form's schema.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A reference to a form type that is included in an asset type.</p>"
+                "smithy.api#documentation": "<p>A form that is included in an asset type, identified by the form type that defines its schema.</p>"
             }
         },
-        "com.amazonaws.glue#AssetTypeFormsMap": {
+        "com.amazonaws.glue#AssetTypeFormOutputMap": {
             "type": "map",
             "key": {
                 "target": "com.amazonaws.glue#AssetTypeFormKey"
             },
             "value": {
-                "target": "com.amazonaws.glue#AssetTypeFormReference"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 100
-                }
+                "target": "com.amazonaws.glue#AssetTypeFormOutput"
             }
         },
         "com.amazonaws.glue#AssetTypeId": {
@@ -2964,6 +2998,15 @@
                 "target": "com.amazonaws.glue#AssetTypeItem"
             }
         },
+        "com.amazonaws.glue#AssetTypeMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.glue#AssetTypeName": {
             "type": "string",
             "traits": {
@@ -2972,6 +3015,40 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^(?![0-9_])\\w+$|^_\\w*[a-zA-Z0-9]\\w*$"
+            }
+        },
+        "com.amazonaws.glue#AssetsExport": {
+            "type": "structure",
+            "members": {
+                "S3TablesExport": {
+                    "target": "com.amazonaws.glue#ExportSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether asset metadata is exported to S3 Tables. Valid values are <code>ENABLED</code> and <code>DISABLED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The export setting for asset metadata.</p>"
+            }
+        },
+        "com.amazonaws.glue#AssetsExportResult": {
+            "type": "structure",
+            "members": {
+                "S3TablesExport": {
+                    "target": "com.amazonaws.glue#ExportSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether asset metadata is exported to S3 Tables. Valid values are <code>ENABLED</code> and <code>DISABLED</code>.</p>"
+                    }
+                },
+                "S3TablesExportState": {
+                    "target": "com.amazonaws.glue#S3TablesExportState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the asset metadata export to S3 Tables.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The export setting and current export state for asset metadata.</p>"
             }
         },
         "com.amazonaws.glue#AssociateGlossaryTerms": {
@@ -3056,7 +3133,7 @@
         "com.amazonaws.glue#AssociateGlossaryTermsResponse": {
             "type": "structure",
             "members": {
-                "AssetIdentifier": {
+                "AssetId": {
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
@@ -3068,14 +3145,14 @@
                         "smithy.api#documentation": "<p>The name of the iterable form, if the association targets an item.</p>"
                     }
                 },
-                "ItemIdentifier": {
-                    "target": "com.amazonaws.glue#ItemIdentifier",
+                "ItemId": {
+                    "target": "com.amazonaws.glue#ItemId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the item within the iterable form, if applicable.</p>"
                     }
                 },
                 "GlossaryTerms": {
-                    "target": "com.amazonaws.glue#GlossaryTermIdList",
+                    "target": "com.amazonaws.glue#GlossaryTermIdOutputList",
                     "traits": {
                         "smithy.api#documentation": "<p>The glossary terms now associated with the asset.</p>"
                     }
@@ -12556,13 +12633,13 @@
                     }
                 },
                 "ShortDescription": {
-                    "target": "com.amazonaws.glue#GlossaryShortDescription",
+                    "target": "com.amazonaws.glue#GlossaryTermShortDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>A short description of the glossary term.</p>"
                     }
                 },
                 "LongDescription": {
-                    "target": "com.amazonaws.glue#GlossaryLongDescription",
+                    "target": "com.amazonaws.glue#GlossaryTermLongDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>A long description of the glossary term.</p>"
                     }
@@ -12601,13 +12678,13 @@
                     }
                 },
                 "ShortDescription": {
-                    "target": "com.amazonaws.glue#GlossaryShortDescription",
+                    "target": "com.amazonaws.glue#GlossaryTermShortDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The short description of the glossary term.</p>"
                     }
                 },
                 "LongDescription": {
-                    "target": "com.amazonaws.glue#GlossaryLongDescription",
+                    "target": "com.amazonaws.glue#GlossaryTermLongDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The long description of the glossary term.</p>"
                     }
@@ -17840,63 +17917,6 @@
                 "smithy.api#output": {}
             }
         },
-        "com.amazonaws.glue#DeleteAssetType": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.glue#DeleteAssetTypeRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.glue#DeleteAssetTypeResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.glue#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.glue#ConcurrentModificationException"
-                },
-                {
-                    "target": "com.amazonaws.glue#InternalServiceException"
-                },
-                {
-                    "target": "com.amazonaws.glue#InvalidInputException"
-                },
-                {
-                    "target": "com.amazonaws.glue#ThrottlingException"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Deletes an asset type from Glue Data Catalog.</p>",
-                "smithy.api#http": {
-                    "method": "DELETE",
-                    "uri": "/asset-types/{Identifier}",
-                    "code": 200
-                }
-            }
-        },
-        "com.amazonaws.glue#DeleteAssetTypeRequest": {
-            "type": "structure",
-            "members": {
-                "Identifier": {
-                    "target": "com.amazonaws.glue#AssetTypeId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the asset type to delete.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#input": {}
-            }
-        },
-        "com.amazonaws.glue#DeleteAssetTypeResponse": {
-            "type": "structure",
-            "members": {},
-            "traits": {
-                "smithy.api#output": {}
-            }
-        },
         "com.amazonaws.glue#DeleteAttachment": {
             "type": "operation",
             "input": {
@@ -17975,7 +17995,7 @@
         "com.amazonaws.glue#DeleteAttachmentResponse": {
             "type": "structure",
             "members": {
-                "AssetIdentifier": {
+                "AssetId": {
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
@@ -17987,8 +18007,8 @@
                         "smithy.api#documentation": "<p>The name of the iterable form, if the deletion targets an item.</p>"
                     }
                 },
-                "ItemIdentifier": {
-                    "target": "com.amazonaws.glue#ItemIdentifier",
+                "ItemId": {
+                    "target": "com.amazonaws.glue#ItemId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the item within the iterable form, if applicable.</p>"
                     }
@@ -21296,7 +21316,7 @@
         "com.amazonaws.glue#DisassociateGlossaryTermsResponse": {
             "type": "structure",
             "members": {
-                "AssetIdentifier": {
+                "AssetId": {
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
@@ -21308,14 +21328,14 @@
                         "smithy.api#documentation": "<p>The name of the iterable form, if the disassociation targets an item.</p>"
                     }
                 },
-                "ItemIdentifier": {
-                    "target": "com.amazonaws.glue#ItemIdentifier",
+                "ItemId": {
+                    "target": "com.amazonaws.glue#ItemId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the item within the iterable form, if applicable.</p>"
                     }
                 },
                 "GlossaryTerms": {
-                    "target": "com.amazonaws.glue#GlossaryTermIdList",
+                    "target": "com.amazonaws.glue#GlossaryTermIdOutputList",
                     "traits": {
                         "smithy.api#documentation": "<p>The remaining glossary terms associated with the asset.</p>"
                     }
@@ -23579,7 +23599,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 256
-                }
+                },
+                "smithy.api#pattern": "^(?![\\.:])([\\w.]+(::))?[A-Z]\\w*$"
             }
         },
         "com.amazonaws.glue#FormTypeItem": {
@@ -23606,6 +23627,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#FormTypeItem"
+            }
+        },
+        "com.amazonaws.glue#FormTypeMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.glue#FormTypeName": {
@@ -23788,7 +23818,7 @@
                     }
                 },
                 "GlossaryTerms": {
-                    "target": "com.amazonaws.glue#GlossaryTermIdList",
+                    "target": "com.amazonaws.glue#GlossaryTermIdOutputList",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifiers of the glossary terms associated with the asset.</p>"
                     }
@@ -23883,7 +23913,7 @@
                     }
                 },
                 "Forms": {
-                    "target": "com.amazonaws.glue#AssetTypeFormsMap",
+                    "target": "com.amazonaws.glue#AssetTypeFormOutputMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The forms that make up the asset type, keyed by form name.</p>"
                     }
@@ -25399,6 +25429,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.glue#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.glue#EntityNotFoundException"
                 },
                 {
@@ -25431,30 +25464,6 @@
         "com.amazonaws.glue#GetDataCatalogExportConfigurationOutput": {
             "type": "structure",
             "members": {
-                "ExportSetting": {
-                    "target": "com.amazonaws.glue#ExportSetting",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The export setting for the data catalog. Valid values are <code>ENABLED</code> and <code>DISABLED</code>.</p>"
-                    }
-                },
-                "Status": {
-                    "target": "com.amazonaws.glue#ExportStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The current status of the export. Valid values are <code>ENABLING</code>, <code>ENABLED</code>, <code>DISABLING</code>, <code>DISABLED</code>, and <code>FAILED</code>.</p>"
-                    }
-                },
-                "EncryptionConfiguration": {
-                    "target": "com.amazonaws.glue#ExportEncryptionConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The encryption configuration for the exported data.</p>"
-                    }
-                },
-                "S3TableBucketArn": {
-                    "target": "com.amazonaws.glue#S3TableBucketArn",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the S3 Tables bucket where catalog metadata is exported.</p>"
-                    }
-                },
                 "CreatedAt": {
                     "target": "com.amazonaws.glue#CreatedAt",
                     "traits": {
@@ -25465,6 +25474,18 @@
                     "target": "com.amazonaws.glue#UpdatedAt",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp at which the export configuration was last updated.</p>"
+                    }
+                },
+                "S3TablesConfiguration": {
+                    "target": "com.amazonaws.glue#S3TablesConfigurationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 Tables configuration for the export, including the table bucket that holds the exported catalog metadata and its encryption configuration.</p>"
+                    }
+                },
+                "Assets": {
+                    "target": "com.amazonaws.glue#AssetsExportResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export setting and current export state for asset metadata.</p>"
                     }
                 }
             },
@@ -27046,6 +27067,9 @@
                     "target": "com.amazonaws.glue#InternalServiceException"
                 },
                 {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
                     "target": "com.amazonaws.glue#ThrottlingException"
                 }
             ],
@@ -27119,6 +27143,9 @@
                     "target": "com.amazonaws.glue#InternalServiceException"
                 },
                 {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
                     "target": "com.amazonaws.glue#ThrottlingException"
                 }
             ],
@@ -27169,13 +27196,13 @@
                     }
                 },
                 "ShortDescription": {
-                    "target": "com.amazonaws.glue#GlossaryShortDescription",
+                    "target": "com.amazonaws.glue#GlossaryTermShortDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The short description of the glossary term.</p>"
                     }
                 },
                 "LongDescription": {
-                    "target": "com.amazonaws.glue#GlossaryLongDescription",
+                    "target": "com.amazonaws.glue#GlossaryTermLongDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The long description of the glossary term.</p>"
                     }
@@ -31658,7 +31685,14 @@
             }
         },
         "com.amazonaws.glue#GlossaryId": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-z0-9]+$"
+            }
         },
         "com.amazonaws.glue#GlossaryItem": {
             "type": "structure",
@@ -31692,12 +31726,12 @@
                 "target": "com.amazonaws.glue#GlossaryItem"
             }
         },
-        "com.amazonaws.glue#GlossaryLongDescription": {
-            "type": "string",
+        "com.amazonaws.glue#GlossaryMaxResults": {
+            "type": "integer",
             "traits": {
-                "smithy.api#length": {
+                "smithy.api#range": {
                     "min": 1,
-                    "max": 4096
+                    "max": 100
                 }
             }
         },
@@ -31710,17 +31744,15 @@
                 }
             }
         },
-        "com.amazonaws.glue#GlossaryShortDescription": {
+        "com.amazonaws.glue#GlossaryTermId": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
-                }
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-z0-9]+$"
             }
-        },
-        "com.amazonaws.glue#GlossaryTermId": {
-            "type": "string"
         },
         "com.amazonaws.glue#GlossaryTermIdList": {
             "type": "list",
@@ -31732,6 +31764,12 @@
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.glue#GlossaryTermIdOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#GlossaryTermId"
             }
         },
         "com.amazonaws.glue#GlossaryTermItem": {
@@ -31750,7 +31788,7 @@
                     }
                 },
                 "ShortDescription": {
-                    "target": "com.amazonaws.glue#GlossaryShortDescription",
+                    "target": "com.amazonaws.glue#GlossaryTermShortDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The short description of the glossary term.</p>"
                     }
@@ -31766,12 +31804,39 @@
                 "target": "com.amazonaws.glue#GlossaryTermItem"
             }
         },
+        "com.amazonaws.glue#GlossaryTermLongDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.glue#GlossaryTermMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.glue#GlossaryTermName": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.glue#GlossaryTermShortDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
                 }
             }
         },
@@ -34276,7 +34341,7 @@
             "type": "structure",
             "members": {
                 "FormTypeId": {
-                    "target": "com.amazonaws.glue#FormTypeId",
+                    "target": "com.amazonaws.glue#IterableFormTypeId",
                     "traits": {
                         "smithy.api#documentation": "<p>The form type identifier of the iterable form (for example, <code>columns</code>), used to retrieve its items via <code>ListIterableForms</code> or <code>BatchGetIterableForms</code>.</p>"
                     }
@@ -34302,7 +34367,7 @@
                     }
                 },
                 "GlossaryTerms": {
-                    "target": "com.amazonaws.glue#GlossaryTermIdList",
+                    "target": "com.amazonaws.glue#GlossaryTermIdOutputList",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifiers of the glossary terms associated with the item.</p>"
                     }
@@ -34355,7 +34420,7 @@
                     }
                 },
                 "GlossaryTerms": {
-                    "target": "com.amazonaws.glue#GlossaryTermIdList",
+                    "target": "com.amazonaws.glue#GlossaryTermIdOutputList",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifiers of the glossary terms associated with the item.</p>"
                     }
@@ -34388,6 +34453,15 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]*(::[a-zA-Z][a-zA-Z0-9_]*)?$"
+            }
+        },
+        "com.amazonaws.glue#IterableFormTypeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.glue#JDBCConnectionType": {
@@ -36508,7 +36582,7 @@
             "type": "structure",
             "members": {
                 "MaxResults": {
-                    "target": "com.amazonaws.glue#PageSize",
+                    "target": "com.amazonaws.glue#AssetTypeMaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
                         "smithy.api#httpQuery": "maxResults"
@@ -37808,7 +37882,7 @@
             "type": "structure",
             "members": {
                 "MaxResults": {
-                    "target": "com.amazonaws.glue#PageSize",
+                    "target": "com.amazonaws.glue#FormTypeMaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
                         "smithy.api#httpQuery": "maxResults"
@@ -37888,7 +37962,7 @@
             "type": "structure",
             "members": {
                 "MaxResults": {
-                    "target": "com.amazonaws.glue#PageSize",
+                    "target": "com.amazonaws.glue#GlossaryMaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
                         "smithy.api#httpQuery": "maxResults"
@@ -37975,7 +38049,7 @@
                     }
                 },
                 "MaxResults": {
-                    "target": "com.amazonaws.glue#PageSize",
+                    "target": "com.amazonaws.glue#GlossaryTermMaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
                         "smithy.api#httpQuery": "maxResults"
@@ -42975,11 +43049,10 @@
         "com.amazonaws.glue#PutAssetRequest": {
             "type": "structure",
             "members": {
-                "AssetTypeId": {
+                "AssetTypeIdentifier": {
                     "target": "com.amazonaws.glue#AssetTypeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the asset type for the asset.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The identifier of the asset type for the asset. This field is required.</p>"
                     }
                 },
                 "Identifier": {
@@ -43003,7 +43076,7 @@
                     }
                 },
                 "Forms": {
-                    "target": "com.amazonaws.glue#AssetFormMap",
+                    "target": "com.amazonaws.glue#AssetFormInputMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The forms to set on the asset, keyed by form name. Each entry specifies the form type and its JSON content.</p>",
                         "smithy.api#required": {}
@@ -43044,6 +43117,13 @@
                         "smithy.api#documentation": "<p>The description of the asset.</p>"
                     }
                 },
+                "AssetTypeId": {
+                    "target": "com.amazonaws.glue#AssetTypeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the asset type for this asset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "CreatedAt": {
                     "target": "com.amazonaws.glue#CreatedAt",
                     "traits": {
@@ -43054,98 +43134,6 @@
                     "target": "com.amazonaws.glue#AssetFormMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The forms attached to the asset, keyed by form name.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#output": {}
-            }
-        },
-        "com.amazonaws.glue#PutAssetType": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.glue#PutAssetTypeRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.glue#PutAssetTypeResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.glue#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.glue#ConcurrentModificationException"
-                },
-                {
-                    "target": "com.amazonaws.glue#EntityNotFoundException"
-                },
-                {
-                    "target": "com.amazonaws.glue#InternalServiceException"
-                },
-                {
-                    "target": "com.amazonaws.glue#InvalidInputException"
-                },
-                {
-                    "target": "com.amazonaws.glue#ThrottlingException"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Creates or updates an asset type in Glue Data Catalog. An asset type defines the structure of assets by specifying which forms they include. If an asset type with the given name already exists, it is updated.</p>",
-                "smithy.api#http": {
-                    "method": "PUT",
-                    "uri": "/asset-types",
-                    "code": 200
-                }
-            }
-        },
-        "com.amazonaws.glue#PutAssetTypeRequest": {
-            "type": "structure",
-            "members": {
-                "Name": {
-                    "target": "com.amazonaws.glue#AssetTypeName",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the asset type.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "Forms": {
-                    "target": "com.amazonaws.glue#AssetTypeFormsMap",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The forms that make up the asset type, keyed by form name. Each entry references the form type that defines the form's schema.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "ClientToken": {
-                    "target": "com.amazonaws.glue#HashString",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
-                        "smithy.api#idempotencyToken": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#input": {}
-            }
-        },
-        "com.amazonaws.glue#PutAssetTypeResponse": {
-            "type": "structure",
-            "members": {
-                "Id": {
-                    "target": "com.amazonaws.glue#AssetTypeId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the asset type.</p>"
-                    }
-                },
-                "Name": {
-                    "target": "com.amazonaws.glue#AssetTypeName",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the asset type.</p>"
-                    }
-                },
-                "Forms": {
-                    "target": "com.amazonaws.glue#AssetTypeFormsMap",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The forms that make up the asset type, keyed by form name.</p>"
                     }
                 }
             },
@@ -43227,11 +43215,10 @@
                         "smithy.api#required": {}
                     }
                 },
-                "FormTypeId": {
+                "FormTypeIdentifier": {
                     "target": "com.amazonaws.glue#FormTypeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the form type for this attachment.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The identifier of the form type for this attachment. This field is required.</p>"
                     }
                 },
                 "ClientToken": {
@@ -43249,7 +43236,7 @@
         "com.amazonaws.glue#PutAttachmentResponse": {
             "type": "structure",
             "members": {
-                "AssetIdentifier": {
+                "AssetId": {
                     "target": "com.amazonaws.glue#AssetId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the asset.</p>"
@@ -43261,8 +43248,8 @@
                         "smithy.api#documentation": "<p>The name of the iterable form, if the attachment targets an item.</p>"
                     }
                 },
-                "ItemIdentifier": {
-                    "target": "com.amazonaws.glue#ItemIdentifier",
+                "ItemId": {
+                    "target": "com.amazonaws.glue#ItemId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the item within the iterable form, if applicable.</p>"
                     }
@@ -43372,24 +43359,23 @@
         "com.amazonaws.glue#PutDataCatalogExportConfigurationInput": {
             "type": "structure",
             "members": {
-                "ExportSetting": {
-                    "target": "com.amazonaws.glue#ExportSetting",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The export setting for the data catalog. Specify <code>ENABLED</code> to start exporting catalog metadata to S3 Tables, or <code>DISABLED</code> to stop exporting. This field is required.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "EncryptionConfiguration": {
-                    "target": "com.amazonaws.glue#ExportEncryptionConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The encryption configuration for the exported data. If not specified, the default encryption settings are used.</p>"
-                    }
-                },
                 "ClientToken": {
                     "target": "com.amazonaws.glue#HashString",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "S3TablesConfiguration": {
+                    "target": "com.amazonaws.glue#S3TablesConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 Tables configuration for the export. The encryption configuration applies only when Glue creates the table bucket that holds the exported catalog metadata. If not specified, the default encryption settings are used.</p>"
+                    }
+                },
+                "Assets": {
+                    "target": "com.amazonaws.glue#AssetsExport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export setting for asset metadata. Set <code>S3TablesExport</code> to <code>ENABLED</code> to start exporting asset metadata to S3 Tables, or to <code>DISABLED</code> to stop exporting.</p>"
                     }
                 }
             },
@@ -43400,16 +43386,16 @@
         "com.amazonaws.glue#PutDataCatalogExportConfigurationOutput": {
             "type": "structure",
             "members": {
-                "ExportSetting": {
-                    "target": "com.amazonaws.glue#ExportSetting",
+                "S3TablesConfiguration": {
+                    "target": "com.amazonaws.glue#S3TablesConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The export setting for the data catalog.</p>"
+                        "smithy.api#documentation": "<p>The S3 Tables configuration for the export.</p>"
                     }
                 },
-                "EncryptionConfiguration": {
-                    "target": "com.amazonaws.glue#ExportEncryptionConfiguration",
+                "Assets": {
+                    "target": "com.amazonaws.glue#AssetsExport",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption configuration for the exported data.</p>"
+                        "smithy.api#documentation": "<p>The export setting for asset metadata.</p>"
                     }
                 }
             },
@@ -46874,6 +46860,54 @@
         "com.amazonaws.glue#S3TableBucketArn": {
             "type": "string"
         },
+        "com.amazonaws.glue#S3TablesConfiguration": {
+            "type": "structure",
+            "members": {
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.glue#ExportEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for the table bucket that holds the exported catalog metadata. It applies only when Glue creates the table bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 Tables configuration for a data catalog export.</p>"
+            }
+        },
+        "com.amazonaws.glue#S3TablesConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "TableBucketArn": {
+                    "target": "com.amazonaws.glue#S3TableBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the S3 table bucket that holds the exported catalog metadata.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.glue#ExportEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption configuration for the table bucket that holds the exported catalog metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The S3 Tables configuration for a data catalog export, including the table bucket that holds the exported catalog metadata.</p>"
+            }
+        },
+        "com.amazonaws.glue#S3TablesExportState": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.glue#ExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the export. Valid values are <code>ENABLING</code>, <code>ENABLED</code>, <code>DISABLING</code>, <code>DISABLED</code>, and <code>FAILED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of an export to S3 Tables. Glue sets this state.</p>"
+            }
+        },
         "com.amazonaws.glue#S3Target": {
             "type": "structure",
             "members": {
@@ -47440,7 +47474,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches for assets in Glue Data Catalog using full-text search, filters, sorting, and aggregations. Returns matching assets with relevance-ranked results.</p>",
+                "smithy.api#documentation": "<p>Searches for assets in Glue Data Catalog using full-text search, filters, and sorting. Returns matching assets with relevance-ranked results.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/search-assets",
@@ -47532,11 +47566,10 @@
                         "smithy.api#required": {}
                     }
                 },
-                "Operator": {
-                    "target": "com.amazonaws.glue#SearchFilterOperator",
+                "Comparator": {
+                    "target": "com.amazonaws.glue#SearchFilterComparator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator. Valid values are <code>equals</code>, <code>greaterThan</code>, <code>greaterThanOrEquals</code>, <code>lessThan</code>, <code>lessThanOrEquals</code>, and <code>notExists</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The comparison operator. Valid values are <code>EQUALS</code>, <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUALS</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUALS</code>, and <code>NOT_EXISTS</code>. This field is required.</p>"
                     }
                 },
                 "Value": {
@@ -47594,51 +47627,51 @@
                 }
             }
         },
+        "com.amazonaws.glue#SearchFilterComparator": {
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUALS"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "GREATER_THAN_OR_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUALS"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "LESS_THAN_OR_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN_OR_EQUALS"
+                    }
+                },
+                "NOT_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EXISTS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#SearchFilterLongValue": {
             "type": "long",
             "traits": {
                 "smithy.api#default": 0
-            }
-        },
-        "com.amazonaws.glue#SearchFilterOperator": {
-            "type": "enum",
-            "members": {
-                "equals": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "equals"
-                    }
-                },
-                "greaterThan": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "greaterThan"
-                    }
-                },
-                "greaterThanOrEquals": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "greaterThanOrEquals"
-                    }
-                },
-                "lessThan": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "lessThan"
-                    }
-                },
-                "lessThanOrEquals": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "lessThanOrEquals"
-                    }
-                },
-                "notExists": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "notExists"
-                    }
-                }
             }
         },
         "com.amazonaws.glue#SearchFilterStringValue": {
@@ -47749,16 +47782,22 @@
                         "smithy.api#documentation": "<p>The unique identifier of the matched asset.</p>"
                     }
                 },
-                "AssetName": {
-                    "target": "com.amazonaws.glue#SearchResultName",
+                "Name": {
+                    "target": "com.amazonaws.glue#AssetName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the matched asset.</p>"
                     }
                 },
-                "AssetDescription": {
+                "Description": {
                     "target": "com.amazonaws.glue#AssetDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the matched asset.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.glue#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the matched asset was created.</p>"
                     }
                 },
                 "UpdatedAt": {
@@ -47783,9 +47822,6 @@
             "member": {
                 "target": "com.amazonaws.glue#SearchResultItem"
             }
-        },
-        "com.amazonaws.glue#SearchResultName": {
-            "type": "string"
         },
         "com.amazonaws.glue#SearchSort": {
             "type": "structure",
@@ -55521,6 +55557,15 @@
                 }
             }
         },
+        "com.amazonaws.glue#UpdateGlossaryDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.glue#UpdateGlossaryRequest": {
             "type": "structure",
             "members": {
@@ -55539,9 +55584,9 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.glue#MetadataDescription",
+                    "target": "com.amazonaws.glue#UpdateGlossaryDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated description of the glossary.</p>"
+                        "smithy.api#documentation": "The new description. Omit it to keep the current description; set it to an empty string to clear it."
                     }
                 },
                 "ClientToken": {
@@ -55622,6 +55667,15 @@
                 }
             }
         },
+        "com.amazonaws.glue#UpdateGlossaryTermLongDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
         "com.amazonaws.glue#UpdateGlossaryTermRequest": {
             "type": "structure",
             "members": {
@@ -55640,15 +55694,15 @@
                     }
                 },
                 "ShortDescription": {
-                    "target": "com.amazonaws.glue#GlossaryShortDescription",
+                    "target": "com.amazonaws.glue#UpdateGlossaryTermShortDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated short description of the glossary term.</p>"
+                        "smithy.api#documentation": "The new short description. Omit it to keep the current one; set it to an empty string to clear it."
                     }
                 },
                 "LongDescription": {
-                    "target": "com.amazonaws.glue#GlossaryLongDescription",
+                    "target": "com.amazonaws.glue#UpdateGlossaryTermLongDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated long description of the glossary term.</p>"
+                        "smithy.api#documentation": "The new long description. Omit it to keep the current one; set it to an empty string to clear it."
                     }
                 },
                 "ClientToken": {
@@ -55685,13 +55739,13 @@
                     }
                 },
                 "ShortDescription": {
-                    "target": "com.amazonaws.glue#GlossaryShortDescription",
+                    "target": "com.amazonaws.glue#GlossaryTermShortDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The short description of the glossary term.</p>"
                     }
                 },
                 "LongDescription": {
-                    "target": "com.amazonaws.glue#GlossaryLongDescription",
+                    "target": "com.amazonaws.glue#GlossaryTermLongDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The long description of the glossary term.</p>"
                     }
@@ -55699,6 +55753,15 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.glue#UpdateGlossaryTermShortDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.glue#UpdateGlueIdentityCenterConfiguration": {

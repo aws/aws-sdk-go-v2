@@ -1,0 +1,5 @@
+POST /batch-revoke-sessions
+
+Content-Type: application/json
+
+{"principalArn":"__PrincipalArn__","reason":"__Reason__","sessionArns":["__Member__","__Member__"]}

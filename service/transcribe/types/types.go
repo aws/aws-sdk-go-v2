@@ -408,11 +408,10 @@ func (v *CallAnalyticsJobDetails) Deserialize(d smithy.ShapeDeserializer) error 
 // language models, custom vocabulary filters, and custom vocabularies.
 type CallAnalyticsJobSettings struct {
 
-	// Makes it possible to redact or flag specified personally identifiable
-	// information (PII) in your transcript. If you use ContentRedaction , you must
-	// also include the sub-parameters: RedactionOutput and RedactionType . You can
-	// optionally include PiiEntityTypes to choose which types of PII you want to
-	// redact.
+	// Makes it possible to redact specified personally identifiable information (PII)
+	// in your transcript. If you use ContentRedaction , you must also include the
+	// sub-parameters: RedactionOutput and RedactionType . You can optionally include
+	// PiiEntityTypes to choose which types of PII you want to redact.
 	ContentRedaction *ContentRedaction
 
 	// If using automatic language identification in your request and you want to
@@ -959,11 +958,10 @@ func (v *ClinicalNoteGenerationSettings) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
-// Makes it possible to redact or flag specified personally identifiable
-// information (PII) in your transcript. If you use ContentRedaction , you must
-// also include the sub-parameters: RedactionOutput and RedactionType . You can
-// optionally include PiiEntityTypes to choose which types of PII you want to
-// redact.
+// Makes it possible to redact specified personally identifiable information (PII)
+// in your transcript. If you use ContentRedaction , you must also include the
+// sub-parameters: RedactionOutput and RedactionType . You can optionally include
+// PiiEntityTypes to choose which types of PII you want to redact.
 type ContentRedaction struct {
 
 	// Specify if you want only a redacted transcript, or if you want a redacted and
@@ -972,7 +970,10 @@ type ContentRedaction struct {
 	// When you choose redacted Amazon Transcribe creates only a redacted transcript.
 	//
 	// When you choose redacted_and_unredacted Amazon Transcribe creates a redacted
-	// and an unredacted transcript (as two separate files).
+	// and an unredacted transcript. For batch jobs, Amazon Transcribe creates two
+	// separate files. For TranscribeAudio , Amazon Transcribe returns them in
+	// RedactedResults and Results , or writes them as two separate files if you use
+	// OutputConfiguration .
 	//
 	// This member is required.
 	RedactionOutput RedactionOutput
@@ -1035,7 +1036,11 @@ func (v *ContentRedaction) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Encryption configuration for the invocation
+// The encryption configuration for your custom resource. Specify a customer
+// managed KMS key, and optionally an encryption context, to encrypt your custom
+// vocabulary, custom vocabulary filter, or custom language model artifacts at
+// rest. If you do not provide a key, your artifacts are encrypted with an Amazon
+// Web Services owned key.
 type EncryptionConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key you want to use to encrypt your
@@ -3670,6 +3675,309 @@ func (v *Summarization) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A word or punctuation mark in your transcript. Labels such as SpeakerLabel and
+// ChannelLabel are present only if you enabled the related feature.
+type SyncItem struct {
+
+	// The audio channel this item came from ( ch_0 or ch_1 ). Present if you enabled
+	// ChannelIdentification .
+	//
+	// Item start and end times are measured from the start of the audio, separately
+	// for each channel.
+	ChannelLabel *string
+
+	// The word or punctuation mark. In RedactedResults , Amazon Transcribe replaces
+	// redacted words with [PII] .
+	Content *string
+
+	// The time, in seconds from the start of your audio, when this item ends.
+	EndTime *float64
+
+	// The position of this item in the transcript, starting at 0.
+	Id *int32
+
+	// The language of this item, as a locale (for example, en-US ).
+	LanguageCode SyncLanguageCode
+
+	// The types of personally identifiable information (PII) that Amazon Transcribe
+	// redacted from this item. Present only on redacted items in RedactedResults .
+	Redactions []SyncRedaction
+
+	// The speaker of this item (for example, spk_0 ). Present if you enabled
+	// ShowSpeakerLabels .
+	SpeakerLabel *string
+
+	// The time, in seconds from the start of your audio, when this item starts.
+	StartTime *float64
+
+	// Indicates whether this item matched a word in your custom vocabulary filter.
+	// Present if you included VocabularyFilterSettings .
+	VocabularyFilterMatch *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *SyncItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SyncItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SyncItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelLabel != nil {
+		s.WriteString(schemas.SyncItem_ChannelLabel, *v.ChannelLabel)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.SyncItem_Content, *v.Content)
+	}
+	if v.EndTime != nil {
+		s.WriteFloat64(schemas.SyncItem_EndTime, *v.EndTime)
+	}
+	if v.Id != nil {
+		s.WriteInt32(schemas.SyncItem_Id, *v.Id)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.SyncItem_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Redactions != nil {
+		serializeSyncRedactionList(s, schemas.SyncItem_Redactions, v.Redactions)
+	}
+	if v.SpeakerLabel != nil {
+		s.WriteString(schemas.SyncItem_SpeakerLabel, *v.SpeakerLabel)
+	}
+	if v.StartTime != nil {
+		s.WriteFloat64(schemas.SyncItem_StartTime, *v.StartTime)
+	}
+	if v.VocabularyFilterMatch != nil {
+		s.WriteBool(schemas.SyncItem_VocabularyFilterMatch, *v.VocabularyFilterMatch)
+	}
+}
+func (v *SyncItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SyncItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SyncItem_ChannelLabel:
+			v.ChannelLabel = new(string)
+			return d.ReadString(schemas.SyncItem_ChannelLabel, v.ChannelLabel)
+		case schemas.SyncItem_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.SyncItem_Content, v.Content)
+		case schemas.SyncItem_EndTime:
+			v.EndTime = new(float64)
+			return d.ReadFloat64(schemas.SyncItem_EndTime, v.EndTime)
+		case schemas.SyncItem_Id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.SyncItem_Id, v.Id)
+		case schemas.SyncItem_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.SyncItem_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = SyncLanguageCode(ev)
+			return nil
+		case schemas.SyncItem_Redactions:
+			return deserializeSyncRedactionList(d, schemas.SyncItem_Redactions, &v.Redactions)
+		case schemas.SyncItem_SpeakerLabel:
+			v.SpeakerLabel = new(string)
+			return d.ReadString(schemas.SyncItem_SpeakerLabel, v.SpeakerLabel)
+		case schemas.SyncItem_StartTime:
+			v.StartTime = new(float64)
+			return d.ReadFloat64(schemas.SyncItem_StartTime, v.StartTime)
+		case schemas.SyncItem_VocabularyFilterMatch:
+			v.VocabularyFilterMatch = new(bool)
+			return d.ReadBool(schemas.SyncItem_VocabularyFilterMatch, v.VocabularyFilterMatch)
+		}
+		return nil
+	})
+}
+
+// A language identified in your audio, and how long it's spoken.
+type SyncLanguageCodeItem struct {
+
+	// The total time, in seconds, the identified language is spoken in your audio.
+	DurationInSeconds *float32
+
+	// The identified language, as a locale (for example, en-US ).
+	LanguageCode SyncLanguageCode
+
+	noSmithyDocumentSerde
+}
+
+func (v *SyncLanguageCodeItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SyncLanguageCodeItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SyncLanguageCodeItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteFloat32(schemas.SyncLanguageCodeItem_DurationInSeconds, *v.DurationInSeconds)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.SyncLanguageCodeItem_LanguageCode, string(v.LanguageCode))
+	}
+}
+func (v *SyncLanguageCodeItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SyncLanguageCodeItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SyncLanguageCodeItem_DurationInSeconds:
+			v.DurationInSeconds = new(float32)
+			return d.ReadFloat32(schemas.SyncLanguageCodeItem_DurationInSeconds, v.DurationInSeconds)
+		case schemas.SyncLanguageCodeItem_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.SyncLanguageCodeItem_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = SyncLanguageCode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The audio to transcribe. Specify exactly one of MediaBytes or MediaFileUri .
+//
+// Audio sent in the request ( MediaBytes ) can be up to 25 MB. Audio in Amazon S3 (
+// MediaFileUri ) can be up to 500 MB.
+//
+// The following types satisfy this interface:
+//
+//	SyncMediaMemberMediaBytes
+//	SyncMediaMemberMediaFileUri
+type SyncMedia interface {
+	isSyncMedia()
+}
+
+// Your audio file, provided inline in the request. The maximum size is 25 MB
+// (26,214,400 bytes) of audio, measured before base64 encoding.
+//
+// If you use an Amazon Web Services SDK, the SDK base64-encodes the bytes for
+// you. If you call the API directly, base64-encode the bytes yourself.
+type SyncMediaMemberMediaBytes struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*SyncMediaMemberMediaBytes) isSyncMedia() {}
+func (v *SyncMediaMemberMediaBytes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBlob(schemas.SyncMedia_MediaBytes, v.Value)
+}
+func (v *SyncMediaMemberMediaBytes) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBlob(schemas.SyncMedia_MediaBytes, &v.Value)
+}
+
+// The Amazon S3 location of the media file you want to transcribe. For example:
+//
+//   - s3://amzn-s3-demo-bucket/my-media-file.flac
+//
+//   - s3://amzn-s3-demo-bucket/media-files/my-media-file.flac
+//
+// The maximum file size is 500 MB. You must have read permission for the file.
+//
+// The Amazon S3 bucket that contains your input media must be located in the same
+// Amazon Web Services Region where you're making your transcription request.
+type SyncMediaMemberMediaFileUri struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SyncMediaMemberMediaFileUri) isSyncMedia() {}
+func (v *SyncMediaMemberMediaFileUri) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.SyncMedia_MediaFileUri, v.Value)
+}
+func (v *SyncMediaMemberMediaFileUri) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.SyncMedia_MediaFileUri, &v.Value)
+}
+
+// The Amazon S3 location where your transcript is written.
+type SyncOutputConfiguration struct {
+
+	// The Amazon S3 location where you want your transcript written. For example:
+	//
+	//   - s3://amzn-s3-demo-bucket/my-transcript.json
+	//
+	//   - s3://amzn-s3-demo-bucket/transcripts/
+	//
+	// If the location ends with an object key, Amazon Transcribe writes the
+	// transcript to that key. If it is a bucket or ends with a forward slash ( / ),
+	// it's treated as a prefix, and Amazon Transcribe writes the transcript under it
+	// to a file named with the request ID of your call and a .json extension.
+	//
+	// If you use ContentRedaction , Amazon Transcribe writes the redacted transcript
+	// to the same location and adds redacted- before the file name (for example,
+	// redacted-my-transcript.json ). With redacted_and_unredacted , Amazon Transcribe
+	// writes both files.
+	//
+	// If an object already exists at that key, Amazon Transcribe overwrites it.
+	//
+	// In a response, this is the location where Amazon Transcribe wrote your
+	// transcript. If you requested redacted_and_unredacted output, this is the
+	// location of the unredacted transcript.
+	//
+	// This member is required.
+	OutputMediaFileUri *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SyncOutputConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SyncOutputConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SyncOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputMediaFileUri != nil {
+		s.WriteString(schemas.SyncOutputConfiguration_OutputMediaFileUri, *v.OutputMediaFileUri)
+	}
+}
+func (v *SyncOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SyncOutputConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SyncOutputConfiguration_OutputMediaFileUri:
+			v.OutputMediaFileUri = new(string)
+			return d.ReadString(schemas.SyncOutputConfiguration_OutputMediaFileUri, v.OutputMediaFileUri)
+		}
+		return nil
+	})
+}
+
+// A type of personally identifiable information (PII) redacted from an item.
+type SyncRedaction struct {
+
+	// The type of PII that was redacted, for example NAME or SSN .
+	Type PiiEntityType
+
+	noSmithyDocumentSerde
+}
+
+func (v *SyncRedaction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SyncRedaction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SyncRedaction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.SyncRedaction_Type, string(v.Type))
+	}
+}
+func (v *SyncRedaction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SyncRedaction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SyncRedaction_Type:
+			var ev string
+			if err := d.ReadString(schemas.SyncRedaction_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = PiiEntityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Adds metadata, in the form of a key:value pair, to the specified resource.
 //
 // For example, you could add the tag Department:Sales to a resource to indicate
@@ -3757,6 +4065,136 @@ func (v *ToxicityDetectionSettings) Deserialize(d smithy.ShapeDeserializer) erro
 		switch s {
 		case schemas.ToxicityDetectionSettings_ToxicityCategories:
 			return deserializeToxicityCategories(d, schemas.ToxicityDetectionSettings_ToxicityCategories, &v.ToxicityCategories)
+		}
+		return nil
+	})
+}
+
+// Information about your audio.
+type TranscribeAudioMetadata struct {
+
+	// The language of your transcript, as a locale (for example, en-US ). Present if
+	// you used LanguageDetectionMode .
+	LanguageCode SyncLanguageCode
+
+	// The language identified in your audio, and how long it's spoken. Present if you
+	// used LanguageDetectionMode .
+	LanguageCodes []SyncLanguageCodeItem
+
+	// The format of your audio, as detected by Amazon Transcribe.
+	MediaFormat MediaFormat
+
+	// The sample rate of your audio, in hertz, as detected by Amazon Transcribe.
+	MediaSampleRateHertz *int32
+
+	// The number of audio channels in your media. Present if you enabled
+	// ChannelIdentification .
+	NumberOfChannels *int32
+
+	// The number of speakers identified in your audio. Present if you enabled
+	// ShowSpeakerLabels .
+	SpeakersCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *TranscribeAudioMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranscribeAudioMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranscribeAudioMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.TranscribeAudioMetadata_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LanguageCodes != nil {
+		serializeSyncLanguageCodeList(s, schemas.TranscribeAudioMetadata_LanguageCodes, v.LanguageCodes)
+	}
+	if v.MediaFormat != "" {
+		s.WriteString(schemas.TranscribeAudioMetadata_MediaFormat, string(v.MediaFormat))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.TranscribeAudioMetadata_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.NumberOfChannels != nil {
+		s.WriteInt32(schemas.TranscribeAudioMetadata_NumberOfChannels, *v.NumberOfChannels)
+	}
+	if v.SpeakersCount != nil {
+		s.WriteInt32(schemas.TranscribeAudioMetadata_SpeakersCount, *v.SpeakersCount)
+	}
+}
+func (v *TranscribeAudioMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranscribeAudioMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranscribeAudioMetadata_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.TranscribeAudioMetadata_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = SyncLanguageCode(ev)
+			return nil
+		case schemas.TranscribeAudioMetadata_LanguageCodes:
+			return deserializeSyncLanguageCodeList(d, schemas.TranscribeAudioMetadata_LanguageCodes, &v.LanguageCodes)
+		case schemas.TranscribeAudioMetadata_MediaFormat:
+			var ev string
+			if err := d.ReadString(schemas.TranscribeAudioMetadata_MediaFormat, &ev); err != nil {
+				return err
+			}
+			v.MediaFormat = MediaFormat(ev)
+			return nil
+		case schemas.TranscribeAudioMetadata_MediaSampleRateHertz:
+			v.MediaSampleRateHertz = new(int32)
+			return d.ReadInt32(schemas.TranscribeAudioMetadata_MediaSampleRateHertz, v.MediaSampleRateHertz)
+		case schemas.TranscribeAudioMetadata_NumberOfChannels:
+			v.NumberOfChannels = new(int32)
+			return d.ReadInt32(schemas.TranscribeAudioMetadata_NumberOfChannels, v.NumberOfChannels)
+		case schemas.TranscribeAudioMetadata_SpeakersCount:
+			v.SpeakersCount = new(int32)
+			return d.ReadInt32(schemas.TranscribeAudioMetadata_SpeakersCount, v.SpeakersCount)
+		}
+		return nil
+	})
+}
+
+// A transcript of your audio.
+type TranscribeAudioResults struct {
+
+	// The words and punctuation in your transcript, with timing and any labels you
+	// requested.
+	Items []SyncItem
+
+	// The full text of your transcript.
+	//
+	// If you enabled ChannelIdentification , the text of channel ch_0 is followed by
+	// the text of channel ch_1 .
+	Transcript *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TranscribeAudioResults) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranscribeAudioResults)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranscribeAudioResults) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Items != nil {
+		serializeSyncItemList(s, schemas.TranscribeAudioResults_Items, v.Items)
+	}
+	if v.Transcript != nil {
+		s.WriteString(schemas.TranscribeAudioResults_Transcript, *v.Transcript)
+	}
+}
+func (v *TranscribeAudioResults) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranscribeAudioResults, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranscribeAudioResults_Items:
+			return deserializeSyncItemList(d, schemas.TranscribeAudioResults_Items, &v.Items)
+		case schemas.TranscribeAudioResults_Transcript:
+			v.Transcript = new(string)
+			return d.ReadString(schemas.TranscribeAudioResults_Transcript, v.Transcript)
 		}
 		return nil
 	})
@@ -4502,6 +4940,130 @@ func (v *TranscriptionJobSummary) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// Your transcript and information about your audio.
+type TranscriptResponse struct {
+
+	// Information about your audio, such as the detected language, format, and sample
+	// rate.
+	Metadata *TranscribeAudioMetadata
+
+	// Your transcript with personally identifiable information (PII) redacted.
+	// Present only if you included ContentRedaction in your request.
+	RedactedResults *TranscribeAudioResults
+
+	// Your unredacted transcript.
+	//
+	// If you set RedactionOutput to redacted , Amazon Transcribe doesn't return this
+	// field. Use RedactedResults instead.
+	Results *TranscribeAudioResults
+
+	noSmithyDocumentSerde
+}
+
+func (v *TranscriptResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranscriptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranscriptResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.TranscriptResponse_Metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedactedResults != nil {
+		s.WriteStruct(schemas.TranscriptResponse_RedactedResults)
+		v.RedactedResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Results != nil {
+		s.WriteStruct(schemas.TranscriptResponse_Results)
+		v.Results.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TranscriptResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranscriptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranscriptResponse_Metadata:
+			v.Metadata = &TranscribeAudioMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.TranscriptResponse_RedactedResults:
+			v.RedactedResults = &TranscribeAudioResults{}
+			return v.RedactedResults.Deserialize(d)
+		case schemas.TranscriptResponse_Results:
+			v.Results = &TranscribeAudioResults{}
+			return v.Results.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A custom vocabulary filter for one language. Specify exactly one of
+// VocabularyFilterName or Words .
+type VocabularyFilterEntry struct {
+
+	// The language this custom vocabulary filter applies to, as a base language code
+	// (for example, en ). Each language can appear in only one entry.
+	//
+	// This member is required.
+	Language SyncLanguage
+
+	// The name of a custom vocabulary filter you created. The filter's language must
+	// match this entry's Language .
+	//
+	// Vocabulary filter names are case sensitive.
+	//
+	// Include either VocabularyFilterName or Words in each entry, but not both.
+	VocabularyFilterName *string
+
+	// The words to filter, provided inline. You don't need to create the vocabulary
+	// filter first.
+	//
+	// Include either Words or VocabularyFilterName in each entry, but not both.
+	Words []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *VocabularyFilterEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VocabularyFilterEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VocabularyFilterEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Language != "" {
+		s.WriteString(schemas.VocabularyFilterEntry_Language, string(v.Language))
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.VocabularyFilterEntry_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	if v.Words != nil {
+		serializeWords(s, schemas.VocabularyFilterEntry_Words, v.Words)
+	}
+}
+func (v *VocabularyFilterEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VocabularyFilterEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VocabularyFilterEntry_Language:
+			var ev string
+			if err := d.ReadString(schemas.VocabularyFilterEntry_Language, &ev); err != nil {
+				return err
+			}
+			v.Language = SyncLanguage(ev)
+			return nil
+		case schemas.VocabularyFilterEntry_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.VocabularyFilterEntry_VocabularyFilterName, v.VocabularyFilterName)
+		case schemas.VocabularyFilterEntry_Words:
+			return deserializeWords(d, schemas.VocabularyFilterEntry_Words, &v.Words)
+		}
+		return nil
+	})
+}
+
 // Provides information about a custom vocabulary filter, including the language
 // of the filter, when it was last modified, and its name.
 type VocabularyFilterInfo struct {
@@ -4568,6 +5130,65 @@ func (v *VocabularyFilterInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.VocabularyFilterInfo_VocabularyFilterName:
 			v.VocabularyFilterName = new(string)
 			return d.ReadString(schemas.VocabularyFilterInfo_VocabularyFilterName, v.VocabularyFilterName)
+		}
+		return nil
+	})
+}
+
+// Custom vocabulary filters to apply to your transcript, and how to apply them.
+type VocabularyFilterSettings struct {
+
+	// Custom vocabulary filters, with one entry per language. In each entry, you can
+	// reference a custom vocabulary filter you created or provide words inline. All
+	// entries must use the same type, either all by name or all inline.
+	//
+	// If you specify Language , include exactly one entry, and its Language must
+	// match. If you use LanguageDetectionMode , you can include one entry for each
+	// language in LanguageOptions .
+	//
+	// This member is required.
+	Filters []VocabularyFilterEntry
+
+	// Specify how you want your custom vocabulary filter applied to your transcript.
+	//
+	// To replace words with *** , choose mask .
+	//
+	// To delete words, choose remove .
+	//
+	// To flag words without changing them, choose tag .
+	//
+	// This member is required.
+	VocabularyFilterMethod VocabularyFilterMethod
+
+	noSmithyDocumentSerde
+}
+
+func (v *VocabularyFilterSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VocabularyFilterSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VocabularyFilterSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		serializeVocabularyFilterEntryList(s, schemas.VocabularyFilterSettings_Filters, v.Filters)
+	}
+	if v.VocabularyFilterMethod != "" {
+		s.WriteString(schemas.VocabularyFilterSettings_VocabularyFilterMethod, string(v.VocabularyFilterMethod))
+	}
+}
+func (v *VocabularyFilterSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VocabularyFilterSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VocabularyFilterSettings_Filters:
+			return deserializeVocabularyFilterEntryList(d, schemas.VocabularyFilterSettings_Filters, &v.Filters)
+		case schemas.VocabularyFilterSettings_VocabularyFilterMethod:
+			var ev string
+			if err := d.ReadString(schemas.VocabularyFilterSettings_VocabularyFilterMethod, &ev); err != nil {
+				return err
+			}
+			v.VocabularyFilterMethod = VocabularyFilterMethod(ev)
+			return nil
 		}
 		return nil
 	})
@@ -4653,6 +5274,113 @@ func (v *VocabularyInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A phrase in an inline custom vocabulary.
+type VocabularyPhrase struct {
+
+	// The phrase to recognize in your audio.
+	//
+	// This member is required.
+	Text *string
+
+	// How the phrase is written in your transcript. If you don't include DisplayAs ,
+	// the phrase is written as it appears in Text .
+	DisplayAs *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *VocabularyPhrase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VocabularyPhrase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VocabularyPhrase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayAs != nil {
+		s.WriteString(schemas.VocabularyPhrase_DisplayAs, *v.DisplayAs)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.VocabularyPhrase_Text, *v.Text)
+	}
+}
+func (v *VocabularyPhrase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VocabularyPhrase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VocabularyPhrase_DisplayAs:
+			v.DisplayAs = new(string)
+			return d.ReadString(schemas.VocabularyPhrase_DisplayAs, v.DisplayAs)
+		case schemas.VocabularyPhrase_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.VocabularyPhrase_Text, v.Text)
+		}
+		return nil
+	})
+}
+
+// A custom vocabulary for one language. Specify exactly one of VocabularyName or
+// Phrases .
+type VocabularySettingsEntry struct {
+
+	// The language this custom vocabulary applies to, as a base language code (for
+	// example, en ). Each language can appear in only one entry.
+	//
+	// This member is required.
+	Language SyncLanguage
+
+	// Up to 100 phrases to use as a custom vocabulary, provided inline. You don't
+	// need to create the vocabulary first.
+	//
+	// Include either Phrases or VocabularyName in each entry, but not both.
+	Phrases []VocabularyPhrase
+
+	// The name of a custom vocabulary you created. The vocabulary must be in the READY
+	// state, and its language must match this entry's Language .
+	//
+	// Vocabulary names are case sensitive.
+	//
+	// Include either VocabularyName or Phrases in each entry, but not both.
+	VocabularyName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *VocabularySettingsEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VocabularySettingsEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VocabularySettingsEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Language != "" {
+		s.WriteString(schemas.VocabularySettingsEntry_Language, string(v.Language))
+	}
+	if v.Phrases != nil {
+		serializeVocabularyPhraseList(s, schemas.VocabularySettingsEntry_Phrases, v.Phrases)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.VocabularySettingsEntry_VocabularyName, *v.VocabularyName)
+	}
+}
+func (v *VocabularySettingsEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VocabularySettingsEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VocabularySettingsEntry_Language:
+			var ev string
+			if err := d.ReadString(schemas.VocabularySettingsEntry_Language, &ev); err != nil {
+				return err
+			}
+			v.Language = SyncLanguage(ev)
+			return nil
+		case schemas.VocabularySettingsEntry_Phrases:
+			return deserializeVocabularyPhraseList(d, schemas.VocabularySettingsEntry_Phrases, &v.Phrases)
+		case schemas.VocabularySettingsEntry_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.VocabularySettingsEntry_VocabularyName, v.VocabularyName)
+		}
+		return nil
+	})
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -4664,4 +5392,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isRule() {}
+func (*UnknownUnionMember) isRule()      {}
+func (*UnknownUnionMember) isSyncMedia() {}

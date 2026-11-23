@@ -3970,6 +3970,21 @@ func validateAuthorizingClaimMatchValueType(v *types.AuthorizingClaimMatchValueT
 	}
 }
 
+func validateAwsBillingConnectorConfiguration(v *types.AwsBillingConnectorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AwsBillingConnectorConfiguration"}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBatchPutLimitEntries(v []types.BatchPutLimitEntry) error {
 	if v == nil {
 		return nil
@@ -4880,6 +4895,11 @@ func validateCredentialsProviderConfiguration(v types.CredentialsProviderConfigu
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CredentialsProviderConfiguration"}
 	switch uv := v.(type) {
+	case *types.CredentialsProviderConfigurationMemberAwsBilling:
+		if err := validateAwsBillingConnectorConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[awsBilling]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.CredentialsProviderConfigurationMemberCoinbaseCDP:
 		if err := validatePaymentCredentialProviderConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[coinbaseCDP]", err.(smithy.InvalidParamsError))
@@ -5706,6 +5726,11 @@ func validateFilesystemConfiguration(v types.FilesystemConfiguration) error {
 	case *types.FilesystemConfigurationMemberEfsAccessPoint:
 		if err := validateEfsAccessPointConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[efsAccessPoint]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.FilesystemConfigurationMemberS3BucketMount:
+		if err := validateS3BucketMountConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3BucketMount]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.FilesystemConfigurationMemberS3FilesAccessPoint:
@@ -8757,6 +8782,24 @@ func validateRuntimeTargetConfiguration(v *types.RuntimeTargetConfiguration) err
 	}
 }
 
+func validateS3BucketMountConfiguration(v *types.S3BucketMountConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BucketMountConfiguration"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.MountPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MountPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3CertificateConfiguration(v *types.S3CertificateConfiguration) error {
 	if v == nil {
 		return nil
@@ -10613,9 +10656,7 @@ func validateOpCreatePaymentConnectorInput(v *CreatePaymentConnectorInput) error
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
-	if v.CredentialProviderConfigurations == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CredentialProviderConfigurations"))
-	} else if v.CredentialProviderConfigurations != nil {
+	if v.CredentialProviderConfigurations != nil {
 		if err := validateCredentialsProviderConfigurations(v.CredentialProviderConfigurations); err != nil {
 			invalidParams.AddNested("CredentialProviderConfigurations", err.(smithy.InvalidParamsError))
 		}

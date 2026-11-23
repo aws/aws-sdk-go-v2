@@ -848,6 +848,11 @@ var UpdateLoginProfile = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateLoginProfile",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateOpenIDConnectProvider = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "UpdateOpenIDConnectProvider",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateOpenIDConnectProviderThumbprint = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "UpdateOpenIDConnectProviderThumbprint",
@@ -1290,6 +1295,36 @@ var _ContextKeyValueListType_member *smithy.Schema
 var _ContextKeyValueType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "ContextKeyValueType",
+}, smithy.ShapeTypeString, 0)
+
+var ContextProvider = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "ContextProvider",
+}, smithy.ShapeTypeStructure, 4)
+var ContextProvider_KeyDefinitionList *smithy.Schema
+
+var ContextProvider_SubjectSourceKey *smithy.Schema
+
+var ContextProvider_SubjectTypeValue *smithy.Schema
+
+var ContextProvider_SubjectTypeSourceKey *smithy.Schema
+
+var ContextProviderKeyDefinition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "ContextProviderKeyDefinition",
+}, smithy.ShapeTypeStructure, 2)
+var ContextProviderKeyDefinition_SourceKey *smithy.Schema
+
+var ContextProviderKeyDefinition_TargetKey *smithy.Schema
+
+var _contextProviderSourceKeyType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "contextProviderSourceKeyType",
+}, smithy.ShapeTypeString, 0)
+
+var _contextProviderTargetKeyType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "contextProviderTargetKeyType",
 }, smithy.ShapeTypeString, 0)
 
 var _credentialAgeDays = smithy.NewSchema(smithy.ShapeID{
@@ -1737,6 +1772,11 @@ var _groupNameType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "groupNameType",
 }, smithy.ShapeTypeString, 0)
 
+var _identityCenterInstanceArnType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "identityCenterInstanceArnType",
+}, smithy.ShapeTypeString, 0)
+
 var _idType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "idType",
@@ -1885,6 +1925,18 @@ var jobStatusType_COMPLETED *smithy.Schema
 
 var jobStatusType_FAILED *smithy.Schema
 
+var _keyDefinitionListType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "keyDefinitionListType",
+}, smithy.ShapeTypeList, 1)
+var _keyDefinitionListType_member *smithy.Schema
+
+var _KeyHashListType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "KeyHashListType",
+}, smithy.ShapeTypeList, 1)
+var _KeyHashListType_member *smithy.Schema
+
 var KeyPairMismatchException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "KeyPairMismatchException",
@@ -1940,12 +1992,14 @@ var _localeType = smithy.NewSchema(smithy.ShapeID{
 var LoginProfile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "LoginProfile",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var LoginProfile_UserName *smithy.Schema
 
 var LoginProfile_CreateDate *smithy.Schema
 
 var LoginProfile_PasswordResetRequired *smithy.Schema
+
+var LoginProfile_MaxSigninSessionDuration *smithy.Schema
 
 var MalformedCertificateException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -2049,6 +2103,11 @@ var _maxPasswordAgeType = smithy.NewSchema(smithy.ShapeID{
 	Name:      "maxPasswordAgeType",
 }, smithy.ShapeTypeInteger, 0)
 
+var _maxSigninSessionDurationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "maxSigninSessionDurationType",
+}, smithy.ShapeTypeInteger, 0)
+
 var MFADevice = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "MFADevice",
@@ -2116,8 +2175,10 @@ var _notificationChannelType = smithy.NewSchema(smithy.ShapeID{
 var OpenIDConnectProviderListEntry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "OpenIDConnectProviderListEntry",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var OpenIDConnectProviderListEntry_Arn *smithy.Schema
+
+var OpenIDConnectProviderListEntry_IsTrustedIdentityPropagationEnabled *smithy.Schema
 
 var _OpenIDConnectProviderListType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -2846,7 +2907,7 @@ var _responseMarkerType = smithy.NewSchema(smithy.ShapeID{
 var Role = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "Role",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var Role_Path *smithy.Schema
 
 var Role_RoleName *smithy.Schema
@@ -2862,6 +2923,8 @@ var Role_AssumeRolePolicyDocument *smithy.Schema
 var Role_Description *smithy.Schema
 
 var Role_MaxSessionDuration *smithy.Schema
+
+var Role_MaxSigninSessionDuration *smithy.Schema
 
 var Role_PermissionsBoundary *smithy.Schema
 
@@ -3057,6 +3120,25 @@ var RoleUsageType_Region *smithy.Schema
 
 var RoleUsageType_Resources *smithy.Schema
 
+var _SAMLIssuerURLType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "SAMLIssuerURLType",
+}, smithy.ShapeTypeString, 0)
+
+var SAMLKeyHashEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "SAMLKeyHashEntry",
+}, smithy.ShapeTypeStructure, 2)
+var SAMLKeyHashEntry_IssuerURL *smithy.Schema
+
+var SAMLKeyHashEntry_KeyHashes *smithy.Schema
+
+var _SAMLKeyHashListType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "SAMLKeyHashListType",
+}, smithy.ShapeTypeList, 1)
+var _SAMLKeyHashListType_member *smithy.Schema
+
 var _SAMLMetadataDocumentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "SAMLMetadataDocumentType",
@@ -3073,12 +3155,14 @@ var SAMLPrivateKey_Timestamp *smithy.Schema
 var SAMLProviderListEntry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "SAMLProviderListEntry",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var SAMLProviderListEntry_Arn *smithy.Schema
 
 var SAMLProviderListEntry_ValidUntil *smithy.Schema
 
 var SAMLProviderListEntry_CreateDate *smithy.Schema
+
+var SAMLProviderListEntry_IsTrustedIdentityPropagationEnabled *smithy.Schema
 
 var _SAMLProviderListType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -3418,6 +3502,11 @@ var statusType_Expired *smithy.Schema
 var _stringType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "stringType",
+}, smithy.ShapeTypeString, 0)
+
+var _subjectTypeValueType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "subjectTypeValueType",
 }, smithy.ShapeTypeString, 0)
 
 var _summaryContentType = smithy.NewSchema(smithy.ShapeID{
@@ -3886,12 +3975,14 @@ var CreateInstanceProfileResponse_InstanceProfile *smithy.Schema
 var CreateLoginProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "CreateLoginProfileRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var CreateLoginProfileRequest_UserName *smithy.Schema
 
 var CreateLoginProfileRequest_Password *smithy.Schema
 
 var CreateLoginProfileRequest_PasswordResetRequired *smithy.Schema
+
+var CreateLoginProfileRequest_MaxSigninSessionDuration *smithy.Schema
 
 var CreateLoginProfileResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -3902,7 +3993,7 @@ var CreateLoginProfileResponse_LoginProfile *smithy.Schema
 var CreateOpenIDConnectProviderRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "CreateOpenIDConnectProviderRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var CreateOpenIDConnectProviderRequest_Url *smithy.Schema
 
 var CreateOpenIDConnectProviderRequest_ClientIDList *smithy.Schema
@@ -3910,6 +4001,10 @@ var CreateOpenIDConnectProviderRequest_ClientIDList *smithy.Schema
 var CreateOpenIDConnectProviderRequest_ThumbprintList *smithy.Schema
 
 var CreateOpenIDConnectProviderRequest_Tags *smithy.Schema
+
+var CreateOpenIDConnectProviderRequest_ContextProvider *smithy.Schema
+
+var CreateOpenIDConnectProviderRequest_IdentityCenterInstanceArn *smithy.Schema
 
 var CreateOpenIDConnectProviderResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -3958,7 +4053,7 @@ var CreatePolicyVersionResponse_PolicyVersion *smithy.Schema
 var CreateRoleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "CreateRoleRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var CreateRoleRequest_Path *smithy.Schema
 
 var CreateRoleRequest_RoleName *smithy.Schema
@@ -3968,6 +4063,8 @@ var CreateRoleRequest_AssumeRolePolicyDocument *smithy.Schema
 var CreateRoleRequest_Description *smithy.Schema
 
 var CreateRoleRequest_MaxSessionDuration *smithy.Schema
+
+var CreateRoleRequest_MaxSigninSessionDuration *smithy.Schema
 
 var CreateRoleRequest_PermissionsBoundary *smithy.Schema
 
@@ -3982,7 +4079,7 @@ var CreateRoleResponse_Role *smithy.Schema
 var CreateSAMLProviderRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "CreateSAMLProviderRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 7)
 var CreateSAMLProviderRequest_SAMLMetadataDocument *smithy.Schema
 
 var CreateSAMLProviderRequest_Name *smithy.Schema
@@ -3992,6 +4089,10 @@ var CreateSAMLProviderRequest_Tags *smithy.Schema
 var CreateSAMLProviderRequest_AssertionEncryptionMode *smithy.Schema
 
 var CreateSAMLProviderRequest_AddPrivateKey *smithy.Schema
+
+var CreateSAMLProviderRequest_ContextProvider *smithy.Schema
+
+var CreateSAMLProviderRequest_IdentityCenterInstanceArn *smithy.Schema
 
 var CreateSAMLProviderResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -4581,7 +4682,7 @@ var GetOpenIDConnectProviderRequest_OpenIDConnectProviderArn *smithy.Schema
 var GetOpenIDConnectProviderResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "GetOpenIDConnectProviderResponse",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 8)
 var GetOpenIDConnectProviderResponse_Url *smithy.Schema
 
 var GetOpenIDConnectProviderResponse_ClientIDList *smithy.Schema
@@ -4591,6 +4692,12 @@ var GetOpenIDConnectProviderResponse_ThumbprintList *smithy.Schema
 var GetOpenIDConnectProviderResponse_CreateDate *smithy.Schema
 
 var GetOpenIDConnectProviderResponse_Tags *smithy.Schema
+
+var GetOpenIDConnectProviderResponse_ContextProvider *smithy.Schema
+
+var GetOpenIDConnectProviderResponse_IdentityCenterInstanceArn *smithy.Schema
+
+var GetOpenIDConnectProviderResponse_IdentityStoreArn *smithy.Schema
 
 var GetOrganizationsAccessReportRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -4713,10 +4820,14 @@ var GetSAMLProviderRequest_SAMLProviderArn *smithy.Schema
 var GetSAMLProviderResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "GetSAMLProviderResponse",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 11)
 var GetSAMLProviderResponse_SAMLProviderUUID *smithy.Schema
 
 var GetSAMLProviderResponse_SAMLMetadataDocument *smithy.Schema
+
+var GetSAMLProviderResponse_ContextProvider *smithy.Schema
+
+var GetSAMLProviderResponse_SAMLKeyHashes *smithy.Schema
 
 var GetSAMLProviderResponse_CreateDate *smithy.Schema
 
@@ -4727,6 +4838,10 @@ var GetSAMLProviderResponse_Tags *smithy.Schema
 var GetSAMLProviderResponse_AssertionEncryptionMode *smithy.Schema
 
 var GetSAMLProviderResponse_PrivateKeyList *smithy.Schema
+
+var GetSAMLProviderResponse_IdentityCenterInstanceArn *smithy.Schema
+
+var GetSAMLProviderResponse_IdentityStoreArn *smithy.Schema
 
 var GetServerCertificateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -5971,12 +6086,30 @@ var UpdateGroupRequest_NewGroupName *smithy.Schema
 var UpdateLoginProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "UpdateLoginProfileRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateLoginProfileRequest_UserName *smithy.Schema
 
 var UpdateLoginProfileRequest_Password *smithy.Schema
 
 var UpdateLoginProfileRequest_PasswordResetRequired *smithy.Schema
+
+var UpdateLoginProfileRequest_MaxSigninSessionDuration *smithy.Schema
+
+var UpdateLoginProfileRequest_ResetMaxSigninSessionDuration *smithy.Schema
+
+var UpdateOpenIDConnectProviderRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.iam",
+	Name:      "UpdateOpenIDConnectProviderRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateOpenIDConnectProviderRequest_OpenIDConnectProviderArn *smithy.Schema
+
+var UpdateOpenIDConnectProviderRequest_ContextProvider *smithy.Schema
+
+var UpdateOpenIDConnectProviderRequest_IdentityCenterInstanceArn *smithy.Schema
+
+var UpdateOpenIDConnectProviderRequest_RemoveContextProvider *smithy.Schema
+
+var UpdateOpenIDConnectProviderRequest_RemoveIdentityCenterInstance *smithy.Schema
 
 var UpdateOpenIDConnectProviderThumbprintRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -6003,12 +6136,16 @@ var UpdateRoleDescriptionResponse_Role *smithy.Schema
 var UpdateRoleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "UpdateRoleRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateRoleRequest_RoleName *smithy.Schema
 
 var UpdateRoleRequest_Description *smithy.Schema
 
 var UpdateRoleRequest_MaxSessionDuration *smithy.Schema
+
+var UpdateRoleRequest_MaxSigninSessionDuration *smithy.Schema
+
+var UpdateRoleRequest_ResetMaxSigninSessionDuration *smithy.Schema
 
 var UpdateRoleResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -6018,7 +6155,7 @@ var UpdateRoleResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateSAMLProviderRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
 	Name:      "UpdateSAMLProviderRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateSAMLProviderRequest_SAMLMetadataDocument *smithy.Schema
 
 var UpdateSAMLProviderRequest_SAMLProviderArn *smithy.Schema
@@ -6028,6 +6165,14 @@ var UpdateSAMLProviderRequest_AssertionEncryptionMode *smithy.Schema
 var UpdateSAMLProviderRequest_AddPrivateKey *smithy.Schema
 
 var UpdateSAMLProviderRequest_RemovePrivateKey *smithy.Schema
+
+var UpdateSAMLProviderRequest_ContextProvider *smithy.Schema
+
+var UpdateSAMLProviderRequest_IdentityCenterInstanceArn *smithy.Schema
+
+var UpdateSAMLProviderRequest_RemoveContextProvider *smithy.Schema
+
+var UpdateSAMLProviderRequest_RemoveIdentityCenterInstance *smithy.Schema
 
 var UpdateSAMLProviderResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.iam",
@@ -6287,6 +6432,20 @@ func init() {
 	_ContextEntryListType_member = _ContextEntryListType.AddMember("member", ContextEntry)
 
 	_ContextKeyNamesResultListType_member = _ContextKeyNamesResultListType.AddMember("member", _ContextKeyNameType)
+
+	ContextProviderKeyDefinition_SourceKey = ContextProviderKeyDefinition.AddMember("SourceKey", _contextProviderSourceKeyType)
+
+	ContextProviderKeyDefinition_TargetKey = ContextProviderKeyDefinition.AddMember("TargetKey", _contextProviderTargetKeyType)
+
+	_keyDefinitionListType_member = _keyDefinitionListType.AddMember("member", ContextProviderKeyDefinition)
+
+	ContextProvider_KeyDefinitionList = ContextProvider.AddMember("KeyDefinitionList", _keyDefinitionListType)
+
+	ContextProvider_SubjectSourceKey = ContextProvider.AddMember("SubjectSourceKey", _contextProviderSourceKeyType)
+
+	ContextProvider_SubjectTypeValue = ContextProvider.AddMember("SubjectTypeValue", _subjectTypeValueType)
+
+	ContextProvider_SubjectTypeSourceKey = ContextProvider.AddMember("SubjectTypeSourceKey", _contextProviderSourceKeyType)
 
 	CredentialReportExpiredException_message = CredentialReportExpiredException.AddMember("message", _credentialReportExpiredExceptionMessage)
 
@@ -6608,6 +6767,8 @@ func init() {
 
 	Role_MaxSessionDuration = Role.AddMember("MaxSessionDuration", _roleMaxSessionDurationType)
 
+	Role_MaxSigninSessionDuration = Role.AddMember("MaxSigninSessionDuration", _maxSigninSessionDurationType)
+
 	Role_PermissionsBoundary = Role.AddMember("PermissionsBoundary", AttachedPermissionsBoundary)
 
 	Role_Tags = Role.AddMember("Tags", _tagListType)
@@ -6650,6 +6811,8 @@ func init() {
 
 	jobStatusType_FAILED = jobStatusType.AddMember("FAILED", smithyprelude.Unit)
 
+	_KeyHashListType_member = _KeyHashListType.AddMember("member", _stringType)
+
 	KeyPairMismatchException_message = KeyPairMismatchException.AddMember("message", _keyPairMismatchMessage)
 
 	LimitExceededException_message = LimitExceededException.AddMember("message", _limitExceededMessage)
@@ -6681,6 +6844,8 @@ func init() {
 	LoginProfile_CreateDate = LoginProfile.AddMember("CreateDate", _dateType)
 
 	LoginProfile_PasswordResetRequired = LoginProfile.AddMember("PasswordResetRequired", _booleanType)
+
+	LoginProfile_MaxSigninSessionDuration = LoginProfile.AddMember("MaxSigninSessionDuration", _maxSigninSessionDurationType)
 
 	MalformedCertificateException_message = MalformedCertificateException.AddMember("message", _malformedCertificateMessage)
 
@@ -6747,6 +6912,8 @@ func init() {
 	NoSuchEntityException_message = NoSuchEntityException.AddMember("message", _noSuchEntityMessage)
 
 	OpenIDConnectProviderListEntry_Arn = OpenIDConnectProviderListEntry.AddMember("Arn", _arnType)
+
+	OpenIDConnectProviderListEntry_IsTrustedIdentityPropagationEnabled = OpenIDConnectProviderListEntry.AddMember("IsTrustedIdentityPropagationEnabled", _booleanType)
 
 	_OpenIDConnectProviderListType_member = _OpenIDConnectProviderListType.AddMember("member", OpenIDConnectProviderListEntry)
 
@@ -7004,11 +7171,19 @@ func init() {
 
 	RoleTemplateVersion_UpdateTimestamp = RoleTemplateVersion.AddMember("UpdateTimestamp", _dateType)
 
+	SAMLKeyHashEntry_IssuerURL = SAMLKeyHashEntry.AddMember("IssuerURL", _SAMLIssuerURLType)
+
+	SAMLKeyHashEntry_KeyHashes = SAMLKeyHashEntry.AddMember("KeyHashes", _KeyHashListType)
+
+	_SAMLKeyHashListType_member = _SAMLKeyHashListType.AddMember("member", SAMLKeyHashEntry)
+
 	SAMLProviderListEntry_Arn = SAMLProviderListEntry.AddMember("Arn", _arnType)
 
 	SAMLProviderListEntry_ValidUntil = SAMLProviderListEntry.AddMember("ValidUntil", _dateType)
 
 	SAMLProviderListEntry_CreateDate = SAMLProviderListEntry.AddMember("CreateDate", _dateType)
+
+	SAMLProviderListEntry_IsTrustedIdentityPropagationEnabled = SAMLProviderListEntry.AddMember("IsTrustedIdentityPropagationEnabled", _booleanType)
 
 	_SAMLProviderListType_member = _SAMLProviderListType.AddMember("member", SAMLProviderListEntry)
 
@@ -7366,6 +7541,8 @@ func init() {
 
 	CreateLoginProfileRequest_PasswordResetRequired = CreateLoginProfileRequest.AddMember("PasswordResetRequired", _booleanType)
 
+	CreateLoginProfileRequest_MaxSigninSessionDuration = CreateLoginProfileRequest.AddMember("MaxSigninSessionDuration", _maxSigninSessionDurationType)
+
 	CreateLoginProfileResponse_LoginProfile = CreateLoginProfileResponse.AddMember("LoginProfile", LoginProfile)
 
 	CreateOpenIDConnectProviderRequest_Url = CreateOpenIDConnectProviderRequest.AddMember("Url", _OpenIDConnectProviderUrlType)
@@ -7375,6 +7552,10 @@ func init() {
 	CreateOpenIDConnectProviderRequest_ThumbprintList = CreateOpenIDConnectProviderRequest.AddMember("ThumbprintList", _thumbprintListType)
 
 	CreateOpenIDConnectProviderRequest_Tags = CreateOpenIDConnectProviderRequest.AddMember("Tags", _tagListType)
+
+	CreateOpenIDConnectProviderRequest_ContextProvider = CreateOpenIDConnectProviderRequest.AddMember("ContextProvider", ContextProvider)
+
+	CreateOpenIDConnectProviderRequest_IdentityCenterInstanceArn = CreateOpenIDConnectProviderRequest.AddMember("IdentityCenterInstanceArn", _identityCenterInstanceArnType)
 
 	CreateOpenIDConnectProviderResponse_OpenIDConnectProviderArn = CreateOpenIDConnectProviderResponse.AddMember("OpenIDConnectProviderArn", _arnType)
 
@@ -7410,6 +7591,8 @@ func init() {
 
 	CreateRoleRequest_MaxSessionDuration = CreateRoleRequest.AddMember("MaxSessionDuration", _roleMaxSessionDurationType)
 
+	CreateRoleRequest_MaxSigninSessionDuration = CreateRoleRequest.AddMember("MaxSigninSessionDuration", _maxSigninSessionDurationType)
+
 	CreateRoleRequest_PermissionsBoundary = CreateRoleRequest.AddMember("PermissionsBoundary", _arnType)
 
 	CreateRoleRequest_Tags = CreateRoleRequest.AddMember("Tags", _tagListType)
@@ -7425,6 +7608,10 @@ func init() {
 	CreateSAMLProviderRequest_AssertionEncryptionMode = CreateSAMLProviderRequest.AddMember("AssertionEncryptionMode", assertionEncryptionModeType)
 
 	CreateSAMLProviderRequest_AddPrivateKey = CreateSAMLProviderRequest.AddMember("AddPrivateKey", _privateKeyType)
+
+	CreateSAMLProviderRequest_ContextProvider = CreateSAMLProviderRequest.AddMember("ContextProvider", ContextProvider)
+
+	CreateSAMLProviderRequest_IdentityCenterInstanceArn = CreateSAMLProviderRequest.AddMember("IdentityCenterInstanceArn", _identityCenterInstanceArnType)
 
 	CreateSAMLProviderResponse_SAMLProviderArn = CreateSAMLProviderResponse.AddMember("SAMLProviderArn", _arnType)
 
@@ -7704,6 +7891,12 @@ func init() {
 
 	GetOpenIDConnectProviderResponse_Tags = GetOpenIDConnectProviderResponse.AddMember("Tags", _tagListType)
 
+	GetOpenIDConnectProviderResponse_ContextProvider = GetOpenIDConnectProviderResponse.AddMember("ContextProvider", ContextProvider)
+
+	GetOpenIDConnectProviderResponse_IdentityCenterInstanceArn = GetOpenIDConnectProviderResponse.AddMember("IdentityCenterInstanceArn", _identityCenterInstanceArnType)
+
+	GetOpenIDConnectProviderResponse_IdentityStoreArn = GetOpenIDConnectProviderResponse.AddMember("IdentityStoreArn", _arnType)
+
 	GetOrganizationsAccessReportRequest_JobId = GetOrganizationsAccessReportRequest.AddMember("JobId", _jobIDType)
 
 	GetOrganizationsAccessReportRequest_MaxItems = GetOrganizationsAccessReportRequest.AddMember("MaxItems", _maxItemsType)
@@ -7770,6 +7963,10 @@ func init() {
 
 	GetSAMLProviderResponse_SAMLMetadataDocument = GetSAMLProviderResponse.AddMember("SAMLMetadataDocument", _SAMLMetadataDocumentType)
 
+	GetSAMLProviderResponse_ContextProvider = GetSAMLProviderResponse.AddMember("ContextProvider", ContextProvider)
+
+	GetSAMLProviderResponse_SAMLKeyHashes = GetSAMLProviderResponse.AddMember("SAMLKeyHashes", _SAMLKeyHashListType)
+
 	GetSAMLProviderResponse_CreateDate = GetSAMLProviderResponse.AddMember("CreateDate", _dateType)
 
 	GetSAMLProviderResponse_ValidUntil = GetSAMLProviderResponse.AddMember("ValidUntil", _dateType)
@@ -7779,6 +7976,10 @@ func init() {
 	GetSAMLProviderResponse_AssertionEncryptionMode = GetSAMLProviderResponse.AddMember("AssertionEncryptionMode", assertionEncryptionModeType)
 
 	GetSAMLProviderResponse_PrivateKeyList = GetSAMLProviderResponse.AddMember("PrivateKeyList", _privateKeyList)
+
+	GetSAMLProviderResponse_IdentityCenterInstanceArn = GetSAMLProviderResponse.AddMember("IdentityCenterInstanceArn", _identityCenterInstanceArnType)
+
+	GetSAMLProviderResponse_IdentityStoreArn = GetSAMLProviderResponse.AddMember("IdentityStoreArn", _arnType)
 
 	GetServerCertificateRequest_ServerCertificateName = GetServerCertificateRequest.AddMember("ServerCertificateName", _serverCertificateNameType)
 
@@ -8514,6 +8715,20 @@ func init() {
 
 	UpdateLoginProfileRequest_PasswordResetRequired = UpdateLoginProfileRequest.AddMember("PasswordResetRequired", _booleanObjectType)
 
+	UpdateLoginProfileRequest_MaxSigninSessionDuration = UpdateLoginProfileRequest.AddMember("MaxSigninSessionDuration", _maxSigninSessionDurationType)
+
+	UpdateLoginProfileRequest_ResetMaxSigninSessionDuration = UpdateLoginProfileRequest.AddMember("ResetMaxSigninSessionDuration", _booleanObjectType)
+
+	UpdateOpenIDConnectProviderRequest_OpenIDConnectProviderArn = UpdateOpenIDConnectProviderRequest.AddMember("OpenIDConnectProviderArn", _arnType)
+
+	UpdateOpenIDConnectProviderRequest_ContextProvider = UpdateOpenIDConnectProviderRequest.AddMember("ContextProvider", ContextProvider)
+
+	UpdateOpenIDConnectProviderRequest_IdentityCenterInstanceArn = UpdateOpenIDConnectProviderRequest.AddMember("IdentityCenterInstanceArn", _identityCenterInstanceArnType)
+
+	UpdateOpenIDConnectProviderRequest_RemoveContextProvider = UpdateOpenIDConnectProviderRequest.AddMember("RemoveContextProvider", _booleanType)
+
+	UpdateOpenIDConnectProviderRequest_RemoveIdentityCenterInstance = UpdateOpenIDConnectProviderRequest.AddMember("RemoveIdentityCenterInstance", _booleanType)
+
 	UpdateOpenIDConnectProviderThumbprintRequest_OpenIDConnectProviderArn = UpdateOpenIDConnectProviderThumbprintRequest.AddMember("OpenIDConnectProviderArn", _arnType)
 
 	UpdateOpenIDConnectProviderThumbprintRequest_ThumbprintList = UpdateOpenIDConnectProviderThumbprintRequest.AddMember("ThumbprintList", _thumbprintListType)
@@ -8530,6 +8745,10 @@ func init() {
 
 	UpdateRoleRequest_MaxSessionDuration = UpdateRoleRequest.AddMember("MaxSessionDuration", _roleMaxSessionDurationType)
 
+	UpdateRoleRequest_MaxSigninSessionDuration = UpdateRoleRequest.AddMember("MaxSigninSessionDuration", _maxSigninSessionDurationType)
+
+	UpdateRoleRequest_ResetMaxSigninSessionDuration = UpdateRoleRequest.AddMember("ResetMaxSigninSessionDuration", _booleanObjectType)
+
 	UpdateSAMLProviderRequest_SAMLMetadataDocument = UpdateSAMLProviderRequest.AddMember("SAMLMetadataDocument", _SAMLMetadataDocumentType)
 
 	UpdateSAMLProviderRequest_SAMLProviderArn = UpdateSAMLProviderRequest.AddMember("SAMLProviderArn", _arnType)
@@ -8539,6 +8758,14 @@ func init() {
 	UpdateSAMLProviderRequest_AddPrivateKey = UpdateSAMLProviderRequest.AddMember("AddPrivateKey", _privateKeyType)
 
 	UpdateSAMLProviderRequest_RemovePrivateKey = UpdateSAMLProviderRequest.AddMember("RemovePrivateKey", _privateKeyIdType)
+
+	UpdateSAMLProviderRequest_ContextProvider = UpdateSAMLProviderRequest.AddMember("ContextProvider", ContextProvider)
+
+	UpdateSAMLProviderRequest_IdentityCenterInstanceArn = UpdateSAMLProviderRequest.AddMember("IdentityCenterInstanceArn", _identityCenterInstanceArnType)
+
+	UpdateSAMLProviderRequest_RemoveContextProvider = UpdateSAMLProviderRequest.AddMember("RemoveContextProvider", _booleanType)
+
+	UpdateSAMLProviderRequest_RemoveIdentityCenterInstance = UpdateSAMLProviderRequest.AddMember("RemoveIdentityCenterInstance", _booleanType)
 
 	UpdateSAMLProviderResponse_SAMLProviderArn = UpdateSAMLProviderResponse.AddMember("SAMLProviderArn", _arnType)
 

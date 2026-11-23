@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.CreateChannelContract
+
+{"catalog":"__Catalog__","clientToken":"__ClientToken__","contractType":"MANAGED_SERVICES_ATTESTATION","payload":{"managedServicesAttestationPayload":{"endDate":"2000-01-01T00:00:00Z","legalEntityAddress":{"addressLine":"__AddressLine__","addressLine2":"__AddressLine2__","city":"__City__","countryCode":"__CountryCode__","postalCode":"__PostalCode__","stateOrRegion":"__StateOrRegion__"},"legalEntityName":"__LegalEntityName__","memberAccountIds":["__Member__","__Member__"],"programManagementAccountIdentifier":"__ProgramManagementAccountIdentifier__","relationshipIdentifier":"__RelationshipIdentifier__","signatoryEmail":"__SignatoryEmail__","signatoryName":"__SignatoryName__","supportedServices":["MONITORING","MONITORING"]}},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

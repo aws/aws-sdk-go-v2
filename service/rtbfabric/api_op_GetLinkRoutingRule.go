@@ -111,6 +111,10 @@ type GetLinkRoutingRuleOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The causes of the failure, such as a deleted subnet. Present only when the
+	// resource has failed.
+	ErrorDetails []types.ErrorDetail
+
 	// A map of the key-value pairs for the tag or tags assigned to the specified
 	// resource.
 	Tags map[string]string
@@ -135,6 +139,9 @@ func (v *GetLinkRoutingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetLinkRoutingRuleResponse_createdAt, *v.CreatedAt)
+	}
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.GetLinkRoutingRuleResponse_errorDetails, v.ErrorDetails)
 	}
 	if v.GatewayId != nil {
 		s.WriteString(schemas.GetLinkRoutingRuleResponse_gatewayId, *v.GatewayId)
@@ -167,6 +174,8 @@ func (v *GetLinkRoutingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.GetLinkRoutingRuleResponse_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.GetLinkRoutingRuleResponse_createdAt, v.CreatedAt)
+		case schemas.GetLinkRoutingRuleResponse_errorDetails:
+			return deserializeErrorDetails(d, schemas.GetLinkRoutingRuleResponse_errorDetails, &v.ErrorDetails)
 		case schemas.GetLinkRoutingRuleResponse_gatewayId:
 			v.GatewayId = new(string)
 			return d.ReadString(schemas.GetLinkRoutingRuleResponse_gatewayId, v.GatewayId)
@@ -399,6 +408,16 @@ func linkRoutingRuleActiveStateRetryable(ctx context.Context, input *GetLinkRout
 
 	if err == nil {
 		v1 := output.Status
+		expectedValue := "CREATE_FAILED"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	if err == nil {
+		v1 := output.Status
 		expectedValue := "ACTIVE"
 		var pathValue string
 		pathValue = string(v1)
@@ -593,6 +612,16 @@ func (w *LinkRoutingRuleDeletedWaiter) WaitForOutput(ctx context.Context, params
 }
 
 func linkRoutingRuleDeletedStateRetryable(ctx context.Context, input *GetLinkRoutingRuleInput, output *GetLinkRoutingRuleOutput, err error) (bool, error) {
+
+	if err == nil {
+		v1 := output.Status
+		expectedValue := "DELETE_FAILED"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
 
 	if err == nil {
 		v1 := output.Status

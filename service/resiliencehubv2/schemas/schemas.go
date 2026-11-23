@@ -2962,7 +2962,7 @@ var _TestParameters_value *smithy.Schema
 var TestRun = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "TestRun",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var TestRun_testRunId *smithy.Schema
 
 var TestRun_testId *smithy.Schema
@@ -2994,6 +2994,8 @@ var TestRun_testTemplateArn *smithy.Schema
 var TestRun_reportConfiguration *smithy.Schema
 
 var TestRun_policy *smithy.Schema
+
+var TestRun_effectivePolicyValues *smithy.Schema
 
 var TestRun_reportOutput *smithy.Schema
 
@@ -3042,6 +3044,26 @@ var _TestRunDependencySummaryList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TestRunDependencySummaryList",
 }, smithy.ShapeTypeList, 1)
 var _TestRunDependencySummaryList_member *smithy.Schema
+
+var TestRunEffectivePolicyValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.resiliencehubv2",
+	Name:      "TestRunEffectivePolicyValues",
+}, smithy.ShapeTypeStructure, 8)
+var TestRunEffectivePolicyValues_availabilitySlo *smithy.Schema
+
+var TestRunEffectivePolicyValues_multiAzRto *smithy.Schema
+
+var TestRunEffectivePolicyValues_multiAzRpo *smithy.Schema
+
+var TestRunEffectivePolicyValues_multiAzDrApproach *smithy.Schema
+
+var TestRunEffectivePolicyValues_multiRegionRto *smithy.Schema
+
+var TestRunEffectivePolicyValues_multiRegionRpo *smithy.Schema
+
+var TestRunEffectivePolicyValues_multiRegionDrApproach *smithy.Schema
+
+var TestRunEffectivePolicyValues_dataRecoveryTimeBetweenBackups *smithy.Schema
 
 var TestRunEvent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -4553,13 +4575,18 @@ var ListTestsResponse_nextToken *smithy.Schema
 var ListTestTemplatesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ListTestTemplatesRequest",
-}, smithy.ShapeTypeStructure, 0)
+}, smithy.ShapeTypeStructure, 2)
+var ListTestTemplatesRequest_maxResults *smithy.Schema
+
+var ListTestTemplatesRequest_nextToken *smithy.Schema
 
 var ListTestTemplatesResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
 	Name:      "ListTestTemplatesResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var ListTestTemplatesResponse_testTemplates *smithy.Schema
+
+var ListTestTemplatesResponse_nextToken *smithy.Schema
 
 var ListUserJourneysRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.resiliencehubv2",
@@ -6313,6 +6340,22 @@ func init() {
 
 	TestRunPolicySnapshot_dataRecovery = TestRunPolicySnapshot.AddMember("dataRecovery", DataRecoveryTargets)
 
+	TestRunEffectivePolicyValues_availabilitySlo = TestRunEffectivePolicyValues.AddMember("availabilitySlo", SloSource)
+
+	TestRunEffectivePolicyValues_multiAzRto = TestRunEffectivePolicyValues.AddMember("multiAzRto", TargetSource)
+
+	TestRunEffectivePolicyValues_multiAzRpo = TestRunEffectivePolicyValues.AddMember("multiAzRpo", TargetSource)
+
+	TestRunEffectivePolicyValues_multiAzDrApproach = TestRunEffectivePolicyValues.AddMember("multiAzDrApproach", DisasterRecoverySource)
+
+	TestRunEffectivePolicyValues_multiRegionRto = TestRunEffectivePolicyValues.AddMember("multiRegionRto", TargetSource)
+
+	TestRunEffectivePolicyValues_multiRegionRpo = TestRunEffectivePolicyValues.AddMember("multiRegionRpo", TargetSource)
+
+	TestRunEffectivePolicyValues_multiRegionDrApproach = TestRunEffectivePolicyValues.AddMember("multiRegionDrApproach", DisasterRecoverySource)
+
+	TestRunEffectivePolicyValues_dataRecoveryTimeBetweenBackups = TestRunEffectivePolicyValues.AddMember("dataRecoveryTimeBetweenBackups", TargetSource)
+
 	TestRun_testRunId = TestRun.AddMember("testRunId", _TestRunId)
 
 	TestRun_testId = TestRun.AddMember("testId", _TestId)
@@ -6344,6 +6387,8 @@ func init() {
 	TestRun_reportConfiguration = TestRun.AddMember("reportConfiguration", TestRunReportConfiguration)
 
 	TestRun_policy = TestRun.AddMember("policy", TestRunPolicySnapshot)
+
+	TestRun_effectivePolicyValues = TestRun.AddMember("effectivePolicyValues", TestRunEffectivePolicyValues)
 
 	TestRun_reportOutput = TestRun.AddMember("reportOutput", ReportGenerationResult)
 
@@ -7195,7 +7240,13 @@ func init() {
 
 	ListTestsResponse_nextToken = ListTestsResponse.AddMember("nextToken", _NextToken)
 
+	ListTestTemplatesRequest_maxResults = ListTestTemplatesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListTestTemplatesRequest_nextToken = ListTestTemplatesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
 	ListTestTemplatesResponse_testTemplates = ListTestTemplatesResponse.AddMember("testTemplates", _TestTemplateSummaryList)
+
+	ListTestTemplatesResponse_nextToken = ListTestTemplatesResponse.AddMember("nextToken", _NextToken)
 
 	ListUserJourneysRequest_systemArn = ListUserJourneysRequest.AddMember("systemArn", _Arn, &smithytraits.HTTPQuery{Name: "systemArn"})
 

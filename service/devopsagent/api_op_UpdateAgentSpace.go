@@ -37,6 +37,12 @@ type UpdateAgentSpaceInput struct {
 	// This member is required.
 	AgentSpaceId *string
 
+	// Specifies whether the AgentSpace's Amazon Web Services source configuration
+	// targets an individual Amazon Web Services account or an Amazon Web Services
+	// Organization. Use this parameter to switch an existing AgentSpace between source
+	// modes.
+	AwsSourceMode types.AwsSourceMode
+
 	// The updated description of the AgentSpace.
 	Description *string
 
@@ -64,6 +70,9 @@ func (v *UpdateAgentSpaceInput) Serialize(s smithy.ShapeSerializer) {
 func (v *UpdateAgentSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.UpdateAgentSpaceInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AwsSourceMode != "" {
+		s.WriteString(schemas.UpdateAgentSpaceInput_awsSourceMode, string(v.AwsSourceMode))
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAgentSpaceInput_description, *v.Description)

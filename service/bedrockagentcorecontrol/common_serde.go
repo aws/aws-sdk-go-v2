@@ -261,6 +261,12 @@ func serializeCredentialRotationConfig(s smithy.ShapeSerializer, schema *smithy.
 
 func serializeCredentialsProviderConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.CredentialsProviderConfiguration) {
 	switch vv := v.(type) {
+	case *types.CredentialsProviderConfigurationMemberAwsBilling:
+		s.WriteUnion(schema, schemas.CredentialsProviderConfiguration_awsBilling)
+		s.WriteStruct(schemas.CredentialsProviderConfiguration_awsBilling)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.CredentialsProviderConfigurationMemberCoinbaseCDP:
 		s.WriteUnion(schema, schemas.CredentialsProviderConfiguration_coinbaseCDP)
 		s.WriteStruct(schemas.CredentialsProviderConfiguration_coinbaseCDP)
@@ -556,6 +562,12 @@ func serializeFilesystemConfiguration(s smithy.ShapeSerializer, schema *smithy.S
 	case *types.FilesystemConfigurationMemberEfsAccessPoint:
 		s.WriteUnion(schema, schemas.FilesystemConfiguration_efsAccessPoint)
 		s.WriteStruct(schemas.FilesystemConfiguration_efsAccessPoint)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.FilesystemConfigurationMemberS3BucketMount:
+		s.WriteUnion(schema, schemas.FilesystemConfiguration_s3BucketMount)
+		s.WriteStruct(schemas.FilesystemConfiguration_s3BucketMount)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -1213,6 +1225,17 @@ func serializeOauth2ProviderConfigOutput(s smithy.ShapeSerializer, schema *smith
 	}
 }
 
+func serializeOperatingSystemConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.OperatingSystemConfiguration) {
+	switch vv := v.(type) {
+	case *types.OperatingSystemConfigurationMemberLinux:
+		s.WriteUnion(schema, schemas.OperatingSystemConfiguration_linux)
+		s.WriteStruct(schemas.OperatingSystemConfiguration_linux)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializePaymentProviderConfigurationInput(s smithy.ShapeSerializer, schema *smithy.Schema, v types.PaymentProviderConfigurationInput) {
 	switch vv := v.(type) {
 	case *types.PaymentProviderConfigurationInputMemberCoinbaseCdpConfiguration:
@@ -1816,6 +1839,10 @@ func deserializeCredentialRotationConfig(d smithy.ShapeDeserializer, s *smithy.S
 func deserializeCredentialsProviderConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.CredentialsProviderConfiguration) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.CredentialsProviderConfiguration_awsBilling:
+			vv := &types.CredentialsProviderConfigurationMemberAwsBilling{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.CredentialsProviderConfiguration_coinbaseCDP:
 			vv := &types.CredentialsProviderConfigurationMemberCoinbaseCDP{}
 			*v = vv
@@ -2094,6 +2121,10 @@ func deserializeFilesystemConfiguration(d smithy.ShapeDeserializer, s *smithy.Sc
 			return vv.Deserialize(d)
 		case schemas.FilesystemConfiguration_efsAccessPoint:
 			vv := &types.FilesystemConfigurationMemberEfsAccessPoint{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.FilesystemConfiguration_s3BucketMount:
+			vv := &types.FilesystemConfigurationMemberS3BucketMount{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.FilesystemConfiguration_s3FilesAccessPoint:
@@ -2690,6 +2721,18 @@ func deserializeOauth2ProviderConfigOutput(d smithy.ShapeDeserializer, s *smithy
 			return vv.Deserialize(d)
 		case schemas.Oauth2ProviderConfigOutput_slackOauth2ProviderConfig:
 			vv := &types.Oauth2ProviderConfigOutputMemberSlackOauth2ProviderConfig{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeOperatingSystemConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.OperatingSystemConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.OperatingSystemConfiguration_linux:
+			vv := &types.OperatingSystemConfigurationMemberLinux{}
 			*v = vv
 			return vv.Deserialize(d)
 		}

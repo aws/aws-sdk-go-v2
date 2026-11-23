@@ -165,6 +165,7 @@ func TestCheckResponseSnapshot_AssociateAvailabilityZones(t *testing.T) {
 				AvailabilityZone: ptr.String("__AvailabilityZone__"),
 			},
 		},
+		FirewallType: types.FirewallType("FIREWALL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -194,6 +195,7 @@ func TestCheckResponseSnapshot_AssociateFirewallPolicy(t *testing.T) {
 		FirewallArn:       ptr.String("__FirewallArn__"),
 		FirewallName:      ptr.String("__FirewallName__"),
 		FirewallPolicyArn: ptr.String("__FirewallPolicyArn__"),
+		FirewallType:      types.FirewallType("FIREWALL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -432,6 +434,9 @@ func TestCheckResponseSnapshot_CreateFirewall(t *testing.T) {
 				},
 			},
 			AvailabilityZoneChangeProtection: true,
+			IgwFirewallConfiguration: &types.IgwFirewallConfiguration{
+				EnforcementMode: types.EnforcementMode("POLICY_CONTROLLED"),
+			},
 			NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 				{
 					SubnetId: ptr.String("__SubnetId__"),
@@ -503,6 +508,16 @@ func TestCheckResponseSnapshot_CreateFirewall(t *testing.T) {
 						"key0": {
 							SyncStatus:  types.PerObjectSyncStatus("PENDING"),
 							UpdateToken: ptr.String("__UpdateToken__"),
+						},
+					},
+					AddressTranslations: &types.AddressTranslations{
+						PublicIPv6Addresses: []string{
+							"__Member__",
+							"__Member__",
+						},
+						PublicIPv4Addresses: []string{
+							"__Member__",
+							"__Member__",
 						},
 					},
 					NatGatewayAttachments: []types.NatGatewayAttachment{
@@ -597,6 +612,9 @@ func TestCheckResponseSnapshot_CreateFirewall(t *testing.T) {
 			},
 		},
 		AvailabilityZoneChangeProtection: true,
+		IgwFirewallConfiguration: &types.IgwFirewallConfiguration{
+			EnforcementMode: types.EnforcementMode("POLICY_CONTROLLED"),
+		},
 		NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 			{
 				SubnetId: ptr.String("__SubnetId__"),
@@ -2329,6 +2347,9 @@ func TestCheckResponseSnapshot_DeleteFirewall(t *testing.T) {
 				},
 			},
 			AvailabilityZoneChangeProtection: true,
+			IgwFirewallConfiguration: &types.IgwFirewallConfiguration{
+				EnforcementMode: types.EnforcementMode("POLICY_CONTROLLED"),
+			},
 			NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 				{
 					SubnetId: ptr.String("__SubnetId__"),
@@ -2402,6 +2423,16 @@ func TestCheckResponseSnapshot_DeleteFirewall(t *testing.T) {
 							UpdateToken: ptr.String("__UpdateToken__"),
 						},
 					},
+					AddressTranslations: &types.AddressTranslations{
+						PublicIPv6Addresses: []string{
+							"__Member__",
+							"__Member__",
+						},
+						PublicIPv4Addresses: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 					NatGatewayAttachments: []types.NatGatewayAttachment{
 						{
 							NatGatewayId:  ptr.String("__NatGatewayId__"),
@@ -2451,6 +2482,7 @@ func TestCheckResponseSnapshot_DeleteFirewall(t *testing.T) {
 	got, err := svc.DeleteFirewall(context.Background(), &DeleteFirewallInput{
 		FirewallName:                ptr.String("__FirewallName__"),
 		FirewallArn:                 ptr.String("__FirewallArn__"),
+		FirewallType:                types.FirewallType("FIREWALL"),
 		DeleteAssociatedNatGateways: true,
 	})
 	if err != nil {
@@ -2981,6 +3013,9 @@ func TestCheckResponseSnapshot_DescribeFirewall(t *testing.T) {
 				},
 			},
 			AvailabilityZoneChangeProtection: true,
+			IgwFirewallConfiguration: &types.IgwFirewallConfiguration{
+				EnforcementMode: types.EnforcementMode("POLICY_CONTROLLED"),
+			},
 			NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 				{
 					SubnetId: ptr.String("__SubnetId__"),
@@ -3054,6 +3089,16 @@ func TestCheckResponseSnapshot_DescribeFirewall(t *testing.T) {
 							UpdateToken: ptr.String("__UpdateToken__"),
 						},
 					},
+					AddressTranslations: &types.AddressTranslations{
+						PublicIPv6Addresses: []string{
+							"__Member__",
+							"__Member__",
+						},
+						PublicIPv4Addresses: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 					NatGatewayAttachments: []types.NatGatewayAttachment{
 						{
 							NatGatewayId:  ptr.String("__NatGatewayId__"),
@@ -3103,6 +3148,7 @@ func TestCheckResponseSnapshot_DescribeFirewall(t *testing.T) {
 	got, err := svc.DescribeFirewall(context.Background(), &DescribeFirewallInput{
 		FirewallName: ptr.String("__FirewallName__"),
 		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3865,6 +3911,7 @@ func TestCheckResponseSnapshot_DescribeLoggingConfiguration(t *testing.T) {
 	got, err := svc.DescribeLoggingConfiguration(context.Background(), &DescribeLoggingConfigurationInput{
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4962,6 +5009,7 @@ func TestCheckResponseSnapshot_DisassociateAvailabilityZones(t *testing.T) {
 				AvailabilityZone: ptr.String("__AvailabilityZone__"),
 			},
 		},
+		FirewallType: types.FirewallType("FIREWALL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5276,7 +5324,8 @@ func TestCheckResponseSnapshot_ListFirewalls(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		MaxResults: ptr.Int32(1),
+		MaxResults:   ptr.Int32(1),
+		FirewallType: types.FirewallType("FIREWALL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5996,6 +6045,7 @@ func TestCheckResponseSnapshot_UpdateFirewallAnalysisSettings(t *testing.T) {
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
 		UpdateToken:  ptr.String("__UpdateToken__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6025,6 +6075,7 @@ func TestCheckResponseSnapshot_UpdateFirewallDeleteProtection(t *testing.T) {
 		FirewallArn:      ptr.String("__FirewallArn__"),
 		FirewallName:     ptr.String("__FirewallName__"),
 		DeleteProtection: true,
+		FirewallType:     types.FirewallType("FIREWALL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6054,6 +6105,7 @@ func TestCheckResponseSnapshot_UpdateFirewallDescription(t *testing.T) {
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
 		Description:  ptr.String("__Description__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6089,6 +6141,7 @@ func TestCheckResponseSnapshot_UpdateFirewallEncryptionConfiguration(t *testing.
 			KeyId: ptr.String("__KeyId__"),
 			Type:  types.EncryptionType("CUSTOMER_KMS"),
 		},
+		FirewallType: types.FirewallType("FIREWALL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6302,6 +6355,7 @@ func TestCheckResponseSnapshot_UpdateFirewallPolicyChangeProtection(t *testing.T
 		FirewallArn:                    ptr.String("__FirewallArn__"),
 		FirewallName:                   ptr.String("__FirewallName__"),
 		FirewallPolicyChangeProtection: true,
+		FirewallType:                   types.FirewallType("FIREWALL"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6792,6 +6846,7 @@ func TestCheckResponseSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 	got, err := svc.UpdateLoggingConfiguration(context.Background(), &UpdateLoggingConfigurationInput{
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 		LoggingConfiguration: &types.LoggingConfiguration{
 			LogDestinationConfigs: []types.LogDestinationConfig{
 				{
@@ -7785,6 +7840,7 @@ func TestCheckResponseSnapshot_Error_InsufficientCapacityException(t *testing.T)
 				AvailabilityZone: ptr.String("__AvailabilityZone__"),
 			},
 		},
+		FirewallType: types.FirewallType("FIREWALL"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7849,6 +7905,7 @@ func TestCheckResponseSnapshot_Error_InvalidOperationException(t *testing.T) {
 				AvailabilityZone: ptr.String("__AvailabilityZone__"),
 			},
 		},
+		FirewallType: types.FirewallType("FIREWALL"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -7940,6 +7997,7 @@ func TestCheckResponseSnapshot_Error_InvalidTokenException(t *testing.T) {
 				AvailabilityZone: ptr.String("__AvailabilityZone__"),
 			},
 		},
+		FirewallType: types.FirewallType("FIREWALL"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8035,6 +8093,7 @@ func TestCheckResponseSnapshot_Error_LogDestinationPermissionException(t *testin
 	_, opErr := svc.UpdateLoggingConfiguration(context.Background(), &UpdateLoggingConfigurationInput{
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 		LoggingConfiguration: &types.LoggingConfiguration{
 			LogDestinationConfigs: []types.LogDestinationConfig{
 				{
@@ -8166,6 +8225,7 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 	_, opErr := svc.DeleteFirewall(context.Background(), &DeleteFirewallInput{
 		FirewallName:                ptr.String("__FirewallName__"),
 		FirewallArn:                 ptr.String("__FirewallArn__"),
+		FirewallType:                types.FirewallType("FIREWALL"),
 		DeleteAssociatedNatGateways: true,
 	})
 	if opErr == nil {

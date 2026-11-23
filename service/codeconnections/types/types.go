@@ -39,6 +39,11 @@ type Connection struct {
 	// Bitbucket repository.
 	OwnerAccountId *string
 
+	// The endpoint of the ghe.com tenant where your organization resides. This value
+	// is populated only for a connection with a ProviderType of
+	// GitHubEnterpriseCloudDataResidency . It is empty for all other provider types.
+	ProviderEndpoint *string
+
 	// The name of the external provider where your third-party code repository is
 	// configured.
 	ProviderType ProviderType
@@ -68,6 +73,9 @@ func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnerAccountId != nil {
 		s.WriteString(schemas.Connection_OwnerAccountId, *v.OwnerAccountId)
 	}
+	if v.ProviderEndpoint != nil {
+		s.WriteString(schemas.Connection_ProviderEndpoint, *v.ProviderEndpoint)
+	}
 	if v.ProviderType != "" {
 		s.WriteString(schemas.Connection_ProviderType, string(v.ProviderType))
 	}
@@ -94,6 +102,9 @@ func (v *Connection) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Connection_OwnerAccountId:
 			v.OwnerAccountId = new(string)
 			return d.ReadString(schemas.Connection_OwnerAccountId, v.OwnerAccountId)
+		case schemas.Connection_ProviderEndpoint:
+			v.ProviderEndpoint = new(string)
+			return d.ReadString(schemas.Connection_ProviderEndpoint, v.ProviderEndpoint)
 		case schemas.Connection_ProviderType:
 			var ev string
 			if err := d.ReadString(schemas.Connection_ProviderType, &ev); err != nil {

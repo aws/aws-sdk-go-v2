@@ -1,0 +1,7 @@
+POST /service/Textract/operation/ListProjects
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿oBlueprintFilter¿lBlueprintArnp__BlueprintArn__pBlueprintVersiont__BlueprintVersion__ÿjMaxResultsiNextTokenm__NextToken__ÿ

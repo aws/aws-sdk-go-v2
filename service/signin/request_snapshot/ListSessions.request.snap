@@ -1,0 +1,5 @@
+POST /list-sessions
+
+Content-Type: application/json
+
+{"clientId":"__ClientId__","issuedAfter":1,"issuedBefore":1,"maxResults":1,"nextToken":"__NextToken__","principalArn":"__PrincipalArn__","status":"ACTIVE"}

@@ -34,10 +34,10 @@ type GetProductInput struct {
 	// This member is required.
 	ProductId *string
 
-	// A BCP 47 language tag or comma-separated priority list specifying the preferred
-	// locale for response content. See Locale for supported values, constraints,
-	// fallback behavior, and the default locale. If omitted, the service returns
-	// content in the default locale.
+	// The preferred locale for response content, as a Best Current Practice 47 (BCP
+	// 47) language tag or a comma-separated priority list of language tags. See Locale
+	// for supported values, constraints, fallback behavior, and the default locale. If
+	// you omit this field, the service returns content in the default locale.
 	Locale *string
 
 	noSmithyDocumentSerde
@@ -65,18 +65,19 @@ type GetProductOutput struct {
 	// This member is required.
 	Catalog *string
 
-	// The categories used to classify this product into logical groups.
+	// The categories that classify this product into logical groups.
 	//
 	// This member is required.
 	Categories []types.Category
 
-	// Indicates whether the product is deployed on AWS infrastructure.
+	// Specifies whether the product is deployed on AWS infrastructure.
 	//
 	// This member is required.
 	DeployedOnAws types.DeployedOnAwsStatus
 
 	// A summary of fulfillment options available for deploying or accessing the
-	// product, such as AMI, SaaS, or Container.
+	// product, such as Amazon Machine Image (AMI), Software as a Service (SaaS), or
+	// Container.
 	//
 	// This member is required.
 	FulfillmentOptionSummaries []types.FulfillmentOptionSummary
@@ -122,6 +123,13 @@ type GetProductOutput struct {
 	// This member is required.
 	PromotionalMedia []types.PromotionalMedia
 
+	// Indicators describing purchase characteristics of this product, such as whether
+	// you can subscribe to it or use it without a subscription. The list is empty when
+	// no special purchase conditions apply.
+	//
+	// This member is required.
+	PurchaseIndicators []types.PurchaseIndicator
+
 	// Resources that provide further information about using the product or
 	// requesting support, such as documentation links, support contacts, and usage
 	// instructions.
@@ -129,8 +137,8 @@ type GetProductOutput struct {
 	// This member is required.
 	Resources []types.Resource
 
-	// Engagement options available to potential buyers, such as requesting a private
-	// offer or requesting a demo.
+	// The engagement options available to you, such as buying now, requesting a
+	// private offer, or requesting a demo.
 	//
 	// This member is required.
 	SellerEngagements []types.SellerEngagement
@@ -140,9 +148,9 @@ type GetProductOutput struct {
 	// This member is required.
 	ShortDescription *string
 
-	// The locale of the returned content. Indicates whether the response contains
-	// content in the requested locale, or fell back to the default locale. See Locale
-	// for details.
+	// The locale of the returned content. This value indicates whether the response
+	// contains content in the requested locale or fell back to the default locale. See
+	// Locale for details.
 	Locale *string
 
 	// Metadata pertaining to the operation's result.
@@ -199,6 +207,9 @@ func (v *GetProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PromotionalMedia != nil {
 		serializePromotionalMediaList(s, schemas.GetProductOutput_promotionalMedia, v.PromotionalMedia)
 	}
+	if v.PurchaseIndicators != nil {
+		serializePurchaseIndicatorList(s, schemas.GetProductOutput_purchaseIndicators, v.PurchaseIndicators)
+	}
 	if v.Resources != nil {
 		serializeResourceList(s, schemas.GetProductOutput_resources, v.Resources)
 	}
@@ -251,6 +262,8 @@ func (v *GetProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.GetProductOutput_productName, v.ProductName)
 		case schemas.GetProductOutput_promotionalMedia:
 			return deserializePromotionalMediaList(d, schemas.GetProductOutput_promotionalMedia, &v.PromotionalMedia)
+		case schemas.GetProductOutput_purchaseIndicators:
+			return deserializePurchaseIndicatorList(d, schemas.GetProductOutput_purchaseIndicators, &v.PurchaseIndicators)
 		case schemas.GetProductOutput_resources:
 			return deserializeResourceList(d, schemas.GetProductOutput_resources, &v.Resources)
 		case schemas.GetProductOutput_sellerEngagements:

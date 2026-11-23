@@ -2,6 +2,26 @@
 
 package types
 
+type AccountSharedPoolDeliveryMode string
+
+// Enum values for AccountSharedPoolDeliveryMode
+const (
+	AccountSharedPoolDeliveryModeGlobal   AccountSharedPoolDeliveryMode = "GLOBAL"
+	AccountSharedPoolDeliveryModeRegional AccountSharedPoolDeliveryMode = "REGIONAL"
+)
+
+// Values returns all known values for AccountSharedPoolDeliveryMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountSharedPoolDeliveryMode) Values() []AccountSharedPoolDeliveryMode {
+	return []AccountSharedPoolDeliveryMode{
+		"GLOBAL",
+		"REGIONAL",
+	}
+}
+
 type AttachmentContentDisposition string
 
 // Enum values for AttachmentContentDisposition
@@ -1086,6 +1106,27 @@ func (SendingStatus) Values() []SendingStatus {
 		"ENABLED",
 		"REINSTATED",
 		"DISABLED",
+	}
+}
+
+type SharedPoolDeliveryMode string
+
+// Enum values for SharedPoolDeliveryMode
+const (
+	SharedPoolDeliveryModeGlobal   SharedPoolDeliveryMode = "GLOBAL"
+	SharedPoolDeliveryModeRegional SharedPoolDeliveryMode = "REGIONAL"
+	SharedPoolDeliveryModeAccount  SharedPoolDeliveryMode = "ACCOUNT"
+)
+
+// Values returns all known values for SharedPoolDeliveryMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SharedPoolDeliveryMode) Values() []SharedPoolDeliveryMode {
+	return []SharedPoolDeliveryMode{
+		"GLOBAL",
+		"REGIONAL",
+		"ACCOUNT",
 	}
 }
 

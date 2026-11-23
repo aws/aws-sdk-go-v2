@@ -2577,6 +2577,14 @@ var _ResourceTypeManagementPreference_key *smithy.Schema
 
 var _ResourceTypeManagementPreference_value *smithy.Schema
 
+var _ResourceTypeOptInIncremental = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.backup",
+	Name:      "ResourceTypeOptInIncremental",
+}, smithy.ShapeTypeMap, 2)
+var _ResourceTypeOptInIncremental_key *smithy.Schema
+
+var _ResourceTypeOptInIncremental_value *smithy.Schema
+
 var _ResourceTypeOptInPreference = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "ResourceTypeOptInPreference",
@@ -4129,10 +4137,12 @@ var DescribeRegionSettingsInput = smithy.NewSchema(smithy.ShapeID{
 var DescribeRegionSettingsOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "DescribeRegionSettingsOutput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var DescribeRegionSettingsOutput_ResourceTypeOptInPreference *smithy.Schema
 
 var DescribeRegionSettingsOutput_ResourceTypeManagementPreference *smithy.Schema
+
+var DescribeRegionSettingsOutput_ResourceTypeOptInIncremental *smithy.Schema
 
 var DescribeReportJobInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
@@ -5619,10 +5629,12 @@ var UpdateRecoveryPointLifecycleOutput_CalculatedLifecycle *smithy.Schema
 var UpdateRegionSettingsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
 	Name:      "UpdateRegionSettingsInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var UpdateRegionSettingsInput_ResourceTypeOptInPreference *smithy.Schema
 
 var UpdateRegionSettingsInput_ResourceTypeManagementPreference *smithy.Schema
+
+var UpdateRegionSettingsInput_ResourceTypeOptInIncremental *smithy.Schema
 
 var UpdateReportPlanInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.backup",
@@ -6787,6 +6799,10 @@ func init() {
 
 	_ResourceTypeManagementPreference_value = _ResourceTypeManagementPreference.AddMember("value", _IsEnabled)
 
+	_ResourceTypeOptInIncremental_key = _ResourceTypeOptInIncremental.AddMember("key", _ResourceType)
+
+	_ResourceTypeOptInIncremental_value = _ResourceTypeOptInIncremental.AddMember("value", _IsEnabled)
+
 	_ResourceTypeOptInPreference_key = _ResourceTypeOptInPreference.AddMember("key", _ResourceType)
 
 	_ResourceTypeOptInPreference_value = _ResourceTypeOptInPreference.AddMember("value", _IsEnabled)
@@ -7733,6 +7749,8 @@ func init() {
 
 	DescribeRegionSettingsOutput_ResourceTypeManagementPreference = DescribeRegionSettingsOutput.AddMember("ResourceTypeManagementPreference", _ResourceTypeManagementPreference)
 
+	DescribeRegionSettingsOutput_ResourceTypeOptInIncremental = DescribeRegionSettingsOutput.AddMember("ResourceTypeOptInIncremental", _ResourceTypeOptInIncremental)
+
 	DescribeReportJobInput_ReportJobId = DescribeReportJobInput.AddMember("ReportJobId", _ReportJobId, &smithytraits.HTTPLabel{})
 
 	DescribeReportJobOutput_ReportJob = DescribeReportJobOutput.AddMember("ReportJob", ReportJob)
@@ -8678,6 +8696,8 @@ func init() {
 	UpdateRegionSettingsInput_ResourceTypeOptInPreference = UpdateRegionSettingsInput.AddMember("ResourceTypeOptInPreference", _ResourceTypeOptInPreference)
 
 	UpdateRegionSettingsInput_ResourceTypeManagementPreference = UpdateRegionSettingsInput.AddMember("ResourceTypeManagementPreference", _ResourceTypeManagementPreference)
+
+	UpdateRegionSettingsInput_ResourceTypeOptInIncremental = UpdateRegionSettingsInput.AddMember("ResourceTypeOptInIncremental", _ResourceTypeOptInIncremental)
 
 	UpdateReportPlanInput_ReportPlanName = UpdateReportPlanInput.AddMember("ReportPlanName", _ReportPlanName, &smithytraits.HTTPLabel{})
 

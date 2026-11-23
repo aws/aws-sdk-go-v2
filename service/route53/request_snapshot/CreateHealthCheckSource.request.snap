@@ -1,0 +1,5 @@
+POST /2013-04-01/healthchecksource
+
+Content-Type: application/xml
+
+<CreateHealthCheckSourceRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><CallerReference>__CallerReference__</CallerReference><HealthCheckSourceConfig><SubnetConfigurationList><SubnetConfiguration><AvailabilityZoneId>__AvailabilityZoneId__</AvailabilityZoneId><SecurityGroupIdList><SecurityGroupId>__Member__</SecurityGroupId><SecurityGroupId>__Member__</SecurityGroupId></SecurityGroupIdList><SubnetId>__SubnetId__</SubnetId></SubnetConfiguration><SubnetConfiguration><AvailabilityZoneId>__AvailabilityZoneId__</AvailabilityZoneId><SecurityGroupIdList><SecurityGroupId>__Member__</SecurityGroupId><SecurityGroupId>__Member__</SecurityGroupId></SecurityGroupIdList><SubnetId>__SubnetId__</SubnetId></SubnetConfiguration></SubnetConfigurationList><VpcId>__VpcId__</VpcId></HealthCheckSourceConfig><Tags><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag><Tag><Key>__Key__</Key><Value>__Value__</Value></Tag></Tags></CreateHealthCheckSourceRequest>

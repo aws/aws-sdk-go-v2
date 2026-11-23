@@ -354,6 +354,36 @@ func serializeExpressionList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	s.CloseList()
 }
 
+func serializeGetUsageLinesEstimatedCostErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []GetUsageLinesEstimatedCostError) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGetUsageLinesEstimatedCostInputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GetUsageLinesEstimatedCostInput) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGetUsageLinesEstimatedCostLineItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GetUsageLinesEstimatedCostLineItem) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeListBillEstimateLineItemsFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []ListBillEstimateLineItemsFilter) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1174,6 +1204,72 @@ func deserializeExpressionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 		}
 
 		vv = Expression{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGetUsageLinesEstimatedCostErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]GetUsageLinesEstimatedCostError) error {
+	*v = make([]GetUsageLinesEstimatedCostError, 0)
+	var vv GetUsageLinesEstimatedCostError
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero GetUsageLinesEstimatedCostError
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = GetUsageLinesEstimatedCostError{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGetUsageLinesEstimatedCostInputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]GetUsageLinesEstimatedCostInput) error {
+	*v = make([]GetUsageLinesEstimatedCostInput, 0)
+	var vv GetUsageLinesEstimatedCostInput
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero GetUsageLinesEstimatedCostInput
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = GetUsageLinesEstimatedCostInput{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGetUsageLinesEstimatedCostLineItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]GetUsageLinesEstimatedCostLineItem) error {
+	*v = make([]GetUsageLinesEstimatedCostLineItem, 0)
+	var vv GetUsageLinesEstimatedCostLineItem
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero GetUsageLinesEstimatedCostLineItem
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = GetUsageLinesEstimatedCostLineItem{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

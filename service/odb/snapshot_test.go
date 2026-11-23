@@ -614,6 +614,18 @@ func TestCheckSnapshot_ListAutonomousDatabasePeers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAutonomousDatabaseRefreshableClones(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAutonomousDatabaseRefreshableClones(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAutonomousDatabaseRefreshableClones")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListAutonomousDatabases(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAutonomousDatabases(context.Background(), nil, func(o *Options) {
@@ -883,6 +895,18 @@ func TestCheckSnapshot_StartAutonomousDatabase(t *testing.T) {
 	_, err := svc.StartAutonomousDatabase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartAutonomousDatabase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartAutonomousDatabaseRefresh(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAutonomousDatabaseRefresh(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAutonomousDatabaseRefresh")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1645,6 +1669,18 @@ func TestUpdateSnapshot_ListAutonomousDatabasePeers(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAutonomousDatabaseRefreshableClones(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAutonomousDatabaseRefreshableClones(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAutonomousDatabaseRefreshableClones")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListAutonomousDatabases(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAutonomousDatabases(context.Background(), nil, func(o *Options) {
@@ -1914,6 +1950,18 @@ func TestUpdateSnapshot_StartAutonomousDatabase(t *testing.T) {
 	_, err := svc.StartAutonomousDatabase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartAutonomousDatabase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartAutonomousDatabaseRefresh(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAutonomousDatabaseRefresh(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAutonomousDatabaseRefresh")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

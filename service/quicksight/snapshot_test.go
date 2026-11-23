@@ -86,6 +86,18 @@ func TestCheckSnapshot_BatchDeleteKnowledgeBase(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchDeletePolicyAssignmentByPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeletePolicyAssignmentByPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeletePolicyAssignmentByPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteTopicReviewedAnswer(context.Background(), nil, func(o *Options) {
@@ -110,11 +122,47 @@ func TestCheckSnapshot_BatchDescribeUserLimits(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchPutPolicyAssignmentByPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchPutPolicyAssignmentByPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchPutPolicyAssignmentByPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelIngestion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelIngestion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CancelIngestion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAccessControlApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAccessControlApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAccessControlApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAccessControlApplicationSecret(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAccessControlApplicationSecret(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAccessControlApplicationSecret")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -338,6 +386,18 @@ func TestCheckSnapshot_CreateIAMPolicyAssignment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateInboundConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInboundConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateInboundConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateIngestion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIngestion(context.Background(), nil, func(o *Options) {
@@ -355,6 +415,18 @@ func TestCheckSnapshot_CreateKnowledgeBase(t *testing.T) {
 	_, err := svc.CreateKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateKnowledgeBaseRefreshSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateKnowledgeBaseRefreshSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateKnowledgeBaseRefreshSchedule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -523,6 +595,30 @@ func TestCheckSnapshot_CreateVPCConnection(t *testing.T) {
 	_, err := svc.CreateVPCConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateVPCConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAccessControlApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccessControlApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAccessControlApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAccessControlApplicationSecret(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccessControlApplicationSecret(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAccessControlApplicationSecret")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -818,11 +914,35 @@ func TestCheckSnapshot_DeleteIdentityPropagationConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteInboundConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteInboundConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteInboundConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteKnowledgeBaseRefreshSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteKnowledgeBaseRefreshSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteKnowledgeBaseRefreshSchedule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -859,6 +979,18 @@ func TestCheckSnapshot_DeleteOAuthClientApplication(t *testing.T) {
 	_, err := svc.DeleteOAuthClientApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteOAuthClientApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePolicyAssignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePolicyAssignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePolicyAssignment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1039,6 +1171,18 @@ func TestCheckSnapshot_DeleteVPCConnection(t *testing.T) {
 	_, err := svc.DeleteVPCConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteVPCConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAccessControlApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccessControlApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAccessControlApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1538,6 +1682,18 @@ func TestCheckSnapshot_DescribeIAMPolicyAssignment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeInboundConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInboundConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeInboundConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeIngestion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeIngestion(context.Background(), nil, func(o *Options) {
@@ -1591,6 +1747,18 @@ func TestCheckSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
 	_, err := svc.DescribeKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeKnowledgeBasePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeKnowledgeBaseRefreshSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeKnowledgeBaseRefreshSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeKnowledgeBaseRefreshSchedule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1994,11 +2162,35 @@ func TestCheckSnapshot_GetIdentityContext(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPolicyAssignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyAssignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPolicyAssignment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSessionEmbedUrl(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSessionEmbedUrl(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetSessionEmbedUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAccessControlApplications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAccessControlApplications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAccessControlApplications")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2282,11 +2474,47 @@ func TestCheckSnapshot_ListIdentityPropagationConfigs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListInboundConnectorApplicationAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInboundConnectorApplicationAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInboundConnectorApplicationAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListInboundConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInboundConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInboundConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListIngestions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListIngestions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListIngestions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListKnowledgeBaseRefreshSchedules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListKnowledgeBaseRefreshSchedules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListKnowledgeBaseRefreshSchedules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2335,6 +2563,18 @@ func TestCheckSnapshot_ListOAuthClientApplications(t *testing.T) {
 	_, err := svc.ListOAuthClientApplications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListOAuthClientApplications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPrincipalsForPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPrincipalsForPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPrincipalsForPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2599,6 +2839,18 @@ func TestCheckSnapshot_PutDataSetRefreshProperties(t *testing.T) {
 	_, err := svc.PutDataSetRefreshProperties(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutDataSetRefreshProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutPolicyAssignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutPolicyAssignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutPolicyAssignment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2875,6 +3127,30 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAccessControlApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAccessControlApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAccessControlApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAccessControlApplicationSecret(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAccessControlApplicationSecret(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAccessControlApplicationSecret")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3290,6 +3566,30 @@ func TestCheckSnapshot_UpdateIdentityPropagationConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateInboundConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateInboundConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateInboundConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateInboundConnectorApplicationAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateInboundConnectorApplicationAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateInboundConnectorApplicationAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateIpRestriction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateIpRestriction(context.Background(), nil, func(o *Options) {
@@ -3331,6 +3631,18 @@ func TestCheckSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 	_, err := svc.UpdateKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateKnowledgeBasePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateKnowledgeBaseRefreshSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateKnowledgeBaseRefreshSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateKnowledgeBaseRefreshSchedule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3697,6 +4009,18 @@ func TestUpdateSnapshot_BatchDeleteKnowledgeBase(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchDeletePolicyAssignmentByPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeletePolicyAssignmentByPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeletePolicyAssignmentByPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteTopicReviewedAnswer(context.Background(), nil, func(o *Options) {
@@ -3721,11 +4045,47 @@ func TestUpdateSnapshot_BatchDescribeUserLimits(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchPutPolicyAssignmentByPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchPutPolicyAssignmentByPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchPutPolicyAssignmentByPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CancelIngestion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelIngestion(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CancelIngestion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAccessControlApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAccessControlApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAccessControlApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAccessControlApplicationSecret(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAccessControlApplicationSecret(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAccessControlApplicationSecret")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3949,6 +4309,18 @@ func TestUpdateSnapshot_CreateIAMPolicyAssignment(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateInboundConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateInboundConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateInboundConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateIngestion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateIngestion(context.Background(), nil, func(o *Options) {
@@ -3966,6 +4338,18 @@ func TestUpdateSnapshot_CreateKnowledgeBase(t *testing.T) {
 	_, err := svc.CreateKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateKnowledgeBaseRefreshSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateKnowledgeBaseRefreshSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateKnowledgeBaseRefreshSchedule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4134,6 +4518,30 @@ func TestUpdateSnapshot_CreateVPCConnection(t *testing.T) {
 	_, err := svc.CreateVPCConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateVPCConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAccessControlApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccessControlApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAccessControlApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAccessControlApplicationSecret(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccessControlApplicationSecret(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAccessControlApplicationSecret")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4429,11 +4837,35 @@ func TestUpdateSnapshot_DeleteIdentityPropagationConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteInboundConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteInboundConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteInboundConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteKnowledgeBase(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteKnowledgeBase")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteKnowledgeBaseRefreshSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteKnowledgeBaseRefreshSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteKnowledgeBaseRefreshSchedule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4470,6 +4902,18 @@ func TestUpdateSnapshot_DeleteOAuthClientApplication(t *testing.T) {
 	_, err := svc.DeleteOAuthClientApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteOAuthClientApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePolicyAssignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePolicyAssignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePolicyAssignment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4650,6 +5094,18 @@ func TestUpdateSnapshot_DeleteVPCConnection(t *testing.T) {
 	_, err := svc.DeleteVPCConnection(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteVPCConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAccessControlApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAccessControlApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAccessControlApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5149,6 +5605,18 @@ func TestUpdateSnapshot_DescribeIAMPolicyAssignment(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeInboundConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInboundConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeInboundConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeIngestion(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeIngestion(context.Background(), nil, func(o *Options) {
@@ -5202,6 +5670,18 @@ func TestUpdateSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
 	_, err := svc.DescribeKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeKnowledgeBasePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeKnowledgeBaseRefreshSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeKnowledgeBaseRefreshSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeKnowledgeBaseRefreshSchedule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5605,11 +6085,35 @@ func TestUpdateSnapshot_GetIdentityContext(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetPolicyAssignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPolicyAssignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPolicyAssignment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetSessionEmbedUrl(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSessionEmbedUrl(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSessionEmbedUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAccessControlApplications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAccessControlApplications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAccessControlApplications")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5893,11 +6397,47 @@ func TestUpdateSnapshot_ListIdentityPropagationConfigs(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListInboundConnectorApplicationAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInboundConnectorApplicationAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInboundConnectorApplicationAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListInboundConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInboundConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInboundConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListIngestions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListIngestions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListIngestions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListKnowledgeBaseRefreshSchedules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListKnowledgeBaseRefreshSchedules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListKnowledgeBaseRefreshSchedules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5946,6 +6486,18 @@ func TestUpdateSnapshot_ListOAuthClientApplications(t *testing.T) {
 	_, err := svc.ListOAuthClientApplications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListOAuthClientApplications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPrincipalsForPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPrincipalsForPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPrincipalsForPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6210,6 +6762,18 @@ func TestUpdateSnapshot_PutDataSetRefreshProperties(t *testing.T) {
 	_, err := svc.PutDataSetRefreshProperties(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutDataSetRefreshProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutPolicyAssignment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutPolicyAssignment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutPolicyAssignment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6486,6 +7050,30 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAccessControlApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAccessControlApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAccessControlApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAccessControlApplicationSecret(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAccessControlApplicationSecret(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAccessControlApplicationSecret")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6901,6 +7489,30 @@ func TestUpdateSnapshot_UpdateIdentityPropagationConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateInboundConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateInboundConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateInboundConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateInboundConnectorApplicationAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateInboundConnectorApplicationAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateInboundConnectorApplicationAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateIpRestriction(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateIpRestriction(context.Background(), nil, func(o *Options) {
@@ -6942,6 +7554,18 @@ func TestUpdateSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 	_, err := svc.UpdateKnowledgeBasePermissions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateKnowledgeBasePermissions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateKnowledgeBaseRefreshSchedule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateKnowledgeBaseRefreshSchedule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateKnowledgeBaseRefreshSchedule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

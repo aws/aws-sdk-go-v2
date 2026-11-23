@@ -1,0 +1,5 @@
+POST /get-session
+
+Content-Type: application/json
+
+{"principalArn":"__PrincipalArn__","sessionArn":"__SessionArn__"}

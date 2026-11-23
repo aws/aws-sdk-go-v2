@@ -232,6 +232,11 @@ func TestCheckRequestSnapshot_CreateProfile(t *testing.T) {
 		},
 		AcceptRoleSessionName: ptr.Bool(true),
 		AliasName:             ptr.String("__AliasName__"),
+		TipConfiguration: &types.TipConfiguration{
+			Status:        types.TipStatus("ENABLED"),
+			SubjectType:   types.TipSubjectType("user"),
+			SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1107,6 +1112,11 @@ func TestCheckRequestSnapshot_UpdateProfile(t *testing.T) {
 		DurationSeconds:       ptr.Int32(1),
 		AcceptRoleSessionName: ptr.Bool(true),
 		AliasName:             ptr.String("__AliasName__"),
+		TipConfiguration: &types.TipConfiguration{
+			Status:        types.TipStatus("ENABLED"),
+			SubjectType:   types.TipSubjectType("user"),
+			SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1193,6 +1203,11 @@ func TestUpdateRequestSnapshot_CreateProfile(t *testing.T) {
 		},
 		AcceptRoleSessionName: ptr.Bool(true),
 		AliasName:             ptr.String("__AliasName__"),
+		TipConfiguration: &types.TipConfiguration{
+			Status:        types.TipStatus("ENABLED"),
+			SubjectType:   types.TipSubjectType("user"),
+			SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2068,6 +2083,11 @@ func TestUpdateRequestSnapshot_UpdateProfile(t *testing.T) {
 		DurationSeconds:       ptr.Int32(1),
 		AcceptRoleSessionName: ptr.Bool(true),
 		AliasName:             ptr.String("__AliasName__"),
+		TipConfiguration: &types.TipConfiguration{
+			Status:        types.TipStatus("ENABLED"),
+			SubjectType:   types.TipSubjectType("user"),
+			SubjectSource: types.TipSubjectSource("x509SAN/URI"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

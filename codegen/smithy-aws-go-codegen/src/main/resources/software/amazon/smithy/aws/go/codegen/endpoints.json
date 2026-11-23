@@ -756,6 +756,7 @@
       },
       "aoss" : {
         "endpoints" : {
+          "af-south-1" : { },
           "ap-east-1" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
@@ -21876,6 +21877,7 @@
               "tags" : [ "dualstack" ]
             } ]
           },
+          "ap-east-2" : { },
           "ap-northeast-1" : {
             "credentialScope" : {
               "region" : "ap-northeast-1"
@@ -21975,6 +21977,9 @@
               "tags" : [ "dualstack" ]
             } ]
           },
+          "ap-southeast-5" : { },
+          "ap-southeast-6" : { },
+          "ap-southeast-7" : { },
           "ca-central-1" : {
             "credentialScope" : {
               "region" : "ca-central-1"
@@ -22146,6 +22151,7 @@
               "tags" : [ "dualstack" ]
             } ]
           },
+          "mx-central-1" : { },
           "sa-east-1" : {
             "credentialScope" : {
               "region" : "sa-east-1"
@@ -40473,6 +40479,11 @@
           "eusc-de-east-1" : { }
         }
       },
+      "emr-containers" : {
+        "endpoints" : {
+          "eusc-de-east-1" : { }
+        }
+      },
       "emr-serverless" : {
         "endpoints" : {
           "eusc-de-east-1" : { }
@@ -40621,6 +40632,11 @@
         }
       },
       "oidc" : {
+        "endpoints" : {
+          "eusc-de-east-1" : { }
+        }
+      },
+      "outposts" : {
         "endpoints" : {
           "eusc-de-east-1" : { }
         }

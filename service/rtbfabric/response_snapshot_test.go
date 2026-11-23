@@ -211,7 +211,25 @@ func TestCheckResponseSnapshot_AcceptLink(t *testing.T) {
 			},
 		},
 		ConnectivityType: types.ConnectivityType("DEFAULT"),
-		LinkId:           ptr.String("__LinkId__"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		LinkId: ptr.String("__LinkId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("AcceptLink.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -456,7 +474,25 @@ func TestCheckResponseSnapshot_CreateLink(t *testing.T) {
 				},
 			},
 		},
-		ConnectivityType:   types.ConnectivityType("DEFAULT"),
+		ConnectivityType: types.ConnectivityType("DEFAULT"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 		LinkId:             ptr.String("__LinkId__"),
 		CustomerProvidedId: ptr.String("__CustomerProvidedId__"),
 	}
@@ -913,6 +949,75 @@ func TestCheckResponseSnapshot_DisassociateCertificate(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetAvailableModule(t *testing.T) {
+	want := &GetAvailableModuleOutput{
+		ModuleId:             ptr.String("__ModuleId__"),
+		ModuleArn:            ptr.String("__ModuleArn__"),
+		ModuleName:           ptr.String("__ModuleName__"),
+		Description:          ptr.String("__Description__"),
+		SubscriptionType:     types.SubscriptionType("MARKETPLACE"),
+		SubscriptionStatus:   types.SubscriptionStatus("ACTIVE"),
+		MarketplaceProductId: ptr.String("__MarketplaceProductId__"),
+		CreatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAvailableModule.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAvailableModule(context.Background(), &GetAvailableModuleInput{
+		ModuleId: ptr.String("__ModuleId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAvailableModule.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetAvailableModuleVersion(t *testing.T) {
+	want := &GetAvailableModuleVersionOutput{
+		ModuleId:         ptr.String("__ModuleId__"),
+		Version:          ptr.String("__Version__"),
+		ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+		Status:           types.ModuleVersionStatus("CREATING"),
+		Permissions: []types.ModulePermission{
+			types.ModulePermission("READ_REQUEST_BODY"),
+			types.ModulePermission("READ_REQUEST_BODY"),
+		},
+		ConfigurableActions: []types.ConfigurableAction{
+			types.ConfigurableAction("FILTER"),
+			types.ConfigurableAction("FILTER"),
+		},
+		ConfigurationSchema: ptr.String("__ConfigurationSchema__"),
+		ReleaseNotes:        ptr.String("__ReleaseNotes__"),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAvailableModuleVersion.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAvailableModuleVersion(context.Background(), &GetAvailableModuleVersionInput{
+		ModuleId: ptr.String("__ModuleId__"),
+		Version:  ptr.String("__Version__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAvailableModuleVersion.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetCertificateAssociation(t *testing.T) {
 	want := &GetCertificateAssociationOutput{
 		GatewayId:         ptr.String("__GatewayId__"),
@@ -920,6 +1025,24 @@ func TestCheckResponseSnapshot_GetCertificateAssociation(t *testing.T) {
 		Status:            types.CertificateAssociationStatus("PENDING_ASSOCIATION"),
 		AssociatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetCertificateAssociation.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1048,6 +1171,89 @@ func TestCheckResponseSnapshot_GetInboundExternalLink(t *testing.T) {
 			},
 		},
 		ConnectivityType: types.ConnectivityType("DEFAULT"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		LockToken: ptr.String("__LockToken__"),
+		Flows: []types.Flow{
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetInboundExternalLink.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1173,12 +1379,95 @@ func TestCheckResponseSnapshot_GetLink(t *testing.T) {
 			},
 		},
 		ConnectivityType: types.ConnectivityType("DEFAULT"),
-		LinkId:           ptr.String("__LinkId__"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		LinkId: ptr.String("__LinkId__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
 		HttpResponderAllowed: ptr.Bool(true),
 		TimeoutInMillis:      ptr.Int64(1),
+		LockToken:            ptr.String("__LockToken__"),
+		Flows: []types.Flow{
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetLink.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1222,6 +1511,24 @@ func TestCheckResponseSnapshot_GetLinkRoutingRule(t *testing.T) {
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		Tags: map[string]string{
 			"key0": "__Value__",
+		},
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetLinkRoutingRule.response")
@@ -1352,6 +1659,89 @@ func TestCheckResponseSnapshot_GetOutboundExternalLink(t *testing.T) {
 			},
 		},
 		ConnectivityType: types.ConnectivityType("DEFAULT"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		LockToken: ptr.String("__LockToken__"),
+		Flows: []types.Flow{
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetOutboundExternalLink.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1380,7 +1770,25 @@ func TestCheckResponseSnapshot_GetRequesterGateway(t *testing.T) {
 		Description: ptr.String("__Description__"),
 		CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		VpcId:       ptr.String("__VpcId__"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		VpcId: ptr.String("__VpcId__"),
 		SubnetIds: []string{
 			"__Member__",
 			"__Member__",
@@ -1430,9 +1838,27 @@ func TestCheckResponseSnapshot_GetResponderGateway(t *testing.T) {
 		Description: ptr.String("__Description__"),
 		CreatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		DomainName:  ptr.String("__DomainName__"),
-		Port:        ptr.Int32(1),
-		Protocol:    types.Protocol("HTTP"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		DomainName: ptr.String("__DomainName__"),
+		Port:       ptr.Int32(1),
+		Protocol:   types.Protocol("HTTP"),
 		ListenerConfig: &types.ListenerConfig{
 			Protocols: []types.Protocol{
 				types.Protocol("HTTP"),
@@ -1491,6 +1917,180 @@ func TestCheckResponseSnapshot_GetResponderGateway(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetResponderGateway.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetUpdate(t *testing.T) {
+	want := &GetUpdateOutput{
+		Update: &types.Update{
+			UpdateId: ptr.String("__UpdateId__"),
+			Type:     types.UpdateType("GATEWAY_CONFIG_UPDATE"),
+			Status:   types.UpdateStatus("IN_PROGRESS"),
+			Target: &types.UpdateTargetMemberGateway{
+				Value: types.Unit{},
+			},
+			CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Parameters: &types.UpdateParametersMemberResponderGatewayConfig{
+				Value: types.ResponderGatewayConfigParameters{
+					Description:         ptr.String("__Description__"),
+					ClientRoutingPolicy: types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
+					DomainName:          ptr.String("__DomainName__"),
+					Port:                ptr.Int32(1),
+					Protocol:            types.Protocol("HTTP"),
+					ListenerConfig: &types.ListenerConfig{
+						Protocols: []types.Protocol{
+							types.Protocol("HTTP"),
+							types.Protocol("HTTP"),
+						},
+					},
+					TrustStoreConfiguration: &types.TrustStoreConfiguration{
+						CertificateAuthorityCertificates: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					ManagedEndpointConfiguration: &types.ManagedEndpointConfigurationMemberAutoScalingGroups{
+						Value: types.AutoScalingGroupsConfiguration{
+							AutoScalingGroupNames: []string{
+								"__Member__",
+								"__Member__",
+							},
+							RoleArn: ptr.String("__RoleArn__"),
+							HealthCheckConfig: &types.HealthCheckConfig{
+								Port:                    ptr.Int32(1),
+								Path:                    ptr.String("__Path__"),
+								Protocol:                types.Protocol("HTTP"),
+								TimeoutMs:               ptr.Int32(1),
+								IntervalSeconds:         ptr.Int32(1),
+								StatusCodeMatcher:       ptr.String("__StatusCodeMatcher__"),
+								HealthyThresholdCount:   ptr.Int32(1),
+								UnhealthyThresholdCount: ptr.Int32(1),
+							},
+						},
+					},
+				},
+			},
+			ErrorDetails: []types.ErrorDetail{
+				{
+					Code:    types.ErrorCode("VPC_NOT_FOUND"),
+					Message: ptr.String("__Message__"),
+					ResourceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Code:    types.ErrorCode("VPC_NOT_FOUND"),
+					Message: ptr.String("__Message__"),
+					ResourceIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetUpdate.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetUpdate(context.Background(), &GetUpdateInput{
+		GatewayId: ptr.String("__GatewayId__"),
+		UpdateId:  ptr.String("__UpdateId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetUpdate.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListAvailableModuleVersions(t *testing.T) {
+	want := &ListAvailableModuleVersionsOutput{
+		ModuleId: ptr.String("__ModuleId__"),
+		Versions: []types.AvailableModuleVersionSummary{
+			{
+				Version:          ptr.String("__Version__"),
+				ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+				Status:           types.ModuleVersionStatus("CREATING"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				Version:          ptr.String("__Version__"),
+				ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+				Status:           types.ModuleVersionStatus("CREATING"),
+				CreatedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAvailableModuleVersions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAvailableModuleVersions(context.Background(), &ListAvailableModuleVersionsInput{
+		ModuleId:   ptr.String("__ModuleId__"),
+		Status:     types.ModuleVersionStatus("CREATING"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAvailableModuleVersions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListAvailableModules(t *testing.T) {
+	want := &ListAvailableModulesOutput{
+		Modules: []types.AvailableModuleSummary{
+			{
+				ModuleId:             ptr.String("__ModuleId__"),
+				ModuleArn:            ptr.String("__ModuleArn__"),
+				ModuleName:           ptr.String("__ModuleName__"),
+				SubscriptionType:     types.SubscriptionType("MARKETPLACE"),
+				SubscriptionStatus:   types.SubscriptionStatus("ACTIVE"),
+				MarketplaceProductId: ptr.String("__MarketplaceProductId__"),
+			},
+			{
+				ModuleId:             ptr.String("__ModuleId__"),
+				ModuleArn:            ptr.String("__ModuleArn__"),
+				ModuleName:           ptr.String("__ModuleName__"),
+				SubscriptionType:     types.SubscriptionType("MARKETPLACE"),
+				SubscriptionStatus:   types.SubscriptionStatus("ACTIVE"),
+				MarketplaceProductId: ptr.String("__MarketplaceProductId__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAvailableModules.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAvailableModules(context.Background(), &ListAvailableModulesInput{
+		SubscriptionType: types.SubscriptionType("MARKETPLACE"),
+		MaxResults:       ptr.Int32(1),
+		NextToken:        ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAvailableModules.response", err)
 	}
 }
 
@@ -1553,6 +2153,24 @@ func TestCheckResponseSnapshot_ListLinkRoutingRules(t *testing.T) {
 				Status:    types.RuleStatus("CREATION_IN_PROGRESS"),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ErrorDetails: []types.ErrorDetail{
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				RuleId:   ptr.String("__RuleId__"),
@@ -1571,6 +2189,24 @@ func TestCheckResponseSnapshot_ListLinkRoutingRules(t *testing.T) {
 				Status:    types.RuleStatus("CREATION_IN_PROGRESS"),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ErrorDetails: []types.ErrorDetail{
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1703,7 +2339,25 @@ func TestCheckResponseSnapshot_ListLinks(t *testing.T) {
 					},
 				},
 				ConnectivityType: types.ConnectivityType("DEFAULT"),
-				LinkId:           ptr.String("__LinkId__"),
+				ErrorDetails: []types.ErrorDetail{
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				LinkId: ptr.String("__LinkId__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -1812,7 +2466,25 @@ func TestCheckResponseSnapshot_ListLinks(t *testing.T) {
 					},
 				},
 				ConnectivityType: types.ConnectivityType("DEFAULT"),
-				LinkId:           ptr.String("__LinkId__"),
+				ErrorDetails: []types.ErrorDetail{
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Code:    types.ErrorCode("VPC_NOT_FOUND"),
+						Message: ptr.String("__Message__"),
+						ResourceIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				LinkId: ptr.String("__LinkId__"),
 				Tags: map[string]string{
 					"key0": "__Value__",
 				},
@@ -1923,6 +2595,142 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListUpdates(t *testing.T) {
+	want := &ListUpdatesOutput{
+		Updates: []types.UpdateSummary{
+			{
+				UpdateId:  ptr.String("__UpdateId__"),
+				Type:      types.UpdateType("GATEWAY_CONFIG_UPDATE"),
+				Status:    types.UpdateStatus("IN_PROGRESS"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				UpdateId:  ptr.String("__UpdateId__"),
+				Type:      types.UpdateType("GATEWAY_CONFIG_UPDATE"),
+				Status:    types.UpdateStatus("IN_PROGRESS"),
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListUpdates.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListUpdates(context.Background(), &ListUpdatesInput{
+		GatewayId:  ptr.String("__GatewayId__"),
+		LinkId:     ptr.String("__LinkId__"),
+		RuleId:     ptr.String("__RuleId__"),
+		Type:       types.UpdateType("GATEWAY_CONFIG_UPDATE"),
+		Status:     types.UpdateStatus("IN_PROGRESS"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListUpdates.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutLinkFlows(t *testing.T) {
+	want := &PutLinkFlowsOutput{
+		GatewayId: ptr.String("__GatewayId__"),
+		LinkId:    ptr.String("__LinkId__"),
+		Status:    types.LinkStatus("PENDING_CREATION"),
+		UpdateId:  ptr.String("__UpdateId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutLinkFlows.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutLinkFlows(context.Background(), &PutLinkFlowsInput{
+		GatewayId:   ptr.String("__GatewayId__"),
+		LinkId:      ptr.String("__LinkId__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		LockToken:   ptr.String("__LockToken__"),
+		Flows: []types.Flow{
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				Pipeline: &types.FlowPipelineMemberSequential{
+					Value: types.SequentialPipeline{
+						Modules: []types.FlowModule{
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+							{
+								Name:             ptr.String("__Name__"),
+								ModuleVersionArn: ptr.String("__ModuleVersionArn__"),
+								SelectedActions: []types.ConfigurableAction{
+									types.ConfigurableAction("FILTER"),
+									types.ConfigurableAction("FILTER"),
+								},
+								FailureMode:          types.FailureMode("OPEN"),
+								ActivationPercentage: ptr.Float32(1.0),
+								ConfigurationValues:  ptr.String("__ConfigurationValues__"),
+							},
+						},
+					},
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutLinkFlows.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_RejectLink(t *testing.T) {
 	want := &RejectLinkOutput{
 		GatewayId:     ptr.String("__GatewayId__"),
@@ -2027,7 +2835,25 @@ func TestCheckResponseSnapshot_RejectLink(t *testing.T) {
 			},
 		},
 		ConnectivityType: types.ConnectivityType("DEFAULT"),
-		LinkId:           ptr.String("__LinkId__"),
+		ErrorDetails: []types.ErrorDetail{
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Code:    types.ErrorCode("VPC_NOT_FOUND"),
+				Message: ptr.String("__Message__"),
+				ResourceIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		LinkId: ptr.String("__LinkId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("RejectLink.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2100,8 +2926,9 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 
 func TestCheckResponseSnapshot_UpdateLink(t *testing.T) {
 	want := &UpdateLinkOutput{
-		LinkId: ptr.String("__LinkId__"),
-		Status: types.LinkStatus("PENDING_CREATION"),
+		LinkId:   ptr.String("__LinkId__"),
+		Status:   types.LinkStatus("PENDING_CREATION"),
+		UpdateId: ptr.String("__UpdateId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateLink.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2123,6 +2950,7 @@ func TestCheckResponseSnapshot_UpdateLink(t *testing.T) {
 			},
 		},
 		TimeoutInMillis: ptr.Int64(1),
+		ClientToken:     ptr.String("__ClientToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2137,6 +2965,7 @@ func TestCheckResponseSnapshot_UpdateLinkModuleFlow(t *testing.T) {
 		GatewayId: ptr.String("__GatewayId__"),
 		LinkId:    ptr.String("__LinkId__"),
 		Status:    types.LinkStatus("PENDING_CREATION"),
+		UpdateId:  ptr.String("__UpdateId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateLinkModuleFlow.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2196,6 +3025,7 @@ func TestCheckResponseSnapshot_UpdateLinkRoutingRule(t *testing.T) {
 		RuleId:    ptr.String("__RuleId__"),
 		Status:    types.RuleStatus("CREATION_IN_PROGRESS"),
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdateId:  ptr.String("__UpdateId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateLinkRoutingRule.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2221,6 +3051,7 @@ func TestCheckResponseSnapshot_UpdateLinkRoutingRule(t *testing.T) {
 			},
 			QueryStringExists: ptr.String("__QueryStringExists__"),
 		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2261,6 +3092,7 @@ func TestCheckResponseSnapshot_UpdateResponderGateway(t *testing.T) {
 		GatewayId:           ptr.String("__GatewayId__"),
 		Status:              types.ResponderGatewayStatus("PENDING_CREATION"),
 		ClientRoutingPolicy: types.ClientRoutingPolicy("AVAILABILITY_ZONE_AFFINITY"),
+		UpdateId:            ptr.String("__UpdateId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateResponderGateway.response")
 	if errors.Is(err, fs.ErrNotExist) {

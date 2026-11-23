@@ -5406,6 +5406,11 @@ func TestUpdateResponseSnapshot_ListProtectedJobs(t *testing.T) {
 					},
 				},
 				JobComputePayerAccountId: ptr.String("__JobComputePayerAccountId__"),
+				IntermediateTableConfiguration: &types.IntermediateTableOutputConfiguration{
+					Id:   ptr.String("__Id__"),
+					Arn:  ptr.String("__Arn__"),
+					Name: ptr.String("__Name__"),
+				},
 			},
 			{
 				Id:            ptr.String("__Id__"),
@@ -5438,6 +5443,11 @@ func TestUpdateResponseSnapshot_ListProtectedJobs(t *testing.T) {
 					},
 				},
 				JobComputePayerAccountId: ptr.String("__JobComputePayerAccountId__"),
+				IntermediateTableConfiguration: &types.IntermediateTableOutputConfiguration{
+					Id:   ptr.String("__Id__"),
+					Arn:  ptr.String("__Arn__"),
+					Name: ptr.String("__Name__"),
+				},
 			},
 		},
 	}

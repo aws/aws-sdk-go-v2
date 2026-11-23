@@ -19,6 +19,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.AliasExistsException,
 			New:    func() any { return &types.AliasExistsException{} },
 		},
+		"com.amazonaws.cognitoidentityprovider#CachedCIMDURLDoesNotExistException": {
+			Schema: schemas.CachedCIMDURLDoesNotExistException,
+			New:    func() any { return &types.CachedCIMDURLDoesNotExistException{} },
+		},
 		"com.amazonaws.cognitoidentityprovider#CodeDeliveryFailureException": {
 			Schema: schemas.CodeDeliveryFailureException,
 			New:    func() any { return &types.CodeDeliveryFailureException{} },

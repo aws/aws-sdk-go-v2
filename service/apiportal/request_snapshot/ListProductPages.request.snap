@@ -1,0 +1,3 @@
+GET /products/__ProductId__/productpages?maxResults=1&nextToken=__NextToken__&resourceOwnerAccountId=__ResourceOwnerAccountId__
+
+

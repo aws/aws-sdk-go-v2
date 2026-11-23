@@ -36,7 +36,11 @@ type ProcessPaymentInput struct {
 	// This member is required.
 	PaymentInput types.PaymentInput
 
-	// The ID of the payment instrument to use.
+	// The ID of the payment instrument to use. For the CRYPTO_X402 and MPP payment
+	// types, specify the ID of a payment instrument that you created. For the
+	// AWS_BILLING_X402 payment type, specify the service-managed instrument ID
+	// aws.agentcorepayments.awsbilling.v1 . You don't create this instrument; it's
+	// available for any payment manager that has an AWS Billing payment connector.
 	//
 	// This member is required.
 	PaymentInstrumentId *string
@@ -110,7 +114,8 @@ type ProcessPaymentOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The ID of the payment instrument used.
+	// The ID of the payment instrument used. For the AWS_BILLING_X402 payment type,
+	// this is the service-managed instrument ID aws.agentcorepayments.awsbilling.v1 .
 	//
 	// This member is required.
 	PaymentInstrumentId *string

@@ -11,6 +11,10 @@ import (
 // TypeRegistry is the type registry for this service.
 var TypeRegistry = &smithy.TypeRegistry{
 	Entries: map[string]*smithy.TypeRegistryEntry{
+		"com.amazonaws.polly#AccessDeniedException": {
+			Schema: schemas.AccessDeniedException,
+			New:    func() any { return &types.AccessDeniedException{} },
+		},
 		"com.amazonaws.polly#AudioEvent": {
 			Schema: schemas.AudioEvent,
 			New:    func() any { return &types.AudioEvent{} },
@@ -18,6 +22,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 		"com.amazonaws.polly#CloseStreamEvent": {
 			Schema: schemas.CloseStreamEvent,
 			New:    func() any { return &types.CloseStreamEvent{} },
+		},
+		"com.amazonaws.polly#ConflictException": {
+			Schema: schemas.ConflictException,
+			New:    func() any { return &types.ConflictException{} },
 		},
 		"com.amazonaws.polly#EngineNotSupportedException": {
 			Schema: schemas.EngineNotSupportedException,

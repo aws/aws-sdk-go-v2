@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clusterArn":"__ClusterArn__","completedTopics":1,"creationTime":"2000-01-01T00:00:00Z","errorInfo":{"errorCode":"__ErrorCode__","errorString":"__ErrorString__"},"lastUpdateTime":"2000-01-01T00:00:00Z","migratedPartitions":1,"status":"PENDING","targetInstanceType":"__TargetInstanceType__","topicReassignmentOperationArn":"__TopicReassignmentOperationArn__","topicsToExclude":["__Member__","__Member__"],"topicsToInclude":["__Member__","__Member__"],"totalPartitions":1,"totalTopics":1}

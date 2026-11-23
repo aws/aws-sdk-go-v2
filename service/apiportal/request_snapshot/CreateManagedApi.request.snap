@@ -1,0 +1,5 @@
+POST /managedapis
+
+Content-Type: application/json
+
+{"apiSignature":{"hostname":"__Hostname__","method":"GET","path":"__Path__","port":1,"resourceArn":"__ResourceArn__"},"tags":{"key0":"__Value__"}}

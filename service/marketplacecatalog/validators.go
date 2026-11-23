@@ -250,6 +250,26 @@ func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartAssessment struct {
+}
+
+func (*validateOpStartAssessment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAssessment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAssessmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAssessmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartChangeSet struct {
 }
 
@@ -358,6 +378,10 @@ func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
 }
 
+func addOpStartAssessmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAssessment{}, middleware.After)
+}
+
 func addOpStartChangeSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartChangeSet{}, middleware.After)
 }
@@ -388,6 +412,38 @@ func validateChange(v *types.Change) error {
 	if v.EntityTags != nil {
 		if err := validateTagList(v.EntityTags); err != nil {
 			invalidParams.AddNested("EntityTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateControlInput(v *types.ControlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ControlInput"}
+	if v.ControlId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ControlId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateControlInputList(v []types.ControlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ControlInputList"}
+	for i := range v {
+		if err := validateControlInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -693,6 +749,32 @@ func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAssessmentInput(v *StartAssessmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAssessmentInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.FrameworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FrameworkId"))
+	}
+	if v.EntityId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if v.Controls != nil {
+		if err := validateControlInputList(v.Controls); err != nil {
+			invalidParams.AddNested("Controls", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

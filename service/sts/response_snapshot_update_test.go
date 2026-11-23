@@ -219,6 +219,19 @@ func TestUpdateResponseSnapshot_AssumeRoleWithSAML(t *testing.T) {
 		SourceIdentity:          ptr.String("__SourceIdentity__"),
 		SessionTokenUtilization: ptr.Int32(1),
 		SessionTokenSize:        ptr.Int32(1),
+		TrustedIdentityPropagationContext: &types.TrustedIdentityPropagationContext{
+			OriginIdentity: &types.OriginIdentity{
+				Subject:              ptr.String("__Subject__"),
+				SubjectType:          ptr.String("__SubjectType__"),
+				Issuer:               ptr.String("__Issuer__"),
+				FederatedProviderArn: ptr.String("__FederatedProviderArn__"),
+			},
+			TransactionContext: &types.TransactionContext{
+				IdentityProvider: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
 	}
 	proto := restxml.New(schemas.AWSSecurityTokenServiceV20110615)
 	opSchema := serdeRespQueryOpSchema(schemas.AssumeRoleWithSAML, schemas.AssumeRoleWithSAMLResponse, schemas.AssumeRoleWithSAMLResponse)
@@ -260,6 +273,19 @@ func TestUpdateResponseSnapshot_AssumeRoleWithWebIdentity(t *testing.T) {
 		SourceIdentity:          ptr.String("__SourceIdentity__"),
 		SessionTokenUtilization: ptr.Int32(1),
 		SessionTokenSize:        ptr.Int32(1),
+		TrustedIdentityPropagationContext: &types.TrustedIdentityPropagationContext{
+			OriginIdentity: &types.OriginIdentity{
+				Subject:              ptr.String("__Subject__"),
+				SubjectType:          ptr.String("__SubjectType__"),
+				Issuer:               ptr.String("__Issuer__"),
+				FederatedProviderArn: ptr.String("__FederatedProviderArn__"),
+			},
+			TransactionContext: &types.TransactionContext{
+				IdentityProvider: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
 	}
 	proto := restxml.New(schemas.AWSSecurityTokenServiceV20110615)
 	opSchema := serdeRespQueryOpSchema(schemas.AssumeRoleWithWebIdentity, schemas.AssumeRoleWithWebIdentityResponse, schemas.AssumeRoleWithWebIdentityResponse)
@@ -461,6 +487,44 @@ func TestUpdateResponseSnapshot_GetFederationToken(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetScopedCredentials(t *testing.T) {
+	want := &GetScopedCredentialsOutput{
+		Credentials: &types.Credentials{
+			AccessKeyId:     ptr.String("__AccessKeyId__"),
+			SecretAccessKey: ptr.String("__SecretAccessKey__"),
+			SessionToken:    ptr.String("__SessionToken__"),
+			Expiration:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SessionInfo: &types.ScopedSession{
+			ScopedSessionId: ptr.String("__ScopedSessionId__"),
+			Arn:             ptr.String("__Arn__"),
+		},
+		SessionTokenUtilization: ptr.Int32(1),
+		SessionTokenSize:        ptr.Int32(1),
+		ScopedPoliciesCount:     ptr.Int32(1),
+		SourceIdentity:          ptr.String("__SourceIdentity__"),
+	}
+	proto := restxml.New(schemas.AWSSecurityTokenServiceV20110615)
+	opSchema := serdeRespQueryOpSchema(schemas.GetScopedCredentials, schemas.GetScopedCredentialsResponse, schemas.GetScopedCredentialsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespQueryResultEnvelope(body, "GetScopedCredentials")
+	if err := serdeRespWriteSnapshot("GetScopedCredentials.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetSessionToken(t *testing.T) {
 	want := &GetSessionTokenOutput{
 		Credentials: &types.Credentials{
@@ -619,6 +683,31 @@ func TestUpdateResponseSnapshot_Error_IDPRejectedClaimException(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_Error_InsufficientSessionLifetimeException(t *testing.T) {
+	want := &types.InsufficientSessionLifetimeException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := restxml.New(schemas.AWSSecurityTokenServiceV20110615)
+	opSchema := serdeRespQueryOpSchema(schemas.GetScopedCredentials, schemas.InsufficientSessionLifetimeException, schemas.InsufficientSessionLifetimeException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespXMLErrorEnvelope(body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("InsufficientSessionLifetimeException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_Error_InvalidAuthorizationMessageException(t *testing.T) {
 	want := &types.InvalidAuthorizationMessageException{
 		Message: ptr.String("__Message__"),
@@ -644,6 +733,31 @@ func TestUpdateResponseSnapshot_Error_InvalidAuthorizationMessageException(t *te
 	}
 }
 
+func TestUpdateResponseSnapshot_Error_InvalidContextAssertionException(t *testing.T) {
+	want := &types.InvalidContextAssertionException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := restxml.New(schemas.AWSSecurityTokenServiceV20110615)
+	opSchema := serdeRespQueryOpSchema(schemas.AssumeRole, schemas.InvalidContextAssertionException, schemas.InvalidContextAssertionException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespXMLErrorEnvelope(body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("InvalidContextAssertionException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_Error_InvalidIdentityTokenException(t *testing.T) {
 	want := &types.InvalidIdentityTokenException{
 		Message: ptr.String("__Message__"),
@@ -665,6 +779,31 @@ func TestUpdateResponseSnapshot_Error_InvalidIdentityTokenException(t *testing.T
 	}
 	body = serdeRespXMLErrorEnvelope(body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("InvalidIdentityTokenException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_InvalidSubjectCredentialsException(t *testing.T) {
+	want := &types.InvalidSubjectCredentialsException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := restxml.New(schemas.AWSSecurityTokenServiceV20110615)
+	opSchema := serdeRespQueryOpSchema(schemas.GetScopedCredentials, schemas.InvalidSubjectCredentialsException, schemas.InvalidSubjectCredentialsException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespXMLErrorEnvelope(body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("InvalidSubjectCredentialsException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

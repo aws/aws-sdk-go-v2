@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"activeLinksCount":1,"createdAt":946684800,"description":"__Description__","domainName":"__DomainName__","gatewayId":"__GatewayId__","securityGroupIds":["__Member__","__Member__"],"status":"PENDING_CREATION","subnetIds":["__Member__","__Member__"],"tags":{"key0":"__Value__"},"totalLinksCount":1,"updatedAt":946684800,"vpcId":"__VpcId__"}
+{"activeLinksCount":1,"createdAt":946684800,"description":"__Description__","domainName":"__DomainName__","errorDetails":[{"code":"VPC_NOT_FOUND","message":"__Message__","resourceIds":["__Member__","__Member__"]},{"code":"VPC_NOT_FOUND","message":"__Message__","resourceIds":["__Member__","__Member__"]}],"gatewayId":"__GatewayId__","securityGroupIds":["__Member__","__Member__"],"status":"PENDING_CREATION","subnetIds":["__Member__","__Member__"],"tags":{"key0":"__Value__"},"totalLinksCount":1,"updatedAt":946684800,"vpcId":"__VpcId__"}

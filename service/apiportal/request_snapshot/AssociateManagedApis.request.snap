@@ -1,0 +1,5 @@
+POST /products/__ProductId__/associate
+
+Content-Type: application/json
+
+{"managedApiIds":["__Member__","__Member__"]}

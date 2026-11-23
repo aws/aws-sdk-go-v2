@@ -1,3 +1,7 @@
+# v1.25.0 (2026-11-19)
+
+* **Feature**: AWS DevOps Agent adds AWS Organizations support so that agent spaces can monitor member accounts across an organizational unit.
+
 # v1.24.0 (2026-11-17)
 
 * **Feature**: AWS DevOps Agent adds Code Change Risk Analysis capability and task types, and GetChat and UpdateChat operations to rename, archive, and unarchive chats and filter ListChats by archive status.

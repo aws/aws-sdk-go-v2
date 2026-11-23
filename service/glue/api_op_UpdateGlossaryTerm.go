@@ -37,13 +37,15 @@ type UpdateGlossaryTermInput struct {
 	// of the request.
 	ClientToken *string
 
-	// The updated long description of the glossary term.
+	// The new long description. Omit it to keep the current one; set it to an empty
+	// string to clear it.
 	LongDescription *string
 
 	// The updated name of the glossary term.
 	Name *string
 
-	// The updated short description of the glossary term.
+	// The new short description. Omit it to keep the current one; set it to an empty
+	// string to clear it.
 	ShortDescription *string
 
 	noSmithyDocumentSerde

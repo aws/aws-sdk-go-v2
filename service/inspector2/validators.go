@@ -2498,6 +2498,24 @@ func validateCodeRepositoryAggregation(v *types.CodeRepositoryAggregation) error
 	}
 }
 
+func validateCodeSecurityIntegrationVpcConfiguration(v *types.CodeSecurityIntegrationVpcConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeSecurityIntegrationVpcConfiguration"}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.VpcEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcEndpointId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCodeSecurityScanConfiguration(v *types.CodeSecurityScanConfiguration) error {
 	if v == nil {
 		return nil
@@ -2952,6 +2970,26 @@ func validateCreateCisTargets(v *types.CreateCisTargets) error {
 	}
 }
 
+func validateCreateGitHubEnterpriseIntegrationDetail(v *types.CreateGitHubEnterpriseIntegrationDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGitHubEnterpriseIntegrationDetail"}
+	if v.InstanceUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceUrl"))
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateCodeSecurityIntegrationVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCreateGitLabSelfManagedIntegrationDetail(v *types.CreateGitLabSelfManagedIntegrationDetail) error {
 	if v == nil {
 		return nil
@@ -2962,6 +3000,11 @@ func validateCreateGitLabSelfManagedIntegrationDetail(v *types.CreateGitLabSelfM
 	}
 	if v.AccessToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccessToken"))
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateCodeSecurityIntegrationVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2976,6 +3019,11 @@ func validateCreateIntegrationDetail(v types.CreateIntegrationDetail) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateIntegrationDetail"}
 	switch uv := v.(type) {
+	case *types.CreateIntegrationDetailMemberGithubEnterprise:
+		if err := validateCreateGitHubEnterpriseIntegrationDetail(&uv.Value); err != nil {
+			invalidParams.AddNested("[githubEnterprise]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.CreateIntegrationDetailMemberGitlabSelfManaged:
 		if err := validateCreateGitLabSelfManagedIntegrationDetail(&uv.Value); err != nil {
 			invalidParams.AddNested("[gitlabSelfManaged]", err.(smithy.InvalidParamsError))
@@ -3494,6 +3542,21 @@ func validateGcpScopeConfigurationInput(v *types.GcpScopeConfigurationInput) err
 	}
 }
 
+func validateGitHubEnterpriseServerAppRegistrationDetail(v *types.GitHubEnterpriseServerAppRegistrationDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GitHubEnterpriseServerAppRegistrationDetail"}
+	if v.ManifestCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ManifestCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImageLayerAggregation(v *types.ImageLayerAggregation) error {
 	if v == nil {
 		return nil
@@ -3850,6 +3913,21 @@ func validatePackageFilter(v *types.PackageFilter) error {
 			invalidParams.AddNested("FilePath", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RuntimeReachability != nil {
+		if err := validateRuntimeReachabilityFilter(v.RuntimeReachability); err != nil {
+			invalidParams.AddNested("RuntimeReachability", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuntimeReachabilityReason != nil {
+		if err := validateRuntimeReachabilityReasonFilter(v.RuntimeReachabilityReason); err != nil {
+			invalidParams.AddNested("RuntimeReachabilityReason", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PurlQualifier != nil {
+		if err := validatePurlQualifierFilter(v.PurlQualifier); err != nil {
+			invalidParams.AddNested("PurlQualifier", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3966,6 +4044,24 @@ func validateProviderFilterList(v []types.ProviderFilter) error {
 		if err := validateProviderFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePurlQualifierFilter(v *types.PurlQualifierFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PurlQualifierFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Key) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4194,6 +4290,42 @@ func validateResourceTagFilterList(v []types.TagFilter) error {
 		if err := validateTagFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuntimeReachabilityFilter(v *types.RuntimeReachabilityFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeReachabilityFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuntimeReachabilityReasonFilter(v *types.RuntimeReachabilityReasonFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeReachabilityReasonFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4516,6 +4648,48 @@ func validateTitleFilterList(v []types.CisStringFilter) error {
 	}
 }
 
+func validateUpdateGitHubEnterpriseServerAppInstallationDetail(v *types.UpdateGitHubEnterpriseServerAppInstallationDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGitHubEnterpriseServerAppInstallationDetail"}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
+	}
+	if v.InstallationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstallationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateGitHubEnterpriseServerIntegrationDetail(v types.UpdateGitHubEnterpriseServerIntegrationDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGitHubEnterpriseServerIntegrationDetail"}
+	switch uv := v.(type) {
+	case *types.UpdateGitHubEnterpriseServerIntegrationDetailMemberAppInstallation:
+		if err := validateUpdateGitHubEnterpriseServerAppInstallationDetail(&uv.Value); err != nil {
+			invalidParams.AddNested("[appInstallation]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.UpdateGitHubEnterpriseServerIntegrationDetailMemberAppRegistration:
+		if err := validateGitHubEnterpriseServerAppRegistrationDetail(&uv.Value); err != nil {
+			invalidParams.AddNested("[appRegistration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateGitHubIntegrationDetail(v *types.UpdateGitHubIntegrationDetail) error {
 	if v == nil {
 		return nil
@@ -4558,6 +4732,11 @@ func validateUpdateIntegrationDetails(v types.UpdateIntegrationDetails) error {
 	case *types.UpdateIntegrationDetailsMemberGithub:
 		if err := validateUpdateGitHubIntegrationDetail(&uv.Value); err != nil {
 			invalidParams.AddNested("[github]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.UpdateIntegrationDetailsMemberGithubEnterpriseServer:
+		if err := validateUpdateGitHubEnterpriseServerIntegrationDetail(uv.Value); err != nil {
+			invalidParams.AddNested("[githubEnterpriseServer]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.UpdateIntegrationDetailsMemberGitlabSelfManaged:

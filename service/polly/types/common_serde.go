@@ -40,6 +40,16 @@ func serializeLexiconNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	s.CloseList()
 }
 
+func serializeRecordingList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Recording) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeSpeechMarkTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SpeechMarkType) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -181,6 +191,28 @@ func deserializeLexiconNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	})
 }
 
+func deserializeRecordingList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Recording) error {
+	*v = make([]Recording, 0)
+	var vv Recording
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero Recording
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = Recording{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeSpeechMarkTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SpeechMarkType) error {
 	*v = make([]SpeechMarkType, 0)
 	var vv string
@@ -311,6 +343,15 @@ func deserializeVoiceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Voi
 	})
 }
 
+func serializeEncryptionContext(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -318,6 +359,27 @@ func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[stri
 		s.WriteString(schema.MapValue(), string(vv))
 	}
 	s.CloseMap()
+}
+
+func deserializeEncryptionContext(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
 }
 
 func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {

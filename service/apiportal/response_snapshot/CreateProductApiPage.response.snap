@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"apiId":{"identifierParts":{"method":"__Method__","path":"__Path__","resourceArn":"__ResourceArn__"}},"displayContent":{"apiUrl":"__ApiUrl__","body":"__Body__","operationName":"__OperationName__"},"productApiPageArn":"__ProductApiPageArn__","productApiPageId":"__ProductApiPageId__","status":"AVAILABLE","statusException":{"exception":"INTERNAL_FAILURE","message":"__Message__"},"tags":{"key0":"__Value__"},"tryItState":"ENABLED","updatedAt":946684800}

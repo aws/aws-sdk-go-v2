@@ -31,16 +31,11 @@ func (c *Client) PutAsset(ctx context.Context, params *PutAssetInput, optFns ...
 
 type PutAssetInput struct {
 
-	// The identifier of the asset type for the asset.
-	//
-	// This member is required.
-	AssetTypeId *string
-
 	// The forms to set on the asset, keyed by form name. Each entry specifies the
 	// form type and its JSON content.
 	//
 	// This member is required.
-	Forms map[string]types.AssetFormEntry
+	Forms map[string]types.AssetFormInput
 
 	// The unique identifier of the asset. If an asset with this identifier already
 	// exists, it is updated.
@@ -52,6 +47,9 @@ type PutAssetInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The identifier of the asset type for the asset. This field is required.
+	AssetTypeIdentifier *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
@@ -70,8 +68,8 @@ func (v *PutAssetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetTypeId != nil {
-		s.WriteString(schemas.PutAssetRequest_AssetTypeId, *v.AssetTypeId)
+	if v.AssetTypeIdentifier != nil {
+		s.WriteString(schemas.PutAssetRequest_AssetTypeIdentifier, *v.AssetTypeIdentifier)
 	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.PutAssetRequest_ClientToken, *v.ClientToken)
@@ -80,7 +78,7 @@ func (v *PutAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.PutAssetRequest_Description, *v.Description)
 	}
 	if v.Forms != nil {
-		serializeAssetFormMap(s, schemas.PutAssetRequest_Forms, v.Forms)
+		serializeAssetFormInputMap(s, schemas.PutAssetRequest_Forms, v.Forms)
 	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.PutAssetRequest_Identifier, *v.Identifier)
@@ -91,6 +89,11 @@ func (v *PutAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type PutAssetOutput struct {
+
+	// The identifier of the asset type for this asset.
+	//
+	// This member is required.
+	AssetTypeId *string
 
 	// The unique identifier of the asset.
 	//
@@ -124,6 +127,9 @@ func (v *PutAssetOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetTypeId != nil {
+		s.WriteString(schemas.PutAssetResponse_AssetTypeId, *v.AssetTypeId)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.PutAssetResponse_CreatedAt, *v.CreatedAt)
 	}
@@ -143,6 +149,9 @@ func (v *PutAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *PutAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutAssetResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.PutAssetResponse_AssetTypeId:
+			v.AssetTypeId = new(string)
+			return d.ReadString(schemas.PutAssetResponse_AssetTypeId, v.AssetTypeId)
 		case schemas.PutAssetResponse_CreatedAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.PutAssetResponse_CreatedAt, v.CreatedAt)

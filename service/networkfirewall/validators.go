@@ -1623,6 +1623,21 @@ func validateHeader(v *types.Header) error {
 	}
 }
 
+func validateIgwFirewallConfiguration(v *types.IgwFirewallConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IgwFirewallConfiguration"}
+	if len(v.EnforcementMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EnforcementMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIPSet(v *types.IPSet) error {
 	if v == nil {
 		return nil
@@ -2646,6 +2661,11 @@ func validateOpCreateFirewallInput(v *CreateFirewallInput) error {
 	if v.AvailabilityZoneMappings != nil {
 		if err := validateAvailabilityZoneMappings(v.AvailabilityZoneMappings); err != nil {
 			invalidParams.AddNested("AvailabilityZoneMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IgwFirewallConfiguration != nil {
+		if err := validateIgwFirewallConfiguration(v.IgwFirewallConfiguration); err != nil {
+			invalidParams.AddNested("IgwFirewallConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.NatGatewayCreateMappings != nil {

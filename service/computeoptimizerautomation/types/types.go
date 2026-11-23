@@ -35,6 +35,9 @@ type AccountInfo struct {
 	// This member is required.
 	Status EnrollmentStatus
 
+	// Information about the source of the account's effective organization rule mode.
+	OrganizationRuleModeSource *OrganizationRuleModeSource
+
 	// The reason for the current Automation enrollment status.
 	StatusReason *string
 
@@ -56,6 +59,11 @@ func (v *AccountInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.OrganizationRuleMode != "" {
 		s.WriteString(schemas.AccountInfo_organizationRuleMode, string(v.OrganizationRuleMode))
+	}
+	if v.OrganizationRuleModeSource != nil {
+		s.WriteStruct(schemas.AccountInfo_organizationRuleModeSource)
+		v.OrganizationRuleModeSource.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.AccountInfo_status, string(v.Status))
@@ -80,6 +88,9 @@ func (v *AccountInfo) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.OrganizationRuleMode = OrganizationRuleMode(ev)
 			return nil
+		case schemas.AccountInfo_organizationRuleModeSource:
+			v.OrganizationRuleModeSource = &OrganizationRuleModeSource{}
+			return v.OrganizationRuleModeSource.Deserialize(d)
 		case schemas.AccountInfo_status:
 			var ev string
 			if err := d.ReadString(schemas.AccountInfo_status, &ev); err != nil {
@@ -275,7 +286,15 @@ type AutomationEventFilter struct {
 	// This member is required.
 	Name AutomationEventFilterName
 
-	//  The values to use for the specified filter.
+	//  The values to use for the specified filter. For the ResourceType , EventType ,
+	// and EventStatus filters, the value that you specify must exactly match the
+	// corresponding field of the automation event, including case. For example,
+	// specify Complete , not complete . Wildcards aren't supported. An asterisk ( * )
+	// or a question mark ( ? ) in a value matches only that literal character.
+	//
+	// Valid values for the EventStatus filter are Ready , InProgress , Complete ,
+	// Failed , Cancelled , RollbackReady , RollbackInProgress , RollbackComplete , and
+	// RollbackFailed .
 	//
 	// This member is required.
 	Values []string
@@ -676,7 +695,9 @@ type Criteria struct {
 	ResourceTag []ResourceTagsCriteriaCondition
 
 	// Filter criteria indicating whether the recommended action requires a resource
-	// restart.
+	// restart. Valid values are true and false . Values are case-sensitive unless you
+	// use an IgnoreCase comparison operator. For example, StringEquals with the value
+	// False matches no recommended actions.
 	RestartNeeded []StringCriteriaCondition
 
 	noSmithyDocumentSerde
@@ -743,7 +764,8 @@ func (v *Criteria) Deserialize(d smithy.ShapeDeserializer) error {
 type DoubleCriteriaCondition struct {
 
 	// The comparison operator used to evaluate the attribute against the specified
-	// values.
+	// values. Only operators that begin with Numeric are valid. Any other operator
+	// returns an InvalidParameterValueException .
 	Comparison ComparisonOperator
 
 	// The list of double values to compare against using the specified comparison
@@ -1000,7 +1022,8 @@ func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 type IntegerCriteriaCondition struct {
 
 	// The comparison operator used to evaluate the attribute against the specified
-	// values.
+	// values. Only operators that begin with Numeric are valid. Any other operator
+	// returns an InvalidParameterValueException .
 	Comparison ComparisonOperator
 
 	// The list of integer values to compare against using the specified comparison
@@ -1041,12 +1064,122 @@ func (v *IntegerCriteriaCondition) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
-// Configuration settings for organization-wide automation rules.
+// Information about an organizational unit (OU) or the organization root,
+// including whether an applicable organization enrollment configuration enables
+// Automation for member accounts and the effective organization rule mode.
+type OrganizationalUnitInfo struct {
+
+	// Whether an applicable organization enrollment configuration enables Automation
+	// for eligible member accounts beneath the organizational unit (OU) or
+	// organization root.
+	//
+	//   - All - An organization enrollment configuration applies and enables
+	//   Automation for affected member accounts, including accounts that join later.
+	//   This value applies to configurations with either AnyAllowed or NoneAllowed .
+	//
+	//   - None - No organization enrollment configuration applies, so Automation isn't
+	//   enabled by an organization enrollment configuration.
+	//
+	// This member is required.
+	AutoEnrollMemberAccounts AutoEnrollMemberAccounts
+
+	// The effective organization rule mode for the organizational unit or
+	// organization root.
+	//
+	// This member is required.
+	OrganizationRuleMode OrganizationRuleMode
+
+	// Information about the source of the effective organization rule mode.
+	//
+	// This member is required.
+	OrganizationRuleModeSource *OrganizationRuleModeSource
+
+	// The ID of the organizational unit (OU) or organization root.
+	//
+	// This member is required.
+	OrganizationalUnitId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationalUnitInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationalUnitInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationalUnitInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEnrollMemberAccounts != "" {
+		s.WriteString(schemas.OrganizationalUnitInfo_autoEnrollMemberAccounts, string(v.AutoEnrollMemberAccounts))
+	}
+	if v.OrganizationRuleMode != "" {
+		s.WriteString(schemas.OrganizationalUnitInfo_organizationRuleMode, string(v.OrganizationRuleMode))
+	}
+	if v.OrganizationRuleModeSource != nil {
+		s.WriteStruct(schemas.OrganizationalUnitInfo_organizationRuleModeSource)
+		v.OrganizationRuleModeSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.OrganizationalUnitInfo_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+}
+func (v *OrganizationalUnitInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationalUnitInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationalUnitInfo_autoEnrollMemberAccounts:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationalUnitInfo_autoEnrollMemberAccounts, &ev); err != nil {
+				return err
+			}
+			v.AutoEnrollMemberAccounts = AutoEnrollMemberAccounts(ev)
+			return nil
+		case schemas.OrganizationalUnitInfo_organizationRuleMode:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationalUnitInfo_organizationRuleMode, &ev); err != nil {
+				return err
+			}
+			v.OrganizationRuleMode = OrganizationRuleMode(ev)
+			return nil
+		case schemas.OrganizationalUnitInfo_organizationRuleModeSource:
+			v.OrganizationRuleModeSource = &OrganizationRuleModeSource{}
+			return v.OrganizationRuleModeSource.Deserialize(d)
+		case schemas.OrganizationalUnitInfo_organizationalUnitId:
+			v.OrganizationalUnitId = new(string)
+			return d.ReadString(schemas.OrganizationalUnitInfo_organizationalUnitId, v.OrganizationalUnitId)
+		}
+		return nil
+	})
+}
+
+// Configuration settings that define the scope of an organization-wide automation
+// rule. Each organizational unit (OU) list can contain up to 150 OUs or
+// organization roots, and each account list can contain up to 50 accounts. Each
+// included OU or organization root must have an effective organization rule mode
+// of AnyAllowed . Exclusions take precedence over inclusions. An account that is
+// in an included OU and is also excluded is excluded. The rule doesn't apply to
+// the management account when the account is reached through an OU or the
+// organization root.
 type OrganizationConfiguration struct {
 
-	// List of specific Amazon Web Services account IDs where the organization rule
-	// should be applied.
+	// The specific Amazon Web Services account IDs where the organization rule should
+	// be applied. You can specify up to 50 account IDs.
 	AccountIds []string
+
+	// The Amazon Web Services account IDs to exclude from the organization rule
+	// scope. You can specify up to 50 account IDs. An excluded account remains
+	// excluded even if it is in an included OU.
+	ExcludedAccountIds []string
+
+	// The organizational unit (OU) or organization root IDs to exclude from the
+	// organization rule scope. The rule doesn't apply to accounts in the specified OUs
+	// or their child OUs. You can specify up to 150 IDs.
+	ExcludedOrganizationalUnitIds []string
+
+	// The organizational unit (OU) or organization root IDs to include in the
+	// organization rule scope. The rule applies to accounts in the specified OUs and
+	// their child OUs. You can specify up to 150 IDs.
+	OrganizationalUnitIds []string
 
 	// Specifies when organization rules should be applied relative to account rules.
 	RuleApplyOrder RuleApplyOrder
@@ -1064,6 +1197,15 @@ func (v *OrganizationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountIds != nil {
 		serializeOrganizationConfigurationAccountIds(s, schemas.OrganizationConfiguration_accountIds, v.AccountIds)
 	}
+	if v.ExcludedAccountIds != nil {
+		serializeOrganizationConfigurationAccountIds(s, schemas.OrganizationConfiguration_excludedAccountIds, v.ExcludedAccountIds)
+	}
+	if v.ExcludedOrganizationalUnitIds != nil {
+		serializeOrganizationConfigurationOrganizationalUnitIds(s, schemas.OrganizationConfiguration_excludedOrganizationalUnitIds, v.ExcludedOrganizationalUnitIds)
+	}
+	if v.OrganizationalUnitIds != nil {
+		serializeOrganizationConfigurationOrganizationalUnitIds(s, schemas.OrganizationConfiguration_organizationalUnitIds, v.OrganizationalUnitIds)
+	}
 	if v.RuleApplyOrder != "" {
 		s.WriteString(schemas.OrganizationConfiguration_ruleApplyOrder, string(v.RuleApplyOrder))
 	}
@@ -1073,12 +1215,143 @@ func (v *OrganizationConfiguration) Deserialize(d smithy.ShapeDeserializer) erro
 		switch s {
 		case schemas.OrganizationConfiguration_accountIds:
 			return deserializeOrganizationConfigurationAccountIds(d, schemas.OrganizationConfiguration_accountIds, &v.AccountIds)
+		case schemas.OrganizationConfiguration_excludedAccountIds:
+			return deserializeOrganizationConfigurationAccountIds(d, schemas.OrganizationConfiguration_excludedAccountIds, &v.ExcludedAccountIds)
+		case schemas.OrganizationConfiguration_excludedOrganizationalUnitIds:
+			return deserializeOrganizationConfigurationOrganizationalUnitIds(d, schemas.OrganizationConfiguration_excludedOrganizationalUnitIds, &v.ExcludedOrganizationalUnitIds)
+		case schemas.OrganizationConfiguration_organizationalUnitIds:
+			return deserializeOrganizationConfigurationOrganizationalUnitIds(d, schemas.OrganizationConfiguration_organizationalUnitIds, &v.OrganizationalUnitIds)
 		case schemas.OrganizationConfiguration_ruleApplyOrder:
 			var ev string
 			if err := d.ReadString(schemas.OrganizationConfiguration_ruleApplyOrder, &ev); err != nil {
 				return err
 			}
 			v.RuleApplyOrder = RuleApplyOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// An organization enrollment configuration sets the organization rule mode on an
+// account, organizational unit (OU), or the organization root and enables
+// Automation for affected member accounts that have opted in to Compute Optimizer.
+type OrganizationEnrollmentConfiguration struct {
+
+	// The ID of the account, organizational unit (OU), or organization root on which
+	// the configuration is stored.
+	//
+	// This member is required.
+	TargetId *string
+
+	// The type of target on which the configuration is stored.
+	//
+	// This member is required.
+	TargetType OrganizationTargetType
+
+	// The organization rule mode set on the target by the organization enrollment
+	// configuration.
+	OrganizationRuleMode OrganizationRuleMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationEnrollmentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationEnrollmentConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationEnrollmentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationRuleMode != "" {
+		s.WriteString(schemas.OrganizationEnrollmentConfiguration_organizationRuleMode, string(v.OrganizationRuleMode))
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.OrganizationEnrollmentConfiguration_targetId, *v.TargetId)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.OrganizationEnrollmentConfiguration_targetType, string(v.TargetType))
+	}
+}
+func (v *OrganizationEnrollmentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationEnrollmentConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationEnrollmentConfiguration_organizationRuleMode:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationEnrollmentConfiguration_organizationRuleMode, &ev); err != nil {
+				return err
+			}
+			v.OrganizationRuleMode = OrganizationRuleMode(ev)
+			return nil
+		case schemas.OrganizationEnrollmentConfiguration_targetId:
+			v.TargetId = new(string)
+			return d.ReadString(schemas.OrganizationEnrollmentConfiguration_targetId, v.TargetId)
+		case schemas.OrganizationEnrollmentConfiguration_targetType:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationEnrollmentConfiguration_targetType, &ev); err != nil {
+				return err
+			}
+			v.TargetType = OrganizationTargetType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Information about the source of an effective organization rule mode.
+type OrganizationRuleModeSource struct {
+
+	// How the effective organization rule mode is supplied.
+	//
+	//   - Applied - An organization enrollment configuration is on this organizational
+	//   unit or account.
+	//
+	//   - Inherited - The organization enrollment configuration is on the parent
+	//   organizational unit or root.
+	//
+	//   - Direct - The organization rule mode is set on the account itself, with no
+	//   organization enrollment configuration applied.
+	//
+	//   - Default - No organization enrollment configuration applies, so the
+	//   organization rule mode is None allowed.
+	//
+	// This member is required.
+	SourceType OrganizationRuleModeSourceType
+
+	// The ID of the account, organizational unit (OU), or organization root that has
+	// the organization enrollment configuration. This field is omitted when sourceType
+	// is Direct or Default .
+	SourceTargetId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OrganizationRuleModeSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationRuleModeSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationRuleModeSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceTargetId != nil {
+		s.WriteString(schemas.OrganizationRuleModeSource_sourceTargetId, *v.SourceTargetId)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.OrganizationRuleModeSource_sourceType, string(v.SourceType))
+	}
+}
+func (v *OrganizationRuleModeSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationRuleModeSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationRuleModeSource_sourceTargetId:
+			v.SourceTargetId = new(string)
+			return d.ReadString(schemas.OrganizationRuleModeSource_sourceTargetId, v.SourceTargetId)
+		case schemas.OrganizationRuleModeSource_sourceType:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationRuleModeSource_sourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = OrganizationRuleModeSourceType(ev)
 			return nil
 		}
 		return nil
@@ -1093,6 +1366,18 @@ type OrganizationScope struct {
 	// List of Amazon Web Services account IDs to include in the organization scope.
 	AccountIds []string
 
+	// The Amazon Web Services account IDs to exclude from the preview scope.
+	ExcludedAccountIds []string
+
+	// The organizational unit (OU) or organization root IDs to exclude from the
+	// preview scope. The preview doesn't include accounts in the specified OUs or
+	// their child OUs.
+	ExcludedOrganizationalUnitIds []string
+
+	// The organizational unit (OU) or organization root IDs to include in the preview
+	// scope. The preview includes accounts in the specified OUs and their child OUs.
+	OrganizationalUnitIds []string
+
 	noSmithyDocumentSerde
 }
 
@@ -1106,15 +1391,73 @@ func (v *OrganizationScope) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountIds != nil {
 		serializeOrganizationConfigurationAccountIds(s, schemas.OrganizationScope_accountIds, v.AccountIds)
 	}
+	if v.ExcludedAccountIds != nil {
+		serializeOrganizationConfigurationAccountIds(s, schemas.OrganizationScope_excludedAccountIds, v.ExcludedAccountIds)
+	}
+	if v.ExcludedOrganizationalUnitIds != nil {
+		serializeOrganizationConfigurationOrganizationalUnitIds(s, schemas.OrganizationScope_excludedOrganizationalUnitIds, v.ExcludedOrganizationalUnitIds)
+	}
+	if v.OrganizationalUnitIds != nil {
+		serializeOrganizationConfigurationOrganizationalUnitIds(s, schemas.OrganizationScope_organizationalUnitIds, v.OrganizationalUnitIds)
+	}
 }
 func (v *OrganizationScope) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OrganizationScope, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.OrganizationScope_accountIds:
 			return deserializeOrganizationConfigurationAccountIds(d, schemas.OrganizationScope_accountIds, &v.AccountIds)
+		case schemas.OrganizationScope_excludedAccountIds:
+			return deserializeOrganizationConfigurationAccountIds(d, schemas.OrganizationScope_excludedAccountIds, &v.ExcludedAccountIds)
+		case schemas.OrganizationScope_excludedOrganizationalUnitIds:
+			return deserializeOrganizationConfigurationOrganizationalUnitIds(d, schemas.OrganizationScope_excludedOrganizationalUnitIds, &v.ExcludedOrganizationalUnitIds)
+		case schemas.OrganizationScope_organizationalUnitIds:
+			return deserializeOrganizationConfigurationOrganizationalUnitIds(d, schemas.OrganizationScope_organizationalUnitIds, &v.OrganizationalUnitIds)
 		}
 		return nil
 	})
+}
+
+// An account, organizational unit (OU), or organization root to which an
+// organization enrollment configuration applies. The management account can't be
+// specified as an account target.
+//
+// The following types satisfy this interface:
+//
+//	OrganizationTargetMemberAccountId
+//	OrganizationTargetMemberOrganizationalUnitId
+type OrganizationTarget interface {
+	isOrganizationTarget()
+}
+
+// The ID of the member account to target. You can't specify the management
+// account.
+type OrganizationTargetMemberAccountId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*OrganizationTargetMemberAccountId) isOrganizationTarget() {}
+func (v *OrganizationTargetMemberAccountId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.OrganizationTarget_accountId, v.Value)
+}
+func (v *OrganizationTargetMemberAccountId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.OrganizationTarget_accountId, &v.Value)
+}
+
+// The ID of the organizational unit (OU) or organization root to target.
+type OrganizationTargetMemberOrganizationalUnitId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*OrganizationTargetMemberOrganizationalUnitId) isOrganizationTarget() {}
+func (v *OrganizationTargetMemberOrganizationalUnitId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.OrganizationTarget_organizationalUnitId, v.Value)
+}
+func (v *OrganizationTargetMemberOrganizationalUnitId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.OrganizationTarget_organizationalUnitId, &v.Value)
 }
 
 // Contains the results of previewing an automation rule against available
@@ -1503,7 +1846,9 @@ func (v *RecommendedAction) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // A filter used to narrow down recommended action results based on specific
-// criteria.
+// criteria. If a filter has more than one value, a recommended action matches the
+// filter when it matches any of the values. If you specify more than one filter, a
+// recommended action must match all of the filters.
 type RecommendedActionFilter struct {
 
 	// The name of the filter field to apply.
@@ -1511,8 +1856,32 @@ type RecommendedActionFilter struct {
 	// This member is required.
 	Name RecommendedActionFilterName
 
-	// List of filter values to match against the specified filter name. Used to
-	// narrow down recommended actions based on specific criteria.
+	// The list of values to filter by for the specified filter name. Wildcards aren't
+	// supported. An asterisk ( * ) or a question mark ( ? ) in a value matches only
+	// that literal character. How a value is matched depends on the filter name:
+	//
+	// ResourceType, RecommendedActionType, ResourceId, and AccountId The value that
+	// you specify must exactly match the corresponding field of the recommended
+	// action, including case. For example, specify EbsVolume , not ebsvolume .
+	//
+	// CurrentResourceDetailsEbsVolumeType Matches when the value appears anywhere in
+	// the current resource details of the recommended action, which include the volume
+	// type, size, IOPS, and throughput. Matching is case sensitive, and a partial
+	// value also matches. For example, gp matches both gp2 and gp3 volumes, and 100
+	// matches any volume whose size, IOPS, or throughput contains 100. To filter by
+	// volume type, specify the complete volume type, such as gp3 or io2 .
+	//
+	// ResourceTagsKey and ResourceTagsValue Matches when the value appears anywhere
+	// in the tags of the resource. Both filter names search every tag key and tag
+	// value. Matching is case sensitive, and a partial value also matches. For
+	// example, a ResourceTagsKey value of test matches a resource that has a tag
+	// value of test .
+	//
+	// LookBackPeriodInDays Matches when the lookback period of the recommended action
+	// equals the value. Specify a number of days, such as 14 .
+	//
+	// RestartNeeded Matches recommended actions based on whether implementing them
+	// requires a resource restart. Specify true or false .
 	//
 	// This member is required.
 	Values []string
@@ -1679,7 +2048,8 @@ func (v *ResourceDetailsMemberEbsVolume) Deserialize(d smithy.ShapeDeserializer)
 type ResourceTagsCriteriaCondition struct {
 
 	// The comparison operator used to evaluate the attribute against the specified
-	// values.
+	// values. Only operators that begin with String are valid. Any other operator
+	// returns an InvalidParameterValueException .
 	Comparison ComparisonOperator
 
 	// The tag key to use for comparison when filtering resources.
@@ -1846,7 +2216,8 @@ func (v *Schedule) Deserialize(d smithy.ShapeDeserializer) error {
 type StringCriteriaCondition struct {
 
 	// The comparison operator used to evaluate the attribute against the specified
-	// values.
+	// values. Only operators that begin with String are valid. Any other operator
+	// returns an InvalidParameterValueException .
 	Comparison ComparisonOperator
 
 	// List of string values to compare against when applying the criteria condition.
@@ -2075,4 +2446,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isResourceDetails() {}
+func (*UnknownUnionMember) isOrganizationTarget() {}
+func (*UnknownUnionMember) isResourceDetails()    {}

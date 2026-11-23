@@ -7,6 +7,24 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeContextFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContextFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeContextFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeCustomerAwsAccountIdFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -49,7 +67,15 @@ func serializeMarketplaceRevenueShareAllocationSummaryList(s smithy.ShapeSeriali
 	s.CloseList()
 }
 
-func serializeMarketplaceRevenueShareSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MarketplaceRevenueShareSummary) {
+func serializeMarketplaceRevenueShareIdentifierList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeMarketplaceRevenueShareProductDetailList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MarketplaceRevenueShareProductDetail) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -59,7 +85,27 @@ func serializeMarketplaceRevenueShareSummaryList(s smithy.ShapeSerializer, schem
 	s.CloseList()
 }
 
-func serializeMarketplaceRevenueShareTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
+func serializeMarketplaceRevenueShareProductEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MarketplaceRevenueShareProductEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeMarketplaceRevenueShareProductSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MarketplaceRevenueShareProductSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeMarketplaceRevenueShareSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MarketplaceRevenueShareSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -125,6 +171,44 @@ func serializeRevenueShareAllocationChangeList(s smithy.ShapeSerializer, schema 
 	s.CloseList()
 }
 
+func serializeRevenueShareProductAccountDetailList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RevenueShareProductAccountDetail) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRevenueShareProductAccountEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RevenueShareProductAccountEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRevenueShareProductAccountIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRevenueShareProductAccountSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RevenueShareProductAccountSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -151,6 +235,49 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 		s.CloseStruct()
 	}
 	s.CloseList()
+}
+
+func deserializeContextFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContextFilter) error {
+	*v = make([]types.ContextFilter, 0)
+	var vv types.ContextFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ContextFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ContextFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeContextFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeCustomerAwsAccountIdFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
@@ -259,6 +386,93 @@ func deserializeMarketplaceRevenueShareAllocationSummaryList(d smithy.ShapeDeser
 	})
 }
 
+func deserializeMarketplaceRevenueShareIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMarketplaceRevenueShareProductDetailList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MarketplaceRevenueShareProductDetail) error {
+	*v = make([]types.MarketplaceRevenueShareProductDetail, 0)
+	var vv types.MarketplaceRevenueShareProductDetail
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MarketplaceRevenueShareProductDetail
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.MarketplaceRevenueShareProductDetail{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMarketplaceRevenueShareProductEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MarketplaceRevenueShareProductEntry) error {
+	*v = make([]types.MarketplaceRevenueShareProductEntry, 0)
+	var vv types.MarketplaceRevenueShareProductEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MarketplaceRevenueShareProductEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.MarketplaceRevenueShareProductEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMarketplaceRevenueShareProductSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MarketplaceRevenueShareProductSummary) error {
+	*v = make([]types.MarketplaceRevenueShareProductSummary, 0)
+	var vv types.MarketplaceRevenueShareProductSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.MarketplaceRevenueShareProductSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.MarketplaceRevenueShareProductSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeMarketplaceRevenueShareSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MarketplaceRevenueShareSummary) error {
 	*v = make([]types.MarketplaceRevenueShareSummary, 0)
 	var vv types.MarketplaceRevenueShareSummary
@@ -272,28 +486,6 @@ func deserializeMarketplaceRevenueShareSummaryList(d smithy.ShapeDeserializer, s
 		}
 
 		vv = types.MarketplaceRevenueShareSummary{}
-		if err := vv.Deserialize(d); err != nil {
-			return err
-		}
-
-		*v = append(*v, vv)
-		return nil
-	})
-}
-
-func deserializeMarketplaceRevenueShareTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
-	*v = make([]types.Tag, 0)
-	var vv types.Tag
-	return smithy.ReadList(d, s, func() error {
-		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
-			return err
-		} else if isNil {
-			var zero types.Tag
-			*v = append(*v, zero)
-			return nil
-		}
-
-		vv = types.Tag{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -433,6 +625,93 @@ func deserializeRevenueShareAllocationChangeList(d smithy.ShapeDeserializer, s *
 	})
 }
 
+func deserializeRevenueShareProductAccountDetailList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RevenueShareProductAccountDetail) error {
+	*v = make([]types.RevenueShareProductAccountDetail, 0)
+	var vv types.RevenueShareProductAccountDetail
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RevenueShareProductAccountDetail
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RevenueShareProductAccountDetail{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRevenueShareProductAccountEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RevenueShareProductAccountEntry) error {
+	*v = make([]types.RevenueShareProductAccountEntry, 0)
+	var vv types.RevenueShareProductAccountEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RevenueShareProductAccountEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RevenueShareProductAccountEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRevenueShareProductAccountIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRevenueShareProductAccountSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RevenueShareProductAccountSummary) error {
+	*v = make([]types.RevenueShareProductAccountSummary, 0)
+	var vv types.RevenueShareProductAccountSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RevenueShareProductAccountSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RevenueShareProductAccountSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -494,6 +773,36 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func serializeRevenueAttributionContext(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
+func deserializeRevenueAttributionContext(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
 		return nil
 	})
 }

@@ -782,18 +782,6 @@ func TestCheckSnapshot_DeleteAsset(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_DeleteAssetType(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DeleteAssetType(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "DeleteAssetType")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_DeleteAttachment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAttachment(context.Background(), nil, func(o *Options) {
@@ -2894,18 +2882,6 @@ func TestCheckSnapshot_PutAsset(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_PutAssetType(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.PutAssetType(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "PutAssetType")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_PutAttachment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutAttachment(context.Background(), nil, func(o *Options) {
@@ -4542,18 +4518,6 @@ func TestUpdateSnapshot_DeleteAsset(t *testing.T) {
 	_, err := svc.DeleteAsset(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAsset")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_DeleteAssetType(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DeleteAssetType(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "DeleteAssetType")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6654,18 +6618,6 @@ func TestUpdateSnapshot_PutAsset(t *testing.T) {
 	_, err := svc.PutAsset(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutAsset")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_PutAssetType(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.PutAssetType(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "PutAssetType")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

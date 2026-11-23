@@ -38,6 +38,11 @@ var CreateBackup = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateBackup",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateClusterPeer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateClusterPeer",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateDataRepositoryAssociation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "CreateDataRepositoryAssociation",
@@ -63,14 +68,34 @@ var CreateFileSystemFromBackup = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateFileSystemFromBackup",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateSnapmirrorPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateSnapmirrorPolicy",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateSnapmirrorRelationship = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateSnapmirrorRelationship",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateSnapshot = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "CreateSnapshot",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateSnapshotPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateSnapshotPolicy",
+}, smithy.ShapeTypeOperation, 0)
+
 var CreateStorageVirtualMachine = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "CreateStorageVirtualMachine",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateStorageVirtualMachinePeer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateStorageVirtualMachinePeer",
 }, smithy.ShapeTypeOperation, 0)
 
 var CreateVolume = smithy.NewSchema(smithy.ShapeID{
@@ -88,6 +113,11 @@ var DeleteBackup = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteBackup",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeleteClusterPeer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteClusterPeer",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeleteDataRepositoryAssociation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "DeleteDataRepositoryAssociation",
@@ -103,14 +133,34 @@ var DeleteFileSystem = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteFileSystem",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeleteSnapmirrorPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteSnapmirrorPolicy",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteSnapmirrorRelationship = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteSnapmirrorRelationship",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeleteSnapshot = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "DeleteSnapshot",
 }, smithy.ShapeTypeOperation, 0)
 
+var DeleteSnapshotPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteSnapshotPolicy",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeleteStorageVirtualMachine = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "DeleteStorageVirtualMachine",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteStorageVirtualMachinePeer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteStorageVirtualMachinePeer",
 }, smithy.ShapeTypeOperation, 0)
 
 var DeleteVolume = smithy.NewSchema(smithy.ShapeID{
@@ -121,6 +171,11 @@ var DeleteVolume = smithy.NewSchema(smithy.ShapeID{
 var DescribeBackups = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "DescribeBackups",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeClusterPeers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeClusterPeers",
 }, smithy.ShapeTypeOperation, 0)
 
 var DescribeDataRepositoryAssociations = smithy.NewSchema(smithy.ShapeID{
@@ -158,9 +213,29 @@ var DescribeSharedVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeSharedVpcConfiguration",
 }, smithy.ShapeTypeOperation, 0)
 
+var DescribeSnapmirrorPolicies = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeSnapmirrorPolicies",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeSnapmirrorRelationships = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeSnapmirrorRelationships",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeSnapshotPolicies = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeSnapshotPolicies",
+}, smithy.ShapeTypeOperation, 0)
+
 var DescribeSnapshots = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "DescribeSnapshots",
+}, smithy.ShapeTypeOperation, 0)
+
+var DescribeStorageVirtualMachinePeers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeStorageVirtualMachinePeers",
 }, smithy.ShapeTypeOperation, 0)
 
 var DescribeStorageVirtualMachines = smithy.NewSchema(smithy.ShapeID{
@@ -213,6 +288,11 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UntagResource",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateClusterPeer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateClusterPeer",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateDataRepositoryAssociation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "UpdateDataRepositoryAssociation",
@@ -233,14 +313,34 @@ var UpdateSharedVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateSharedVpcConfiguration",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateSnapmirrorPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateSnapmirrorPolicy",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateSnapmirrorRelationship = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateSnapmirrorRelationship",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateSnapshot = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "UpdateSnapshot",
 }, smithy.ShapeTypeOperation, 0)
 
+var UpdateSnapshotPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateSnapshotPolicy",
+}, smithy.ShapeTypeOperation, 0)
+
 var UpdateStorageVirtualMachine = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "UpdateStorageVirtualMachine",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateStorageVirtualMachinePeer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateStorageVirtualMachinePeer",
 }, smithy.ShapeTypeOperation, 0)
 
 var UpdateVolume = smithy.NewSchema(smithy.ShapeID{
@@ -351,7 +451,7 @@ var _AdministrativeActions_member *smithy.Schema
 var AdministrativeActionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "AdministrativeActionType",
-}, smithy.ShapeTypeEnum, 15)
+}, smithy.ShapeTypeEnum, 16)
 var AdministrativeActionType_FILE_SYSTEM_UPDATE *smithy.Schema
 
 var AdministrativeActionType_STORAGE_OPTIMIZATION *smithy.Schema
@@ -381,6 +481,8 @@ var AdministrativeActionType_VOLUME_UPDATE_WITH_SNAPSHOT *smithy.Schema
 var AdministrativeActionType_VOLUME_INITIALIZE_WITH_SNAPSHOT *smithy.Schema
 
 var AdministrativeActionType_DOWNLOAD_DATA_FROM_BACKUP *smithy.Schema
+
+var AdministrativeActionType_VOLUME_CLONE_SPLIT *smithy.Schema
 
 var _AdminPassword = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -438,6 +540,22 @@ var AliasLifecycle_DELETING *smithy.Schema
 var AliasLifecycle_CREATE_FAILED *smithy.Schema
 
 var AliasLifecycle_DELETE_FAILED *smithy.Schema
+
+var _AllowedSvmIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "AllowedSvmIds",
+}, smithy.ShapeTypeList, 1)
+var _AllowedSvmIds_member *smithy.Schema
+
+var AllowedSvmMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "AllowedSvmMode",
+}, smithy.ShapeTypeEnum, 3)
+var AllowedSvmMode_ALL *smithy.Schema
+
+var AllowedSvmMode_NONE *smithy.Schema
+
+var AllowedSvmMode_SPECIFIED *smithy.Schema
 
 var _AlternateDNSName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -656,6 +774,141 @@ var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ClientRequestToken",
 }, smithy.ShapeTypeString, 0)
 
+var CloneConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CloneConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var CloneConfiguration_ParentVolumeId *smithy.Schema
+
+var CloneConfiguration_SnapshotId *smithy.Schema
+
+var CloneSplitAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CloneSplitAction",
+}, smithy.ShapeTypeEnum, 1)
+var CloneSplitAction_START *smithy.Schema
+
+var ClusterPeer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeer",
+}, smithy.ShapeTypeStructure, 14)
+var ClusterPeer_ResourceARN *smithy.Schema
+
+var ClusterPeer_ClusterPeerId *smithy.Schema
+
+var ClusterPeer_FileSystemId *smithy.Schema
+
+var ClusterPeer_Lifecycle *smithy.Schema
+
+var ClusterPeer_LifecycleTransitionReason *smithy.Schema
+
+var ClusterPeer_Tags *smithy.Schema
+
+var ClusterPeer_PeerAddresses *smithy.Schema
+
+var ClusterPeer_PeerClusterName *smithy.Schema
+
+var ClusterPeer_PassphraseSecretArn *smithy.Schema
+
+var ClusterPeer_AllowedSvmMode *smithy.Schema
+
+var ClusterPeer_AllowedSvmIds *smithy.Schema
+
+var ClusterPeer_Status *smithy.Schema
+
+var ClusterPeer_UUID *smithy.Schema
+
+var ClusterPeer_AuthenticationStatus *smithy.Schema
+
+var _ClusterPeerAuthenticationInUse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerAuthenticationInUse",
+}, smithy.ShapeTypeString, 0)
+
+var _ClusterPeerAuthenticationState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerAuthenticationState",
+}, smithy.ShapeTypeString, 0)
+
+var ClusterPeerAuthenticationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerAuthenticationStatus",
+}, smithy.ShapeTypeStructure, 2)
+var ClusterPeerAuthenticationStatus_State *smithy.Schema
+
+var ClusterPeerAuthenticationStatus_InUse *smithy.Schema
+
+var ClusterPeerFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerFilter",
+}, smithy.ShapeTypeStructure, 2)
+var ClusterPeerFilter_Name *smithy.Schema
+
+var ClusterPeerFilter_Values *smithy.Schema
+
+var ClusterPeerFilterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerFilterName",
+}, smithy.ShapeTypeEnum, 1)
+var ClusterPeerFilterName_FILE_SYSTEM_ID *smithy.Schema
+
+var _ClusterPeerFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerFilters",
+}, smithy.ShapeTypeList, 1)
+var _ClusterPeerFilters_member *smithy.Schema
+
+var _ClusterPeerFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerFilterValue",
+}, smithy.ShapeTypeString, 0)
+
+var _ClusterPeerFilterValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerFilterValues",
+}, smithy.ShapeTypeList, 1)
+var _ClusterPeerFilterValues_member *smithy.Schema
+
+var _ClusterPeerId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerId",
+}, smithy.ShapeTypeString, 0)
+
+var _ClusterPeerIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerIds",
+}, smithy.ShapeTypeList, 1)
+var _ClusterPeerIds_member *smithy.Schema
+
+var ClusterPeerLifecycle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerLifecycle",
+}, smithy.ShapeTypeEnum, 4)
+var ClusterPeerLifecycle_CREATING *smithy.Schema
+
+var ClusterPeerLifecycle_CREATED *smithy.Schema
+
+var ClusterPeerLifecycle_DELETING *smithy.Schema
+
+var ClusterPeerLifecycle_FAILED *smithy.Schema
+
+var ClusterPeerNotFound = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerNotFound",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var ClusterPeerNotFound_Message *smithy.Schema
+
+var _ClusterPeers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeers",
+}, smithy.ShapeTypeList, 1)
+var _ClusterPeers_member *smithy.Schema
+
+var _ClusterPeerStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ClusterPeerStatus",
+}, smithy.ShapeTypeString, 0)
+
 var CompletionReport = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "CompletionReport",
@@ -709,6 +962,14 @@ var CreateAndAttachS3AccessPointS3Configuration = smithy.NewSchema(smithy.ShapeI
 var CreateAndAttachS3AccessPointS3Configuration_VpcConfiguration *smithy.Schema
 
 var CreateAndAttachS3AccessPointS3Configuration_Policy *smithy.Schema
+
+var CreateCloneConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateCloneConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var CreateCloneConfiguration_ParentVolumeId *smithy.Schema
+
+var CreateCloneConfiguration_SnapshotId *smithy.Schema
 
 var _CreateFileCacheDataRepositoryAssociations = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -868,10 +1129,20 @@ var CreateFileSystemWindowsConfiguration_DiskIopsConfiguration *smithy.Schema
 
 var CreateFileSystemWindowsConfiguration_FsrmConfiguration *smithy.Schema
 
+var CreateOntapSnapshotConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateOntapSnapshotConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var CreateOntapSnapshotConfiguration_SnapmirrorLabel *smithy.Schema
+
+var CreateOntapSnapshotConfiguration_ExpiryTime *smithy.Schema
+
+var CreateOntapSnapshotConfiguration_SnaplockExpiryTime *smithy.Schema
+
 var CreateOntapVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "CreateOntapVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var CreateOntapVolumeConfiguration_JunctionPath *smithy.Schema
 
 var CreateOntapVolumeConfiguration_SecurityStyle *smithy.Schema
@@ -897,6 +1168,8 @@ var CreateOntapVolumeConfiguration_VolumeStyle *smithy.Schema
 var CreateOntapVolumeConfiguration_AggregateConfiguration *smithy.Schema
 
 var CreateOntapVolumeConfiguration_SizeInBytes *smithy.Schema
+
+var CreateOntapVolumeConfiguration_CloneConfiguration *smithy.Schema
 
 var CreateOpenZFSOriginSnapshotConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -945,6 +1218,18 @@ var CreateSnaplockConfiguration_RetentionPeriod *smithy.Schema
 var CreateSnaplockConfiguration_SnaplockType *smithy.Schema
 
 var CreateSnaplockConfiguration_VolumeAppendModeEnabled *smithy.Schema
+
+var CreateSnapmirrorDestination = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateSnapmirrorDestination",
+}, smithy.ShapeTypeStructure, 1)
+var CreateSnapmirrorDestination_VolumeId *smithy.Schema
+
+var CreateSnapmirrorSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateSnapmirrorSource",
+}, smithy.ShapeTypeStructure, 1)
+var CreateSnapmirrorSource_Path *smithy.Schema
 
 var CreateSvmActiveDirectoryConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -1421,6 +1706,11 @@ var _EventTypes = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EventTypes",
 }, smithy.ShapeTypeList, 1)
 var _EventTypes_member *smithy.Schema
+
+var _ExpiryTime = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ExpiryTime",
+}, smithy.ShapeTypeTimestamp, 0)
 
 var _FailedCount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -1995,6 +2285,11 @@ var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "KmsKeyId",
 }, smithy.ShapeTypeString, 0)
 
+var _LagTimeInMinutes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "LagTimeInMinutes",
+}, smithy.ShapeTypeLong, 0)
+
 var _LastUpdatedTime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "LastUpdatedTime",
@@ -2003,8 +2298,10 @@ var _LastUpdatedTime = smithy.NewSchema(smithy.ShapeID{
 var LifecycleTransitionReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "LifecycleTransitionReason",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var LifecycleTransitionReason_Message *smithy.Schema
+
+var LifecycleTransitionReason_OntapError *smithy.Schema
 
 var _LimitedMaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -2246,7 +2543,7 @@ var NotServiceResourceError_Message *smithy.Schema
 var OntapDeploymentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "OntapDeploymentType",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 6)
 var OntapDeploymentType_MULTI_AZ_1 *smithy.Schema
 
 var OntapDeploymentType_SINGLE_AZ_1 *smithy.Schema
@@ -2255,11 +2552,23 @@ var OntapDeploymentType_SINGLE_AZ_2 *smithy.Schema
 
 var OntapDeploymentType_MULTI_AZ_2 *smithy.Schema
 
+var OntapDeploymentType_SINGLE_AZ_3 *smithy.Schema
+
+var OntapDeploymentType_MULTI_AZ_3 *smithy.Schema
+
 var _OntapEndpointIpAddresses = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "OntapEndpointIpAddresses",
 }, smithy.ShapeTypeList, 1)
 var _OntapEndpointIpAddresses_member *smithy.Schema
+
+var OntapError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "OntapError",
+}, smithy.ShapeTypeStructure, 2)
+var OntapError_Message *smithy.Schema
+
+var OntapError_Code *smithy.Schema
 
 var OntapFileSystemConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -2316,6 +2625,20 @@ var OntapFileSystemUserType_UNIX *smithy.Schema
 
 var OntapFileSystemUserType_WINDOWS *smithy.Schema
 
+var OntapSnapshotConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "OntapSnapshotConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var OntapSnapshotConfiguration_SizeInMegabytes *smithy.Schema
+
+var OntapSnapshotConfiguration_SnapmirrorLabel *smithy.Schema
+
+var OntapSnapshotConfiguration_ExpiryTime *smithy.Schema
+
+var OntapSnapshotConfiguration_SnaplockExpiryTime *smithy.Schema
+
+var OntapSnapshotConfiguration_UUID *smithy.Schema
+
 var OntapUnixFileSystemUser = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "OntapUnixFileSystemUser",
@@ -2325,7 +2648,7 @@ var OntapUnixFileSystemUser_Name *smithy.Schema
 var OntapVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "OntapVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var OntapVolumeConfiguration_FlexCacheEndpointType *smithy.Schema
 
 var OntapVolumeConfiguration_JunctionPath *smithy.Schema
@@ -2357,6 +2680,8 @@ var OntapVolumeConfiguration_VolumeStyle *smithy.Schema
 var OntapVolumeConfiguration_AggregateConfiguration *smithy.Schema
 
 var OntapVolumeConfiguration_SizeInBytes *smithy.Schema
+
+var OntapVolumeConfiguration_CloneConfiguration *smithy.Schema
 
 var OntapVolumeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -2624,6 +2949,27 @@ var _OrganizationalUnitDistinguishedName = smithy.NewSchema(smithy.ShapeID{
 var _Parameter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "Parameter",
+}, smithy.ShapeTypeString, 0)
+
+var _PeerAddresses = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "PeerAddresses",
+}, smithy.ShapeTypeList, 1)
+var _PeerAddresses_member *smithy.Schema
+
+var _PeerClusterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "PeerClusterName",
+}, smithy.ShapeTypeString, 0)
+
+var _PeerSvmAlias = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "PeerSvmAlias",
+}, smithy.ShapeTypeString, 0)
+
+var _PeerSvmName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "PeerSvmName",
 }, smithy.ShapeTypeString, 0)
 
 var _PerUnitStorageThroughput = smithy.NewSchema(smithy.ShapeID{
@@ -3055,6 +3401,11 @@ var SnaplockConfiguration_SnaplockType *smithy.Schema
 
 var SnaplockConfiguration_VolumeAppendModeEnabled *smithy.Schema
 
+var _SnaplockExpiryTime = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnaplockExpiryTime",
+}, smithy.ShapeTypeTimestamp, 0)
+
 var SnaplockRetentionPeriod = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "SnaplockRetentionPeriod",
@@ -3073,10 +3424,377 @@ var SnaplockType_COMPLIANCE *smithy.Schema
 
 var SnaplockType_ENTERPRISE *smithy.Schema
 
+var SnapmirrorDestination = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorDestination",
+}, smithy.ShapeTypeStructure, 2)
+var SnapmirrorDestination_Path *smithy.Schema
+
+var SnapmirrorDestination_VolumeId *smithy.Schema
+
+var SnapmirrorExportedSnapshot = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorExportedSnapshot",
+}, smithy.ShapeTypeStructure, 2)
+var SnapmirrorExportedSnapshot_SnapshotId *smithy.Schema
+
+var SnapmirrorExportedSnapshot_SnapshotName *smithy.Schema
+
+var _SnapmirrorExportedSnapshotName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorExportedSnapshotName",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapmirrorHealthy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorHealthy",
+}, smithy.ShapeTypeBoolean, 0)
+
+var _SnapmirrorLabel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorLabel",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapmirrorPath = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPath",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapmirrorPolicies = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicies",
+}, smithy.ShapeTypeList, 1)
+var _SnapmirrorPolicies_member *smithy.Schema
+
+var SnapmirrorPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicy",
+}, smithy.ShapeTypeStructure, 15)
+var SnapmirrorPolicy_ResourceARN *smithy.Schema
+
+var SnapmirrorPolicy_SnapmirrorPolicyId *smithy.Schema
+
+var SnapmirrorPolicy_FileSystemId *smithy.Schema
+
+var SnapmirrorPolicy_StorageVirtualMachineId *smithy.Schema
+
+var SnapmirrorPolicy_Name *smithy.Schema
+
+var SnapmirrorPolicy_SnapshotCopyMode *smithy.Schema
+
+var SnapmirrorPolicy_RetentionRules *smithy.Schema
+
+var SnapmirrorPolicy_TransferSchedule *smithy.Schema
+
+var SnapmirrorPolicy_NetworkCompressionEnabled *smithy.Schema
+
+var SnapmirrorPolicy_ThrottleInKbps *smithy.Schema
+
+var SnapmirrorPolicy_Scope *smithy.Schema
+
+var SnapmirrorPolicy_Lifecycle *smithy.Schema
+
+var SnapmirrorPolicy_UUID *smithy.Schema
+
+var SnapmirrorPolicy_LifecycleTransitionReason *smithy.Schema
+
+var SnapmirrorPolicy_Tags *smithy.Schema
+
+var _SnapmirrorPolicyCreationScheduleName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyCreationScheduleName",
+}, smithy.ShapeTypeString, 0)
+
+var SnapmirrorPolicyFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyFilter",
+}, smithy.ShapeTypeStructure, 2)
+var SnapmirrorPolicyFilter_Name *smithy.Schema
+
+var SnapmirrorPolicyFilter_Values *smithy.Schema
+
+var SnapmirrorPolicyFilterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyFilterName",
+}, smithy.ShapeTypeEnum, 2)
+var SnapmirrorPolicyFilterName_FILE_SYSTEM_ID *smithy.Schema
+
+var SnapmirrorPolicyFilterName_STORAGE_VIRTUAL_MACHINE_ID *smithy.Schema
+
+var _SnapmirrorPolicyFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyFilters",
+}, smithy.ShapeTypeList, 1)
+var _SnapmirrorPolicyFilters_member *smithy.Schema
+
+var _SnapmirrorPolicyFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyFilterValue",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapmirrorPolicyFilterValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyFilterValues",
+}, smithy.ShapeTypeList, 1)
+var _SnapmirrorPolicyFilterValues_member *smithy.Schema
+
+var _SnapmirrorPolicyId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyId",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapmirrorPolicyIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyIds",
+}, smithy.ShapeTypeList, 1)
+var _SnapmirrorPolicyIds_member *smithy.Schema
+
+var SnapmirrorPolicyLifecycle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyLifecycle",
+}, smithy.ShapeTypeEnum, 4)
+var SnapmirrorPolicyLifecycle_CREATING *smithy.Schema
+
+var SnapmirrorPolicyLifecycle_CREATED *smithy.Schema
+
+var SnapmirrorPolicyLifecycle_DELETING *smithy.Schema
+
+var SnapmirrorPolicyLifecycle_FAILED *smithy.Schema
+
+var _SnapmirrorPolicyName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyName",
+}, smithy.ShapeTypeString, 0)
+
+var SnapmirrorPolicyNotFound = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyNotFound",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var SnapmirrorPolicyNotFound_Message *smithy.Schema
+
+var _SnapmirrorPolicyRetentionCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyRetentionCount",
+}, smithy.ShapeTypeInteger, 0)
+
+var SnapmirrorPolicyRetentionRule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyRetentionRule",
+}, smithy.ShapeTypeStructure, 3)
+var SnapmirrorPolicyRetentionRule_Label *smithy.Schema
+
+var SnapmirrorPolicyRetentionRule_Count *smithy.Schema
+
+var SnapmirrorPolicyRetentionRule_CreationSchedule *smithy.Schema
+
+var _SnapmirrorPolicyRetentionRules = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyRetentionRules",
+}, smithy.ShapeTypeList, 1)
+var _SnapmirrorPolicyRetentionRules_member *smithy.Schema
+
+var SnapmirrorPolicyScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicyScope",
+}, smithy.ShapeTypeEnum, 2)
+var SnapmirrorPolicyScope_FILESYSTEM *smithy.Schema
+
+var SnapmirrorPolicyScope_SVM *smithy.Schema
+
+var SnapmirrorPolicySnapshotCopyMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorPolicySnapshotCopyMode",
+}, smithy.ShapeTypeEnum, 3)
+var SnapmirrorPolicySnapshotCopyMode_COPY_ALL_SOURCE_SNAPSHOTS *smithy.Schema
+
+var SnapmirrorPolicySnapshotCopyMode_COPY_LATEST_SOURCE_SNAPSHOT *smithy.Schema
+
+var SnapmirrorPolicySnapshotCopyMode_NO_CREATE_SNAPSHOT_ON_SOURCE *smithy.Schema
+
+var SnapmirrorRelationship = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationship",
+}, smithy.ShapeTypeStructure, 18)
+var SnapmirrorRelationship_ResourceARN *smithy.Schema
+
+var SnapmirrorRelationship_SnapmirrorRelationshipId *smithy.Schema
+
+var SnapmirrorRelationship_FileSystemId *smithy.Schema
+
+var SnapmirrorRelationship_Lifecycle *smithy.Schema
+
+var SnapmirrorRelationship_LifecycleTransitionReason *smithy.Schema
+
+var SnapmirrorRelationship_Tags *smithy.Schema
+
+var SnapmirrorRelationship_Source *smithy.Schema
+
+var SnapmirrorRelationship_Destination *smithy.Schema
+
+var SnapmirrorRelationship_SnapmirrorPolicy *smithy.Schema
+
+var SnapmirrorRelationship_TransferSchedule *smithy.Schema
+
+var SnapmirrorRelationship_ThrottleInKbps *smithy.Schema
+
+var SnapmirrorRelationship_State *smithy.Schema
+
+var SnapmirrorRelationship_Healthy *smithy.Schema
+
+var SnapmirrorRelationship_UnhealthyReason *smithy.Schema
+
+var SnapmirrorRelationship_LagTimeInMinutes *smithy.Schema
+
+var SnapmirrorRelationship_ExportedSnapshot *smithy.Schema
+
+var SnapmirrorRelationship_TransferState *smithy.Schema
+
+var SnapmirrorRelationship_UUID *smithy.Schema
+
+var SnapmirrorRelationshipFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationshipFilter",
+}, smithy.ShapeTypeStructure, 2)
+var SnapmirrorRelationshipFilter_Name *smithy.Schema
+
+var SnapmirrorRelationshipFilter_Values *smithy.Schema
+
+var SnapmirrorRelationshipFilterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationshipFilterName",
+}, smithy.ShapeTypeEnum, 2)
+var SnapmirrorRelationshipFilterName_FILE_SYSTEM_ID *smithy.Schema
+
+var SnapmirrorRelationshipFilterName_DESTINATION_VOLUME_ID *smithy.Schema
+
+var _SnapmirrorRelationshipFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationshipFilters",
+}, smithy.ShapeTypeList, 1)
+var _SnapmirrorRelationshipFilters_member *smithy.Schema
+
+var _SnapmirrorRelationshipFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationshipFilterValue",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapmirrorRelationshipFilterValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationshipFilterValues",
+}, smithy.ShapeTypeList, 1)
+var _SnapmirrorRelationshipFilterValues_member *smithy.Schema
+
+var _SnapmirrorRelationshipId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationshipId",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapmirrorRelationshipIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationshipIds",
+}, smithy.ShapeTypeList, 1)
+var _SnapmirrorRelationshipIds_member *smithy.Schema
+
+var SnapmirrorRelationshipLifecycle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationshipLifecycle",
+}, smithy.ShapeTypeEnum, 4)
+var SnapmirrorRelationshipLifecycle_CREATING *smithy.Schema
+
+var SnapmirrorRelationshipLifecycle_CREATED *smithy.Schema
+
+var SnapmirrorRelationshipLifecycle_DELETING *smithy.Schema
+
+var SnapmirrorRelationshipLifecycle_FAILED *smithy.Schema
+
+var SnapmirrorRelationshipNotFound = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationshipNotFound",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var SnapmirrorRelationshipNotFound_Message *smithy.Schema
+
+var SnapmirrorRelationshipPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationshipPolicy",
+}, smithy.ShapeTypeStructure, 2)
+var SnapmirrorRelationshipPolicy_PolicyId *smithy.Schema
+
+var SnapmirrorRelationshipPolicy_PolicyName *smithy.Schema
+
+var _SnapmirrorRelationships = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationships",
+}, smithy.ShapeTypeList, 1)
+var _SnapmirrorRelationships_member *smithy.Schema
+
+var SnapmirrorRelationshipState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorRelationshipState",
+}, smithy.ShapeTypeEnum, 5)
+var SnapmirrorRelationshipState_UNINITIALIZED *smithy.Schema
+
+var SnapmirrorRelationshipState_TRANSFERRING *smithy.Schema
+
+var SnapmirrorRelationshipState_SNAPMIRRORED *smithy.Schema
+
+var SnapmirrorRelationshipState_PAUSED *smithy.Schema
+
+var SnapmirrorRelationshipState_BROKEN_OFF *smithy.Schema
+
+var SnapmirrorSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorSource",
+}, smithy.ShapeTypeStructure, 1)
+var SnapmirrorSource_Path *smithy.Schema
+
+var _SnapmirrorTransferBytes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorTransferBytes",
+}, smithy.ShapeTypeLong, 0)
+
+var _SnapmirrorTransferDuration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorTransferDuration",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapmirrorTransferScheduleName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorTransferScheduleName",
+}, smithy.ShapeTypeString, 0)
+
+var SnapmirrorTransferState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorTransferState",
+}, smithy.ShapeTypeStructure, 5)
+var SnapmirrorTransferState_State *smithy.Schema
+
+var SnapmirrorTransferState_Type *smithy.Schema
+
+var SnapmirrorTransferState_BytesTransferred *smithy.Schema
+
+var SnapmirrorTransferState_Duration *smithy.Schema
+
+var SnapmirrorTransferState_EndTime *smithy.Schema
+
+var _SnapmirrorTransferStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorTransferStatus",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapmirrorTransferType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorTransferType",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapmirrorUnhealthyReason = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapmirrorUnhealthyReason",
+}, smithy.ShapeTypeString, 0)
+
 var Snapshot = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "Snapshot",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 11)
 var Snapshot_ResourceARN *smithy.Schema
 
 var Snapshot_SnapshotId *smithy.Schema
@@ -3089,11 +3807,15 @@ var Snapshot_CreationTime *smithy.Schema
 
 var Snapshot_Lifecycle *smithy.Schema
 
+var Snapshot_SnapshotType *smithy.Schema
+
 var Snapshot_LifecycleTransitionReason *smithy.Schema
 
 var Snapshot_Tags *smithy.Schema
 
 var Snapshot_AdministrativeActions *smithy.Schema
+
+var Snapshot_OntapConfiguration *smithy.Schema
 
 var SnapshotFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -3142,7 +3864,7 @@ var _SnapshotIds_member *smithy.Schema
 var SnapshotLifecycle = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "SnapshotLifecycle",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var SnapshotLifecycle_PENDING *smithy.Schema
 
 var SnapshotLifecycle_CREATING *smithy.Schema
@@ -3150,6 +3872,8 @@ var SnapshotLifecycle_CREATING *smithy.Schema
 var SnapshotLifecycle_DELETING *smithy.Schema
 
 var SnapshotLifecycle_AVAILABLE *smithy.Schema
+
+var SnapshotLifecycle_FAILED *smithy.Schema
 
 var _SnapshotName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -3162,16 +3886,199 @@ var SnapshotNotFound = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var SnapshotNotFound_Message *smithy.Schema
 
-var _SnapshotPolicy = smithy.NewSchema(smithy.ShapeID{
+var _SnapshotPolicies = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicies",
+}, smithy.ShapeTypeList, 1)
+var _SnapshotPolicies_member *smithy.Schema
+
+var SnapshotPolicy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "SnapshotPolicy",
+}, smithy.ShapeTypeStructure, 12)
+var SnapshotPolicy_ResourceARN *smithy.Schema
+
+var SnapshotPolicy_SnapshotPolicyId *smithy.Schema
+
+var SnapshotPolicy_FileSystemId *smithy.Schema
+
+var SnapshotPolicy_StorageVirtualMachineId *smithy.Schema
+
+var SnapshotPolicy_Name *smithy.Schema
+
+var SnapshotPolicy_Enabled *smithy.Schema
+
+var SnapshotPolicy_Schedules *smithy.Schema
+
+var SnapshotPolicy_Scope *smithy.Schema
+
+var SnapshotPolicy_Lifecycle *smithy.Schema
+
+var SnapshotPolicy_UUID *smithy.Schema
+
+var SnapshotPolicy_LifecycleTransitionReason *smithy.Schema
+
+var SnapshotPolicy_Tags *smithy.Schema
+
+var SnapshotPolicyFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyFilter",
+}, smithy.ShapeTypeStructure, 2)
+var SnapshotPolicyFilter_Name *smithy.Schema
+
+var SnapshotPolicyFilter_Values *smithy.Schema
+
+var SnapshotPolicyFilterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyFilterName",
+}, smithy.ShapeTypeEnum, 2)
+var SnapshotPolicyFilterName_FILE_SYSTEM_ID *smithy.Schema
+
+var SnapshotPolicyFilterName_STORAGE_VIRTUAL_MACHINE_ID *smithy.Schema
+
+var _SnapshotPolicyFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyFilters",
+}, smithy.ShapeTypeList, 1)
+var _SnapshotPolicyFilters_member *smithy.Schema
+
+var _SnapshotPolicyFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyFilterValue",
 }, smithy.ShapeTypeString, 0)
+
+var _SnapshotPolicyFilterValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyFilterValues",
+}, smithy.ShapeTypeList, 1)
+var _SnapshotPolicyFilterValues_member *smithy.Schema
+
+var _SnapshotPolicyId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyId",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapshotPolicyIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyIds",
+}, smithy.ShapeTypeList, 1)
+var _SnapshotPolicyIds_member *smithy.Schema
+
+var SnapshotPolicyLifecycle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyLifecycle",
+}, smithy.ShapeTypeEnum, 4)
+var SnapshotPolicyLifecycle_CREATING *smithy.Schema
+
+var SnapshotPolicyLifecycle_CREATED *smithy.Schema
+
+var SnapshotPolicyLifecycle_DELETING *smithy.Schema
+
+var SnapshotPolicyLifecycle_FAILED *smithy.Schema
+
+var _SnapshotPolicyName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyName",
+}, smithy.ShapeTypeString, 0)
+
+var SnapshotPolicyNotFound = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyNotFound",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var SnapshotPolicyNotFound_Message *smithy.Schema
+
+var SnapshotPolicyRetentionPeriod = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyRetentionPeriod",
+}, smithy.ShapeTypeStructure, 2)
+var SnapshotPolicyRetentionPeriod_Type *smithy.Schema
+
+var SnapshotPolicyRetentionPeriod_Value *smithy.Schema
+
+var SnapshotPolicyRetentionPeriodType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyRetentionPeriodType",
+}, smithy.ShapeTypeEnum, 7)
+var SnapshotPolicyRetentionPeriodType_SECONDS *smithy.Schema
+
+var SnapshotPolicyRetentionPeriodType_MINUTES *smithy.Schema
+
+var SnapshotPolicyRetentionPeriodType_HOURS *smithy.Schema
+
+var SnapshotPolicyRetentionPeriodType_DAYS *smithy.Schema
+
+var SnapshotPolicyRetentionPeriodType_MONTHS *smithy.Schema
+
+var SnapshotPolicyRetentionPeriodType_YEARS *smithy.Schema
+
+var SnapshotPolicyRetentionPeriodType_INFINITE *smithy.Schema
+
+var _SnapshotPolicyRetentionPeriodValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyRetentionPeriodValue",
+}, smithy.ShapeTypeInteger, 0)
+
+var SnapshotPolicySchedule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicySchedule",
+}, smithy.ShapeTypeStructure, 5)
+var SnapshotPolicySchedule_Name *smithy.Schema
+
+var SnapshotPolicySchedule_Count *smithy.Schema
+
+var SnapshotPolicySchedule_Prefix *smithy.Schema
+
+var SnapshotPolicySchedule_SnapmirrorLabel *smithy.Schema
+
+var SnapshotPolicySchedule_RetentionPeriod *smithy.Schema
+
+var _SnapshotPolicyScheduleCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyScheduleCount",
+}, smithy.ShapeTypeInteger, 0)
+
+var _SnapshotPolicyScheduleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyScheduleList",
+}, smithy.ShapeTypeList, 1)
+var _SnapshotPolicyScheduleList_member *smithy.Schema
+
+var _SnapshotPolicyScheduleName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyScheduleName",
+}, smithy.ShapeTypeString, 0)
+
+var _SnapshotPolicySchedulePrefix = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicySchedulePrefix",
+}, smithy.ShapeTypeString, 0)
+
+var SnapshotPolicyScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotPolicyScope",
+}, smithy.ShapeTypeEnum, 2)
+var SnapshotPolicyScope_FILESYSTEM *smithy.Schema
+
+var SnapshotPolicyScope_SVM *smithy.Schema
 
 var _Snapshots = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "Snapshots",
 }, smithy.ShapeTypeList, 1)
 var _Snapshots_member *smithy.Schema
+
+var _SnapshotSizeInMegabytes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotSizeInMegabytes",
+}, smithy.ShapeTypeLong, 0)
+
+var SnapshotType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "SnapshotType",
+}, smithy.ShapeTypeEnum, 2)
+var SnapshotType_ONTAP *smithy.Schema
+
+var SnapshotType_OPENZFS *smithy.Schema
 
 var _SourceBackupId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -3325,6 +4232,148 @@ var StorageVirtualMachineNotFound = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var StorageVirtualMachineNotFound_Message *smithy.Schema
 
+var StorageVirtualMachinePeer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeer",
+}, smithy.ShapeTypeStructure, 13)
+var StorageVirtualMachinePeer_ResourceARN *smithy.Schema
+
+var StorageVirtualMachinePeer_StorageVirtualMachinePeerId *smithy.Schema
+
+var StorageVirtualMachinePeer_StorageVirtualMachineId *smithy.Schema
+
+var StorageVirtualMachinePeer_FileSystemId *smithy.Schema
+
+var StorageVirtualMachinePeer_Lifecycle *smithy.Schema
+
+var StorageVirtualMachinePeer_LifecycleTransitionReason *smithy.Schema
+
+var StorageVirtualMachinePeer_Tags *smithy.Schema
+
+var StorageVirtualMachinePeer_PeerSvmName *smithy.Schema
+
+var StorageVirtualMachinePeer_PeerSvmAlias *smithy.Schema
+
+var StorageVirtualMachinePeer_PeerClusterName *smithy.Schema
+
+var StorageVirtualMachinePeer_Applications *smithy.Schema
+
+var StorageVirtualMachinePeer_State *smithy.Schema
+
+var StorageVirtualMachinePeer_UUID *smithy.Schema
+
+var StorageVirtualMachinePeerApplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerApplication",
+}, smithy.ShapeTypeEnum, 4)
+var StorageVirtualMachinePeerApplication_SNAPMIRROR *smithy.Schema
+
+var StorageVirtualMachinePeerApplication_FILE_COPY *smithy.Schema
+
+var StorageVirtualMachinePeerApplication_LUN_COPY *smithy.Schema
+
+var StorageVirtualMachinePeerApplication_FLEXCACHE *smithy.Schema
+
+var _StorageVirtualMachinePeerApplications = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerApplications",
+}, smithy.ShapeTypeList, 1)
+var _StorageVirtualMachinePeerApplications_member *smithy.Schema
+
+var StorageVirtualMachinePeerFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerFilter",
+}, smithy.ShapeTypeStructure, 2)
+var StorageVirtualMachinePeerFilter_Name *smithy.Schema
+
+var StorageVirtualMachinePeerFilter_Values *smithy.Schema
+
+var StorageVirtualMachinePeerFilterName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerFilterName",
+}, smithy.ShapeTypeEnum, 2)
+var StorageVirtualMachinePeerFilterName_FILE_SYSTEM_ID *smithy.Schema
+
+var StorageVirtualMachinePeerFilterName_STORAGE_VIRTUAL_MACHINE_ID *smithy.Schema
+
+var _StorageVirtualMachinePeerFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerFilters",
+}, smithy.ShapeTypeList, 1)
+var _StorageVirtualMachinePeerFilters_member *smithy.Schema
+
+var _StorageVirtualMachinePeerFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerFilterValue",
+}, smithy.ShapeTypeString, 0)
+
+var _StorageVirtualMachinePeerFilterValues = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerFilterValues",
+}, smithy.ShapeTypeList, 1)
+var _StorageVirtualMachinePeerFilterValues_member *smithy.Schema
+
+var _StorageVirtualMachinePeerId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerId",
+}, smithy.ShapeTypeString, 0)
+
+var _StorageVirtualMachinePeerIds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerIds",
+}, smithy.ShapeTypeList, 1)
+var _StorageVirtualMachinePeerIds_member *smithy.Schema
+
+var StorageVirtualMachinePeerLifecycle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerLifecycle",
+}, smithy.ShapeTypeEnum, 4)
+var StorageVirtualMachinePeerLifecycle_CREATING *smithy.Schema
+
+var StorageVirtualMachinePeerLifecycle_CREATED *smithy.Schema
+
+var StorageVirtualMachinePeerLifecycle_DELETING *smithy.Schema
+
+var StorageVirtualMachinePeerLifecycle_FAILED *smithy.Schema
+
+var StorageVirtualMachinePeerNotFound = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerNotFound",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
+var StorageVirtualMachinePeerNotFound_Message *smithy.Schema
+
+var _StorageVirtualMachinePeers = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeers",
+}, smithy.ShapeTypeList, 1)
+var _StorageVirtualMachinePeers_member *smithy.Schema
+
+var StorageVirtualMachinePeerState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerState",
+}, smithy.ShapeTypeEnum, 6)
+var StorageVirtualMachinePeerState_PEERED *smithy.Schema
+
+var StorageVirtualMachinePeerState_REJECTED *smithy.Schema
+
+var StorageVirtualMachinePeerState_SUSPENDED *smithy.Schema
+
+var StorageVirtualMachinePeerState_INITIATED *smithy.Schema
+
+var StorageVirtualMachinePeerState_PENDING *smithy.Schema
+
+var StorageVirtualMachinePeerState_INITIALIZING *smithy.Schema
+
+var StorageVirtualMachinePeerUpdateState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "StorageVirtualMachinePeerUpdateState",
+}, smithy.ShapeTypeEnum, 3)
+var StorageVirtualMachinePeerUpdateState_PEERED *smithy.Schema
+
+var StorageVirtualMachinePeerUpdateState_REJECTED *smithy.Schema
+
+var StorageVirtualMachinePeerUpdateState_SUSPENDED *smithy.Schema
+
 var StorageVirtualMachineRootVolumeSecurityStyle = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "StorageVirtualMachineRootVolumeSecurityStyle",
@@ -3446,6 +4495,11 @@ var _TaskIds = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _TaskIds_member *smithy.Schema
 
+var _ThrottleInKbps = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "ThrottleInKbps",
+}, smithy.ShapeTypeLong, 0)
+
 var _ThroughputCapacityMbps = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "ThroughputCapacityMbps",
@@ -3513,6 +4567,22 @@ var UnsupportedOperation = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UnsupportedOperation",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var UnsupportedOperation_Message *smithy.Schema
+
+var UpdatableSnapmirrorRelationshipState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdatableSnapmirrorRelationshipState",
+}, smithy.ShapeTypeEnum, 3)
+var UpdatableSnapmirrorRelationshipState_SNAPMIRRORED *smithy.Schema
+
+var UpdatableSnapmirrorRelationshipState_PAUSED *smithy.Schema
+
+var UpdatableSnapmirrorRelationshipState_BROKEN_OFF *smithy.Schema
+
+var UpdateCloneConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateCloneConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateCloneConfiguration_SplitAction *smithy.Schema
 
 var UpdateFileCacheLustreConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -3626,10 +4696,20 @@ var UpdateFileSystemWindowsConfiguration_DiskIopsConfiguration *smithy.Schema
 
 var UpdateFileSystemWindowsConfiguration_FsrmConfiguration *smithy.Schema
 
+var UpdateOntapSnapshotConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateOntapSnapshotConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateOntapSnapshotConfiguration_SnapmirrorLabel *smithy.Schema
+
+var UpdateOntapSnapshotConfiguration_ExpiryTime *smithy.Schema
+
+var UpdateOntapSnapshotConfiguration_SnaplockExpiryTime *smithy.Schema
+
 var UpdateOntapVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "UpdateOntapVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var UpdateOntapVolumeConfiguration_JunctionPath *smithy.Schema
 
 var UpdateOntapVolumeConfiguration_SecurityStyle *smithy.Schema
@@ -3647,6 +4727,8 @@ var UpdateOntapVolumeConfiguration_CopyTagsToBackups *smithy.Schema
 var UpdateOntapVolumeConfiguration_SnaplockConfiguration *smithy.Schema
 
 var UpdateOntapVolumeConfiguration_SizeInBytes *smithy.Schema
+
+var UpdateOntapVolumeConfiguration_CloneConfiguration *smithy.Schema
 
 var UpdateOpenZFSVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -4071,6 +5153,32 @@ var CreateBackupResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CreateBackupResponse_Backup *smithy.Schema
 
+var CreateClusterPeerRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateClusterPeerRequest",
+}, smithy.ShapeTypeStructure, 8)
+var CreateClusterPeerRequest_ClientRequestToken *smithy.Schema
+
+var CreateClusterPeerRequest_FileSystemId *smithy.Schema
+
+var CreateClusterPeerRequest_PeerAddresses *smithy.Schema
+
+var CreateClusterPeerRequest_PassphraseSecretArn *smithy.Schema
+
+var CreateClusterPeerRequest_PeerClusterName *smithy.Schema
+
+var CreateClusterPeerRequest_AllowedSvmMode *smithy.Schema
+
+var CreateClusterPeerRequest_AllowedSvmIds *smithy.Schema
+
+var CreateClusterPeerRequest_Tags *smithy.Schema
+
+var CreateClusterPeerResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateClusterPeerResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateClusterPeerResponse_ClusterPeer *smithy.Schema
+
 var CreateDataRepositoryAssociationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "CreateDataRepositoryAssociationRequest",
@@ -4229,10 +5337,64 @@ var CreateFileSystemResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var CreateFileSystemResponse_FileSystem *smithy.Schema
 
+var CreateSnapmirrorPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateSnapmirrorPolicyRequest",
+}, smithy.ShapeTypeStructure, 10)
+var CreateSnapmirrorPolicyRequest_ClientRequestToken *smithy.Schema
+
+var CreateSnapmirrorPolicyRequest_FileSystemId *smithy.Schema
+
+var CreateSnapmirrorPolicyRequest_StorageVirtualMachineId *smithy.Schema
+
+var CreateSnapmirrorPolicyRequest_Name *smithy.Schema
+
+var CreateSnapmirrorPolicyRequest_SnapshotCopyMode *smithy.Schema
+
+var CreateSnapmirrorPolicyRequest_RetentionRules *smithy.Schema
+
+var CreateSnapmirrorPolicyRequest_TransferSchedule *smithy.Schema
+
+var CreateSnapmirrorPolicyRequest_NetworkCompressionEnabled *smithy.Schema
+
+var CreateSnapmirrorPolicyRequest_ThrottleInKbps *smithy.Schema
+
+var CreateSnapmirrorPolicyRequest_Tags *smithy.Schema
+
+var CreateSnapmirrorPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateSnapmirrorPolicyResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateSnapmirrorPolicyResponse_SnapmirrorPolicy *smithy.Schema
+
+var CreateSnapmirrorRelationshipRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateSnapmirrorRelationshipRequest",
+}, smithy.ShapeTypeStructure, 7)
+var CreateSnapmirrorRelationshipRequest_ClientRequestToken *smithy.Schema
+
+var CreateSnapmirrorRelationshipRequest_Source *smithy.Schema
+
+var CreateSnapmirrorRelationshipRequest_Destination *smithy.Schema
+
+var CreateSnapmirrorRelationshipRequest_PolicyId *smithy.Schema
+
+var CreateSnapmirrorRelationshipRequest_TransferSchedule *smithy.Schema
+
+var CreateSnapmirrorRelationshipRequest_ThrottleInKbps *smithy.Schema
+
+var CreateSnapmirrorRelationshipRequest_Tags *smithy.Schema
+
+var CreateSnapmirrorRelationshipResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateSnapmirrorRelationshipResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateSnapmirrorRelationshipResponse_SnapmirrorRelationship *smithy.Schema
+
 var CreateSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "CreateSnapshotRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var CreateSnapshotRequest_ClientRequestToken *smithy.Schema
 
 var CreateSnapshotRequest_Name *smithy.Schema
@@ -4241,11 +5403,37 @@ var CreateSnapshotRequest_VolumeId *smithy.Schema
 
 var CreateSnapshotRequest_Tags *smithy.Schema
 
+var CreateSnapshotRequest_OntapConfiguration *smithy.Schema
+
 var CreateSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "CreateSnapshotResponse",
 }, smithy.ShapeTypeStructure, 1)
 var CreateSnapshotResponse_Snapshot *smithy.Schema
+
+var CreateSnapshotPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateSnapshotPolicyRequest",
+}, smithy.ShapeTypeStructure, 7)
+var CreateSnapshotPolicyRequest_ClientRequestToken *smithy.Schema
+
+var CreateSnapshotPolicyRequest_FileSystemId *smithy.Schema
+
+var CreateSnapshotPolicyRequest_StorageVirtualMachineId *smithy.Schema
+
+var CreateSnapshotPolicyRequest_Name *smithy.Schema
+
+var CreateSnapshotPolicyRequest_Enabled *smithy.Schema
+
+var CreateSnapshotPolicyRequest_Schedules *smithy.Schema
+
+var CreateSnapshotPolicyRequest_Tags *smithy.Schema
+
+var CreateSnapshotPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateSnapshotPolicyResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateSnapshotPolicyResponse_SnapshotPolicy *smithy.Schema
 
 var CreateStorageVirtualMachineRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -4270,6 +5458,30 @@ var CreateStorageVirtualMachineResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateStorageVirtualMachineResponse",
 }, smithy.ShapeTypeStructure, 1)
 var CreateStorageVirtualMachineResponse_StorageVirtualMachine *smithy.Schema
+
+var CreateStorageVirtualMachinePeerRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateStorageVirtualMachinePeerRequest",
+}, smithy.ShapeTypeStructure, 7)
+var CreateStorageVirtualMachinePeerRequest_ClientRequestToken *smithy.Schema
+
+var CreateStorageVirtualMachinePeerRequest_StorageVirtualMachineId *smithy.Schema
+
+var CreateStorageVirtualMachinePeerRequest_PeerSvmName *smithy.Schema
+
+var CreateStorageVirtualMachinePeerRequest_PeerClusterName *smithy.Schema
+
+var CreateStorageVirtualMachinePeerRequest_Applications *smithy.Schema
+
+var CreateStorageVirtualMachinePeerRequest_PeerSvmAlias *smithy.Schema
+
+var CreateStorageVirtualMachinePeerRequest_Tags *smithy.Schema
+
+var CreateStorageVirtualMachinePeerResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "CreateStorageVirtualMachinePeerResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateStorageVirtualMachinePeerResponse_StorageVirtualMachinePeer *smithy.Schema
 
 var CreateVolumeFromBackupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -4328,6 +5540,22 @@ var DeleteBackupResponse = smithy.NewSchema(smithy.ShapeID{
 var DeleteBackupResponse_BackupId *smithy.Schema
 
 var DeleteBackupResponse_Lifecycle *smithy.Schema
+
+var DeleteClusterPeerRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteClusterPeerRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteClusterPeerRequest_ClientRequestToken *smithy.Schema
+
+var DeleteClusterPeerRequest_ClusterPeerId *smithy.Schema
+
+var DeleteClusterPeerResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteClusterPeerResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteClusterPeerResponse_ClusterPeerId *smithy.Schema
+
+var DeleteClusterPeerResponse_Lifecycle *smithy.Schema
 
 var DeleteDataRepositoryAssociationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -4393,6 +5621,38 @@ var DeleteFileSystemResponse_LustreResponse *smithy.Schema
 
 var DeleteFileSystemResponse_OpenZFSResponse *smithy.Schema
 
+var DeleteSnapmirrorPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteSnapmirrorPolicyRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteSnapmirrorPolicyRequest_ClientRequestToken *smithy.Schema
+
+var DeleteSnapmirrorPolicyRequest_SnapmirrorPolicyId *smithy.Schema
+
+var DeleteSnapmirrorPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteSnapmirrorPolicyResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteSnapmirrorPolicyResponse_SnapmirrorPolicyId *smithy.Schema
+
+var DeleteSnapmirrorPolicyResponse_Lifecycle *smithy.Schema
+
+var DeleteSnapmirrorRelationshipRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteSnapmirrorRelationshipRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteSnapmirrorRelationshipRequest_ClientRequestToken *smithy.Schema
+
+var DeleteSnapmirrorRelationshipRequest_SnapmirrorRelationshipId *smithy.Schema
+
+var DeleteSnapmirrorRelationshipResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteSnapmirrorRelationshipResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteSnapmirrorRelationshipResponse_SnapmirrorRelationshipId *smithy.Schema
+
+var DeleteSnapmirrorRelationshipResponse_Lifecycle *smithy.Schema
+
 var DeleteSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "DeleteSnapshotRequest",
@@ -4409,6 +5669,22 @@ var DeleteSnapshotResponse_SnapshotId *smithy.Schema
 
 var DeleteSnapshotResponse_Lifecycle *smithy.Schema
 
+var DeleteSnapshotPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteSnapshotPolicyRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteSnapshotPolicyRequest_ClientRequestToken *smithy.Schema
+
+var DeleteSnapshotPolicyRequest_SnapshotPolicyId *smithy.Schema
+
+var DeleteSnapshotPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteSnapshotPolicyResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteSnapshotPolicyResponse_SnapshotPolicyId *smithy.Schema
+
+var DeleteSnapshotPolicyResponse_Lifecycle *smithy.Schema
+
 var DeleteStorageVirtualMachineRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "DeleteStorageVirtualMachineRequest",
@@ -4424,6 +5700,22 @@ var DeleteStorageVirtualMachineResponse = smithy.NewSchema(smithy.ShapeID{
 var DeleteStorageVirtualMachineResponse_StorageVirtualMachineId *smithy.Schema
 
 var DeleteStorageVirtualMachineResponse_Lifecycle *smithy.Schema
+
+var DeleteStorageVirtualMachinePeerRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteStorageVirtualMachinePeerRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteStorageVirtualMachinePeerRequest_ClientRequestToken *smithy.Schema
+
+var DeleteStorageVirtualMachinePeerRequest_StorageVirtualMachinePeerId *smithy.Schema
+
+var DeleteStorageVirtualMachinePeerResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DeleteStorageVirtualMachinePeerResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteStorageVirtualMachinePeerResponse_StorageVirtualMachinePeerId *smithy.Schema
+
+var DeleteStorageVirtualMachinePeerResponse_Lifecycle *smithy.Schema
 
 var DeleteVolumeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -4466,6 +5758,26 @@ var DescribeBackupsResponse = smithy.NewSchema(smithy.ShapeID{
 var DescribeBackupsResponse_Backups *smithy.Schema
 
 var DescribeBackupsResponse_NextToken *smithy.Schema
+
+var DescribeClusterPeersRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeClusterPeersRequest",
+}, smithy.ShapeTypeStructure, 4)
+var DescribeClusterPeersRequest_ClusterPeerIds *smithy.Schema
+
+var DescribeClusterPeersRequest_Filters *smithy.Schema
+
+var DescribeClusterPeersRequest_MaxResults *smithy.Schema
+
+var DescribeClusterPeersRequest_NextToken *smithy.Schema
+
+var DescribeClusterPeersResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeClusterPeersResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeClusterPeersResponse_ClusterPeers *smithy.Schema
+
+var DescribeClusterPeersResponse_NextToken *smithy.Schema
 
 var DescribeDataRepositoryAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -4594,6 +5906,66 @@ var DescribeSharedVpcConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DescribeSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts *smithy.Schema
 
+var DescribeSnapmirrorPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeSnapmirrorPoliciesRequest",
+}, smithy.ShapeTypeStructure, 4)
+var DescribeSnapmirrorPoliciesRequest_SnapmirrorPolicyIds *smithy.Schema
+
+var DescribeSnapmirrorPoliciesRequest_Filters *smithy.Schema
+
+var DescribeSnapmirrorPoliciesRequest_MaxResults *smithy.Schema
+
+var DescribeSnapmirrorPoliciesRequest_NextToken *smithy.Schema
+
+var DescribeSnapmirrorPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeSnapmirrorPoliciesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeSnapmirrorPoliciesResponse_SnapmirrorPolicies *smithy.Schema
+
+var DescribeSnapmirrorPoliciesResponse_NextToken *smithy.Schema
+
+var DescribeSnapmirrorRelationshipsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeSnapmirrorRelationshipsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var DescribeSnapmirrorRelationshipsRequest_SnapmirrorRelationshipIds *smithy.Schema
+
+var DescribeSnapmirrorRelationshipsRequest_Filters *smithy.Schema
+
+var DescribeSnapmirrorRelationshipsRequest_MaxResults *smithy.Schema
+
+var DescribeSnapmirrorRelationshipsRequest_NextToken *smithy.Schema
+
+var DescribeSnapmirrorRelationshipsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeSnapmirrorRelationshipsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeSnapmirrorRelationshipsResponse_SnapmirrorRelationships *smithy.Schema
+
+var DescribeSnapmirrorRelationshipsResponse_NextToken *smithy.Schema
+
+var DescribeSnapshotPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeSnapshotPoliciesRequest",
+}, smithy.ShapeTypeStructure, 4)
+var DescribeSnapshotPoliciesRequest_SnapshotPolicyIds *smithy.Schema
+
+var DescribeSnapshotPoliciesRequest_Filters *smithy.Schema
+
+var DescribeSnapshotPoliciesRequest_MaxResults *smithy.Schema
+
+var DescribeSnapshotPoliciesRequest_NextToken *smithy.Schema
+
+var DescribeSnapshotPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeSnapshotPoliciesResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeSnapshotPoliciesResponse_SnapshotPolicies *smithy.Schema
+
+var DescribeSnapshotPoliciesResponse_NextToken *smithy.Schema
+
 var DescribeSnapshotsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "DescribeSnapshotsRequest",
@@ -4615,6 +5987,26 @@ var DescribeSnapshotsResponse = smithy.NewSchema(smithy.ShapeID{
 var DescribeSnapshotsResponse_Snapshots *smithy.Schema
 
 var DescribeSnapshotsResponse_NextToken *smithy.Schema
+
+var DescribeStorageVirtualMachinePeersRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeStorageVirtualMachinePeersRequest",
+}, smithy.ShapeTypeStructure, 4)
+var DescribeStorageVirtualMachinePeersRequest_StorageVirtualMachinePeerIds *smithy.Schema
+
+var DescribeStorageVirtualMachinePeersRequest_Filters *smithy.Schema
+
+var DescribeStorageVirtualMachinePeersRequest_MaxResults *smithy.Schema
+
+var DescribeStorageVirtualMachinePeersRequest_NextToken *smithy.Schema
+
+var DescribeStorageVirtualMachinePeersResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "DescribeStorageVirtualMachinePeersResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeStorageVirtualMachinePeersResponse_StorageVirtualMachinePeers *smithy.Schema
+
+var DescribeStorageVirtualMachinePeersResponse_NextToken *smithy.Schema
 
 var DescribeStorageVirtualMachinesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -4782,6 +6174,24 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UntagResourceResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var UpdateClusterPeerRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateClusterPeerRequest",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateClusterPeerRequest_ClientRequestToken *smithy.Schema
+
+var UpdateClusterPeerRequest_ClusterPeerId *smithy.Schema
+
+var UpdateClusterPeerRequest_PeerClusterName *smithy.Schema
+
+var UpdateClusterPeerRequest_PeerAddresses *smithy.Schema
+
+var UpdateClusterPeerResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateClusterPeerResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateClusterPeerResponse_ClusterPeer *smithy.Schema
+
 var UpdateDataRepositoryAssociationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "UpdateDataRepositoryAssociationRequest",
@@ -4860,21 +6270,83 @@ var UpdateSharedVpcConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var UpdateSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts *smithy.Schema
 
+var UpdateSnapmirrorPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateSnapmirrorPolicyRequest",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateSnapmirrorPolicyRequest_ClientRequestToken *smithy.Schema
+
+var UpdateSnapmirrorPolicyRequest_SnapmirrorPolicyId *smithy.Schema
+
+var UpdateSnapmirrorPolicyRequest_RetentionRules *smithy.Schema
+
+var UpdateSnapmirrorPolicyRequest_TransferSchedule *smithy.Schema
+
+var UpdateSnapmirrorPolicyRequest_NetworkCompressionEnabled *smithy.Schema
+
+var UpdateSnapmirrorPolicyRequest_ThrottleInKbps *smithy.Schema
+
+var UpdateSnapmirrorPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateSnapmirrorPolicyResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateSnapmirrorPolicyResponse_SnapmirrorPolicy *smithy.Schema
+
+var UpdateSnapmirrorRelationshipRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateSnapmirrorRelationshipRequest",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateSnapmirrorRelationshipRequest_ClientRequestToken *smithy.Schema
+
+var UpdateSnapmirrorRelationshipRequest_SnapmirrorRelationshipId *smithy.Schema
+
+var UpdateSnapmirrorRelationshipRequest_PolicyId *smithy.Schema
+
+var UpdateSnapmirrorRelationshipRequest_TransferSchedule *smithy.Schema
+
+var UpdateSnapmirrorRelationshipRequest_ThrottleInKbps *smithy.Schema
+
+var UpdateSnapmirrorRelationshipRequest_State *smithy.Schema
+
+var UpdateSnapmirrorRelationshipResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateSnapmirrorRelationshipResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateSnapmirrorRelationshipResponse_SnapmirrorRelationship *smithy.Schema
+
 var UpdateSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "UpdateSnapshotRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var UpdateSnapshotRequest_ClientRequestToken *smithy.Schema
 
 var UpdateSnapshotRequest_Name *smithy.Schema
 
 var UpdateSnapshotRequest_SnapshotId *smithy.Schema
 
+var UpdateSnapshotRequest_OntapConfiguration *smithy.Schema
+
 var UpdateSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
 	Name:      "UpdateSnapshotResponse",
 }, smithy.ShapeTypeStructure, 1)
 var UpdateSnapshotResponse_Snapshot *smithy.Schema
+
+var UpdateSnapshotPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateSnapshotPolicyRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateSnapshotPolicyRequest_ClientRequestToken *smithy.Schema
+
+var UpdateSnapshotPolicyRequest_SnapshotPolicyId *smithy.Schema
+
+var UpdateSnapshotPolicyRequest_Enabled *smithy.Schema
+
+var UpdateSnapshotPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateSnapshotPolicyResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateSnapshotPolicyResponse_SnapshotPolicy *smithy.Schema
 
 var UpdateStorageVirtualMachineRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -4893,6 +6365,26 @@ var UpdateStorageVirtualMachineResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateStorageVirtualMachineResponse",
 }, smithy.ShapeTypeStructure, 1)
 var UpdateStorageVirtualMachineResponse_StorageVirtualMachine *smithy.Schema
+
+var UpdateStorageVirtualMachinePeerRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateStorageVirtualMachinePeerRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateStorageVirtualMachinePeerRequest_ClientRequestToken *smithy.Schema
+
+var UpdateStorageVirtualMachinePeerRequest_StorageVirtualMachinePeerId *smithy.Schema
+
+var UpdateStorageVirtualMachinePeerRequest_Applications *smithy.Schema
+
+var UpdateStorageVirtualMachinePeerRequest_PeerSvmAlias *smithy.Schema
+
+var UpdateStorageVirtualMachinePeerRequest_State *smithy.Schema
+
+var UpdateStorageVirtualMachinePeerResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.fsx",
+	Name:      "UpdateStorageVirtualMachinePeerResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateStorageVirtualMachinePeerResponse_StorageVirtualMachinePeer *smithy.Schema
 
 var UpdateVolumeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.fsx",
@@ -4972,6 +6464,8 @@ func init() {
 	AdministrativeActionType_VOLUME_INITIALIZE_WITH_SNAPSHOT = AdministrativeActionType.AddMember("VOLUME_INITIALIZE_WITH_SNAPSHOT", smithyprelude.Unit)
 
 	AdministrativeActionType_DOWNLOAD_DATA_FROM_BACKUP = AdministrativeActionType.AddMember("DOWNLOAD_DATA_FROM_BACKUP", smithyprelude.Unit)
+
+	AdministrativeActionType_VOLUME_CLONE_SPLIT = AdministrativeActionType.AddMember("VOLUME_CLONE_SPLIT", smithyprelude.Unit)
 
 	Status_FAILED = Status.AddMember("FAILED", smithyprelude.Unit)
 
@@ -5259,6 +6753,10 @@ func init() {
 
 	OntapDeploymentType_MULTI_AZ_2 = OntapDeploymentType.AddMember("MULTI_AZ_2", smithyprelude.Unit)
 
+	OntapDeploymentType_SINGLE_AZ_3 = OntapDeploymentType.AddMember("SINGLE_AZ_3", smithyprelude.Unit)
+
+	OntapDeploymentType_MULTI_AZ_3 = OntapDeploymentType.AddMember("MULTI_AZ_3", smithyprelude.Unit)
+
 	_OntapEndpointIpAddresses_member = _OntapEndpointIpAddresses.AddMember("member", _IpAddress)
 
 	FileSystemEndpoint_DNSName = FileSystemEndpoint.AddMember("DNSName", _DNSName)
@@ -5521,6 +7019,10 @@ func init() {
 
 	AggregateConfiguration_TotalConstituents = AggregateConfiguration.AddMember("TotalConstituents", _TotalConstituents)
 
+	CloneConfiguration_ParentVolumeId = CloneConfiguration.AddMember("ParentVolumeId", _VolumeId)
+
+	CloneConfiguration_SnapshotId = CloneConfiguration.AddMember("SnapshotId", _SnapshotId)
+
 	OntapVolumeConfiguration_FlexCacheEndpointType = OntapVolumeConfiguration.AddMember("FlexCacheEndpointType", FlexCacheEndpointType)
 
 	OntapVolumeConfiguration_JunctionPath = OntapVolumeConfiguration.AddMember("JunctionPath", _JunctionPath)
@@ -5541,7 +7043,7 @@ func init() {
 
 	OntapVolumeConfiguration_OntapVolumeType = OntapVolumeConfiguration.AddMember("OntapVolumeType", OntapVolumeType)
 
-	OntapVolumeConfiguration_SnapshotPolicy = OntapVolumeConfiguration.AddMember("SnapshotPolicy", _SnapshotPolicy)
+	OntapVolumeConfiguration_SnapshotPolicy = OntapVolumeConfiguration.AddMember("SnapshotPolicy", _SnapshotPolicyName)
 
 	OntapVolumeConfiguration_CopyTagsToBackups = OntapVolumeConfiguration.AddMember("CopyTagsToBackups", _Flag)
 
@@ -5553,11 +7055,19 @@ func init() {
 
 	OntapVolumeConfiguration_SizeInBytes = OntapVolumeConfiguration.AddMember("SizeInBytes", _VolumeCapacityBytes)
 
+	OntapVolumeConfiguration_CloneConfiguration = OntapVolumeConfiguration.AddMember("CloneConfiguration", CloneConfiguration)
+
 	VolumeType_ONTAP = VolumeType.AddMember("ONTAP", smithyprelude.Unit)
 
 	VolumeType_OPENZFS = VolumeType.AddMember("OPENZFS", smithyprelude.Unit)
 
+	OntapError_Message = OntapError.AddMember("Message", _ErrorMessage)
+
+	OntapError_Code = OntapError.AddMember("Code", _ErrorCode)
+
 	LifecycleTransitionReason_Message = LifecycleTransitionReason.AddMember("Message", _ErrorMessage)
+
+	LifecycleTransitionReason_OntapError = LifecycleTransitionReason.AddMember("OntapError", OntapError)
 
 	OpenZFSDataCompressionType_NONE = OpenZFSDataCompressionType.AddMember("NONE", smithyprelude.Unit)
 
@@ -5667,6 +7177,22 @@ func init() {
 
 	SnapshotLifecycle_AVAILABLE = SnapshotLifecycle.AddMember("AVAILABLE", smithyprelude.Unit)
 
+	SnapshotLifecycle_FAILED = SnapshotLifecycle.AddMember("FAILED", smithyprelude.Unit)
+
+	SnapshotType_ONTAP = SnapshotType.AddMember("ONTAP", smithyprelude.Unit)
+
+	SnapshotType_OPENZFS = SnapshotType.AddMember("OPENZFS", smithyprelude.Unit)
+
+	OntapSnapshotConfiguration_SizeInMegabytes = OntapSnapshotConfiguration.AddMember("SizeInMegabytes", _SnapshotSizeInMegabytes)
+
+	OntapSnapshotConfiguration_SnapmirrorLabel = OntapSnapshotConfiguration.AddMember("SnapmirrorLabel", _SnapmirrorLabel)
+
+	OntapSnapshotConfiguration_ExpiryTime = OntapSnapshotConfiguration.AddMember("ExpiryTime", _ExpiryTime)
+
+	OntapSnapshotConfiguration_SnaplockExpiryTime = OntapSnapshotConfiguration.AddMember("SnaplockExpiryTime", _SnaplockExpiryTime)
+
+	OntapSnapshotConfiguration_UUID = OntapSnapshotConfiguration.AddMember("UUID", _UUID)
+
 	Snapshot_ResourceARN = Snapshot.AddMember("ResourceARN", _ResourceARN)
 
 	Snapshot_SnapshotId = Snapshot.AddMember("SnapshotId", _SnapshotId)
@@ -5679,11 +7205,15 @@ func init() {
 
 	Snapshot_Lifecycle = Snapshot.AddMember("Lifecycle", SnapshotLifecycle)
 
+	Snapshot_SnapshotType = Snapshot.AddMember("SnapshotType", SnapshotType)
+
 	Snapshot_LifecycleTransitionReason = Snapshot.AddMember("LifecycleTransitionReason", LifecycleTransitionReason)
 
 	Snapshot_Tags = Snapshot.AddMember("Tags", _Tags)
 
 	Snapshot_AdministrativeActions = Snapshot.AddMember("AdministrativeActions", _AdministrativeActions)
+
+	Snapshot_OntapConfiguration = Snapshot.AddMember("OntapConfiguration", OntapSnapshotConfiguration)
 
 	AdministrativeAction_AdministrativeActionType = AdministrativeAction.AddMember("AdministrativeActionType", AdministrativeActionType)
 
@@ -5706,6 +7236,14 @@ func init() {
 	AdministrativeAction_RemainingTransferBytes = AdministrativeAction.AddMember("RemainingTransferBytes", _RemainingTransferBytes)
 
 	AdministrativeAction_Message = AdministrativeAction.AddMember("Message", _ErrorMessage)
+
+	_AllowedSvmIds_member = _AllowedSvmIds.AddMember("member", _StorageVirtualMachineId)
+
+	AllowedSvmMode_ALL = AllowedSvmMode.AddMember("ALL", smithyprelude.Unit)
+
+	AllowedSvmMode_NONE = AllowedSvmMode.AddMember("NONE", smithyprelude.Unit)
+
+	AllowedSvmMode_SPECIFIED = AllowedSvmMode.AddMember("SPECIFIED", smithyprelude.Unit)
 
 	_AlternateDNSNames_member = _AlternateDNSNames.AddMember("member", _AlternateDNSName)
 
@@ -5799,6 +7337,66 @@ func init() {
 
 	BadRequest_Message = BadRequest.AddMember("Message", _ErrorMessage)
 
+	CloneSplitAction_START = CloneSplitAction.AddMember("START", smithyprelude.Unit)
+
+	ClusterPeerLifecycle_CREATING = ClusterPeerLifecycle.AddMember("CREATING", smithyprelude.Unit)
+
+	ClusterPeerLifecycle_CREATED = ClusterPeerLifecycle.AddMember("CREATED", smithyprelude.Unit)
+
+	ClusterPeerLifecycle_DELETING = ClusterPeerLifecycle.AddMember("DELETING", smithyprelude.Unit)
+
+	ClusterPeerLifecycle_FAILED = ClusterPeerLifecycle.AddMember("FAILED", smithyprelude.Unit)
+
+	_PeerAddresses_member = _PeerAddresses.AddMember("member", _IpAddress)
+
+	ClusterPeerAuthenticationStatus_State = ClusterPeerAuthenticationStatus.AddMember("State", _ClusterPeerAuthenticationState)
+
+	ClusterPeerAuthenticationStatus_InUse = ClusterPeerAuthenticationStatus.AddMember("InUse", _ClusterPeerAuthenticationInUse)
+
+	ClusterPeer_ResourceARN = ClusterPeer.AddMember("ResourceARN", _ResourceARN)
+
+	ClusterPeer_ClusterPeerId = ClusterPeer.AddMember("ClusterPeerId", _ClusterPeerId)
+
+	ClusterPeer_FileSystemId = ClusterPeer.AddMember("FileSystemId", _FileSystemId)
+
+	ClusterPeer_Lifecycle = ClusterPeer.AddMember("Lifecycle", ClusterPeerLifecycle)
+
+	ClusterPeer_LifecycleTransitionReason = ClusterPeer.AddMember("LifecycleTransitionReason", LifecycleTransitionReason)
+
+	ClusterPeer_Tags = ClusterPeer.AddMember("Tags", _Tags)
+
+	ClusterPeer_PeerAddresses = ClusterPeer.AddMember("PeerAddresses", _PeerAddresses)
+
+	ClusterPeer_PeerClusterName = ClusterPeer.AddMember("PeerClusterName", _PeerClusterName)
+
+	ClusterPeer_PassphraseSecretArn = ClusterPeer.AddMember("PassphraseSecretArn", _CustomerSecretsManagerARN)
+
+	ClusterPeer_AllowedSvmMode = ClusterPeer.AddMember("AllowedSvmMode", AllowedSvmMode)
+
+	ClusterPeer_AllowedSvmIds = ClusterPeer.AddMember("AllowedSvmIds", _AllowedSvmIds)
+
+	ClusterPeer_Status = ClusterPeer.AddMember("Status", _ClusterPeerStatus)
+
+	ClusterPeer_UUID = ClusterPeer.AddMember("UUID", _UUID)
+
+	ClusterPeer_AuthenticationStatus = ClusterPeer.AddMember("AuthenticationStatus", ClusterPeerAuthenticationStatus)
+
+	ClusterPeerFilterName_FILE_SYSTEM_ID = ClusterPeerFilterName.AddMember("FILE_SYSTEM_ID", smithyprelude.Unit)
+
+	_ClusterPeerFilterValues_member = _ClusterPeerFilterValues.AddMember("member", _ClusterPeerFilterValue)
+
+	ClusterPeerFilter_Name = ClusterPeerFilter.AddMember("Name", ClusterPeerFilterName)
+
+	ClusterPeerFilter_Values = ClusterPeerFilter.AddMember("Values", _ClusterPeerFilterValues)
+
+	_ClusterPeerFilters_member = _ClusterPeerFilters.AddMember("member", ClusterPeerFilter)
+
+	_ClusterPeerIds_member = _ClusterPeerIds.AddMember("member", _ClusterPeerId)
+
+	ClusterPeerNotFound_Message = ClusterPeerNotFound.AddMember("Message", _ErrorMessage)
+
+	_ClusterPeers_member = _ClusterPeers.AddMember("member", ClusterPeer)
+
 	ReportFormat_REPORT_CSV_20191124 = ReportFormat.AddMember("REPORT_CSV_20191124", smithyprelude.Unit)
 
 	ReportScope_FAILED_FILES_ONLY = ReportScope.AddMember("FAILED_FILES_ONLY", smithyprelude.Unit)
@@ -5856,6 +7454,10 @@ func init() {
 	CreateAndAttachS3AccessPointS3Configuration_VpcConfiguration = CreateAndAttachS3AccessPointS3Configuration.AddMember("VpcConfiguration", S3AccessPointVpcConfiguration)
 
 	CreateAndAttachS3AccessPointS3Configuration_Policy = CreateAndAttachS3AccessPointS3Configuration.AddMember("Policy", _AccessPointPolicy)
+
+	CreateCloneConfiguration_ParentVolumeId = CreateCloneConfiguration.AddMember("ParentVolumeId", _VolumeId)
+
+	CreateCloneConfiguration_SnapshotId = CreateCloneConfiguration.AddMember("SnapshotId", _SnapshotId)
 
 	_SubDirectoriesPaths_member = _SubDirectoriesPaths.AddMember("member", _Namespace)
 
@@ -6045,6 +7647,12 @@ func init() {
 
 	CreateFileSystemWindowsConfiguration_FsrmConfiguration = CreateFileSystemWindowsConfiguration.AddMember("FsrmConfiguration", WindowsFsrmConfiguration)
 
+	CreateOntapSnapshotConfiguration_SnapmirrorLabel = CreateOntapSnapshotConfiguration.AddMember("SnapmirrorLabel", _SnapmirrorLabel)
+
+	CreateOntapSnapshotConfiguration_ExpiryTime = CreateOntapSnapshotConfiguration.AddMember("ExpiryTime", _ExpiryTime)
+
+	CreateOntapSnapshotConfiguration_SnaplockExpiryTime = CreateOntapSnapshotConfiguration.AddMember("SnaplockExpiryTime", _SnaplockExpiryTime)
+
 	InputOntapVolumeType_RW = InputOntapVolumeType.AddMember("RW", smithyprelude.Unit)
 
 	InputOntapVolumeType_DP = InputOntapVolumeType.AddMember("DP", smithyprelude.Unit)
@@ -6075,7 +7683,7 @@ func init() {
 
 	CreateOntapVolumeConfiguration_OntapVolumeType = CreateOntapVolumeConfiguration.AddMember("OntapVolumeType", InputOntapVolumeType)
 
-	CreateOntapVolumeConfiguration_SnapshotPolicy = CreateOntapVolumeConfiguration.AddMember("SnapshotPolicy", _SnapshotPolicy)
+	CreateOntapVolumeConfiguration_SnapshotPolicy = CreateOntapVolumeConfiguration.AddMember("SnapshotPolicy", _SnapshotPolicyName)
 
 	CreateOntapVolumeConfiguration_CopyTagsToBackups = CreateOntapVolumeConfiguration.AddMember("CopyTagsToBackups", _Flag)
 
@@ -6086,6 +7694,8 @@ func init() {
 	CreateOntapVolumeConfiguration_AggregateConfiguration = CreateOntapVolumeConfiguration.AddMember("AggregateConfiguration", CreateAggregateConfiguration)
 
 	CreateOntapVolumeConfiguration_SizeInBytes = CreateOntapVolumeConfiguration.AddMember("SizeInBytes", _VolumeCapacityBytes)
+
+	CreateOntapVolumeConfiguration_CloneConfiguration = CreateOntapVolumeConfiguration.AddMember("CloneConfiguration", CreateCloneConfiguration)
 
 	CreateOpenZFSOriginSnapshotConfiguration_SnapshotARN = CreateOpenZFSOriginSnapshotConfiguration.AddMember("SnapshotARN", _ResourceARN)
 
@@ -6110,6 +7720,10 @@ func init() {
 	CreateOpenZFSVolumeConfiguration_NfsExports = CreateOpenZFSVolumeConfiguration.AddMember("NfsExports", _OpenZFSNfsExports)
 
 	CreateOpenZFSVolumeConfiguration_UserAndGroupQuotas = CreateOpenZFSVolumeConfiguration.AddMember("UserAndGroupQuotas", _OpenZFSUserAndGroupQuotas)
+
+	CreateSnapmirrorDestination_VolumeId = CreateSnapmirrorDestination.AddMember("VolumeId", _VolumeId)
+
+	CreateSnapmirrorSource_Path = CreateSnapmirrorSource.AddMember("Path", _SnapmirrorPath)
 
 	CreateSvmActiveDirectoryConfiguration_NetBiosName = CreateSvmActiveDirectoryConfiguration.AddMember("NetBiosName", _NetBiosAlias)
 
@@ -6603,6 +8217,176 @@ func init() {
 
 	ServiceLimitExceeded_Message = ServiceLimitExceeded.AddMember("Message", _ErrorMessage)
 
+	SnapmirrorDestination_Path = SnapmirrorDestination.AddMember("Path", _SnapmirrorPath)
+
+	SnapmirrorDestination_VolumeId = SnapmirrorDestination.AddMember("VolumeId", _VolumeId)
+
+	SnapmirrorExportedSnapshot_SnapshotId = SnapmirrorExportedSnapshot.AddMember("SnapshotId", _SnapshotId)
+
+	SnapmirrorExportedSnapshot_SnapshotName = SnapmirrorExportedSnapshot.AddMember("SnapshotName", _SnapmirrorExportedSnapshotName)
+
+	SnapmirrorPolicySnapshotCopyMode_COPY_ALL_SOURCE_SNAPSHOTS = SnapmirrorPolicySnapshotCopyMode.AddMember("COPY_ALL_SOURCE_SNAPSHOTS", smithyprelude.Unit)
+
+	SnapmirrorPolicySnapshotCopyMode_COPY_LATEST_SOURCE_SNAPSHOT = SnapmirrorPolicySnapshotCopyMode.AddMember("COPY_LATEST_SOURCE_SNAPSHOT", smithyprelude.Unit)
+
+	SnapmirrorPolicySnapshotCopyMode_NO_CREATE_SNAPSHOT_ON_SOURCE = SnapmirrorPolicySnapshotCopyMode.AddMember("NO_CREATE_SNAPSHOT_ON_SOURCE", smithyprelude.Unit)
+
+	SnapmirrorPolicyRetentionRule_Label = SnapmirrorPolicyRetentionRule.AddMember("Label", _SnapmirrorLabel)
+
+	SnapmirrorPolicyRetentionRule_Count = SnapmirrorPolicyRetentionRule.AddMember("Count", _SnapmirrorPolicyRetentionCount)
+
+	SnapmirrorPolicyRetentionRule_CreationSchedule = SnapmirrorPolicyRetentionRule.AddMember("CreationSchedule", _SnapmirrorPolicyCreationScheduleName)
+
+	_SnapmirrorPolicyRetentionRules_member = _SnapmirrorPolicyRetentionRules.AddMember("member", SnapmirrorPolicyRetentionRule)
+
+	SnapmirrorPolicyScope_FILESYSTEM = SnapmirrorPolicyScope.AddMember("FILESYSTEM", smithyprelude.Unit)
+
+	SnapmirrorPolicyScope_SVM = SnapmirrorPolicyScope.AddMember("SVM", smithyprelude.Unit)
+
+	SnapmirrorPolicyLifecycle_CREATING = SnapmirrorPolicyLifecycle.AddMember("CREATING", smithyprelude.Unit)
+
+	SnapmirrorPolicyLifecycle_CREATED = SnapmirrorPolicyLifecycle.AddMember("CREATED", smithyprelude.Unit)
+
+	SnapmirrorPolicyLifecycle_DELETING = SnapmirrorPolicyLifecycle.AddMember("DELETING", smithyprelude.Unit)
+
+	SnapmirrorPolicyLifecycle_FAILED = SnapmirrorPolicyLifecycle.AddMember("FAILED", smithyprelude.Unit)
+
+	SnapmirrorPolicy_ResourceARN = SnapmirrorPolicy.AddMember("ResourceARN", _ResourceARN)
+
+	SnapmirrorPolicy_SnapmirrorPolicyId = SnapmirrorPolicy.AddMember("SnapmirrorPolicyId", _SnapmirrorPolicyId)
+
+	SnapmirrorPolicy_FileSystemId = SnapmirrorPolicy.AddMember("FileSystemId", _FileSystemId)
+
+	SnapmirrorPolicy_StorageVirtualMachineId = SnapmirrorPolicy.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
+
+	SnapmirrorPolicy_Name = SnapmirrorPolicy.AddMember("Name", _SnapmirrorPolicyName)
+
+	SnapmirrorPolicy_SnapshotCopyMode = SnapmirrorPolicy.AddMember("SnapshotCopyMode", SnapmirrorPolicySnapshotCopyMode)
+
+	SnapmirrorPolicy_RetentionRules = SnapmirrorPolicy.AddMember("RetentionRules", _SnapmirrorPolicyRetentionRules)
+
+	SnapmirrorPolicy_TransferSchedule = SnapmirrorPolicy.AddMember("TransferSchedule", _SnapmirrorTransferScheduleName)
+
+	SnapmirrorPolicy_NetworkCompressionEnabled = SnapmirrorPolicy.AddMember("NetworkCompressionEnabled", _Flag)
+
+	SnapmirrorPolicy_ThrottleInKbps = SnapmirrorPolicy.AddMember("ThrottleInKbps", _ThrottleInKbps)
+
+	SnapmirrorPolicy_Scope = SnapmirrorPolicy.AddMember("Scope", SnapmirrorPolicyScope)
+
+	SnapmirrorPolicy_Lifecycle = SnapmirrorPolicy.AddMember("Lifecycle", SnapmirrorPolicyLifecycle)
+
+	SnapmirrorPolicy_UUID = SnapmirrorPolicy.AddMember("UUID", _UUID)
+
+	SnapmirrorPolicy_LifecycleTransitionReason = SnapmirrorPolicy.AddMember("LifecycleTransitionReason", LifecycleTransitionReason)
+
+	SnapmirrorPolicy_Tags = SnapmirrorPolicy.AddMember("Tags", _Tags)
+
+	_SnapmirrorPolicies_member = _SnapmirrorPolicies.AddMember("member", SnapmirrorPolicy)
+
+	SnapmirrorPolicyFilterName_FILE_SYSTEM_ID = SnapmirrorPolicyFilterName.AddMember("FILE_SYSTEM_ID", smithyprelude.Unit)
+
+	SnapmirrorPolicyFilterName_STORAGE_VIRTUAL_MACHINE_ID = SnapmirrorPolicyFilterName.AddMember("STORAGE_VIRTUAL_MACHINE_ID", smithyprelude.Unit)
+
+	_SnapmirrorPolicyFilterValues_member = _SnapmirrorPolicyFilterValues.AddMember("member", _SnapmirrorPolicyFilterValue)
+
+	SnapmirrorPolicyFilter_Name = SnapmirrorPolicyFilter.AddMember("Name", SnapmirrorPolicyFilterName)
+
+	SnapmirrorPolicyFilter_Values = SnapmirrorPolicyFilter.AddMember("Values", _SnapmirrorPolicyFilterValues)
+
+	_SnapmirrorPolicyFilters_member = _SnapmirrorPolicyFilters.AddMember("member", SnapmirrorPolicyFilter)
+
+	_SnapmirrorPolicyIds_member = _SnapmirrorPolicyIds.AddMember("member", _SnapmirrorPolicyId)
+
+	SnapmirrorPolicyNotFound_Message = SnapmirrorPolicyNotFound.AddMember("Message", _ErrorMessage)
+
+	SnapmirrorRelationshipLifecycle_CREATING = SnapmirrorRelationshipLifecycle.AddMember("CREATING", smithyprelude.Unit)
+
+	SnapmirrorRelationshipLifecycle_CREATED = SnapmirrorRelationshipLifecycle.AddMember("CREATED", smithyprelude.Unit)
+
+	SnapmirrorRelationshipLifecycle_DELETING = SnapmirrorRelationshipLifecycle.AddMember("DELETING", smithyprelude.Unit)
+
+	SnapmirrorRelationshipLifecycle_FAILED = SnapmirrorRelationshipLifecycle.AddMember("FAILED", smithyprelude.Unit)
+
+	SnapmirrorSource_Path = SnapmirrorSource.AddMember("Path", _SnapmirrorPath)
+
+	SnapmirrorRelationshipPolicy_PolicyId = SnapmirrorRelationshipPolicy.AddMember("PolicyId", _SnapmirrorPolicyId)
+
+	SnapmirrorRelationshipPolicy_PolicyName = SnapmirrorRelationshipPolicy.AddMember("PolicyName", _SnapmirrorPolicyName)
+
+	SnapmirrorRelationshipState_UNINITIALIZED = SnapmirrorRelationshipState.AddMember("UNINITIALIZED", smithyprelude.Unit)
+
+	SnapmirrorRelationshipState_TRANSFERRING = SnapmirrorRelationshipState.AddMember("TRANSFERRING", smithyprelude.Unit)
+
+	SnapmirrorRelationshipState_SNAPMIRRORED = SnapmirrorRelationshipState.AddMember("SNAPMIRRORED", smithyprelude.Unit)
+
+	SnapmirrorRelationshipState_PAUSED = SnapmirrorRelationshipState.AddMember("PAUSED", smithyprelude.Unit)
+
+	SnapmirrorRelationshipState_BROKEN_OFF = SnapmirrorRelationshipState.AddMember("BROKEN_OFF", smithyprelude.Unit)
+
+	SnapmirrorTransferState_State = SnapmirrorTransferState.AddMember("State", _SnapmirrorTransferStatus)
+
+	SnapmirrorTransferState_Type = SnapmirrorTransferState.AddMember("Type", _SnapmirrorTransferType)
+
+	SnapmirrorTransferState_BytesTransferred = SnapmirrorTransferState.AddMember("BytesTransferred", _SnapmirrorTransferBytes)
+
+	SnapmirrorTransferState_Duration = SnapmirrorTransferState.AddMember("Duration", _SnapmirrorTransferDuration)
+
+	SnapmirrorTransferState_EndTime = SnapmirrorTransferState.AddMember("EndTime", _CreationTime)
+
+	SnapmirrorRelationship_ResourceARN = SnapmirrorRelationship.AddMember("ResourceARN", _ResourceARN)
+
+	SnapmirrorRelationship_SnapmirrorRelationshipId = SnapmirrorRelationship.AddMember("SnapmirrorRelationshipId", _SnapmirrorRelationshipId)
+
+	SnapmirrorRelationship_FileSystemId = SnapmirrorRelationship.AddMember("FileSystemId", _FileSystemId)
+
+	SnapmirrorRelationship_Lifecycle = SnapmirrorRelationship.AddMember("Lifecycle", SnapmirrorRelationshipLifecycle)
+
+	SnapmirrorRelationship_LifecycleTransitionReason = SnapmirrorRelationship.AddMember("LifecycleTransitionReason", LifecycleTransitionReason)
+
+	SnapmirrorRelationship_Tags = SnapmirrorRelationship.AddMember("Tags", _Tags)
+
+	SnapmirrorRelationship_Source = SnapmirrorRelationship.AddMember("Source", SnapmirrorSource)
+
+	SnapmirrorRelationship_Destination = SnapmirrorRelationship.AddMember("Destination", SnapmirrorDestination)
+
+	SnapmirrorRelationship_SnapmirrorPolicy = SnapmirrorRelationship.AddMember("SnapmirrorPolicy", SnapmirrorRelationshipPolicy)
+
+	SnapmirrorRelationship_TransferSchedule = SnapmirrorRelationship.AddMember("TransferSchedule", _SnapmirrorTransferScheduleName)
+
+	SnapmirrorRelationship_ThrottleInKbps = SnapmirrorRelationship.AddMember("ThrottleInKbps", _ThrottleInKbps)
+
+	SnapmirrorRelationship_State = SnapmirrorRelationship.AddMember("State", SnapmirrorRelationshipState)
+
+	SnapmirrorRelationship_Healthy = SnapmirrorRelationship.AddMember("Healthy", _SnapmirrorHealthy)
+
+	SnapmirrorRelationship_UnhealthyReason = SnapmirrorRelationship.AddMember("UnhealthyReason", _SnapmirrorUnhealthyReason)
+
+	SnapmirrorRelationship_LagTimeInMinutes = SnapmirrorRelationship.AddMember("LagTimeInMinutes", _LagTimeInMinutes)
+
+	SnapmirrorRelationship_ExportedSnapshot = SnapmirrorRelationship.AddMember("ExportedSnapshot", SnapmirrorExportedSnapshot)
+
+	SnapmirrorRelationship_TransferState = SnapmirrorRelationship.AddMember("TransferState", SnapmirrorTransferState)
+
+	SnapmirrorRelationship_UUID = SnapmirrorRelationship.AddMember("UUID", _UUID)
+
+	SnapmirrorRelationshipFilterName_FILE_SYSTEM_ID = SnapmirrorRelationshipFilterName.AddMember("FILE_SYSTEM_ID", smithyprelude.Unit)
+
+	SnapmirrorRelationshipFilterName_DESTINATION_VOLUME_ID = SnapmirrorRelationshipFilterName.AddMember("DESTINATION_VOLUME_ID", smithyprelude.Unit)
+
+	_SnapmirrorRelationshipFilterValues_member = _SnapmirrorRelationshipFilterValues.AddMember("member", _SnapmirrorRelationshipFilterValue)
+
+	SnapmirrorRelationshipFilter_Name = SnapmirrorRelationshipFilter.AddMember("Name", SnapmirrorRelationshipFilterName)
+
+	SnapmirrorRelationshipFilter_Values = SnapmirrorRelationshipFilter.AddMember("Values", _SnapmirrorRelationshipFilterValues)
+
+	_SnapmirrorRelationshipFilters_member = _SnapmirrorRelationshipFilters.AddMember("member", SnapmirrorRelationshipFilter)
+
+	_SnapmirrorRelationshipIds_member = _SnapmirrorRelationshipIds.AddMember("member", _SnapmirrorRelationshipId)
+
+	SnapmirrorRelationshipNotFound_Message = SnapmirrorRelationshipNotFound.AddMember("Message", _ErrorMessage)
+
+	_SnapmirrorRelationships_member = _SnapmirrorRelationships.AddMember("member", SnapmirrorRelationship)
+
 	SnapshotFilterName_FILE_SYSTEM_ID = SnapshotFilterName.AddMember("FILE_SYSTEM_ID", smithyprelude.Unit)
 
 	SnapshotFilterName_VOLUME_ID = SnapshotFilterName.AddMember("VOLUME_ID", smithyprelude.Unit)
@@ -6618,6 +8402,90 @@ func init() {
 	_SnapshotIds_member = _SnapshotIds.AddMember("member", _SnapshotId)
 
 	SnapshotNotFound_Message = SnapshotNotFound.AddMember("Message", _ErrorMessage)
+
+	SnapshotPolicyRetentionPeriodType_SECONDS = SnapshotPolicyRetentionPeriodType.AddMember("SECONDS", smithyprelude.Unit)
+
+	SnapshotPolicyRetentionPeriodType_MINUTES = SnapshotPolicyRetentionPeriodType.AddMember("MINUTES", smithyprelude.Unit)
+
+	SnapshotPolicyRetentionPeriodType_HOURS = SnapshotPolicyRetentionPeriodType.AddMember("HOURS", smithyprelude.Unit)
+
+	SnapshotPolicyRetentionPeriodType_DAYS = SnapshotPolicyRetentionPeriodType.AddMember("DAYS", smithyprelude.Unit)
+
+	SnapshotPolicyRetentionPeriodType_MONTHS = SnapshotPolicyRetentionPeriodType.AddMember("MONTHS", smithyprelude.Unit)
+
+	SnapshotPolicyRetentionPeriodType_YEARS = SnapshotPolicyRetentionPeriodType.AddMember("YEARS", smithyprelude.Unit)
+
+	SnapshotPolicyRetentionPeriodType_INFINITE = SnapshotPolicyRetentionPeriodType.AddMember("INFINITE", smithyprelude.Unit)
+
+	SnapshotPolicyRetentionPeriod_Type = SnapshotPolicyRetentionPeriod.AddMember("Type", SnapshotPolicyRetentionPeriodType)
+
+	SnapshotPolicyRetentionPeriod_Value = SnapshotPolicyRetentionPeriod.AddMember("Value", _SnapshotPolicyRetentionPeriodValue)
+
+	SnapshotPolicySchedule_Name = SnapshotPolicySchedule.AddMember("Name", _SnapshotPolicyScheduleName)
+
+	SnapshotPolicySchedule_Count = SnapshotPolicySchedule.AddMember("Count", _SnapshotPolicyScheduleCount)
+
+	SnapshotPolicySchedule_Prefix = SnapshotPolicySchedule.AddMember("Prefix", _SnapshotPolicySchedulePrefix)
+
+	SnapshotPolicySchedule_SnapmirrorLabel = SnapshotPolicySchedule.AddMember("SnapmirrorLabel", _SnapmirrorLabel)
+
+	SnapshotPolicySchedule_RetentionPeriod = SnapshotPolicySchedule.AddMember("RetentionPeriod", SnapshotPolicyRetentionPeriod)
+
+	_SnapshotPolicyScheduleList_member = _SnapshotPolicyScheduleList.AddMember("member", SnapshotPolicySchedule)
+
+	SnapshotPolicyScope_FILESYSTEM = SnapshotPolicyScope.AddMember("FILESYSTEM", smithyprelude.Unit)
+
+	SnapshotPolicyScope_SVM = SnapshotPolicyScope.AddMember("SVM", smithyprelude.Unit)
+
+	SnapshotPolicyLifecycle_CREATING = SnapshotPolicyLifecycle.AddMember("CREATING", smithyprelude.Unit)
+
+	SnapshotPolicyLifecycle_CREATED = SnapshotPolicyLifecycle.AddMember("CREATED", smithyprelude.Unit)
+
+	SnapshotPolicyLifecycle_DELETING = SnapshotPolicyLifecycle.AddMember("DELETING", smithyprelude.Unit)
+
+	SnapshotPolicyLifecycle_FAILED = SnapshotPolicyLifecycle.AddMember("FAILED", smithyprelude.Unit)
+
+	SnapshotPolicy_ResourceARN = SnapshotPolicy.AddMember("ResourceARN", _ResourceARN)
+
+	SnapshotPolicy_SnapshotPolicyId = SnapshotPolicy.AddMember("SnapshotPolicyId", _SnapshotPolicyId)
+
+	SnapshotPolicy_FileSystemId = SnapshotPolicy.AddMember("FileSystemId", _FileSystemId)
+
+	SnapshotPolicy_StorageVirtualMachineId = SnapshotPolicy.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
+
+	SnapshotPolicy_Name = SnapshotPolicy.AddMember("Name", _SnapshotPolicyName)
+
+	SnapshotPolicy_Enabled = SnapshotPolicy.AddMember("Enabled", _Flag)
+
+	SnapshotPolicy_Schedules = SnapshotPolicy.AddMember("Schedules", _SnapshotPolicyScheduleList)
+
+	SnapshotPolicy_Scope = SnapshotPolicy.AddMember("Scope", SnapshotPolicyScope)
+
+	SnapshotPolicy_Lifecycle = SnapshotPolicy.AddMember("Lifecycle", SnapshotPolicyLifecycle)
+
+	SnapshotPolicy_UUID = SnapshotPolicy.AddMember("UUID", _UUID)
+
+	SnapshotPolicy_LifecycleTransitionReason = SnapshotPolicy.AddMember("LifecycleTransitionReason", LifecycleTransitionReason)
+
+	SnapshotPolicy_Tags = SnapshotPolicy.AddMember("Tags", _Tags)
+
+	_SnapshotPolicies_member = _SnapshotPolicies.AddMember("member", SnapshotPolicy)
+
+	SnapshotPolicyFilterName_FILE_SYSTEM_ID = SnapshotPolicyFilterName.AddMember("FILE_SYSTEM_ID", smithyprelude.Unit)
+
+	SnapshotPolicyFilterName_STORAGE_VIRTUAL_MACHINE_ID = SnapshotPolicyFilterName.AddMember("STORAGE_VIRTUAL_MACHINE_ID", smithyprelude.Unit)
+
+	_SnapshotPolicyFilterValues_member = _SnapshotPolicyFilterValues.AddMember("member", _SnapshotPolicyFilterValue)
+
+	SnapshotPolicyFilter_Name = SnapshotPolicyFilter.AddMember("Name", SnapshotPolicyFilterName)
+
+	SnapshotPolicyFilter_Values = SnapshotPolicyFilter.AddMember("Values", _SnapshotPolicyFilterValues)
+
+	_SnapshotPolicyFilters_member = _SnapshotPolicyFilters.AddMember("member", SnapshotPolicyFilter)
+
+	_SnapshotPolicyIds_member = _SnapshotPolicyIds.AddMember("member", _SnapshotPolicyId)
+
+	SnapshotPolicyNotFound_Message = SnapshotPolicyNotFound.AddMember("Message", _ErrorMessage)
 
 	_Snapshots_member = _Snapshots.AddMember("member", Snapshot)
 
@@ -6709,6 +8577,86 @@ func init() {
 
 	StorageVirtualMachineNotFound_Message = StorageVirtualMachineNotFound.AddMember("Message", _ErrorMessage)
 
+	StorageVirtualMachinePeerLifecycle_CREATING = StorageVirtualMachinePeerLifecycle.AddMember("CREATING", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerLifecycle_CREATED = StorageVirtualMachinePeerLifecycle.AddMember("CREATED", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerLifecycle_DELETING = StorageVirtualMachinePeerLifecycle.AddMember("DELETING", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerLifecycle_FAILED = StorageVirtualMachinePeerLifecycle.AddMember("FAILED", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerApplication_SNAPMIRROR = StorageVirtualMachinePeerApplication.AddMember("SNAPMIRROR", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerApplication_FILE_COPY = StorageVirtualMachinePeerApplication.AddMember("FILE_COPY", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerApplication_LUN_COPY = StorageVirtualMachinePeerApplication.AddMember("LUN_COPY", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerApplication_FLEXCACHE = StorageVirtualMachinePeerApplication.AddMember("FLEXCACHE", smithyprelude.Unit)
+
+	_StorageVirtualMachinePeerApplications_member = _StorageVirtualMachinePeerApplications.AddMember("member", StorageVirtualMachinePeerApplication)
+
+	StorageVirtualMachinePeerState_PEERED = StorageVirtualMachinePeerState.AddMember("PEERED", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerState_REJECTED = StorageVirtualMachinePeerState.AddMember("REJECTED", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerState_SUSPENDED = StorageVirtualMachinePeerState.AddMember("SUSPENDED", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerState_INITIATED = StorageVirtualMachinePeerState.AddMember("INITIATED", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerState_PENDING = StorageVirtualMachinePeerState.AddMember("PENDING", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerState_INITIALIZING = StorageVirtualMachinePeerState.AddMember("INITIALIZING", smithyprelude.Unit)
+
+	StorageVirtualMachinePeer_ResourceARN = StorageVirtualMachinePeer.AddMember("ResourceARN", _ResourceARN)
+
+	StorageVirtualMachinePeer_StorageVirtualMachinePeerId = StorageVirtualMachinePeer.AddMember("StorageVirtualMachinePeerId", _StorageVirtualMachinePeerId)
+
+	StorageVirtualMachinePeer_StorageVirtualMachineId = StorageVirtualMachinePeer.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
+
+	StorageVirtualMachinePeer_FileSystemId = StorageVirtualMachinePeer.AddMember("FileSystemId", _FileSystemId)
+
+	StorageVirtualMachinePeer_Lifecycle = StorageVirtualMachinePeer.AddMember("Lifecycle", StorageVirtualMachinePeerLifecycle)
+
+	StorageVirtualMachinePeer_LifecycleTransitionReason = StorageVirtualMachinePeer.AddMember("LifecycleTransitionReason", LifecycleTransitionReason)
+
+	StorageVirtualMachinePeer_Tags = StorageVirtualMachinePeer.AddMember("Tags", _Tags)
+
+	StorageVirtualMachinePeer_PeerSvmName = StorageVirtualMachinePeer.AddMember("PeerSvmName", _PeerSvmName)
+
+	StorageVirtualMachinePeer_PeerSvmAlias = StorageVirtualMachinePeer.AddMember("PeerSvmAlias", _PeerSvmAlias)
+
+	StorageVirtualMachinePeer_PeerClusterName = StorageVirtualMachinePeer.AddMember("PeerClusterName", _PeerClusterName)
+
+	StorageVirtualMachinePeer_Applications = StorageVirtualMachinePeer.AddMember("Applications", _StorageVirtualMachinePeerApplications)
+
+	StorageVirtualMachinePeer_State = StorageVirtualMachinePeer.AddMember("State", StorageVirtualMachinePeerState)
+
+	StorageVirtualMachinePeer_UUID = StorageVirtualMachinePeer.AddMember("UUID", _UUID)
+
+	StorageVirtualMachinePeerFilterName_FILE_SYSTEM_ID = StorageVirtualMachinePeerFilterName.AddMember("FILE_SYSTEM_ID", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerFilterName_STORAGE_VIRTUAL_MACHINE_ID = StorageVirtualMachinePeerFilterName.AddMember("STORAGE_VIRTUAL_MACHINE_ID", smithyprelude.Unit)
+
+	_StorageVirtualMachinePeerFilterValues_member = _StorageVirtualMachinePeerFilterValues.AddMember("member", _StorageVirtualMachinePeerFilterValue)
+
+	StorageVirtualMachinePeerFilter_Name = StorageVirtualMachinePeerFilter.AddMember("Name", StorageVirtualMachinePeerFilterName)
+
+	StorageVirtualMachinePeerFilter_Values = StorageVirtualMachinePeerFilter.AddMember("Values", _StorageVirtualMachinePeerFilterValues)
+
+	_StorageVirtualMachinePeerFilters_member = _StorageVirtualMachinePeerFilters.AddMember("member", StorageVirtualMachinePeerFilter)
+
+	_StorageVirtualMachinePeerIds_member = _StorageVirtualMachinePeerIds.AddMember("member", _StorageVirtualMachinePeerId)
+
+	StorageVirtualMachinePeerNotFound_Message = StorageVirtualMachinePeerNotFound.AddMember("Message", _ErrorMessage)
+
+	_StorageVirtualMachinePeers_member = _StorageVirtualMachinePeers.AddMember("member", StorageVirtualMachinePeer)
+
+	StorageVirtualMachinePeerUpdateState_PEERED = StorageVirtualMachinePeerUpdateState.AddMember("PEERED", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerUpdateState_REJECTED = StorageVirtualMachinePeerUpdateState.AddMember("REJECTED", smithyprelude.Unit)
+
+	StorageVirtualMachinePeerUpdateState_SUSPENDED = StorageVirtualMachinePeerUpdateState.AddMember("SUSPENDED", smithyprelude.Unit)
+
 	_StorageVirtualMachines_member = _StorageVirtualMachines.AddMember("member", StorageVirtualMachine)
 
 	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
@@ -6720,6 +8668,14 @@ func init() {
 	TooManyAccessPoints_Message = TooManyAccessPoints.AddMember("Message", _ErrorMessage)
 
 	UnsupportedOperation_Message = UnsupportedOperation.AddMember("Message", _ErrorMessage)
+
+	UpdatableSnapmirrorRelationshipState_SNAPMIRRORED = UpdatableSnapmirrorRelationshipState.AddMember("SNAPMIRRORED", smithyprelude.Unit)
+
+	UpdatableSnapmirrorRelationshipState_PAUSED = UpdatableSnapmirrorRelationshipState.AddMember("PAUSED", smithyprelude.Unit)
+
+	UpdatableSnapmirrorRelationshipState_BROKEN_OFF = UpdatableSnapmirrorRelationshipState.AddMember("BROKEN_OFF", smithyprelude.Unit)
+
+	UpdateCloneConfiguration_SplitAction = UpdateCloneConfiguration.AddMember("SplitAction", CloneSplitAction)
 
 	UpdateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime = UpdateFileCacheLustreConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
 
@@ -6809,6 +8765,12 @@ func init() {
 
 	UpdateFileSystemWindowsConfiguration_FsrmConfiguration = UpdateFileSystemWindowsConfiguration.AddMember("FsrmConfiguration", WindowsFsrmConfiguration)
 
+	UpdateOntapSnapshotConfiguration_SnapmirrorLabel = UpdateOntapSnapshotConfiguration.AddMember("SnapmirrorLabel", _SnapmirrorLabel)
+
+	UpdateOntapSnapshotConfiguration_ExpiryTime = UpdateOntapSnapshotConfiguration.AddMember("ExpiryTime", _ExpiryTime)
+
+	UpdateOntapSnapshotConfiguration_SnaplockExpiryTime = UpdateOntapSnapshotConfiguration.AddMember("SnaplockExpiryTime", _SnaplockExpiryTime)
+
 	UpdateSnaplockConfiguration_AuditLogVolume = UpdateSnaplockConfiguration.AddMember("AuditLogVolume", _Flag)
 
 	UpdateSnaplockConfiguration_AutocommitPeriod = UpdateSnaplockConfiguration.AddMember("AutocommitPeriod", AutocommitPeriod)
@@ -6829,13 +8791,15 @@ func init() {
 
 	UpdateOntapVolumeConfiguration_TieringPolicy = UpdateOntapVolumeConfiguration.AddMember("TieringPolicy", TieringPolicy)
 
-	UpdateOntapVolumeConfiguration_SnapshotPolicy = UpdateOntapVolumeConfiguration.AddMember("SnapshotPolicy", _SnapshotPolicy)
+	UpdateOntapVolumeConfiguration_SnapshotPolicy = UpdateOntapVolumeConfiguration.AddMember("SnapshotPolicy", _SnapshotPolicyName)
 
 	UpdateOntapVolumeConfiguration_CopyTagsToBackups = UpdateOntapVolumeConfiguration.AddMember("CopyTagsToBackups", _Flag)
 
 	UpdateOntapVolumeConfiguration_SnaplockConfiguration = UpdateOntapVolumeConfiguration.AddMember("SnaplockConfiguration", UpdateSnaplockConfiguration)
 
 	UpdateOntapVolumeConfiguration_SizeInBytes = UpdateOntapVolumeConfiguration.AddMember("SizeInBytes", _VolumeCapacityBytes)
+
+	UpdateOntapVolumeConfiguration_CloneConfiguration = UpdateOntapVolumeConfiguration.AddMember("CloneConfiguration", UpdateCloneConfiguration)
 
 	UpdateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB = UpdateOpenZFSVolumeConfiguration.AddMember("StorageCapacityReservationGiB", _IntegerNoMaxFromNegativeOne)
 
@@ -6948,6 +8912,24 @@ func init() {
 	CreateBackupRequest_VolumeId = CreateBackupRequest.AddMember("VolumeId", _VolumeId)
 
 	CreateBackupResponse_Backup = CreateBackupResponse.AddMember("Backup", Backup)
+
+	CreateClusterPeerRequest_ClientRequestToken = CreateClusterPeerRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	CreateClusterPeerRequest_FileSystemId = CreateClusterPeerRequest.AddMember("FileSystemId", _FileSystemId)
+
+	CreateClusterPeerRequest_PeerAddresses = CreateClusterPeerRequest.AddMember("PeerAddresses", _PeerAddresses)
+
+	CreateClusterPeerRequest_PassphraseSecretArn = CreateClusterPeerRequest.AddMember("PassphraseSecretArn", _CustomerSecretsManagerARN)
+
+	CreateClusterPeerRequest_PeerClusterName = CreateClusterPeerRequest.AddMember("PeerClusterName", _PeerClusterName)
+
+	CreateClusterPeerRequest_AllowedSvmMode = CreateClusterPeerRequest.AddMember("AllowedSvmMode", AllowedSvmMode)
+
+	CreateClusterPeerRequest_AllowedSvmIds = CreateClusterPeerRequest.AddMember("AllowedSvmIds", _AllowedSvmIds)
+
+	CreateClusterPeerRequest_Tags = CreateClusterPeerRequest.AddMember("Tags", _Tags)
+
+	CreateClusterPeerResponse_ClusterPeer = CreateClusterPeerResponse.AddMember("ClusterPeer", ClusterPeer)
 
 	CreateDataRepositoryAssociationRequest_FileSystemId = CreateDataRepositoryAssociationRequest.AddMember("FileSystemId", _FileSystemId)
 
@@ -7067,6 +9049,44 @@ func init() {
 
 	CreateFileSystemResponse_FileSystem = CreateFileSystemResponse.AddMember("FileSystem", FileSystem)
 
+	CreateSnapmirrorPolicyRequest_ClientRequestToken = CreateSnapmirrorPolicyRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	CreateSnapmirrorPolicyRequest_FileSystemId = CreateSnapmirrorPolicyRequest.AddMember("FileSystemId", _FileSystemId)
+
+	CreateSnapmirrorPolicyRequest_StorageVirtualMachineId = CreateSnapmirrorPolicyRequest.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
+
+	CreateSnapmirrorPolicyRequest_Name = CreateSnapmirrorPolicyRequest.AddMember("Name", _SnapmirrorPolicyName)
+
+	CreateSnapmirrorPolicyRequest_SnapshotCopyMode = CreateSnapmirrorPolicyRequest.AddMember("SnapshotCopyMode", SnapmirrorPolicySnapshotCopyMode)
+
+	CreateSnapmirrorPolicyRequest_RetentionRules = CreateSnapmirrorPolicyRequest.AddMember("RetentionRules", _SnapmirrorPolicyRetentionRules)
+
+	CreateSnapmirrorPolicyRequest_TransferSchedule = CreateSnapmirrorPolicyRequest.AddMember("TransferSchedule", _SnapmirrorTransferScheduleName)
+
+	CreateSnapmirrorPolicyRequest_NetworkCompressionEnabled = CreateSnapmirrorPolicyRequest.AddMember("NetworkCompressionEnabled", _Flag)
+
+	CreateSnapmirrorPolicyRequest_ThrottleInKbps = CreateSnapmirrorPolicyRequest.AddMember("ThrottleInKbps", _ThrottleInKbps)
+
+	CreateSnapmirrorPolicyRequest_Tags = CreateSnapmirrorPolicyRequest.AddMember("Tags", _Tags)
+
+	CreateSnapmirrorPolicyResponse_SnapmirrorPolicy = CreateSnapmirrorPolicyResponse.AddMember("SnapmirrorPolicy", SnapmirrorPolicy)
+
+	CreateSnapmirrorRelationshipRequest_ClientRequestToken = CreateSnapmirrorRelationshipRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	CreateSnapmirrorRelationshipRequest_Source = CreateSnapmirrorRelationshipRequest.AddMember("Source", CreateSnapmirrorSource)
+
+	CreateSnapmirrorRelationshipRequest_Destination = CreateSnapmirrorRelationshipRequest.AddMember("Destination", CreateSnapmirrorDestination)
+
+	CreateSnapmirrorRelationshipRequest_PolicyId = CreateSnapmirrorRelationshipRequest.AddMember("PolicyId", _SnapmirrorPolicyId)
+
+	CreateSnapmirrorRelationshipRequest_TransferSchedule = CreateSnapmirrorRelationshipRequest.AddMember("TransferSchedule", _SnapmirrorTransferScheduleName)
+
+	CreateSnapmirrorRelationshipRequest_ThrottleInKbps = CreateSnapmirrorRelationshipRequest.AddMember("ThrottleInKbps", _ThrottleInKbps)
+
+	CreateSnapmirrorRelationshipRequest_Tags = CreateSnapmirrorRelationshipRequest.AddMember("Tags", _Tags)
+
+	CreateSnapmirrorRelationshipResponse_SnapmirrorRelationship = CreateSnapmirrorRelationshipResponse.AddMember("SnapmirrorRelationship", SnapmirrorRelationship)
+
 	CreateSnapshotRequest_ClientRequestToken = CreateSnapshotRequest.AddMember("ClientRequestToken", _ClientRequestToken)
 
 	CreateSnapshotRequest_Name = CreateSnapshotRequest.AddMember("Name", _SnapshotName)
@@ -7075,7 +9095,25 @@ func init() {
 
 	CreateSnapshotRequest_Tags = CreateSnapshotRequest.AddMember("Tags", _Tags)
 
+	CreateSnapshotRequest_OntapConfiguration = CreateSnapshotRequest.AddMember("OntapConfiguration", CreateOntapSnapshotConfiguration)
+
 	CreateSnapshotResponse_Snapshot = CreateSnapshotResponse.AddMember("Snapshot", Snapshot)
+
+	CreateSnapshotPolicyRequest_ClientRequestToken = CreateSnapshotPolicyRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	CreateSnapshotPolicyRequest_FileSystemId = CreateSnapshotPolicyRequest.AddMember("FileSystemId", _FileSystemId)
+
+	CreateSnapshotPolicyRequest_StorageVirtualMachineId = CreateSnapshotPolicyRequest.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
+
+	CreateSnapshotPolicyRequest_Name = CreateSnapshotPolicyRequest.AddMember("Name", _SnapshotPolicyName)
+
+	CreateSnapshotPolicyRequest_Enabled = CreateSnapshotPolicyRequest.AddMember("Enabled", _Flag)
+
+	CreateSnapshotPolicyRequest_Schedules = CreateSnapshotPolicyRequest.AddMember("Schedules", _SnapshotPolicyScheduleList)
+
+	CreateSnapshotPolicyRequest_Tags = CreateSnapshotPolicyRequest.AddMember("Tags", _Tags)
+
+	CreateSnapshotPolicyResponse_SnapshotPolicy = CreateSnapshotPolicyResponse.AddMember("SnapshotPolicy", SnapshotPolicy)
 
 	CreateStorageVirtualMachineRequest_ActiveDirectoryConfiguration = CreateStorageVirtualMachineRequest.AddMember("ActiveDirectoryConfiguration", CreateSvmActiveDirectoryConfiguration)
 
@@ -7092,6 +9130,22 @@ func init() {
 	CreateStorageVirtualMachineRequest_RootVolumeSecurityStyle = CreateStorageVirtualMachineRequest.AddMember("RootVolumeSecurityStyle", StorageVirtualMachineRootVolumeSecurityStyle)
 
 	CreateStorageVirtualMachineResponse_StorageVirtualMachine = CreateStorageVirtualMachineResponse.AddMember("StorageVirtualMachine", StorageVirtualMachine)
+
+	CreateStorageVirtualMachinePeerRequest_ClientRequestToken = CreateStorageVirtualMachinePeerRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	CreateStorageVirtualMachinePeerRequest_StorageVirtualMachineId = CreateStorageVirtualMachinePeerRequest.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
+
+	CreateStorageVirtualMachinePeerRequest_PeerSvmName = CreateStorageVirtualMachinePeerRequest.AddMember("PeerSvmName", _PeerSvmName)
+
+	CreateStorageVirtualMachinePeerRequest_PeerClusterName = CreateStorageVirtualMachinePeerRequest.AddMember("PeerClusterName", _PeerClusterName)
+
+	CreateStorageVirtualMachinePeerRequest_Applications = CreateStorageVirtualMachinePeerRequest.AddMember("Applications", _StorageVirtualMachinePeerApplications)
+
+	CreateStorageVirtualMachinePeerRequest_PeerSvmAlias = CreateStorageVirtualMachinePeerRequest.AddMember("PeerSvmAlias", _PeerSvmAlias)
+
+	CreateStorageVirtualMachinePeerRequest_Tags = CreateStorageVirtualMachinePeerRequest.AddMember("Tags", _Tags)
+
+	CreateStorageVirtualMachinePeerResponse_StorageVirtualMachinePeer = CreateStorageVirtualMachinePeerResponse.AddMember("StorageVirtualMachinePeer", StorageVirtualMachinePeer)
 
 	CreateVolumeFromBackupRequest_BackupId = CreateVolumeFromBackupRequest.AddMember("BackupId", _BackupId)
 
@@ -7126,6 +9180,14 @@ func init() {
 	DeleteBackupResponse_BackupId = DeleteBackupResponse.AddMember("BackupId", _BackupId)
 
 	DeleteBackupResponse_Lifecycle = DeleteBackupResponse.AddMember("Lifecycle", BackupLifecycle)
+
+	DeleteClusterPeerRequest_ClientRequestToken = DeleteClusterPeerRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	DeleteClusterPeerRequest_ClusterPeerId = DeleteClusterPeerRequest.AddMember("ClusterPeerId", _ClusterPeerId)
+
+	DeleteClusterPeerResponse_ClusterPeerId = DeleteClusterPeerResponse.AddMember("ClusterPeerId", _ClusterPeerId)
+
+	DeleteClusterPeerResponse_Lifecycle = DeleteClusterPeerResponse.AddMember("Lifecycle", ClusterPeerLifecycle)
 
 	DeleteDataRepositoryAssociationRequest_AssociationId = DeleteDataRepositoryAssociationRequest.AddMember("AssociationId", _DataRepositoryAssociationId)
 
@@ -7167,6 +9229,22 @@ func init() {
 
 	DeleteFileSystemResponse_OpenZFSResponse = DeleteFileSystemResponse.AddMember("OpenZFSResponse", DeleteFileSystemOpenZFSResponse)
 
+	DeleteSnapmirrorPolicyRequest_ClientRequestToken = DeleteSnapmirrorPolicyRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	DeleteSnapmirrorPolicyRequest_SnapmirrorPolicyId = DeleteSnapmirrorPolicyRequest.AddMember("SnapmirrorPolicyId", _SnapmirrorPolicyId)
+
+	DeleteSnapmirrorPolicyResponse_SnapmirrorPolicyId = DeleteSnapmirrorPolicyResponse.AddMember("SnapmirrorPolicyId", _SnapmirrorPolicyId)
+
+	DeleteSnapmirrorPolicyResponse_Lifecycle = DeleteSnapmirrorPolicyResponse.AddMember("Lifecycle", SnapmirrorPolicyLifecycle)
+
+	DeleteSnapmirrorRelationshipRequest_ClientRequestToken = DeleteSnapmirrorRelationshipRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	DeleteSnapmirrorRelationshipRequest_SnapmirrorRelationshipId = DeleteSnapmirrorRelationshipRequest.AddMember("SnapmirrorRelationshipId", _SnapmirrorRelationshipId)
+
+	DeleteSnapmirrorRelationshipResponse_SnapmirrorRelationshipId = DeleteSnapmirrorRelationshipResponse.AddMember("SnapmirrorRelationshipId", _SnapmirrorRelationshipId)
+
+	DeleteSnapmirrorRelationshipResponse_Lifecycle = DeleteSnapmirrorRelationshipResponse.AddMember("Lifecycle", SnapmirrorRelationshipLifecycle)
+
 	DeleteSnapshotRequest_ClientRequestToken = DeleteSnapshotRequest.AddMember("ClientRequestToken", _ClientRequestToken)
 
 	DeleteSnapshotRequest_SnapshotId = DeleteSnapshotRequest.AddMember("SnapshotId", _SnapshotId)
@@ -7175,6 +9253,14 @@ func init() {
 
 	DeleteSnapshotResponse_Lifecycle = DeleteSnapshotResponse.AddMember("Lifecycle", SnapshotLifecycle)
 
+	DeleteSnapshotPolicyRequest_ClientRequestToken = DeleteSnapshotPolicyRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	DeleteSnapshotPolicyRequest_SnapshotPolicyId = DeleteSnapshotPolicyRequest.AddMember("SnapshotPolicyId", _SnapshotPolicyId)
+
+	DeleteSnapshotPolicyResponse_SnapshotPolicyId = DeleteSnapshotPolicyResponse.AddMember("SnapshotPolicyId", _SnapshotPolicyId)
+
+	DeleteSnapshotPolicyResponse_Lifecycle = DeleteSnapshotPolicyResponse.AddMember("Lifecycle", SnapshotPolicyLifecycle)
+
 	DeleteStorageVirtualMachineRequest_ClientRequestToken = DeleteStorageVirtualMachineRequest.AddMember("ClientRequestToken", _ClientRequestToken)
 
 	DeleteStorageVirtualMachineRequest_StorageVirtualMachineId = DeleteStorageVirtualMachineRequest.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
@@ -7182,6 +9268,14 @@ func init() {
 	DeleteStorageVirtualMachineResponse_StorageVirtualMachineId = DeleteStorageVirtualMachineResponse.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
 
 	DeleteStorageVirtualMachineResponse_Lifecycle = DeleteStorageVirtualMachineResponse.AddMember("Lifecycle", StorageVirtualMachineLifecycle)
+
+	DeleteStorageVirtualMachinePeerRequest_ClientRequestToken = DeleteStorageVirtualMachinePeerRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	DeleteStorageVirtualMachinePeerRequest_StorageVirtualMachinePeerId = DeleteStorageVirtualMachinePeerRequest.AddMember("StorageVirtualMachinePeerId", _StorageVirtualMachinePeerId)
+
+	DeleteStorageVirtualMachinePeerResponse_StorageVirtualMachinePeerId = DeleteStorageVirtualMachinePeerResponse.AddMember("StorageVirtualMachinePeerId", _StorageVirtualMachinePeerId)
+
+	DeleteStorageVirtualMachinePeerResponse_Lifecycle = DeleteStorageVirtualMachinePeerResponse.AddMember("Lifecycle", StorageVirtualMachinePeerLifecycle)
 
 	DeleteVolumeRequest_ClientRequestToken = DeleteVolumeRequest.AddMember("ClientRequestToken", _ClientRequestToken)
 
@@ -7208,6 +9302,18 @@ func init() {
 	DescribeBackupsResponse_Backups = DescribeBackupsResponse.AddMember("Backups", _Backups)
 
 	DescribeBackupsResponse_NextToken = DescribeBackupsResponse.AddMember("NextToken", _NextToken)
+
+	DescribeClusterPeersRequest_ClusterPeerIds = DescribeClusterPeersRequest.AddMember("ClusterPeerIds", _ClusterPeerIds)
+
+	DescribeClusterPeersRequest_Filters = DescribeClusterPeersRequest.AddMember("Filters", _ClusterPeerFilters)
+
+	DescribeClusterPeersRequest_MaxResults = DescribeClusterPeersRequest.AddMember("MaxResults", _MaxResults)
+
+	DescribeClusterPeersRequest_NextToken = DescribeClusterPeersRequest.AddMember("NextToken", _NextToken)
+
+	DescribeClusterPeersResponse_ClusterPeers = DescribeClusterPeersResponse.AddMember("ClusterPeers", _ClusterPeers)
+
+	DescribeClusterPeersResponse_NextToken = DescribeClusterPeersResponse.AddMember("NextToken", _NextToken)
 
 	DescribeDataRepositoryAssociationsRequest_AssociationIds = DescribeDataRepositoryAssociationsRequest.AddMember("AssociationIds", _DataRepositoryAssociationIds)
 
@@ -7279,6 +9385,42 @@ func init() {
 
 	DescribeSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts = DescribeSharedVpcConfigurationResponse.AddMember("EnableFsxRouteTableUpdatesFromParticipantAccounts", _VerboseFlag)
 
+	DescribeSnapmirrorPoliciesRequest_SnapmirrorPolicyIds = DescribeSnapmirrorPoliciesRequest.AddMember("SnapmirrorPolicyIds", _SnapmirrorPolicyIds)
+
+	DescribeSnapmirrorPoliciesRequest_Filters = DescribeSnapmirrorPoliciesRequest.AddMember("Filters", _SnapmirrorPolicyFilters)
+
+	DescribeSnapmirrorPoliciesRequest_MaxResults = DescribeSnapmirrorPoliciesRequest.AddMember("MaxResults", _MaxResults)
+
+	DescribeSnapmirrorPoliciesRequest_NextToken = DescribeSnapmirrorPoliciesRequest.AddMember("NextToken", _NextToken)
+
+	DescribeSnapmirrorPoliciesResponse_SnapmirrorPolicies = DescribeSnapmirrorPoliciesResponse.AddMember("SnapmirrorPolicies", _SnapmirrorPolicies)
+
+	DescribeSnapmirrorPoliciesResponse_NextToken = DescribeSnapmirrorPoliciesResponse.AddMember("NextToken", _NextToken)
+
+	DescribeSnapmirrorRelationshipsRequest_SnapmirrorRelationshipIds = DescribeSnapmirrorRelationshipsRequest.AddMember("SnapmirrorRelationshipIds", _SnapmirrorRelationshipIds)
+
+	DescribeSnapmirrorRelationshipsRequest_Filters = DescribeSnapmirrorRelationshipsRequest.AddMember("Filters", _SnapmirrorRelationshipFilters)
+
+	DescribeSnapmirrorRelationshipsRequest_MaxResults = DescribeSnapmirrorRelationshipsRequest.AddMember("MaxResults", _MaxResults)
+
+	DescribeSnapmirrorRelationshipsRequest_NextToken = DescribeSnapmirrorRelationshipsRequest.AddMember("NextToken", _NextToken)
+
+	DescribeSnapmirrorRelationshipsResponse_SnapmirrorRelationships = DescribeSnapmirrorRelationshipsResponse.AddMember("SnapmirrorRelationships", _SnapmirrorRelationships)
+
+	DescribeSnapmirrorRelationshipsResponse_NextToken = DescribeSnapmirrorRelationshipsResponse.AddMember("NextToken", _NextToken)
+
+	DescribeSnapshotPoliciesRequest_SnapshotPolicyIds = DescribeSnapshotPoliciesRequest.AddMember("SnapshotPolicyIds", _SnapshotPolicyIds)
+
+	DescribeSnapshotPoliciesRequest_Filters = DescribeSnapshotPoliciesRequest.AddMember("Filters", _SnapshotPolicyFilters)
+
+	DescribeSnapshotPoliciesRequest_MaxResults = DescribeSnapshotPoliciesRequest.AddMember("MaxResults", _MaxResults)
+
+	DescribeSnapshotPoliciesRequest_NextToken = DescribeSnapshotPoliciesRequest.AddMember("NextToken", _NextToken)
+
+	DescribeSnapshotPoliciesResponse_SnapshotPolicies = DescribeSnapshotPoliciesResponse.AddMember("SnapshotPolicies", _SnapshotPolicies)
+
+	DescribeSnapshotPoliciesResponse_NextToken = DescribeSnapshotPoliciesResponse.AddMember("NextToken", _NextToken)
+
 	DescribeSnapshotsRequest_SnapshotIds = DescribeSnapshotsRequest.AddMember("SnapshotIds", _SnapshotIds)
 
 	DescribeSnapshotsRequest_Filters = DescribeSnapshotsRequest.AddMember("Filters", _SnapshotFilters)
@@ -7292,6 +9434,18 @@ func init() {
 	DescribeSnapshotsResponse_Snapshots = DescribeSnapshotsResponse.AddMember("Snapshots", _Snapshots)
 
 	DescribeSnapshotsResponse_NextToken = DescribeSnapshotsResponse.AddMember("NextToken", _NextToken)
+
+	DescribeStorageVirtualMachinePeersRequest_StorageVirtualMachinePeerIds = DescribeStorageVirtualMachinePeersRequest.AddMember("StorageVirtualMachinePeerIds", _StorageVirtualMachinePeerIds)
+
+	DescribeStorageVirtualMachinePeersRequest_Filters = DescribeStorageVirtualMachinePeersRequest.AddMember("Filters", _StorageVirtualMachinePeerFilters)
+
+	DescribeStorageVirtualMachinePeersRequest_MaxResults = DescribeStorageVirtualMachinePeersRequest.AddMember("MaxResults", _MaxResults)
+
+	DescribeStorageVirtualMachinePeersRequest_NextToken = DescribeStorageVirtualMachinePeersRequest.AddMember("NextToken", _NextToken)
+
+	DescribeStorageVirtualMachinePeersResponse_StorageVirtualMachinePeers = DescribeStorageVirtualMachinePeersResponse.AddMember("StorageVirtualMachinePeers", _StorageVirtualMachinePeers)
+
+	DescribeStorageVirtualMachinePeersResponse_NextToken = DescribeStorageVirtualMachinePeersResponse.AddMember("NextToken", _NextToken)
 
 	DescribeStorageVirtualMachinesRequest_StorageVirtualMachineIds = DescribeStorageVirtualMachinesRequest.AddMember("StorageVirtualMachineIds", _StorageVirtualMachineIds)
 
@@ -7377,6 +9531,16 @@ func init() {
 
 	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeys)
 
+	UpdateClusterPeerRequest_ClientRequestToken = UpdateClusterPeerRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	UpdateClusterPeerRequest_ClusterPeerId = UpdateClusterPeerRequest.AddMember("ClusterPeerId", _ClusterPeerId)
+
+	UpdateClusterPeerRequest_PeerClusterName = UpdateClusterPeerRequest.AddMember("PeerClusterName", _PeerClusterName)
+
+	UpdateClusterPeerRequest_PeerAddresses = UpdateClusterPeerRequest.AddMember("PeerAddresses", _PeerAddresses)
+
+	UpdateClusterPeerResponse_ClusterPeer = UpdateClusterPeerResponse.AddMember("ClusterPeer", ClusterPeer)
+
 	UpdateDataRepositoryAssociationRequest_AssociationId = UpdateDataRepositoryAssociationRequest.AddMember("AssociationId", _DataRepositoryAssociationId)
 
 	UpdateDataRepositoryAssociationRequest_ClientRequestToken = UpdateDataRepositoryAssociationRequest.AddMember("ClientRequestToken", _ClientRequestToken)
@@ -7423,13 +9587,51 @@ func init() {
 
 	UpdateSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts = UpdateSharedVpcConfigurationResponse.AddMember("EnableFsxRouteTableUpdatesFromParticipantAccounts", _VerboseFlag)
 
+	UpdateSnapmirrorPolicyRequest_ClientRequestToken = UpdateSnapmirrorPolicyRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	UpdateSnapmirrorPolicyRequest_SnapmirrorPolicyId = UpdateSnapmirrorPolicyRequest.AddMember("SnapmirrorPolicyId", _SnapmirrorPolicyId)
+
+	UpdateSnapmirrorPolicyRequest_RetentionRules = UpdateSnapmirrorPolicyRequest.AddMember("RetentionRules", _SnapmirrorPolicyRetentionRules)
+
+	UpdateSnapmirrorPolicyRequest_TransferSchedule = UpdateSnapmirrorPolicyRequest.AddMember("TransferSchedule", _SnapmirrorTransferScheduleName)
+
+	UpdateSnapmirrorPolicyRequest_NetworkCompressionEnabled = UpdateSnapmirrorPolicyRequest.AddMember("NetworkCompressionEnabled", _Flag)
+
+	UpdateSnapmirrorPolicyRequest_ThrottleInKbps = UpdateSnapmirrorPolicyRequest.AddMember("ThrottleInKbps", _ThrottleInKbps)
+
+	UpdateSnapmirrorPolicyResponse_SnapmirrorPolicy = UpdateSnapmirrorPolicyResponse.AddMember("SnapmirrorPolicy", SnapmirrorPolicy)
+
+	UpdateSnapmirrorRelationshipRequest_ClientRequestToken = UpdateSnapmirrorRelationshipRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	UpdateSnapmirrorRelationshipRequest_SnapmirrorRelationshipId = UpdateSnapmirrorRelationshipRequest.AddMember("SnapmirrorRelationshipId", _SnapmirrorRelationshipId)
+
+	UpdateSnapmirrorRelationshipRequest_PolicyId = UpdateSnapmirrorRelationshipRequest.AddMember("PolicyId", _SnapmirrorPolicyId)
+
+	UpdateSnapmirrorRelationshipRequest_TransferSchedule = UpdateSnapmirrorRelationshipRequest.AddMember("TransferSchedule", _SnapmirrorTransferScheduleName)
+
+	UpdateSnapmirrorRelationshipRequest_ThrottleInKbps = UpdateSnapmirrorRelationshipRequest.AddMember("ThrottleInKbps", _ThrottleInKbps)
+
+	UpdateSnapmirrorRelationshipRequest_State = UpdateSnapmirrorRelationshipRequest.AddMember("State", UpdatableSnapmirrorRelationshipState)
+
+	UpdateSnapmirrorRelationshipResponse_SnapmirrorRelationship = UpdateSnapmirrorRelationshipResponse.AddMember("SnapmirrorRelationship", SnapmirrorRelationship)
+
 	UpdateSnapshotRequest_ClientRequestToken = UpdateSnapshotRequest.AddMember("ClientRequestToken", _ClientRequestToken)
 
 	UpdateSnapshotRequest_Name = UpdateSnapshotRequest.AddMember("Name", _SnapshotName)
 
 	UpdateSnapshotRequest_SnapshotId = UpdateSnapshotRequest.AddMember("SnapshotId", _SnapshotId)
 
+	UpdateSnapshotRequest_OntapConfiguration = UpdateSnapshotRequest.AddMember("OntapConfiguration", UpdateOntapSnapshotConfiguration)
+
 	UpdateSnapshotResponse_Snapshot = UpdateSnapshotResponse.AddMember("Snapshot", Snapshot)
+
+	UpdateSnapshotPolicyRequest_ClientRequestToken = UpdateSnapshotPolicyRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	UpdateSnapshotPolicyRequest_SnapshotPolicyId = UpdateSnapshotPolicyRequest.AddMember("SnapshotPolicyId", _SnapshotPolicyId)
+
+	UpdateSnapshotPolicyRequest_Enabled = UpdateSnapshotPolicyRequest.AddMember("Enabled", _Flag)
+
+	UpdateSnapshotPolicyResponse_SnapshotPolicy = UpdateSnapshotPolicyResponse.AddMember("SnapshotPolicy", SnapshotPolicy)
 
 	UpdateStorageVirtualMachineRequest_ActiveDirectoryConfiguration = UpdateStorageVirtualMachineRequest.AddMember("ActiveDirectoryConfiguration", UpdateSvmActiveDirectoryConfiguration)
 
@@ -7440,6 +9642,18 @@ func init() {
 	UpdateStorageVirtualMachineRequest_SvmAdminPassword = UpdateStorageVirtualMachineRequest.AddMember("SvmAdminPassword", _AdminPassword)
 
 	UpdateStorageVirtualMachineResponse_StorageVirtualMachine = UpdateStorageVirtualMachineResponse.AddMember("StorageVirtualMachine", StorageVirtualMachine)
+
+	UpdateStorageVirtualMachinePeerRequest_ClientRequestToken = UpdateStorageVirtualMachinePeerRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	UpdateStorageVirtualMachinePeerRequest_StorageVirtualMachinePeerId = UpdateStorageVirtualMachinePeerRequest.AddMember("StorageVirtualMachinePeerId", _StorageVirtualMachinePeerId)
+
+	UpdateStorageVirtualMachinePeerRequest_Applications = UpdateStorageVirtualMachinePeerRequest.AddMember("Applications", _StorageVirtualMachinePeerApplications)
+
+	UpdateStorageVirtualMachinePeerRequest_PeerSvmAlias = UpdateStorageVirtualMachinePeerRequest.AddMember("PeerSvmAlias", _PeerSvmAlias)
+
+	UpdateStorageVirtualMachinePeerRequest_State = UpdateStorageVirtualMachinePeerRequest.AddMember("State", StorageVirtualMachinePeerUpdateState)
+
+	UpdateStorageVirtualMachinePeerResponse_StorageVirtualMachinePeer = UpdateStorageVirtualMachinePeerResponse.AddMember("StorageVirtualMachinePeer", StorageVirtualMachinePeer)
 
 	UpdateVolumeRequest_ClientRequestToken = UpdateVolumeRequest.AddMember("ClientRequestToken", _ClientRequestToken)
 

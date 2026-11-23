@@ -1,0 +1,5 @@
+POST /governance-policy-mgmt/accounts/__AccountId__/policy-assignments/batch-delete
+
+Content-Type: application/json
+
+{"PolicyArn":"__PolicyArn__","PrincipalArns":["__Member__","__Member__"]}

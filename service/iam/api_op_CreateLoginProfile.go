@@ -40,6 +40,14 @@ func (c *Client) CreateLoginProfile(ctx context.Context, params *CreateLoginProf
 
 type CreateLoginProfileInput struct {
 
+	// The maximum duration (in seconds) of an Amazon Web Services Sign-In session for
+	// this IAM user. This setting can have a value from 1 hour (3600 seconds) to 90
+	// days (7776000 seconds), inclusive. If you do not specify a value, the setting
+	// remains unset and the existing sign-in session behavior applies.
+	//
+	// This setting is not supported for the root user.
+	MaxSigninSessionDuration *int32
+
 	// The new password for the user.
 	//
 	// This parameter must be omitted when you make the request with an [AssumeRoot] session. It
@@ -85,6 +93,9 @@ func (v *CreateLoginProfileInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateLoginProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxSigninSessionDuration != nil {
+		s.WriteInt32(schemas.CreateLoginProfileRequest_MaxSigninSessionDuration, *v.MaxSigninSessionDuration)
+	}
 	if v.Password != nil {
 		s.WriteString(schemas.CreateLoginProfileRequest_Password, *v.Password)
 	}

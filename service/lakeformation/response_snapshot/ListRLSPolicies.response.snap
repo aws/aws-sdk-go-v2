@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"NextToken":"__NextToken__","RLSPolicies":[{"AttachmentColumns":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}],"CatalogId":"__CatalogId__","FilterExpression":"__FilterExpression__","Name":"__Name__"},{"AttachmentColumns":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}],"CatalogId":"__CatalogId__","FilterExpression":"__FilterExpression__","Name":"__Name__"}]}
+{"NextToken":"__NextToken__","RLSPolicies":[{"AttachmentColumns":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}],"CatalogId":"__CatalogId__","FilterExpression":"__FilterExpression__","Name":"__Name__","Status":"VALID","StatusReason":"REFERENCED_UDF_DELETED"},{"AttachmentColumns":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}],"CatalogId":"__CatalogId__","FilterExpression":"__FilterExpression__","Name":"__Name__","Status":"VALID","StatusReason":"REFERENCED_UDF_DELETED"}]}

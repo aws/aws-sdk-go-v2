@@ -36,16 +36,22 @@ type ListMarketplaceRevenueShareAllocationsInput struct {
 	// This member is required.
 	Catalog types.CatalogName
 
-	// The AWS Marketplace product identifier for the parent revenue share.
+	// The parent marketplace revenue share, by ID (mrs-...) or ARN.
 	//
 	// This member is required.
-	ProductId *string
+	MarketplaceRevenueShareIdentifier *string
 
 	// Inclusive lower bound for EffectiveFrom date filter.
 	AfterEffectiveFrom *string
 
+	// Inclusive lower bound for EffectiveUntil date filter.
+	AfterEffectiveUntil *string
+
 	// Exclusive upper bound for EffectiveFrom date filter (half-open range).
 	BeforeEffectiveFrom *string
+
+	// Exclusive upper bound for EffectiveUntil date filter (half-open range).
+	BeforeEffectiveUntil *string
 
 	// Optional share revision for historical list. Returns allocations as they
 	// existed at this revision.
@@ -60,11 +66,11 @@ type ListMarketplaceRevenueShareAllocationsInput struct {
 	// The field to sort marketplace revenue share allocations by.
 	SortBy types.MarketplaceRevenueShareAllocationSortField
 
-	// The direction to sort results. Defaults to DESCENDING.
+	// The direction to sort results. Defaults to ASCENDING.
 	SortOrder types.SortOrder
 
 	// Filter by allocation status.
-	Status types.AllocationStatus
+	StatusFilter types.AllocationStatus
 
 	noSmithyDocumentSerde
 }
@@ -79,11 +85,20 @@ func (v *ListMarketplaceRevenueShareAllocationsInput) SerializeMembers(s smithy.
 	if v.AfterEffectiveFrom != nil {
 		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_AfterEffectiveFrom, *v.AfterEffectiveFrom)
 	}
+	if v.AfterEffectiveUntil != nil {
+		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_AfterEffectiveUntil, *v.AfterEffectiveUntil)
+	}
 	if v.BeforeEffectiveFrom != nil {
 		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveFrom, *v.BeforeEffectiveFrom)
 	}
+	if v.BeforeEffectiveUntil != nil {
+		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_BeforeEffectiveUntil, *v.BeforeEffectiveUntil)
+	}
 	if v.Catalog != "" {
 		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_Catalog, string(v.Catalog))
+	}
+	if v.MarketplaceRevenueShareIdentifier != nil {
+		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_MarketplaceRevenueShareIdentifier, *v.MarketplaceRevenueShareIdentifier)
 	}
 	if v.MarketplaceRevenueShareRevision != nil {
 		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_MarketplaceRevenueShareRevision, *v.MarketplaceRevenueShareRevision)
@@ -94,17 +109,14 @@ func (v *ListMarketplaceRevenueShareAllocationsInput) SerializeMembers(s smithy.
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_NextToken, *v.NextToken)
 	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_ProductId, *v.ProductId)
-	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_SortBy, string(v.SortBy))
 	}
 	if v.SortOrder != "" {
 		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_SortOrder, string(v.SortOrder))
 	}
-	if v.Status != "" {
-		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_Status, string(v.Status))
+	if v.StatusFilter != "" {
+		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsInput_StatusFilter, string(v.StatusFilter))
 	}
 }
 

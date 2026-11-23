@@ -723,6 +723,55 @@ var _Ciphers = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _Ciphers_member *smithy.Schema
 
+var ClientCertificateIdentityFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticloadbalancingv2",
+	Name:      "ClientCertificateIdentityFilter",
+}, smithy.ShapeTypeStructure, 4)
+var ClientCertificateIdentityFilter_Field *smithy.Schema
+
+var ClientCertificateIdentityFilter_Action *smithy.Schema
+
+var ClientCertificateIdentityFilter_MatchType *smithy.Schema
+
+var ClientCertificateIdentityFilter_Value *smithy.Schema
+
+var ClientCertificateIdentityFilterAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticloadbalancingv2",
+	Name:      "ClientCertificateIdentityFilterAction",
+}, smithy.ShapeTypeEnum, 1)
+var ClientCertificateIdentityFilterAction_ACCEPT *smithy.Schema
+
+var ClientCertificateIdentityFilterField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticloadbalancingv2",
+	Name:      "ClientCertificateIdentityFilterField",
+}, smithy.ShapeTypeEnum, 4)
+var ClientCertificateIdentityFilterField_SUBJECT_CN *smithy.Schema
+
+var ClientCertificateIdentityFilterField_SUBJECT_OU *smithy.Schema
+
+var ClientCertificateIdentityFilterField_SAN_DNS *smithy.Schema
+
+var ClientCertificateIdentityFilterField_SAN_URI *smithy.Schema
+
+var ClientCertificateIdentityFilterMatchType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticloadbalancingv2",
+	Name:      "ClientCertificateIdentityFilterMatchType",
+}, smithy.ShapeTypeEnum, 2)
+var ClientCertificateIdentityFilterMatchType_EXACT *smithy.Schema
+
+var ClientCertificateIdentityFilterMatchType_PREFIX *smithy.Schema
+
+var _ClientCertificateIdentityFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticloadbalancingv2",
+	Name:      "ClientCertificateIdentityFilters",
+}, smithy.ShapeTypeList, 1)
+var _ClientCertificateIdentityFilters_member *smithy.Schema
+
+var _ClientCertificateIdentityFilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticloadbalancingv2",
+	Name:      "ClientCertificateIdentityFilterValue",
+}, smithy.ShapeTypeString, 0)
+
 var _ConditionFieldName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticloadbalancingv2",
 	Name:      "ConditionFieldName",
@@ -1470,7 +1519,7 @@ var _Mode = smithy.NewSchema(smithy.ShapeID{
 var MutualAuthenticationAttributes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticloadbalancingv2",
 	Name:      "MutualAuthenticationAttributes",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var MutualAuthenticationAttributes_Mode *smithy.Schema
 
 var MutualAuthenticationAttributes_TrustStoreArn *smithy.Schema
@@ -1480,6 +1529,8 @@ var MutualAuthenticationAttributes_IgnoreClientCertificateExpiry *smithy.Schema
 var MutualAuthenticationAttributes_TrustStoreAssociationStatus *smithy.Schema
 
 var MutualAuthenticationAttributes_AdvertiseTrustStoreCaNames *smithy.Schema
+
+var MutualAuthenticationAttributes_ClientCertificateIdentityFilters *smithy.Schema
 
 var _Name = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticloadbalancingv2",
@@ -3809,6 +3860,30 @@ func init() {
 
 	_Ciphers_member = _Ciphers.AddMember("member", Cipher)
 
+	ClientCertificateIdentityFilterField_SUBJECT_CN = ClientCertificateIdentityFilterField.AddMember("SUBJECT_CN", smithyprelude.Unit)
+
+	ClientCertificateIdentityFilterField_SUBJECT_OU = ClientCertificateIdentityFilterField.AddMember("SUBJECT_OU", smithyprelude.Unit)
+
+	ClientCertificateIdentityFilterField_SAN_DNS = ClientCertificateIdentityFilterField.AddMember("SAN_DNS", smithyprelude.Unit)
+
+	ClientCertificateIdentityFilterField_SAN_URI = ClientCertificateIdentityFilterField.AddMember("SAN_URI", smithyprelude.Unit)
+
+	ClientCertificateIdentityFilterAction_ACCEPT = ClientCertificateIdentityFilterAction.AddMember("ACCEPT", smithyprelude.Unit)
+
+	ClientCertificateIdentityFilterMatchType_EXACT = ClientCertificateIdentityFilterMatchType.AddMember("EXACT", smithyprelude.Unit)
+
+	ClientCertificateIdentityFilterMatchType_PREFIX = ClientCertificateIdentityFilterMatchType.AddMember("PREFIX", smithyprelude.Unit)
+
+	ClientCertificateIdentityFilter_Field = ClientCertificateIdentityFilter.AddMember("Field", ClientCertificateIdentityFilterField)
+
+	ClientCertificateIdentityFilter_Action = ClientCertificateIdentityFilter.AddMember("Action", ClientCertificateIdentityFilterAction)
+
+	ClientCertificateIdentityFilter_MatchType = ClientCertificateIdentityFilter.AddMember("MatchType", ClientCertificateIdentityFilterMatchType)
+
+	ClientCertificateIdentityFilter_Value = ClientCertificateIdentityFilter.AddMember("Value", _ClientCertificateIdentityFilterValue)
+
+	_ClientCertificateIdentityFilters_member = _ClientCertificateIdentityFilters.AddMember("member", ClientCertificateIdentityFilter)
+
 	DeleteAssociationSameAccountException_Message = DeleteAssociationSameAccountException.AddMember("Message", _ErrorDescription)
 
 	DescribeTargetHealthInputIncludeEnum_ANOMALY = DescribeTargetHealthInputIncludeEnum.AddMember("ANOMALY", smithyprelude.Unit)
@@ -3934,6 +4009,8 @@ func init() {
 	MutualAuthenticationAttributes_TrustStoreAssociationStatus = MutualAuthenticationAttributes.AddMember("TrustStoreAssociationStatus", TrustStoreAssociationStatusEnum)
 
 	MutualAuthenticationAttributes_AdvertiseTrustStoreCaNames = MutualAuthenticationAttributes.AddMember("AdvertiseTrustStoreCaNames", AdvertiseTrustStoreCaNamesEnum)
+
+	MutualAuthenticationAttributes_ClientCertificateIdentityFilters = MutualAuthenticationAttributes.AddMember("ClientCertificateIdentityFilters", _ClientCertificateIdentityFilters)
 
 	Listener_ListenerArn = Listener.AddMember("ListenerArn", _ListenerArn)
 

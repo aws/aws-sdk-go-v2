@@ -12922,6 +12922,12 @@
             "members": {
                 "queryComputeConfiguration": {
                     "target": "com.amazonaws.cleanrooms#WorkerComputeConfiguration"
+                },
+                "jobComputeConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#ProtectedJobComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the compute configuration for the PySpark job that populates the intermediate table.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17056,6 +17062,12 @@
                     "traits": {
                         "smithy.api#enumValue": "QUERY"
                     }
+                },
+                "JOB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JOB"
+                    }
                 }
             }
         },
@@ -17140,10 +17152,31 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The SQL parameters for the population analysis, including the query string or analysis template ARN.</p>"
                     }
+                },
+                "jobParameters": {
+                    "target": "com.amazonaws.cleanrooms#PopulationAnalysisJobParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the PySpark job parameters for the population analysis. Use <code>jobParameters</code> instead of <code>sqlParameters</code> when you populate the intermediate table with results from a PySpark job.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the configuration that defines the analysis used to populate an intermediate table.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#PopulationAnalysisJobParameters": {
+            "type": "structure",
+            "members": {
+                "analysisTemplateArn": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the ARN of the PySpark analysis template that populates the intermediate table. Provide this ARN in <code>jobParameters</code> when you populate the intermediate table with results from a PySpark job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the PySpark job parameters used to populate an intermediate table, including the ARN of the analysis template that defines the job. Use these parameters instead of SQL parameters when the analysis you use to populate the intermediate table is a PySpark analysis template.</p>"
             }
         },
         "com.amazonaws.cleanrooms#PopulationAnalysisSqlParameters": {
@@ -17955,6 +17988,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The member output configuration for a protected job.</p>"
                     }
+                },
+                "intermediateTable": {
+                    "target": "com.amazonaws.cleanrooms#IntermediateTableOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the intermediate table that the protected job populated, identified by its ID, Amazon Resource Name (ARN), and name. This field is present when the protected job was triggered by a <code>PopulateIntermediateTable</code> operation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18260,6 +18299,12 @@
                     "target": "com.amazonaws.cleanrooms#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the member that pays for the job compute costs.</p>"
+                    }
+                },
+                "intermediateTableConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#IntermediateTableOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The intermediate table that the protected job populated. This field is present when the protected job was triggered by a <code>PopulateIntermediateTable</code> operation.</p>"
                     }
                 }
             },

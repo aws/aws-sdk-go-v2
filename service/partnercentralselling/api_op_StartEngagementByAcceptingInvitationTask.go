@@ -33,6 +33,8 @@ func (c *Client) StartEngagementByAcceptingInvitationTask(ctx context.Context, p
 	return out, nil
 }
 
+// Contains the request parameters for the StartEngagementByAcceptingInvitationTask
+// operation.
 type StartEngagementByAcceptingInvitationTaskInput struct {
 
 	// Specifies the catalog related to the task. Use AWS for production engagements
@@ -82,6 +84,8 @@ func (v *StartEngagementByAcceptingInvitationTaskInput) SerializeMembers(s smith
 	}
 }
 
+// Contains the response that the StartEngagementByAcceptingInvitationTask action
+// returns.
 type StartEngagementByAcceptingInvitationTaskOutput struct {
 
 	// Returns the identifier of the engagement invitation that was accepted and used

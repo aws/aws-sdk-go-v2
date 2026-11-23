@@ -2226,6 +2226,211 @@ func (v *PropertyDifference) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Provides visibility into the stack instances deployment stage for a single
+// Region, including per-stack-instance progress counts and a completion percentage
+// for that Region.
+type RegionalStackInstancesDeployment struct {
+
+	// The number of stack instances in this Region that were canceled because the
+	// operation exceeded its failure tolerance or was stopped.
+	CancelledStackInstancesCount *int32
+
+	// The number of stack instances in this Region that have reached a final state.
+	// This count includes stack instances that succeeded, failed, were skipped, or
+	// were canceled.
+	CompletedStackInstancesCount *int32
+
+	// The number of stack instances that failed to deploy in this Region.
+	FailedStackInstancesCount *int32
+
+	// The number of stack instances in this Region that have not reached a final
+	// state. This is the total number of stack instances in this Region minus the
+	// completed count.
+	PendingStackInstancesCount *int32
+
+	// The percentage of stack instances in this Region that have reached a final
+	// state.
+	PercentageCompleted *float64
+
+	// The number of stack instances in this Region that were skipped because role
+	// provisioning failed for their target account.
+	SkippedStackInstancesCount *int32
+
+	// The status of the stack instances deployment stage can be one of the following
+	// values:
+	//
+	//   - NOT_APPLICABLE : The operation does not deploy stack instances, such as a
+	//   drift detection operation.
+	//
+	//   - NOT_STARTED : Stack instances deployment has not started. The operation is
+	//   still provisioning roles, has not begun, or failed before this stage was
+	//   reached.
+	//
+	//   - IN_PROGRESS : At least one stack instance has started deploying.
+	//
+	//   - SUCCEEDED : Deployment finished and succeeded for all stack instances that
+	//   were not skipped.
+	//
+	//   - PARTIAL_SUCCESS : Deployment finished with a mix of succeeded, failed, and
+	//   canceled stack instances.
+	//
+	//   - FAILED : Deployment finished and every stack instance that was not skipped
+	//   failed or was canceled.
+	Status StageStatus
+
+	// The number of stack instances that deployed successfully in this Region.
+	SucceededStackInstancesCount *int32
+
+	// The total number of stack instances targeted by this operation in this Region.
+	TotalStackInstancesCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *RegionalStackInstancesDeployment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionalStackInstancesDeployment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionalStackInstancesDeployment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CancelledStackInstancesCount != nil {
+		s.WriteInt32(schemas.RegionalStackInstancesDeployment_CancelledStackInstancesCount, *v.CancelledStackInstancesCount)
+	}
+	if v.CompletedStackInstancesCount != nil {
+		s.WriteInt32(schemas.RegionalStackInstancesDeployment_CompletedStackInstancesCount, *v.CompletedStackInstancesCount)
+	}
+	if v.FailedStackInstancesCount != nil {
+		s.WriteInt32(schemas.RegionalStackInstancesDeployment_FailedStackInstancesCount, *v.FailedStackInstancesCount)
+	}
+	if v.PendingStackInstancesCount != nil {
+		s.WriteInt32(schemas.RegionalStackInstancesDeployment_PendingStackInstancesCount, *v.PendingStackInstancesCount)
+	}
+	if v.PercentageCompleted != nil {
+		s.WriteFloat64(schemas.RegionalStackInstancesDeployment_PercentageCompleted, *v.PercentageCompleted)
+	}
+	if v.SkippedStackInstancesCount != nil {
+		s.WriteInt32(schemas.RegionalStackInstancesDeployment_SkippedStackInstancesCount, *v.SkippedStackInstancesCount)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RegionalStackInstancesDeployment_Status, string(v.Status))
+	}
+	if v.SucceededStackInstancesCount != nil {
+		s.WriteInt32(schemas.RegionalStackInstancesDeployment_SucceededStackInstancesCount, *v.SucceededStackInstancesCount)
+	}
+	if v.TotalStackInstancesCount != nil {
+		s.WriteInt32(schemas.RegionalStackInstancesDeployment_TotalStackInstancesCount, *v.TotalStackInstancesCount)
+	}
+}
+func (v *RegionalStackInstancesDeployment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionalStackInstancesDeployment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionalStackInstancesDeployment_CancelledStackInstancesCount:
+			v.CancelledStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.RegionalStackInstancesDeployment_CancelledStackInstancesCount, v.CancelledStackInstancesCount)
+		case schemas.RegionalStackInstancesDeployment_CompletedStackInstancesCount:
+			v.CompletedStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.RegionalStackInstancesDeployment_CompletedStackInstancesCount, v.CompletedStackInstancesCount)
+		case schemas.RegionalStackInstancesDeployment_FailedStackInstancesCount:
+			v.FailedStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.RegionalStackInstancesDeployment_FailedStackInstancesCount, v.FailedStackInstancesCount)
+		case schemas.RegionalStackInstancesDeployment_PendingStackInstancesCount:
+			v.PendingStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.RegionalStackInstancesDeployment_PendingStackInstancesCount, v.PendingStackInstancesCount)
+		case schemas.RegionalStackInstancesDeployment_PercentageCompleted:
+			v.PercentageCompleted = new(float64)
+			return d.ReadFloat64(schemas.RegionalStackInstancesDeployment_PercentageCompleted, v.PercentageCompleted)
+		case schemas.RegionalStackInstancesDeployment_SkippedStackInstancesCount:
+			v.SkippedStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.RegionalStackInstancesDeployment_SkippedStackInstancesCount, v.SkippedStackInstancesCount)
+		case schemas.RegionalStackInstancesDeployment_Status:
+			var ev string
+			if err := d.ReadString(schemas.RegionalStackInstancesDeployment_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = StageStatus(ev)
+			return nil
+		case schemas.RegionalStackInstancesDeployment_SucceededStackInstancesCount:
+			v.SucceededStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.RegionalStackInstancesDeployment_SucceededStackInstancesCount, v.SucceededStackInstancesCount)
+		case schemas.RegionalStackInstancesDeployment_TotalStackInstancesCount:
+			v.TotalStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.RegionalStackInstancesDeployment_TotalStackInstancesCount, v.TotalStackInstancesCount)
+		}
+		return nil
+	})
+}
+
+// Contains the progress information for the individual stages of a StackSet
+// operation in a single Region. Currently reports the stack instances deployment
+// stage for the Region.
+type RegionalStages struct {
+
+	// The progress detail for the stack instances deployment stage in this Region.
+	RegionalStackInstancesDeployment *RegionalStackInstancesDeployment
+
+	noSmithyDocumentSerde
+}
+
+func (v *RegionalStages) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionalStages)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionalStages) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegionalStackInstancesDeployment != nil {
+		s.WriteStruct(schemas.RegionalStages_RegionalStackInstancesDeployment)
+		v.RegionalStackInstancesDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegionalStages) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionalStages, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionalStages_RegionalStackInstancesDeployment:
+			v.RegionalStackInstancesDeployment = &RegionalStackInstancesDeployment{}
+			return v.RegionalStackInstancesDeployment.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains the progress detail for a single Region of a StackSet operation. This
+// information is returned only by DescribeStackSetOperation.
+type RegionalStatusDetail struct {
+
+	// The progress information for the individual stages of the operation in this
+	// Region.
+	Stages *RegionalStages
+
+	noSmithyDocumentSerde
+}
+
+func (v *RegionalStatusDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionalStatusDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionalStatusDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Stages != nil {
+		s.WriteStruct(schemas.RegionalStatusDetail_Stages)
+		v.Stages.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegionalStatusDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionalStatusDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionalStatusDetail_Stages:
+			v.Stages = &RegionalStages{}
+			return v.Stages.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // For extensions that are modules, a public third-party extension that must be
 // activated in your account in order for the module itself to be activated.
 //
@@ -3337,6 +3542,107 @@ func (v *ResourceToImport) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceToImport_ResourceType:
 			v.ResourceType = new(string)
 			return d.ReadString(schemas.ResourceToImport_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
+// Provides visibility into the role provisioning stage of a StackSet operation,
+// including per-account progress counts and a completion percentage. For
+// operations that do not provision IAM roles in target accounts, the Status is
+// NOT_APPLICABLE and the progress counts are omitted.
+type RoleProvisioning struct {
+
+	// The number of accounts that have finished role provisioning, including both
+	// succeeded and failed accounts.
+	CompletedAccountsCount *int32
+
+	// The number of accounts for which role provisioning failed.
+	FailedAccountsCount *int32
+
+	// The number of accounts that are still awaiting role provisioning.
+	PendingAccountsCount *int32
+
+	// The percentage of accounts that have completed role provisioning.
+	PercentageCompleted *float64
+
+	// The status of the role provisioning stage can be one of the following values:
+	//
+	//   - NOT_APPLICABLE : The operation does not provision roles. This includes
+	//   self-managed operations and service-managed operations whose configuration does
+	//   not require role provisioning.
+	//
+	//   - NOT_STARTED : Role provisioning has not started. The operation has not begun
+	//   resolving target accounts, or it failed or stopped before the total number of
+	//   target accounts was resolved.
+	//
+	//   - IN_PROGRESS : Role provisioning is actively processing target accounts.
+	//
+	//   - SUCCEEDED : Role provisioning finished and succeeded for all target accounts.
+	//
+	//   - PARTIAL_SUCCESS : Role provisioning finished, but succeeded for only a
+	//   subset of target accounts; one or more accounts failed.
+	//
+	//   - FAILED : Role provisioning finished and failed for all target accounts.
+	Status StageStatus
+
+	// The number of accounts for which role provisioning succeeded.
+	SucceededAccountsCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *RoleProvisioning) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoleProvisioning)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoleProvisioning) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedAccountsCount != nil {
+		s.WriteInt32(schemas.RoleProvisioning_CompletedAccountsCount, *v.CompletedAccountsCount)
+	}
+	if v.FailedAccountsCount != nil {
+		s.WriteInt32(schemas.RoleProvisioning_FailedAccountsCount, *v.FailedAccountsCount)
+	}
+	if v.PendingAccountsCount != nil {
+		s.WriteInt32(schemas.RoleProvisioning_PendingAccountsCount, *v.PendingAccountsCount)
+	}
+	if v.PercentageCompleted != nil {
+		s.WriteFloat64(schemas.RoleProvisioning_PercentageCompleted, *v.PercentageCompleted)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RoleProvisioning_Status, string(v.Status))
+	}
+	if v.SucceededAccountsCount != nil {
+		s.WriteInt32(schemas.RoleProvisioning_SucceededAccountsCount, *v.SucceededAccountsCount)
+	}
+}
+func (v *RoleProvisioning) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoleProvisioning, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoleProvisioning_CompletedAccountsCount:
+			v.CompletedAccountsCount = new(int32)
+			return d.ReadInt32(schemas.RoleProvisioning_CompletedAccountsCount, v.CompletedAccountsCount)
+		case schemas.RoleProvisioning_FailedAccountsCount:
+			v.FailedAccountsCount = new(int32)
+			return d.ReadInt32(schemas.RoleProvisioning_FailedAccountsCount, v.FailedAccountsCount)
+		case schemas.RoleProvisioning_PendingAccountsCount:
+			v.PendingAccountsCount = new(int32)
+			return d.ReadInt32(schemas.RoleProvisioning_PendingAccountsCount, v.PendingAccountsCount)
+		case schemas.RoleProvisioning_PercentageCompleted:
+			v.PercentageCompleted = new(float64)
+			return d.ReadFloat64(schemas.RoleProvisioning_PercentageCompleted, v.PercentageCompleted)
+		case schemas.RoleProvisioning_Status:
+			var ev string
+			if err := d.ReadString(schemas.RoleProvisioning_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = StageStatus(ev)
+			return nil
+		case schemas.RoleProvisioning_SucceededAccountsCount:
+			v.SucceededAccountsCount = new(int32)
+			return d.ReadInt32(schemas.RoleProvisioning_SucceededAccountsCount, v.SucceededAccountsCount)
 		}
 		return nil
 	})
@@ -4831,6 +5137,130 @@ func (v *StackInstanceResourceDriftsSummary) Deserialize(d smithy.ShapeDeseriali
 	})
 }
 
+// Provides visibility into the stack instances deployment stage of a StackSet
+// operation, including per-stack-instance progress counts and a completion
+// percentage. For service-managed operations that provision roles, this stage
+// begins after role provisioning finishes.
+type StackInstancesDeployment struct {
+
+	// The number of stack instances that were canceled because the operation exceeded
+	// its failure tolerance or was stopped.
+	CancelledStackInstancesCount *int32
+
+	// The number of stack instances that have reached a final state. This count
+	// includes stack instances that succeeded, failed, were skipped, or were canceled.
+	CompletedStackInstancesCount *int32
+
+	// The number of stack instances that failed to deploy.
+	FailedStackInstancesCount *int32
+
+	// The number of stack instances that have not reached a final state. This is the
+	// total number of stack instances minus the completed count.
+	PendingStackInstancesCount *int32
+
+	// The percentage of stack instances that have reached a final state.
+	PercentageCompleted *float64
+
+	// The number of stack instances that were skipped because role provisioning
+	// failed for their target account.
+	SkippedStackInstancesCount *int32
+
+	// The status of the stack instances deployment stage can be one of the following
+	// values:
+	//
+	//   - NOT_APPLICABLE : The operation does not deploy stack instances, such as a
+	//   drift detection operation.
+	//
+	//   - NOT_STARTED : Stack instances deployment has not started. The operation is
+	//   still provisioning roles, has not begun, or failed before this stage was
+	//   reached.
+	//
+	//   - IN_PROGRESS : At least one stack instance has started deploying.
+	//
+	//   - SUCCEEDED : Deployment finished and succeeded for all stack instances that
+	//   were not skipped.
+	//
+	//   - PARTIAL_SUCCESS : Deployment finished with a mix of succeeded, failed, and
+	//   canceled stack instances.
+	//
+	//   - FAILED : Deployment finished and every stack instance that was not skipped
+	//   failed or was canceled.
+	Status StageStatus
+
+	// The number of stack instances that deployed successfully.
+	SucceededStackInstancesCount *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *StackInstancesDeployment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StackInstancesDeployment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StackInstancesDeployment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CancelledStackInstancesCount != nil {
+		s.WriteInt32(schemas.StackInstancesDeployment_CancelledStackInstancesCount, *v.CancelledStackInstancesCount)
+	}
+	if v.CompletedStackInstancesCount != nil {
+		s.WriteInt32(schemas.StackInstancesDeployment_CompletedStackInstancesCount, *v.CompletedStackInstancesCount)
+	}
+	if v.FailedStackInstancesCount != nil {
+		s.WriteInt32(schemas.StackInstancesDeployment_FailedStackInstancesCount, *v.FailedStackInstancesCount)
+	}
+	if v.PendingStackInstancesCount != nil {
+		s.WriteInt32(schemas.StackInstancesDeployment_PendingStackInstancesCount, *v.PendingStackInstancesCount)
+	}
+	if v.PercentageCompleted != nil {
+		s.WriteFloat64(schemas.StackInstancesDeployment_PercentageCompleted, *v.PercentageCompleted)
+	}
+	if v.SkippedStackInstancesCount != nil {
+		s.WriteInt32(schemas.StackInstancesDeployment_SkippedStackInstancesCount, *v.SkippedStackInstancesCount)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StackInstancesDeployment_Status, string(v.Status))
+	}
+	if v.SucceededStackInstancesCount != nil {
+		s.WriteInt32(schemas.StackInstancesDeployment_SucceededStackInstancesCount, *v.SucceededStackInstancesCount)
+	}
+}
+func (v *StackInstancesDeployment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StackInstancesDeployment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StackInstancesDeployment_CancelledStackInstancesCount:
+			v.CancelledStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.StackInstancesDeployment_CancelledStackInstancesCount, v.CancelledStackInstancesCount)
+		case schemas.StackInstancesDeployment_CompletedStackInstancesCount:
+			v.CompletedStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.StackInstancesDeployment_CompletedStackInstancesCount, v.CompletedStackInstancesCount)
+		case schemas.StackInstancesDeployment_FailedStackInstancesCount:
+			v.FailedStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.StackInstancesDeployment_FailedStackInstancesCount, v.FailedStackInstancesCount)
+		case schemas.StackInstancesDeployment_PendingStackInstancesCount:
+			v.PendingStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.StackInstancesDeployment_PendingStackInstancesCount, v.PendingStackInstancesCount)
+		case schemas.StackInstancesDeployment_PercentageCompleted:
+			v.PercentageCompleted = new(float64)
+			return d.ReadFloat64(schemas.StackInstancesDeployment_PercentageCompleted, v.PercentageCompleted)
+		case schemas.StackInstancesDeployment_SkippedStackInstancesCount:
+			v.SkippedStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.StackInstancesDeployment_SkippedStackInstancesCount, v.SkippedStackInstancesCount)
+		case schemas.StackInstancesDeployment_Status:
+			var ev string
+			if err := d.ReadString(schemas.StackInstancesDeployment_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = StageStatus(ev)
+			return nil
+		case schemas.StackInstancesDeployment_SucceededStackInstancesCount:
+			v.SucceededStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.StackInstancesDeployment_SucceededStackInstancesCount, v.SucceededStackInstancesCount)
+		}
+		return nil
+	})
+}
+
 // The structure that contains summary information about a stack instance.
 type StackInstanceSummary struct {
 
@@ -6056,6 +6486,11 @@ type StackSet struct {
 	// The name that's associated with the StackSet.
 	StackSetName *string
 
+	// The Amazon S3 bucket path where CloudFormation stores the execution role stack
+	// template body. CloudFormation uses this bucket only when you specify a custom
+	// execution role template.
+	StackSetOutputBucketPath *string
+
 	// The status of the StackSet.
 	Status StackSetStatus
 
@@ -6125,6 +6560,9 @@ func (v *StackSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StackSetName != nil {
 		s.WriteString(schemas.StackSet_StackSetName, *v.StackSetName)
 	}
+	if v.StackSetOutputBucketPath != nil {
+		s.WriteString(schemas.StackSet_StackSetOutputBucketPath, *v.StackSetOutputBucketPath)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.StackSet_Status, string(v.Status))
 	}
@@ -6180,6 +6618,9 @@ func (v *StackSet) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.StackSet_StackSetName:
 			v.StackSetName = new(string)
 			return d.ReadString(schemas.StackSet_StackSetName, v.StackSetName)
+		case schemas.StackSet_StackSetOutputBucketPath:
+			v.StackSetOutputBucketPath = new(string)
+			return d.ReadString(schemas.StackSet_StackSetOutputBucketPath, v.StackSetOutputBucketPath)
 		case schemas.StackSet_Status:
 			var ev string
 			if err := d.ReadString(schemas.StackSet_Status, &ev); err != nil {
@@ -6439,6 +6880,11 @@ type StackSetOperation struct {
 	// The preferences for how CloudFormation performs this StackSet operation.
 	OperationPreferences *StackSetOperationPreferences
 
+	// The progress detail for each Region of the operation, keyed by Region. Each
+	// entry reports the stack instances deployment progress for that Region. This
+	// field is returned only by DescribeStackSetOperation. It is not included in the ListStackSetOperations summary.
+	RegionalStatusDetails map[string]RegionalStatusDetail
+
 	// For StackSet operations of action type DELETE , specifies whether to remove the
 	// stack instances from the specified StackSet, but doesn't delete the stacks. You
 	// can't re-associate a retained stack, or add an existing, saved stack to a new
@@ -6529,6 +6975,9 @@ func (v *StackSetOperation) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OperationPreferences.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.RegionalStatusDetails != nil {
+		serializeRegionalStatusDetails(s, schemas.StackSetOperation_RegionalStatusDetails, v.RegionalStatusDetails)
+	}
 	if v.RetainStacks != nil {
 		s.WriteBool(schemas.StackSetOperation_RetainStacks, *v.RetainStacks)
 	}
@@ -6583,6 +7032,8 @@ func (v *StackSetOperation) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.StackSetOperation_OperationPreferences:
 			v.OperationPreferences = &StackSetOperationPreferences{}
 			return v.OperationPreferences.Deserialize(d)
+		case schemas.StackSetOperation_RegionalStatusDetails:
+			return deserializeRegionalStatusDetails(d, schemas.StackSetOperation_RegionalStatusDetails, &v.RegionalStatusDetails)
 		case schemas.StackSetOperation_RetainStacks:
 			v.RetainStacks = new(bool)
 			return d.ReadBool(schemas.StackSetOperation_RetainStacks, v.RetainStacks)
@@ -6885,6 +7336,21 @@ type StackSetOperationStatusDetails struct {
 	// The number of stack instances for which the StackSet operation failed.
 	FailedStackInstancesCount *int32
 
+	// The detailed progress information for the individual stages of the StackSet
+	// operation: the role provisioning stage and the stack instances deployment stage.
+	Stages *Stages
+
+	// The total number of accounts targeted by this StackSet operation. Self-managed
+	// operations and service-managed operations that do not provision roles also
+	// report this value when it is known. CloudFormation populates this value after it
+	// resolves the target accounts. Until then, this field is not present.
+	TotalAccountsCount *int32
+
+	// The total number of stack instances targeted by this StackSet operation.
+	// CloudFormation populates this value after it resolves the target stack
+	// instances. Until then, this field is not present.
+	TotalStackInstancesCount *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -6898,6 +7364,17 @@ func (v *StackSetOperationStatusDetails) SerializeMembers(s smithy.ShapeSerializ
 	if v.FailedStackInstancesCount != nil {
 		s.WriteInt32(schemas.StackSetOperationStatusDetails_FailedStackInstancesCount, *v.FailedStackInstancesCount)
 	}
+	if v.Stages != nil {
+		s.WriteStruct(schemas.StackSetOperationStatusDetails_Stages)
+		v.Stages.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TotalAccountsCount != nil {
+		s.WriteInt32(schemas.StackSetOperationStatusDetails_TotalAccountsCount, *v.TotalAccountsCount)
+	}
+	if v.TotalStackInstancesCount != nil {
+		s.WriteInt32(schemas.StackSetOperationStatusDetails_TotalStackInstancesCount, *v.TotalStackInstancesCount)
+	}
 }
 func (v *StackSetOperationStatusDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StackSetOperationStatusDetails, func(s *smithy.Schema) error {
@@ -6905,6 +7382,15 @@ func (v *StackSetOperationStatusDetails) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.StackSetOperationStatusDetails_FailedStackInstancesCount:
 			v.FailedStackInstancesCount = new(int32)
 			return d.ReadInt32(schemas.StackSetOperationStatusDetails_FailedStackInstancesCount, v.FailedStackInstancesCount)
+		case schemas.StackSetOperationStatusDetails_Stages:
+			v.Stages = &Stages{}
+			return v.Stages.Deserialize(d)
+		case schemas.StackSetOperationStatusDetails_TotalAccountsCount:
+			v.TotalAccountsCount = new(int32)
+			return d.ReadInt32(schemas.StackSetOperationStatusDetails_TotalAccountsCount, v.TotalAccountsCount)
+		case schemas.StackSetOperationStatusDetails_TotalStackInstancesCount:
+			v.TotalStackInstancesCount = new(int32)
+			return d.ReadInt32(schemas.StackSetOperationStatusDetails_TotalStackInstancesCount, v.TotalStackInstancesCount)
 		}
 		return nil
 	})
@@ -7353,6 +7839,54 @@ func (v *StackSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.StackSummary_TemplateDescription:
 			v.TemplateDescription = new(string)
 			return d.ReadString(schemas.StackSummary_TemplateDescription, v.TemplateDescription)
+		}
+		return nil
+	})
+}
+
+// Contains detailed progress information for the individual stages of a StackSet
+// operation: the role provisioning stage and the stack instances deployment stage.
+type Stages struct {
+
+	// The progress detail for the role provisioning stage. For operations that do not
+	// provision roles, this stage is present with a Status of NOT_APPLICABLE .
+	RoleProvisioning *RoleProvisioning
+
+	// The progress detail for the stack instances deployment stage. This stage
+	// reports the deployment of stack instances to the target accounts and Amazon Web
+	// Services Regions, after any role provisioning has finished.
+	StackInstancesDeployment *StackInstancesDeployment
+
+	noSmithyDocumentSerde
+}
+
+func (v *Stages) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Stages)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Stages) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleProvisioning != nil {
+		s.WriteStruct(schemas.Stages_RoleProvisioning)
+		v.RoleProvisioning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StackInstancesDeployment != nil {
+		s.WriteStruct(schemas.Stages_StackInstancesDeployment)
+		v.StackInstancesDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Stages) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Stages, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Stages_RoleProvisioning:
+			v.RoleProvisioning = &RoleProvisioning{}
+			return v.RoleProvisioning.Deserialize(d)
+		case schemas.Stages_StackInstancesDeployment:
+			v.StackInstancesDeployment = &StackInstancesDeployment{}
+			return v.StackInstancesDeployment.Deserialize(d)
 		}
 		return nil
 	})

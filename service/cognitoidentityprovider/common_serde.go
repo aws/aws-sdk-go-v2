@@ -111,6 +111,26 @@ func serializeChallengeResponseListType(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
+func serializeCIMDPolicySummaryListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CIMDPolicySummaryType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeClientMetadataURLListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ClientMetadataURLType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeClientPermissionListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -319,6 +339,26 @@ func serializeResourceServersListType(s smithy.ShapeSerializer, schema *smithy.S
 	s.CloseList()
 }
 
+func serializeRestorationListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RestorationDescriptionType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRestorePreviewListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RestorePreviewType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeSchemaAttributesListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SchemaAttributeType) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -377,6 +417,14 @@ func serializeTermsDescriptionListType(s smithy.ShapeSerializer, schema *smithy.
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeURLPatternListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -728,6 +776,50 @@ func deserializeChallengeResponseListType(d smithy.ShapeDeserializer, s *smithy.
 		}
 
 		vv = types.ChallengeResponseType{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCIMDPolicySummaryListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CIMDPolicySummaryType) error {
+	*v = make([]types.CIMDPolicySummaryType, 0)
+	var vv types.CIMDPolicySummaryType
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CIMDPolicySummaryType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.CIMDPolicySummaryType{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeClientMetadataURLListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ClientMetadataURLType) error {
+	*v = make([]types.ClientMetadataURLType, 0)
+	var vv types.ClientMetadataURLType
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ClientMetadataURLType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ClientMetadataURLType{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1232,6 +1324,50 @@ func deserializeResourceServersListType(d smithy.ShapeDeserializer, s *smithy.Sc
 	})
 }
 
+func deserializeRestorationListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RestorationDescriptionType) error {
+	*v = make([]types.RestorationDescriptionType, 0)
+	var vv types.RestorationDescriptionType
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RestorationDescriptionType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RestorationDescriptionType{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRestorePreviewListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RestorePreviewType) error {
+	*v = make([]types.RestorePreviewType, 0)
+	var vv types.RestorePreviewType
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RestorePreviewType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RestorePreviewType{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeSchemaAttributesListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SchemaAttributeType) error {
 	*v = make([]types.SchemaAttributeType, 0)
 	var vv types.SchemaAttributeType
@@ -1374,6 +1510,27 @@ func deserializeTermsDescriptionListType(d smithy.ShapeDeserializer, s *smithy.S
 
 		vv = types.TermsDescriptionType{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeURLPatternListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

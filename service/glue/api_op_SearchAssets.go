@@ -11,9 +11,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Searches for assets in Glue Data Catalog using full-text search, filters,
-// sorting, and aggregations. Returns matching assets with relevance-ranked
-// results.
+// Searches for assets in Glue Data Catalog using full-text search, filters, and
+// sorting. Returns matching assets with relevance-ranked results.
 func (c *Client) SearchAssets(ctx context.Context, params *SearchAssetsInput, optFns ...func(*Options)) (*SearchAssetsOutput, error) {
 	if params == nil {
 		params = &SearchAssetsInput{}

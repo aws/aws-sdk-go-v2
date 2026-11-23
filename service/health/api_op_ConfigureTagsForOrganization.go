@@ -54,8 +54,9 @@ func (v *ConfigureTagsForOrganizationInput) SerializeMembers(s smithy.ShapeSeria
 
 type ConfigureTagsForOrganizationOutput struct {
 
-	// The list of tag keys that were successfully configured for the organization.
-	ConfiguredTagKeys []types.TagKeyForOrganization
+	// The list of tag keys that were successfully configured for the organization,
+	// with the current status of each tag key.
+	ConfiguredTagKeys []types.OrganizationTagKey
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,14 +72,14 @@ func (v *ConfigureTagsForOrganizationOutput) Serialize(s smithy.ShapeSerializer)
 
 func (v *ConfigureTagsForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfiguredTagKeys != nil {
-		serializeConfigureTagsForOrganizationTagKeyList(s, schemas.ConfigureTagsForOrganizationResponse_configuredTagKeys, v.ConfiguredTagKeys)
+		serializeConfigureTagsForOrganizationResponseTagKeyList(s, schemas.ConfigureTagsForOrganizationResponse_configuredTagKeys, v.ConfiguredTagKeys)
 	}
 }
 func (v *ConfigureTagsForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfigureTagsForOrganizationResponse, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.ConfigureTagsForOrganizationResponse_configuredTagKeys:
-			return deserializeConfigureTagsForOrganizationTagKeyList(d, schemas.ConfigureTagsForOrganizationResponse_configuredTagKeys, &v.ConfiguredTagKeys)
+			return deserializeConfigureTagsForOrganizationResponseTagKeyList(d, schemas.ConfigureTagsForOrganizationResponse_configuredTagKeys, &v.ConfiguredTagKeys)
 		}
 		return nil
 	})

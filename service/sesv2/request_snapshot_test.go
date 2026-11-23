@@ -318,9 +318,10 @@ func TestCheckRequestSnapshot_CreateConfigurationSet(t *testing.T) {
 			HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
 		},
 		DeliveryOptions: &types.DeliveryOptions{
-			TlsPolicy:          types.TlsPolicy("REQUIRE"),
-			SendingPoolName:    ptr.String("__SendingPoolName__"),
-			MaxDeliverySeconds: ptr.Int64(1),
+			TlsPolicy:              types.TlsPolicy("REQUIRE"),
+			SendingPoolName:        ptr.String("__SendingPoolName__"),
+			MaxDeliverySeconds:     ptr.Int64(1),
+			SharedPoolDeliveryMode: types.SharedPoolDeliveryMode("GLOBAL"),
 		},
 		ReputationOptions: &types.ReputationOptions{
 			ReputationMetricsEnabled: true,
@@ -2841,6 +2842,33 @@ func TestCheckRequestSnapshot_PutAccountDedicatedIpWarmupAttributes(t *testing.T
 	}
 }
 
+func TestCheckRequestSnapshot_PutAccountDeliveryAttributes(t *testing.T) {
+	input := &PutAccountDeliveryAttributesInput{
+		SharedPoolDeliveryMode: types.AccountSharedPoolDeliveryMode("GLOBAL"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutAccountDeliveryAttributes(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAccountDeliveryAttributes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_PutAccountDetails(t *testing.T) {
 	input := &PutAccountDetailsInput{
 		MailType:           types.MailType("MARKETING"),
@@ -3033,10 +3061,11 @@ func TestCheckRequestSnapshot_PutConfigurationSetArchivingOptions(t *testing.T) 
 
 func TestCheckRequestSnapshot_PutConfigurationSetDeliveryOptions(t *testing.T) {
 	input := &PutConfigurationSetDeliveryOptionsInput{
-		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
-		TlsPolicy:            types.TlsPolicy("REQUIRE"),
-		SendingPoolName:      ptr.String("__SendingPoolName__"),
-		MaxDeliverySeconds:   ptr.Int64(1),
+		ConfigurationSetName:   ptr.String("__ConfigurationSetName__"),
+		TlsPolicy:              types.TlsPolicy("REQUIRE"),
+		SendingPoolName:        ptr.String("__SendingPoolName__"),
+		MaxDeliverySeconds:     ptr.Int64(1),
+		SharedPoolDeliveryMode: types.SharedPoolDeliveryMode("GLOBAL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4468,9 +4497,10 @@ func TestUpdateRequestSnapshot_CreateConfigurationSet(t *testing.T) {
 			HttpsPolicy:          types.HttpsPolicy("REQUIRE"),
 		},
 		DeliveryOptions: &types.DeliveryOptions{
-			TlsPolicy:          types.TlsPolicy("REQUIRE"),
-			SendingPoolName:    ptr.String("__SendingPoolName__"),
-			MaxDeliverySeconds: ptr.Int64(1),
+			TlsPolicy:              types.TlsPolicy("REQUIRE"),
+			SendingPoolName:        ptr.String("__SendingPoolName__"),
+			MaxDeliverySeconds:     ptr.Int64(1),
+			SharedPoolDeliveryMode: types.SharedPoolDeliveryMode("GLOBAL"),
 		},
 		ReputationOptions: &types.ReputationOptions{
 			ReputationMetricsEnabled: true,
@@ -6991,6 +7021,33 @@ func TestUpdateRequestSnapshot_PutAccountDedicatedIpWarmupAttributes(t *testing.
 	}
 }
 
+func TestUpdateRequestSnapshot_PutAccountDeliveryAttributes(t *testing.T) {
+	input := &PutAccountDeliveryAttributesInput{
+		SharedPoolDeliveryMode: types.AccountSharedPoolDeliveryMode("GLOBAL"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutAccountDeliveryAttributes(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAccountDeliveryAttributes"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_PutAccountDetails(t *testing.T) {
 	input := &PutAccountDetailsInput{
 		MailType:           types.MailType("MARKETING"),
@@ -7183,10 +7240,11 @@ func TestUpdateRequestSnapshot_PutConfigurationSetArchivingOptions(t *testing.T)
 
 func TestUpdateRequestSnapshot_PutConfigurationSetDeliveryOptions(t *testing.T) {
 	input := &PutConfigurationSetDeliveryOptionsInput{
-		ConfigurationSetName: ptr.String("__ConfigurationSetName__"),
-		TlsPolicy:            types.TlsPolicy("REQUIRE"),
-		SendingPoolName:      ptr.String("__SendingPoolName__"),
-		MaxDeliverySeconds:   ptr.Int64(1),
+		ConfigurationSetName:   ptr.String("__ConfigurationSetName__"),
+		TlsPolicy:              types.TlsPolicy("REQUIRE"),
+		SendingPoolName:        ptr.String("__SendingPoolName__"),
+		MaxDeliverySeconds:     ptr.Int64(1),
+		SharedPoolDeliveryMode: types.SharedPoolDeliveryMode("GLOBAL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -64,6 +64,7 @@ const (
 	DeviceStatusOnline  DeviceStatus = "ONLINE"
 	DeviceStatusOffline DeviceStatus = "OFFLINE"
 	DeviceStatusRetired DeviceStatus = "RETIRED"
+	DeviceStatusPaused  DeviceStatus = "PAUSED"
 )
 
 // Values returns all known values for DeviceStatus. Note that this can be
@@ -75,6 +76,28 @@ func (DeviceStatus) Values() []DeviceStatus {
 		"ONLINE",
 		"OFFLINE",
 		"RETIRED",
+		"PAUSED",
+	}
+}
+
+type DeviceStatusReasonCode string
+
+// Enum values for DeviceStatusReasonCode
+const (
+	DeviceStatusReasonCodeOutsideAvailabilityWindow DeviceStatusReasonCode = "OUTSIDE_AVAILABILITY_WINDOW"
+	DeviceStatusReasonCodeMaintenance               DeviceStatusReasonCode = "MAINTENANCE"
+	DeviceStatusReasonCodeReservation               DeviceStatusReasonCode = "RESERVATION"
+)
+
+// Values returns all known values for DeviceStatusReasonCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceStatusReasonCode) Values() []DeviceStatusReasonCode {
+	return []DeviceStatusReasonCode{
+		"OUTSIDE_AVAILABILITY_WINDOW",
+		"MAINTENANCE",
+		"RESERVATION",
 	}
 }
 
@@ -167,13 +190,6 @@ const (
 	InstanceTypeMlC5n4xlarge   InstanceType = "ml.c5n.4xlarge"
 	InstanceTypeMlC5n9xlarge   InstanceType = "ml.c5n.9xlarge"
 	InstanceTypeMlC5n18xlarge  InstanceType = "ml.c5n.18xlarge"
-	InstanceTypeMlP2Xlarge     InstanceType = "ml.p2.xlarge"
-	InstanceTypeMlP28xlarge    InstanceType = "ml.p2.8xlarge"
-	InstanceTypeMlP216xlarge   InstanceType = "ml.p2.16xlarge"
-	InstanceTypeMlP32xlarge    InstanceType = "ml.p3.2xlarge"
-	InstanceTypeMlP38xlarge    InstanceType = "ml.p3.8xlarge"
-	InstanceTypeMlP316xlarge   InstanceType = "ml.p3.16xlarge"
-	InstanceTypeMlP3dn24xlarge InstanceType = "ml.p3dn.24xlarge"
 	InstanceTypeMlP4d24xlarge  InstanceType = "ml.p4d.24xlarge"
 	InstanceTypeMlG4dnXlarge   InstanceType = "ml.g4dn.xlarge"
 	InstanceTypeMlG4dn2xlarge  InstanceType = "ml.g4dn.2xlarge"
@@ -233,13 +249,6 @@ func (InstanceType) Values() []InstanceType {
 		"ml.c5n.4xlarge",
 		"ml.c5n.9xlarge",
 		"ml.c5n.18xlarge",
-		"ml.p2.xlarge",
-		"ml.p2.8xlarge",
-		"ml.p2.16xlarge",
-		"ml.p3.2xlarge",
-		"ml.p3.8xlarge",
-		"ml.p3.16xlarge",
-		"ml.p3dn.24xlarge",
 		"ml.p4d.24xlarge",
 		"ml.g4dn.xlarge",
 		"ml.g4dn.2xlarge",

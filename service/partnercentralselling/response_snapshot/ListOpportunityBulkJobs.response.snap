@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListOpportunityBulkJobs
+
+{"NextToken":"__NextToken__","OpportunityBulkJobSummaries":[{"CompletedAt":"2000-01-01T00:00:00Z","CreatedAt":"2000-01-01T00:00:00Z","FailureCount":1,"FailureReason":"__FailureReason__","FileName":"__FileName__","JobId":"__JobId__","OperationType":"BULK_CREATE","ProcessedRecords":1,"StartedAt":"2000-01-01T00:00:00Z","Status":"SUBMITTED","SuccessCount":1,"TotalRecords":1},{"CompletedAt":"2000-01-01T00:00:00Z","CreatedAt":"2000-01-01T00:00:00Z","FailureCount":1,"FailureReason":"__FailureReason__","FileName":"__FileName__","JobId":"__JobId__","OperationType":"BULK_CREATE","ProcessedRecords":1,"StartedAt":"2000-01-01T00:00:00Z","Status":"SUBMITTED","SuccessCount":1,"TotalRecords":1}]}

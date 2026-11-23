@@ -327,6 +327,44 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type RLSPolicyStatus string
+
+// Enum values for RLSPolicyStatus
+const (
+	RLSPolicyStatusValid   RLSPolicyStatus = "VALID"
+	RLSPolicyStatusInvalid RLSPolicyStatus = "INVALID"
+)
+
+// Values returns all known values for RLSPolicyStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RLSPolicyStatus) Values() []RLSPolicyStatus {
+	return []RLSPolicyStatus{
+		"VALID",
+		"INVALID",
+	}
+}
+
+type RLSPolicyStatusReason string
+
+// Enum values for RLSPolicyStatusReason
+const (
+	RLSPolicyStatusReasonReferencedUdfDeleted         RLSPolicyStatusReason = "REFERENCED_UDF_DELETED"
+	RLSPolicyStatusReasonReferencedLookupTableDeleted RLSPolicyStatusReason = "REFERENCED_LOOKUP_TABLE_DELETED"
+)
+
+// Values returns all known values for RLSPolicyStatusReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RLSPolicyStatusReason) Values() []RLSPolicyStatusReason {
+	return []RLSPolicyStatusReason{
+		"REFERENCED_UDF_DELETED",
+		"REFERENCED_LOOKUP_TABLE_DELETED",
+	}
+}
+
 type ServiceAuthorization string
 
 // Enum values for ServiceAuthorization

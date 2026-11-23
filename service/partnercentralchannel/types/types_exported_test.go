@@ -7,6 +7,60 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
 )
 
+func ExampleChannelContractDetails_outputUsage() {
+	var union types.ChannelContractDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ChannelContractDetailsMemberManagedServicesAttestationDetails:
+		_ = v.Value // Value is types.ManagedServicesAttestationDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ManagedServicesAttestationDetails
+
+func ExampleChannelContractPayload_outputUsage() {
+	var union types.ChannelContractPayload
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ChannelContractPayloadMemberManagedServicesAttestationPayload:
+		_ = v.Value // Value is types.ManagedServicesAttestationPayload
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ManagedServicesAttestationPayload
+
+func ExampleChannelContractSummaryDetails_outputUsage() {
+	var union types.ChannelContractSummaryDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ChannelContractSummaryDetailsMemberManagedServicesAttestationDetails:
+		_ = v.Value // Value is types.ManagedServicesAttestationSummaryDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ManagedServicesAttestationSummaryDetails
+
 func ExampleChannelHandshakePayload_outputUsage() {
 	var union types.ChannelHandshakePayload
 	// type switches can be used to check the union value
@@ -54,6 +108,42 @@ func ExampleHandshakeDetail_outputUsage() {
 var _ *types.ProgramManagementAccountHandshakeDetail
 var _ *types.StartServicePeriodHandshakeDetail
 var _ *types.RevokeServicePeriodHandshakeDetail
+
+func ExampleListChannelContractsTypeFilters_outputUsage() {
+	var union types.ListChannelContractsTypeFilters
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ListChannelContractsTypeFiltersMemberManagedServicesAttestationTypeFilters:
+		_ = v.Value // Value is types.ManagedServicesAttestationTypeFilters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ManagedServicesAttestationTypeFilters
+
+func ExampleListChannelContractsTypeSort_outputUsage() {
+	var union types.ListChannelContractsTypeSort
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ListChannelContractsTypeSortMemberManagedServicesAttestationTypeSort:
+		_ = v.Value // Value is types.ManagedServicesAttestationTypeSort
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ManagedServicesAttestationTypeSort
 
 func ExampleListChannelHandshakesTypeFilters_outputUsage() {
 	var union types.ListChannelHandshakesTypeFilters

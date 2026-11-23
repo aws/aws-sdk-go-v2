@@ -107,6 +107,18 @@ type CreateFirewallInput struct {
 	// firewall, the operation initializes this setting to TRUE .
 	FirewallPolicyChangeProtection bool
 
+	// Settings that make this firewall an internet gateway firewall. An internet
+	// gateway firewall inspects all traffic between a VPC and its internet gateway,
+	// without changes to your subnets or route tables. Amazon Web Services Network
+	// Security Manager creates and manages internet gateway firewalls on your behalf,
+	// so you don't include this setting when you create a standard Network Firewall
+	// firewall.
+	//
+	// When this setting is present, FirewallName must equal the VpcId ,
+	// AvailabilityZoneMappings is required and must use Availability Zone IDs, and you
+	// can't specify SubnetMappings or a transit gateway.
+	IgwFirewallConfiguration *types.IgwFirewallConfiguration
+
 	// The NAT gateways that Network Firewall creates for a proxy mode firewall, one
 	// for each Availability Zone. When you specify this, you create a proxy mode
 	// firewall. Destinations see the IP address of the NAT gateway in the client's
@@ -231,6 +243,11 @@ func (v *CreateFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.FirewallPolicyChangeProtection != false {
 		s.WriteBool(schemas.CreateFirewallRequest_FirewallPolicyChangeProtection, v.FirewallPolicyChangeProtection)
+	}
+	if v.IgwFirewallConfiguration != nil {
+		s.WriteStruct(schemas.CreateFirewallRequest_IgwFirewallConfiguration)
+		v.IgwFirewallConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.NatGatewayCreateMappings != nil {
 		serializeNatGatewayCreateMappingsList(s, schemas.CreateFirewallRequest_NatGatewayCreateMappings, v.NatGatewayCreateMappings)

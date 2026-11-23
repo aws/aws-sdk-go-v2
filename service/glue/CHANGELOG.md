@@ -1,3 +1,7 @@
+# v1.177.0 (2026-11-20)
+
+* **Feature**: Minor updates to the Glue Business Context APIs
+
 # v1.176.0 (2026-11-13)
 
 * **Feature**: Field description update for auto upgrade summaries

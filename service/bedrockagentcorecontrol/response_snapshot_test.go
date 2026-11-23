@@ -683,6 +683,11 @@ func TestCheckResponseSnapshot_CreateAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -1017,6 +1022,9 @@ func TestCheckResponseSnapshot_CreateCapacityProvider(t *testing.T) {
 						InstanceProfileArn: ptr.String("__InstanceProfileArn__"),
 						PropagatedTags: map[string]string{
 							"key0": "__Value__",
+						},
+						CpuOptions: &types.CpuOptions{
+							NestedVirtualization: types.NestedVirtualization("ENABLED"),
 						},
 					},
 				},
@@ -1566,6 +1574,10 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 						},
 					},
 				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
+				},
 			},
 			{
 				Interceptor: &types.InterceptorConfigurationMemberLambda{
@@ -1589,6 +1601,10 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 							},
 						},
 					},
+				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
 				},
 			},
 		},
@@ -1762,6 +1778,10 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 						},
 					},
 				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
+				},
 			},
 			{
 				Interceptor: &types.InterceptorConfigurationMemberLambda{
@@ -1785,6 +1805,10 @@ func TestCheckResponseSnapshot_CreateGateway(t *testing.T) {
 							},
 						},
 					},
+				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
 				},
 			},
 		},
@@ -5721,6 +5745,11 @@ func TestCheckResponseSnapshot_GetAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
 		AllowedPorts: []types.AllowedPort{
@@ -6042,6 +6071,9 @@ func TestCheckResponseSnapshot_GetCapacityProvider(t *testing.T) {
 						InstanceProfileArn: ptr.String("__InstanceProfileArn__"),
 						PropagatedTags: map[string]string{
 							"key0": "__Value__",
+						},
+						CpuOptions: &types.CpuOptions{
+							NestedVirtualization: types.NestedVirtualization("ENABLED"),
 						},
 					},
 				},
@@ -6612,6 +6644,10 @@ func TestCheckResponseSnapshot_GetGateway(t *testing.T) {
 						},
 					},
 				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
+				},
 			},
 			{
 				Interceptor: &types.InterceptorConfigurationMemberLambda{
@@ -6635,6 +6671,10 @@ func TestCheckResponseSnapshot_GetGateway(t *testing.T) {
 							},
 						},
 					},
+				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
 				},
 			},
 		},
@@ -11653,6 +11693,11 @@ func TestCheckResponseSnapshot_UpdateAgentRuntime(t *testing.T) {
 		},
 		CapacityProviderConfiguration: &types.CapacityProviderConfiguration{
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
+			OperatingSystemConfiguration: &types.OperatingSystemConfigurationMemberLinux{
+				Value: types.LinuxOperatingSystemConfiguration{
+					PrivilegeMode: types.PrivilegeMode("STANDARD"),
+				},
+			},
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
 		AllowedPorts: []types.AllowedPort{
@@ -12168,6 +12213,10 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 						},
 					},
 				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
+				},
 			},
 			{
 				Interceptor: &types.InterceptorConfigurationMemberLambda{
@@ -12191,6 +12240,10 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 							},
 						},
 					},
+				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
 				},
 			},
 		},
@@ -12369,6 +12422,10 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 						},
 					},
 				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
+				},
 			},
 			{
 				Interceptor: &types.InterceptorConfigurationMemberLambda{
@@ -12392,6 +12449,10 @@ func TestCheckResponseSnapshot_UpdateGateway(t *testing.T) {
 							},
 						},
 					},
+				},
+				ResponseInterceptionMode: types.ResponseInterceptionMode("BUFFERED"),
+				ResponseStreamingConfiguration: &types.ResponseStreamingConfiguration{
+					MaxEventsPerInvocation: ptr.Int32(1),
 				},
 			},
 		},
@@ -15784,6 +15845,9 @@ func TestCheckResponseSnapshot_Error_RetryableConflictException(t *testing.T) {
 						InstanceProfileArn: ptr.String("__InstanceProfileArn__"),
 						PropagatedTags: map[string]string{
 							"key0": "__Value__",
+						},
+						CpuOptions: &types.CpuOptions{
+							NestedVirtualization: types.NestedVirtualization("ENABLED"),
 						},
 					},
 				},

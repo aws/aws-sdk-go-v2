@@ -1077,6 +1077,49 @@ func TestCheckRequestSnapshot_GetPreferences(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetUsageLinesEstimatedCost(t *testing.T) {
+	input := &GetUsageLinesEstimatedCostInput{
+		Usage: []types.GetUsageLinesEstimatedCostInput{
+			{
+				ServiceCode: ptr.String("__ServiceCode__"),
+				UsageType:   ptr.String("__UsageType__"),
+				Operation:   ptr.String("__Operation__"),
+				Key:         ptr.String("__Key__"),
+				Amount:      ptr.Float64(1.0),
+			},
+			{
+				ServiceCode: ptr.String("__ServiceCode__"),
+				UsageType:   ptr.String("__UsageType__"),
+				Operation:   ptr.String("__Operation__"),
+				Key:         ptr.String("__Key__"),
+				Amount:      ptr.Float64(1.0),
+			},
+		},
+		RateType: types.RateType("BEFORE_DISCOUNTS"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetUsageLinesEstimatedCost(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetUsageLinesEstimatedCost"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetWorkloadEstimate(t *testing.T) {
 	input := &GetWorkloadEstimateInput{
 		Identifier: ptr.String("__Identifier__"),
@@ -2622,6 +2665,49 @@ func TestUpdateRequestSnapshot_GetPreferences(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPreferences"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetUsageLinesEstimatedCost(t *testing.T) {
+	input := &GetUsageLinesEstimatedCostInput{
+		Usage: []types.GetUsageLinesEstimatedCostInput{
+			{
+				ServiceCode: ptr.String("__ServiceCode__"),
+				UsageType:   ptr.String("__UsageType__"),
+				Operation:   ptr.String("__Operation__"),
+				Key:         ptr.String("__Key__"),
+				Amount:      ptr.Float64(1.0),
+			},
+			{
+				ServiceCode: ptr.String("__ServiceCode__"),
+				UsageType:   ptr.String("__UsageType__"),
+				Operation:   ptr.String("__Operation__"),
+				Key:         ptr.String("__Key__"),
+				Amount:      ptr.Float64(1.0),
+			},
+		},
+		RateType: types.RateType("BEFORE_DISCOUNTS"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetUsageLinesEstimatedCost(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetUsageLinesEstimatedCost"); err != nil {
 		t.Fatal(err)
 	}
 }

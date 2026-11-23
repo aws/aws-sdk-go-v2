@@ -2630,6 +2630,26 @@ func (m *validateOpUpdateLoginProfile) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateOpenIDConnectProvider struct {
+}
+
+func (*validateOpUpdateOpenIDConnectProvider) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateOpenIDConnectProvider) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateOpenIDConnectProviderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateOpenIDConnectProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateOpenIDConnectProviderThumbprint struct {
 }
 
@@ -3394,6 +3414,10 @@ func addOpUpdateLoginProfileValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpUpdateLoginProfile{}, middleware.After)
 }
 
+func addOpUpdateOpenIDConnectProviderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateOpenIDConnectProvider{}, middleware.After)
+}
+
 func addOpUpdateOpenIDConnectProviderThumbprintValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateOpenIDConnectProviderThumbprint{}, middleware.After)
 }
@@ -3442,6 +3466,41 @@ func addOpUploadSSHPublicKeyValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpUploadSSHPublicKey{}, middleware.After)
 }
 
+func validateContextProvider(v *types.ContextProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextProvider"}
+	if v.KeyDefinitionList != nil {
+		if err := validateKeyDefinitionListType(v.KeyDefinitionList); err != nil {
+			invalidParams.AddNested("KeyDefinitionList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SubjectSourceKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubjectSourceKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContextProviderKeyDefinition(v *types.ContextProviderKeyDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextProviderKeyDefinition"}
+	if v.SourceKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInlinePolicyIdentifierType(v *types.InlinePolicyIdentifierType) error {
 	if v == nil {
 		return nil
@@ -3455,6 +3514,23 @@ func validateInlinePolicyIdentifierType(v *types.InlinePolicyIdentifierType) err
 	}
 	if v.AttachmentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttachmentName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKeyDefinitionListType(v []types.ContextProviderKeyDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KeyDefinitionListType"}
+	for i := range v {
+		if err := validateContextProviderKeyDefinition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3833,6 +3909,11 @@ func validateOpCreateOpenIDConnectProviderInput(v *CreateOpenIDConnectProviderIn
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ContextProvider != nil {
+		if err := validateContextProvider(v.ContextProvider); err != nil {
+			invalidParams.AddNested("ContextProvider", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3918,6 +3999,11 @@ func validateOpCreateSAMLProviderInput(v *CreateSAMLProviderInput) error {
 	if v.Tags != nil {
 		if err := validateTagListType(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContextProvider != nil {
+		if err := validateContextProvider(v.ContextProvider); err != nil {
+			invalidParams.AddNested("ContextProvider", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5819,6 +5905,26 @@ func validateOpUpdateLoginProfileInput(v *UpdateLoginProfileInput) error {
 	}
 }
 
+func validateOpUpdateOpenIDConnectProviderInput(v *UpdateOpenIDConnectProviderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOpenIDConnectProviderInput"}
+	if v.OpenIDConnectProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpenIDConnectProviderArn"))
+	}
+	if v.ContextProvider != nil {
+		if err := validateContextProvider(v.ContextProvider); err != nil {
+			invalidParams.AddNested("ContextProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateOpenIDConnectProviderThumbprintInput(v *UpdateOpenIDConnectProviderThumbprintInput) error {
 	if v == nil {
 		return nil
@@ -5877,6 +5983,11 @@ func validateOpUpdateSAMLProviderInput(v *UpdateSAMLProviderInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSAMLProviderInput"}
 	if v.SAMLProviderArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SAMLProviderArn"))
+	}
+	if v.ContextProvider != nil {
+		if err := validateContextProvider(v.ContextProvider); err != nil {
+			invalidParams.AddNested("ContextProvider", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

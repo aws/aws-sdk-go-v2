@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Deletes the key value pair specified by the key.
+// Deletes the key-value pair specified by the key.
 func (c *Client) DeleteKey(ctx context.Context, params *DeleteKeyInput, optFns ...func(*Options)) (*DeleteKeyOutput, error) {
 	if params == nil {
 		params = &DeleteKeyInput{}
@@ -27,8 +27,8 @@ func (c *Client) DeleteKey(ctx context.Context, params *DeleteKeyInput, optFns .
 
 type DeleteKeyInput struct {
 
-	// The current version (ETag) of the Key Value Store that you are deleting keys
-	// from, which you can get using DescribeKeyValueStore.
+	// The current version ( ETag ) of the key value store that you are deleting keys
+	// from, which you can get by using the DescribeKeyValueStore API operation.
 	//
 	// This member is required.
 	IfMatch *string
@@ -38,7 +38,7 @@ type DeleteKeyInput struct {
 	// This member is required.
 	Key *string
 
-	// The Amazon Resource Name (ARN) of the Key Value Store.
+	// The Amazon Resource Name (ARN) of the key value store.
 	//
 	// This member is required.
 	KvsARN *string
@@ -69,21 +69,21 @@ func (in *DeleteKeyInput) bindEndpointParams(p *EndpointParameters) {
 
 }
 
-// Metadata information about a Key Value Store.
+// Metadata information about a key value store.
 type DeleteKeyOutput struct {
 
-	// The current version identifier of the Key Value Store after the successful
+	// The current version identifier of the key value store after the successful
 	// delete.
 	//
 	// This member is required.
 	ETag *string
 
-	// Number of key value pairs in the Key Value Store after the successful delete.
+	// Number of key-value pairs in the key value store after the successful delete.
 	//
 	// This member is required.
 	ItemCount *int32
 
-	// Total size of the Key Value Store after the successful delete, in bytes.
+	// Total size of the key value store after the successful delete, in bytes.
 	//
 	// This member is required.
 	TotalSizeInBytes *int64

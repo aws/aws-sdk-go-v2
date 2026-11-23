@@ -38,7 +38,8 @@ type ListPipelinesInput struct {
 
 	// Filters the pipelines by who manages them. Specify AWS to return pipelines that
 	// Amazon Web Services manages, or CUSTOMER to return pipelines that you created.
-	// If you don't specify a value, the response includes both.
+	// If you don't specify a value, the response includes only pipelines that you
+	// created.
 	ManagedBy types.PipelineManagedBy
 
 	// The maximum number of pipelines to return in the response.

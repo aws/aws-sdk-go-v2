@@ -1160,6 +1160,14 @@ func serializeGlossaryTermIdList(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.CloseList()
 }
 
+func serializeGlossaryTermIdOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeGlossaryTermItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GlossaryTermItem) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -4774,6 +4782,27 @@ func deserializeGlossaryTermIdList(d smithy.ShapeDeserializer, s *smithy.Schema,
 	})
 }
 
+func deserializeGlossaryTermIdOutputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeGlossaryTermItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]GlossaryTermItem) error {
 	*v = make([]GlossaryTermItem, 0)
 	var vv GlossaryTermItem
@@ -7624,6 +7653,17 @@ func serializeAdditionalPlanOptionsMap(s smithy.ShapeSerializer, schema *smithy.
 	s.CloseMap()
 }
 
+func serializeAssetFormInputMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]AssetFormInput) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteStruct(schema.MapValue())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseMap()
+}
+
 func serializeAssetFormMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]AssetFormEntry) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -7635,7 +7675,7 @@ func serializeAssetFormMap(s smithy.ShapeSerializer, schema *smithy.Schema, v ma
 	s.CloseMap()
 }
 
-func serializeAssetTypeFormsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]AssetTypeFormReference) {
+func serializeAssetTypeFormOutputMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]AssetTypeFormOutput) {
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -8127,6 +8167,28 @@ func deserializeAdditionalPlanOptionsMap(d smithy.ShapeDeserializer, s *smithy.S
 	})
 }
 
+func deserializeAssetFormInputMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]AssetFormInput) error {
+	*v = make(map[string]AssetFormInput)
+	var vv AssetFormInput
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero AssetFormInput
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = AssetFormInput{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
 func deserializeAssetFormMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]AssetFormEntry) error {
 	*v = make(map[string]AssetFormEntry)
 	var vv AssetFormEntry
@@ -8149,19 +8211,19 @@ func deserializeAssetFormMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *ma
 	})
 }
 
-func deserializeAssetTypeFormsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]AssetTypeFormReference) error {
-	*v = make(map[string]AssetTypeFormReference)
-	var vv AssetTypeFormReference
+func deserializeAssetTypeFormOutputMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]AssetTypeFormOutput) error {
+	*v = make(map[string]AssetTypeFormOutput)
+	var vv AssetTypeFormOutput
 	return smithy.ReadMap(d, s, func(k string) error {
 		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
 			return err
 		} else if isNil {
-			var zero AssetTypeFormReference
+			var zero AssetTypeFormOutput
 			(*v)[k] = zero
 			return nil
 		}
 
-		vv = AssetTypeFormReference{}
+		vv = AssetTypeFormOutput{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

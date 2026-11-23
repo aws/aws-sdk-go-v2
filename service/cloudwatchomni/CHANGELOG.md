@@ -1,3 +1,7 @@
+# v1.5.0 (2026-11-23)
+
+* **Feature**: Release of the new integration type in CreateIntegration API - Used to add Microsoft Azure resources to the Amazon CloudWatch Omni context graph through an AWS Config connector for your Azure tenant.
+
 # v1.4.0 (2026-11-12)
 
 * **Feature**: Add aggregationTemporality and monotonicity to GetContextGraph MetricMetadata

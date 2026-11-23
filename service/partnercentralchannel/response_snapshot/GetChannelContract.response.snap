@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.GetChannelContract
+
+{"channelContractDetail":{"arn":"__Arn__","cancellationReason":"__CancellationReason__","catalog":"__Catalog__","contractType":"MANAGED_SERVICES_ATTESTATION","createdAt":"2000-01-01T00:00:00Z","details":{"managedServicesAttestationDetails":{"endDate":"2000-01-01T00:00:00Z","legalEntityAddress":{"addressLine":"__AddressLine__","addressLine2":"__AddressLine2__","city":"__City__","countryCode":"__CountryCode__","postalCode":"__PostalCode__","stateOrRegion":"__StateOrRegion__"},"legalEntityName":"__LegalEntityName__","memberAccountIds":["__Member__","__Member__"],"programManagementAccountIdentifier":"__ProgramManagementAccountIdentifier__","relationshipIdentifier":"__RelationshipIdentifier__","signatoryEmail":"__SignatoryEmail__","signatoryName":"__SignatoryName__","supportedServices":["MONITORING","MONITORING"]}},"id":"__Id__","respondedAt":"2000-01-01T00:00:00Z","status":"PENDING","updatedAt":"2000-01-01T00:00:00Z"}}

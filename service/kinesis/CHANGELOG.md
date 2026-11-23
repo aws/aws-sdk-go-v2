@@ -1,3 +1,7 @@
+# v1.58.0 (2026-11-18)
+
+* **Feature**: Treat Kinesis ReceiveQueueRecords and ReceiveDeadLetterQueueRecords as long-polling operations, so they back off when the retry quota is exhausted.
+
 # v1.57.0 (2026-11-17)
 
 * **Feature**: Adds support for queues on on-demand streams with new CreateQueue, UpdateQueue, DeleteQueue, DescribeQueue, ListQueues, ReceiveQueueRecords, AcknowledgeQueueRecords, and UpdateQueueRecordsVisibility APIs, plus four dead-letter APIs, for Amazon Kinesis Data Streams.

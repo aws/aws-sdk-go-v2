@@ -543,6 +543,11 @@ var ___integerMin10Max48 = smithy.NewSchema(smithy.ShapeID{
 	Name:      "__integerMin10Max48",
 }, smithy.ShapeTypeInteger, 0)
 
+var ___integerMin160000Max448000 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "__integerMin160000Max448000",
+}, smithy.ShapeTypeInteger, 0)
+
 var ___integerMin16000Max320000 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "__integerMin16000Max320000",
@@ -781,6 +786,11 @@ var ___integerMin64Max2160 = smithy.NewSchema(smithy.ShapeID{
 var ___integerMin6Max16 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "__integerMin6Max16",
+}, smithy.ShapeTypeInteger, 0)
+
+var ___integerMin768000Max768000 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "__integerMin768000Max768000",
 }, smithy.ShapeTypeInteger, 0)
 
 var ___integerMin8000Max192000 = smithy.NewSchema(smithy.ShapeID{
@@ -1207,6 +1217,12 @@ var ___listOfQueueTransition = smithy.NewSchema(smithy.ShapeID{
 	Name:      "__listOfQueueTransition",
 }, smithy.ShapeTypeList, 1)
 var ___listOfQueueTransition_member *smithy.Schema
+
+var ___listOfRectangle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "__listOfRectangle",
+}, smithy.ShapeTypeList, 1)
+var ___listOfRectangle_member *smithy.Schema
 
 var ___listOfServiceOverride = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -2122,7 +2138,7 @@ var AudioChannelTaggingSettings_ChannelTags *smithy.Schema
 var AudioCodec = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "AudioCodec",
-}, smithy.ShapeTypeEnum, 13)
+}, smithy.ShapeTypeEnum, 15)
 var AudioCodec_AAC *smithy.Schema
 
 var AudioCodec_MP2 *smithy.Schema
@@ -2136,6 +2152,10 @@ var AudioCodec_AIFF *smithy.Schema
 var AudioCodec_AC3 *smithy.Schema
 
 var AudioCodec_AC4 *smithy.Schema
+
+var AudioCodec_DTSX *smithy.Schema
+
+var AudioCodec_DTSC *smithy.Schema
 
 var AudioCodec_EAC3 *smithy.Schema
 
@@ -2152,7 +2172,7 @@ var AudioCodec_FLAC *smithy.Schema
 var AudioCodecSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "AudioCodecSettings",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 15)
 var AudioCodecSettings_AacSettings *smithy.Schema
 
 var AudioCodecSettings_Ac3Settings *smithy.Schema
@@ -2162,6 +2182,10 @@ var AudioCodecSettings_Ac4Settings *smithy.Schema
 var AudioCodecSettings_AiffSettings *smithy.Schema
 
 var AudioCodecSettings_Codec *smithy.Schema
+
+var AudioCodecSettings_DtscSettings *smithy.Schema
+
+var AudioCodecSettings_DtsxSettings *smithy.Schema
 
 var AudioCodecSettings_Eac3AtmosSettings *smithy.Schema
 
@@ -2424,8 +2448,10 @@ var AutomatedEncodingSettings_AbrSettings *smithy.Schema
 var Av1AdaptiveQuantization = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "Av1AdaptiveQuantization",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 7)
 var Av1AdaptiveQuantization_OFF *smithy.Schema
+
+var Av1AdaptiveQuantization_AUTO *smithy.Schema
 
 var Av1AdaptiveQuantization_LOW *smithy.Schema
 
@@ -2444,6 +2470,14 @@ var Av1BitDepth = smithy.NewSchema(smithy.ShapeID{
 var Av1BitDepth_BIT_8 *smithy.Schema
 
 var Av1BitDepth_BIT_10 *smithy.Schema
+
+var Av1FastDecode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "Av1FastDecode",
+}, smithy.ShapeTypeEnum, 2)
+var Av1FastDecode_DISABLED *smithy.Schema
+
+var Av1FastDecode_ENABLED *smithy.Schema
 
 var Av1FilmGrainSynthesis = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -2472,6 +2506,14 @@ var Av1FramerateConversionAlgorithm_INTERPOLATE *smithy.Schema
 var Av1FramerateConversionAlgorithm_FRAMEFORMER *smithy.Schema
 
 var Av1FramerateConversionAlgorithm_MAINTAIN_FRAME_COUNT *smithy.Schema
+
+var Av1GopSizeUnits = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "Av1GopSizeUnits",
+}, smithy.ShapeTypeEnum, 2)
+var Av1GopSizeUnits_FRAMES *smithy.Schema
+
+var Av1GopSizeUnits_SECONDS *smithy.Schema
 
 var Av1QvbrSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -2502,12 +2544,14 @@ var Av1SceneChangeDetect_TRANSITION_DETECTION *smithy.Schema
 var Av1Settings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "Av1Settings",
-}, smithy.ShapeTypeStructure, 19)
+}, smithy.ShapeTypeStructure, 22)
 var Av1Settings_AdaptiveQuantization *smithy.Schema
 
 var Av1Settings_BitDepth *smithy.Schema
 
 var Av1Settings_Bitrate *smithy.Schema
+
+var Av1Settings_FastDecode *smithy.Schema
 
 var Av1Settings_FilmGrainSynthesis *smithy.Schema
 
@@ -2520,6 +2564,8 @@ var Av1Settings_FramerateDenominator *smithy.Schema
 var Av1Settings_FramerateNumerator *smithy.Schema
 
 var Av1Settings_GopSize *smithy.Schema
+
+var Av1Settings_GopSizeUnits *smithy.Schema
 
 var Av1Settings_MaxBitrate *smithy.Schema
 
@@ -2541,6 +2587,8 @@ var Av1Settings_SlidingWindowPeakBitrate *smithy.Schema
 
 var Av1Settings_SpatialAdaptiveQuantization *smithy.Schema
 
+var Av1Settings_TemporalAdaptiveQuantization *smithy.Schema
+
 var Av1SpatialAdaptiveQuantization = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "Av1SpatialAdaptiveQuantization",
@@ -2548,6 +2596,14 @@ var Av1SpatialAdaptiveQuantization = smithy.NewSchema(smithy.ShapeID{
 var Av1SpatialAdaptiveQuantization_DISABLED *smithy.Schema
 
 var Av1SpatialAdaptiveQuantization_ENABLED *smithy.Schema
+
+var Av1TemporalAdaptiveQuantization = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "Av1TemporalAdaptiveQuantization",
+}, smithy.ShapeTypeEnum, 2)
+var Av1TemporalAdaptiveQuantization_DISABLED *smithy.Schema
+
+var Av1TemporalAdaptiveQuantization_ENABLED *smithy.Schema
 
 var AvailBlanking = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -4253,6 +4309,32 @@ var DropFrameTimecode_DISABLED *smithy.Schema
 
 var DropFrameTimecode_ENABLED *smithy.Schema
 
+var DtscSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "DtscSettings",
+}, smithy.ShapeTypeStructure, 2)
+var DtscSettings_Bitrate *smithy.Schema
+
+var DtscSettings_SampleRate *smithy.Schema
+
+var DtsxCodingMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "DtsxCodingMode",
+}, smithy.ShapeTypeEnum, 2)
+var DtsxCodingMode_CODING_MODE_5_1 *smithy.Schema
+
+var DtsxCodingMode_CODING_MODE_5_1_4 *smithy.Schema
+
+var DtsxSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "DtsxSettings",
+}, smithy.ShapeTypeStructure, 3)
+var DtsxSettings_Bitrate *smithy.Schema
+
+var DtsxSettings_CodingMode *smithy.Schema
+
+var DtsxSettings_SampleRate *smithy.Schema
+
 var DurationControl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "DurationControl",
@@ -4516,6 +4598,22 @@ var DynamicAudioSelectorType = smithy.NewSchema(smithy.ShapeID{
 var DynamicAudioSelectorType_ALL_TRACKS *smithy.Schema
 
 var DynamicAudioSelectorType_LANGUAGE_CODE *smithy.Schema
+
+var DynamicMultiviewSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "DynamicMultiviewSettings",
+}, smithy.ShapeTypeStructure, 2)
+var DynamicMultiviewSettings_Enabled *smithy.Schema
+
+var DynamicMultiviewSettings_Regions *smithy.Schema
+
+var DynamicMultiviewSettingsEnabled = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconvert",
+	Name:      "DynamicMultiviewSettingsEnabled",
+}, smithy.ShapeTypeEnum, 2)
+var DynamicMultiviewSettingsEnabled_DISABLED *smithy.Schema
+
+var DynamicMultiviewSettingsEnabled_ENABLED *smithy.Schema
 
 var Eac3AtmosBitstreamMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
@@ -10178,7 +10276,7 @@ var VideoCodecSettings_XavcSettings *smithy.Schema
 var VideoDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconvert",
 	Name:      "VideoDescription",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var VideoDescription_AfdSignaling *smithy.Schema
 
 var VideoDescription_AntiAlias *smithy.Schema
@@ -10192,6 +10290,8 @@ var VideoDescription_ColorMetadata *smithy.Schema
 var VideoDescription_Crop *smithy.Schema
 
 var VideoDescription_DropFrameTimecode *smithy.Schema
+
+var VideoDescription_DynamicMultiviewSettings *smithy.Schema
 
 var VideoDescription_FixedAfd *smithy.Schema
 
@@ -11920,6 +12020,10 @@ func init() {
 
 	AudioCodec_AC4 = AudioCodec.AddMember("AC4", smithyprelude.Unit)
 
+	AudioCodec_DTSX = AudioCodec.AddMember("DTSX", smithyprelude.Unit)
+
+	AudioCodec_DTSC = AudioCodec.AddMember("DTSC", smithyprelude.Unit)
+
 	AudioCodec_EAC3 = AudioCodec.AddMember("EAC3", smithyprelude.Unit)
 
 	AudioCodec_EAC3_ATMOS = AudioCodec.AddMember("EAC3_ATMOS", smithyprelude.Unit)
@@ -11931,6 +12035,20 @@ func init() {
 	AudioCodec_PASSTHROUGH = AudioCodec.AddMember("PASSTHROUGH", smithyprelude.Unit)
 
 	AudioCodec_FLAC = AudioCodec.AddMember("FLAC", smithyprelude.Unit)
+
+	DtscSettings_Bitrate = DtscSettings.AddMember("Bitrate", ___integerMin768000Max768000, &smithytraits.JSONName{Name: "bitrate"})
+
+	DtscSettings_SampleRate = DtscSettings.AddMember("SampleRate", ___integerMin48000Max48000, &smithytraits.JSONName{Name: "sampleRate"})
+
+	DtsxCodingMode_CODING_MODE_5_1 = DtsxCodingMode.AddMember("CODING_MODE_5_1", smithyprelude.Unit)
+
+	DtsxCodingMode_CODING_MODE_5_1_4 = DtsxCodingMode.AddMember("CODING_MODE_5_1_4", smithyprelude.Unit)
+
+	DtsxSettings_Bitrate = DtsxSettings.AddMember("Bitrate", ___integerMin160000Max448000, &smithytraits.JSONName{Name: "bitrate"})
+
+	DtsxSettings_CodingMode = DtsxSettings.AddMember("CodingMode", DtsxCodingMode, &smithytraits.JSONName{Name: "codingMode"})
+
+	DtsxSettings_SampleRate = DtsxSettings.AddMember("SampleRate", ___integerMin48000Max48000, &smithytraits.JSONName{Name: "sampleRate"})
 
 	Eac3AtmosBitstreamMode_COMPLETE_MAIN = Eac3AtmosBitstreamMode.AddMember("COMPLETE_MAIN", smithyprelude.Unit)
 
@@ -12235,6 +12353,10 @@ func init() {
 	AudioCodecSettings_AiffSettings = AudioCodecSettings.AddMember("AiffSettings", AiffSettings, &smithytraits.JSONName{Name: "aiffSettings"})
 
 	AudioCodecSettings_Codec = AudioCodecSettings.AddMember("Codec", AudioCodec, &smithytraits.JSONName{Name: "codec"})
+
+	AudioCodecSettings_DtscSettings = AudioCodecSettings.AddMember("DtscSettings", DtscSettings, &smithytraits.JSONName{Name: "dtscSettings"})
+
+	AudioCodecSettings_DtsxSettings = AudioCodecSettings.AddMember("DtsxSettings", DtsxSettings, &smithytraits.JSONName{Name: "dtsxSettings"})
 
 	AudioCodecSettings_Eac3AtmosSettings = AudioCodecSettings.AddMember("Eac3AtmosSettings", Eac3AtmosSettings, &smithytraits.JSONName{Name: "eac3AtmosSettings"})
 
@@ -15490,6 +15612,8 @@ func init() {
 
 	Av1AdaptiveQuantization_OFF = Av1AdaptiveQuantization.AddMember("OFF", smithyprelude.Unit)
 
+	Av1AdaptiveQuantization_AUTO = Av1AdaptiveQuantization.AddMember("AUTO", smithyprelude.Unit)
+
 	Av1AdaptiveQuantization_LOW = Av1AdaptiveQuantization.AddMember("LOW", smithyprelude.Unit)
 
 	Av1AdaptiveQuantization_MEDIUM = Av1AdaptiveQuantization.AddMember("MEDIUM", smithyprelude.Unit)
@@ -15503,6 +15627,10 @@ func init() {
 	Av1BitDepth_BIT_8 = Av1BitDepth.AddMember("BIT_8", smithyprelude.Unit)
 
 	Av1BitDepth_BIT_10 = Av1BitDepth.AddMember("BIT_10", smithyprelude.Unit)
+
+	Av1FastDecode_DISABLED = Av1FastDecode.AddMember("DISABLED", smithyprelude.Unit)
+
+	Av1FastDecode_ENABLED = Av1FastDecode.AddMember("ENABLED", smithyprelude.Unit)
 
 	Av1FilmGrainSynthesis_DISABLED = Av1FilmGrainSynthesis.AddMember("DISABLED", smithyprelude.Unit)
 
@@ -15519,6 +15647,10 @@ func init() {
 	Av1FramerateConversionAlgorithm_FRAMEFORMER = Av1FramerateConversionAlgorithm.AddMember("FRAMEFORMER", smithyprelude.Unit)
 
 	Av1FramerateConversionAlgorithm_MAINTAIN_FRAME_COUNT = Av1FramerateConversionAlgorithm.AddMember("MAINTAIN_FRAME_COUNT", smithyprelude.Unit)
+
+	Av1GopSizeUnits_FRAMES = Av1GopSizeUnits.AddMember("FRAMES", smithyprelude.Unit)
+
+	Av1GopSizeUnits_SECONDS = Av1GopSizeUnits.AddMember("SECONDS", smithyprelude.Unit)
 
 	Av1QvbrSettings_QvbrQualityLevel = Av1QvbrSettings.AddMember("QvbrQualityLevel", ___integerMin1Max10, &smithytraits.JSONName{Name: "qvbrQualityLevel"})
 
@@ -15538,11 +15670,17 @@ func init() {
 
 	Av1SpatialAdaptiveQuantization_ENABLED = Av1SpatialAdaptiveQuantization.AddMember("ENABLED", smithyprelude.Unit)
 
+	Av1TemporalAdaptiveQuantization_DISABLED = Av1TemporalAdaptiveQuantization.AddMember("DISABLED", smithyprelude.Unit)
+
+	Av1TemporalAdaptiveQuantization_ENABLED = Av1TemporalAdaptiveQuantization.AddMember("ENABLED", smithyprelude.Unit)
+
 	Av1Settings_AdaptiveQuantization = Av1Settings.AddMember("AdaptiveQuantization", Av1AdaptiveQuantization, &smithytraits.JSONName{Name: "adaptiveQuantization"})
 
 	Av1Settings_BitDepth = Av1Settings.AddMember("BitDepth", Av1BitDepth, &smithytraits.JSONName{Name: "bitDepth"})
 
 	Av1Settings_Bitrate = Av1Settings.AddMember("Bitrate", ___integerMin1000Max1152000000, &smithytraits.JSONName{Name: "bitrate"})
+
+	Av1Settings_FastDecode = Av1Settings.AddMember("FastDecode", Av1FastDecode, &smithytraits.JSONName{Name: "fastDecode"})
 
 	Av1Settings_FilmGrainSynthesis = Av1Settings.AddMember("FilmGrainSynthesis", Av1FilmGrainSynthesis, &smithytraits.JSONName{Name: "filmGrainSynthesis"})
 
@@ -15555,6 +15693,8 @@ func init() {
 	Av1Settings_FramerateNumerator = Av1Settings.AddMember("FramerateNumerator", ___integerMin1Max2147483647, &smithytraits.JSONName{Name: "framerateNumerator"})
 
 	Av1Settings_GopSize = Av1Settings.AddMember("GopSize", ___doubleMin0, &smithytraits.JSONName{Name: "gopSize"})
+
+	Av1Settings_GopSizeUnits = Av1Settings.AddMember("GopSizeUnits", Av1GopSizeUnits, &smithytraits.JSONName{Name: "gopSizeUnits"})
 
 	Av1Settings_MaxBitrate = Av1Settings.AddMember("MaxBitrate", ___integerMin1000Max1152000000, &smithytraits.JSONName{Name: "maxBitrate"})
 
@@ -15575,6 +15715,8 @@ func init() {
 	Av1Settings_SlidingWindowPeakBitrate = Av1Settings.AddMember("SlidingWindowPeakBitrate", ___integerMin1000Max1152000000, &smithytraits.JSONName{Name: "slidingWindowPeakBitrate"})
 
 	Av1Settings_SpatialAdaptiveQuantization = Av1Settings.AddMember("SpatialAdaptiveQuantization", Av1SpatialAdaptiveQuantization, &smithytraits.JSONName{Name: "spatialAdaptiveQuantization"})
+
+	Av1Settings_TemporalAdaptiveQuantization = Av1Settings.AddMember("TemporalAdaptiveQuantization", Av1TemporalAdaptiveQuantization, &smithytraits.JSONName{Name: "temporalAdaptiveQuantization"})
 
 	AvcIntraClass_CLASS_50 = AvcIntraClass.AddMember("CLASS_50", smithyprelude.Unit)
 
@@ -17026,6 +17168,16 @@ func init() {
 
 	DropFrameTimecode_ENABLED = DropFrameTimecode.AddMember("ENABLED", smithyprelude.Unit)
 
+	DynamicMultiviewSettingsEnabled_DISABLED = DynamicMultiviewSettingsEnabled.AddMember("DISABLED", smithyprelude.Unit)
+
+	DynamicMultiviewSettingsEnabled_ENABLED = DynamicMultiviewSettingsEnabled.AddMember("ENABLED", smithyprelude.Unit)
+
+	___listOfRectangle_member = ___listOfRectangle.AddMember("member", Rectangle)
+
+	DynamicMultiviewSettings_Enabled = DynamicMultiviewSettings.AddMember("Enabled", DynamicMultiviewSettingsEnabled, &smithytraits.JSONName{Name: "enabled"})
+
+	DynamicMultiviewSettings_Regions = DynamicMultiviewSettings.AddMember("Regions", ___listOfRectangle, &smithytraits.JSONName{Name: "regions"})
+
 	RespondToAfd_NONE = RespondToAfd.AddMember("NONE", smithyprelude.Unit)
 
 	RespondToAfd_RESPOND = RespondToAfd.AddMember("RESPOND", smithyprelude.Unit)
@@ -17309,6 +17461,8 @@ func init() {
 	VideoDescription_Crop = VideoDescription.AddMember("Crop", Rectangle, &smithytraits.JSONName{Name: "crop"})
 
 	VideoDescription_DropFrameTimecode = VideoDescription.AddMember("DropFrameTimecode", DropFrameTimecode, &smithytraits.JSONName{Name: "dropFrameTimecode"})
+
+	VideoDescription_DynamicMultiviewSettings = VideoDescription.AddMember("DynamicMultiviewSettings", DynamicMultiviewSettings, &smithytraits.JSONName{Name: "dynamicMultiviewSettings"})
 
 	VideoDescription_FixedAfd = VideoDescription.AddMember("FixedAfd", ___integerMin0Max15, &smithytraits.JSONName{Name: "fixedAfd"})
 

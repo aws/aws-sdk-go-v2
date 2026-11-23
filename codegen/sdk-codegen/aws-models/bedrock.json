@@ -493,6 +493,9 @@
                     "target": "com.amazonaws.bedrock#DataRetentionResource"
                 },
                 {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResource"
+                },
+                {
                     "target": "com.amazonaws.bedrock#EnforcedGuardrailConfigurationResource"
                 },
                 {
@@ -520,6 +523,9 @@
                     "target": "com.amazonaws.bedrock#ModelResource"
                 },
                 {
+                    "target": "com.amazonaws.bedrock#ProjectResource"
+                },
+                {
                     "target": "com.amazonaws.bedrock#PromptRouterResource"
                 },
                 {
@@ -536,6 +542,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrock#TrainingResource"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramResource"
                 }
             ],
             "traits": {
@@ -1379,6 +1388,118 @@
                         "smithy.api#enumValue": "RagEvaluation"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrock#ArchiveProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#ArchiveProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#ArchiveProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Archives a project. Archiving is terminal; there is no delete. Archiving an already-archived project succeeds without effect. The default project cannot be archived.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/projects/{projectIdentifier}/archive"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#ArchiveProjectRequest": {
+            "type": "structure",
+            "members": {
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id or ARN of the project to archive.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the project to archive.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#ArchiveProjectResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.bedrock#ProjectResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project ID. The account's default project uses <code>default</code>; a named project's generated ID starts with <code>proj_</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.bedrock#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrock#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's display name. Project names do not have to be unique.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's lifecycle status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the project was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "archivedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the project was archived.</p>"
+                    }
+                },
+                "dataRetention": {
+                    "target": "com.amazonaws.bedrock#ProjectDataRetention",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's data retention setting. A mode of <code>inherit</code> defers to the account setting or model default.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The project after the archive operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.bedrock#Arn": {
@@ -7541,6 +7662,131 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#CreateProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#CreateProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#CreateProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a project: a workload boundary within the account that inference requests can be associated with.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/projects"
+                }
+            }
+        },
+        "com.amazonaws.bedrock#CreateProjectRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.bedrock#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name for the project. Project names do not have to be unique.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrock#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to associate with the project.</p>"
+                    }
+                },
+                "dataRetention": {
+                    "target": "com.amazonaws.bedrock#ProjectDataRetention",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's data-retention mode. If you omit this field, Amazon Bedrock sets the mode to <code>inherit</code>. The project then uses the account setting or the model default.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The display name, optional tags, and optional data retention setting for the new project.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#CreateProjectResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.bedrock#ProjectResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project ID. The account's default project uses <code>default</code>; a named project's generated ID starts with <code>proj_</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.bedrock#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrock#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's display name. Project names do not have to be unique.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's lifecycle status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the project was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "archivedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the project was archived.</p>"
+                    }
+                },
+                "dataRetention": {
+                    "target": "com.amazonaws.bedrock#ProjectDataRetention",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's data retention setting. A mode of <code>inherit</code> defers to the account setting or model default.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The newly created project.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#CreatePromptRouter": {
             "type": "operation",
             "input": {
@@ -8289,6 +8535,240 @@
                     "target": "com.amazonaws.bedrock#PutAccountDataRetention"
                 }
             ]
+        },
+        "com.amazonaws.bedrock#DataRetentionStorageBucketArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket for retained data.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
+            }
+        },
+        "com.amazonaws.bedrock#DataRetentionStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.bedrock#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer managed AWS Key Management Service (AWS KMS) key you use to encrypt retained data. Specify an enabled symmetric encryption key in the AWS Region where you register the configuration. You cannot specify a key alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3BucketArn": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageBucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket that receives retained data. The bucket must be in the AWS Region where you register the configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3BucketOwner": {
+                    "target": "com.amazonaws.bedrock#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the destination bucket's owner. You must specify the owner, even when the bucket belongs to another account. Amazon Bedrock uses this ID to verify bucket ownership for each delivery request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You provide the Amazon S3 destination and AWS Key Management Service (AWS KMS) key for retained data.</p> <p>Before saving a customer-managed destination, Amazon Bedrock validates that you can use the bucket and key and that their resource policies permit the required Amazon Bedrock access. If validation fails, Amazon Bedrock rejects the configuration without saving it.</p> <p>You need <code>s3:PutObject</code>, <code>s3:GetObject</code>, <code>kms:GenerateDataKey</code>, and <code>kms:Decrypt</code> permissions. The Amazon S3 bucket policy must allow the Amazon Bedrock service principal, <code>bedrock.amazonaws.com</code>, to put, get, and delete objects with conditions appropriate to the configuration scope.</p> <p>Use <code>aws:SourceAccount</code> for account scope, <code>aws:SourceOrgID</code> for organization scope, and both <code>aws:SourceAccount</code> and the project's <code>aws:SourceArn</code> for project scope. Validation rejects resource policies that allow the service principal to access the destination without the required scope conditions.</p> <p>The key policy must permit <code>kms:GenerateDataKey</code> and <code>kms:Decrypt</code> for both uses of the key: direct use by Amazon Bedrock with the scope conditions, and use through Amazon S3 with a <code>kms:ViaService</code> condition for the bucket's Region and <code>kms:EncryptionContext:aws:s3:arn</code> scoped to the bucket.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#DataRetentionStorageDestination": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stores retained data in the Amazon S3 bucket you specify and encrypts it with the AWS KMS key you specify. You must provide <code>storageConfiguration</code>.</p>",
+                        "smithy.api#enumValue": "customer_managed"
+                    }
+                },
+                "AMAZON_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retained data uses Amazon-managed storage. Do not provide <code>storageConfiguration</code>.</p>",
+                        "smithy.api#enumValue": "amazon_managed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Where a scope's retained data is delivered. Clients must tolerate unknown values.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#DataRetentionStorageModelProvider": {
+            "type": "enum",
+            "members": {
+                "ANTHROPIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Anthropic model provider.</p>",
+                        "smithy.api#enumValue": "anthropic"
+                    }
+                },
+                "OPENAI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OpenAI model provider.</p>",
+                        "smithy.api#enumValue": "openai"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Model provider owning a retention storage configuration. Clients must tolerate unknown values.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#DataRetentionStorageResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrock#DeleteAccountDataRetentionStorage"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#DeleteOrganizationDataRetentionStorage"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#DeleteProjectDataRetentionStorage"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#GetAccountDataRetentionStorage"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#GetOrganizationDataRetentionStorage"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#GetProjectDataRetentionStorage"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#PutAccountDataRetentionStorage"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#PutOrganizationDataRetentionStorage"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#PutProjectDataRetentionStorage"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retention storage configurations: where a model provider's data-retention programs deliver this customer's retained data. Account and organization settings are shared across AWS Regions within a partition and are eventually consistent; project settings are scoped to the project's Region.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#DataRetentionStorageResourceStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation of the destination resource is pending.</p>",
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination resource has passed validation.</p>",
+                        "smithy.api#enumValue": "active"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Access to the destination resource was denied.</p>",
+                        "smithy.api#enumValue": "access_denied"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Validation state of a configured destination resource. Clients must tolerate unknown values.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#DataRetentionStorageScope": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calling AWS account.</p>",
+                        "smithy.api#enumValue": "account"
+                    }
+                },
+                "ORGANIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calling account's organization.</p>",
+                        "smithy.api#enumValue": "organization"
+                    }
+                },
+                "PROJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The named project addressed by the request.</p>",
+                        "smithy.api#enumValue": "project"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Scope addressed by a retention storage operation. Clients must tolerate unknown values.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#DeleteAccountDataRetentionStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#DeleteAccountDataRetentionStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#DeleteAccountDataRetentionStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes your account's retention storage configuration for a model provider. Deleting an absent configuration succeeds. You do not need to participate in the program to delete the configuration. You can delete it even if your account is ineligible or its eligibility is revoked.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/v1/data_retention/storage/{modelProvider}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteAccountDataRetentionStorageRequest": {
+            "type": "structure",
+            "members": {
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model provider whose retention storage configuration is addressed by this request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the model provider whose account retention storage configuration to delete.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteAccountDataRetentionStorageResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A successful deletion returns no response fields.</p>",
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.bedrock#DeleteAutomatedReasoningPolicy": {
             "type": "operation",
@@ -9057,6 +9537,131 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteOrganizationDataRetentionStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#DeleteOrganizationDataRetentionStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#DeleteOrganizationDataRetentionStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the organization's retention storage configuration for a model provider. The caller must be the organization's management account or a delegated administrator. Deleting an absent configuration succeeds; no program participation is required to delete.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/v1/data_retention/organization-storage/{modelProvider}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteOrganizationDataRetentionStorageRequest": {
+            "type": "structure",
+            "members": {
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model provider whose retention storage configuration is addressed by this request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the model provider whose organization retention storage configuration to delete.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteOrganizationDataRetentionStorageResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A successful deletion returns no response fields.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteProjectDataRetentionStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#DeleteProjectDataRetentionStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#DeleteProjectDataRetentionStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a project's retention storage configuration for a model provider. Deleting an absent configuration on an active project succeeds. If the project does not exist or your account does not own it, the operation returns <code>ResourceNotFoundException</code>. For an archived project, the operation returns <code>ValidationException</code>. You can read the archived project's stored configuration until Amazon Bedrock purges the project. You do not need to participate in the program to delete the configuration.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/v1/projects/{projectIdentifier}/data_retention/storage/{modelProvider}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteProjectDataRetentionStorageRequest": {
+            "type": "structure",
+            "members": {
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of a named project owned by the calling account in this AWS Region. The default project is not supported; use the account-level retention storage operations instead.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model provider whose retention storage configuration is addressed by this request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the project and model provider whose retention storage configuration to delete.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#DeleteProjectDataRetentionStorageResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>A successful deletion returns no response fields.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -10818,6 +11423,113 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#GetAccountDataRetentionStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetAccountDataRetentionStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetAccountDataRetentionStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns your account's stored retention storage configuration for a model provider. Amazon Bedrock determines whether the configuration applies when processing an inference request. Returns <code>ResourceNotFoundException</code> when no configuration exists.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v1/data_retention/storage/{modelProvider}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetAccountDataRetentionStorageRequest": {
+            "type": "structure",
+            "members": {
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model provider whose retention storage configuration is addressed by this request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the model provider whose account retention storage configuration to retrieve.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetAccountDataRetentionStorageResponse": {
+            "type": "structure",
+            "members": {
+                "scope": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scope addressed by the operation that returned this record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model provider this configuration applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageDestination": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where this record delivers retained data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stored destination and key. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time the stored record last changed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyStatus": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation state of the KMS key. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "s3BucketStatus": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation state of the bucket. Present only when storageDestination is customer_managed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The calling account's stored retention storage configuration for the requested model provider.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJob": {
             "type": "operation",
             "input": {
@@ -12275,6 +12987,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock uses the project's trusted access program participation when determining whether to return the model. The project must belong to your account in the same AWS Region and partition as the request.</p> <p>If you omit this parameter or specify <code>default</code>, Amazon Bedrock uses your account's participation, including organization inheritance.</p> <p>A project that doesn't exist or is archived causes a <code>ValidationException</code>. A model outside the project's available model catalog causes a <code>ResourceNotFoundException</code>.</p>",
+                        "smithy.api#httpQuery": "projectIdentifier"
+                    }
                 }
             },
             "traits": {
@@ -12653,6 +13372,13 @@
                         "smithy.api#documentation": "<p>The ID or Amazon Resource Name (ARN) of the inference profile.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock uses the project's trusted access program participation when determining whether to return a system-defined inference profile. The project must belong to your account in the same AWS Region and partition as the request.</p> <p>If you omit this parameter or specify <code>default</code>, Amazon Bedrock uses your account's participation, including organization inheritance.</p> <p>A project that doesn't exist or is archived causes a <code>ValidationException</code>. Specifying a project other than <code>default</code> for an application inference profile also causes a <code>ValidationException</code>.</p>",
+                        "smithy.api#httpQuery": "projectIdentifier"
                     }
                 }
             },
@@ -13502,6 +14228,344 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#GetOrganizationDataRetentionStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetOrganizationDataRetentionStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetOrganizationDataRetentionStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the organization's retention storage configuration for a model provider. The caller must be the organization's management account or a delegated administrator. Returns ResourceNotFoundException when no configuration exists.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v1/data_retention/organization-storage/{modelProvider}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetOrganizationDataRetentionStorageRequest": {
+            "type": "structure",
+            "members": {
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model provider whose retention storage configuration is addressed by this request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the model provider whose organization retention storage configuration to retrieve.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetOrganizationDataRetentionStorageResponse": {
+            "type": "structure",
+            "members": {
+                "scope": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scope addressed by the operation that returned this record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model provider this configuration applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageDestination": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where this record delivers retained data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stored destination and key. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time the stored record last changed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyStatus": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation state of the KMS key. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "s3BucketStatus": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation state of the bucket. Present only when storageDestination is customer_managed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The organization's stored retention storage configuration for the requested model provider.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a project.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/projects/{projectIdentifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetProjectDataRetentionStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetProjectDataRetentionStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetProjectDataRetentionStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a project's retention storage configuration for a model provider. Returns ResourceNotFoundException when the project does not exist, is not owned by the calling account, or has no configuration.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v1/projects/{projectIdentifier}/data_retention/storage/{modelProvider}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetProjectDataRetentionStorageRequest": {
+            "type": "structure",
+            "members": {
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of a named project owned by the calling account in this AWS Region. The default project is not supported; use the account-level retention storage operations instead.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model provider whose retention storage configuration is addressed by this request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the project and model provider whose retention storage configuration to retrieve.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetProjectDataRetentionStorageResponse": {
+            "type": "structure",
+            "members": {
+                "scope": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scope addressed by the operation that returned this record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model provider this configuration applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageDestination": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where this record delivers retained data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stored destination and key. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time the stored record last changed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyStatus": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation state of the KMS key. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "s3BucketStatus": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation state of the bucket. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "projectArn": {
+                    "target": "com.amazonaws.bedrock#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the configured project.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The project's stored retention storage configuration for the requested model provider.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetProjectRequest": {
+            "type": "structure",
+            "members": {
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id or ARN of the project to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the project to retrieve.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetProjectResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.bedrock#ProjectResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project ID. The account's default project uses <code>default</code>; a named project's generated ID starts with <code>proj_</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.bedrock#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrock#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's display name. Project names do not have to be unique.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's lifecycle status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the project was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "archivedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the project was archived.</p>"
+                    }
+                },
+                "dataRetention": {
+                    "target": "com.amazonaws.bedrock#ProjectDataRetention",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's data retention setting. A mode of <code>inherit</code> defers to the account setting or model default.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested project's details and data retention setting.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#GetPromptRouter": {
             "type": "operation",
             "input": {
@@ -13840,6 +14904,391 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetTrustedAccessProgram": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetTrustedAccessProgramRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetTrustedAccessProgramResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets trusted access program details and resolves participation for your account and its current organization. If you specify a project, Amazon Bedrock resolves participation for the project, including inheritance from the account and organization. Archived projects remain readable until they expire. Returns the same flat summary as a ListTrustedAccessPrograms item. An absent or invisible program returns ResourceNotFoundException.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/trusted-access-programs/{programIdentifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetTrustedAccessProgramAccountEnrollment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetTrustedAccessProgramAccountEnrollmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetTrustedAccessProgramAccountEnrollmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the calling account's stored enrollment setting for a trusted access program. The account is derived from the authenticated caller. Use GetTrustedAccessProgram to retrieve the resolved participation status, including organization inheritance. If no enrollment is stored, returns inherit without timestamps.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/trusted-access-programs/{programIdentifier}/account-enrollment"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetTrustedAccessProgramAccountEnrollmentRequest": {
+            "type": "structure",
+            "members": {
+                "programIdentifier": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the trusted access program.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the trusted access program whose saved account enrollment preference to retrieve.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetTrustedAccessProgramAccountEnrollmentResponse": {
+            "type": "structure",
+            "members": {
+                "optIn": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramOptIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stored preference at the addressed scope. A missing enrollment returns inherit without updatedAt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last change to the stored enrollment. Present whenever a row exists, including an explicitly stored inherit setting.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The account's stored enrollment. updatedAt is present whenever a row exists, including an explicit inherit setting.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetTrustedAccessProgramOrganizationEnrollment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetTrustedAccessProgramOrganizationEnrollmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetTrustedAccessProgramOrganizationEnrollmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the current organization's stored enrollment setting for a trusted access program. The organization and payer account are derived from the authenticated context. Requires operation permission and management-account or Bedrock-specific delegated-administrator authority. The setting can differ from the caller's resolved status returned by GetTrustedAccessProgram. If no enrollment is stored, returns inherit without timestamps.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/trusted-access-programs/{programIdentifier}/organization-enrollment"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetTrustedAccessProgramOrganizationEnrollmentRequest": {
+            "type": "structure",
+            "members": {
+                "programIdentifier": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the trusted access program.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the trusted access program whose saved organization enrollment preference to retrieve.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetTrustedAccessProgramOrganizationEnrollmentResponse": {
+            "type": "structure",
+            "members": {
+                "optIn": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramOptIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stored preference at the addressed scope. A missing enrollment returns inherit without updatedAt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last change to the stored enrollment. Present whenever a row exists, including an explicitly stored inherit setting.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The organization's stored enrollment. updatedAt is present whenever a row exists, including an explicit inherit setting.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetTrustedAccessProgramProjectEnrollment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetTrustedAccessProgramProjectEnrollmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetTrustedAccessProgramProjectEnrollmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a named project's stored enrollment setting for a trusted access program. The project must exist in this Region and be owned by the calling account. Archived projects remain readable until they expire. Use GetTrustedAccessProgram with projectIdentifier to retrieve resolved participation, including account and organization inheritance. If no enrollment is stored, returns inherit without timestamps.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/trusted-access-programs/{programIdentifier}/project-enrollment/{projectIdentifier}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetTrustedAccessProgramProjectEnrollmentRequest": {
+            "type": "structure",
+            "members": {
+                "programIdentifier": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the trusted access program.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id or ARN of the named Bedrock project. The default project is not supported; use GetTrustedAccessProgramAccountEnrollment for account-level enrollment. An ARN from another account, Region, or partition returns ValidationException. A project that does not exist in the calling account returns ResourceNotFoundException.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the trusted access program and named project whose saved enrollment preference to retrieve.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetTrustedAccessProgramProjectEnrollmentResponse": {
+            "type": "structure",
+            "members": {
+                "optIn": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramOptIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stored preference at the addressed scope. A missing enrollment returns inherit without updatedAt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last change to the stored enrollment. Present whenever a row exists, including an explicitly stored inherit setting.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The project's stored enrollment. updatedAt is present whenever a row exists, including an explicit inherit setting.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetTrustedAccessProgramRequest": {
+            "type": "structure",
+            "members": {
+                "programIdentifier": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the trusted access program.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of a named Bedrock project owned by the calling account in this Region. When omitted, resolves participation for the calling account, including participation inherited from its current organization. When specified, resolves participation for the project, including participation inherited from the account and its current organization. You cannot specify the default project. Omit this field to resolve its inherited participation. An ARN from another account, Region, or partition returns ValidationException. A project that does not exist in the calling account returns ResourceNotFoundException.</p>",
+                        "smithy.api#httpQuery": "projectIdentifier"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the trusted access program and optional named project for which to resolve participation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetTrustedAccessProgramResponse": {
+            "type": "structure",
+            "members": {
+                "programId": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the trusted access program.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Display name of the program.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the program and its effects on model access or data handling.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "providerName": {
+                    "target": "com.amazonaws.bedrock#BrandedName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the model provider offering the program.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detailsUrl": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>URL with program details, terms, and instructions for obtaining access.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enrollmentUrl": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider application intake URL. Omitted when the program has no customer-facing intake URL.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Participation status resolved for the account and optional project context.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Nonempty explanation for requestable or revoked status. Omitted for other statuses.</p>"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scope deciding the status. This can differ from the scope supplying the resolved opt-in preference and enrollment timestamps.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eligibilityScope": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scope supplying the applicable approval or most-specific revocation. Omitted when no approval or revocation applies.</p>"
+                    }
+                },
+                "resolvedFor": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessResolutionContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account and optional project context for which participation was resolved.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "optIn": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramOptIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resolved customer preference, preserved independently of eligibility, including while revoked.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last change to the enrollment supplying the resolved opt-in. Present for enabled or disabled, including while revoked; omitted for inherit.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The program's details and participation resolved for the calling account or requested project.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -18019,6 +19468,13 @@
                         "smithy.api#documentation": "<p>Return models that support the inference type that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html\">Provisioned Throughput</a> in the <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html\">Amazon Bedrock User Guide</a>.</p>",
                         "smithy.api#httpQuery": "byInferenceType"
                     }
+                },
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock uses the project's trusted access program participation when determining which models to return. The project must belong to your account in the same AWS Region and partition as the request.</p> <p>If you omit this parameter or specify <code>default</code>, Amazon Bedrock uses your account's participation, including organization inheritance. A project that doesn't exist or is archived causes a <code>ValidationException</code>.</p>",
+                        "smithy.api#httpQuery": "projectIdentifier"
+                    }
                 }
             },
             "traits": {
@@ -18305,6 +19761,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Filters for inference profiles that match the type you specify.</p> <ul> <li> <p> <code>SYSTEM_DEFINED</code> – The inference profile is defined by Amazon Bedrock. You can route inference requests across regions with these inference profiles.</p> </li> <li> <p> <code>APPLICATION</code> – The inference profile was created by a user. This type of inference profile can track metrics and costs when invoking the model in it. The inference profile may route requests to one or multiple regions.</p> </li> </ul>",
                         "smithy.api#httpQuery": "type"
+                    }
+                },
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock uses the project's trusted access program participation when determining which system-defined inference profiles to return. The project must belong to your account in the same AWS Region and partition as the request.</p> <p>If you omit this parameter or specify <code>default</code>, Amazon Bedrock uses your account's participation, including organization inheritance.</p> <p>A project that doesn't exist or is archived causes a <code>ValidationException</code>. Specifying a project other than <code>default</code> with <code>typeEquals</code> set to <code>APPLICATION</code> also causes a <code>ValidationException</code>. Omit <code>typeEquals</code> or set it to <code>SYSTEM_DEFINED</code> to list system-defined inference profiles for the project.</p>",
+                        "smithy.api#httpQuery": "projectIdentifier"
                     }
                 }
             },
@@ -18927,6 +20390,96 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#ListProjects": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#ListProjectsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#ListProjectsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the account's projects. Results are paginated: when the response includes <code>nextToken</code>, pass it in the next request to fetch the following page. Page size is 1-100, default 20. By default every project is returned regardless of status; set <code>statusFilter</code> to list only active or only archived projects.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/projects"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "projectSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListProjectsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Continuation token from a previous ListProjects response.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrock#ProjectMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of projects to return in one response, from 1 to 100. The default is 20.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "statusFilter": {
+                    "target": "com.amazonaws.bedrock#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only the projects in this lifecycle status. When absent, no status filtering is applied and every project is returned. New lifecycle states extend the <code>ProjectStatus</code> enum, and with it this filter, compatibly.</p>",
+                        "smithy.api#httpQuery": "statusFilter"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The page size, continuation token, and optional lifecycle status filter for listing projects.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListProjectsResponse": {
+            "type": "structure",
+            "members": {
+                "projectSummaries": {
+                    "target": "com.amazonaws.bedrock#ProjectSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The projects returned for this page, including their details and data retention settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Continuation token; present only when more results exist. Pass it in the next request to fetch the following page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A page of projects and a continuation token when more results are available.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#ListPromptRouters": {
             "type": "operation",
             "input": {
@@ -19204,6 +20757,99 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListTrustedAccessPrograms": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#ListTrustedAccessProgramsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#ListTrustedAccessProgramsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all trusted access programs visible to your account, ordered by program ID. Amazon Bedrock resolves participation for your account and its current organization. If you specify a project, Amazon Bedrock resolves participation for the project, including inheritance from the account and organization. Archived projects remain readable until they expire. Amazon Bedrock returns all visible programs in one response.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/trusted-access-programs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "programSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListTrustedAccessProgramsRequest": {
+            "type": "structure",
+            "members": {
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of a named Bedrock project owned by the calling account in this Region. When omitted, resolves participation for the calling account, including participation inherited from its current organization. When specified, resolves participation for the project, including participation inherited from the account and its current organization. You cannot specify the default project. Omit this field to resolve its inherited participation. An ARN from another account, Region, or partition returns ValidationException. A project that does not exist in the calling account returns ResourceNotFoundException.</p>",
+                        "smithy.api#httpQuery": "projectIdentifier"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.bedrock#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future pagination support. Currently ignored; the response includes all visible programs.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future pagination support. Omit this field.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The optional named project for which to resolve participation in visible trusted access programs.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#ListTrustedAccessProgramsResponse": {
+            "type": "structure",
+            "members": {
+                "programSummaries": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All visible programs with resolved participation, ordered by program ID. Always present, including an empty array when no programs are visible.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.bedrock#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future pagination support. Currently omitted because the response contains the complete list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The visible trusted access programs and their resolved participation statuses.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -20730,6 +22376,189 @@
                 "smithy.api#documentation": "<p>Describes the usage-based pricing term.</p>"
             }
         },
+        "com.amazonaws.bedrock#ProjectArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ARN of a project.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock:[0-9a-z-]{1,20}:[0-9]{12}:project/[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.bedrock#ProjectDataRetention": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.bedrock#DataRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's data retention mode. Use <code>inherit</code> to defer to the account setting or model default.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A project's data-retention setting: the project-scope mode, which may be <code>inherit</code> to defer to the account scope or the model default. Uses the same mode space as the account-level data-retention operations; the effective mode for a request resolves project, then account, then model default.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ProjectIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a project by bare id or by full project ARN. An ARN must belong to the caller's account and this Region. When sent in a request path, an ARN's slash must be percent-encoded.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9_-]+|arn:aws(-[^:]+)?:bedrock:[0-9a-z-]{1,20}:[0-9]{12}:project/[a-zA-Z0-9_-]+)$"
+            }
+        },
+        "com.amazonaws.bedrock#ProjectMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>The number of projects to request in one response. The value must be from 1 to 100.</p>",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.bedrock#ProjectName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The display name you choose for a project. Project names do not have to be unique. Include at least one non-whitespace character. The length limit counts Unicode characters, not bytes.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
+                },
+                "smithy.api#pattern": "\\S",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrock#ProjectResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrock#ArchiveProject"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#CreateProject"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#GetProject"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ListProjects"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#UpdateProject"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Projects provide workload boundaries within an AWS account and Region. These operations create, retrieve, list, update, and archive projects.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ProjectResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The id of a project: <code>default</code> for the account's default project, or a created project's generated id (<code>proj_</code> followed by its suffix).</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.bedrock#ProjectStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project has not been archived.</p>",
+                        "smithy.api#enumValue": "active"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project rejects new inference requests and mutations. Its stored data remains readable until it expires.</p>",
+                        "smithy.api#enumValue": "archived"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle status of a project. An <code>archived</code> project rejects new inference requests and mutations; its stored data remains readable until it expires. There is no delete: archive is the terminal state.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ProjectSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.bedrock#ProjectResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project ID. The account's default project uses <code>default</code>; a named project's generated ID starts with <code>proj_</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.bedrock#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrock#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's display name. Project names do not have to be unique.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's lifecycle status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the project was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "archivedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the project was archived.</p>"
+                    }
+                },
+                "dataRetention": {
+                    "target": "com.amazonaws.bedrock#ProjectDataRetention",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's data retention setting. A mode of <code>inherit</code> defers to the account setting or model default.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A project. The same field set every project-returning operation uses: create, get, update, and archive all return the full project, and list returns one per project.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#ProjectSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#ProjectSummary",
+                "traits": {
+                    "smithy.api#documentation": "<p>A project's details and data retention setting.</p>"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of projects and their details.</p>"
+            }
+        },
         "com.amazonaws.bedrock#PromptRouterArn": {
             "type": "string",
             "traits": {
@@ -21177,6 +23006,126 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#PutAccountDataRetentionStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#PutAccountDataRetentionStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#PutAccountDataRetentionStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or replaces the calling account's retention storage record for a model provider. Amazon Bedrock identifies the account from your authenticated request. Requires resolved trusted access eligibility for a storage-capable program of the provider at a covering scope; otherwise returns ConflictException. Writes replace the whole record; the last write wins.</p> <p>For <code>customer_managed</code> destinations, Amazon Bedrock validates the caller's and service's access to the bucket and key before saving the configuration. The bucket and key must be in the AWS Region where you register the configuration. Validation failures reject the write.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/v1/data_retention/storage/{modelProvider}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutAccountDataRetentionStorageRequest": {
+            "type": "structure",
+            "members": {
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model provider whose retention storage configuration is addressed by this request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageDestination": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where retained data is delivered for this scope. customer_managed requires storageConfiguration; amazon_managed forbids it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Destination bucket and key. Required when storageDestination is customer_managed; rejected with ValidationException when amazon_managed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The model provider and retention storage destination to configure for the calling account.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutAccountDataRetentionStorageResponse": {
+            "type": "structure",
+            "members": {
+                "scope": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scope addressed by the operation that returned this record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model provider this configuration applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageDestination": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where this record delivers retained data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stored destination and key. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time the stored record last changed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyStatus": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation state of the KMS key. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "s3BucketStatus": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation state of the bucket. Present only when storageDestination is customer_managed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The stored configuration after the write.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#PutEnforcedGuardrailConfiguration": {
             "type": "operation",
             "input": {
@@ -21316,6 +23265,264 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#PutOrganizationDataRetentionStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#PutOrganizationDataRetentionStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#PutOrganizationDataRetentionStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or replaces the organization's retention storage record for a model provider. The organization is resolved from the authenticated caller's management context; the caller must be the organization's management account or a delegated administrator. Requires resolved organization-scope trusted access eligibility for a storage-capable program of the provider; otherwise returns ConflictException. Writes replace the whole record; the last write wins.</p> <p>For <code>customer_managed</code> destinations, Amazon Bedrock validates the caller's and service's access to the bucket and key before saving the configuration. The bucket and key must be in the AWS Region where you register the configuration. Validation failures reject the write.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/v1/data_retention/organization-storage/{modelProvider}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutOrganizationDataRetentionStorageRequest": {
+            "type": "structure",
+            "members": {
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model provider whose retention storage configuration is addressed by this request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageDestination": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where retained data is delivered for this scope. customer_managed requires storageConfiguration; amazon_managed forbids it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Destination bucket and key. Required when storageDestination is customer_managed; rejected with ValidationException when amazon_managed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The model provider and retention storage destination to configure for the organization.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutOrganizationDataRetentionStorageResponse": {
+            "type": "structure",
+            "members": {
+                "scope": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scope addressed by the operation that returned this record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model provider this configuration applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageDestination": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where this record delivers retained data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stored destination and key. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time the stored record last changed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyStatus": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation state of the KMS key. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "s3BucketStatus": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation state of the bucket. Present only when storageDestination is customer_managed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The organization's stored retention storage configuration after the write.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutProjectDataRetentionStorage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#PutProjectDataRetentionStorageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#PutProjectDataRetentionStorageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or replaces a project's retention storage record for a model provider. The project must be active in this AWS Region and owned by the calling account. A missing or unowned project returns <code>ResourceNotFoundException</code>; an archived project returns <code>ValidationException</code>.</p> <p>Requires applicable project, account, or organization approval for a storage-capable trusted access program of the provider, with no applicable revocation. Otherwise, the operation returns <code>ConflictException</code>. Enrollment is not required to save the configuration.</p> <p>The request replaces the complete stored configuration. The last successful write wins.</p> <p>For <code>customer_managed</code> destinations, Amazon Bedrock validates the caller's and service's access to the bucket and key before saving the configuration. The bucket and key must be in the AWS Region where you register the configuration. Validation failures reject the write.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/v1/projects/{projectIdentifier}/data_retention/storage/{modelProvider}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutProjectDataRetentionStorageRequest": {
+            "type": "structure",
+            "members": {
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID or ARN of a named project owned by the calling account in this AWS Region. The default project is not supported; use the account-level retention storage operations instead.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model provider whose retention storage configuration is addressed by this request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageDestination": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where retained data is delivered for this scope. customer_managed requires storageConfiguration; amazon_managed forbids it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Destination bucket and key. Required when storageDestination is customer_managed; rejected with ValidationException when amazon_managed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The project, model provider, and retention storage destination to configure.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutProjectDataRetentionStorageResponse": {
+            "type": "structure",
+            "members": {
+                "scope": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scope addressed by the operation that returned this record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "modelProvider": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageModelProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Model provider this configuration applies to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageDestination": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Where this record delivers retained data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "storageConfiguration": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stored destination and key. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time the stored record last changed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyStatus": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation state of the KMS key. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "s3BucketStatus": {
+                    "target": "com.amazonaws.bedrock#DataRetentionStorageResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Validation state of the bucket. Present only when storageDestination is customer_managed.</p>"
+                    }
+                },
+                "projectArn": {
+                    "target": "com.amazonaws.bedrock#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the configured project.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The project's stored retention storage configuration after the write.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#PutResourcePolicy": {
             "type": "operation",
             "input": {
@@ -21388,6 +23595,269 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutTrustedAccessProgramAccountEnrollment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#PutTrustedAccessProgramAccountEnrollmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#PutTrustedAccessProgramAccountEnrollmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets your account's enrollment preference for a trusted access program. Amazon Bedrock identifies the account from your authenticated request. To enable enrollment, your account needs applicable approval and no applicable revocation, including when you repeat an enabled setting. Otherwise, Amazon Bedrock returns <code>ConflictException</code> and preserves the stored setting. With the required permissions, you can set <code>disabled</code> or <code>inherit</code> even if your account is ineligible or its eligibility is revoked.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/trusted-access-programs/{programIdentifier}/account-enrollment"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutTrustedAccessProgramAccountEnrollmentRequest": {
+            "type": "structure",
+            "members": {
+                "programIdentifier": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the trusted access program.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "optIn": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramOptIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrollment preference to store. A transition to enabled accepts the program's terms. Changing the preference records a new updatedAt. Repeating the same stored preference preserves updatedAt.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The trusted access program and enrollment preference to save for the calling account.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutTrustedAccessProgramAccountEnrollmentResponse": {
+            "type": "structure",
+            "members": {
+                "optIn": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramOptIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stored preference at the addressed scope. A missing enrollment returns inherit without updatedAt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the stored enrollment setting last changed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The account's resulting stored enrollment setting. An initial inherit write creates a stored setting with updatedAt.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutTrustedAccessProgramOrganizationEnrollment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#PutTrustedAccessProgramOrganizationEnrollmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#PutTrustedAccessProgramOrganizationEnrollmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the current organization's enrollment preference for a trusted access program. The organization and payer account are derived from the authenticated context. Every write requires operation permission and management-account or Bedrock-specific delegated-administrator authority. Enabling requires approval and no revocation for the organization, including when repeating an enabled setting; otherwise returns ConflictException and preserves the stored setting. Account approval alone is insufficient. If you have the required permissions, you can set the enrollment preference to <code>disabled</code> or <code>inherit</code> even if your organization is ineligible or its eligibility is revoked.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/trusted-access-programs/{programIdentifier}/organization-enrollment"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutTrustedAccessProgramOrganizationEnrollmentRequest": {
+            "type": "structure",
+            "members": {
+                "programIdentifier": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the trusted access program.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "optIn": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramOptIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrollment preference to store for the organization. A transition to enabled accepts the program's terms. Changing the preference records a new updatedAt. Repeating the same stored preference preserves updatedAt.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The trusted access program and enrollment preference to save for the organization.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutTrustedAccessProgramOrganizationEnrollmentResponse": {
+            "type": "structure",
+            "members": {
+                "optIn": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramOptIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stored preference at the addressed scope. A missing enrollment returns inherit without updatedAt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the stored enrollment setting last changed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The organization's resulting stored enrollment setting. An initial inherit write creates a stored setting with updatedAt.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutTrustedAccessProgramProjectEnrollment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#PutTrustedAccessProgramProjectEnrollmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#PutTrustedAccessProgramProjectEnrollmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets a named project's enrollment preference for a trusted access program. The project must be active in this Region and owned by the calling account. Enabling requires applicable project, account, or organization approval and no applicable revocation, including when repeating an enabled setting; otherwise returns ConflictException and preserves the stored setting. Authorized disable and inherit writes are allowed while ineligible or revoked. Archived projects reject all writes with ValidationException.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/trusted-access-programs/{programIdentifier}/project-enrollment/{projectIdentifier}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutTrustedAccessProgramProjectEnrollmentRequest": {
+            "type": "structure",
+            "members": {
+                "programIdentifier": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the trusted access program.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id or ARN of the named Bedrock project. The default project is not supported; use PutTrustedAccessProgramAccountEnrollment for account-level enrollment. An ARN from another account, Region, or partition returns ValidationException. A project that does not exist in the calling account returns ResourceNotFoundException.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "optIn": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramOptIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrollment preference to store. A transition to enabled accepts the program's terms. Changing the preference records a new updatedAt. Repeating the same stored preference preserves updatedAt.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The trusted access program, named project, and enrollment preference to save.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutTrustedAccessProgramProjectEnrollmentResponse": {
+            "type": "structure",
+            "members": {
+                "optIn": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramOptIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stored preference at the addressed scope. A missing enrollment returns inherit without updatedAt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the stored enrollment setting last changed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The project's resulting stored enrollment setting. An initial inherit write creates a stored setting with updatedAt.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -22695,6 +25165,215 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrock#StartTrustedAccessProgramAccountApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#StartTrustedAccessProgramAccountApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#StartTrustedAccessProgramAccountApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Prepare a provider application handoff for the calling account. This does not submit an application, grant eligibility, or change enrollment. Programs without self-service applications return ValidationException with guidance to contact the AWS account team. Repeated calls can issue fresh tokens. Successful responses use Cache-Control: no-store.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/trusted-access-programs/{programIdentifier}/account-application"
+                }
+            }
+        },
+        "com.amazonaws.bedrock#StartTrustedAccessProgramAccountApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "programIdentifier": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the trusted access program.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the trusted access program for which to prepare an account application handoff.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#StartTrustedAccessProgramAccountApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "result": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramApplicationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider handoff for the calling account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information needed to continue the account's application with the provider.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#StartTrustedAccessProgramOrganizationApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#StartTrustedAccessProgramOrganizationApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#StartTrustedAccessProgramOrganizationApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Prepare a provider application handoff for the calling account's current organization. Requires operation permission and management-account or Bedrock-specific delegated-administrator authority. This does not submit an application, grant eligibility, or change enrollment. Programs without self-service applications return ValidationException with guidance to contact the AWS account team. Repeated calls can issue fresh tokens. Successful responses use Cache-Control: no-store.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/trusted-access-programs/{programIdentifier}/organization-application"
+                }
+            }
+        },
+        "com.amazonaws.bedrock#StartTrustedAccessProgramOrganizationApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "programIdentifier": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the trusted access program.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the trusted access program for which to prepare an organization application handoff.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#StartTrustedAccessProgramOrganizationApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "result": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramApplicationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider handoff for the calling account's current organization.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information needed to continue the organization's application with the provider.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#StartTrustedAccessProgramProjectApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#StartTrustedAccessProgramProjectApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#StartTrustedAccessProgramProjectApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Prepare a provider application handoff for a named project. The project must be active in this Region and owned by the calling account. Archived projects return ValidationException. This does not submit an application, grant eligibility, or change enrollment. Programs without self-service applications return ValidationException with guidance to contact the AWS account team. Repeated calls can issue fresh tokens. Successful responses use Cache-Control: no-store.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/trusted-access-programs/{programIdentifier}/project-application/{projectIdentifier}"
+                }
+            }
+        },
+        "com.amazonaws.bedrock#StartTrustedAccessProgramProjectApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "programIdentifier": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the trusted access program.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id or ARN of the named Bedrock project. The default project is not supported; use StartTrustedAccessProgramAccountApplication for an account-level application. An ARN from another account, Region, or partition returns ValidationException. A project that does not exist in the calling account returns ResourceNotFoundException.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the trusted access program and named project for which to prepare an application handoff.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#StartTrustedAccessProgramProjectApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "result": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramApplicationResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider handoff for the named project.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information needed to continue the project's application with the provider.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#Status": {
             "type": "enum",
             "members": {
@@ -23172,7 +25851,7 @@
                     "min": 20,
                     "max": 1011
                 },
-                "smithy.api#pattern": "(^[a-zA-Z0-9][a-zA-Z0-9\\-]*$)|(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model/(imported)/[a-z0-9]{12}$)|(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:([0-9]{12}|)((:(fine-tuning-job|model-customization-job|custom-model)/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12})$)|(:guardrail/[a-z0-9]+$)|(:automated-reasoning-policy/[a-zA-Z0-9]+(:[a-zA-Z0-9]+)?$)|(:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+$)|(:(provisioned-model|model-invocation-job|model-evaluation-job|evaluation-job|model-import-job|imported-model|async-invoke|provisioned-model-v2|provisioned-model-reservation|prompt-router|custom-model-deployment)/[a-z0-9]{12}$)))"
+                "smithy.api#pattern": "(^[a-zA-Z0-9][a-zA-Z0-9\\-]*$)|(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model/(imported)/[a-z0-9]{12}$)|(^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:([0-9]{12}|)((:(fine-tuning-job|model-customization-job|custom-model)/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12})$)|(:guardrail/[a-z0-9]+$)|(:automated-reasoning-policy/[a-zA-Z0-9]+(:[a-zA-Z0-9]+)?$)|(:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+$)|(:project/(proj_[a-z2-7]{20}|default)$)|(:(provisioned-model|model-invocation-job|model-evaluation-job|evaluation-job|model-import-job|imported-model|async-invoke|provisioned-model-v2|provisioned-model-reservation|prompt-router|custom-model-deployment)/[a-z0-9]{12}$)))"
             }
         },
         "com.amazonaws.bedrock#TaggingResource": {
@@ -23424,6 +26103,378 @@
                     "target": "com.amazonaws.bedrock#StopModelCustomizationJob"
                 }
             ]
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramApplicationResult": {
+            "type": "union",
+            "members": {
+                "providerHandoff": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramProviderHandoff",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information for continuing the application with the provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Result of preparing an application. A provider handoff does not submit an application, grant eligibility, or change enrollment. Clients must tolerate unknown union members.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramApplicationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Opaque application token to pass unchanged to the provider. Do not log this token.</p>",
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Provider-prefixed identifier of a trusted access program. This is the final component of the program ARN.</p>",
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9]+-[a-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A trusted access program ID or its system-owned global ARN, arn:&lt;partition&gt;:bedrock::aws:trusted-access-program/&lt;id&gt;. The program ID must contain 3 to 64 characters. An ARN must use this request's AWS partition.</p>",
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 115
+                },
+                "smithy.api#pattern": "^([a-z0-9]+-[a-z0-9-]+|arn:aws(-[^:]+)?:bedrock::aws:trusted-access-program/[a-z0-9]+-[a-z0-9-]+)$"
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Display name of a trusted access program.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramOptIn": {
+            "type": "enum",
+            "members": {
+                "INHERIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defer to a broader scope without accepting or declining the program at this scope.</p>",
+                        "smithy.api#enumValue": "inherit"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Accept the program's terms and opt in at this scope.</p>",
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Explicitly opt out at this scope.</p>",
+                        "smithy.api#enumValue": "disabled"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Customer preference for a trusted access program. Clients must tolerate unknown values.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramProviderHandoff": {
+            "type": "structure",
+            "members": {
+                "enrollmentUrl": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider intake URL. When present, open it and paste the complete application token into the provider's token field. Omitted when the provider receives the application token through a separate integration.</p>"
+                    }
+                },
+                "applicationToken": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramApplicationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Opaque token binding the application to the authenticated customer, requested program, and scope.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "applicationTokenExpiresAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Deadline for the provider to accept the application context. Start another application handoff if the token expires before acceptance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information needed to continue an application with the provider.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrock#GetTrustedAccessProgram"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#GetTrustedAccessProgramAccountEnrollment"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#GetTrustedAccessProgramOrganizationEnrollment"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#GetTrustedAccessProgramProjectEnrollment"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ListTrustedAccessPrograms"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#PutTrustedAccessProgramAccountEnrollment"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#PutTrustedAccessProgramOrganizationEnrollment"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#PutTrustedAccessProgramProjectEnrollment"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#StartTrustedAccessProgramAccountApplication"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#StartTrustedAccessProgramOrganizationApplication"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#StartTrustedAccessProgramProjectApplication"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Trusted access programs and their project, account, and organization enrollment settings. Account and organization settings are shared across AWS Regions within a partition and are eventually consistent. Project settings identify one named project in its owning account and Region.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramScope": {
+            "type": "enum",
+            "members": {
+                "ORGANIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calling account's current organization.</p>",
+                        "smithy.api#enumValue": "organization"
+                    }
+                },
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The calling AWS account.</p>",
+                        "smithy.api#enumValue": "account"
+                    }
+                },
+                "PROJECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The named project addressed by the request.</p>",
+                        "smithy.api#enumValue": "project"
+                    }
+                },
+                "PROGRAM_DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Program fallback when no stored record decides the status. This is not a writable scope.</p>",
+                        "smithy.api#enumValue": "program_default"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Scope supplying a trusted access decision. Clients must tolerate unknown values.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramStatus": {
+            "type": "enum",
+            "members": {
+                "REQUESTABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>No applicable approval or revocation exists. The status reason explains how to request access.</p>",
+                        "smithy.api#enumValue": "requestable"
+                    }
+                },
+                "ELIGIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Approved with no resolved enabled or disabled preference, or qualified by a read-only automatic eligibility preview.</p>",
+                        "smithy.api#enumValue": "eligible"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Approved and opted in for the evaluated context.</p>",
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Approved and explicitly opted out at the deciding enrollment scope.</p>",
+                        "smithy.api#enumValue": "disabled"
+                    }
+                },
+                "REVOKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An applicable revocation removes eligibility. The saved opt-in preference is preserved.</p>",
+                        "smithy.api#enumValue": "revoked"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Resolved participation status for a trusted access program. Clients must tolerate unknown values.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#TrustedAccessProgramSummary",
+                "traits": {
+                    "smithy.api#documentation": "<p>A visible trusted access program and its resolved participation status.</p>"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Visible programs, ordered by program ID. An empty array is returned when no programs are visible.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramSummary": {
+            "type": "structure",
+            "members": {
+                "programId": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the trusted access program.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Display name of the program.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the program and its effects on model access or data handling.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "providerName": {
+                    "target": "com.amazonaws.bedrock#BrandedName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the model provider offering the program.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detailsUrl": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>URL with program details, terms, and instructions for obtaining access.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enrollmentUrl": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider application intake URL. Omitted when the program has no customer-facing intake URL.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Participation status resolved for the account and optional project context.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Nonempty explanation for requestable or revoked status. Omitted for other statuses.</p>"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scope deciding the status. This can differ from the scope supplying the resolved opt-in preference and enrollment timestamps.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eligibilityScope": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Scope supplying the applicable approval or most-specific revocation. Omitted when no approval or revocation applies.</p>"
+                    }
+                },
+                "resolvedFor": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessResolutionContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account and optional project context for which participation was resolved.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "optIn": {
+                    "target": "com.amazonaws.bedrock#TrustedAccessProgramOptIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resolved customer preference, preserved independently of eligibility, including while revoked.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Last change to the enrollment supplying the resolved opt-in. Present for enabled or disabled, including while revoked; omitted for inherit.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Program details and participation resolved for the calling account and optional named project.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessProgramUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>HTTPS URL for trusted access program details or provider application intake.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^https://[^\\s]+$"
+            }
+        },
+        "com.amazonaws.bedrock#TrustedAccessResolutionContext": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.bedrock#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS account for which the program status was resolved, including applicable organization settings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "projectArn": {
+                    "target": "com.amazonaws.bedrock#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The canonical ARN of the authorized named project for which participation was resolved. Omitted when the request has no project context.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Account and optional project context evaluated when resolving a trusted access program's status.</p>"
+            }
         },
         "com.amazonaws.bedrock#UntagResource": {
             "type": "operation",
@@ -24171,6 +27222,129 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrock#UpdateProject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#UpdateProjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#UpdateProjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates one mutable project field per call: exactly one of <code>name</code> or <code>dataRetention</code> must be set. The default project and archived projects cannot be updated.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/projects/{projectIdentifier}"
+                }
+            }
+        },
+        "com.amazonaws.bedrock#UpdateProjectRequest": {
+            "type": "structure",
+            "members": {
+                "projectIdentifier": {
+                    "target": "com.amazonaws.bedrock#ProjectIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id or ARN of the project to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrock#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's new display name. Specify this field only when <code>dataRetention</code> is omitted. Project names do not have to be unique.</p>"
+                    }
+                },
+                "dataRetention": {
+                    "target": "com.amazonaws.bedrock#ProjectDataRetention",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's new data-retention mode. Must be set on its own.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies the project and the field to update. Specify exactly one of <code>name</code> or <code>dataRetention</code>.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#UpdateProjectResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.bedrock#ProjectResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project ID. The account's default project uses <code>default</code>; a named project's generated ID starts with <code>proj_</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.bedrock#ProjectArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the project.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.bedrock#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's display name. Project names do not have to be unique.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrock#ProjectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's lifecycle status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the project was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "archivedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the project was archived.</p>"
+                    }
+                },
+                "dataRetention": {
+                    "target": "com.amazonaws.bedrock#ProjectDataRetention",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The project's data retention setting. A mode of <code>inherit</code> defers to the account setting or model default.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The project after the update.</p>",
                 "smithy.api#output": {}
             }
         },

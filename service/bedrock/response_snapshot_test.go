@@ -108,6 +108,37 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_ArchiveProject(t *testing.T) {
+	want := &ArchiveProjectOutput{
+		Id:         ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.ProjectStatus("active"),
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ArchiveProject.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ArchiveProject(context.Background(), &ArchiveProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ArchiveProject.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_BatchDeleteAdvancedPromptOptimizationJob(t *testing.T) {
 	want := &BatchDeleteAdvancedPromptOptimizationJobOutput{
 		Errors: []types.BatchDeleteAdvancedPromptOptimizationJobError{
@@ -1354,6 +1385,50 @@ func TestCheckResponseSnapshot_CreateModelInvocationJob(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
+	want := &CreateProjectOutput{
+		Id:         ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.ProjectStatus("active"),
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateProject.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateProject.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreatePromptRouter(t *testing.T) {
 	want := &CreatePromptRouterOutput{
 		PromptRouterArn: ptr.String("__PromptRouterArn__"),
@@ -1437,6 +1512,27 @@ func TestCheckResponseSnapshot_CreateProvisionedModelThroughput(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateProvisionedModelThroughput.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteAccountDataRetentionStorage(t *testing.T) {
+	want := &DeleteAccountDataRetentionStorageOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteAccountDataRetentionStorage.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteAccountDataRetentionStorage(context.Background(), &DeleteAccountDataRetentionStorageInput{
+		ModelProvider: types.DataRetentionStorageModelProvider("anthropic"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteAccountDataRetentionStorage.response", err)
 	}
 }
 
@@ -1696,6 +1792,49 @@ func TestCheckResponseSnapshot_DeleteModelInvocationLoggingConfiguration(t *test
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteOrganizationDataRetentionStorage(t *testing.T) {
+	want := &DeleteOrganizationDataRetentionStorageOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteOrganizationDataRetentionStorage.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteOrganizationDataRetentionStorage(context.Background(), &DeleteOrganizationDataRetentionStorageInput{
+		ModelProvider: types.DataRetentionStorageModelProvider("anthropic"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteOrganizationDataRetentionStorage.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteProjectDataRetentionStorage(t *testing.T) {
+	want := &DeleteProjectDataRetentionStorageOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteProjectDataRetentionStorage.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteProjectDataRetentionStorage(context.Background(), &DeleteProjectDataRetentionStorageInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		ModelProvider:     types.DataRetentionStorageModelProvider("anthropic"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteProjectDataRetentionStorage.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeletePromptRouter(t *testing.T) {
 	want := &DeletePromptRouterOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeletePromptRouter.response")
@@ -1878,6 +2017,39 @@ func TestCheckResponseSnapshot_GetAccountDataRetention(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetAccountDataRetention.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetAccountDataRetentionStorage(t *testing.T) {
+	want := &GetAccountDataRetentionStorageOutput{
+		Scope:              types.DataRetentionStorageScope("account"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KmsKeyStatus:   types.DataRetentionStorageResourceStatus("pending"),
+		S3BucketStatus: types.DataRetentionStorageResourceStatus("pending"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAccountDataRetentionStorage.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAccountDataRetentionStorage(context.Background(), &GetAccountDataRetentionStorageInput{
+		ModelProvider: types.DataRetentionStorageModelProvider("anthropic"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAccountDataRetentionStorage.response", err)
 	}
 }
 
@@ -2758,7 +2930,8 @@ func TestCheckResponseSnapshot_GetFoundationModel(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetFoundationModel(context.Background(), &GetFoundationModelInput{
-		ModelIdentifier: ptr.String("__ModelIdentifier__"),
+		ModelIdentifier:   ptr.String("__ModelIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3088,6 +3261,7 @@ func TestCheckResponseSnapshot_GetInferenceProfile(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetInferenceProfile(context.Background(), &GetInferenceProfileInput{
 		InferenceProfileIdentifier: ptr.String("__InferenceProfileIdentifier__"),
+		ProjectIdentifier:          ptr.String("__ProjectIdentifier__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3451,6 +3625,105 @@ func TestCheckResponseSnapshot_GetModelInvocationLoggingConfiguration(t *testing
 	}
 }
 
+func TestCheckResponseSnapshot_GetOrganizationDataRetentionStorage(t *testing.T) {
+	want := &GetOrganizationDataRetentionStorageOutput{
+		Scope:              types.DataRetentionStorageScope("account"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KmsKeyStatus:   types.DataRetentionStorageResourceStatus("pending"),
+		S3BucketStatus: types.DataRetentionStorageResourceStatus("pending"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetOrganizationDataRetentionStorage.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetOrganizationDataRetentionStorage(context.Background(), &GetOrganizationDataRetentionStorageInput{
+		ModelProvider: types.DataRetentionStorageModelProvider("anthropic"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetOrganizationDataRetentionStorage.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetProject(t *testing.T) {
+	want := &GetProjectOutput{
+		Id:         ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.ProjectStatus("active"),
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetProject.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetProject(context.Background(), &GetProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetProject.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetProjectDataRetentionStorage(t *testing.T) {
+	want := &GetProjectDataRetentionStorageOutput{
+		Scope:              types.DataRetentionStorageScope("account"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KmsKeyStatus:   types.DataRetentionStorageResourceStatus("pending"),
+		S3BucketStatus: types.DataRetentionStorageResourceStatus("pending"),
+		ProjectArn:     ptr.String("__ProjectArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetProjectDataRetentionStorage.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetProjectDataRetentionStorage(context.Background(), &GetProjectDataRetentionStorageInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		ModelProvider:     types.DataRetentionStorageModelProvider("anthropic"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetProjectDataRetentionStorage.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetPromptRouter(t *testing.T) {
 	want := &GetPromptRouterOutput{
 		PromptRouterName: ptr.String("__PromptRouterName__"),
@@ -3549,6 +3822,118 @@ func TestCheckResponseSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetResourcePolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetTrustedAccessProgram(t *testing.T) {
+	want := &GetTrustedAccessProgramOutput{
+		ProgramId:        ptr.String("__ProgramId__"),
+		Name:             ptr.String("__Name__"),
+		Description:      ptr.String("__Description__"),
+		ProviderName:     ptr.String("__ProviderName__"),
+		DetailsUrl:       ptr.String("__DetailsUrl__"),
+		EnrollmentUrl:    ptr.String("__EnrollmentUrl__"),
+		Status:           types.TrustedAccessProgramStatus("requestable"),
+		StatusReason:     ptr.String("__StatusReason__"),
+		Source:           types.TrustedAccessProgramScope("organization"),
+		EligibilityScope: types.TrustedAccessProgramScope("organization"),
+		ResolvedFor: &types.TrustedAccessResolutionContext{
+			AccountId:  ptr.String("__AccountId__"),
+			ProjectArn: ptr.String("__ProjectArn__"),
+		},
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTrustedAccessProgram.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTrustedAccessProgram(context.Background(), &GetTrustedAccessProgramInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTrustedAccessProgram.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetTrustedAccessProgramAccountEnrollment(t *testing.T) {
+	want := &GetTrustedAccessProgramAccountEnrollmentOutput{
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTrustedAccessProgramAccountEnrollment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTrustedAccessProgramAccountEnrollment(context.Background(), &GetTrustedAccessProgramAccountEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTrustedAccessProgramAccountEnrollment.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetTrustedAccessProgramOrganizationEnrollment(t *testing.T) {
+	want := &GetTrustedAccessProgramOrganizationEnrollmentOutput{
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTrustedAccessProgramOrganizationEnrollment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTrustedAccessProgramOrganizationEnrollment(context.Background(), &GetTrustedAccessProgramOrganizationEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTrustedAccessProgramOrganizationEnrollment.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetTrustedAccessProgramProjectEnrollment(t *testing.T) {
+	want := &GetTrustedAccessProgramProjectEnrollmentOutput{
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetTrustedAccessProgramProjectEnrollment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetTrustedAccessProgramProjectEnrollment(context.Background(), &GetTrustedAccessProgramProjectEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetTrustedAccessProgramProjectEnrollment.response", err)
 	}
 }
 
@@ -4646,6 +5031,7 @@ func TestCheckResponseSnapshot_ListFoundationModels(t *testing.T) {
 		ByCustomizationType: types.ModelCustomization("FINE_TUNING"),
 		ByOutputModality:    types.ModelModality("TEXT"),
 		ByInferenceType:     types.InferenceType("ON_DEMAND"),
+		ProjectIdentifier:   ptr.String("__ProjectIdentifier__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4806,9 +5192,10 @@ func TestCheckResponseSnapshot_ListInferenceProfiles(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListInferenceProfiles(context.Background(), &ListInferenceProfilesInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
-		TypeEquals: types.InferenceProfileType("SYSTEM_DEFINED"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		TypeEquals:        types.InferenceProfileType("SYSTEM_DEFINED"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5199,6 +5586,55 @@ func TestCheckResponseSnapshot_ListModelInvocationJobs(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListProjects(t *testing.T) {
+	want := &ListProjectsOutput{
+		ProjectSummaries: []types.ProjectSummary{
+			{
+				Id:         ptr.String("__Id__"),
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				Status:     types.ProjectStatus("active"),
+				CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ArchivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DataRetention: &types.ProjectDataRetention{
+					Mode: types.DataRetentionMode("default"),
+				},
+			},
+			{
+				Id:         ptr.String("__Id__"),
+				Arn:        ptr.String("__Arn__"),
+				Name:       ptr.String("__Name__"),
+				Status:     types.ProjectStatus("active"),
+				CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ArchivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DataRetention: &types.ProjectDataRetention{
+					Mode: types.DataRetentionMode("default"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListProjects.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListProjects(context.Background(), &ListProjectsInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		StatusFilter: types.ProjectStatus("active"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListProjects.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListPromptRouters(t *testing.T) {
 	want := &ListPromptRoutersOutput{
 		PromptRouterSummaries: []types.PromptRouterSummary{
@@ -5365,6 +5801,69 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListTrustedAccessPrograms(t *testing.T) {
+	want := &ListTrustedAccessProgramsOutput{
+		ProgramSummaries: []types.TrustedAccessProgramSummary{
+			{
+				ProgramId:        ptr.String("__ProgramId__"),
+				Name:             ptr.String("__Name__"),
+				Description:      ptr.String("__Description__"),
+				ProviderName:     ptr.String("__ProviderName__"),
+				DetailsUrl:       ptr.String("__DetailsUrl__"),
+				EnrollmentUrl:    ptr.String("__EnrollmentUrl__"),
+				Status:           types.TrustedAccessProgramStatus("requestable"),
+				StatusReason:     ptr.String("__StatusReason__"),
+				Source:           types.TrustedAccessProgramScope("organization"),
+				EligibilityScope: types.TrustedAccessProgramScope("organization"),
+				ResolvedFor: &types.TrustedAccessResolutionContext{
+					AccountId:  ptr.String("__AccountId__"),
+					ProjectArn: ptr.String("__ProjectArn__"),
+				},
+				OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ProgramId:        ptr.String("__ProgramId__"),
+				Name:             ptr.String("__Name__"),
+				Description:      ptr.String("__Description__"),
+				ProviderName:     ptr.String("__ProviderName__"),
+				DetailsUrl:       ptr.String("__DetailsUrl__"),
+				EnrollmentUrl:    ptr.String("__EnrollmentUrl__"),
+				Status:           types.TrustedAccessProgramStatus("requestable"),
+				StatusReason:     ptr.String("__StatusReason__"),
+				Source:           types.TrustedAccessProgramScope("organization"),
+				EligibilityScope: types.TrustedAccessProgramScope("organization"),
+				ResolvedFor: &types.TrustedAccessResolutionContext{
+					AccountId:  ptr.String("__AccountId__"),
+					ProjectArn: ptr.String("__ProjectArn__"),
+				},
+				OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTrustedAccessPrograms.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTrustedAccessPrograms(context.Background(), &ListTrustedAccessProgramsInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTrustedAccessPrograms.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_PutAccountDataRetention(t *testing.T) {
 	want := &PutAccountDataRetentionOutput{
 		Mode:      types.DataRetentionMode("default"),
@@ -5386,6 +5885,45 @@ func TestCheckResponseSnapshot_PutAccountDataRetention(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutAccountDataRetention.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutAccountDataRetentionStorage(t *testing.T) {
+	want := &PutAccountDataRetentionStorageOutput{
+		Scope:              types.DataRetentionStorageScope("account"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KmsKeyStatus:   types.DataRetentionStorageResourceStatus("pending"),
+		S3BucketStatus: types.DataRetentionStorageResourceStatus("pending"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutAccountDataRetentionStorage.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutAccountDataRetentionStorage(context.Background(), &PutAccountDataRetentionStorageInput{
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutAccountDataRetentionStorage.response", err)
 	}
 }
 
@@ -5471,6 +6009,86 @@ func TestCheckResponseSnapshot_PutModelInvocationLoggingConfiguration(t *testing
 	}
 }
 
+func TestCheckResponseSnapshot_PutOrganizationDataRetentionStorage(t *testing.T) {
+	want := &PutOrganizationDataRetentionStorageOutput{
+		Scope:              types.DataRetentionStorageScope("account"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KmsKeyStatus:   types.DataRetentionStorageResourceStatus("pending"),
+		S3BucketStatus: types.DataRetentionStorageResourceStatus("pending"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutOrganizationDataRetentionStorage.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutOrganizationDataRetentionStorage(context.Background(), &PutOrganizationDataRetentionStorageInput{
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutOrganizationDataRetentionStorage.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutProjectDataRetentionStorage(t *testing.T) {
+	want := &PutProjectDataRetentionStorageOutput{
+		Scope:              types.DataRetentionStorageScope("account"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		KmsKeyStatus:   types.DataRetentionStorageResourceStatus("pending"),
+		S3BucketStatus: types.DataRetentionStorageResourceStatus("pending"),
+		ProjectArn:     ptr.String("__ProjectArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutProjectDataRetentionStorage.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutProjectDataRetentionStorage(context.Background(), &PutProjectDataRetentionStorageInput{
+		ProjectIdentifier:  ptr.String("__ProjectIdentifier__"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutProjectDataRetentionStorage.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	want := &PutResourcePolicyOutput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -5492,6 +6110,82 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutResourcePolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutTrustedAccessProgramAccountEnrollment(t *testing.T) {
+	want := &PutTrustedAccessProgramAccountEnrollmentOutput{
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutTrustedAccessProgramAccountEnrollment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutTrustedAccessProgramAccountEnrollment(context.Background(), &PutTrustedAccessProgramAccountEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		OptIn:             types.TrustedAccessProgramOptIn("inherit"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutTrustedAccessProgramAccountEnrollment.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutTrustedAccessProgramOrganizationEnrollment(t *testing.T) {
+	want := &PutTrustedAccessProgramOrganizationEnrollmentOutput{
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutTrustedAccessProgramOrganizationEnrollment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutTrustedAccessProgramOrganizationEnrollment(context.Background(), &PutTrustedAccessProgramOrganizationEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		OptIn:             types.TrustedAccessProgramOptIn("inherit"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutTrustedAccessProgramOrganizationEnrollment.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutTrustedAccessProgramProjectEnrollment(t *testing.T) {
+	want := &PutTrustedAccessProgramProjectEnrollmentOutput{
+		OptIn:     types.TrustedAccessProgramOptIn("inherit"),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutTrustedAccessProgramProjectEnrollment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutTrustedAccessProgramProjectEnrollment(context.Background(), &PutTrustedAccessProgramProjectEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		OptIn:             types.TrustedAccessProgramOptIn("inherit"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutTrustedAccessProgramProjectEnrollment.response", err)
 	}
 }
 
@@ -5694,6 +6388,94 @@ func TestCheckResponseSnapshot_StartAutomatedReasoningPolicyTestWorkflow(t *test
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StartAutomatedReasoningPolicyTestWorkflow.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartTrustedAccessProgramAccountApplication(t *testing.T) {
+	want := &StartTrustedAccessProgramAccountApplicationOutput{
+		Result: &types.TrustedAccessProgramApplicationResultMemberProviderHandoff{
+			Value: types.TrustedAccessProgramProviderHandoff{
+				EnrollmentUrl:             ptr.String("__EnrollmentUrl__"),
+				ApplicationToken:          ptr.String("__ApplicationToken__"),
+				ApplicationTokenExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartTrustedAccessProgramAccountApplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartTrustedAccessProgramAccountApplication(context.Background(), &StartTrustedAccessProgramAccountApplicationInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartTrustedAccessProgramAccountApplication.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartTrustedAccessProgramOrganizationApplication(t *testing.T) {
+	want := &StartTrustedAccessProgramOrganizationApplicationOutput{
+		Result: &types.TrustedAccessProgramApplicationResultMemberProviderHandoff{
+			Value: types.TrustedAccessProgramProviderHandoff{
+				EnrollmentUrl:             ptr.String("__EnrollmentUrl__"),
+				ApplicationToken:          ptr.String("__ApplicationToken__"),
+				ApplicationTokenExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartTrustedAccessProgramOrganizationApplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartTrustedAccessProgramOrganizationApplication(context.Background(), &StartTrustedAccessProgramOrganizationApplicationInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartTrustedAccessProgramOrganizationApplication.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartTrustedAccessProgramProjectApplication(t *testing.T) {
+	want := &StartTrustedAccessProgramProjectApplicationOutput{
+		Result: &types.TrustedAccessProgramApplicationResultMemberProviderHandoff{
+			Value: types.TrustedAccessProgramProviderHandoff{
+				EnrollmentUrl:             ptr.String("__EnrollmentUrl__"),
+				ApplicationToken:          ptr.String("__ApplicationToken__"),
+				ApplicationTokenExpiresAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartTrustedAccessProgramProjectApplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartTrustedAccessProgramProjectApplication(context.Background(), &StartTrustedAccessProgramProjectApplicationInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartTrustedAccessProgramProjectApplication.response", err)
 	}
 }
 
@@ -6318,6 +7100,41 @@ func TestCheckResponseSnapshot_UpdateMarketplaceModelEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
+	want := &UpdateProjectOutput{
+		Id:         ptr.String("__Id__"),
+		Arn:        ptr.String("__Arn__"),
+		Name:       ptr.String("__Name__"),
+		Status:     types.ProjectStatus("active"),
+		CreatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ArchivedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateProject.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateProject(context.Background(), &UpdateProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		Name:              ptr.String("__Name__"),
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateProject.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateProvisionedModelThroughput(t *testing.T) {
 	want := &UpdateProvisionedModelThroughputOutput{}
 	status, header, body, err := serdeRespReadSnapshot("UpdateProvisionedModelThroughput.response")
@@ -6353,11 +7170,8 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{
-		JobIdentifiers: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.ArchiveProject(context.Background(), &ArchiveProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6383,11 +7197,8 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteEvaluationJob(context.Background(), &BatchDeleteEvaluationJobInput{
-		JobIdentifiers: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.ArchiveProject(context.Background(), &ArchiveProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6413,11 +7224,8 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{
-		JobIdentifiers: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.ArchiveProject(context.Background(), &ArchiveProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6471,11 +7279,8 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteEvaluationJob(context.Background(), &BatchDeleteEvaluationJobInput{
-		JobIdentifiers: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.ArchiveProject(context.Background(), &ArchiveProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6606,11 +7411,8 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{
-		JobIdentifiers: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.ArchiveProject(context.Background(), &ArchiveProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -6715,11 +7517,8 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), &BatchDeleteAdvancedPromptOptimizationJobInput{
-		JobIdentifiers: []string{
-			"__Member__",
-			"__Member__",
-		},
+	_, opErr := svc.ArchiveProject(context.Background(), &ArchiveProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

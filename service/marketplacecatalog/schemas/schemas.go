@@ -92,6 +92,13 @@ var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/PutResourcePolicy",
 	Code: 200})
 
+var StartAssessment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "StartAssessment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/StartAssessment",
+	Code: 200})
+
 var StartChangeSet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "StartChangeSet",
@@ -126,6 +133,36 @@ var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_Message *smithy.Schema
+
+var AdditionalResource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "AdditionalResource",
+}, smithy.ShapeTypeStructure, 3)
+var AdditionalResource_Type *smithy.Schema
+
+var AdditionalResource_Text *smithy.Schema
+
+var AdditionalResource_Url *smithy.Schema
+
+var _AdditionalResourceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "AdditionalResourceList",
+}, smithy.ShapeTypeList, 1)
+var _AdditionalResourceList_member *smithy.Schema
+
+var AdditionalResourcesAlternative = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "AdditionalResourcesAlternative",
+}, smithy.ShapeTypeStructure, 2)
+var AdditionalResourcesAlternative_Value *smithy.Schema
+
+var AdditionalResourcesAlternative_Rationale *smithy.Schema
+
+var _AdditionalResourcesAlternativeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "AdditionalResourcesAlternativeList",
+}, smithy.ShapeTypeList, 1)
+var _AdditionalResourcesAlternativeList_member *smithy.Schema
 
 var AmiProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -300,10 +337,12 @@ var _AssessmentSummaryList_member *smithy.Schema
 var AssessmentTargetFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "AssessmentTargetFilter",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var AssessmentTargetFilter_EntityId *smithy.Schema
 
 var AssessmentTargetFilter_ChangeSetId *smithy.Schema
+
+var AssessmentTargetFilter_EntityIds *smithy.Schema
 
 var AssessmentTargetSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -329,6 +368,31 @@ var BatchDescribeErrorDetail_ErrorMessage *smithy.Schema
 var _BatchDescribeErrorMessageContent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "BatchDescribeErrorMessageContent",
+}, smithy.ShapeTypeString, 0)
+
+var CaseStudiesAlternative = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "CaseStudiesAlternative",
+}, smithy.ShapeTypeStructure, 2)
+var CaseStudiesAlternative_Value *smithy.Schema
+
+var CaseStudiesAlternative_Rationale *smithy.Schema
+
+var _CaseStudiesAlternativeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "CaseStudiesAlternativeList",
+}, smithy.ShapeTypeList, 1)
+var _CaseStudiesAlternativeList_member *smithy.Schema
+
+var _CaseStudyList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "CaseStudyList",
+}, smithy.ShapeTypeList, 1)
+var _CaseStudyList_member *smithy.Schema
+
+var _CaseStudyTitle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "CaseStudyTitle",
 }, smithy.ShapeTypeString, 0)
 
 var _Catalog = smithy.NewSchema(smithy.ShapeID{
@@ -427,6 +491,17 @@ var ChangeSummary_ChangeName *smithy.Schema
 var _ChangeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ChangeType",
+}, smithy.ShapeTypeString, 0)
+
+var _CitationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "CitationList",
+}, smithy.ShapeTypeList, 1)
+var _CitationList_member *smithy.Schema
+
+var _CitationUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "CitationUrl",
 }, smithy.ShapeTypeString, 0)
 
 var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
@@ -562,15 +637,53 @@ var ContainerSecuritySummary = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var ContainerSecuritySummary_DeliveryOptionId *smithy.Schema
 
+var ContentAlternatives = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ContentAlternatives",
+}, smithy.ShapeTypeUnion, 5)
+var ContentAlternatives_Text *smithy.Schema
+
+var ContentAlternatives_TextList *smithy.Schema
+
+var ContentAlternatives_AdditionalResources *smithy.Schema
+
+var ContentAlternatives_UseCases *smithy.Schema
+
+var ContentAlternatives_CaseStudies *smithy.Schema
+
+var ContentRecommendation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ContentRecommendation",
+}, smithy.ShapeTypeStructure, 4)
+var ContentRecommendation_Status *smithy.Schema
+
+var ContentRecommendation_Alternatives *smithy.Schema
+
+var ContentRecommendation_FollowUpQuestions *smithy.Schema
+
+var ContentRecommendation_Findings *smithy.Schema
+
+var ContentRecommendationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ContentRecommendationStatus",
+}, smithy.ShapeTypeEnum, 2)
+var ContentRecommendationStatus_GENERATED *smithy.Schema
+
+var ContentRecommendationStatus_INSUFFICIENT_CONTEXT *smithy.Schema
+
 var ControlAssessment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ControlAssessment",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 5)
 var ControlAssessment_ControlId *smithy.Schema
 
 var ControlAssessment_ControlAssessmentResult *smithy.Schema
 
+var ControlAssessment_VerificationSource *smithy.Schema
+
 var ControlAssessment_Errors *smithy.Schema
+
+var ControlAssessment_ControlSummary *smithy.Schema
 
 var _ControlAssessmentList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -605,6 +718,26 @@ var _ControlErrorList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ControlErrorList",
 }, smithy.ShapeTypeList, 1)
 var _ControlErrorList_member *smithy.Schema
+
+var ControlInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ControlInput",
+}, smithy.ShapeTypeStructure, 2)
+var ControlInput_ControlId *smithy.Schema
+
+var ControlInput_Input *smithy.Schema
+
+var _ControlInputList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ControlInputList",
+}, smithy.ShapeTypeList, 1)
+var _ControlInputList_member *smithy.Schema
+
+var ControlSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ControlSummary",
+}, smithy.ShapeTypeUnion, 1)
+var ControlSummary_ListingRecommendations *smithy.Schema
 
 var DataProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -767,6 +900,12 @@ var _EntityId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EntityId",
 }, smithy.ShapeTypeString, 0)
 
+var _EntityIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "EntityIdList",
+}, smithy.ShapeTypeList, 1)
+var _EntityIdList_member *smithy.Schema
+
 var _EntityNameString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "EntityNameString",
@@ -785,6 +924,11 @@ var _EntityRequestList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EntityRequestList",
 }, smithy.ShapeTypeList, 1)
 var _EntityRequestList_member *smithy.Schema
+
+var _EntityRevision = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "EntityRevision",
+}, smithy.ShapeTypeString, 0)
 
 var EntitySummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -1037,10 +1181,52 @@ var FailureCode_ClientError *smithy.Schema
 
 var FailureCode_ServerFault *smithy.Schema
 
+var FeatureRecommendation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "FeatureRecommendation",
+}, smithy.ShapeTypeStructure, 5)
+var FeatureRecommendation_FeatureId *smithy.Schema
+
+var FeatureRecommendation_Action *smithy.Schema
+
+var FeatureRecommendation_Rationale *smithy.Schema
+
+var FeatureRecommendation_Severity *smithy.Schema
+
+var FeatureRecommendation_Status *smithy.Schema
+
+var _FeatureRecommendationList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "FeatureRecommendationList",
+}, smithy.ShapeTypeList, 1)
+var _FeatureRecommendationList_member *smithy.Schema
+
+var FeatureRecommendations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "FeatureRecommendations",
+}, smithy.ShapeTypeStructure, 1)
+var FeatureRecommendations_Recommendations *smithy.Schema
+
 var _FieldName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "FieldName",
 }, smithy.ShapeTypeString, 0)
+
+var _FieldText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "FieldText",
+}, smithy.ShapeTypeString, 0)
+
+var _FieldTextItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "FieldTextItem",
+}, smithy.ShapeTypeString, 0)
+
+var _FieldTextList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "FieldTextList",
+}, smithy.ShapeTypeList, 1)
+var _FieldTextList_member *smithy.Schema
 
 var Filter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -1066,6 +1252,41 @@ var _FilterValueContent = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FilterValueContent",
 }, smithy.ShapeTypeString, 0)
 
+var _FindingDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "FindingDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _FindingList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "FindingList",
+}, smithy.ShapeTypeList, 1)
+var _FindingList_member *smithy.Schema
+
+var FollowUpQuestion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "FollowUpQuestion",
+}, smithy.ShapeTypeStructure, 2)
+var FollowUpQuestion_Question *smithy.Schema
+
+var FollowUpQuestion_Justification *smithy.Schema
+
+var _FollowUpQuestionJustification = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "FollowUpQuestionJustification",
+}, smithy.ShapeTypeString, 0)
+
+var _FollowUpQuestionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "FollowUpQuestionList",
+}, smithy.ShapeTypeList, 1)
+var _FollowUpQuestionList_member *smithy.Schema
+
+var _FollowUpQuestionText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "FollowUpQuestionText",
+}, smithy.ShapeTypeString, 0)
+
 var FrameworkFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "FrameworkFilters",
@@ -1082,10 +1303,14 @@ var _FrameworkId = smithy.NewSchema(smithy.ShapeID{
 var FrameworkSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "FrameworkSummary",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 4)
 var FrameworkSummary_AMISecuritySummary *smithy.Schema
 
 var FrameworkSummary_ContainerSecuritySummary *smithy.Schema
+
+var FrameworkSummary_ListingQualitySummary *smithy.Schema
+
+var FrameworkSummary_ListingRecommendationsSummary *smithy.Schema
 
 var _Identifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -1131,6 +1356,92 @@ var _ListEntitiesMaxResultInteger = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "ListEntitiesMaxResultInteger",
 }, smithy.ShapeTypeInteger, 0)
+
+var ListingCaseStudy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ListingCaseStudy",
+}, smithy.ShapeTypeStructure, 3)
+var ListingCaseStudy_Id *smithy.Schema
+
+var ListingCaseStudy_Title *smithy.Schema
+
+var ListingCaseStudy_Rationale *smithy.Schema
+
+var ListingFinding = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ListingFinding",
+}, smithy.ShapeTypeStructure, 4)
+var ListingFinding_Action *smithy.Schema
+
+var ListingFinding_Description *smithy.Schema
+
+var ListingFinding_Severity *smithy.Schema
+
+var ListingFinding_Status *smithy.Schema
+
+var ListingFindingStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ListingFindingStatus",
+}, smithy.ShapeTypeEnum, 2)
+var ListingFindingStatus_PASS *smithy.Schema
+
+var ListingFindingStatus_FAIL *smithy.Schema
+
+var ListingQualitySummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ListingQualitySummary",
+}, smithy.ShapeTypeStructure, 2)
+var ListingQualitySummary_Tier *smithy.Schema
+
+var ListingQualitySummary_EntityRevision *smithy.Schema
+
+var ListingQualityTier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ListingQualityTier",
+}, smithy.ShapeTypeEnum, 4)
+var ListingQualityTier_NEEDS_IMPROVEMENT *smithy.Schema
+
+var ListingQualityTier_BASIC *smithy.Schema
+
+var ListingQualityTier_STRONG *smithy.Schema
+
+var ListingQualityTier_EXCELLENT *smithy.Schema
+
+var ListingRecommendations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ListingRecommendations",
+}, smithy.ShapeTypeUnion, 3)
+var ListingRecommendations_ProductContentRecommendations *smithy.Schema
+
+var ListingRecommendations_SolutionContentRecommendations *smithy.Schema
+
+var ListingRecommendations_FeatureRecommendations *smithy.Schema
+
+var ListingRecommendationsSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ListingRecommendationsSummary",
+}, smithy.ShapeTypeStructure, 2)
+var ListingRecommendationsSummary_Tier *smithy.Schema
+
+var ListingRecommendationsSummary_EntityRevision *smithy.Schema
+
+var ListingUseCase = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ListingUseCase",
+}, smithy.ShapeTypeStructure, 7)
+var ListingUseCase_Id *smithy.Schema
+
+var ListingUseCase_Rank *smithy.Schema
+
+var ListingUseCase_Name *smithy.Schema
+
+var ListingUseCase_Group *smithy.Schema
+
+var ListingUseCase_Subgroup *smithy.Schema
+
+var ListingUseCase_UseCaseDetails *smithy.Schema
+
+var ListingUseCase_Rationale *smithy.Schema
 
 var MachineLearningProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -1327,7 +1638,7 @@ var _OfferEntityIdString = smithy.NewSchema(smithy.ShapeID{
 var OfferFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "OfferFilters",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var OfferFilters_EntityId *smithy.Schema
 
 var OfferFilters_Name *smithy.Schema
@@ -1335,6 +1646,8 @@ var OfferFilters_Name *smithy.Schema
 var OfferFilters_ProductId *smithy.Schema
 
 var OfferFilters_ResaleAuthorizationId *smithy.Schema
+
+var OfferFilters_SubsidiaryAuthorizationId *smithy.Schema
 
 var OfferFilters_ReleaseDate *smithy.Schema
 
@@ -1643,7 +1956,7 @@ var OfferSort_SortOrder *smithy.Schema
 var OfferSortBy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "OfferSortBy",
-}, smithy.ShapeTypeEnum, 14)
+}, smithy.ShapeTypeEnum, 15)
 var OfferSortBy_EntityId *smithy.Schema
 
 var OfferSortBy_Name *smithy.Schema
@@ -1651,6 +1964,8 @@ var OfferSortBy_Name *smithy.Schema
 var OfferSortBy_ProductId *smithy.Schema
 
 var OfferSortBy_ResaleAuthorizationId *smithy.Schema
+
+var OfferSortBy_SubsidiaryAuthorizationId *smithy.Schema
 
 var OfferSortBy_ReleaseDate *smithy.Schema
 
@@ -1692,15 +2007,34 @@ var OfferStateString_Draft *smithy.Schema
 
 var OfferStateString_Released *smithy.Schema
 
+var OfferSubsidiaryAuthorizationIdFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "OfferSubsidiaryAuthorizationIdFilter",
+}, smithy.ShapeTypeStructure, 1)
+var OfferSubsidiaryAuthorizationIdFilter_ValueList *smithy.Schema
+
+var _OfferSubsidiaryAuthorizationIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "OfferSubsidiaryAuthorizationIdFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _OfferSubsidiaryAuthorizationIdFilterValueList_member *smithy.Schema
+
+var _OfferSubsidiaryAuthorizationIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "OfferSubsidiaryAuthorizationIdString",
+}, smithy.ShapeTypeString, 0)
+
 var OfferSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "OfferSummary",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
 var OfferSummary_Name *smithy.Schema
 
 var OfferSummary_ProductId *smithy.Schema
 
 var OfferSummary_ResaleAuthorizationId *smithy.Schema
+
+var OfferSummary_SubsidiaryAuthorizationId *smithy.Schema
 
 var OfferSummary_ReleaseDate *smithy.Schema
 
@@ -1792,6 +2126,74 @@ var OwnershipType = smithy.NewSchema(smithy.ShapeID{
 var OwnershipType_SELF *smithy.Schema
 
 var OwnershipType_SHARED *smithy.Schema
+
+var ProductContentRecommendations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ProductContentRecommendations",
+}, smithy.ShapeTypeStructure, 9)
+var ProductContentRecommendations_ProductTitle *smithy.Schema
+
+var ProductContentRecommendations_ShortDescription *smithy.Schema
+
+var ProductContentRecommendations_LongDescription *smithy.Schema
+
+var ProductContentRecommendations_SupportDescription *smithy.Schema
+
+var ProductContentRecommendations_Highlights *smithy.Schema
+
+var ProductContentRecommendations_SearchKeywords *smithy.Schema
+
+var ProductContentRecommendations_Categories *smithy.Schema
+
+var ProductContentRecommendations_AdditionalResources *smithy.Schema
+
+var ProductContentRecommendations_Citations *smithy.Schema
+
+var _Rationale = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "Rationale",
+}, smithy.ShapeTypeString, 0)
+
+var RecommendationCitation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "RecommendationCitation",
+}, smithy.ShapeTypeStructure, 1)
+var RecommendationCitation_Url *smithy.Schema
+
+var RecommendationSeverity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "RecommendationSeverity",
+}, smithy.ShapeTypeEnum, 2)
+var RecommendationSeverity_BLOCKING *smithy.Schema
+
+var RecommendationSeverity_ADVISORY *smithy.Schema
+
+var _RecommendedAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "RecommendedAction",
+}, smithy.ShapeTypeString, 0)
+
+var RecommendedFeatureId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "RecommendedFeatureId",
+}, smithy.ShapeTypeEnum, 5)
+var RecommendedFeatureId_REQUEST_PRIVATE_OFFER *smithy.Schema
+
+var RecommendedFeatureId_REQUEST_A_DEMO *smithy.Schema
+
+var RecommendedFeatureId_PROMOTIONAL_MEDIA *smithy.Schema
+
+var RecommendedFeatureId_FREE_TRIAL *smithy.Schema
+
+var RecommendedFeatureId_QUICK_LAUNCH *smithy.Schema
+
+var RecommendedFeatureStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "RecommendedFeatureStatus",
+}, smithy.ShapeTypeEnum, 2)
+var RecommendedFeatureStatus_PASS *smithy.Schema
+
+var RecommendedFeatureStatus_FAIL *smithy.Schema
 
 var _RequestedChangeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -2289,6 +2691,21 @@ var _ResourcePolicyJson = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ResourcePolicyJson",
 }, smithy.ShapeTypeString, 0)
 
+var _ResourceText = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResourceText",
+}, smithy.ShapeTypeString, 0)
+
+var _ResourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResourceType",
+}, smithy.ShapeTypeString, 0)
+
+var _ResourceUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "ResourceUrl",
+}, smithy.ShapeTypeString, 0)
+
 var SaaSProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "SaaSProductEntityIdFilter",
@@ -2421,6 +2838,26 @@ var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_Message *smithy.Schema
+
+var SolutionContentRecommendations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SolutionContentRecommendations",
+}, smithy.ShapeTypeStructure, 8)
+var SolutionContentRecommendations_Title *smithy.Schema
+
+var SolutionContentRecommendations_ShortDescription *smithy.Schema
+
+var SolutionContentRecommendations_LongDescription *smithy.Schema
+
+var SolutionContentRecommendations_IntegrationDetails *smithy.Schema
+
+var SolutionContentRecommendations_AdditionalResources *smithy.Schema
+
+var SolutionContentRecommendations_UseCases *smithy.Schema
+
+var SolutionContentRecommendations_CaseStudies *smithy.Schema
+
+var SolutionContentRecommendations_Citations *smithy.Schema
 
 var Sort = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -2702,10 +3139,46 @@ var _TagList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _TagList_member *smithy.Schema
 
+var _TagMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "TagMap",
+}, smithy.ShapeTypeMap, 2)
+var _TagMap_key *smithy.Schema
+
+var _TagMap_value *smithy.Schema
+
 var _TagValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "TagValue",
 }, smithy.ShapeTypeString, 0)
+
+var TextAlternative = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "TextAlternative",
+}, smithy.ShapeTypeStructure, 2)
+var TextAlternative_Value *smithy.Schema
+
+var TextAlternative_Rationale *smithy.Schema
+
+var _TextAlternativeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "TextAlternativeList",
+}, smithy.ShapeTypeList, 1)
+var _TextAlternativeList_member *smithy.Schema
+
+var TextListAlternative = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "TextListAlternative",
+}, smithy.ShapeTypeStructure, 2)
+var TextListAlternative_Value *smithy.Schema
+
+var TextListAlternative_Rationale *smithy.Schema
+
+var _TextListAlternativeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "TextListAlternativeList",
+}, smithy.ShapeTypeList, 1)
+var _TextListAlternativeList_member *smithy.Schema
 
 var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -2713,6 +3186,46 @@ var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 429})
 var ThrottlingException_Message *smithy.Schema
+
+var _UseCaseDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "UseCaseDetails",
+}, smithy.ShapeTypeString, 0)
+
+var _UseCaseId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "UseCaseId",
+}, smithy.ShapeTypeString, 0)
+
+var _UseCaseList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "UseCaseList",
+}, smithy.ShapeTypeList, 1)
+var _UseCaseList_member *smithy.Schema
+
+var _UseCaseRank = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "UseCaseRank",
+}, smithy.ShapeTypeInteger, 0)
+
+var UseCasesAlternative = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "UseCasesAlternative",
+}, smithy.ShapeTypeStructure, 2)
+var UseCasesAlternative_Value *smithy.Schema
+
+var UseCasesAlternative_Rationale *smithy.Schema
+
+var _UseCasesAlternativeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "UseCasesAlternativeList",
+}, smithy.ShapeTypeList, 1)
+var _UseCasesAlternativeList_member *smithy.Schema
+
+var _UseCaseTaxonomyValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "UseCaseTaxonomyValue",
+}, smithy.ShapeTypeString, 0)
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -2762,6 +3275,14 @@ var _ValueList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ValueList",
 }, smithy.ShapeTypeList, 1)
 var _ValueList_member *smithy.Schema
+
+var VerificationSource = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "VerificationSource",
+}, smithy.ShapeTypeEnum, 2)
+var VerificationSource_AWS_VERIFIED *smithy.Schema
+
+var VerificationSource_SELF_ATTESTED *smithy.Schema
 
 var _VersionedFrameworkId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -3021,6 +3542,28 @@ var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PutResourcePolicyResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var StartAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "StartAssessmentRequest",
+}, smithy.ShapeTypeStructure, 6)
+var StartAssessmentRequest_Catalog *smithy.Schema
+
+var StartAssessmentRequest_ClientToken *smithy.Schema
+
+var StartAssessmentRequest_FrameworkId *smithy.Schema
+
+var StartAssessmentRequest_EntityId *smithy.Schema
+
+var StartAssessmentRequest_Controls *smithy.Schema
+
+var StartAssessmentRequest_Tags *smithy.Schema
+
+var StartAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "StartAssessmentResponse",
+}, smithy.ShapeTypeStructure, 1)
+var StartAssessmentResponse_AssessmentId *smithy.Schema
+
 var StartChangeSetRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "StartChangeSetRequest",
@@ -3075,6 +3618,20 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 // initialization cycles
 func init() {
 	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ExceptionMessageContent)
+
+	AdditionalResource_Type = AdditionalResource.AddMember("Type", _ResourceType)
+
+	AdditionalResource_Text = AdditionalResource.AddMember("Text", _ResourceText)
+
+	AdditionalResource_Url = AdditionalResource.AddMember("Url", _ResourceUrl)
+
+	_AdditionalResourceList_member = _AdditionalResourceList.AddMember("member", AdditionalResource)
+
+	AdditionalResourcesAlternative_Value = AdditionalResourcesAlternative.AddMember("Value", _AdditionalResourceList)
+
+	AdditionalResourcesAlternative_Rationale = AdditionalResourcesAlternative.AddMember("Rationale", _Rationale)
+
+	_AdditionalResourcesAlternativeList_member = _AdditionalResourcesAlternativeList.AddMember("member", AdditionalResourcesAlternative)
 
 	_AmiProductEntityIdFilterValueList_member = _AmiProductEntityIdFilterValueList.AddMember("member", _AmiProductEntityIdString)
 
@@ -3146,9 +3703,29 @@ func init() {
 
 	ContainerSecuritySummary_DeliveryOptionId = ContainerSecuritySummary.AddMember("DeliveryOptionId", _ResourceId)
 
+	ListingQualityTier_NEEDS_IMPROVEMENT = ListingQualityTier.AddMember("NEEDS_IMPROVEMENT", smithyprelude.Unit)
+
+	ListingQualityTier_BASIC = ListingQualityTier.AddMember("BASIC", smithyprelude.Unit)
+
+	ListingQualityTier_STRONG = ListingQualityTier.AddMember("STRONG", smithyprelude.Unit)
+
+	ListingQualityTier_EXCELLENT = ListingQualityTier.AddMember("EXCELLENT", smithyprelude.Unit)
+
+	ListingQualitySummary_Tier = ListingQualitySummary.AddMember("Tier", ListingQualityTier)
+
+	ListingQualitySummary_EntityRevision = ListingQualitySummary.AddMember("EntityRevision", _EntityRevision)
+
+	ListingRecommendationsSummary_Tier = ListingRecommendationsSummary.AddMember("Tier", ListingQualityTier)
+
+	ListingRecommendationsSummary_EntityRevision = ListingRecommendationsSummary.AddMember("EntityRevision", _EntityRevision)
+
 	FrameworkSummary_AMISecuritySummary = FrameworkSummary.AddMember("AMISecuritySummary", AMISecuritySummary)
 
 	FrameworkSummary_ContainerSecuritySummary = FrameworkSummary.AddMember("ContainerSecuritySummary", ContainerSecuritySummary)
+
+	FrameworkSummary_ListingQualitySummary = FrameworkSummary.AddMember("ListingQualitySummary", ListingQualitySummary)
+
+	FrameworkSummary_ListingRecommendationsSummary = FrameworkSummary.AddMember("ListingRecommendationsSummary", ListingRecommendationsSummary)
 
 	AssessmentSummary_AssessmentArn = AssessmentSummary.AddMember("AssessmentArn", _ARN)
 
@@ -3168,13 +3745,31 @@ func init() {
 
 	_AssessmentSummaryList_member = _AssessmentSummaryList.AddMember("member", AssessmentSummary)
 
+	_EntityIdList_member = _EntityIdList.AddMember("member", _ResourceId)
+
 	AssessmentTargetFilter_EntityId = AssessmentTargetFilter.AddMember("EntityId", _ResourceId)
 
 	AssessmentTargetFilter_ChangeSetId = AssessmentTargetFilter.AddMember("ChangeSetId", _ResourceId)
 
+	AssessmentTargetFilter_EntityIds = AssessmentTargetFilter.AddMember("EntityIds", _EntityIdList)
+
 	BatchDescribeErrorDetail_ErrorCode = BatchDescribeErrorDetail.AddMember("ErrorCode", _BatchDescribeErrorCodeString)
 
 	BatchDescribeErrorDetail_ErrorMessage = BatchDescribeErrorDetail.AddMember("ErrorMessage", _BatchDescribeErrorMessageContent)
+
+	ListingCaseStudy_Id = ListingCaseStudy.AddMember("Id", _EntityId)
+
+	ListingCaseStudy_Title = ListingCaseStudy.AddMember("Title", _CaseStudyTitle)
+
+	ListingCaseStudy_Rationale = ListingCaseStudy.AddMember("Rationale", _Rationale)
+
+	_CaseStudyList_member = _CaseStudyList.AddMember("member", ListingCaseStudy)
+
+	CaseStudiesAlternative_Value = CaseStudiesAlternative.AddMember("Value", _CaseStudyList)
+
+	CaseStudiesAlternative_Rationale = CaseStudiesAlternative.AddMember("Rationale", _Rationale)
+
+	_CaseStudiesAlternativeList_member = _CaseStudiesAlternativeList.AddMember("member", CaseStudiesAlternative)
 
 	Entity_Type = Entity.AddMember("Type", _EntityType)
 
@@ -3252,6 +3847,10 @@ func init() {
 
 	_ChangeSetSummaryList_member = _ChangeSetSummaryList.AddMember("member", ChangeSetSummaryListItem)
 
+	RecommendationCitation_Url = RecommendationCitation.AddMember("Url", _CitationUrl)
+
+	_CitationList_member = _CitationList.AddMember("member", RecommendationCitation)
+
 	_ContainerProductEntityIdFilterValueList_member = _ContainerProductEntityIdFilterValueList.AddMember("member", _ContainerProductEntityIdString)
 
 	ContainerProductEntityIdFilter_ValueList = ContainerProductEntityIdFilter.AddMember("ValueList", _ContainerProductEntityIdFilterValueList)
@@ -3308,6 +3907,88 @@ func init() {
 
 	ContainerSecurityFilters_DeliveryOptionId = ContainerSecurityFilters.AddMember("DeliveryOptionId", _ResourceId)
 
+	TextAlternative_Value = TextAlternative.AddMember("Value", _FieldText)
+
+	TextAlternative_Rationale = TextAlternative.AddMember("Rationale", _Rationale)
+
+	_TextAlternativeList_member = _TextAlternativeList.AddMember("member", TextAlternative)
+
+	_FieldTextList_member = _FieldTextList.AddMember("member", _FieldTextItem)
+
+	TextListAlternative_Value = TextListAlternative.AddMember("Value", _FieldTextList)
+
+	TextListAlternative_Rationale = TextListAlternative.AddMember("Rationale", _Rationale)
+
+	_TextListAlternativeList_member = _TextListAlternativeList.AddMember("member", TextListAlternative)
+
+	ListingUseCase_Id = ListingUseCase.AddMember("Id", _UseCaseId)
+
+	ListingUseCase_Rank = ListingUseCase.AddMember("Rank", _UseCaseRank)
+
+	ListingUseCase_Name = ListingUseCase.AddMember("Name", _UseCaseTaxonomyValue)
+
+	ListingUseCase_Group = ListingUseCase.AddMember("Group", _UseCaseTaxonomyValue)
+
+	ListingUseCase_Subgroup = ListingUseCase.AddMember("Subgroup", _UseCaseTaxonomyValue)
+
+	ListingUseCase_UseCaseDetails = ListingUseCase.AddMember("UseCaseDetails", _UseCaseDetails)
+
+	ListingUseCase_Rationale = ListingUseCase.AddMember("Rationale", _Rationale)
+
+	_UseCaseList_member = _UseCaseList.AddMember("member", ListingUseCase)
+
+	UseCasesAlternative_Value = UseCasesAlternative.AddMember("Value", _UseCaseList)
+
+	UseCasesAlternative_Rationale = UseCasesAlternative.AddMember("Rationale", _Rationale)
+
+	_UseCasesAlternativeList_member = _UseCasesAlternativeList.AddMember("member", UseCasesAlternative)
+
+	ContentAlternatives_Text = ContentAlternatives.AddMember("Text", _TextAlternativeList)
+
+	ContentAlternatives_TextList = ContentAlternatives.AddMember("TextList", _TextListAlternativeList)
+
+	ContentAlternatives_AdditionalResources = ContentAlternatives.AddMember("AdditionalResources", _AdditionalResourcesAlternativeList)
+
+	ContentAlternatives_UseCases = ContentAlternatives.AddMember("UseCases", _UseCasesAlternativeList)
+
+	ContentAlternatives_CaseStudies = ContentAlternatives.AddMember("CaseStudies", _CaseStudiesAlternativeList)
+
+	ContentRecommendationStatus_GENERATED = ContentRecommendationStatus.AddMember("GENERATED", smithyprelude.Unit)
+
+	ContentRecommendationStatus_INSUFFICIENT_CONTEXT = ContentRecommendationStatus.AddMember("INSUFFICIENT_CONTEXT", smithyprelude.Unit)
+
+	FollowUpQuestion_Question = FollowUpQuestion.AddMember("Question", _FollowUpQuestionText)
+
+	FollowUpQuestion_Justification = FollowUpQuestion.AddMember("Justification", _FollowUpQuestionJustification)
+
+	_FollowUpQuestionList_member = _FollowUpQuestionList.AddMember("member", FollowUpQuestion)
+
+	RecommendationSeverity_BLOCKING = RecommendationSeverity.AddMember("BLOCKING", smithyprelude.Unit)
+
+	RecommendationSeverity_ADVISORY = RecommendationSeverity.AddMember("ADVISORY", smithyprelude.Unit)
+
+	ListingFindingStatus_PASS = ListingFindingStatus.AddMember("PASS", smithyprelude.Unit)
+
+	ListingFindingStatus_FAIL = ListingFindingStatus.AddMember("FAIL", smithyprelude.Unit)
+
+	ListingFinding_Action = ListingFinding.AddMember("Action", _RecommendedAction)
+
+	ListingFinding_Description = ListingFinding.AddMember("Description", _FindingDescription)
+
+	ListingFinding_Severity = ListingFinding.AddMember("Severity", RecommendationSeverity)
+
+	ListingFinding_Status = ListingFinding.AddMember("Status", ListingFindingStatus)
+
+	_FindingList_member = _FindingList.AddMember("member", ListingFinding)
+
+	ContentRecommendation_Status = ContentRecommendation.AddMember("Status", ContentRecommendationStatus)
+
+	ContentRecommendation_Alternatives = ContentRecommendation.AddMember("Alternatives", ContentAlternatives)
+
+	ContentRecommendation_FollowUpQuestions = ContentRecommendation.AddMember("FollowUpQuestions", _FollowUpQuestionList)
+
+	ContentRecommendation_Findings = ContentRecommendation.AddMember("Findings", _FindingList)
+
 	ControlAssessmentResult_PASS = ControlAssessmentResult.AddMember("PASS", smithyprelude.Unit)
 
 	ControlAssessmentResult_FAIL = ControlAssessmentResult.AddMember("FAIL", smithyprelude.Unit)
@@ -3315,6 +3996,10 @@ func init() {
 	ControlAssessmentResult_NOT_EXECUTED = ControlAssessmentResult.AddMember("NOT_EXECUTED", smithyprelude.Unit)
 
 	ControlAssessmentResult_EXEMPTION_PASS = ControlAssessmentResult.AddMember("EXEMPTION_PASS", smithyprelude.Unit)
+
+	VerificationSource_AWS_VERIFIED = VerificationSource.AddMember("AWS_VERIFIED", smithyprelude.Unit)
+
+	VerificationSource_SELF_ATTESTED = VerificationSource.AddMember("SELF_ATTESTED", smithyprelude.Unit)
 
 	ErrorScope_Name = ErrorScope.AddMember("Name", _ScopeName)
 
@@ -3330,13 +4015,93 @@ func init() {
 
 	_ControlErrorList_member = _ControlErrorList.AddMember("member", ControlError)
 
+	ProductContentRecommendations_ProductTitle = ProductContentRecommendations.AddMember("ProductTitle", ContentRecommendation)
+
+	ProductContentRecommendations_ShortDescription = ProductContentRecommendations.AddMember("ShortDescription", ContentRecommendation)
+
+	ProductContentRecommendations_LongDescription = ProductContentRecommendations.AddMember("LongDescription", ContentRecommendation)
+
+	ProductContentRecommendations_SupportDescription = ProductContentRecommendations.AddMember("SupportDescription", ContentRecommendation)
+
+	ProductContentRecommendations_Highlights = ProductContentRecommendations.AddMember("Highlights", ContentRecommendation)
+
+	ProductContentRecommendations_SearchKeywords = ProductContentRecommendations.AddMember("SearchKeywords", ContentRecommendation)
+
+	ProductContentRecommendations_Categories = ProductContentRecommendations.AddMember("Categories", ContentRecommendation)
+
+	ProductContentRecommendations_AdditionalResources = ProductContentRecommendations.AddMember("AdditionalResources", ContentRecommendation)
+
+	ProductContentRecommendations_Citations = ProductContentRecommendations.AddMember("Citations", _CitationList)
+
+	SolutionContentRecommendations_Title = SolutionContentRecommendations.AddMember("Title", ContentRecommendation)
+
+	SolutionContentRecommendations_ShortDescription = SolutionContentRecommendations.AddMember("ShortDescription", ContentRecommendation)
+
+	SolutionContentRecommendations_LongDescription = SolutionContentRecommendations.AddMember("LongDescription", ContentRecommendation)
+
+	SolutionContentRecommendations_IntegrationDetails = SolutionContentRecommendations.AddMember("IntegrationDetails", ContentRecommendation)
+
+	SolutionContentRecommendations_AdditionalResources = SolutionContentRecommendations.AddMember("AdditionalResources", ContentRecommendation)
+
+	SolutionContentRecommendations_UseCases = SolutionContentRecommendations.AddMember("UseCases", ContentRecommendation)
+
+	SolutionContentRecommendations_CaseStudies = SolutionContentRecommendations.AddMember("CaseStudies", ContentRecommendation)
+
+	SolutionContentRecommendations_Citations = SolutionContentRecommendations.AddMember("Citations", _CitationList)
+
+	RecommendedFeatureId_REQUEST_PRIVATE_OFFER = RecommendedFeatureId.AddMember("REQUEST_PRIVATE_OFFER", smithyprelude.Unit)
+
+	RecommendedFeatureId_REQUEST_A_DEMO = RecommendedFeatureId.AddMember("REQUEST_A_DEMO", smithyprelude.Unit)
+
+	RecommendedFeatureId_PROMOTIONAL_MEDIA = RecommendedFeatureId.AddMember("PROMOTIONAL_MEDIA", smithyprelude.Unit)
+
+	RecommendedFeatureId_FREE_TRIAL = RecommendedFeatureId.AddMember("FREE_TRIAL", smithyprelude.Unit)
+
+	RecommendedFeatureId_QUICK_LAUNCH = RecommendedFeatureId.AddMember("QUICK_LAUNCH", smithyprelude.Unit)
+
+	RecommendedFeatureStatus_PASS = RecommendedFeatureStatus.AddMember("PASS", smithyprelude.Unit)
+
+	RecommendedFeatureStatus_FAIL = RecommendedFeatureStatus.AddMember("FAIL", smithyprelude.Unit)
+
+	FeatureRecommendation_FeatureId = FeatureRecommendation.AddMember("FeatureId", RecommendedFeatureId)
+
+	FeatureRecommendation_Action = FeatureRecommendation.AddMember("Action", _RecommendedAction)
+
+	FeatureRecommendation_Rationale = FeatureRecommendation.AddMember("Rationale", _Rationale)
+
+	FeatureRecommendation_Severity = FeatureRecommendation.AddMember("Severity", RecommendationSeverity)
+
+	FeatureRecommendation_Status = FeatureRecommendation.AddMember("Status", RecommendedFeatureStatus)
+
+	_FeatureRecommendationList_member = _FeatureRecommendationList.AddMember("member", FeatureRecommendation)
+
+	FeatureRecommendations_Recommendations = FeatureRecommendations.AddMember("Recommendations", _FeatureRecommendationList)
+
+	ListingRecommendations_ProductContentRecommendations = ListingRecommendations.AddMember("ProductContentRecommendations", ProductContentRecommendations)
+
+	ListingRecommendations_SolutionContentRecommendations = ListingRecommendations.AddMember("SolutionContentRecommendations", SolutionContentRecommendations)
+
+	ListingRecommendations_FeatureRecommendations = ListingRecommendations.AddMember("FeatureRecommendations", FeatureRecommendations)
+
+	ControlSummary_ListingRecommendations = ControlSummary.AddMember("ListingRecommendations", ListingRecommendations)
+
 	ControlAssessment_ControlId = ControlAssessment.AddMember("ControlId", _ResourceId)
 
 	ControlAssessment_ControlAssessmentResult = ControlAssessment.AddMember("ControlAssessmentResult", ControlAssessmentResult)
 
+	ControlAssessment_VerificationSource = ControlAssessment.AddMember("VerificationSource", VerificationSource)
+
 	ControlAssessment_Errors = ControlAssessment.AddMember("Errors", _ControlErrorList)
 
+	ControlAssessment_ControlSummary = ControlAssessment.AddMember("ControlSummary", ControlSummary)
+
 	_ControlAssessmentList_member = _ControlAssessmentList.AddMember("member", ControlAssessment)
+
+	ControlInput_ControlId = ControlInput.AddMember("ControlId", _ResourceId)
+
+	ControlInput_Input = ControlInput.AddMember("Input", _JsonDocumentType)
+
+	_ControlInputList_member = _ControlInputList.AddMember("member", ControlInput)
 
 	_DataProductEntityIdFilterValueList_member = _DataProductEntityIdFilterValueList.AddMember("member", _DataProductEntityIdString)
 
@@ -3451,6 +4216,8 @@ func init() {
 	OfferSummary_ProductId = OfferSummary.AddMember("ProductId", _OfferProductIdString)
 
 	OfferSummary_ResaleAuthorizationId = OfferSummary.AddMember("ResaleAuthorizationId", _OfferResaleAuthorizationIdString)
+
+	OfferSummary_SubsidiaryAuthorizationId = OfferSummary.AddMember("SubsidiaryAuthorizationId", _OfferSubsidiaryAuthorizationIdString)
 
 	OfferSummary_ReleaseDate = OfferSummary.AddMember("ReleaseDate", _DateTimeISO8601)
 
@@ -3636,6 +4403,10 @@ func init() {
 
 	OfferResaleAuthorizationIdFilter_ValueList = OfferResaleAuthorizationIdFilter.AddMember("ValueList", _OfferResaleAuthorizationIdFilterValueList)
 
+	_OfferSubsidiaryAuthorizationIdFilterValueList_member = _OfferSubsidiaryAuthorizationIdFilterValueList.AddMember("member", _OfferSubsidiaryAuthorizationIdString)
+
+	OfferSubsidiaryAuthorizationIdFilter_ValueList = OfferSubsidiaryAuthorizationIdFilter.AddMember("ValueList", _OfferSubsidiaryAuthorizationIdFilterValueList)
+
 	OfferReleaseDateFilterDateRange_AfterValue = OfferReleaseDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
 
 	OfferReleaseDateFilterDateRange_BeforeValue = OfferReleaseDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
@@ -3687,6 +4458,8 @@ func init() {
 	OfferFilters_ProductId = OfferFilters.AddMember("ProductId", OfferProductIdFilter)
 
 	OfferFilters_ResaleAuthorizationId = OfferFilters.AddMember("ResaleAuthorizationId", OfferResaleAuthorizationIdFilter)
+
+	OfferFilters_SubsidiaryAuthorizationId = OfferFilters.AddMember("SubsidiaryAuthorizationId", OfferSubsidiaryAuthorizationIdFilter)
 
 	OfferFilters_ReleaseDate = OfferFilters.AddMember("ReleaseDate", OfferReleaseDateFilter)
 
@@ -4028,6 +4801,8 @@ func init() {
 
 	OfferSortBy_ResaleAuthorizationId = OfferSortBy.AddMember("ResaleAuthorizationId", smithyprelude.Unit)
 
+	OfferSortBy_SubsidiaryAuthorizationId = OfferSortBy.AddMember("SubsidiaryAuthorizationId", smithyprelude.Unit)
+
 	OfferSortBy_ReleaseDate = OfferSortBy.AddMember("ReleaseDate", smithyprelude.Unit)
 
 	OfferSortBy_AvailabilityEndDate = OfferSortBy.AddMember("AvailabilityEndDate", smithyprelude.Unit)
@@ -4206,6 +4981,10 @@ func init() {
 
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
 
+	_TagMap_key = _TagMap.AddMember("key", _TagKey)
+
+	_TagMap_value = _TagMap.AddMember("value", _TagValue)
+
 	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ExceptionMessageContent)
 
 	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
@@ -4383,6 +5162,20 @@ func init() {
 	PutResourcePolicyRequest_ResourceArn = PutResourcePolicyRequest.AddMember("ResourceArn", _ResourceARN)
 
 	PutResourcePolicyRequest_Policy = PutResourcePolicyRequest.AddMember("Policy", _ResourcePolicyJson)
+
+	StartAssessmentRequest_Catalog = StartAssessmentRequest.AddMember("Catalog", _Catalog)
+
+	StartAssessmentRequest_ClientToken = StartAssessmentRequest.AddMember("ClientToken", _ClientRequestToken)
+
+	StartAssessmentRequest_FrameworkId = StartAssessmentRequest.AddMember("FrameworkId", _FrameworkId)
+
+	StartAssessmentRequest_EntityId = StartAssessmentRequest.AddMember("EntityId", _ResourceId)
+
+	StartAssessmentRequest_Controls = StartAssessmentRequest.AddMember("Controls", _ControlInputList)
+
+	StartAssessmentRequest_Tags = StartAssessmentRequest.AddMember("Tags", _TagMap)
+
+	StartAssessmentResponse_AssessmentId = StartAssessmentResponse.AddMember("AssessmentId", _AssessmentIdentifier)
 
 	StartChangeSetRequest_Catalog = StartChangeSetRequest.AddMember("Catalog", _Catalog)
 

@@ -1,3 +1,7 @@
+# v1.18.0 (2026-11-19)
+
+* **Feature**: AWS RTB Fabric now lets you discover modules and attach them to your links. Find modules and their versions with ListAvailableModules, GetAvailableModule, ListAvailableModuleVersions and GetAvailableModuleVersion, attach them with PutLinkFlows and track each change with GetUpdate and ListUpdates.
+
 # v1.17.5 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

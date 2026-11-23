@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configuration":{"dataAsAService":{"fulfillmentUrl":"__FulfillmentUrl__"}},"configurationArn":"__ConfigurationArn__","createdAt":"2000-01-01T00:00:00Z","endedAt":"2000-01-01T00:00:00Z","errorCode":"FULFILLMENT_URL_UNREACHABLE","jobId":"__JobId__","message":"__Message__","status":"IN_PROGRESS"}

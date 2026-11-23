@@ -43,7 +43,7 @@ type CreateBillScenarioInput struct {
 	// The arn of the cost category used in the reserved and prioritized group sharing.
 	CostCategoryGroupSharingPreferenceArn *string
 
-	// The setting for the reserved instance and savings plan group sharing used in
+	// The setting for the reserved instance and savings plans group sharing used in
 	// this estimate.
 	GroupSharingPreference types.GroupSharingPreferenceEnum
 
@@ -99,7 +99,7 @@ type CreateBillScenarioOutput struct {
 	//  An error message if the bill scenario creation failed.
 	FailureMessage *string
 
-	// The setting for the reserved instance and savings plan group sharing used in
+	// The setting for the reserved instance and savings plans group sharing used in
 	// this estimate.
 	GroupSharingPreference types.GroupSharingPreferenceEnum
 

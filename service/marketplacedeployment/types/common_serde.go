@@ -3,8 +3,42 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/marketplacedeployment/schemas"
 	smithy "github.com/aws/smithy-go"
 )
+
+func serializeDeploymentConfigurationDetail(s smithy.ShapeSerializer, schema *smithy.Schema, v DeploymentConfigurationDetail) {
+	switch vv := v.(type) {
+	case *DeploymentConfigurationDetailMemberDataAsAService:
+		s.WriteUnion(schema, schemas.DeploymentConfigurationDetail_dataAsAService)
+		s.WriteStruct(schemas.DeploymentConfigurationDetail_dataAsAService)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func deserializeDeploymentConfigurationDetail(d smithy.ShapeDeserializer, s *smithy.Schema, v *DeploymentConfigurationDetail) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.DeploymentConfigurationDetail_dataAsAService:
+			vv := &DeploymentConfigurationDetailMemberDataAsAService{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func serializeDeploymentConfigurationJobSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []DeploymentConfigurationJobSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
 
 func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
@@ -12,6 +46,28 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
+}
+
+func deserializeDeploymentConfigurationJobSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DeploymentConfigurationJobSummary) error {
+	*v = make([]DeploymentConfigurationJobSummary, 0)
+	var vv DeploymentConfigurationJobSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero DeploymentConfigurationJobSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = DeploymentConfigurationJobSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {

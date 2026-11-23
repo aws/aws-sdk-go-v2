@@ -2572,6 +2572,165 @@ func TestCheckResponseSnapshot_CreateAdapterVersion(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateBlueprint(t *testing.T) {
+	want := &CreateBlueprintOutput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateBlueprint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateBlueprint(context.Background(), &CreateBlueprintInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		BlueprintName:      ptr.String("__BlueprintName__"),
+		Schema:             ptr.String("__Schema__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateBlueprint.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateBlueprintVersion(t *testing.T) {
+	want := &CreateBlueprintVersionOutput{
+		BlueprintArn:     ptr.String("__BlueprintArn__"),
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateBlueprintVersion.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateBlueprintVersion(context.Background(), &CreateBlueprintVersionInput{
+		BlueprintArn:       ptr.String("__BlueprintArn__"),
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateBlueprintVersion.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
+	want := &CreateProjectOutput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+		Status:     types.ProjectStatus("COMPLETED"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateProject.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateProject(context.Background(), &CreateProjectInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ProjectName:        ptr.String("__ProjectName__"),
+		ProjectDescription: ptr.String("__ProjectDescription__"),
+		ExtractionConfiguration: &types.ExtractionConfiguration{
+			BoundingBox: &types.BoundingBoxConfiguration{
+				State: types.State("ENABLED"),
+			},
+			Granularity: &types.ExtractionGranularity{
+				Types: []types.ExtractionGranularityType{
+					types.ExtractionGranularityType("DOCUMENT"),
+					types.ExtractionGranularityType("DOCUMENT"),
+				},
+			},
+			OutputFormat: &types.OutputFormat{
+				AdditionalFileFormat: &types.OutputAdditionalFileFormat{
+					State: types.State("ENABLED"),
+				},
+				TextFormat: &types.OutputTextFormat{
+					Types: []types.OutputTextFormatType{
+						types.OutputTextFormatType("PLAIN_TEXT"),
+						types.OutputTextFormatType("PLAIN_TEXT"),
+					},
+				},
+			},
+		},
+		GenerativeConfiguration: &types.GenerativeConfiguration{
+			Summarization: &types.SummarizationConfiguration{
+				State: types.State("ENABLED"),
+			},
+			FigureCaption: &types.FigureCaptionConfiguration{
+				State: types.State("ENABLED"),
+			},
+		},
+		CustomConfiguration: &types.CustomConfiguration{
+			Blueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+			FallbackBlueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+		},
+		SplitterConfiguration: &types.SplitterConfiguration{
+			State: types.State("ENABLED"),
+		},
+		SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+			DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+			PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+				PiiEntityTypes: []types.PIIEntityType{
+					types.PIIEntityType("ALL"),
+					types.PIIEntityType("ALL"),
+				},
+				RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateProject.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteAdapter(t *testing.T) {
 	want := &DeleteAdapterOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteAdapter.response")
@@ -2612,6 +2771,49 @@ func TestCheckResponseSnapshot_DeleteAdapterVersion(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteAdapterVersion.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteBlueprint(t *testing.T) {
+	want := &DeleteBlueprintOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteBlueprint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteBlueprint(context.Background(), &DeleteBlueprintInput{
+		BlueprintArn:     ptr.String("__BlueprintArn__"),
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteBlueprint.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteProject(t *testing.T) {
+	want := &DeleteProjectOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteProject.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteProject(context.Background(), &DeleteProjectInput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteProject.response", err)
 	}
 }
 
@@ -2879,6 +3081,39 @@ func TestCheckResponseSnapshot_GetAdapterVersion(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetBlueprint(t *testing.T) {
+	want := &GetBlueprintOutput{
+		BlueprintArn:     ptr.String("__BlueprintArn__"),
+		BlueprintName:    ptr.String("__BlueprintName__"),
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+		Schema:           ptr.String("__Schema__"),
+		KmsKeyId:         ptr.String("__KmsKeyId__"),
+		KmsEncryptionContext: map[string]string{
+			"key0": "__Value__",
+		},
+		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetBlueprint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetBlueprint(context.Background(), &GetBlueprintInput{
+		BlueprintArn:     ptr.String("__BlueprintArn__"),
+		BlueprintVersion: ptr.String("__BlueprintVersion__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetBlueprint.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetDocumentAnalysis(t *testing.T) {
 	want := &GetDocumentAnalysisOutput{
 		DocumentMetadata: &types.DocumentMetadata{
@@ -3045,6 +3280,34 @@ func TestCheckResponseSnapshot_GetDocumentAnalysis(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetDocumentAnalysis.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetDocumentInsights(t *testing.T) {
+	want := &GetDocumentInsightsOutput{
+		Status: types.JobStatus("IN_PROGRESS"),
+		OutputConfiguration: &types.OutputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		ErrorType:    ptr.String("__ErrorType__"),
+		ErrorMessage: ptr.String("__ErrorMessage__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetDocumentInsights.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetDocumentInsights(context.Background(), &GetDocumentInsightsInput{
+		JobArn: ptr.String("__JobArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetDocumentInsights.response", err)
 	}
 }
 
@@ -10277,6 +10540,105 @@ func TestCheckResponseSnapshot_GetLendingAnalysisSummary(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetProject(t *testing.T) {
+	want := &GetProjectOutput{
+		ProjectArn:         ptr.String("__ProjectArn__"),
+		ProjectName:        ptr.String("__ProjectName__"),
+		ProjectDescription: ptr.String("__ProjectDescription__"),
+		Status:             types.ProjectStatus("COMPLETED"),
+		ExtractionConfiguration: &types.ExtractionConfiguration{
+			BoundingBox: &types.BoundingBoxConfiguration{
+				State: types.State("ENABLED"),
+			},
+			Granularity: &types.ExtractionGranularity{
+				Types: []types.ExtractionGranularityType{
+					types.ExtractionGranularityType("DOCUMENT"),
+					types.ExtractionGranularityType("DOCUMENT"),
+				},
+			},
+			OutputFormat: &types.OutputFormat{
+				AdditionalFileFormat: &types.OutputAdditionalFileFormat{
+					State: types.State("ENABLED"),
+				},
+				TextFormat: &types.OutputTextFormat{
+					Types: []types.OutputTextFormatType{
+						types.OutputTextFormatType("PLAIN_TEXT"),
+						types.OutputTextFormatType("PLAIN_TEXT"),
+					},
+				},
+			},
+		},
+		GenerativeConfiguration: &types.GenerativeConfiguration{
+			Summarization: &types.SummarizationConfiguration{
+				State: types.State("ENABLED"),
+			},
+			FigureCaption: &types.FigureCaptionConfiguration{
+				State: types.State("ENABLED"),
+			},
+		},
+		CustomConfiguration: &types.CustomConfiguration{
+			Blueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+			FallbackBlueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+		},
+		SplitterConfiguration: &types.SplitterConfiguration{
+			State: types.State("ENABLED"),
+		},
+		SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+			DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+			PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+				PiiEntityTypes: []types.PIIEntityType{
+					types.PIIEntityType("ALL"),
+					types.PIIEntityType("ALL"),
+				},
+				RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetProject.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetProject(context.Background(), &GetProjectInput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetProject.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListAdapterVersions(t *testing.T) {
 	want := &ListAdapterVersionsOutput{
 		AdapterVersions: []types.AdapterVersionOverview{
@@ -10371,6 +10733,95 @@ func TestCheckResponseSnapshot_ListAdapters(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListAdapters.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListBlueprints(t *testing.T) {
+	want := &ListBlueprintsOutput{
+		Blueprints: []types.BlueprintSummary{
+			{
+				BlueprintArn:     ptr.String("__BlueprintArn__"),
+				BlueprintName:    ptr.String("__BlueprintName__"),
+				BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				ResourceOwner:    types.ResourceOwner("ACCOUNT"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				BlueprintArn:     ptr.String("__BlueprintArn__"),
+				BlueprintName:    ptr.String("__BlueprintName__"),
+				BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				ResourceOwner:    types.ResourceOwner("ACCOUNT"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListBlueprints.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListBlueprints(context.Background(), &ListBlueprintsInput{
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		ProjectFilter: &types.ProjectFilter{
+			ProjectArn: ptr.String("__ProjectArn__"),
+		},
+		ResourceOwner: types.ResourceOwner("ACCOUNT"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListBlueprints.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListProjects(t *testing.T) {
+	want := &ListProjectsOutput{
+		Projects: []types.ProjectSummary{
+			{
+				ProjectArn:       ptr.String("__ProjectArn__"),
+				ProjectName:      ptr.String("__ProjectName__"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ProjectArn:       ptr.String("__ProjectArn__"),
+				ProjectName:      ptr.String("__ProjectName__"),
+				CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListProjects.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListProjects(context.Background(), &ListProjectsInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		BlueprintFilter: &types.BlueprintFilter{
+			BlueprintArn:     ptr.String("__BlueprintArn__"),
+			BlueprintVersion: ptr.String("__BlueprintVersion__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListProjects.response", err)
 	}
 }
 
@@ -10480,6 +10931,59 @@ func TestCheckResponseSnapshot_StartDocumentAnalysis(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StartDocumentAnalysis.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StartDocumentInsights(t *testing.T) {
+	want := &StartDocumentInsightsOutput{
+		JobArn: ptr.String("__JobArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartDocumentInsights.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartDocumentInsights(context.Background(), &StartDocumentInsightsInput{
+		InputConfiguration: &types.InputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		OutputConfiguration: &types.OutputConfiguration{
+			S3Uri: ptr.String("__S3Uri__"),
+		},
+		ProjectArn: ptr.String("__ProjectArn__"),
+		Blueprints: []types.BlueprintItem{
+			{
+				BlueprintArn:     ptr.String("__BlueprintArn__"),
+				BlueprintVersion: ptr.String("__BlueprintVersion__"),
+			},
+			{
+				BlueprintArn:     ptr.String("__BlueprintArn__"),
+				BlueprintVersion: ptr.String("__BlueprintVersion__"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		NotificationConfiguration: &types.NotificationConfiguration{
+			EventBridgeConfiguration: &types.EventBridgeConfiguration{
+				State: types.State("ENABLED"),
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartDocumentInsights.response", err)
 	}
 }
 
@@ -10683,6 +11187,132 @@ func TestCheckResponseSnapshot_UpdateAdapter(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateAdapter.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateBlueprint(t *testing.T) {
+	want := &UpdateBlueprintOutput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateBlueprint.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateBlueprint(context.Background(), &UpdateBlueprintInput{
+		BlueprintArn: ptr.String("__BlueprintArn__"),
+		Schema:       ptr.String("__Schema__"),
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateBlueprint.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
+	want := &UpdateProjectOutput{
+		ProjectArn: ptr.String("__ProjectArn__"),
+		Status:     types.ProjectStatus("COMPLETED"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateProject.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateProject(context.Background(), &UpdateProjectInput{
+		ProjectArn:         ptr.String("__ProjectArn__"),
+		ProjectDescription: ptr.String("__ProjectDescription__"),
+		ExtractionConfiguration: &types.ExtractionConfiguration{
+			BoundingBox: &types.BoundingBoxConfiguration{
+				State: types.State("ENABLED"),
+			},
+			Granularity: &types.ExtractionGranularity{
+				Types: []types.ExtractionGranularityType{
+					types.ExtractionGranularityType("DOCUMENT"),
+					types.ExtractionGranularityType("DOCUMENT"),
+				},
+			},
+			OutputFormat: &types.OutputFormat{
+				AdditionalFileFormat: &types.OutputAdditionalFileFormat{
+					State: types.State("ENABLED"),
+				},
+				TextFormat: &types.OutputTextFormat{
+					Types: []types.OutputTextFormatType{
+						types.OutputTextFormatType("PLAIN_TEXT"),
+						types.OutputTextFormatType("PLAIN_TEXT"),
+					},
+				},
+			},
+		},
+		GenerativeConfiguration: &types.GenerativeConfiguration{
+			Summarization: &types.SummarizationConfiguration{
+				State: types.State("ENABLED"),
+			},
+			FigureCaption: &types.FigureCaptionConfiguration{
+				State: types.State("ENABLED"),
+			},
+		},
+		CustomConfiguration: &types.CustomConfiguration{
+			Blueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+			FallbackBlueprints: []types.BlueprintItem{
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+				{
+					BlueprintArn:     ptr.String("__BlueprintArn__"),
+					BlueprintVersion: ptr.String("__BlueprintVersion__"),
+				},
+			},
+		},
+		SplitterConfiguration: &types.SplitterConfiguration{
+			State: types.State("ENABLED"),
+		},
+		SensitiveDataConfiguration: &types.SensitiveDataConfiguration{
+			DetectionMode: types.SensitiveDataDetectionMode("DETECTION"),
+			PiiEntitiesConfiguration: &types.PIIEntitiesConfiguration{
+				PiiEntityTypes: []types.PIIEntityType{
+					types.PIIEntityType("ALL"),
+					types.PIIEntityType("ALL"),
+				},
+				RedactionMaskMode: types.PIIRedactionMaskMode("PII"),
+			},
+		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyId: ptr.String("__KmsKeyId__"),
+			KmsEncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateProject.response", err)
 	}
 }
 

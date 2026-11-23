@@ -14,8 +14,9 @@ import (
 //	Provides a summary of recommended actions based on specified filters.
 //
 // Management accounts and delegated administrators can retrieve recommended
-// actions that include associated member accounts. You can associate a member
-// account using AssociateAccounts .
+// action summaries for member accounts that are associated using AssociateAccounts
+// or have an applicable organization enrollment configuration with
+// organizationRuleMode set to AnyAllowed .
 func (c *Client) ListRecommendedActionSummaries(ctx context.Context, params *ListRecommendedActionSummariesInput, optFns ...func(*Options)) (*ListRecommendedActionSummariesOutput, error) {
 	if params == nil {
 		params = &ListRecommendedActionSummariesInput{}
@@ -39,12 +40,18 @@ type ListRecommendedActionSummariesInput struct {
 	Filters []types.RecommendedActionFilter
 
 	// The maximum number of recommended action summaries to return in a single
-	// response. Valid range is 1-1000.
+	// response. If you don't specify a value, the default is 100.
 	MaxResults *int32
 
 	// A token used for pagination to retrieve the next set of results when the
 	// response is truncated.
 	NextToken *string
+
+	//  The organizational unit (OU) or organization root IDs to use to filter the
+	// results. The response includes recommended action summaries for accounts in the
+	// specified OUs and their child OUs. Only the management account or a delegated
+	// administrator can specify this parameter.
+	OrganizationalUnitIds []string
 
 	noSmithyDocumentSerde
 }
@@ -64,6 +71,9 @@ func (v *ListRecommendedActionSummariesInput) SerializeMembers(s smithy.ShapeSer
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecommendedActionSummariesRequest_nextToken, *v.NextToken)
+	}
+	if v.OrganizationalUnitIds != nil {
+		serializeOrganizationalUnitIds(s, schemas.ListRecommendedActionSummariesRequest_organizationalUnitIds, v.OrganizationalUnitIds)
 	}
 }
 
@@ -156,7 +166,7 @@ func (c *Client) addOperationListRecommendedActionSummariesMiddlewares(stack *mi
 // ListRecommendedActionSummaries
 type ListRecommendedActionSummariesPaginatorOptions struct {
 	// The maximum number of recommended action summaries to return in a single
-	// response. Valid range is 1-1000.
+	// response. If you don't specify a value, the default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

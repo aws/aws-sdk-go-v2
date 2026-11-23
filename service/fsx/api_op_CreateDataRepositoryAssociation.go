@@ -74,6 +74,9 @@ type CreateDataRepositoryAssociationInput struct {
 	// if a data repository is associated with file system path /ns1/ , then you cannot
 	// link another data repository with file system path /ns1/ns2 .
 	//
+	// You must specify this path when you create a data repository association. There
+	// is no default value; a request that omits it fails with a BadRequest error.
+	//
 	// This path specifies where in your file system files will be exported from or
 	// imported to. This file system directory can be linked to only one Amazon S3
 	// bucket, and no other S3 bucket can be linked to the directory.

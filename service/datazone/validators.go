@@ -3470,6 +3470,26 @@ func (m *validateOpUpdateAssetFilter) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAssetOwner struct {
+}
+
+func (*validateOpUpdateAssetOwner) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAssetOwner) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAssetOwnerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAssetOwnerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateConnection struct {
 }
 
@@ -4580,6 +4600,10 @@ func addOpUpdateAccountPoolValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAssetFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAssetFilter{}, middleware.After)
+}
+
+func addOpUpdateAssetOwnerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAssetOwner{}, middleware.After)
 }
 
 func addOpUpdateConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -10781,6 +10805,27 @@ func validateOpUpdateAssetFilterInput(v *UpdateAssetFilterInput) error {
 		if err := validateAssetFilterConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAssetOwnerInput(v *UpdateAssetOwnerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssetOwnerInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.TargetProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetProjectIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

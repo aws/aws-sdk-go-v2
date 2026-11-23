@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"policyDocument":"__PolicyDocument__","productId":"__ProductId__","tags":{"key0":"__Value__"}}

@@ -1,3 +1,7 @@
+# v1.68.0 (2026-11-20)
+
+* **Feature**: This release adds the TranscribeAudio API for synchronous transcription. Send a media file inline or from Amazon S3 and receive the transcript in the same response, with support for speaker, channel identification, language identification, custom vocabularies, vocabulary filters, and PII redaction.
+
 # v1.67.0 (2026-11-11)
 
 * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.

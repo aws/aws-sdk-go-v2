@@ -267,6 +267,40 @@ func TestCheckRequestSnapshot_BatchDisassociateScramSecret(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateAssessment(t *testing.T) {
+	input := &CreateAssessmentInput{
+		AssessmentParameters: &types.AssessmentParameters{
+			TargetInstanceType: ptr.String("__TargetInstanceType__"),
+		},
+		AssessmentType: types.AssessmentType("UPDATE_BROKER_TYPE"),
+		ClusterArn:     ptr.String("__ClusterArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAssessment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAssessment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
 	input := &CreateChannelInput{
 		ChannelName: ptr.String("__ChannelName__"),
@@ -1092,6 +1126,34 @@ func TestCheckRequestSnapshot_CreateVpcConnection(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteAssessment(t *testing.T) {
+	input := &DeleteAssessmentInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		ClusterArn:    ptr.String("__ClusterArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAssessment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAssessment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteChannel(t *testing.T) {
 	input := &DeleteChannelInput{
 		ChannelArn: ptr.String("__ChannelArn__"),
@@ -1281,6 +1343,34 @@ func TestCheckRequestSnapshot_DeleteVpcConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteVpcConnection"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeAssessment(t *testing.T) {
+	input := &DescribeAssessmentInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		ClusterArn:    ptr.String("__ClusterArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAssessment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAssessment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1561,6 +1651,34 @@ func TestCheckRequestSnapshot_DescribeTopicPartitions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeTopicReassignment(t *testing.T) {
+	input := &DescribeTopicReassignmentInput{
+		ClusterArn:                    ptr.String("__ClusterArn__"),
+		TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTopicReassignment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTopicReassignment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeVpcConnection(t *testing.T) {
 	input := &DescribeVpcConnectionInput{
 		Arn: ptr.String("__Arn__"),
@@ -1665,6 +1783,68 @@ func TestCheckRequestSnapshot_GetCompatibleKafkaVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCompatibleKafkaVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAssessmentFindings(t *testing.T) {
+	input := &ListAssessmentFindingsInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		Category:      ptr.String("__Category__"),
+		ClusterArn:    ptr.String("__ClusterArn__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Severity:      ptr.String("__Severity__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAssessmentFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAssessmentFindings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAssessments(t *testing.T) {
+	input := &ListAssessmentsInput{
+		AssessmentType: ptr.String("__AssessmentType__"),
+		ClusterArn:     ptr.String("__ClusterArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAssessments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAssessments"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2044,6 +2224,36 @@ func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListTopicReassignments(t *testing.T) {
+	input := &ListTopicReassignmentsInput{
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		StatusFilter: ptr.String("__StatusFilter__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTopicReassignments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTopicReassignments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListTopics(t *testing.T) {
 	input := &ListTopicsInput{
 		ClusterArn:      ptr.String("__ClusterArn__"),
@@ -2190,6 +2400,71 @@ func TestCheckRequestSnapshot_RejectClientVpcConnection(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_StartTopicReassignment(t *testing.T) {
+	input := &StartTopicReassignmentInput{
+		ClientToken:        ptr.String("__ClientToken__"),
+		ClusterArn:         ptr.String("__ClusterArn__"),
+		TargetInstanceType: ptr.String("__TargetInstanceType__"),
+		TopicsToExclude: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TopicsToInclude: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTopicReassignment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTopicReassignment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StopTopicReassignment(t *testing.T) {
+	input := &StopTopicReassignmentInput{
+		ClusterArn:                    ptr.String("__ClusterArn__"),
+		TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopTopicReassignment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopTopicReassignment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -2331,6 +2606,7 @@ func TestCheckRequestSnapshot_UpdateBrokerType(t *testing.T) {
 		ClusterArn:         ptr.String("__ClusterArn__"),
 		CurrentVersion:     ptr.String("__CurrentVersion__"),
 		TargetInstanceType: ptr.String("__TargetInstanceType__"),
+		TopicReassignment:  types.TopicReassignment("AUTO"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2889,6 +3165,40 @@ func TestUpdateRequestSnapshot_BatchDisassociateScramSecret(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDisassociateScramSecret"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateAssessment(t *testing.T) {
+	input := &CreateAssessmentInput{
+		AssessmentParameters: &types.AssessmentParameters{
+			TargetInstanceType: ptr.String("__TargetInstanceType__"),
+		},
+		AssessmentType: types.AssessmentType("UPDATE_BROKER_TYPE"),
+		ClusterArn:     ptr.String("__ClusterArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAssessment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAssessment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3718,6 +4028,34 @@ func TestUpdateRequestSnapshot_CreateVpcConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteAssessment(t *testing.T) {
+	input := &DeleteAssessmentInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		ClusterArn:    ptr.String("__ClusterArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAssessment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAssessment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteChannel(t *testing.T) {
 	input := &DeleteChannelInput{
 		ChannelArn: ptr.String("__ChannelArn__"),
@@ -3907,6 +4245,34 @@ func TestUpdateRequestSnapshot_DeleteVpcConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteVpcConnection"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeAssessment(t *testing.T) {
+	input := &DescribeAssessmentInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		ClusterArn:    ptr.String("__ClusterArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAssessment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAssessment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4187,6 +4553,34 @@ func TestUpdateRequestSnapshot_DescribeTopicPartitions(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeTopicReassignment(t *testing.T) {
+	input := &DescribeTopicReassignmentInput{
+		ClusterArn:                    ptr.String("__ClusterArn__"),
+		TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTopicReassignment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTopicReassignment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeVpcConnection(t *testing.T) {
 	input := &DescribeVpcConnectionInput{
 		Arn: ptr.String("__Arn__"),
@@ -4291,6 +4685,68 @@ func TestUpdateRequestSnapshot_GetCompatibleKafkaVersions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCompatibleKafkaVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAssessmentFindings(t *testing.T) {
+	input := &ListAssessmentFindingsInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		Category:      ptr.String("__Category__"),
+		ClusterArn:    ptr.String("__ClusterArn__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Severity:      ptr.String("__Severity__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAssessmentFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAssessmentFindings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAssessments(t *testing.T) {
+	input := &ListAssessmentsInput{
+		AssessmentType: ptr.String("__AssessmentType__"),
+		ClusterArn:     ptr.String("__ClusterArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAssessments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAssessments"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4670,6 +5126,36 @@ func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListTopicReassignments(t *testing.T) {
+	input := &ListTopicReassignmentsInput{
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		StatusFilter: ptr.String("__StatusFilter__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTopicReassignments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTopicReassignments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListTopics(t *testing.T) {
 	input := &ListTopicsInput{
 		ClusterArn:      ptr.String("__ClusterArn__"),
@@ -4816,6 +5302,71 @@ func TestUpdateRequestSnapshot_RejectClientVpcConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_StartTopicReassignment(t *testing.T) {
+	input := &StartTopicReassignmentInput{
+		ClientToken:        ptr.String("__ClientToken__"),
+		ClusterArn:         ptr.String("__ClusterArn__"),
+		TargetInstanceType: ptr.String("__TargetInstanceType__"),
+		TopicsToExclude: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TopicsToInclude: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTopicReassignment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTopicReassignment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StopTopicReassignment(t *testing.T) {
+	input := &StopTopicReassignmentInput{
+		ClusterArn:                    ptr.String("__ClusterArn__"),
+		TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StopTopicReassignment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StopTopicReassignment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_TagResource(t *testing.T) {
 	input := &TagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -4957,6 +5508,7 @@ func TestUpdateRequestSnapshot_UpdateBrokerType(t *testing.T) {
 		ClusterArn:         ptr.String("__ClusterArn__"),
 		CurrentVersion:     ptr.String("__CurrentVersion__"),
 		TargetInstanceType: ptr.String("__TargetInstanceType__"),
+		TopicReassignment:  types.TopicReassignment("AUTO"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

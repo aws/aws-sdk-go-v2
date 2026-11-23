@@ -40,7 +40,7 @@ type UpdateBillScenarioInput struct {
 	//  The new expiration date for the bill scenario.
 	ExpiresAt *time.Time
 
-	// The setting for the reserved instance and savings plan group sharing used in
+	// The setting for the reserved instance and savings plans group sharing used in
 	// this estimate.
 	GroupSharingPreference types.GroupSharingPreferenceEnum
 
@@ -96,7 +96,7 @@ type UpdateBillScenarioOutput struct {
 	//  An error message if the bill scenario update failed.
 	FailureMessage *string
 
-	// The setting for the reserved instance and savings plan group sharing used in
+	// The setting for the reserved instance and savings plans group sharing used in
 	// this estimate.
 	GroupSharingPreference types.GroupSharingPreferenceEnum
 

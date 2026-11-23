@@ -178,14 +178,16 @@ func TestUpdateResponseSnapshot_ConfigureTags(t *testing.T) {
 
 func TestUpdateResponseSnapshot_ConfigureTagsForOrganization(t *testing.T) {
 	want := &ConfigureTagsForOrganizationOutput{
-		ConfiguredTagKeys: []types.TagKeyForOrganization{
+		ConfiguredTagKeys: []types.OrganizationTagKey{
 			{
 				Key:                   ptr.String("__Key__"),
 				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
 			},
 			{
 				Key:                   ptr.String("__Key__"),
 				EnabledForEventBridge: true,
+				Status:                types.TagKeyStatus("PENDING"),
 			},
 		},
 	}
@@ -269,9 +271,6 @@ func TestUpdateResponseSnapshot_DescribeAffectedEntities(t *testing.T) {
 				AccountTags: map[string]string{
 					"key0": "__Value__",
 				},
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
 				EntityMetadata: map[string]string{
 					"key0": "__Value__",
 				},
@@ -288,9 +287,6 @@ func TestUpdateResponseSnapshot_DescribeAffectedEntities(t *testing.T) {
 					"key0": "__Value__",
 				},
 				AccountTags: map[string]string{
-					"key0": "__Value__",
-				},
-				Tags: map[string]string{
 					"key0": "__Value__",
 				},
 				EntityMetadata: map[string]string{
@@ -337,9 +333,6 @@ func TestUpdateResponseSnapshot_DescribeAffectedEntitiesForOrganization(t *testi
 				AccountTags: map[string]string{
 					"key0": "__Value__",
 				},
-				Tags: map[string]string{
-					"key0": "__Value__",
-				},
 				EntityMetadata: map[string]string{
 					"key0": "__Value__",
 				},
@@ -356,9 +349,6 @@ func TestUpdateResponseSnapshot_DescribeAffectedEntitiesForOrganization(t *testi
 					"key0": "__Value__",
 				},
 				AccountTags: map[string]string{
-					"key0": "__Value__",
-				},
-				Tags: map[string]string{
 					"key0": "__Value__",
 				},
 				EntityMetadata: map[string]string{

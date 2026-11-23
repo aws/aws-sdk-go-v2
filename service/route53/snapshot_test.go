@@ -146,6 +146,18 @@ func TestCheckSnapshot_CreateHealthCheck(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateHealthCheckSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHealthCheckSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateHealthCheckSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateHostedZone(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateHostedZone(context.Background(), nil, func(o *Options) {
@@ -283,6 +295,18 @@ func TestCheckSnapshot_DeleteHealthCheck(t *testing.T) {
 	_, err := svc.DeleteHealthCheck(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteHealthCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteHealthCheckSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteHealthCheckSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteHealthCheckSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -518,6 +542,18 @@ func TestCheckSnapshot_GetHealthCheckLastFailureReason(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetHealthCheckSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetHealthCheckSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetHealthCheckSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetHealthCheckStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetHealthCheckStatus(context.Background(), nil, func(o *Options) {
@@ -535,6 +571,18 @@ func TestCheckSnapshot_GetHostedZone(t *testing.T) {
 	_, err := svc.GetHostedZone(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetHostedZone")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetHostedZoneChangeBatch(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetHostedZoneChangeBatch(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetHostedZoneChangeBatch")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -698,6 +746,42 @@ func TestCheckSnapshot_ListHealthChecks(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListHealthChecksBySource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHealthChecksBySource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListHealthChecksBySource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListHealthCheckSources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHealthCheckSources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListHealthCheckSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListHostedZoneChangeBatches(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHostedZoneChangeBatches(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListHostedZoneChangeBatches")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListHostedZones(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListHostedZones(context.Background(), nil, func(o *Options) {
@@ -739,6 +823,18 @@ func TestCheckSnapshot_ListQueryLoggingConfigs(t *testing.T) {
 	_, err := svc.ListQueryLoggingConfigs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListQueryLoggingConfigs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListResourceRecordSetChanges(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceRecordSetChanges(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListResourceRecordSetChanges")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -926,6 +1022,18 @@ func TestCheckSnapshot_UpdateHostedZoneFeatures(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateHostedZoneTier(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHostedZoneTier(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateHostedZoneTier")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateTrafficPolicyComment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTrafficPolicyComment(context.Background(), nil, func(o *Options) {
@@ -1026,6 +1134,18 @@ func TestUpdateSnapshot_CreateHealthCheck(t *testing.T) {
 	_, err := svc.CreateHealthCheck(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateHealthCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateHealthCheckSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHealthCheckSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateHealthCheckSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1170,6 +1290,18 @@ func TestUpdateSnapshot_DeleteHealthCheck(t *testing.T) {
 	_, err := svc.DeleteHealthCheck(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteHealthCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteHealthCheckSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteHealthCheckSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteHealthCheckSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1405,6 +1537,18 @@ func TestUpdateSnapshot_GetHealthCheckLastFailureReason(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetHealthCheckSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetHealthCheckSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetHealthCheckSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetHealthCheckStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetHealthCheckStatus(context.Background(), nil, func(o *Options) {
@@ -1422,6 +1566,18 @@ func TestUpdateSnapshot_GetHostedZone(t *testing.T) {
 	_, err := svc.GetHostedZone(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetHostedZone")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetHostedZoneChangeBatch(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetHostedZoneChangeBatch(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetHostedZoneChangeBatch")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1585,6 +1741,42 @@ func TestUpdateSnapshot_ListHealthChecks(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListHealthChecksBySource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHealthChecksBySource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListHealthChecksBySource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListHealthCheckSources(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHealthCheckSources(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListHealthCheckSources")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListHostedZoneChangeBatches(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHostedZoneChangeBatches(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListHostedZoneChangeBatches")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListHostedZones(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListHostedZones(context.Background(), nil, func(o *Options) {
@@ -1626,6 +1818,18 @@ func TestUpdateSnapshot_ListQueryLoggingConfigs(t *testing.T) {
 	_, err := svc.ListQueryLoggingConfigs(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListQueryLoggingConfigs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListResourceRecordSetChanges(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListResourceRecordSetChanges(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListResourceRecordSetChanges")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1806,6 +2010,18 @@ func TestUpdateSnapshot_UpdateHostedZoneFeatures(t *testing.T) {
 	_, err := svc.UpdateHostedZoneFeatures(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateHostedZoneFeatures")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateHostedZoneTier(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHostedZoneTier(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateHostedZoneTier")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

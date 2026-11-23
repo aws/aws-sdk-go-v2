@@ -4,6 +4,7 @@ package rtbfabric
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
 	smithy "github.com/aws/smithy-go"
@@ -57,6 +58,10 @@ type UpdateLinkRoutingRuleInput struct {
 	// This member is required.
 	RuleId *string
 
+	// A unique, case-sensitive identifier for the request. The SDK generates one when
+	// you don't.
+	ClientToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -67,6 +72,9 @@ func (v *UpdateLinkRoutingRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateLinkRoutingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateLinkRoutingRuleRequest_clientToken, *v.ClientToken)
+	}
 	if v.Conditions != nil {
 		s.WriteStruct(schemas.UpdateLinkRoutingRuleRequest_conditions)
 		v.Conditions.SerializeMembers(s)
@@ -98,6 +106,11 @@ type UpdateLinkRoutingRuleOutput struct {
 	// This member is required.
 	Status types.RuleStatus
 
+	// The ID of the update this call started.
+	//
+	// This member is required.
+	UpdateId *string
+
 	// The timestamp of when the routing rule was last updated.
 	//
 	// This member is required.
@@ -122,6 +135,9 @@ func (v *UpdateLinkRoutingRuleOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateLinkRoutingRuleResponse_status, string(v.Status))
 	}
+	if v.UpdateId != nil {
+		s.WriteString(schemas.UpdateLinkRoutingRuleResponse_updateId, *v.UpdateId)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.UpdateLinkRoutingRuleResponse_updatedAt, *v.UpdatedAt)
 	}
@@ -139,6 +155,9 @@ func (v *UpdateLinkRoutingRuleOutput) Deserialize(d smithy.ShapeDeserializer) er
 			}
 			v.Status = types.RuleStatus(ev)
 			return nil
+		case schemas.UpdateLinkRoutingRuleResponse_updateId:
+			v.UpdateId = new(string)
+			return d.ReadString(schemas.UpdateLinkRoutingRuleResponse_updateId, v.UpdateId)
 		case schemas.UpdateLinkRoutingRuleResponse_updatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.UpdateLinkRoutingRuleResponse_updatedAt, v.UpdatedAt)
@@ -166,6 +185,9 @@ func (c *Client) addOperationUpdateLinkRoutingRuleMiddlewares(stack *middleware.
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opUpdateLinkRoutingRuleMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateLinkRoutingRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -185,4 +207,37 @@ func (c *Client) addOperationUpdateLinkRoutingRuleMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpUpdateLinkRoutingRule struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpUpdateLinkRoutingRule) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpUpdateLinkRoutingRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*UpdateLinkRoutingRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateLinkRoutingRuleInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opUpdateLinkRoutingRuleMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateLinkRoutingRule{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }

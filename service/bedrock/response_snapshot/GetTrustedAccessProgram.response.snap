@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"description":"__Description__","detailsUrl":"__DetailsUrl__","eligibilityScope":"organization","enrollmentUrl":"__EnrollmentUrl__","name":"__Name__","optIn":"inherit","programId":"__ProgramId__","providerName":"__ProviderName__","resolvedFor":{"accountId":"__AccountId__","projectArn":"__ProjectArn__"},"source":"organization","status":"requestable","statusReason":"__StatusReason__","updatedAt":"2000-01-01T00:00:00Z"}

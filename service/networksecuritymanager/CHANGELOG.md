@@ -1,3 +1,7 @@
+# v1.1.0 (2026-11-20)
+
+* **Feature**: Adds support for Network Firewall automated internet firewall to Network Security Manager
+
 # v1.0.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

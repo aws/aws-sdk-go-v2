@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"correlationId":"__CorrelationId__","description":"__Description__","lastUpdatedAt":946684800,"reasonCode":"ACTIONED","reportId":"__ReportId__","status":"QUEUED","submittedAt":946684800}

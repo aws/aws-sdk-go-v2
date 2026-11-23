@@ -33,6 +33,17 @@ func (c *Client) ListFirewalls(ctx context.Context, params *ListFirewallsInput, 
 
 type ListFirewallsInput struct {
 
+	// Specifies the firewall type to filter the results by. You can specify one of
+	// the following values:
+	//
+	//   - IGW_FIREWALL - Returns only internet gateway firewalls, which Amazon Web
+	//   Services Network Security Manager creates and manages for your VPCs.
+	//
+	//   - FIREWALL - Returns only standard Network Firewall firewalls.
+	//
+	// If you don't specify a type, the default is to return firewalls of both types.
+	FirewallType types.FirewallType
+
 	// The maximum number of objects that you want Network Firewall to return for this
 	// request. If more objects are available, in the response, Network Firewall
 	// provides a NextToken value that you can use in a subsequent call to get the
@@ -61,6 +72,9 @@ func (v *ListFirewallsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFirewallsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallType != "" {
+		s.WriteString(schemas.ListFirewallsRequest_FirewallType, string(v.FirewallType))
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListFirewallsRequest_MaxResults, *v.MaxResults)
 	}

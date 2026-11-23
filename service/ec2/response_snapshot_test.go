@@ -5109,15 +5109,16 @@ func TestCheckResponseSnapshot_CreateDefaultSubnet(t *testing.T) {
 			BlockPublicAccessStates: &types.BlockPublicAccessStates{
 				InternetGatewayBlockMode: types.BlockPublicAccessMode("off"),
 			},
-			Type:                    ptr.String("__Type__"),
-			SubnetId:                ptr.String("__SubnetId__"),
-			State:                   types.SubnetState("pending"),
-			VpcId:                   ptr.String("__VpcId__"),
-			CidrBlock:               ptr.String("__CidrBlock__"),
-			AvailableIpAddressCount: ptr.Int32(1),
-			AvailabilityZone:        ptr.String("__AvailabilityZone__"),
-			DefaultForAz:            ptr.Bool(true),
-			MapPublicIpOnLaunch:     ptr.Bool(true),
+			Type:                            ptr.String("__Type__"),
+			NetworkFirewallConnectivityType: types.NetworkFirewallConnectivityType("flexible"),
+			SubnetId:                        ptr.String("__SubnetId__"),
+			State:                           types.SubnetState("pending"),
+			VpcId:                           ptr.String("__VpcId__"),
+			CidrBlock:                       ptr.String("__CidrBlock__"),
+			AvailableIpAddressCount:         ptr.Int32(1),
+			AvailabilityZone:                ptr.String("__AvailabilityZone__"),
+			DefaultForAz:                    ptr.Bool(true),
+			MapPublicIpOnLaunch:             ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateDefaultSubnet.response")
@@ -5263,6 +5264,18 @@ func TestCheckResponseSnapshot_CreateDefaultVpc(t *testing.T) {
 			},
 			BlockPublicAccessStates: &types.BlockPublicAccessStates{
 				InternetGatewayBlockMode: types.BlockPublicAccessMode("off"),
+			},
+			NetworkFirewallAssociations: []types.NetworkFirewallAssociation{
+				{
+					FirewallArn:              ptr.String("__FirewallArn__"),
+					FirewallOnboardingStatus: types.FirewallOnboardingStatus("pending"),
+					FirewallMode:             types.FirewallMode("monitor"),
+				},
+				{
+					FirewallArn:              ptr.String("__FirewallArn__"),
+					FirewallOnboardingStatus: types.FirewallOnboardingStatus("pending"),
+					FirewallMode:             types.FirewallMode("monitor"),
+				},
 			},
 			VpcId:         ptr.String("__VpcId__"),
 			State:         types.VpcState("pending"),
@@ -13375,6 +13388,10 @@ func TestCheckResponseSnapshot_CreateRouteTable(t *testing.T) {
 					CoreNetworkArn:              ptr.String("__CoreNetworkArn__"),
 					OdbNetworkArn:               ptr.String("__OdbNetworkArn__"),
 					IpAddress:                   ptr.String("__IpAddress__"),
+					IgwFirewall: &types.IgwFirewall{
+						FirewallArn: ptr.String("__FirewallArn__"),
+						Status:      types.FirewallOnboardingStatus("pending"),
+					},
 				},
 				{
 					DestinationCidrBlock:        ptr.String("__DestinationCidrBlock__"),
@@ -13395,6 +13412,10 @@ func TestCheckResponseSnapshot_CreateRouteTable(t *testing.T) {
 					CoreNetworkArn:              ptr.String("__CoreNetworkArn__"),
 					OdbNetworkArn:               ptr.String("__OdbNetworkArn__"),
 					IpAddress:                   ptr.String("__IpAddress__"),
+					IgwFirewall: &types.IgwFirewall{
+						FirewallArn: ptr.String("__FirewallArn__"),
+						Status:      types.FirewallOnboardingStatus("pending"),
+					},
 				},
 			},
 			Tags: []types.Tag{
@@ -14031,15 +14052,16 @@ func TestCheckResponseSnapshot_CreateSubnet(t *testing.T) {
 			BlockPublicAccessStates: &types.BlockPublicAccessStates{
 				InternetGatewayBlockMode: types.BlockPublicAccessMode("off"),
 			},
-			Type:                    ptr.String("__Type__"),
-			SubnetId:                ptr.String("__SubnetId__"),
-			State:                   types.SubnetState("pending"),
-			VpcId:                   ptr.String("__VpcId__"),
-			CidrBlock:               ptr.String("__CidrBlock__"),
-			AvailableIpAddressCount: ptr.Int32(1),
-			AvailabilityZone:        ptr.String("__AvailabilityZone__"),
-			DefaultForAz:            ptr.Bool(true),
-			MapPublicIpOnLaunch:     ptr.Bool(true),
+			Type:                            ptr.String("__Type__"),
+			NetworkFirewallConnectivityType: types.NetworkFirewallConnectivityType("flexible"),
+			SubnetId:                        ptr.String("__SubnetId__"),
+			State:                           types.SubnetState("pending"),
+			VpcId:                           ptr.String("__VpcId__"),
+			CidrBlock:                       ptr.String("__CidrBlock__"),
+			AvailableIpAddressCount:         ptr.Int32(1),
+			AvailabilityZone:                ptr.String("__AvailabilityZone__"),
+			DefaultForAz:                    ptr.Bool(true),
+			MapPublicIpOnLaunch:             ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateSubnet.response")
@@ -16538,6 +16560,18 @@ func TestCheckResponseSnapshot_CreateVpc(t *testing.T) {
 			},
 			BlockPublicAccessStates: &types.BlockPublicAccessStates{
 				InternetGatewayBlockMode: types.BlockPublicAccessMode("off"),
+			},
+			NetworkFirewallAssociations: []types.NetworkFirewallAssociation{
+				{
+					FirewallArn:              ptr.String("__FirewallArn__"),
+					FirewallOnboardingStatus: types.FirewallOnboardingStatus("pending"),
+					FirewallMode:             types.FirewallMode("monitor"),
+				},
+				{
+					FirewallArn:              ptr.String("__FirewallArn__"),
+					FirewallOnboardingStatus: types.FirewallOnboardingStatus("pending"),
+					FirewallMode:             types.FirewallMode("monitor"),
+				},
 			},
 			VpcId:         ptr.String("__VpcId__"),
 			State:         types.VpcState("pending"),
@@ -52182,6 +52216,10 @@ func TestCheckResponseSnapshot_DescribeRouteTables(t *testing.T) {
 						CoreNetworkArn:              ptr.String("__CoreNetworkArn__"),
 						OdbNetworkArn:               ptr.String("__OdbNetworkArn__"),
 						IpAddress:                   ptr.String("__IpAddress__"),
+						IgwFirewall: &types.IgwFirewall{
+							FirewallArn: ptr.String("__FirewallArn__"),
+							Status:      types.FirewallOnboardingStatus("pending"),
+						},
 					},
 					{
 						DestinationCidrBlock:        ptr.String("__DestinationCidrBlock__"),
@@ -52202,6 +52240,10 @@ func TestCheckResponseSnapshot_DescribeRouteTables(t *testing.T) {
 						CoreNetworkArn:              ptr.String("__CoreNetworkArn__"),
 						OdbNetworkArn:               ptr.String("__OdbNetworkArn__"),
 						IpAddress:                   ptr.String("__IpAddress__"),
+						IgwFirewall: &types.IgwFirewall{
+							FirewallArn: ptr.String("__FirewallArn__"),
+							Status:      types.FirewallOnboardingStatus("pending"),
+						},
 					},
 				},
 				Tags: []types.Tag{
@@ -52273,6 +52315,10 @@ func TestCheckResponseSnapshot_DescribeRouteTables(t *testing.T) {
 						CoreNetworkArn:              ptr.String("__CoreNetworkArn__"),
 						OdbNetworkArn:               ptr.String("__OdbNetworkArn__"),
 						IpAddress:                   ptr.String("__IpAddress__"),
+						IgwFirewall: &types.IgwFirewall{
+							FirewallArn: ptr.String("__FirewallArn__"),
+							Status:      types.FirewallOnboardingStatus("pending"),
+						},
 					},
 					{
 						DestinationCidrBlock:        ptr.String("__DestinationCidrBlock__"),
@@ -52293,6 +52339,10 @@ func TestCheckResponseSnapshot_DescribeRouteTables(t *testing.T) {
 						CoreNetworkArn:              ptr.String("__CoreNetworkArn__"),
 						OdbNetworkArn:               ptr.String("__OdbNetworkArn__"),
 						IpAddress:                   ptr.String("__IpAddress__"),
+						IgwFirewall: &types.IgwFirewall{
+							FirewallArn: ptr.String("__FirewallArn__"),
+							Status:      types.FirewallOnboardingStatus("pending"),
+						},
 					},
 				},
 				Tags: []types.Tag{
@@ -57619,15 +57669,16 @@ func TestCheckResponseSnapshot_DescribeSubnets(t *testing.T) {
 				BlockPublicAccessStates: &types.BlockPublicAccessStates{
 					InternetGatewayBlockMode: types.BlockPublicAccessMode("off"),
 				},
-				Type:                    ptr.String("__Type__"),
-				SubnetId:                ptr.String("__SubnetId__"),
-				State:                   types.SubnetState("pending"),
-				VpcId:                   ptr.String("__VpcId__"),
-				CidrBlock:               ptr.String("__CidrBlock__"),
-				AvailableIpAddressCount: ptr.Int32(1),
-				AvailabilityZone:        ptr.String("__AvailabilityZone__"),
-				DefaultForAz:            ptr.Bool(true),
-				MapPublicIpOnLaunch:     ptr.Bool(true),
+				Type:                            ptr.String("__Type__"),
+				NetworkFirewallConnectivityType: types.NetworkFirewallConnectivityType("flexible"),
+				SubnetId:                        ptr.String("__SubnetId__"),
+				State:                           types.SubnetState("pending"),
+				VpcId:                           ptr.String("__VpcId__"),
+				CidrBlock:                       ptr.String("__CidrBlock__"),
+				AvailableIpAddressCount:         ptr.Int32(1),
+				AvailabilityZone:                ptr.String("__AvailabilityZone__"),
+				DefaultForAz:                    ptr.Bool(true),
+				MapPublicIpOnLaunch:             ptr.Bool(true),
 			},
 			{
 				AvailabilityZoneId:          ptr.String("__AvailabilityZoneId__"),
@@ -57680,15 +57731,16 @@ func TestCheckResponseSnapshot_DescribeSubnets(t *testing.T) {
 				BlockPublicAccessStates: &types.BlockPublicAccessStates{
 					InternetGatewayBlockMode: types.BlockPublicAccessMode("off"),
 				},
-				Type:                    ptr.String("__Type__"),
-				SubnetId:                ptr.String("__SubnetId__"),
-				State:                   types.SubnetState("pending"),
-				VpcId:                   ptr.String("__VpcId__"),
-				CidrBlock:               ptr.String("__CidrBlock__"),
-				AvailableIpAddressCount: ptr.Int32(1),
-				AvailabilityZone:        ptr.String("__AvailabilityZone__"),
-				DefaultForAz:            ptr.Bool(true),
-				MapPublicIpOnLaunch:     ptr.Bool(true),
+				Type:                            ptr.String("__Type__"),
+				NetworkFirewallConnectivityType: types.NetworkFirewallConnectivityType("flexible"),
+				SubnetId:                        ptr.String("__SubnetId__"),
+				State:                           types.SubnetState("pending"),
+				VpcId:                           ptr.String("__VpcId__"),
+				CidrBlock:                       ptr.String("__CidrBlock__"),
+				AvailableIpAddressCount:         ptr.Int32(1),
+				AvailabilityZone:                ptr.String("__AvailabilityZone__"),
+				DefaultForAz:                    ptr.Bool(true),
+				MapPublicIpOnLaunch:             ptr.Bool(true),
 			},
 		},
 	}
@@ -62668,6 +62720,18 @@ func TestCheckResponseSnapshot_DescribeVpcs(t *testing.T) {
 				BlockPublicAccessStates: &types.BlockPublicAccessStates{
 					InternetGatewayBlockMode: types.BlockPublicAccessMode("off"),
 				},
+				NetworkFirewallAssociations: []types.NetworkFirewallAssociation{
+					{
+						FirewallArn:              ptr.String("__FirewallArn__"),
+						FirewallOnboardingStatus: types.FirewallOnboardingStatus("pending"),
+						FirewallMode:             types.FirewallMode("monitor"),
+					},
+					{
+						FirewallArn:              ptr.String("__FirewallArn__"),
+						FirewallOnboardingStatus: types.FirewallOnboardingStatus("pending"),
+						FirewallMode:             types.FirewallMode("monitor"),
+					},
+				},
 				VpcId:         ptr.String("__VpcId__"),
 				State:         types.VpcState("pending"),
 				CidrBlock:     ptr.String("__CidrBlock__"),
@@ -62792,6 +62856,18 @@ func TestCheckResponseSnapshot_DescribeVpcs(t *testing.T) {
 				},
 				BlockPublicAccessStates: &types.BlockPublicAccessStates{
 					InternetGatewayBlockMode: types.BlockPublicAccessMode("off"),
+				},
+				NetworkFirewallAssociations: []types.NetworkFirewallAssociation{
+					{
+						FirewallArn:              ptr.String("__FirewallArn__"),
+						FirewallOnboardingStatus: types.FirewallOnboardingStatus("pending"),
+						FirewallMode:             types.FirewallMode("monitor"),
+					},
+					{
+						FirewallArn:              ptr.String("__FirewallArn__"),
+						FirewallOnboardingStatus: types.FirewallOnboardingStatus("pending"),
+						FirewallMode:             types.FirewallMode("monitor"),
+					},
 				},
 				VpcId:         ptr.String("__VpcId__"),
 				State:         types.VpcState("pending"),

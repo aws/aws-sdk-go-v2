@@ -288,8 +288,8 @@ func (p EndpointParameters) WithDefaults() EndpointParameters {
 
 const bddRoot int32 = 2
 
-var bddNodes = [45]int32{
-	-1, 1, -1, 0, 100000012, 3, 1, 4, 100000011, 2, 5, 100000010, 3, 6, 100000009, 4, 7, 100000008, 5, 8, 100000007, 6, 100000007, 9, 7, 10, 100000006, 8, 11, 100000005, 9, 12, 14, 10, 13, 14, 11, 14, 100000004, 12, 15, 100000003, 13, 100000001, 100000002}
+var bddNodes = [75]int32{
+	-1, 1, -1, 0, 3, 100000015, 1, 4, 100000014, 2, 5, 100000013, 3, 6, 100000012, 4, 7, 100000011, 5, 100000011, 8, 6, 9, 100000010, 7, 16, 10, 8, 11, 100000009, 9, 100000008, 12, 10, 13, 15, 11, 14, 100000006, 12, 15, 100000005, 13, 21, 100000007, 9, 22, 17, 10, 18, 20, 11, 19, 100000006, 12, 20, 100000005, 13, 21, 100000004, 14, 100000001, 100000002, 10, 23, 25, 11, 24, 100000006, 12, 25, 100000005, 13, 100000003, 100000004}
 
 type conditionContext struct {
 	parsedArn       *awsrulesfn.ARN
@@ -301,44 +301,46 @@ type conditionContext struct {
 func evalCondition(idx int, params *EndpointParameters, c *conditionContext) bool {
 	switch idx {
 	case 0:
-		return *params.UseFIPS == true
-	case 1:
 		return params.KvsARN != nil
-	case 2:
+	case 1:
 		if v := awsrulesfn.ParseARN(*params.KvsARN); v != nil {
 			c.parsedArn = v
 			return true
 		}
 		return false
-	case 3:
+	case 2:
 		return c.parsedArn.Service == "cloudfront"
-	case 4:
+	case 3:
 		return c.parsedArn.Region == ""
-	case 5:
+	case 4:
 		if v := c.parsedArn.ResourceId.Get(0); v != nil {
 			c.arnType = v
 			return true
 		}
 		return false
-	case 6:
+	case 5:
 		return *c.arnType == ""
-	case 7:
+	case 6:
 		return *c.arnType == "key-value-store"
-	case 8:
+	case 7:
 		return c.parsedArn.Partition == "aws"
+	case 8:
+		return c.parsedArn.Partition == "aws-eusc"
 	case 9:
-		return params.Region != nil
+		return *params.UseFIPS == true
 	case 10:
+		return params.Region != nil
+	case 11:
 		if v := awsrulesfn.GetPartition(*params.Region); v != nil {
 			c.partitionResult = v
 			return true
 		}
 		return false
-	case 11:
-		return c.parsedArn.Partition == c.partitionResult.Name
 	case 12:
-		return params.Endpoint != nil
+		return c.parsedArn.Partition == c.partitionResult.Name
 	case 13:
+		return params.Endpoint != nil
+	case 14:
 		if v := rulesfn.ParseURL(*params.Endpoint); v != nil {
 			c.url = v
 			return true
@@ -391,6 +393,8 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 	case 2:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Provided endpoint is not a valid URL")
 	case 3:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: FIPS and custom endpoint are not supported")
+	case 4:
 		uriString := func() string {
 			var out strings.Builder
 			out.WriteString("https://")
@@ -423,7 +427,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 				return out
 			}(),
 		}, nil
-	case 4:
+	case 5:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
 			var out strings.Builder
 			out.WriteString("Client was configured for partition `")
@@ -433,7 +437,44 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			out.WriteString("`")
 			return out.String()
 		}())
-	case 5:
+	case 6:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
+	case 7:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(c.parsedArn.AccountId)
+			out.WriteString(".cloudfront-kvs.global.api.amazonwebservices.eu")
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+			Properties: func() smithy.Properties {
+				var out smithy.Properties
+				smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+					{
+						SchemeID: "sigv4a",
+						SignerProperties: func() smithy.Properties {
+							var sp smithy.Properties
+							smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
+							smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
+
+							smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+							return sp
+						}(),
+					},
+				})
+				return out
+			}(),
+		}, nil
+	case 8:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore.")
+	case 9:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
 			var out strings.Builder
 			out.WriteString("CloudFront-KeyValueStore is not supported in partition `")
@@ -441,7 +482,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			out.WriteString("`")
 			return out.String()
 		}())
-	case 6:
+	case 10:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
 			var out strings.Builder
 			out.WriteString("ARN resource type is invalid. Expected `key-value-store`, found: `")
@@ -449,9 +490,9 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			out.WriteString("`")
 			return out.String()
 		}())
-	case 7:
+	case 11:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "No resource type found in the KVS ARN. Resource type must be `key-value-store`.")
-	case 8:
+	case 12:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
 			var out strings.Builder
 			out.WriteString("Provided ARN must be a global resource ARN. Found: `")
@@ -459,7 +500,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			out.WriteString("`")
 			return out.String()
 		}())
-	case 9:
+	case 13:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
 			var out strings.Builder
 			out.WriteString("Provided ARN is not a valid CloudFront Service ARN. Found: `")
@@ -467,12 +508,10 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			out.WriteString("`")
 			return out.String()
 		}())
-	case 10:
+	case 14:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "KVS ARN must be a valid ARN")
-	case 11:
+	case 15:
 		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "KVS ARN must be provided to use this service")
-	case 12:
-		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore.")
 	}
 	return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, invalid result index: %d", idx)
 }

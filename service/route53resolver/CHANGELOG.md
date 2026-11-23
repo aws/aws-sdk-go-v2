@@ -1,3 +1,7 @@
+# v1.55.0 (2026-11-19)
+
+* **Feature**: Route 53 Resolver DNS Firewall adds the AutoAllowlist firewall rule type, which observes the domains your VPCs resolve and allows the ones you approve, and the ListFirewallRuleDomains API.
+
 # v1.54.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

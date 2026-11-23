@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configurableActions":["FILTER","FILTER"],"configurationSchema":"__ConfigurationSchema__","createdAt":946684800,"moduleId":"__ModuleId__","moduleVersionArn":"__ModuleVersionArn__","permissions":["READ_REQUEST_BODY","READ_REQUEST_BODY"],"releaseNotes":"__ReleaseNotes__","status":"CREATING","updatedAt":946684800,"version":"__Version__"}

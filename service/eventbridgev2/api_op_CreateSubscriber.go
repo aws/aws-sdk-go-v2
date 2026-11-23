@@ -14,7 +14,9 @@ import (
 
 // Creates a subscriber on an event bus, which delivers matching events to the
 // configured target. The bus must be ACTIVE. Retries carrying the same ClientToken
-// are idempotent.
+// are idempotent. A subscriber that targets an Amazon MSK cluster provisions its
+// connectivity asynchronously after this call returns and begins delivering when
+// its ConnectivityState reaches ACTIVE (see the MskSubscriberActive waiter).
 func (c *Client) CreateSubscriber(ctx context.Context, params *CreateSubscriberInput, optFns ...func(*Options)) (*CreateSubscriberOutput, error) {
 	if params == nil {
 		params = &CreateSubscriberInput{}
@@ -94,8 +96,7 @@ type CreateSubscriberInput struct {
 	// Tags attached to a resource, as key-value pairs.
 	Tags map[string]string
 
-	// Not applicable to universal (aws-sdk) targets, whose input transformation is
-	// UniversalTargetParameters.Input; a Transformer on such a target is rejected.
+	// Transformer configuration for a subscriber.
 	Transformer *types.Transformer
 
 	// Delivery ordering mode of a subscriber: FIFO delivers events in order within an
@@ -210,6 +211,11 @@ type CreateSubscriberOutput struct {
 	// The Amazon Resource Name (ARN) that uniquely identifies a subscriber.
 	SubscriberArn *string
 
+	// Values EventBridge manages for a subscriber that depend on its target type.
+	// Only the member for the subscriber's target type is set. Returned in responses
+	// only; the customer never supplies these values.
+	SubscriberDetails *types.SubscriberDetails
+
 	// Delivery ordering mode of a subscriber: FIFO delivers events in order within an
 	// event group; UNORDERED delivers without an ordering guarantee.
 	Type types.OrderingType
@@ -250,6 +256,11 @@ func (v *CreateSubscriberOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubscriberArn != nil {
 		s.WriteString(schemas.CreateSubscriberResponse_SubscriberArn, *v.SubscriberArn)
 	}
+	if v.SubscriberDetails != nil {
+		s.WriteStruct(schemas.CreateSubscriberResponse_SubscriberDetails)
+		v.SubscriberDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateSubscriberResponse_Type, string(v.Type))
 	}
@@ -286,6 +297,9 @@ func (v *CreateSubscriberOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CreateSubscriberResponse_SubscriberArn:
 			v.SubscriberArn = new(string)
 			return d.ReadString(schemas.CreateSubscriberResponse_SubscriberArn, v.SubscriberArn)
+		case schemas.CreateSubscriberResponse_SubscriberDetails:
+			v.SubscriberDetails = &types.SubscriberDetails{}
+			return v.SubscriberDetails.Deserialize(d)
 		case schemas.CreateSubscriberResponse_Type:
 			var ev string
 			if err := d.ReadString(schemas.CreateSubscriberResponse_Type, &ev); err != nil {

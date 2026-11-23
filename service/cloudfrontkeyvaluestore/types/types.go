@@ -11,7 +11,7 @@ import (
 // List item for keys to delete.
 type DeleteKeyRequestListItem struct {
 
-	// The key of the key value pair to be deleted.
+	// The key of the key-value pair to be deleted.
 	//
 	// This member is required.
 	Key *string
@@ -41,15 +41,15 @@ func (v *DeleteKeyRequestListItem) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
-// A key value pair.
+// A key-value pair.
 type ListKeysResponseListItem struct {
 
-	// The key of the key value pair.
+	// The key of the key-value pair.
 	//
 	// This member is required.
 	Key *string
 
-	// The value of the key value pair.
+	// The value of the key-value pair.
 	//
 	// This member is required.
 	Value *string
@@ -85,15 +85,15 @@ func (v *ListKeysResponseListItem) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
-// List item for key value pair to put.
+// List item for key-value pair to put.
 type PutKeyRequestListItem struct {
 
-	// The key of the key value pair list item to put.
+	// The key of the key-value pair list item to put.
 	//
 	// This member is required.
 	Key *string
 
-	// The value for the key value pair to put.
+	// The value for the key-value pair to put.
 	//
 	// This member is required.
 	Value *string

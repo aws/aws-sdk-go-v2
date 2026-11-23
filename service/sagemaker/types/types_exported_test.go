@@ -139,6 +139,28 @@ func ExampleAutoMLProblemTypeResolvedAttributes_outputUsage() {
 var _ *types.TextGenerationResolvedAttributes
 var _ *types.TabularResolvedAttributes
 
+func ExampleCapacityReservationResourceAssociation_outputUsage() {
+	var union types.CapacityReservationResourceAssociation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CapacityReservationResourceAssociationMemberEndpoints:
+		_ = v.Value // Value is types.CapacityReservationEndpointsAssociation
+
+	case *types.CapacityReservationResourceAssociationMemberHyperPodClusters:
+		_ = v.Value // Value is types.CapacityReservationHyperPodClustersAssociation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CapacityReservationHyperPodClustersAssociation
+var _ *types.CapacityReservationEndpointsAssociation
+
 func ExampleClusterInstanceStorageConfig_outputUsage() {
 	var union types.ClusterInstanceStorageConfig
 	// type switches can be used to check the union value

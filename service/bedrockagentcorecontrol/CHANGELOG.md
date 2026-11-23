@@ -1,3 +1,15 @@
+# v1.84.0 (2026-11-20)
+
+* **Feature**: Adds responseInterceptionMode and responseStreamingConfiguration to gateway interceptor configurations. Set responseInterceptionMode to STREAM to have the response interceptor process streaming responses from HTTP and inference targets in batches of events.
+
+# v1.83.0 (2026-11-19)
+
+* **Feature**: Adds AWS Billing payments to ProcessPayment. Agents can pay x402 sellers that accept AWS Marketplace billing, and the charge goes on the buyer's AWS bill. Adds support for nested virtualization in Runtime Instances. When you turn on nested virtualization, Runtime launches instances with KVM enabled.
+
+# v1.82.0 (2026-11-18)
+
+* **Feature**: Adds s3BucketMount to mount an Amazon S3 bucket as a file system in AgentCore Runtime, with an optional per-session key prefix and adds operatingSystemConfiguration with a Linux privilegeMode (STANDARD or PRIVILEGED) to the capacity provider configuration
+
 # v1.81.0 (2026-11-17)
 
 * **Feature**: Adds support for agent insight stores that help frame insight evaluators, and dataset source support for batch evaluation

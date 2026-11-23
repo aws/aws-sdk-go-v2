@@ -113,6 +113,16 @@ var GetDecryptedAPIKey = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetDecryptedAPIKey",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "GetEvent",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetEventActor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "GetEventActor",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetIPSet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "GetIPSet",
@@ -201,6 +211,21 @@ var ListAvailableManagedRuleGroups = smithy.NewSchema(smithy.ShapeID{
 var ListAvailableManagedRuleGroupVersions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "ListAvailableManagedRuleGroupVersions",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListEventActors = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ListEventActors",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListEvents = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ListEvents",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListEventsByWebACL = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ListEventsByWebACL",
 }, smithy.ShapeTypeOperation, 0)
 
 var ListIPSets = smithy.NewSchema(smithy.ShapeID{
@@ -367,6 +392,20 @@ var AllQueryArguments = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AllQueryArguments",
 }, smithy.ShapeTypeStructure, 0)
 
+var AnalyticsConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "AnalyticsConfig",
+}, smithy.ShapeTypeStructure, 1)
+var AnalyticsConfig_Mode *smithy.Schema
+
+var AnalyticsMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "AnalyticsMode",
+}, smithy.ShapeTypeEnum, 2)
+var AnalyticsMode_CROSS_REGION *smithy.Schema
+
+var AnalyticsMode_DISABLED *smithy.Schema
+
 var AndStatement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "AndStatement",
@@ -407,6 +446,64 @@ var _APIKeyVersion = smithy.NewSchema(smithy.ShapeID{
 	Name:      "APIKeyVersion",
 }, smithy.ShapeTypeInteger, 0)
 
+var ApiPattern = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ApiPattern",
+}, smithy.ShapeTypeStructure, 4)
+var ApiPattern_Method *smithy.Schema
+
+var ApiPattern_PathPattern *smithy.Schema
+
+var ApiPattern_Port *smithy.Schema
+
+var ApiPattern_Domains *smithy.Schema
+
+var _ApiPatternDomainList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ApiPatternDomainList",
+}, smithy.ShapeTypeList, 1)
+var _ApiPatternDomainList_member *smithy.Schema
+
+var ApiPatternFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ApiPatternFilter",
+}, smithy.ShapeTypeStructure, 4)
+var ApiPatternFilter_Method *smithy.Schema
+
+var ApiPatternFilter_PathPattern *smithy.Schema
+
+var ApiPatternFilter_Port *smithy.Schema
+
+var ApiPatternFilter_Domains *smithy.Schema
+
+var _ApiPatternFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ApiPatternFilterList",
+}, smithy.ShapeTypeList, 1)
+var _ApiPatternFilterList_member *smithy.Schema
+
+var _ApiPatternList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ApiPatternList",
+}, smithy.ShapeTypeList, 1)
+var _ApiPatternList_member *smithy.Schema
+
+var ApiSecurityEventDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ApiSecurityEventDetail",
+}, smithy.ShapeTypeStructure, 6)
+var ApiSecurityEventDetail_Label *smithy.Schema
+
+var ApiSecurityEventDetail_Category *smithy.Schema
+
+var ApiSecurityEventDetail_Confidence *smithy.Schema
+
+var ApiSecurityEventDetail_ApiPatterns *smithy.Schema
+
+var ApiSecurityEventDetail_EventActors *smithy.Schema
+
+var ApiSecurityEventDetail_Timeline *smithy.Schema
+
 var ApplicationAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "ApplicationAttribute",
@@ -446,10 +543,20 @@ var AsnMatchStatement_AsnList *smithy.Schema
 
 var AsnMatchStatement_ForwardedIPConfig *smithy.Schema
 
+var _AsnOrganizationString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "AsnOrganizationString",
+}, smithy.ShapeTypeString, 0)
+
+var _AsnString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "AsnString",
+}, smithy.ShapeTypeString, 0)
+
 var AssociatedResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "AssociatedResourceType",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 7)
 var AssociatedResourceType_CLOUDFRONT *smithy.Schema
 
 var AssociatedResourceType_API_GATEWAY *smithy.Schema
@@ -461,6 +568,8 @@ var AssociatedResourceType_APP_RUNNER_SERVICE *smithy.Schema
 var AssociatedResourceType_VERIFIED_ACCESS_INSTANCE *smithy.Schema
 
 var AssociatedResourceType_AGENTCORE_GATEWAY *smithy.Schema
+
+var AssociatedResourceType_APPLICATION_LOAD_BALANCER *smithy.Schema
 
 var AssociationConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -486,6 +595,11 @@ var _AttributeValues = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _AttributeValues_member *smithy.Schema
 
+var _AuthFingerprintString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "AuthFingerprintString",
+}, smithy.ShapeTypeString, 0)
+
 var AWSManagedRulesACFPRuleSet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "AWSManagedRulesACFPRuleSet",
@@ -499,6 +613,12 @@ var AWSManagedRulesACFPRuleSet_RequestInspection *smithy.Schema
 var AWSManagedRulesACFPRuleSet_ResponseInspection *smithy.Schema
 
 var AWSManagedRulesACFPRuleSet_EnableRegexInPath *smithy.Schema
+
+var AWSManagedRulesAISecurityRuleSet = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "AWSManagedRulesAISecurityRuleSet",
+}, smithy.ShapeTypeStructure, 1)
+var AWSManagedRulesAISecurityRuleSet_BedrockGuardrails *smithy.Schema
 
 var AWSManagedRulesAntiDDoSRuleSet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -527,6 +647,28 @@ var AWSManagedRulesBotControlRuleSet = smithy.NewSchema(smithy.ShapeID{
 var AWSManagedRulesBotControlRuleSet_InspectionLevel *smithy.Schema
 
 var AWSManagedRulesBotControlRuleSet_EnableMachineLearning *smithy.Schema
+
+var BedrockGuardrails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "BedrockGuardrails",
+}, smithy.ShapeTypeStructure, 3)
+var BedrockGuardrails_Disable *smithy.Schema
+
+var BedrockGuardrails_ProtectRequestOnly *smithy.Schema
+
+var BedrockGuardrails_ProtectRequestAndResponse *smithy.Schema
+
+var BedrockGuardrailsRequestAndResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "BedrockGuardrailsRequestAndResponse",
+}, smithy.ShapeTypeStructure, 1)
+var BedrockGuardrailsRequestAndResponse_RoleArn *smithy.Schema
+
+var BedrockGuardrailsRequestOnly = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "BedrockGuardrailsRequestOnly",
+}, smithy.ShapeTypeStructure, 1)
+var BedrockGuardrailsRequestOnly_RoleArn *smithy.Schema
 
 var BlockAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -624,6 +766,11 @@ var CaptchaResponse_SolveTimestamp *smithy.Schema
 
 var CaptchaResponse_FailureReason *smithy.Schema
 
+var _CategoryString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "CategoryString",
+}, smithy.ShapeTypeString, 0)
+
 var ChallengeAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "ChallengeAction",
@@ -704,6 +851,16 @@ var _Conditions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Conditions",
 }, smithy.ShapeTypeList, 1)
 var _Conditions_member *smithy.Schema
+
+var Confidence = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "Confidence",
+}, smithy.ShapeTypeEnum, 3)
+var Confidence_LOW *smithy.Schema
+
+var Confidence_MEDIUM *smithy.Schema
+
+var Confidence_HIGH *smithy.Schema
 
 var _ConnectedAccountArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -801,6 +958,11 @@ var CountAction = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CountAction",
 }, smithy.ShapeTypeStructure, 1)
 var CountAction_CustomRequestHandling *smithy.Schema
+
+var _CountedValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "CountedValue",
+}, smithy.ShapeTypeInteger, 0)
 
 var _Country = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -1317,6 +1479,11 @@ var _CountryCodes = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _CountryCodes_member *smithy.Schema
 
+var _CountryString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "CountryString",
+}, smithy.ShapeTypeString, 0)
+
 var _CreationPathString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "CreationPathString",
@@ -1468,6 +1635,11 @@ var DefaultAction_Block *smithy.Schema
 
 var DefaultAction_Allow *smithy.Schema
 
+var DisableBedrockGuardrails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "DisableBedrockGuardrails",
+}, smithy.ShapeTypeStructure, 0)
+
 var DisallowedFeature = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "DisallowedFeature",
@@ -1481,6 +1653,17 @@ var _DisallowedFeatures = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DisallowedFeatures",
 }, smithy.ShapeTypeList, 1)
 var _DisallowedFeatures_member *smithy.Schema
+
+var _DomainList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "DomainList",
+}, smithy.ShapeTypeList, 1)
+var _DomainList_member *smithy.Schema
+
+var _DomainString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "DomainString",
+}, smithy.ShapeTypeString, 0)
 
 var _DownloadUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -1527,6 +1710,229 @@ var _EvaluationWindowSec = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "EvaluationWindowSec",
 }, smithy.ShapeTypeLong, 0)
+
+var EventActorChange = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventActorChange",
+}, smithy.ShapeTypeStructure, 6)
+var EventActorChange_ChangeTime *smithy.Schema
+
+var EventActorChange_ClientIp *smithy.Schema
+
+var EventActorChange_TlsFingerprint *smithy.Schema
+
+var EventActorChange_Asn *smithy.Schema
+
+var EventActorChange_AsnOrganization *smithy.Schema
+
+var EventActorChange_Country *smithy.Schema
+
+var _EventActorChangeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventActorChangeList",
+}, smithy.ShapeTypeList, 1)
+var _EventActorChangeList_member *smithy.Schema
+
+var EventActorDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventActorDetail",
+}, smithy.ShapeTypeStructure, 3)
+var EventActorDetail_Summary *smithy.Schema
+
+var EventActorDetail_Events *smithy.Schema
+
+var EventActorDetail_Changes *smithy.Schema
+
+var EventActorDetailSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventActorDetailSummary",
+}, smithy.ShapeTypeStructure, 8)
+var EventActorDetailSummary_EventActorId *smithy.Schema
+
+var EventActorDetailSummary_ClientIp *smithy.Schema
+
+var EventActorDetailSummary_TlsFingerprint *smithy.Schema
+
+var EventActorDetailSummary_Asn *smithy.Schema
+
+var EventActorDetailSummary_AsnOrganization *smithy.Schema
+
+var EventActorDetailSummary_Country *smithy.Schema
+
+var EventActorDetailSummary_AuthFingerprint *smithy.Schema
+
+var EventActorDetailSummary_CreatedAt *smithy.Schema
+
+var EventActorReference = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventActorReference",
+}, smithy.ShapeTypeStructure, 2)
+var EventActorReference_EventActorId *smithy.Schema
+
+var EventActorReference_EventActorValue *smithy.Schema
+
+var _EventActorReferenceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventActorReferenceList",
+}, smithy.ShapeTypeList, 1)
+var _EventActorReferenceList_member *smithy.Schema
+
+var EventActorSortBy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventActorSortBy",
+}, smithy.ShapeTypeEnum, 1)
+var EventActorSortBy_EVENT_COUNT *smithy.Schema
+
+var EventActorSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventActorSummary",
+}, smithy.ShapeTypeStructure, 9)
+var EventActorSummary_EventActorId *smithy.Schema
+
+var EventActorSummary_ClientIp *smithy.Schema
+
+var EventActorSummary_TlsFingerprint *smithy.Schema
+
+var EventActorSummary_Asn *smithy.Schema
+
+var EventActorSummary_AsnOrganization *smithy.Schema
+
+var EventActorSummary_Country *smithy.Schema
+
+var EventActorSummary_AuthFingerprint *smithy.Schema
+
+var EventActorSummary_CreatedAt *smithy.Schema
+
+var EventActorSummary_EventCount *smithy.Schema
+
+var _EventActorSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventActorSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _EventActorSummaryList_member *smithy.Schema
+
+var _EventActorValueString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventActorValueString",
+}, smithy.ShapeTypeString, 0)
+
+var EventCategory = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventCategory",
+}, smithy.ShapeTypeEnum, 1)
+var EventCategory_API_SECURITY *smithy.Schema
+
+var EventDetailSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventDetailSummary",
+}, smithy.ShapeTypeStructure, 9)
+var EventDetailSummary_EventId *smithy.Schema
+
+var EventDetailSummary_EventStatus *smithy.Schema
+
+var EventDetailSummary_EventCategory *smithy.Schema
+
+var EventDetailSummary_StartTime *smithy.Schema
+
+var EventDetailSummary_LastUpdatedTime *smithy.Schema
+
+var EventDetailSummary_EndTime *smithy.Schema
+
+var EventDetailSummary_ResourceArn *smithy.Schema
+
+var EventDetailSummary_WebAclArn *smithy.Schema
+
+var EventDetailSummary_ApiSecurityEventDetail *smithy.Schema
+
+var _EventDetailSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventDetailSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _EventDetailSummaryList_member *smithy.Schema
+
+var EventFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventFilter",
+}, smithy.ShapeTypeStructure, 2)
+var EventFilter_Name *smithy.Schema
+
+var EventFilter_Values *smithy.Schema
+
+var EventFilterKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventFilterKey",
+}, smithy.ShapeTypeEnum, 2)
+var EventFilterKey_EVENT_CATEGORY *smithy.Schema
+
+var EventFilterKey_RESOURCE_ARN *smithy.Schema
+
+var _EventFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventFilterList",
+}, smithy.ShapeTypeList, 1)
+var _EventFilterList_member *smithy.Schema
+
+var EventIncludeField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventIncludeField",
+}, smithy.ShapeTypeEnum, 1)
+var EventIncludeField_TIMELINE *smithy.Schema
+
+var _EventIncludeFieldList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventIncludeFieldList",
+}, smithy.ShapeTypeList, 1)
+var _EventIncludeFieldList_member *smithy.Schema
+
+var _EventNextMarker = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventNextMarker",
+}, smithy.ShapeTypeString, 0)
+
+var _EventPaginationLimit = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventPaginationLimit",
+}, smithy.ShapeTypeInteger, 0)
+
+var EventSortBy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventSortBy",
+}, smithy.ShapeTypeEnum, 3)
+var EventSortBy_START_TIME *smithy.Schema
+
+var EventSortBy_END_TIME *smithy.Schema
+
+var EventSortBy_CONFIDENCE *smithy.Schema
+
+var EventStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventStatus",
+}, smithy.ShapeTypeEnum, 4)
+var EventStatus_EVENT_STARTED *smithy.Schema
+
+var EventStatus_EVENT_IN_PROGRESS *smithy.Schema
+
+var EventStatus_EVENT_COMPLETED *smithy.Schema
+
+var EventStatus_EVENT_ENDED *smithy.Schema
+
+var EventTimelineEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventTimelineEntry",
+}, smithy.ShapeTypeStructure, 4)
+var EventTimelineEntry_ChangeTime *smithy.Schema
+
+var EventTimelineEntry_Label *smithy.Schema
+
+var EventTimelineEntry_Confidence *smithy.Schema
+
+var EventTimelineEntry_ApiPatterns *smithy.Schema
+
+var _EventTimelineEntryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "EventTimelineEntryList",
+}, smithy.ShapeTypeList, 1)
+var _EventTimelineEntryList_member *smithy.Schema
 
 var ExcludedRule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -1692,6 +2098,17 @@ var _FilterString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FilterString",
 }, smithy.ShapeTypeString, 0)
 
+var _FilterValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "FilterValue",
+}, smithy.ShapeTypeString, 0)
+
+var _FilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "FilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _FilterValueList_member *smithy.Schema
+
 var FirewallManagerRuleGroup = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "FirewallManagerRuleGroup",
@@ -1826,6 +2243,11 @@ var _HTTPMethod = smithy.NewSchema(smithy.ShapeID{
 	Name:      "HTTPMethod",
 }, smithy.ShapeTypeString, 0)
 
+var _HttpMethodString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "HttpMethodString",
+}, smithy.ShapeTypeString, 0)
+
 var HTTPRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "HTTPRequest",
@@ -1845,6 +2267,11 @@ var HTTPRequest_Headers *smithy.Schema
 var _HTTPVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "HTTPVersion",
+}, smithy.ShapeTypeString, 0)
+
+var _IAMRoleArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "IAMRoleArn",
 }, smithy.ShapeTypeString, 0)
 
 var ImmunityTimeProperty = smithy.NewSchema(smithy.ShapeID{
@@ -1883,6 +2310,11 @@ var _IPAddresses = smithy.NewSchema(smithy.ShapeID{
 	Name:      "IPAddresses",
 }, smithy.ShapeTypeList, 1)
 var _IPAddresses_member *smithy.Schema
+
+var _IpAddressString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "IpAddressString",
+}, smithy.ShapeTypeString, 0)
 
 var IPAddressVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -2173,7 +2605,7 @@ var _ManagedProductDescriptors_member *smithy.Schema
 var ManagedRuleGroupConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "ManagedRuleGroupConfig",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var ManagedRuleGroupConfig_LoginPath *smithy.Schema
 
 var ManagedRuleGroupConfig_PayloadType *smithy.Schema
@@ -2189,6 +2621,8 @@ var ManagedRuleGroupConfig_AWSManagedRulesATPRuleSet *smithy.Schema
 var ManagedRuleGroupConfig_AWSManagedRulesACFPRuleSet *smithy.Schema
 
 var ManagedRuleGroupConfig_AWSManagedRulesAntiDDoSRuleSet *smithy.Schema
+
+var ManagedRuleGroupConfig_AWSManagedRulesAISecurityRuleSet *smithy.Schema
 
 var _ManagedRuleGroupConfigs = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -2454,7 +2888,7 @@ var _PaginationLimit = smithy.NewSchema(smithy.ShapeID{
 var ParameterExceptionField = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "ParameterExceptionField",
-}, smithy.ShapeTypeEnum, 78)
+}, smithy.ShapeTypeEnum, 80)
 var ParameterExceptionField_WEB_ACL *smithy.Schema
 
 var ParameterExceptionField_RULE_GROUP *smithy.Schema
@@ -2611,6 +3045,10 @@ var ParameterExceptionField_PRE_PARSE_TEXT_TRANSFORMATION *smithy.Schema
 
 var ParameterExceptionField_CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG *smithy.Schema
 
+var ParameterExceptionField_BEDROCK_GUARDRAILS *smithy.Schema
+
+var ParameterExceptionField_ROLE_ARN *smithy.Schema
+
 var _ParameterExceptionParameter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "ParameterExceptionParameter",
@@ -2621,6 +3059,11 @@ var PasswordField = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PasswordField",
 }, smithy.ShapeTypeStructure, 1)
 var PasswordField_Identifier *smithy.Schema
+
+var _PathPatternString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "PathPatternString",
+}, smithy.ShapeTypeString, 0)
 
 var PathStatistics = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -2710,6 +3153,11 @@ var _PopulationSize = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "PopulationSize",
 }, smithy.ShapeTypeLong, 0)
+
+var _PortNumber = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "PortNumber",
+}, smithy.ShapeTypeInteger, 0)
 
 var PositionalConstraint = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -3072,6 +3520,28 @@ var _RegularExpressionList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RegularExpressionList",
 }, smithy.ShapeTypeList, 1)
 var _RegularExpressionList_member *smithy.Schema
+
+var RelatedEvent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "RelatedEvent",
+}, smithy.ShapeTypeStructure, 6)
+var RelatedEvent_EventId *smithy.Schema
+
+var RelatedEvent_StartTime *smithy.Schema
+
+var RelatedEvent_Label *smithy.Schema
+
+var RelatedEvent_Category *smithy.Schema
+
+var RelatedEvent_Confidence *smithy.Schema
+
+var RelatedEvent_ApiPatterns *smithy.Schema
+
+var _RelatedEventList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "RelatedEventList",
+}, smithy.ShapeTypeList, 1)
+var _RelatedEventList_member *smithy.Schema
 
 var _ReleaseNotes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -3662,7 +4132,9 @@ var SizeConstraintStatement_PreParseTextTransformations *smithy.Schema
 var SizeInspectionLimit = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "SizeInspectionLimit",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
+var SizeInspectionLimit_KB_8 *smithy.Schema
+
 var SizeInspectionLimit_KB_16 *smithy.Schema
 
 var SizeInspectionLimit_KB_32 *smithy.Schema
@@ -3940,6 +4412,11 @@ var _TimeWindowSecond = smithy.NewSchema(smithy.ShapeID{
 	Name:      "TimeWindowSecond",
 }, smithy.ShapeTypeLong, 0)
 
+var _TlsFingerprintString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "TlsFingerprintString",
+}, smithy.ShapeTypeString, 0)
+
 var _TokenDomain = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "TokenDomain",
@@ -4165,7 +4642,7 @@ var _WalletAddress = smithy.NewSchema(smithy.ShapeID{
 var WebACL = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "WebACL",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var WebACL_Name *smithy.Schema
 
 var WebACL_Id *smithy.Schema
@@ -4209,6 +4686,8 @@ var WebACL_OnSourceDDoSProtectionConfig *smithy.Schema
 var WebACL_ApplicationConfig *smithy.Schema
 
 var WebACL_MonetizationConfig *smithy.Schema
+
+var WebACL_AnalyticsConfig *smithy.Schema
 
 var _WebACLSummaries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -4354,7 +4833,7 @@ var CreateRuleGroupResponse_Summary *smithy.Schema
 var CreateWebACLRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "CreateWebACLRequest",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var CreateWebACLRequest_Name *smithy.Schema
 
 var CreateWebACLRequest_Scope *smithy.Schema
@@ -4386,6 +4865,8 @@ var CreateWebACLRequest_OnSourceDDoSProtectionConfig *smithy.Schema
 var CreateWebACLRequest_ApplicationConfig *smithy.Schema
 
 var CreateWebACLRequest_MonetizationConfig *smithy.Schema
+
+var CreateWebACLRequest_AnalyticsConfig *smithy.Schema
 
 var CreateWebACLResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -4610,6 +5091,36 @@ var GetDecryptedAPIKeyResponse = smithy.NewSchema(smithy.ShapeID{
 var GetDecryptedAPIKeyResponse_TokenDomains *smithy.Schema
 
 var GetDecryptedAPIKeyResponse_CreationTimestamp *smithy.Schema
+
+var GetEventActorRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "GetEventActorRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetEventActorRequest_Scope *smithy.Schema
+
+var GetEventActorRequest_EventActorId *smithy.Schema
+
+var GetEventActorResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "GetEventActorResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetEventActorResponse_EventActor *smithy.Schema
+
+var GetEventRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "GetEventRequest",
+}, smithy.ShapeTypeStructure, 3)
+var GetEventRequest_Scope *smithy.Schema
+
+var GetEventRequest_EventId *smithy.Schema
+
+var GetEventRequest_WebAclArn *smithy.Schema
+
+var GetEventResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "GetEventResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetEventResponse_Event *smithy.Schema
 
 var GetIPSetRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -4987,6 +5498,90 @@ var ListAvailableManagedRuleGroupVersionsResponse_Versions *smithy.Schema
 
 var ListAvailableManagedRuleGroupVersionsResponse_CurrentDefaultVersion *smithy.Schema
 
+var ListEventActorsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ListEventActorsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListEventActorsRequest_Scope *smithy.Schema
+
+var ListEventActorsRequest_TimeWindow *smithy.Schema
+
+var ListEventActorsRequest_SortBy *smithy.Schema
+
+var ListEventActorsRequest_Limit *smithy.Schema
+
+var ListEventActorsRequest_NextMarker *smithy.Schema
+
+var ListEventActorsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ListEventActorsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListEventActorsResponse_EventActors *smithy.Schema
+
+var ListEventActorsResponse_NextMarker *smithy.Schema
+
+var ListEventsByWebACLRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ListEventsByWebACLRequest",
+}, smithy.ShapeTypeStructure, 10)
+var ListEventsByWebACLRequest_Scope *smithy.Schema
+
+var ListEventsByWebACLRequest_WebAclArn *smithy.Schema
+
+var ListEventsByWebACLRequest_TimeWindow *smithy.Schema
+
+var ListEventsByWebACLRequest_Filters *smithy.Schema
+
+var ListEventsByWebACLRequest_ApiPatternFilters *smithy.Schema
+
+var ListEventsByWebACLRequest_Limit *smithy.Schema
+
+var ListEventsByWebACLRequest_NextMarker *smithy.Schema
+
+var ListEventsByWebACLRequest_SortOrder *smithy.Schema
+
+var ListEventsByWebACLRequest_SortBy *smithy.Schema
+
+var ListEventsByWebACLRequest_Include *smithy.Schema
+
+var ListEventsByWebACLResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ListEventsByWebACLResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListEventsByWebACLResponse_Events *smithy.Schema
+
+var ListEventsByWebACLResponse_NextMarker *smithy.Schema
+
+var ListEventsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ListEventsRequest",
+}, smithy.ShapeTypeStructure, 9)
+var ListEventsRequest_Scope *smithy.Schema
+
+var ListEventsRequest_TimeWindow *smithy.Schema
+
+var ListEventsRequest_Filters *smithy.Schema
+
+var ListEventsRequest_ApiPatternFilters *smithy.Schema
+
+var ListEventsRequest_Limit *smithy.Schema
+
+var ListEventsRequest_NextMarker *smithy.Schema
+
+var ListEventsRequest_SortOrder *smithy.Schema
+
+var ListEventsRequest_SortBy *smithy.Schema
+
+var ListEventsRequest_Include *smithy.Schema
+
+var ListEventsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ListEventsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListEventsResponse_Events *smithy.Schema
+
+var ListEventsResponse_NextMarker *smithy.Schema
+
 var ListIPSetsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "ListIPSetsRequest",
@@ -5349,7 +5944,7 @@ var UpdateRuleGroupResponse_NextLockToken *smithy.Schema
 var UpdateWebACLRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "UpdateWebACLRequest",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var UpdateWebACLRequest_Name *smithy.Schema
 
 var UpdateWebACLRequest_Scope *smithy.Schema
@@ -5383,6 +5978,8 @@ var UpdateWebACLRequest_OnSourceDDoSProtectionConfig *smithy.Schema
 var UpdateWebACLRequest_ApplicationConfig *smithy.Schema
 
 var UpdateWebACLRequest_MonetizationConfig *smithy.Schema
+
+var UpdateWebACLRequest_AnalyticsConfig *smithy.Schema
 
 var UpdateWebACLResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -5422,6 +6019,12 @@ func init() {
 	CustomRequestHandling_InsertHeaders = CustomRequestHandling.AddMember("InsertHeaders", _CustomHTTPHeaders)
 
 	AllowAction_CustomRequestHandling = AllowAction.AddMember("CustomRequestHandling", CustomRequestHandling)
+
+	AnalyticsMode_CROSS_REGION = AnalyticsMode.AddMember("CROSS_REGION", smithyprelude.Unit)
+
+	AnalyticsMode_DISABLED = AnalyticsMode.AddMember("DISABLED", smithyprelude.Unit)
+
+	AnalyticsConfig_Mode = AnalyticsConfig.AddMember("Mode", AnalyticsMode)
 
 	SingleHeader_Name = SingleHeader.AddMember("Name", _FieldToMatchData)
 
@@ -6457,6 +7060,18 @@ func init() {
 
 	AWSManagedRulesAntiDDoSRuleSet_SensitivityToBlock = AWSManagedRulesAntiDDoSRuleSet.AddMember("SensitivityToBlock", SensitivityToAct)
 
+	BedrockGuardrailsRequestOnly_RoleArn = BedrockGuardrailsRequestOnly.AddMember("RoleArn", _IAMRoleArn)
+
+	BedrockGuardrailsRequestAndResponse_RoleArn = BedrockGuardrailsRequestAndResponse.AddMember("RoleArn", _IAMRoleArn)
+
+	BedrockGuardrails_Disable = BedrockGuardrails.AddMember("Disable", DisableBedrockGuardrails)
+
+	BedrockGuardrails_ProtectRequestOnly = BedrockGuardrails.AddMember("ProtectRequestOnly", BedrockGuardrailsRequestOnly)
+
+	BedrockGuardrails_ProtectRequestAndResponse = BedrockGuardrails.AddMember("ProtectRequestAndResponse", BedrockGuardrailsRequestAndResponse)
+
+	AWSManagedRulesAISecurityRuleSet_BedrockGuardrails = AWSManagedRulesAISecurityRuleSet.AddMember("BedrockGuardrails", BedrockGuardrails)
+
 	ManagedRuleGroupConfig_LoginPath = ManagedRuleGroupConfig.AddMember("LoginPath", _LoginPathString)
 
 	ManagedRuleGroupConfig_PayloadType = ManagedRuleGroupConfig.AddMember("PayloadType", PayloadType)
@@ -6472,6 +7087,8 @@ func init() {
 	ManagedRuleGroupConfig_AWSManagedRulesACFPRuleSet = ManagedRuleGroupConfig.AddMember("AWSManagedRulesACFPRuleSet", AWSManagedRulesACFPRuleSet)
 
 	ManagedRuleGroupConfig_AWSManagedRulesAntiDDoSRuleSet = ManagedRuleGroupConfig.AddMember("AWSManagedRulesAntiDDoSRuleSet", AWSManagedRulesAntiDDoSRuleSet)
+
+	ManagedRuleGroupConfig_AWSManagedRulesAISecurityRuleSet = ManagedRuleGroupConfig.AddMember("AWSManagedRulesAISecurityRuleSet", AWSManagedRulesAISecurityRuleSet)
 
 	_ManagedRuleGroupConfigs_member = _ManagedRuleGroupConfigs.AddMember("member", ManagedRuleGroupConfig)
 
@@ -6561,6 +7178,64 @@ func init() {
 
 	_APIKeyTokenDomains_member = _APIKeyTokenDomains.AddMember("member", _TokenDomain)
 
+	_DomainList_member = _DomainList.AddMember("member", _DomainString)
+
+	ApiPattern_Method = ApiPattern.AddMember("Method", _HttpMethodString)
+
+	ApiPattern_PathPattern = ApiPattern.AddMember("PathPattern", _PathPatternString)
+
+	ApiPattern_Port = ApiPattern.AddMember("Port", _PortNumber)
+
+	ApiPattern_Domains = ApiPattern.AddMember("Domains", _DomainList)
+
+	_ApiPatternDomainList_member = _ApiPatternDomainList.AddMember("member", _DomainString)
+
+	ApiPatternFilter_Method = ApiPatternFilter.AddMember("Method", _HttpMethodString)
+
+	ApiPatternFilter_PathPattern = ApiPatternFilter.AddMember("PathPattern", _PathPatternString)
+
+	ApiPatternFilter_Port = ApiPatternFilter.AddMember("Port", _PortNumber)
+
+	ApiPatternFilter_Domains = ApiPatternFilter.AddMember("Domains", _ApiPatternDomainList)
+
+	_ApiPatternFilterList_member = _ApiPatternFilterList.AddMember("member", ApiPatternFilter)
+
+	_ApiPatternList_member = _ApiPatternList.AddMember("member", ApiPattern)
+
+	Confidence_LOW = Confidence.AddMember("LOW", smithyprelude.Unit)
+
+	Confidence_MEDIUM = Confidence.AddMember("MEDIUM", smithyprelude.Unit)
+
+	Confidence_HIGH = Confidence.AddMember("HIGH", smithyprelude.Unit)
+
+	EventActorReference_EventActorId = EventActorReference.AddMember("EventActorId", _EntityId)
+
+	EventActorReference_EventActorValue = EventActorReference.AddMember("EventActorValue", _EventActorValueString)
+
+	_EventActorReferenceList_member = _EventActorReferenceList.AddMember("member", EventActorReference)
+
+	EventTimelineEntry_ChangeTime = EventTimelineEntry.AddMember("ChangeTime", _Timestamp)
+
+	EventTimelineEntry_Label = EventTimelineEntry.AddMember("Label", _LabelName)
+
+	EventTimelineEntry_Confidence = EventTimelineEntry.AddMember("Confidence", Confidence)
+
+	EventTimelineEntry_ApiPatterns = EventTimelineEntry.AddMember("ApiPatterns", _ApiPatternList)
+
+	_EventTimelineEntryList_member = _EventTimelineEntryList.AddMember("member", EventTimelineEntry)
+
+	ApiSecurityEventDetail_Label = ApiSecurityEventDetail.AddMember("Label", _LabelName)
+
+	ApiSecurityEventDetail_Category = ApiSecurityEventDetail.AddMember("Category", _CategoryString)
+
+	ApiSecurityEventDetail_Confidence = ApiSecurityEventDetail.AddMember("Confidence", Confidence)
+
+	ApiSecurityEventDetail_ApiPatterns = ApiSecurityEventDetail.AddMember("ApiPatterns", _ApiPatternList)
+
+	ApiSecurityEventDetail_EventActors = ApiSecurityEventDetail.AddMember("EventActors", _EventActorReferenceList)
+
+	ApiSecurityEventDetail_Timeline = ApiSecurityEventDetail.AddMember("Timeline", _EventTimelineEntryList)
+
 	_AttributeValues_member = _AttributeValues.AddMember("member", _AttributeValue)
 
 	ApplicationAttribute_Name = ApplicationAttribute.AddMember("Name", _AttributeName)
@@ -6582,6 +7257,10 @@ func init() {
 	AssociatedResourceType_VERIFIED_ACCESS_INSTANCE = AssociatedResourceType.AddMember("VERIFIED_ACCESS_INSTANCE", smithyprelude.Unit)
 
 	AssociatedResourceType_AGENTCORE_GATEWAY = AssociatedResourceType.AddMember("AGENTCORE_GATEWAY", smithyprelude.Unit)
+
+	AssociatedResourceType_APPLICATION_LOAD_BALANCER = AssociatedResourceType.AddMember("APPLICATION_LOAD_BALANCER", smithyprelude.Unit)
+
+	SizeInspectionLimit_KB_8 = SizeInspectionLimit.AddMember("KB_8", smithyprelude.Unit)
 
 	SizeInspectionLimit_KB_16 = SizeInspectionLimit.AddMember("KB_16", smithyprelude.Unit)
 
@@ -6772,6 +7451,130 @@ func init() {
 	DisallowedFeature_RequiredPricingPlan = DisallowedFeature.AddMember("RequiredPricingPlan", _RequiredPricingPlanName)
 
 	_DisallowedFeatures_member = _DisallowedFeatures.AddMember("member", DisallowedFeature)
+
+	EventActorChange_ChangeTime = EventActorChange.AddMember("ChangeTime", _Timestamp)
+
+	EventActorChange_ClientIp = EventActorChange.AddMember("ClientIp", _IpAddressString)
+
+	EventActorChange_TlsFingerprint = EventActorChange.AddMember("TlsFingerprint", _TlsFingerprintString)
+
+	EventActorChange_Asn = EventActorChange.AddMember("Asn", _AsnString)
+
+	EventActorChange_AsnOrganization = EventActorChange.AddMember("AsnOrganization", _AsnOrganizationString)
+
+	EventActorChange_Country = EventActorChange.AddMember("Country", _CountryString)
+
+	_EventActorChangeList_member = _EventActorChangeList.AddMember("member", EventActorChange)
+
+	EventActorDetailSummary_EventActorId = EventActorDetailSummary.AddMember("EventActorId", _EntityId)
+
+	EventActorDetailSummary_ClientIp = EventActorDetailSummary.AddMember("ClientIp", _IpAddressString)
+
+	EventActorDetailSummary_TlsFingerprint = EventActorDetailSummary.AddMember("TlsFingerprint", _TlsFingerprintString)
+
+	EventActorDetailSummary_Asn = EventActorDetailSummary.AddMember("Asn", _AsnString)
+
+	EventActorDetailSummary_AsnOrganization = EventActorDetailSummary.AddMember("AsnOrganization", _AsnOrganizationString)
+
+	EventActorDetailSummary_Country = EventActorDetailSummary.AddMember("Country", _CountryString)
+
+	EventActorDetailSummary_AuthFingerprint = EventActorDetailSummary.AddMember("AuthFingerprint", _AuthFingerprintString)
+
+	EventActorDetailSummary_CreatedAt = EventActorDetailSummary.AddMember("CreatedAt", _Timestamp)
+
+	RelatedEvent_EventId = RelatedEvent.AddMember("EventId", _EntityId)
+
+	RelatedEvent_StartTime = RelatedEvent.AddMember("StartTime", _Timestamp)
+
+	RelatedEvent_Label = RelatedEvent.AddMember("Label", _LabelName)
+
+	RelatedEvent_Category = RelatedEvent.AddMember("Category", _CategoryString)
+
+	RelatedEvent_Confidence = RelatedEvent.AddMember("Confidence", Confidence)
+
+	RelatedEvent_ApiPatterns = RelatedEvent.AddMember("ApiPatterns", _ApiPatternList)
+
+	_RelatedEventList_member = _RelatedEventList.AddMember("member", RelatedEvent)
+
+	EventActorDetail_Summary = EventActorDetail.AddMember("Summary", EventActorDetailSummary)
+
+	EventActorDetail_Events = EventActorDetail.AddMember("Events", _RelatedEventList)
+
+	EventActorDetail_Changes = EventActorDetail.AddMember("Changes", _EventActorChangeList)
+
+	EventActorSortBy_EVENT_COUNT = EventActorSortBy.AddMember("EVENT_COUNT", smithyprelude.Unit)
+
+	EventActorSummary_EventActorId = EventActorSummary.AddMember("EventActorId", _EntityId)
+
+	EventActorSummary_ClientIp = EventActorSummary.AddMember("ClientIp", _IpAddressString)
+
+	EventActorSummary_TlsFingerprint = EventActorSummary.AddMember("TlsFingerprint", _TlsFingerprintString)
+
+	EventActorSummary_Asn = EventActorSummary.AddMember("Asn", _AsnString)
+
+	EventActorSummary_AsnOrganization = EventActorSummary.AddMember("AsnOrganization", _AsnOrganizationString)
+
+	EventActorSummary_Country = EventActorSummary.AddMember("Country", _CountryString)
+
+	EventActorSummary_AuthFingerprint = EventActorSummary.AddMember("AuthFingerprint", _AuthFingerprintString)
+
+	EventActorSummary_CreatedAt = EventActorSummary.AddMember("CreatedAt", _Timestamp)
+
+	EventActorSummary_EventCount = EventActorSummary.AddMember("EventCount", _CountedValue)
+
+	_EventActorSummaryList_member = _EventActorSummaryList.AddMember("member", EventActorSummary)
+
+	EventCategory_API_SECURITY = EventCategory.AddMember("API_SECURITY", smithyprelude.Unit)
+
+	EventStatus_EVENT_STARTED = EventStatus.AddMember("EVENT_STARTED", smithyprelude.Unit)
+
+	EventStatus_EVENT_IN_PROGRESS = EventStatus.AddMember("EVENT_IN_PROGRESS", smithyprelude.Unit)
+
+	EventStatus_EVENT_COMPLETED = EventStatus.AddMember("EVENT_COMPLETED", smithyprelude.Unit)
+
+	EventStatus_EVENT_ENDED = EventStatus.AddMember("EVENT_ENDED", smithyprelude.Unit)
+
+	EventDetailSummary_EventId = EventDetailSummary.AddMember("EventId", _EntityId)
+
+	EventDetailSummary_EventStatus = EventDetailSummary.AddMember("EventStatus", EventStatus)
+
+	EventDetailSummary_EventCategory = EventDetailSummary.AddMember("EventCategory", EventCategory)
+
+	EventDetailSummary_StartTime = EventDetailSummary.AddMember("StartTime", _Timestamp)
+
+	EventDetailSummary_LastUpdatedTime = EventDetailSummary.AddMember("LastUpdatedTime", _Timestamp)
+
+	EventDetailSummary_EndTime = EventDetailSummary.AddMember("EndTime", _Timestamp)
+
+	EventDetailSummary_ResourceArn = EventDetailSummary.AddMember("ResourceArn", _ResourceArn)
+
+	EventDetailSummary_WebAclArn = EventDetailSummary.AddMember("WebAclArn", _ResourceArn)
+
+	EventDetailSummary_ApiSecurityEventDetail = EventDetailSummary.AddMember("ApiSecurityEventDetail", ApiSecurityEventDetail)
+
+	_EventDetailSummaryList_member = _EventDetailSummaryList.AddMember("member", EventDetailSummary)
+
+	EventFilterKey_EVENT_CATEGORY = EventFilterKey.AddMember("EVENT_CATEGORY", smithyprelude.Unit)
+
+	EventFilterKey_RESOURCE_ARN = EventFilterKey.AddMember("RESOURCE_ARN", smithyprelude.Unit)
+
+	_FilterValueList_member = _FilterValueList.AddMember("member", _FilterValue)
+
+	EventFilter_Name = EventFilter.AddMember("Name", EventFilterKey)
+
+	EventFilter_Values = EventFilter.AddMember("Values", _FilterValueList)
+
+	_EventFilterList_member = _EventFilterList.AddMember("member", EventFilter)
+
+	EventIncludeField_TIMELINE = EventIncludeField.AddMember("TIMELINE", smithyprelude.Unit)
+
+	_EventIncludeFieldList_member = _EventIncludeFieldList.AddMember("member", EventIncludeField)
+
+	EventSortBy_START_TIME = EventSortBy.AddMember("START_TIME", smithyprelude.Unit)
+
+	EventSortBy_END_TIME = EventSortBy.AddMember("END_TIME", smithyprelude.Unit)
+
+	EventSortBy_CONFIDENCE = EventSortBy.AddMember("CONFIDENCE", smithyprelude.Unit)
 
 	FilterBehavior_KEEP = FilterBehavior.AddMember("KEEP", smithyprelude.Unit)
 
@@ -7197,6 +8000,10 @@ func init() {
 
 	ParameterExceptionField_CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG = ParameterExceptionField.AddMember("CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG", smithyprelude.Unit)
 
+	ParameterExceptionField_BEDROCK_GUARDRAILS = ParameterExceptionField.AddMember("BEDROCK_GUARDRAILS", smithyprelude.Unit)
+
+	ParameterExceptionField_ROLE_ARN = ParameterExceptionField.AddMember("ROLE_ARN", smithyprelude.Unit)
+
 	PathStatistics_Source = PathStatistics.AddMember("Source", FilterSource)
 
 	PathStatistics_Path = PathStatistics.AddMember("Path", _PathString)
@@ -7581,6 +8388,8 @@ func init() {
 
 	WebACL_MonetizationConfig = WebACL.AddMember("MonetizationConfig", MonetizationConfig)
 
+	WebACL_AnalyticsConfig = WebACL.AddMember("AnalyticsConfig", AnalyticsConfig)
+
 	WebACLSummary_Name = WebACLSummary.AddMember("Name", _EntityName)
 
 	WebACLSummary_Id = WebACLSummary.AddMember("Id", _EntityId)
@@ -7687,6 +8496,8 @@ func init() {
 
 	CreateWebACLRequest_MonetizationConfig = CreateWebACLRequest.AddMember("MonetizationConfig", MonetizationConfig)
 
+	CreateWebACLRequest_AnalyticsConfig = CreateWebACLRequest.AddMember("AnalyticsConfig", AnalyticsConfig)
+
 	CreateWebACLResponse_Summary = CreateWebACLResponse.AddMember("Summary", WebACLSummary)
 
 	DeleteAPIKeyRequest_Scope = DeleteAPIKeyRequest.AddMember("Scope", Scope)
@@ -7786,6 +8597,20 @@ func init() {
 	GetDecryptedAPIKeyResponse_TokenDomains = GetDecryptedAPIKeyResponse.AddMember("TokenDomains", _TokenDomains)
 
 	GetDecryptedAPIKeyResponse_CreationTimestamp = GetDecryptedAPIKeyResponse.AddMember("CreationTimestamp", _Timestamp)
+
+	GetEventActorRequest_Scope = GetEventActorRequest.AddMember("Scope", Scope)
+
+	GetEventActorRequest_EventActorId = GetEventActorRequest.AddMember("EventActorId", _EntityId)
+
+	GetEventActorResponse_EventActor = GetEventActorResponse.AddMember("EventActor", EventActorDetail)
+
+	GetEventRequest_Scope = GetEventRequest.AddMember("Scope", Scope)
+
+	GetEventRequest_EventId = GetEventRequest.AddMember("EventId", _EntityId)
+
+	GetEventRequest_WebAclArn = GetEventRequest.AddMember("WebAclArn", _ResourceArn)
+
+	GetEventResponse_Event = GetEventResponse.AddMember("Event", EventDetailSummary)
 
 	GetIPSetRequest_Name = GetIPSetRequest.AddMember("Name", _EntityName)
 
@@ -8018,6 +8843,66 @@ func init() {
 	ListAvailableManagedRuleGroupVersionsResponse_Versions = ListAvailableManagedRuleGroupVersionsResponse.AddMember("Versions", _ManagedRuleGroupVersions)
 
 	ListAvailableManagedRuleGroupVersionsResponse_CurrentDefaultVersion = ListAvailableManagedRuleGroupVersionsResponse.AddMember("CurrentDefaultVersion", _VersionKeyString)
+
+	ListEventActorsRequest_Scope = ListEventActorsRequest.AddMember("Scope", Scope)
+
+	ListEventActorsRequest_TimeWindow = ListEventActorsRequest.AddMember("TimeWindow", TimeWindow)
+
+	ListEventActorsRequest_SortBy = ListEventActorsRequest.AddMember("SortBy", EventActorSortBy)
+
+	ListEventActorsRequest_Limit = ListEventActorsRequest.AddMember("Limit", _PaginationLimit)
+
+	ListEventActorsRequest_NextMarker = ListEventActorsRequest.AddMember("NextMarker", _EventNextMarker)
+
+	ListEventActorsResponse_EventActors = ListEventActorsResponse.AddMember("EventActors", _EventActorSummaryList)
+
+	ListEventActorsResponse_NextMarker = ListEventActorsResponse.AddMember("NextMarker", _EventNextMarker)
+
+	ListEventsByWebACLRequest_Scope = ListEventsByWebACLRequest.AddMember("Scope", Scope)
+
+	ListEventsByWebACLRequest_WebAclArn = ListEventsByWebACLRequest.AddMember("WebAclArn", _ResourceArn)
+
+	ListEventsByWebACLRequest_TimeWindow = ListEventsByWebACLRequest.AddMember("TimeWindow", TimeWindow)
+
+	ListEventsByWebACLRequest_Filters = ListEventsByWebACLRequest.AddMember("Filters", _EventFilterList)
+
+	ListEventsByWebACLRequest_ApiPatternFilters = ListEventsByWebACLRequest.AddMember("ApiPatternFilters", _ApiPatternFilterList)
+
+	ListEventsByWebACLRequest_Limit = ListEventsByWebACLRequest.AddMember("Limit", _EventPaginationLimit)
+
+	ListEventsByWebACLRequest_NextMarker = ListEventsByWebACLRequest.AddMember("NextMarker", _EventNextMarker)
+
+	ListEventsByWebACLRequest_SortOrder = ListEventsByWebACLRequest.AddMember("SortOrder", SortOrder)
+
+	ListEventsByWebACLRequest_SortBy = ListEventsByWebACLRequest.AddMember("SortBy", EventSortBy)
+
+	ListEventsByWebACLRequest_Include = ListEventsByWebACLRequest.AddMember("Include", _EventIncludeFieldList)
+
+	ListEventsByWebACLResponse_Events = ListEventsByWebACLResponse.AddMember("Events", _EventDetailSummaryList)
+
+	ListEventsByWebACLResponse_NextMarker = ListEventsByWebACLResponse.AddMember("NextMarker", _EventNextMarker)
+
+	ListEventsRequest_Scope = ListEventsRequest.AddMember("Scope", Scope)
+
+	ListEventsRequest_TimeWindow = ListEventsRequest.AddMember("TimeWindow", TimeWindow)
+
+	ListEventsRequest_Filters = ListEventsRequest.AddMember("Filters", _EventFilterList)
+
+	ListEventsRequest_ApiPatternFilters = ListEventsRequest.AddMember("ApiPatternFilters", _ApiPatternFilterList)
+
+	ListEventsRequest_Limit = ListEventsRequest.AddMember("Limit", _EventPaginationLimit)
+
+	ListEventsRequest_NextMarker = ListEventsRequest.AddMember("NextMarker", _EventNextMarker)
+
+	ListEventsRequest_SortOrder = ListEventsRequest.AddMember("SortOrder", SortOrder)
+
+	ListEventsRequest_SortBy = ListEventsRequest.AddMember("SortBy", EventSortBy)
+
+	ListEventsRequest_Include = ListEventsRequest.AddMember("Include", _EventIncludeFieldList)
+
+	ListEventsResponse_Events = ListEventsResponse.AddMember("Events", _EventDetailSummaryList)
+
+	ListEventsResponse_NextMarker = ListEventsResponse.AddMember("NextMarker", _EventNextMarker)
 
 	ListIPSetsRequest_Scope = ListIPSetsRequest.AddMember("Scope", Scope)
 
@@ -8256,6 +9141,8 @@ func init() {
 	UpdateWebACLRequest_ApplicationConfig = UpdateWebACLRequest.AddMember("ApplicationConfig", ApplicationConfig)
 
 	UpdateWebACLRequest_MonetizationConfig = UpdateWebACLRequest.AddMember("MonetizationConfig", MonetizationConfig)
+
+	UpdateWebACLRequest_AnalyticsConfig = UpdateWebACLRequest.AddMember("AnalyticsConfig", AnalyticsConfig)
 
 	UpdateWebACLResponse_NextLockToken = UpdateWebACLResponse.AddMember("NextLockToken", _LockToken)
 

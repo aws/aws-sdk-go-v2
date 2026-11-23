@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeResourceAssociations
+
+{"NextToken":"__NextToken__","ResourceAssociations":[{"HyperPodClusters":{"AssociatedTime":946684800,"FailureReason":"__FailureReason__","Status":"Pending"}},{"HyperPodClusters":{"AssociatedTime":946684800,"FailureReason":"__FailureReason__","Status":"Pending"}}],"SMCapacityReservationArn":"__SMCapacityReservationArn__","SMCapacityReservationId":"__SMCapacityReservationId__"}

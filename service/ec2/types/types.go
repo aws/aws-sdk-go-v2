@@ -469,8 +469,6 @@ type Address struct {
 	PublicIpv4Pool *string
 
 	// The service that manages the elastic IP address.
-	//
-	// The only option supported today is alb .
 	ServiceManaged ServiceManaged
 
 	// The ID of the subnet where the IP address is allocated.
@@ -8765,6 +8763,21 @@ type IdFormat struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the Automated Internet Firewall that inspects traffic for an internet
+// gateway or egress-only internet gateway route.
+type IgwFirewall struct {
+
+	// The ARN of the firewall that inspects traffic for this route.
+	FirewallArn *string
+
+	// The status of the firewall that inspects traffic for this route. Uses the same
+	// values as NetworkFirewallAssociation$firewallOnboardingStatus : active ,
+	// disabling , or pending .
+	Status FirewallOnboardingStatus
+
+	noSmithyDocumentSerde
+}
+
 // The internet key exchange (IKE) version permitted for the VPN tunnel.
 type IKEVersionsListValue struct {
 
@@ -13188,6 +13201,16 @@ type IpamPolicyDocument struct {
 	// through IPAM policies. Supported services and resource types include:
 	//
 	//   - Elastic IP addresses
+	//
+	//   - Application Load Balancers
+	//
+	//   - Amazon RDS
+	//
+	//   - NAT gateways in regional availability mode
+	//
+	//   - Lambda Network Connector
+	//
+	//   - Automated Internet Firewall
 	ResourceType IpamPolicyResourceType
 
 	noSmithyDocumentSerde
@@ -17848,6 +17871,34 @@ type NetworkCardInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an Automated Internet Firewall that inspects traffic between a VPC
+// and its internet gateway or egress-only internet gateway.
+type NetworkFirewallAssociation struct {
+
+	// The Amazon Resource Name (ARN) of the firewall.
+	FirewallArn *string
+
+	// The mode of the firewall. Possible values:
+	//
+	//   - enforce : The firewall applies its policy to traffic.
+	//
+	//   - monitor : The firewall logs traffic that its policy would act on, but
+	//   doesn't block it.
+	FirewallMode FirewallMode
+
+	// The status of the firewall for the VPC. Possible values:
+	//
+	//   - active : The firewall inspects traffic for the VPC.
+	//
+	//   - disabling : AWS is removing the firewall from the VPC.
+	//
+	//   - pending : AWS is setting up the firewall for the VPC. The firewall might not
+	//   inspect traffic yet.
+	FirewallOnboardingStatus FirewallOnboardingStatus
+
+	noSmithyDocumentSerde
+}
+
 // Describes the networking features of the instance type.
 type NetworkInfo struct {
 
@@ -21243,6 +21294,12 @@ type Route struct {
 
 	// The ID of a gateway attached to your VPC.
 	GatewayId *string
+
+	// Information about the Automated Internet Firewall that inspects traffic for
+	// this route. The response includes this value only for routes that target an
+	// internet gateway or egress-only internet gateway in a VPC that has a firewall.
+	// The route target remains the internet gateway or egress-only internet gateway.
+	IgwFirewall *IgwFirewall
 
 	// The ID of a NAT instance in your VPC.
 	InstanceId *string
@@ -24693,6 +24750,35 @@ type Subnet struct {
 	// [Amazon VPC pricing page]: http://aws.amazon.com/vpc/pricing/
 	MapPublicIpOnLaunch *bool
 
+	// The internet connectivity treatment that the Automated Internet Firewall
+	// applies to the subnet. The response includes this value only if the subnet is in
+	// a VPC that has a firewall. Possible values:
+	//
+	//   - az-unsupported : The firewall doesn't support the subnet's Availability
+	//   Zone, so it doesn't inspect traffic for the subnet.
+	//
+	//   - bidirectional : Provides bidirectional internet connectivity to every
+	//   network interface that has a public IP association. Any network interface
+	//   without a public IP cannot communicate with the internet unless a NAT device is
+	//   explicitly inserted in the path. All inbound and outbound traffic is inspected
+	//   against your firewall rules.
+	//
+	//   - exclude : The firewall doesn't inspect traffic for the subnet. The subnet
+	//   bypasses the firewall, and its traffic passes directly through the internet
+	//   gateway.
+	//
+	//   - flexible : Sets the connectivity for each network interface in the subnet
+	//   based on whether it is associated with a public IP address. A network interface
+	//   with a public IP address gets bidirectional internet connectivity. A network
+	//   interface without a public IP address gets outbound-only connectivity. All
+	//   traffic is inspected against your firewall rules.
+	//
+	//   - outbound-only : Provides egress-only connectivity for all network interfaces
+	//   in the subnet. All outbound traffic and inbound responses are inspected against
+	//   your firewall rules. Unsolicited inbound connections are dropped. For IPv4
+	//   traffic, the firewall performs NAT.
+	NetworkFirewallConnectivityType NetworkFirewallConnectivityType
+
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
@@ -28104,6 +28190,12 @@ type Vpc struct {
 
 	// Indicates whether the VPC is the default VPC.
 	IsDefault *bool
+
+	// Information about the firewall associations for the VPC. Automated Internet
+	// Firewall, a feature of Amazon Virtual Private Cloud (Amazon VPC), inspects
+	// traffic between the VPC and its internet gateway or egress-only internet
+	// gateway. This list is empty if the VPC doesn't have a firewall.
+	NetworkFirewallAssociations []NetworkFirewallAssociation
 
 	// The ID of the Amazon Web Services account that owns the VPC.
 	OwnerId *string

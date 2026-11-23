@@ -21,6 +21,11 @@ type AcmCertificateMetadata struct {
 	// The origin of the certificate's key pair.
 	CertificateKeyPairOrigin CertificateKeyPairOrigin
 
+	// The Extended Key Usage profile of the certificate. This value exists only for
+	// Amazon N2 certificates. If CertificateUsage was omitted from the request, this
+	// value is CLIENT_AND_SERVER_AUTH .
+	CertificateUsage CertificateUsage
+
 	// The time at which the certificate was requested.
 	CreatedAt *time.Time
 
@@ -56,6 +61,10 @@ type AcmCertificateMetadata struct {
 	// The time at which the certificate was revoked. This value exists only when the
 	// certificate status is REVOKED .
 	RevokedAt *time.Time
+
+	// The root hierarchy from which the certificate was issued. This value exists
+	// only for Amazon N2 certificates, which have a Type of AMAZON_ISSUED .
+	RootHierarchyType RootHierarchyType
 
 	// The status of the certificate.
 	//
@@ -103,6 +112,9 @@ func (v *AcmCertificateMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateKeyPairOrigin != "" {
 		s.WriteString(schemas.AcmCertificateMetadata_CertificateKeyPairOrigin, string(v.CertificateKeyPairOrigin))
 	}
+	if v.CertificateUsage != "" {
+		s.WriteString(schemas.AcmCertificateMetadata_CertificateUsage, string(v.CertificateUsage))
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AcmCertificateMetadata_CreatedAt, *v.CreatedAt)
 	}
@@ -133,6 +145,9 @@ func (v *AcmCertificateMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RevokedAt != nil {
 		s.WriteTime(schemas.AcmCertificateMetadata_RevokedAt, *v.RevokedAt)
 	}
+	if v.RootHierarchyType != "" {
+		s.WriteString(schemas.AcmCertificateMetadata_RootHierarchyType, string(v.RootHierarchyType))
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AcmCertificateMetadata_Status, string(v.Status))
 	}
@@ -158,6 +173,13 @@ func (v *AcmCertificateMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.CertificateKeyPairOrigin = CertificateKeyPairOrigin(ev)
+			return nil
+		case schemas.AcmCertificateMetadata_CertificateUsage:
+			var ev string
+			if err := d.ReadString(schemas.AcmCertificateMetadata_CertificateUsage, &ev); err != nil {
+				return err
+			}
+			v.CertificateUsage = CertificateUsage(ev)
 			return nil
 		case schemas.AcmCertificateMetadata_CreatedAt:
 			v.CreatedAt = new(time.Time)
@@ -205,6 +227,13 @@ func (v *AcmCertificateMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AcmCertificateMetadata_RevokedAt:
 			v.RevokedAt = new(time.Time)
 			return d.ReadTime(schemas.AcmCertificateMetadata_RevokedAt, v.RevokedAt)
+		case schemas.AcmCertificateMetadata_RootHierarchyType:
+			var ev string
+			if err := d.ReadString(schemas.AcmCertificateMetadata_RootHierarchyType, &ev); err != nil {
+				return err
+			}
+			v.RootHierarchyType = RootHierarchyType(ev)
+			return nil
 		case schemas.AcmCertificateMetadata_Status:
 			var ev string
 			if err := d.ReadString(schemas.AcmCertificateMetadata_Status, &ev); err != nil {
@@ -243,6 +272,7 @@ func (v *AcmCertificateMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 //	AcmCertificateMetadataFilterMemberInUse
 //	AcmCertificateMetadataFilterMemberManagedBy
 //	AcmCertificateMetadataFilterMemberRenewalStatus
+//	AcmCertificateMetadataFilterMemberRootHierarchyType
 //	AcmCertificateMetadataFilterMemberStatus
 //	AcmCertificateMetadataFilterMemberType
 //	AcmCertificateMetadataFilterMemberValidationMethod
@@ -387,6 +417,27 @@ func (v *AcmCertificateMetadataFilterMemberRenewalStatus) Deserialize(d smithy.S
 		return err
 	}
 	v.Value = RenewalStatus(s)
+	return nil
+}
+
+// Filter by root hierarchy type. Specify N2_AMAZON_MANAGED or
+// N2_SFG2_AMAZON_MANAGED to return Amazon N2 certificates.
+type AcmCertificateMetadataFilterMemberRootHierarchyType struct {
+	Value RootHierarchyType
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberRootHierarchyType) isAcmCertificateMetadataFilter() {}
+func (v *AcmCertificateMetadataFilterMemberRootHierarchyType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AcmCertificateMetadataFilter_RootHierarchyType, string(v.Value))
+}
+func (v *AcmCertificateMetadataFilterMemberRootHierarchyType) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.AcmCertificateMetadataFilter_RootHierarchyType, &s); err != nil {
+		return err
+	}
+	v.Value = RootHierarchyType(s)
 	return nil
 }
 
@@ -1321,6 +1372,11 @@ type CertificateDetail struct {
 	// The origin of the certificate's key pair.
 	CertificateKeyPairOrigin CertificateKeyPairOrigin
 
+	// The Extended Key Usage profile of the certificate. This value exists only for
+	// Amazon N2 certificates. If CertificateUsage was omitted from the request, this
+	// value is CLIENT_AND_SERVER_AUTH .
+	CertificateUsage CertificateUsage
+
 	// The time at which the certificate was requested.
 	CreatedAt *time.Time
 
@@ -1381,8 +1437,8 @@ type CertificateDetail struct {
 	NotBefore *time.Time
 
 	// Contains the certificate options. Certificate transparency logging opt-out is
-	// no longer available. All public certificates are recorded in a certificate
-	// transparency log.
+	// no longer available. ACM records all public certificates other than Amazon N2
+	// certificates in a certificate transparency log.
 	Options *CertificateOptions
 
 	// Specifies whether the certificate is eligible for renewal. At this time, only
@@ -1402,6 +1458,10 @@ type CertificateDetail struct {
 	// The time at which the certificate was revoked. This value exists only when the
 	// certificate status is REVOKED .
 	RevokedAt *time.Time
+
+	// The root hierarchy from which the certificate was issued. This value exists
+	// only for Amazon N2 certificates, which have a Type of AMAZON_ISSUED .
+	RootHierarchyType RootHierarchyType
 
 	// The serial number of the certificate.
 	Serial *string
@@ -1474,6 +1534,9 @@ func (v *CertificateDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateKeyPairOrigin != "" {
 		s.WriteString(schemas.CertificateDetail_CertificateKeyPairOrigin, string(v.CertificateKeyPairOrigin))
 	}
+	if v.CertificateUsage != "" {
+		s.WriteString(schemas.CertificateDetail_CertificateUsage, string(v.CertificateUsage))
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CertificateDetail_CreatedAt, *v.CreatedAt)
 	}
@@ -1535,6 +1598,9 @@ func (v *CertificateDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RevokedAt != nil {
 		s.WriteTime(schemas.CertificateDetail_RevokedAt, *v.RevokedAt)
 	}
+	if v.RootHierarchyType != "" {
+		s.WriteString(schemas.CertificateDetail_RootHierarchyType, string(v.RootHierarchyType))
+	}
 	if v.Serial != nil {
 		s.WriteString(schemas.CertificateDetail_Serial, *v.Serial)
 	}
@@ -1580,6 +1646,13 @@ func (v *CertificateDetail) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.CertificateKeyPairOrigin = CertificateKeyPairOrigin(ev)
+			return nil
+		case schemas.CertificateDetail_CertificateUsage:
+			var ev string
+			if err := d.ReadString(schemas.CertificateDetail_CertificateUsage, &ev); err != nil {
+				return err
+			}
+			v.CertificateUsage = CertificateUsage(ev)
 			return nil
 		case schemas.CertificateDetail_CreatedAt:
 			v.CreatedAt = new(time.Time)
@@ -1654,6 +1727,13 @@ func (v *CertificateDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CertificateDetail_RevokedAt:
 			v.RevokedAt = new(time.Time)
 			return d.ReadTime(schemas.CertificateDetail_RevokedAt, v.RevokedAt)
+		case schemas.CertificateDetail_RootHierarchyType:
+			var ev string
+			if err := d.ReadString(schemas.CertificateDetail_RootHierarchyType, &ev); err != nil {
+				return err
+			}
+			v.RootHierarchyType = RootHierarchyType(ev)
+			return nil
 		case schemas.CertificateDetail_Serial:
 			v.Serial = new(string)
 			return d.ReadString(schemas.CertificateDetail_Serial, v.Serial)
@@ -1848,8 +1928,8 @@ func (v *CertificateMetadataMemberAcmCertificateMetadata) Deserialize(d smithy.S
 // structure to change the domain validation method or specify whether to export
 // your certificate.
 //
-// All public certificates are recorded in a certificate transparency log. For
-// general information, see [Certificate Transparency Logging].
+// ACM records all public certificates other than Amazon N2 certificates in a
+// certificate transparency log. For general information, see [Certificate Transparency Logging].
 //
 // You can export public ACM certificates to use with Amazon Web Services services
 // as well as outside Amazon Web Services Cloud. For more information, see [Certificate Manager exportable public certificate].
@@ -1859,8 +1939,8 @@ func (v *CertificateMetadataMemberAcmCertificateMetadata) Deserialize(d smithy.S
 type CertificateOptions struct {
 
 	// This parameter has been deprecated. Certificate transparency logging opt-out is
-	// no longer available. All public certificates are recorded in a certificate
-	// transparency log.
+	// no longer available. ACM records all public certificates other than Amazon N2
+	// certificates in a certificate transparency log.
 	//
 	// Deprecated: Certificate transparency logging opt-out is no longer available.
 	CertificateTransparencyLoggingPreference CertificateTransparencyLoggingPreference
@@ -1988,6 +2068,11 @@ type CertificateSummary struct {
 	// The origin of the certificate's key pair.
 	CertificateKeyPairOrigin CertificateKeyPairOrigin
 
+	// The Extended Key Usage profile of the certificate. This value exists only for
+	// Amazon N2 certificates. If CertificateUsage was omitted from the request, this
+	// value is CLIENT_AND_SERVER_AUTH .
+	CertificateUsage CertificateUsage
+
 	// The time at which the certificate was requested.
 	CreatedAt *time.Time
 
@@ -2055,6 +2140,10 @@ type CertificateSummary struct {
 	// certificate status is REVOKED .
 	RevokedAt *time.Time
 
+	// The root hierarchy from which the certificate was issued. This value exists
+	// only for Amazon N2 certificates, which have a Type of AMAZON_ISSUED .
+	RootHierarchyType RootHierarchyType
+
 	// The status of the certificate.
 	//
 	// A certificate enters status PENDING_VALIDATION upon being requested, unless it
@@ -2109,6 +2198,9 @@ func (v *CertificateSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateKeyPairOrigin != "" {
 		s.WriteString(schemas.CertificateSummary_CertificateKeyPairOrigin, string(v.CertificateKeyPairOrigin))
 	}
+	if v.CertificateUsage != "" {
+		s.WriteString(schemas.CertificateSummary_CertificateUsage, string(v.CertificateUsage))
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CertificateSummary_CreatedAt, *v.CreatedAt)
 	}
@@ -2157,6 +2249,9 @@ func (v *CertificateSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RevokedAt != nil {
 		s.WriteTime(schemas.CertificateSummary_RevokedAt, *v.RevokedAt)
 	}
+	if v.RootHierarchyType != "" {
+		s.WriteString(schemas.CertificateSummary_RootHierarchyType, string(v.RootHierarchyType))
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CertificateSummary_Status, string(v.Status))
 	}
@@ -2179,6 +2274,13 @@ func (v *CertificateSummary) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.CertificateKeyPairOrigin = CertificateKeyPairOrigin(ev)
+			return nil
+		case schemas.CertificateSummary_CertificateUsage:
+			var ev string
+			if err := d.ReadString(schemas.CertificateSummary_CertificateUsage, &ev); err != nil {
+				return err
+			}
+			v.CertificateUsage = CertificateUsage(ev)
 			return nil
 		case schemas.CertificateSummary_CreatedAt:
 			v.CreatedAt = new(time.Time)
@@ -2242,6 +2344,13 @@ func (v *CertificateSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CertificateSummary_RevokedAt:
 			v.RevokedAt = new(time.Time)
 			return d.ReadTime(schemas.CertificateSummary_RevokedAt, v.RevokedAt)
+		case schemas.CertificateSummary_RootHierarchyType:
+			var ev string
+			if err := d.ReadString(schemas.CertificateSummary_RootHierarchyType, &ev); err != nil {
+				return err
+			}
+			v.RootHierarchyType = RootHierarchyType(ev)
+			return nil
 		case schemas.CertificateSummary_Status:
 			var ev string
 			if err := d.ReadString(schemas.CertificateSummary_Status, &ev); err != nil {

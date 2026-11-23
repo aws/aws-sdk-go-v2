@@ -8,7 +8,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You don't have sufficient access to perform this action.
+// You don't have sufficient access to perform this action. Verify that you have
+// the required permissions.
 type AccessDeniedException struct {
 	Message *string
 
@@ -102,7 +103,7 @@ func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// The specified resource doesn't exist.
+// The specified resource doesn't exist. Verify that the identifier is correct.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -149,7 +150,8 @@ func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// The request was denied due to request throttling.
+// The request was denied due to request throttling. Reduce the frequency of your
+// requests and retry.
 type ThrottlingException struct {
 	Message *string
 
@@ -196,7 +198,8 @@ func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The input fails to satisfy the constraints specified by the service.
+// The input fails to satisfy the constraints specified by the service. Check the
+// reason field for the constraint that failed.
 type ValidationException struct {
 	Message *string
 

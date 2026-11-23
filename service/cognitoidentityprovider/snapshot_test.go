@@ -458,6 +458,18 @@ func TestCheckSnapshot_AssociateSoftwareToken(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelPointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelPointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelPointInTimeRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ChangePassword(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ChangePassword(context.Background(), nil, func(o *Options) {
@@ -511,6 +523,18 @@ func TestCheckSnapshot_ConfirmSignUp(t *testing.T) {
 	_, err := svc.ConfirmSignUp(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ConfirmSignUp")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateCIMDPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCIMDPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCIMDPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -631,6 +655,18 @@ func TestCheckSnapshot_CreateUserPoolReplica(t *testing.T) {
 	_, err := svc.CreateUserPoolReplica(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateUserPoolReplica")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCIMDPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCIMDPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCIMDPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -794,6 +830,18 @@ func TestCheckSnapshot_DeleteWebAuthnCredential(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeCIMDPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCIMDPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCIMDPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeIdentityProvider(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeIdentityProvider(context.Background(), nil, func(o *Options) {
@@ -823,6 +871,18 @@ func TestCheckSnapshot_DescribeManagedLoginBrandingByClient(t *testing.T) {
 	_, err := svc.DescribeManagedLoginBrandingByClient(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeManagedLoginBrandingByClient")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribePointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribePointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribePointInTimeRecovery")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1178,6 +1238,42 @@ func TestCheckSnapshot_InitiateAuth(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_InitiatePointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InitiatePointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InitiatePointInTimeRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCIMDPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCIMDPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCIMDPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListClientMetadataURLs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListClientMetadataURLs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListClientMetadataURLs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDevices(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDevices(context.Background(), nil, func(o *Options) {
@@ -1207,6 +1303,18 @@ func TestCheckSnapshot_ListIdentityProviders(t *testing.T) {
 	_, err := svc.ListIdentityProviders(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListIdentityProviders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPointInTimeRecoveries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPointInTimeRecoveries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPointInTimeRecoveries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1514,6 +1622,18 @@ func TestCheckSnapshot_SignUp(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartPointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartPointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartPointInTimeRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartUserImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartUserImportJob(context.Background(), nil, func(o *Options) {
@@ -1579,6 +1699,30 @@ func TestCheckSnapshot_UpdateAuthEventFeedback(t *testing.T) {
 	_, err := svc.UpdateAuthEventFeedback(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateAuthEventFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateCIMDPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCIMDPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCIMDPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateClientMetadataURLState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateClientMetadataURLState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateClientMetadataURLState")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2149,6 +2293,18 @@ func TestUpdateSnapshot_AssociateSoftwareToken(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CancelPointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelPointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelPointInTimeRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ChangePassword(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ChangePassword(context.Background(), nil, func(o *Options) {
@@ -2202,6 +2358,18 @@ func TestUpdateSnapshot_ConfirmSignUp(t *testing.T) {
 	_, err := svc.ConfirmSignUp(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ConfirmSignUp")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCIMDPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCIMDPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCIMDPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2322,6 +2490,18 @@ func TestUpdateSnapshot_CreateUserPoolReplica(t *testing.T) {
 	_, err := svc.CreateUserPoolReplica(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateUserPoolReplica")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCIMDPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCIMDPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCIMDPolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2485,6 +2665,18 @@ func TestUpdateSnapshot_DeleteWebAuthnCredential(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeCIMDPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCIMDPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCIMDPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeIdentityProvider(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeIdentityProvider(context.Background(), nil, func(o *Options) {
@@ -2514,6 +2706,18 @@ func TestUpdateSnapshot_DescribeManagedLoginBrandingByClient(t *testing.T) {
 	_, err := svc.DescribeManagedLoginBrandingByClient(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeManagedLoginBrandingByClient")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribePointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribePointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribePointInTimeRecovery")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2869,6 +3073,42 @@ func TestUpdateSnapshot_InitiateAuth(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_InitiatePointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InitiatePointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InitiatePointInTimeRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCIMDPolicies(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCIMDPolicies(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCIMDPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListClientMetadataURLs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListClientMetadataURLs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListClientMetadataURLs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDevices(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDevices(context.Background(), nil, func(o *Options) {
@@ -2898,6 +3138,18 @@ func TestUpdateSnapshot_ListIdentityProviders(t *testing.T) {
 	_, err := svc.ListIdentityProviders(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListIdentityProviders")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPointInTimeRecoveries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPointInTimeRecoveries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPointInTimeRecoveries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3205,6 +3457,18 @@ func TestUpdateSnapshot_SignUp(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartPointInTimeRecovery(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartPointInTimeRecovery(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartPointInTimeRecovery")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartUserImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartUserImportJob(context.Background(), nil, func(o *Options) {
@@ -3270,6 +3534,30 @@ func TestUpdateSnapshot_UpdateAuthEventFeedback(t *testing.T) {
 	_, err := svc.UpdateAuthEventFeedback(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAuthEventFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCIMDPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCIMDPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCIMDPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateClientMetadataURLState(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateClientMetadataURLState(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateClientMetadataURLState")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

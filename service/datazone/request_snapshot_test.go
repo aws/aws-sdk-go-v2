@@ -1655,7 +1655,8 @@ func TestCheckRequestSnapshot_CreateProject(t *testing.T) {
 		ProjectProfileId: ptr.String("__ProjectProfileId__"),
 		UserParameters: []types.EnvironmentConfigurationUserParameter{
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -1674,7 +1675,8 @@ func TestCheckRequestSnapshot_CreateProject(t *testing.T) {
 				},
 			},
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -6512,6 +6514,36 @@ func TestCheckRequestSnapshot_UpdateAssetFilter(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateAssetOwner(t *testing.T) {
+	input := &UpdateAssetOwnerInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		Identifier:              ptr.String("__Identifier__"),
+		TargetProjectIdentifier: ptr.String("__TargetProjectIdentifier__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAssetOwner(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAssetOwner"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateConnection(t *testing.T) {
 	input := &UpdateConnectionInput{
 		Configurations: []types.Configuration{
@@ -7120,7 +7152,8 @@ func TestCheckRequestSnapshot_UpdateProject(t *testing.T) {
 		},
 		UserParameters: []types.EnvironmentConfigurationUserParameter{
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -7139,7 +7172,8 @@ func TestCheckRequestSnapshot_UpdateProject(t *testing.T) {
 				},
 			},
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -7159,6 +7193,7 @@ func TestCheckRequestSnapshot_UpdateProject(t *testing.T) {
 			},
 		},
 		ProjectProfileVersion: ptr.String("__ProjectProfileVersion__"),
+		ProjectProfileAction:  types.ProjectProfileAction("DISASSOCIATE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9006,7 +9041,8 @@ func TestUpdateRequestSnapshot_CreateProject(t *testing.T) {
 		ProjectProfileId: ptr.String("__ProjectProfileId__"),
 		UserParameters: []types.EnvironmentConfigurationUserParameter{
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -9025,7 +9061,8 @@ func TestUpdateRequestSnapshot_CreateProject(t *testing.T) {
 				},
 			},
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -13863,6 +13900,36 @@ func TestUpdateRequestSnapshot_UpdateAssetFilter(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateAssetOwner(t *testing.T) {
+	input := &UpdateAssetOwnerInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		Identifier:              ptr.String("__Identifier__"),
+		TargetProjectIdentifier: ptr.String("__TargetProjectIdentifier__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAssetOwner(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAssetOwner"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateConnection(t *testing.T) {
 	input := &UpdateConnectionInput{
 		Configurations: []types.Configuration{
@@ -14471,7 +14538,8 @@ func TestUpdateRequestSnapshot_UpdateProject(t *testing.T) {
 		},
 		UserParameters: []types.EnvironmentConfigurationUserParameter{
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -14490,7 +14558,8 @@ func TestUpdateRequestSnapshot_UpdateProject(t *testing.T) {
 				},
 			},
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -14510,6 +14579,7 @@ func TestUpdateRequestSnapshot_UpdateProject(t *testing.T) {
 			},
 		},
 		ProjectProfileVersion: ptr.String("__ProjectProfileVersion__"),
+		ProjectProfileAction:  types.ProjectProfileAction("DISASSOCIATE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

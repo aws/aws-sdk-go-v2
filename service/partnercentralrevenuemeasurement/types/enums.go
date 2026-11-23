@@ -293,6 +293,26 @@ func (RevenueAttributionAllocationTaskStatus) Values() []RevenueAttributionAlloc
 	}
 }
 
+type RevenueShareProductAccountType string
+
+// Enum values for RevenueShareProductAccountType
+const (
+	RevenueShareProductAccountTypeDeployment   RevenueShareProductAccountType = "DEPLOYMENT"
+	RevenueShareProductAccountTypeOrganization RevenueShareProductAccountType = "ORGANIZATION"
+)
+
+// Values returns all known values for RevenueShareProductAccountType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RevenueShareProductAccountType) Values() []RevenueShareProductAccountType {
+	return []RevenueShareProductAccountType{
+		"DEPLOYMENT",
+		"ORGANIZATION",
+	}
+}
+
 type ServiceQuotaExceededExceptionReason string
 
 // Enum values for ServiceQuotaExceededExceptionReason

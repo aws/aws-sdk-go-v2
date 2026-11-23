@@ -3155,6 +3155,46 @@ func (FindingsFound) Values() []FindingsFound {
 	}
 }
 
+type FirewallMode string
+
+// Enum values for FirewallMode
+const (
+	FirewallModeMonitor FirewallMode = "monitor"
+	FirewallModeEnforce FirewallMode = "enforce"
+)
+
+// Values returns all known values for FirewallMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallMode) Values() []FirewallMode {
+	return []FirewallMode{
+		"monitor",
+		"enforce",
+	}
+}
+
+type FirewallOnboardingStatus string
+
+// Enum values for FirewallOnboardingStatus
+const (
+	FirewallOnboardingStatusPending   FirewallOnboardingStatus = "pending"
+	FirewallOnboardingStatusActive    FirewallOnboardingStatus = "active"
+	FirewallOnboardingStatusDisabling FirewallOnboardingStatus = "disabling"
+)
+
+// Values returns all known values for FirewallOnboardingStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallOnboardingStatus) Values() []FirewallOnboardingStatus {
+	return []FirewallOnboardingStatus{
+		"pending",
+		"active",
+		"disabling",
+	}
+}
+
 type FleetActivityStatus string
 
 // Enum values for FleetActivityStatus
@@ -7926,10 +7966,12 @@ type IpamPolicyResourceType string
 
 // Enum values for IpamPolicyResourceType
 const (
-	IpamPolicyResourceTypeAlb  IpamPolicyResourceType = "alb"
-	IpamPolicyResourceTypeEip  IpamPolicyResourceType = "eip"
-	IpamPolicyResourceTypeRds  IpamPolicyResourceType = "rds"
-	IpamPolicyResourceTypeRnat IpamPolicyResourceType = "rnat"
+	IpamPolicyResourceTypeAlb                    IpamPolicyResourceType = "alb"
+	IpamPolicyResourceTypeEip                    IpamPolicyResourceType = "eip"
+	IpamPolicyResourceTypeRds                    IpamPolicyResourceType = "rds"
+	IpamPolicyResourceTypeRnat                   IpamPolicyResourceType = "rnat"
+	IpamPolicyResourceTypeLambdaNetworkConnector IpamPolicyResourceType = "lambda-network-connector"
+	IpamPolicyResourceTypeIgwFirewall            IpamPolicyResourceType = "igw-firewall"
 )
 
 // Values returns all known values for IpamPolicyResourceType. Note that this can
@@ -7942,6 +7984,8 @@ func (IpamPolicyResourceType) Values() []IpamPolicyResourceType {
 		"eip",
 		"rds",
 		"rnat",
+		"lambda-network-connector",
+		"igw-firewall",
 	}
 }
 
@@ -8550,6 +8594,7 @@ const (
 	IpamRoutingPolicyRegistrationStateUpdateComplete   IpamRoutingPolicyRegistrationState = "update-complete"
 	IpamRoutingPolicyRegistrationStateDeleteInProgress IpamRoutingPolicyRegistrationState = "delete-in-progress"
 	IpamRoutingPolicyRegistrationStateDeleteComplete   IpamRoutingPolicyRegistrationState = "delete-complete"
+	IpamRoutingPolicyRegistrationStateDisableComplete  IpamRoutingPolicyRegistrationState = "disable-complete"
 )
 
 // Values returns all known values for IpamRoutingPolicyRegistrationState. Note
@@ -8567,6 +8612,7 @@ func (IpamRoutingPolicyRegistrationState) Values() []IpamRoutingPolicyRegistrati
 		"update-complete",
 		"delete-in-progress",
 		"delete-complete",
+		"disable-complete",
 	}
 }
 
@@ -9901,6 +9947,32 @@ func (NetworkCardInterfaceType) Values() []NetworkCardInterfaceType {
 		"efa",
 		"efa-only",
 		"secondary",
+	}
+}
+
+type NetworkFirewallConnectivityType string
+
+// Enum values for NetworkFirewallConnectivityType
+const (
+	NetworkFirewallConnectivityTypeFlexible      NetworkFirewallConnectivityType = "flexible"
+	NetworkFirewallConnectivityTypeOutboundOnly  NetworkFirewallConnectivityType = "outbound-only"
+	NetworkFirewallConnectivityTypeBidirectional NetworkFirewallConnectivityType = "bidirectional"
+	NetworkFirewallConnectivityTypeExclude       NetworkFirewallConnectivityType = "exclude"
+	NetworkFirewallConnectivityTypeAzUnsupported NetworkFirewallConnectivityType = "az-unsupported"
+)
+
+// Values returns all known values for NetworkFirewallConnectivityType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkFirewallConnectivityType) Values() []NetworkFirewallConnectivityType {
+	return []NetworkFirewallConnectivityType{
+		"flexible",
+		"outbound-only",
+		"bidirectional",
+		"exclude",
+		"az-unsupported",
 	}
 }
 
@@ -11932,10 +12004,12 @@ type ServiceManaged string
 
 // Enum values for ServiceManaged
 const (
-	ServiceManagedAlb  ServiceManaged = "alb"
-	ServiceManagedNlb  ServiceManaged = "nlb"
-	ServiceManagedRnat ServiceManaged = "rnat"
-	ServiceManagedRds  ServiceManaged = "rds"
+	ServiceManagedAlb                    ServiceManaged = "alb"
+	ServiceManagedNlb                    ServiceManaged = "nlb"
+	ServiceManagedRnat                   ServiceManaged = "rnat"
+	ServiceManagedRds                    ServiceManaged = "rds"
+	ServiceManagedLambdaNetworkConnector ServiceManaged = "lambda-network-connector"
+	ServiceManagedIgwFirewall            ServiceManaged = "igw-firewall"
 )
 
 // Values returns all known values for ServiceManaged. Note that this can be
@@ -11948,6 +12022,8 @@ func (ServiceManaged) Values() []ServiceManaged {
 		"nlb",
 		"rnat",
 		"rds",
+		"lambda-network-connector",
+		"igw-firewall",
 	}
 }
 
@@ -13662,6 +13738,7 @@ const (
 	UnlimitedSupportedInstanceFamilyT3a UnlimitedSupportedInstanceFamily = "t3a"
 	UnlimitedSupportedInstanceFamilyT4g UnlimitedSupportedInstanceFamily = "t4g"
 	UnlimitedSupportedInstanceFamilyT8i UnlimitedSupportedInstanceFamily = "t8i"
+	UnlimitedSupportedInstanceFamilyT9g UnlimitedSupportedInstanceFamily = "t9g"
 )
 
 // Values returns all known values for UnlimitedSupportedInstanceFamily. Note that
@@ -13676,6 +13753,7 @@ func (UnlimitedSupportedInstanceFamily) Values() []UnlimitedSupportedInstanceFam
 		"t3a",
 		"t4g",
 		"t8i",
+		"t9g",
 	}
 }
 

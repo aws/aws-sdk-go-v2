@@ -10,14 +10,22 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Allows the creation of an asynchronous synthesis task, by starting a new
-// SpeechSynthesisTask . This operation requires all the standard information
-// needed for speech synthesis, plus the name of an Amazon S3 bucket for the
-// service to store the output of the synthesis task and two optional parameters (
-// OutputS3KeyPrefix and SnsTopicArn ). Once the synthesis task is created, this
-// operation will return a SpeechSynthesisTask object, which will include an
-// identifier of this task as well as the current status. The SpeechSynthesisTask
-// object is available for 72 hours after starting the asynchronous synthesis task.
+// Starts an asynchronous synthesis task by creating a new SpeechSynthesisTask .
+// This operation requires all the standard information needed for speech
+// synthesis, plus the name of an Amazon S3 bucket for the service to store the
+// output of the synthesis task and two optional parameters ( OutputS3KeyPrefix
+// and SnsTopicArn ). After Amazon Polly creates the synthesis task, the operation
+// returns a SpeechSynthesisTask object that includes an identifier for the task
+// and its current status. The SpeechSynthesisTask object is available for 72
+// hours after you start the asynchronous synthesis task.
+//
+// To use a custom voice, specify its ID in VoiceId . The voice must be in active
+// status. If the voice is in pending or failed status, the request fails with
+// ConflictException . If no custom voice with the specified ID exists in your
+// account and Region, the request fails with ResourceNotFoundException . If the
+// custom voice uses a customer managed key, you need kms:Decrypt permission on
+// the key. If you disable the key or schedule it for deletion before the task
+// runs, the task fails and TaskStatusReason describes the cause.
 func (c *Client) StartSpeechSynthesisTask(ctx context.Context, params *StartSpeechSynthesisTaskInput, optFns ...func(*Options)) (*StartSpeechSynthesisTaskOutput, error) {
 	if params == nil {
 		params = &StartSpeechSynthesisTaskInput{}
@@ -53,7 +61,9 @@ type StartSpeechSynthesisTaskInput struct {
 	// This member is required.
 	Text *string
 
-	// Voice ID to use for the synthesis.
+	// The voice ID to use for the synthesis. To use a custom voice, specify the voice
+	// ID that CreateVoice returned, for example, vc-9a8fa85dd3 . You can't specify the
+	// ARN of a voice.
 	//
 	// This member is required.
 	VoiceId types.VoiceId

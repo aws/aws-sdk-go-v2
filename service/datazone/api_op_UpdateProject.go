@@ -54,6 +54,10 @@ type UpdateProjectInput struct {
 	// The name to be updated as part of the UpdateProject action.
 	Name *string
 
+	// The action to perform on the project profile of the project. Specify
+	// DISASSOCIATE to disassociate the project from its project profile.
+	ProjectProfileAction types.ProjectProfileAction
+
 	// The project profile version to which the project should be updated. You can
 	// only specify the following string for this parameter: latest .
 	ProjectProfileVersion *string
@@ -96,6 +100,9 @@ func (v *UpdateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateProjectInput_name, *v.Name)
+	}
+	if v.ProjectProfileAction != "" {
+		s.WriteString(schemas.UpdateProjectInput_projectProfileAction, string(v.ProjectProfileAction))
 	}
 	if v.ProjectProfileVersion != nil {
 		s.WriteString(schemas.UpdateProjectInput_projectProfileVersion, *v.ProjectProfileVersion)

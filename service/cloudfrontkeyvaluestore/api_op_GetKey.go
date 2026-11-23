@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns a key value pair.
+// Returns a key-value pair.
 func (c *Client) GetKey(ctx context.Context, params *GetKeyInput, optFns ...func(*Options)) (*GetKeyOutput, error) {
 	if params == nil {
 		params = &GetKeyInput{}
@@ -32,7 +32,7 @@ type GetKeyInput struct {
 	// This member is required.
 	Key *string
 
-	// The Amazon Resource Name (ARN) of the Key Value Store.
+	// The Amazon Resource Name (ARN) of the key value store.
 	//
 	// This member is required.
 	KvsARN *string
@@ -60,25 +60,25 @@ func (in *GetKeyInput) bindEndpointParams(p *EndpointParameters) {
 
 }
 
-// A key value pair.
+// A key-value pair.
 type GetKeyOutput struct {
 
-	// Number of key value pairs in the Key Value Store.
+	// Number of key-value pairs in the key value store.
 	//
 	// This member is required.
 	ItemCount *int32
 
-	// The key of the key value pair.
+	// The key of the key-value pair.
 	//
 	// This member is required.
 	Key *string
 
-	// Total size of the Key Value Store in bytes.
+	// Total size of the key value store in bytes.
 	//
 	// This member is required.
 	TotalSizeInBytes *int64
 
-	// The value of the key value pair.
+	// The value of the key-value pair.
 	//
 	// This member is required.
 	Value *string

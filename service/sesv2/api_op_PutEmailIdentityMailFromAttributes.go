@@ -36,13 +36,13 @@ type PutEmailIdentityMailFromAttributesInput struct {
 	EmailIdentity *string
 
 	// The action to take if the required MX record isn't found when you send an
-	// email. When you set this value to UseDefaultValue , the mail is sent using
-	// amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage
-	// , the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't
-	// attempt to deliver the email.
+	// email. When you set this value to USE_DEFAULT_VALUE , the mail is sent using
+	// amazonses.com as the MAIL FROM domain. When you set this value to REJECT_MESSAGE
+	// , the Amazon SES API v2 returns a MailFromDomainNotVerifiedException error, and
+	// doesn't attempt to deliver the email.
 	//
 	// These behaviors are taken when the custom MAIL FROM domain configuration is in
-	// the Pending , Failed , and TemporaryFailure states.
+	// the PENDING , FAILED , and TEMPORARY_FAILURE states.
 	BehaviorOnMxFailure types.BehaviorOnMxFailure
 
 	//  The custom MAIL FROM domain that you want the verified identity to use. The

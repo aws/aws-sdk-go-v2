@@ -31,6 +31,7 @@ func (c *Client) CreateEngagement(ctx context.Context, params *CreateEngagementI
 	return out, nil
 }
 
+// Contains the request parameters for the CreateEngagement operation.
 type CreateEngagementInput struct {
 
 	// The CreateEngagementRequest$Catalog parameter specifies the catalog related to
@@ -95,6 +96,7 @@ func (v *CreateEngagementInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
+// Contains the response that the CreateEngagement action returns.
 type CreateEngagementOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the engagement.

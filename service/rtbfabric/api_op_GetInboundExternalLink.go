@@ -91,8 +91,20 @@ type GetInboundExternalLinkOutput struct {
 	// The timestamp of when the inbound external link was created.
 	CreatedAt *time.Time
 
+	// The causes of the failure, such as a deleted subnet. Present only when the
+	// resource has failed.
+	ErrorDetails []types.ErrorDetail
+
 	// The configuration of flow modules.
 	FlowModules []types.ModuleConfiguration
+
+	// The link's active flows, in the form PutLinkFlows takes. Empty when the link
+	// has no modules, and absent when its modules were set with UpdateLinkModuleFlow.
+	Flows []types.Flow
+
+	// The link's concurrency token. Pass it to PutLinkFlows unchanged; it changes
+	// whenever the link does.
+	LockToken *string
 
 	// Settings for the application logs.
 	LogSettings *types.LinkLogSettings
@@ -134,14 +146,23 @@ func (v *GetInboundExternalLinkOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.DomainName != nil {
 		s.WriteString(schemas.GetInboundExternalLinkResponse_domainName, *v.DomainName)
 	}
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.GetInboundExternalLinkResponse_errorDetails, v.ErrorDetails)
+	}
 	if v.FlowModules != nil {
 		serializeModuleConfigurationList(s, schemas.GetInboundExternalLinkResponse_flowModules, v.FlowModules)
+	}
+	if v.Flows != nil {
+		serializeFlowList(s, schemas.GetInboundExternalLinkResponse_flows, v.Flows)
 	}
 	if v.GatewayId != nil {
 		s.WriteString(schemas.GetInboundExternalLinkResponse_gatewayId, *v.GatewayId)
 	}
 	if v.LinkId != nil {
 		s.WriteString(schemas.GetInboundExternalLinkResponse_linkId, *v.LinkId)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.GetInboundExternalLinkResponse_lockToken, *v.LockToken)
 	}
 	if v.LogSettings != nil {
 		s.WriteStruct(schemas.GetInboundExternalLinkResponse_logSettings)
@@ -180,14 +201,21 @@ func (v *GetInboundExternalLinkOutput) Deserialize(d smithy.ShapeDeserializer) e
 		case schemas.GetInboundExternalLinkResponse_domainName:
 			v.DomainName = new(string)
 			return d.ReadString(schemas.GetInboundExternalLinkResponse_domainName, v.DomainName)
+		case schemas.GetInboundExternalLinkResponse_errorDetails:
+			return deserializeErrorDetails(d, schemas.GetInboundExternalLinkResponse_errorDetails, &v.ErrorDetails)
 		case schemas.GetInboundExternalLinkResponse_flowModules:
 			return deserializeModuleConfigurationList(d, schemas.GetInboundExternalLinkResponse_flowModules, &v.FlowModules)
+		case schemas.GetInboundExternalLinkResponse_flows:
+			return deserializeFlowList(d, schemas.GetInboundExternalLinkResponse_flows, &v.Flows)
 		case schemas.GetInboundExternalLinkResponse_gatewayId:
 			v.GatewayId = new(string)
 			return d.ReadString(schemas.GetInboundExternalLinkResponse_gatewayId, v.GatewayId)
 		case schemas.GetInboundExternalLinkResponse_linkId:
 			v.LinkId = new(string)
 			return d.ReadString(schemas.GetInboundExternalLinkResponse_linkId, v.LinkId)
+		case schemas.GetInboundExternalLinkResponse_lockToken:
+			v.LockToken = new(string)
+			return d.ReadString(schemas.GetInboundExternalLinkResponse_lockToken, v.LockToken)
 		case schemas.GetInboundExternalLinkResponse_logSettings:
 			v.LogSettings = &types.LinkLogSettings{}
 			return v.LogSettings.Deserialize(d)
@@ -414,6 +442,16 @@ func inboundExternalLinkActiveStateRetryable(ctx context.Context, input *GetInbo
 
 	if err == nil {
 		v1 := output.Status
+		expectedValue := "CREATE_FAILED"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	if err == nil {
+		v1 := output.Status
 		expectedValue := "ACTIVE"
 		var pathValue string
 		pathValue = string(v1)
@@ -630,6 +668,16 @@ func (w *InboundExternalLinkDeletedWaiter) WaitForOutput(ctx context.Context, pa
 }
 
 func inboundExternalLinkDeletedStateRetryable(ctx context.Context, input *GetInboundExternalLinkInput, output *GetInboundExternalLinkOutput, err error) (bool, error) {
+
+	if err == nil {
+		v1 := output.Status
+		expectedValue := "DELETE_FAILED"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
 
 	if err == nil {
 		v1 := output.Status

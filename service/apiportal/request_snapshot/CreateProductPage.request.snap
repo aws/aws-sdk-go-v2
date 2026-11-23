@@ -1,0 +1,5 @@
+POST /products/__ProductId__/productpages
+
+Content-Type: application/json
+
+{"displayContent":{"body":"__Body__","title":"__Title__"},"tags":{"key0":"__Value__"}}

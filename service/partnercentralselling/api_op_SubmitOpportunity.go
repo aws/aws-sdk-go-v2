@@ -29,6 +29,7 @@ func (c *Client) SubmitOpportunity(ctx context.Context, params *SubmitOpportunit
 	return out, nil
 }
 
+// Contains the request parameters for the SubmitOpportunity operation.
 type SubmitOpportunityInput struct {
 
 	// Specifies the catalog related to the request. Valid values are:

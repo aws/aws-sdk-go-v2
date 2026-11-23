@@ -1,0 +1,3 @@
+GET /managedapis?maxResults=1&nextToken=__NextToken__&productId=__ProductId__
+
+

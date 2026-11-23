@@ -554,6 +554,13 @@ var PutAccountDedicatedIpWarmupAttributes = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v2/email/account/dedicated-ips/warmup",
 	Code: 200})
 
+var PutAccountDeliveryAttributes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "PutAccountDeliveryAttributes",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v2/email/account/delivery",
+	Code: 200})
+
 var PutAccountDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "PutAccountDetails",
@@ -842,6 +849,14 @@ var AccountDetails_UseCaseDescription *smithy.Schema
 var AccountDetails_AdditionalContactEmailAddresses *smithy.Schema
 
 var AccountDetails_ReviewDetails *smithy.Schema
+
+var AccountSharedPoolDeliveryMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "AccountSharedPoolDeliveryMode",
+}, smithy.ShapeTypeEnum, 2)
+var AccountSharedPoolDeliveryMode_GLOBAL *smithy.Schema
+
+var AccountSharedPoolDeliveryMode_REGIONAL *smithy.Schema
 
 var AccountSuspendedException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
@@ -1454,6 +1469,12 @@ var _DeliverabilityTestSubject = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeliverabilityTestSubject",
 }, smithy.ShapeTypeString, 0)
 
+var DeliveryAttributes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "DeliveryAttributes",
+}, smithy.ShapeTypeStructure, 1)
+var DeliveryAttributes_SharedPoolDeliveryMode *smithy.Schema
+
 var DeliveryEventType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "DeliveryEventType",
@@ -1473,12 +1494,14 @@ var DeliveryEventType_COMPLAINT *smithy.Schema
 var DeliveryOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "DeliveryOptions",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var DeliveryOptions_TlsPolicy *smithy.Schema
 
 var DeliveryOptions_SendingPoolName *smithy.Schema
 
 var DeliveryOptions_MaxDeliverySeconds *smithy.Schema
+
+var DeliveryOptions_SharedPoolDeliveryMode *smithy.Schema
 
 var _Description = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
@@ -3340,6 +3363,16 @@ var _SerialNumber = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SerialNumber",
 }, smithy.ShapeTypeLong, 0)
 
+var SharedPoolDeliveryMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "SharedPoolDeliveryMode",
+}, smithy.ShapeTypeEnum, 3)
+var SharedPoolDeliveryMode_GLOBAL *smithy.Schema
+
+var SharedPoolDeliveryMode_REGIONAL *smithy.Schema
+
+var SharedPoolDeliveryMode_ACCOUNT *smithy.Schema
+
 var SignatureFormat = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "SignatureFormat",
@@ -4370,7 +4403,7 @@ var GetAccountRequest = smithy.NewSchema(smithy.ShapeID{
 var GetAccountResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "GetAccountResponse",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var GetAccountResponse_DedicatedIpAutoWarmupEnabled *smithy.Schema
 
 var GetAccountResponse_EnforcementStatus *smithy.Schema
@@ -4388,6 +4421,8 @@ var GetAccountResponse_Details *smithy.Schema
 var GetAccountResponse_VdmAttributes *smithy.Schema
 
 var GetAccountResponse_PricingAttributes *smithy.Schema
+
+var GetAccountResponse_DeliveryAttributes *smithy.Schema
 
 var GetBlacklistReportsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
@@ -5205,6 +5240,17 @@ var PutAccountDedicatedIpWarmupAttributesResponse = smithy.NewSchema(smithy.Shap
 	Name:      "PutAccountDedicatedIpWarmupAttributesResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var PutAccountDeliveryAttributesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "PutAccountDeliveryAttributesRequest",
+}, smithy.ShapeTypeStructure, 1)
+var PutAccountDeliveryAttributesRequest_SharedPoolDeliveryMode *smithy.Schema
+
+var PutAccountDeliveryAttributesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sesv2",
+	Name:      "PutAccountDeliveryAttributesResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var PutAccountDetailsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "PutAccountDetailsRequest",
@@ -5288,7 +5334,7 @@ var PutConfigurationSetArchivingOptionsResponse = smithy.NewSchema(smithy.ShapeI
 var PutConfigurationSetDeliveryOptionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
 	Name:      "PutConfigurationSetDeliveryOptionsRequest",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var PutConfigurationSetDeliveryOptionsRequest_ConfigurationSetName *smithy.Schema
 
 var PutConfigurationSetDeliveryOptionsRequest_TlsPolicy *smithy.Schema
@@ -5296,6 +5342,8 @@ var PutConfigurationSetDeliveryOptionsRequest_TlsPolicy *smithy.Schema
 var PutConfigurationSetDeliveryOptionsRequest_SendingPoolName *smithy.Schema
 
 var PutConfigurationSetDeliveryOptionsRequest_MaxDeliverySeconds *smithy.Schema
+
+var PutConfigurationSetDeliveryOptionsRequest_SharedPoolDeliveryMode *smithy.Schema
 
 var PutConfigurationSetDeliveryOptionsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sesv2",
@@ -5833,6 +5881,10 @@ func init() {
 
 	AccountDetails_ReviewDetails = AccountDetails.AddMember("ReviewDetails", ReviewDetails)
 
+	AccountSharedPoolDeliveryMode_GLOBAL = AccountSharedPoolDeliveryMode.AddMember("GLOBAL", smithyprelude.Unit)
+
+	AccountSharedPoolDeliveryMode_REGIONAL = AccountSharedPoolDeliveryMode.AddMember("REGIONAL", smithyprelude.Unit)
+
 	AccountSuspendedException_message = AccountSuspendedException.AddMember("message", _ErrorMessage)
 
 	AlreadyExistsException_message = AlreadyExistsException.AddMember("message", _ErrorMessage)
@@ -6213,6 +6265,8 @@ func init() {
 
 	_DeliverabilityTestReports_member = _DeliverabilityTestReports.AddMember("member", DeliverabilityTestReport)
 
+	DeliveryAttributes_SharedPoolDeliveryMode = DeliveryAttributes.AddMember("SharedPoolDeliveryMode", AccountSharedPoolDeliveryMode)
+
 	DeliveryEventType_SEND = DeliveryEventType.AddMember("SEND", smithyprelude.Unit)
 
 	DeliveryEventType_DELIVERY = DeliveryEventType.AddMember("DELIVERY", smithyprelude.Unit)
@@ -6229,11 +6283,19 @@ func init() {
 
 	TlsPolicy_OPTIONAL = TlsPolicy.AddMember("OPTIONAL", smithyprelude.Unit)
 
+	SharedPoolDeliveryMode_GLOBAL = SharedPoolDeliveryMode.AddMember("GLOBAL", smithyprelude.Unit)
+
+	SharedPoolDeliveryMode_REGIONAL = SharedPoolDeliveryMode.AddMember("REGIONAL", smithyprelude.Unit)
+
+	SharedPoolDeliveryMode_ACCOUNT = SharedPoolDeliveryMode.AddMember("ACCOUNT", smithyprelude.Unit)
+
 	DeliveryOptions_TlsPolicy = DeliveryOptions.AddMember("TlsPolicy", TlsPolicy)
 
 	DeliveryOptions_SendingPoolName = DeliveryOptions.AddMember("SendingPoolName", _PoolName)
 
 	DeliveryOptions_MaxDeliverySeconds = DeliveryOptions.AddMember("MaxDeliverySeconds", _MaxDeliverySeconds)
+
+	DeliveryOptions_SharedPoolDeliveryMode = DeliveryOptions.AddMember("SharedPoolDeliveryMode", SharedPoolDeliveryMode)
 
 	RouteDetails_Region = RouteDetails.AddMember("Region", _Region)
 
@@ -7393,6 +7455,8 @@ func init() {
 
 	GetAccountResponse_PricingAttributes = GetAccountResponse.AddMember("PricingAttributes", PricingAttributes)
 
+	GetAccountResponse_DeliveryAttributes = GetAccountResponse.AddMember("DeliveryAttributes", DeliveryAttributes)
+
 	GetBlacklistReportsRequest_BlacklistItemNames = GetBlacklistReportsRequest.AddMember("BlacklistItemNames", _BlacklistItemNames, &smithytraits.HTTPQuery{Name: "BlacklistItemNames"})
 
 	GetBlacklistReportsResponse_BlacklistReport = GetBlacklistReportsResponse.AddMember("BlacklistReport", _BlacklistReport)
@@ -7847,6 +7911,8 @@ func init() {
 
 	PutAccountDedicatedIpWarmupAttributesRequest_AutoWarmupEnabled = PutAccountDedicatedIpWarmupAttributesRequest.AddMember("AutoWarmupEnabled", _Enabled)
 
+	PutAccountDeliveryAttributesRequest_SharedPoolDeliveryMode = PutAccountDeliveryAttributesRequest.AddMember("SharedPoolDeliveryMode", AccountSharedPoolDeliveryMode)
+
 	PutAccountDetailsRequest_MailType = PutAccountDetailsRequest.AddMember("MailType", MailType)
 
 	PutAccountDetailsRequest_WebsiteURL = PutAccountDetailsRequest.AddMember("WebsiteURL", _WebsiteURL)
@@ -7880,6 +7946,8 @@ func init() {
 	PutConfigurationSetDeliveryOptionsRequest_SendingPoolName = PutConfigurationSetDeliveryOptionsRequest.AddMember("SendingPoolName", _SendingPoolName)
 
 	PutConfigurationSetDeliveryOptionsRequest_MaxDeliverySeconds = PutConfigurationSetDeliveryOptionsRequest.AddMember("MaxDeliverySeconds", _MaxDeliverySeconds)
+
+	PutConfigurationSetDeliveryOptionsRequest_SharedPoolDeliveryMode = PutConfigurationSetDeliveryOptionsRequest.AddMember("SharedPoolDeliveryMode", SharedPoolDeliveryMode)
 
 	PutConfigurationSetReputationOptionsRequest_ConfigurationSetName = PutConfigurationSetReputationOptionsRequest.AddMember("ConfigurationSetName", _ConfigurationSetName, &smithytraits.HTTPLabel{})
 

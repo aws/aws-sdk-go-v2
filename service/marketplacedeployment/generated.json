@@ -8,8 +8,12 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_GetDeploymentConfiguration.go",
+        "api_op_GetDeploymentConfigurationJob.go",
+        "api_op_ListDeploymentConfigurationJobs.go",
         "api_op_ListTagsForResource.go",
         "api_op_PutDeploymentParameter.go",
+        "api_op_StartDeploymentConfigurationJob.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "auth.go",
@@ -30,8 +34,10 @@
         "sra_operation_order_test.go",
         "type_registry.go",
         "types/common_serde.go",
+        "types/enums.go",
         "types/errors.go",
         "types/types.go",
+        "types/types_exported_test.go",
         "validators.go"
     ],
     "go": "1.24",

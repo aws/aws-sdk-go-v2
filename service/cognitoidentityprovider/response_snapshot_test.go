@@ -1330,6 +1330,49 @@ func TestCheckResponseSnapshot_AssociateSoftwareToken(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CancelPointInTimeRecovery(t *testing.T) {
+	want := &CancelPointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelPointInTimeRecovery.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelPointInTimeRecovery(context.Background(), &CancelPointInTimeRecoveryInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RestoreId:  ptr.String("__RestoreId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelPointInTimeRecovery.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ChangePassword(t *testing.T) {
 	want := &ChangePasswordOutput{}
 	status, header, body, err := serdeRespReadSnapshot("ChangePassword.response")
@@ -1474,6 +1517,48 @@ func TestCheckResponseSnapshot_ConfirmSignUp(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ConfirmSignUp.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateCIMDPolicy(t *testing.T) {
+	want := &CreateCIMDPolicyOutput{
+		CIMDPolicy: &types.CIMDPolicyType{
+			UserPoolId:    ptr.String("__UserPoolId__"),
+			CIMDPolicyId:  ptr.String("__CIMDPolicyId__"),
+			ClientId:      ptr.String("__ClientId__"),
+			PolicyName:    ptr.String("__PolicyName__"),
+			CacheDuration: ptr.Int32(1),
+			URLPatterns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateCIMDPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateCIMDPolicy(context.Background(), &CreateCIMDPolicyInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		ClientId:      ptr.String("__ClientId__"),
+		PolicyName:    ptr.String("__PolicyName__"),
+		CacheDuration: ptr.Int32(1),
+		URLPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateCIMDPolicy.response", err)
 	}
 }
 
@@ -2203,6 +2288,7 @@ func TestCheckResponseSnapshot_CreateUserPoolClient(t *testing.T) {
 			ClientName:           ptr.String("__ClientName__"),
 			ClientId:             ptr.String("__ClientId__"),
 			ClientSecret:         ptr.String("__ClientSecret__"),
+			ClientSecretArn:      ptr.String("__ClientSecretArn__"),
 			LastModifiedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			RefreshTokenValidity: 1,
@@ -2335,6 +2421,7 @@ func TestCheckResponseSnapshot_CreateUserPoolClient(t *testing.T) {
 			Feature:                 types.FeatureType("ENABLED"),
 			RetryGracePeriodSeconds: ptr.Int32(1),
 		},
+		PublishSecretsInAWSSecretsManager: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2415,6 +2502,28 @@ func TestCheckResponseSnapshot_CreateUserPoolReplica(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateUserPoolReplica.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteCIMDPolicy(t *testing.T) {
+	want := &DeleteCIMDPolicyOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteCIMDPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteCIMDPolicy(context.Background(), &DeleteCIMDPolicyInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteCIMDPolicy.response", err)
 	}
 }
 
@@ -2713,6 +2822,42 @@ func TestCheckResponseSnapshot_DeleteWebAuthnCredential(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeCIMDPolicy(t *testing.T) {
+	want := &DescribeCIMDPolicyOutput{
+		CIMDPolicy: &types.CIMDPolicyType{
+			UserPoolId:    ptr.String("__UserPoolId__"),
+			CIMDPolicyId:  ptr.String("__CIMDPolicyId__"),
+			ClientId:      ptr.String("__ClientId__"),
+			PolicyName:    ptr.String("__PolicyName__"),
+			CacheDuration: ptr.Int32(1),
+			URLPatterns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeCIMDPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeCIMDPolicy(context.Background(), &DescribeCIMDPolicyInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeCIMDPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeIdentityProvider(t *testing.T) {
 	want := &DescribeIdentityProviderOutput{
 		IdentityProvider: &types.IdentityProviderType{
@@ -2849,6 +2994,49 @@ func TestCheckResponseSnapshot_DescribeManagedLoginBrandingByClient(t *testing.T
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeManagedLoginBrandingByClient.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribePointInTimeRecovery(t *testing.T) {
+	want := &DescribePointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribePointInTimeRecovery.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribePointInTimeRecovery(context.Background(), &DescribePointInTimeRecoveryInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RestoreId:  ptr.String("__RestoreId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribePointInTimeRecovery.response", err)
 	}
 }
 
@@ -3325,6 +3513,7 @@ func TestCheckResponseSnapshot_DescribeUserPoolClient(t *testing.T) {
 			ClientName:           ptr.String("__ClientName__"),
 			ClientId:             ptr.String("__ClientId__"),
 			ClientSecret:         ptr.String("__ClientSecret__"),
+			ClientSecretArn:      ptr.String("__ClientSecretArn__"),
 			LastModifiedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			RefreshTokenValidity: 1,
@@ -4216,6 +4405,130 @@ func TestCheckResponseSnapshot_InitiateAuth(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_InitiatePointInTimeRecovery(t *testing.T) {
+	want := &InitiatePointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("InitiatePointInTimeRecovery.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.InitiatePointInTimeRecovery(context.Background(), &InitiatePointInTimeRecoveryInput{
+		UserPoolId:       ptr.String("__UserPoolId__"),
+		RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "InitiatePointInTimeRecovery.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListCIMDPolicies(t *testing.T) {
+	want := &ListCIMDPoliciesOutput{
+		NextToken: ptr.String("__NextToken__"),
+		CIMDPolicies: []types.CIMDPolicySummaryType{
+			{
+				CIMDPolicyId:     ptr.String("__CIMDPolicyId__"),
+				ClientId:         ptr.String("__ClientId__"),
+				PolicyName:       ptr.String("__PolicyName__"),
+				CacheDuration:    ptr.Int32(1),
+				CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				CIMDPolicyId:     ptr.String("__CIMDPolicyId__"),
+				ClientId:         ptr.String("__ClientId__"),
+				PolicyName:       ptr.String("__PolicyName__"),
+				CacheDuration:    ptr.Int32(1),
+				CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListCIMDPolicies.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListCIMDPolicies(context.Background(), &ListCIMDPoliciesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListCIMDPolicies.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListClientMetadataURLs(t *testing.T) {
+	want := &ListClientMetadataURLsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		ClientMetadataURLs: []types.ClientMetadataURLType{
+			{
+				URL:            ptr.String("__URL__"),
+				CachedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpirationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				URL:            ptr.String("__URL__"),
+				CachedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpirationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListClientMetadataURLs.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListClientMetadataURLs(context.Background(), &ListClientMetadataURLsInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListClientMetadataURLs.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListDevices(t *testing.T) {
 	want := &ListDevicesOutput{
 		Devices: []types.DeviceType{
@@ -4356,6 +4669,43 @@ func TestCheckResponseSnapshot_ListIdentityProviders(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListIdentityProviders.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListPointInTimeRecoveries(t *testing.T) {
+	want := &ListPointInTimeRecoveriesOutput{
+		Restorations: []types.RestorationDescriptionType{
+			{
+				RestoreId:        ptr.String("__RestoreId__"),
+				RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+				RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				RestoreId:        ptr.String("__RestoreId__"),
+				RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+				RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListPointInTimeRecoveries.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListPointInTimeRecoveries(context.Background(), &ListPointInTimeRecoveriesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListPointInTimeRecoveries.response", err)
 	}
 }
 
@@ -5705,6 +6055,49 @@ func TestCheckResponseSnapshot_SignUp(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartPointInTimeRecovery(t *testing.T) {
+	want := &StartPointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartPointInTimeRecovery.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartPointInTimeRecovery(context.Background(), &StartPointInTimeRecoveryInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RestoreId:  ptr.String("__RestoreId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartPointInTimeRecovery.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartUserImportJob(t *testing.T) {
 	want := &StartUserImportJobOutput{
 		UserImportJob: &types.UserImportJobType{
@@ -5877,6 +6270,73 @@ func TestCheckResponseSnapshot_UpdateAuthEventFeedback(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateAuthEventFeedback.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateCIMDPolicy(t *testing.T) {
+	want := &UpdateCIMDPolicyOutput{
+		CIMDPolicy: &types.CIMDPolicyType{
+			UserPoolId:    ptr.String("__UserPoolId__"),
+			CIMDPolicyId:  ptr.String("__CIMDPolicyId__"),
+			ClientId:      ptr.String("__ClientId__"),
+			PolicyName:    ptr.String("__PolicyName__"),
+			CacheDuration: ptr.Int32(1),
+			URLPatterns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateCIMDPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateCIMDPolicy(context.Background(), &UpdateCIMDPolicyInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		CIMDPolicyId:  ptr.String("__CIMDPolicyId__"),
+		ClientId:      ptr.String("__ClientId__"),
+		PolicyName:    ptr.String("__PolicyName__"),
+		CacheDuration: ptr.Int32(1),
+		URLPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCIMDPolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateClientMetadataURLState(t *testing.T) {
+	want := &UpdateClientMetadataURLStateOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateClientMetadataURLState.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateClientMetadataURLState(context.Background(), &UpdateClientMetadataURLStateInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+		URL:          ptr.String("__URL__"),
+		Action:       types.CIMDCacheActionType("REFRESH"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateClientMetadataURLState.response", err)
 	}
 }
 
@@ -6419,6 +6879,7 @@ func TestCheckResponseSnapshot_UpdateUserPoolClient(t *testing.T) {
 			ClientName:           ptr.String("__ClientName__"),
 			ClientId:             ptr.String("__ClientId__"),
 			ClientSecret:         ptr.String("__ClientSecret__"),
+			ClientSecretArn:      ptr.String("__ClientSecretArn__"),
 			LastModifiedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			RefreshTokenValidity: 1,
@@ -6550,6 +7011,7 @@ func TestCheckResponseSnapshot_UpdateUserPoolClient(t *testing.T) {
 			Feature:                 types.FeatureType("ENABLED"),
 			RetryGracePeriodSeconds: ptr.Int32(1),
 		},
+		PublishSecretsInAWSSecretsManager: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6739,6 +7201,36 @@ func TestCheckResponseSnapshot_Error_AliasExistsException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "AliasExistsException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_CachedCIMDURLDoesNotExistException(t *testing.T) {
+	want := &types.CachedCIMDURLDoesNotExistException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CachedCIMDURLDoesNotExistException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.UpdateClientMetadataURLState(context.Background(), &UpdateClientMetadataURLStateInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+		URL:          ptr.String("__URL__"),
+		Action:       types.CIMDCacheActionType("REFRESH"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.CachedCIMDURLDoesNotExistException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.CachedCIMDURLDoesNotExistException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "CachedCIMDURLDoesNotExistException.error", err)
 	}
 }
 
@@ -7405,6 +7897,7 @@ func TestCheckResponseSnapshot_Error_InvalidOAuthFlowException(t *testing.T) {
 			Feature:                 types.FeatureType("ENABLED"),
 			RetryGracePeriodSeconds: ptr.Int32(1),
 		},
+		PublishSecretsInAWSSecretsManager: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -8263,6 +8756,7 @@ func TestCheckResponseSnapshot_Error_ScopeDoesNotExistException(t *testing.T) {
 			Feature:                 types.FeatureType("ENABLED"),
 			RetryGracePeriodSeconds: ptr.Int32(1),
 		},
+		PublishSecretsInAWSSecretsManager: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

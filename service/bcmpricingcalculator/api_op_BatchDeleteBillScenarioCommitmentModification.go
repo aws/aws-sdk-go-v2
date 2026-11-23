@@ -12,7 +12,7 @@ import (
 
 //	Delete commitment that you have created in a Bill Scenario. You can only
 //
-// delete a commitment that you had added and cannot model deletion (or removal) of
+// delete a commitment that you had added and can't model deletion (or removal) of
 // a existing commitment. If you want model deletion of an existing commitment, see
 // the negate [BillScenarioCommitmentModificationAction]of [BatchCreateBillScenarioCommitmentModification] operation.
 //
@@ -71,7 +71,7 @@ func (v *BatchDeleteBillScenarioCommitmentModificationInput) SerializeMembers(s 
 
 type BatchDeleteBillScenarioCommitmentModificationOutput struct {
 
-	//  Returns the list of errors reason and the commitment item keys that cannot be
+	//  Returns the list of errors reason and the commitment item keys that can't be
 	// deleted from the Bill Scenario.
 	Errors []types.BatchDeleteBillScenarioCommitmentModificationError
 

@@ -270,6 +270,26 @@ func (m *validateOpDeleteTableReplication) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateTableReplication struct {
+}
+
+func (*validateOpDisassociateTableReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateTableReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateTableReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateTableReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetNamespace struct {
 }
 
@@ -1120,6 +1140,10 @@ func addOpDeleteTablePolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteTableReplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTableReplication{}, middleware.After)
+}
+
+func addOpDisassociateTableReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateTableReplication{}, middleware.After)
 }
 
 func addOpGetNamespaceValidationMiddleware(stack *middleware.Stack) error {
@@ -2162,6 +2186,21 @@ func validateOpDeleteTableReplicationInput(v *DeleteTableReplicationInput) error
 	}
 	if v.VersionToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateTableReplicationInput(v *DisassociateTableReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateTableReplicationInput"}
+	if v.TableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -31468,7 +31468,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies whether Amazon S3 replicates delete markers. If you specify a <code>Filter</code> in your\n      replication configuration, you must also include a <code>DeleteMarkerReplication</code> element. If your\n        <code>Filter</code> includes a <code>Tag</code> element, the <code>DeleteMarkerReplication</code>\n            <code>Status</code> must be set to Disabled, because Amazon S3 does not support replicating delete markers\n      for tag-based rules. For an example configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config\">Basic Rule\n        Configuration</a>. </p>\n         <p>For more information about delete marker replication, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html\">Basic Rule Configuration</a>. </p>\n         <note>\n            <p>If you are using an earlier version of the replication configuration, Amazon S3 handles replication of\n        delete markers differently. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations\">Backward Compatibility</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Specifies whether Amazon S3 replicates delete markers. If you specify a <code>Filter</code> in your\n      replication configuration, you must also include a <code>DeleteMarkerReplication</code> element. If your\n        <code>Filter</code> includes a <code>Tag</code> element, including within a <code>Not</code> or\n      <code>Or</code> element, the <code>DeleteMarkerReplication</code>\n            <code>Status</code> must be set to\n      Disabled, because Amazon S3 does not support replicating delete markers for tag-based rules. For an example\n      configuration, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config\">Basic Rule\n        Configuration</a>. </p>\n         <p>For more information about delete marker replication, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html\">Basic Rule Configuration</a>. </p>\n         <note>\n            <p>If you are using an earlier version of the replication configuration, Amazon S3 handles replication of\n        delete markers differently. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations\">Backward Compatibility</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.s3#DeleteMarkerReplicationStatus": {
@@ -32269,6 +32269,12 @@
                     "target": "com.amazonaws.s3#ReplicaKmsKeyID",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the ID (Key ARN or Alias ARN) of the customer managed Amazon Web Services KMS key stored in Amazon Web Services Key\n      Management Service (KMS) for the destination bucket. Amazon S3 uses this key to encrypt replica objects. Amazon S3\n      only supports symmetric encryption KMS keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Asymmetric keys in Amazon Web Services KMS</a> in the\n        <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>"
+                    }
+                },
+                "UseSourceMultiRegionKey": {
+                    "target": "com.amazonaws.s3#UseSourceMultiRegionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 uses the related multi-Region KMS key in the destination Amazon Web Services Region to encrypt\n      the replica.</p>"
                     }
                 }
             },
@@ -45678,6 +45684,15 @@
                 "smithy.api#documentation": "<p>A container for replication rules. You can add up to 1,000 rules. The maximum size of a replication\n      configuration is 2 MB.</p>"
             }
         },
+        "com.amazonaws.s3#ReplicationPrefixList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3#Prefix",
+                "traits": {
+                    "smithy.api#xmlName": "Prefix"
+                }
+            }
+        },
         "com.amazonaws.s3#ReplicationRule": {
             "type": "structure",
             "members": {
@@ -45753,6 +45768,12 @@
                         "smithy.api#xmlFlattened": {},
                         "smithy.api#xmlName": "Tag"
                     }
+                },
+                "Not": {
+                    "target": "com.amazonaws.s3#ReplicationRuleNotOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for specifying filters that exclude matching objects from the replication rule.</p>"
+                    }
                 }
             },
             "traits": {
@@ -45779,10 +45800,66 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A container for specifying rule filters. The filters determine the subset of objects to which the\n      rule applies. This element is required only if you specify more than one filter. For example: </p>\n         <ul>\n            <li>\n               <p>If you specify both a <code>Prefix</code> and a <code>Tag</code> filter, wrap these filters in\n          an <code>And</code> tag.</p>\n            </li>\n            <li>\n               <p>If you specify a filter based on multiple tags, wrap the <code>Tag</code> elements in an\n            <code>And</code> tag.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "Not": {
+                    "target": "com.amazonaws.s3#ReplicationRuleNotOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for specifying filters that exclude matching objects from the replication rule.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter that identifies the subset of objects to which the replication rule applies. A\n        <code>Filter</code> must specify exactly one <code>Prefix</code>, <code>Tag</code>, or an\n        <code>And</code> child element.</p>"
+                "smithy.api#documentation": "<p>A filter that identifies the subset of objects to which the replication rule applies. A\n        <code>Filter</code> must specify exactly one <code>Prefix</code>, <code>Tag</code>, <code>And</code>,\n        or <code>Not</code> child element.</p>"
+            }
+        },
+        "com.amazonaws.s3#ReplicationRuleNotOperator": {
+            "type": "structure",
+            "members": {
+                "Prefix": {
+                    "target": "com.amazonaws.s3#Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object key name prefix that identifies objects to exclude from the replication rule.</p>"
+                    }
+                },
+                "Tag": {
+                    "target": "com.amazonaws.s3#Tag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tag key and value that identify objects to exclude from the replication rule.</p>"
+                    }
+                },
+                "Or": {
+                    "target": "com.amazonaws.s3#ReplicationRuleOrOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for specifying prefixes and tags. An object is excluded from the replication rule if it\n      matches any of the specified filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for specifying a filter that excludes matching objects from the replication rule. Specify\n      exactly one <code>Prefix</code>, <code>Tag</code>, or <code>Or</code> child element.</p>"
+            }
+        },
+        "com.amazonaws.s3#ReplicationRuleOrOperator": {
+            "type": "structure",
+            "members": {
+                "Prefixes": {
+                    "target": "com.amazonaws.s3#ReplicationPrefixList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of object key name prefixes.</p>",
+                        "smithy.api#xmlFlattened": {},
+                        "smithy.api#xmlName": "Prefix"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.s3#TagSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tags containing key and value pairs.</p>",
+                        "smithy.api#xmlFlattened": {},
+                        "smithy.api#xmlName": "Tag"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for specifying one or more prefix or tag filters.</p>"
             }
         },
         "com.amazonaws.s3#ReplicationRuleStatus": {
@@ -48466,6 +48543,38 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.s3#UseSourceMultiRegionKey": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.s3#UseSourceMultiRegionKeyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 uses the related multi-Region KMS key in the destination Amazon Web Services Region to encrypt\n      the replica.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for configuring the use of the related multi-Region KMS key in the destination Amazon Web Services Region\n      for replication.</p>"
+            }
+        },
+        "com.amazonaws.s3#UseSourceMultiRegionKeyStatus": {
+            "type": "enum",
+            "members": {
+                "Enabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enabled"
+                    }
+                },
+                "Disabled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Disabled"
+                    }
+                }
             }
         },
         "com.amazonaws.s3#UserMetadata": {

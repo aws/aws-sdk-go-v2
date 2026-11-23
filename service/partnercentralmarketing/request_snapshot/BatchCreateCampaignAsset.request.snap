@@ -1,0 +1,7 @@
+POST /service/AWSPartnerDemandGenerator/operation/BatchCreateCampaignAsset
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿rCampaignIdentifierv__CampaignIdentifier__gCatalogcAWSgEntriesŸ¿xSourceAssetTemplateIdentifierx!__SourceAssetTemplateIdentifier__ÿ¿xSourceAssetTemplateIdentifierx!__SourceAssetTemplateIdentifier__ÿÿÿ

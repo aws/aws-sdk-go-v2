@@ -31,6 +31,8 @@ func (c *Client) StartOpportunityFromEngagementTask(ctx context.Context, params 
 	return out, nil
 }
 
+// Contains the request parameters for the StartOpportunityFromEngagementTask
+// operation.
 type StartOpportunityFromEngagementTaskInput struct {
 
 	// Specifies the catalog in which the opportunity creation task is executed.
@@ -90,6 +92,8 @@ func (v *StartOpportunityFromEngagementTaskInput) SerializeMembers(s smithy.Shap
 	}
 }
 
+// Contains the response that the StartOpportunityFromEngagementTask action
+// returns.
 type StartOpportunityFromEngagementTaskOutput struct {
 
 	// The unique identifier of the engagement context used to create the opportunity.

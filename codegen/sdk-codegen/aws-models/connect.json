@@ -9151,6 +9151,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the conversational analytics configuration applied to the contact. This field is present only for contacts\n   where conversational analytics is enabled in the contact flow.</p>"
                     }
+                },
+                "VoicemailInfo": {
+                    "target": "com.amazonaws.connect#VoicemailInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If one or more voicemails were recorded for the contact, this contains information about the\n   voicemails.</p>"
+                    }
                 }
             },
             "traits": {
@@ -31662,6 +31668,30 @@
                     "traits": {
                         "smithy.api#enumValue": "VOICE_RECORDING"
                     }
+                },
+                "VOICEMAIL_RECORDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICEMAIL_RECORDING"
+                    }
+                },
+                "VOICEMAIL_RECORDING_REDACTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICEMAIL_RECORDING_REDACTED"
+                    }
+                },
+                "VOICEMAIL_ANALYSIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICEMAIL_ANALYSIS"
+                    }
+                },
+                "VOICEMAIL_ANALYSIS_REDACTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICEMAIL_ANALYSIS_REDACTED"
+                    }
                 }
             }
         },
@@ -46199,6 +46229,15 @@
                 "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a numeric condition.</p>\n         <note>\n            <p>The currently supported value for <code>FieldName</code> is <code>limit</code>.</p>\n         </note>"
             }
         },
+        "com.amazonaws.connect#NumberOfVoicemails": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.connect#NumberReference": {
             "type": "structure",
             "members": {
@@ -52617,6 +52656,30 @@
                 },
                 "ContactAnalysis": {
                     "target": "com.amazonaws.connect#ContactAnalysisReference"
+                },
+                "VoicemailRecording": {
+                    "target": "com.amazonaws.connect#VoicemailRecordingReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the reference when the <code>referenceType</code> is <code>VOICEMAIL_RECORDING</code>.\n   Otherwise, null.</p>"
+                    }
+                },
+                "VoicemailRecordingRedacted": {
+                    "target": "com.amazonaws.connect#VoicemailRecordingReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the reference when the <code>referenceType</code> is\n   <code>VOICEMAIL_RECORDING_REDACTED</code>. Otherwise, null.</p>"
+                    }
+                },
+                "VoicemailAnalysis": {
+                    "target": "com.amazonaws.connect#VoicemailAnalysisReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the reference when the <code>referenceType</code> is <code>VOICEMAIL_ANALYSIS</code>.\n   Otherwise, null.</p>"
+                    }
+                },
+                "VoicemailAnalysisRedacted": {
+                    "target": "com.amazonaws.connect#VoicemailAnalysisReference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the reference when the <code>referenceType</code> is\n   <code>VOICEMAIL_ANALYSIS_REDACTED</code>. Otherwise, null.</p>"
+                    }
                 }
             },
             "traits": {
@@ -52696,6 +52759,30 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EMAIL_MESSAGE_REDACTED"
+                    }
+                },
+                "VOICEMAIL_RECORDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICEMAIL_RECORDING"
+                    }
+                },
+                "VOICEMAIL_RECORDING_REDACTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICEMAIL_RECORDING_REDACTED"
+                    }
+                },
+                "VOICEMAIL_ANALYSIS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICEMAIL_ANALYSIS"
+                    }
+                },
+                "VOICEMAIL_ANALYSIS_REDACTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICEMAIL_ANALYSIS_REDACTED"
                     }
                 }
             }
@@ -72832,6 +72919,84 @@
                         "smithy.api#enumValue": "ALL"
                     }
                 }
+            }
+        },
+        "com.amazonaws.connect#VoicemailAnalysisReference": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#ReferenceKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the voicemail analysis reference.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.connect#ReferenceValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location path of the voicemail analysis reference.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#ReferenceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the voicemail analysis reference type.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the voicemail analysis reference.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>VOICEMAIL_ANALYSIS</code> or\n   <code>VOICEMAIL_ANALYSIS_REDACTED</code>. Otherwise, null.</p>"
+            }
+        },
+        "com.amazonaws.connect#VoicemailInfo": {
+            "type": "structure",
+            "members": {
+                "NumberOfVoicemails": {
+                    "target": "com.amazonaws.connect#NumberOfVoicemails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of voicemails recorded for the contact. Valid range is 1-3.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the voicemails recorded for a voice contact.</p>"
+            }
+        },
+        "com.amazonaws.connect#VoicemailRecordingReference": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#ReferenceKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the voicemail recording reference.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.connect#ReferenceValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location path of the voicemail recording reference.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.connect#ReferenceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the voicemail recording reference type.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the voicemail recording reference.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>VOICEMAIL_RECORDING</code> or\n   <code>VOICEMAIL_RECORDING_REDACTED</code>. Otherwise, null.</p>"
             }
         },
         "com.amazonaws.connect#WebBrowserId": {

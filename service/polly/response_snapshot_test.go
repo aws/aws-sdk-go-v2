@@ -107,6 +107,102 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_CreateVoice(t *testing.T) {
+	want := &CreateVoiceOutput{
+		Voice: &types.Voice{
+			Arn:          ptr.String("__Arn__"),
+			Gender:       types.Gender("Female"),
+			Id:           types.VoiceId("Aditi"),
+			LanguageCode: types.LanguageCode("arb"),
+			LanguageName: ptr.String("__LanguageName__"),
+			Name:         ptr.String("__Name__"),
+			Origin:       types.VoiceOrigin("aws"),
+			Status:       types.VoiceStatus("pending"),
+			StatusReason: ptr.String("__StatusReason__"),
+			AdditionalLanguageCodes: []types.LanguageCode{
+				types.LanguageCode("arb"),
+				types.LanguageCode("arb"),
+			},
+			SupportedEngines: []types.Engine{
+				types.Engine("standard"),
+				types.Engine("standard"),
+			},
+			VoiceCreationData: &types.VoiceCreationData{
+				Recordings: []types.Recording{
+					{
+						Format: types.AudioFormat("wav"),
+						Data: &types.RecordingData{
+							S3Url: ptr.String("__S3Url__"),
+							Bytes: []byte("blob"),
+						},
+					},
+					{
+						Format: types.AudioFormat("wav"),
+						Data: &types.RecordingData{
+							S3Url: ptr.String("__S3Url__"),
+							Bytes: []byte("blob"),
+						},
+					},
+				},
+			},
+			CustomerManagedEncryption: &types.CustomerManagedEncryption{
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				EncryptionContext: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateVoice.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateVoice(context.Background(), &CreateVoiceInput{
+		Name:          ptr.String("__Name__"),
+		LanguageCode:  types.CustomVoiceLanguageCode("de-DE"),
+		TermsAccepted: true,
+		VoiceCreationData: &types.VoiceCreationData{
+			Recordings: []types.Recording{
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+			},
+		},
+		CustomerManagedEncryption: &types.CustomerManagedEncryption{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateVoice.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteLexicon(t *testing.T) {
 	want := &DeleteLexiconOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteLexicon.response")
@@ -128,15 +224,40 @@ func TestCheckResponseSnapshot_DeleteLexicon(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteVoice(t *testing.T) {
+	want := &DeleteVoiceOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteVoice.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteVoice(context.Background(), &DeleteVoiceInput{
+		VoiceId: ptr.String("__VoiceId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteVoice.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeVoices(t *testing.T) {
 	want := &DescribeVoicesOutput{
 		Voices: []types.Voice{
 			{
+				Arn:          ptr.String("__Arn__"),
 				Gender:       types.Gender("Female"),
 				Id:           types.VoiceId("Aditi"),
 				LanguageCode: types.LanguageCode("arb"),
 				LanguageName: ptr.String("__LanguageName__"),
 				Name:         ptr.String("__Name__"),
+				Origin:       types.VoiceOrigin("aws"),
+				Status:       types.VoiceStatus("pending"),
+				StatusReason: ptr.String("__StatusReason__"),
 				AdditionalLanguageCodes: []types.LanguageCode{
 					types.LanguageCode("arb"),
 					types.LanguageCode("arb"),
@@ -145,13 +266,42 @@ func TestCheckResponseSnapshot_DescribeVoices(t *testing.T) {
 					types.Engine("standard"),
 					types.Engine("standard"),
 				},
+				VoiceCreationData: &types.VoiceCreationData{
+					Recordings: []types.Recording{
+						{
+							Format: types.AudioFormat("wav"),
+							Data: &types.RecordingData{
+								S3Url: ptr.String("__S3Url__"),
+								Bytes: []byte("blob"),
+							},
+						},
+						{
+							Format: types.AudioFormat("wav"),
+							Data: &types.RecordingData{
+								S3Url: ptr.String("__S3Url__"),
+								Bytes: []byte("blob"),
+							},
+						},
+					},
+				},
+				CustomerManagedEncryption: &types.CustomerManagedEncryption{
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					EncryptionContext: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
+				Arn:          ptr.String("__Arn__"),
 				Gender:       types.Gender("Female"),
 				Id:           types.VoiceId("Aditi"),
 				LanguageCode: types.LanguageCode("arb"),
 				LanguageName: ptr.String("__LanguageName__"),
 				Name:         ptr.String("__Name__"),
+				Origin:       types.VoiceOrigin("aws"),
+				Status:       types.VoiceStatus("pending"),
+				StatusReason: ptr.String("__StatusReason__"),
 				AdditionalLanguageCodes: []types.LanguageCode{
 					types.LanguageCode("arb"),
 					types.LanguageCode("arb"),
@@ -160,6 +310,31 @@ func TestCheckResponseSnapshot_DescribeVoices(t *testing.T) {
 					types.Engine("standard"),
 					types.Engine("standard"),
 				},
+				VoiceCreationData: &types.VoiceCreationData{
+					Recordings: []types.Recording{
+						{
+							Format: types.AudioFormat("wav"),
+							Data: &types.RecordingData{
+								S3Url: ptr.String("__S3Url__"),
+								Bytes: []byte("blob"),
+							},
+						},
+						{
+							Format: types.AudioFormat("wav"),
+							Data: &types.RecordingData{
+								S3Url: ptr.String("__S3Url__"),
+								Bytes: []byte("blob"),
+							},
+						},
+					},
+				},
+				CustomerManagedEncryption: &types.CustomerManagedEncryption{
+					KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					EncryptionContext: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -262,6 +437,72 @@ func TestCheckResponseSnapshot_GetSpeechSynthesisTask(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetSpeechSynthesisTask.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetVoice(t *testing.T) {
+	want := &GetVoiceOutput{
+		Voice: &types.Voice{
+			Arn:          ptr.String("__Arn__"),
+			Gender:       types.Gender("Female"),
+			Id:           types.VoiceId("Aditi"),
+			LanguageCode: types.LanguageCode("arb"),
+			LanguageName: ptr.String("__LanguageName__"),
+			Name:         ptr.String("__Name__"),
+			Origin:       types.VoiceOrigin("aws"),
+			Status:       types.VoiceStatus("pending"),
+			StatusReason: ptr.String("__StatusReason__"),
+			AdditionalLanguageCodes: []types.LanguageCode{
+				types.LanguageCode("arb"),
+				types.LanguageCode("arb"),
+			},
+			SupportedEngines: []types.Engine{
+				types.Engine("standard"),
+				types.Engine("standard"),
+			},
+			VoiceCreationData: &types.VoiceCreationData{
+				Recordings: []types.Recording{
+					{
+						Format: types.AudioFormat("wav"),
+						Data: &types.RecordingData{
+							S3Url: ptr.String("__S3Url__"),
+							Bytes: []byte("blob"),
+						},
+					},
+					{
+						Format: types.AudioFormat("wav"),
+						Data: &types.RecordingData{
+							S3Url: ptr.String("__S3Url__"),
+							Bytes: []byte("blob"),
+						},
+					},
+				},
+			},
+			CustomerManagedEncryption: &types.CustomerManagedEncryption{
+				KmsKeyArn: ptr.String("__KmsKeyArn__"),
+				EncryptionContext: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetVoice.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetVoice(context.Background(), &GetVoiceInput{
+		VoiceId: ptr.String("__VoiceId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetVoice.response", err)
 	}
 }
 
@@ -586,6 +827,92 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UntagResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
+	want := &types.AccessDeniedException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("AccessDeniedException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateVoice(context.Background(), &CreateVoiceInput{
+		Name:          ptr.String("__Name__"),
+		LanguageCode:  types.CustomVoiceLanguageCode("de-DE"),
+		TermsAccepted: true,
+		VoiceCreationData: &types.VoiceCreationData{
+			Recordings: []types.Recording{
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+			},
+		},
+		CustomerManagedEncryption: &types.CustomerManagedEncryption{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.AccessDeniedException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.AccessDeniedException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "AccessDeniedException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
+	want := &types.ConflictException{
+		Message:      ptr.String("__Message__"),
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.ResourceType("lexicon"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ConflictException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.DeleteVoice(context.Background(), &DeleteVoiceInput{
+		VoiceId: ptr.String("__VoiceId__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ConflictException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ConflictException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ConflictException.error", err)
 	}
 }
 
@@ -926,8 +1253,38 @@ func TestCheckResponseSnapshot_Error_InvalidTagParameterException(t *testing.T) 
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
+	_, opErr := svc.CreateVoice(context.Background(), &CreateVoiceInput{
+		Name:          ptr.String("__Name__"),
+		LanguageCode:  types.CustomVoiceLanguageCode("de-DE"),
+		TermsAccepted: true,
+		VoiceCreationData: &types.VoiceCreationData{
+			Recordings: []types.Recording{
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+			},
+		},
+		CustomerManagedEncryption: &types.CustomerManagedEncryption{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1190,8 +1547,8 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
+	_, opErr := svc.DeleteVoice(context.Background(), &DeleteVoiceInput{
+		VoiceId: ptr.String("__VoiceId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1217,8 +1574,38 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteLexicon(context.Background(), &DeleteLexiconInput{
-		Name: ptr.String("__Name__"),
+	_, opErr := svc.CreateVoice(context.Background(), &CreateVoiceInput{
+		Name:          ptr.String("__Name__"),
+		LanguageCode:  types.CustomVoiceLanguageCode("de-DE"),
+		TermsAccepted: true,
+		VoiceCreationData: &types.VoiceCreationData{
+			Recordings: []types.Recording{
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+			},
+		},
+		CustomerManagedEncryption: &types.CustomerManagedEncryption{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1229,6 +1616,65 @@ func TestCheckResponseSnapshot_Error_ServiceFailureException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceFailureException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T) {
+	want := &types.ServiceQuotaExceededException{
+		Message:     ptr.String("__Message__"),
+		QuotaCode:   types.QuotaCode("input-stream-inbound-event-timeout"),
+		ServiceCode: types.ServiceCode("polly"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ServiceQuotaExceededException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CreateVoice(context.Background(), &CreateVoiceInput{
+		Name:          ptr.String("__Name__"),
+		LanguageCode:  types.CustomVoiceLanguageCode("de-DE"),
+		TermsAccepted: true,
+		VoiceCreationData: &types.VoiceCreationData{
+			Recordings: []types.Recording{
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+			},
+		},
+		CustomerManagedEncryption: &types.CustomerManagedEncryption{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ServiceQuotaExceededException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ServiceQuotaExceededException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ServiceQuotaExceededException.error", err)
 	}
 }
 
@@ -1369,8 +1815,38 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
+	_, opErr := svc.CreateVoice(context.Background(), &CreateVoiceInput{
+		Name:          ptr.String("__Name__"),
+		LanguageCode:  types.CustomVoiceLanguageCode("de-DE"),
+		TermsAccepted: true,
+		VoiceCreationData: &types.VoiceCreationData{
+			Recordings: []types.Recording{
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+			},
+		},
+		CustomerManagedEncryption: &types.CustomerManagedEncryption{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1396,12 +1872,38 @@ func TestCheckResponseSnapshot_Error_TooManyTagsException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.PutLexicon(context.Background(), &PutLexiconInput{
-		Name:    ptr.String("__Name__"),
-		Content: ptr.String("__Content__"),
+	_, opErr := svc.CreateVoice(context.Background(), &CreateVoiceInput{
+		Name:          ptr.String("__Name__"),
+		LanguageCode:  types.CustomVoiceLanguageCode("de-DE"),
+		TermsAccepted: true,
+		VoiceCreationData: &types.VoiceCreationData{
+			Recordings: []types.Recording{
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+			},
+		},
+		CustomerManagedEncryption: &types.CustomerManagedEncryption{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1500,8 +2002,38 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListTagsForResource(context.Background(), &ListTagsForResourceInput{
-		ResourceArn: ptr.String("__ResourceArn__"),
+	_, opErr := svc.CreateVoice(context.Background(), &CreateVoiceInput{
+		Name:          ptr.String("__Name__"),
+		LanguageCode:  types.CustomVoiceLanguageCode("de-DE"),
+		TermsAccepted: true,
+		VoiceCreationData: &types.VoiceCreationData{
+			Recordings: []types.Recording{
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+			},
+		},
+		CustomerManagedEncryption: &types.CustomerManagedEncryption{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

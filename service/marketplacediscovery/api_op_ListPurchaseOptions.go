@@ -11,9 +11,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns the purchase options (offers and offer sets) available to the buyer.
-// You can filter results by product, seller, purchase option type, visibility
-// scope, and availability status.
+// Retrieves the purchase options (offers and offer sets) available to you. You
+// can filter results by product, seller, purchase option type, visibility scope,
+// and availability status. The operation returns results in pages. Use nextToken
+// to retrieve the next page.
 //
 // You must include at least one of the following filters in the request: a
 // PRODUCT_ID filter to specify the product for which to retrieve purchase options,
@@ -35,22 +36,25 @@ func (c *Client) ListPurchaseOptions(ctx context.Context, params *ListPurchaseOp
 
 type ListPurchaseOptionsInput struct {
 
-	// Filters to narrow the results. Multiple filters are combined with AND logic.
-	// Multiple values within the same filter are combined with OR logic.
+	// Filters to narrow the results. A result must match every filter. Within one
+	// filter, a result matches if it has any of the values.
 	Filters []types.PurchaseOptionFilter
 
-	// A BCP 47 language tag or comma-separated priority list specifying the preferred
-	// locale for response content. See Locale for supported values, constraints,
-	// fallback behavior, and the default locale. If omitted, the service returns
-	// content in the default locale.
+	// The preferred locale for response content, as a Best Current Practice 47 (BCP
+	// 47) language tag or a comma-separated priority list of language tags. See Locale
+	// for supported values, constraints, fallback behavior, and the default locale. If
+	// you omit this field, the service returns content in the default locale.
 	Locale *string
 
-	// The maximum number of results that are returned per call. You can use nextToken
-	// to get more results.
+	// The maximum number of purchase options to return in each call. If you omit this
+	// field, the default is 25. Use nextToken to retrieve the next page.
 	MaxResults *int32
 
-	// If nextToken is returned, there are more results available. Make the call again
-	// using the returned token to retrieve the next page.
+	// If the service returns nextToken , more results are available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again with
+	// the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 24 hours. An expired pagination
+	// token returns a ValidationException .
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -79,12 +83,15 @@ func (v *ListPurchaseOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type ListPurchaseOptionsOutput struct {
 
-	// If nextToken is returned, there are more results available. Make the call again
-	// using the returned token to retrieve the next page.
+	// If the service returns nextToken , more results are available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again with
+	// the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 24 hours. An expired pagination
+	// token returns a ValidationException .
 	NextToken *string
 
-	// The purchase options available to the buyer. Each option is either an offer for
-	// a single product or an offer set spanning multiple products.
+	// The purchase options available to you. Each option is either an offer for a
+	// single product or an offer set spanning multiple products.
 	PurchaseOptions []types.PurchaseOptionSummary
 
 	// Metadata pertaining to the operation's result.

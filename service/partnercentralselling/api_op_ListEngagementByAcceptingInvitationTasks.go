@@ -11,8 +11,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Lists all in-progress, completed, or failed
-//
+// Lists all in-progress, completed, or failed
 // StartEngagementByAcceptingInvitationTask tasks that were initiated by the
 // caller's account.
 func (c *Client) ListEngagementByAcceptingInvitationTasks(ctx context.Context, params *ListEngagementByAcceptingInvitationTasksInput, optFns ...func(*Options)) (*ListEngagementByAcceptingInvitationTasksOutput, error) {
@@ -30,9 +29,11 @@ func (c *Client) ListEngagementByAcceptingInvitationTasks(ctx context.Context, p
 	return out, nil
 }
 
+// Contains the request parameters for the ListEngagementByAcceptingInvitationTasks
+// operation.
 type ListEngagementByAcceptingInvitationTasksInput struct {
 
-	//  Specifies the catalog related to the request. Valid values are:
+	// Specifies the catalog related to the request. Valid values are:
 	//
 	//   - AWS: Retrieves the request from the production AWS environment.
 	//
@@ -42,20 +43,20 @@ type ListEngagementByAcceptingInvitationTasksInput struct {
 	// This member is required.
 	Catalog *string
 
-	//  Filters tasks by the identifiers of the engagement invitations they are
+	// Filters tasks by the identifiers of the engagement invitations they are
 	// processing.
 	EngagementInvitationIdentifier []string
 
-	//  Use this parameter to control the number of items returned in each request,
+	// Use this parameter to control the number of items returned in each request,
 	// which can be useful for performance tuning and managing large result sets.
 	MaxResults *int32
 
-	//  Use this parameter for pagination when the result set spans multiple pages.
+	// Use this parameter for pagination when the result set spans multiple pages.
 	// This value is obtained from the NextToken field in the response of a previous
 	// call to this API.
 	NextToken *string
 
-	//  Filters tasks by the identifiers of the opportunities they created or are
+	// Filters tasks by the identifiers of the opportunities they created or are
 	// associated with.
 	OpportunityIdentifier []string
 
@@ -63,7 +64,7 @@ type ListEngagementByAcceptingInvitationTasksInput struct {
 	// order the tasks based on specific attributes.
 	Sort *types.ListTasksSortBase
 
-	//  Filters tasks by their unique identifiers. Use this when you want to retrieve
+	// Filters tasks by their unique identifiers. Use this when you want to retrieve
 	// information about specific tasks.
 	TaskIdentifier []string
 
@@ -109,9 +110,11 @@ func (v *ListEngagementByAcceptingInvitationTasksInput) SerializeMembers(s smith
 	}
 }
 
+// Contains the response that the ListEngagementByAcceptingInvitationTasks action
+// returns.
 type ListEngagementByAcceptingInvitationTasksOutput struct {
 
-	//  A token used for pagination to retrieve the next page of results.If there are
+	// A token used for pagination to retrieve the next page of results.If there are
 	// more results available, this field will contain a token that can be used in a
 	// subsequent API call to retrieve the next page. If there are no more results,
 	// this field will be null or an empty string.
@@ -198,7 +201,7 @@ func (c *Client) addOperationListEngagementByAcceptingInvitationTasksMiddlewares
 // ListEngagementByAcceptingInvitationTasksPaginatorOptions is the paginator
 // options for ListEngagementByAcceptingInvitationTasks
 type ListEngagementByAcceptingInvitationTasksPaginatorOptions struct {
-	//  Use this parameter to control the number of items returned in each request,
+	// Use this parameter to control the number of items returned in each request,
 	// which can be useful for performance tuning and managing large result sets.
 	Limit int32
 

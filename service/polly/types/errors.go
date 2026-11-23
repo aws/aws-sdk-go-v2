@@ -8,6 +8,123 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// You don't have sufficient permissions to perform this action. For a custom
+// voice that uses a customer managed key, Amazon Polly also returns this exception
+// if you don't have the required Amazon Web Services KMS permissions on the key.
+type AccessDeniedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_Message, *v.Message)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The request conflicts with the current state of the resource. For a custom
+// voice, the voice isn't in the status that the operation requires. Check the
+// status with GetVoice , and then try again.
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	ResourceId   *string
+	ResourceType ResourceType
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_message, *v.Message)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ConflictException_resourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ConflictException_resourceType, string(v.ResourceType))
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_message, v.Message)
+		case schemas.ConflictException_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ConflictException_resourceId, v.ResourceId)
+		case schemas.ConflictException_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.ConflictException_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This engine is not compatible with the voice that you have designated. Choose a
 // new voice that is compatible with the engine or change the engine and restart
 // the operation.
@@ -784,8 +901,8 @@ func (v *MaxLexiconsNumberExceededException) Deserialize(d smithy.ShapeDeseriali
 }
 
 // Amazon Polly can't find the specified resource. Verify that the resource exists
-// in the Amazon Web Services account and Region of the request and that its ARN is
-// spelled correctly, and then try again.
+// in the Amazon Web Services account and Region of the request and that its ARN or
+// ID is spelled correctly, and then try again.
 type ResourceNotFoundException struct {
 	Message *string
 

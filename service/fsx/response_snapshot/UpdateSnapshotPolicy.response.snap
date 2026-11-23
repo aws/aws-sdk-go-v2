@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.UpdateSnapshotPolicy
+
+{"SnapshotPolicy":{"Enabled":true,"FileSystemId":"__FileSystemId__","Lifecycle":"CREATING","LifecycleTransitionReason":{"Message":"__Message__","OntapError":{"Code":"__Code__","Message":"__Message__"}},"Name":"__Name__","ResourceARN":"__ResourceARN__","Schedules":[{"Count":1,"Name":"__Name__","Prefix":"__Prefix__","RetentionPeriod":{"Type":"SECONDS","Value":1},"SnapmirrorLabel":"__SnapmirrorLabel__"},{"Count":1,"Name":"__Name__","Prefix":"__Prefix__","RetentionPeriod":{"Type":"SECONDS","Value":1},"SnapmirrorLabel":"__SnapmirrorLabel__"}],"Scope":"FILESYSTEM","SnapshotPolicyId":"__SnapshotPolicyId__","StorageVirtualMachineId":"__StorageVirtualMachineId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UUID":"__UUID__"}}

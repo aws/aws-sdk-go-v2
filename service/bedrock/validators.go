@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpArchiveProject struct {
+}
+
+func (*validateOpArchiveProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpArchiveProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ArchiveProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpArchiveProjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDeleteAdvancedPromptOptimizationJob struct {
 }
 
@@ -390,6 +410,26 @@ func (m *validateOpCreateModelInvocationJob) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateProject struct {
+}
+
+func (*validateOpCreateProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePromptRouter struct {
 }
 
@@ -425,6 +465,26 @@ func (m *validateOpCreateProvisionedModelThroughput) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateProvisionedModelThroughputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAccountDataRetentionStorage struct {
+}
+
+func (*validateOpDeleteAccountDataRetentionStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccountDataRetentionStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccountDataRetentionStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccountDataRetentionStorageInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,6 +710,46 @@ func (m *validateOpDeleteMarketplaceModelEndpoint) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteOrganizationDataRetentionStorage struct {
+}
+
+func (*validateOpDeleteOrganizationDataRetentionStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteOrganizationDataRetentionStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteOrganizationDataRetentionStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteOrganizationDataRetentionStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteProjectDataRetentionStorage struct {
+}
+
+func (*validateOpDeleteProjectDataRetentionStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProjectDataRetentionStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProjectDataRetentionStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProjectDataRetentionStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeletePromptRouter struct {
 }
 
@@ -745,6 +845,26 @@ func (m *validateOpExportAutomatedReasoningPolicyVersion) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpExportAutomatedReasoningPolicyVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAccountDataRetentionStorage struct {
+}
+
+func (*validateOpGetAccountDataRetentionStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccountDataRetentionStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccountDataRetentionStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccountDataRetentionStorageInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1170,6 +1290,66 @@ func (m *validateOpGetModelInvocationJob) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetOrganizationDataRetentionStorage struct {
+}
+
+func (*validateOpGetOrganizationDataRetentionStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetOrganizationDataRetentionStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetOrganizationDataRetentionStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetOrganizationDataRetentionStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetProjectDataRetentionStorage struct {
+}
+
+func (*validateOpGetProjectDataRetentionStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetProjectDataRetentionStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetProjectDataRetentionStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetProjectDataRetentionStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetProject struct {
+}
+
+func (*validateOpGetProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetProjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPromptRouter struct {
 }
 
@@ -1225,6 +1405,86 @@ func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTrustedAccessProgramAccountEnrollment struct {
+}
+
+func (*validateOpGetTrustedAccessProgramAccountEnrollment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTrustedAccessProgramAccountEnrollment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTrustedAccessProgramAccountEnrollmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTrustedAccessProgramAccountEnrollmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTrustedAccessProgram struct {
+}
+
+func (*validateOpGetTrustedAccessProgram) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTrustedAccessProgram) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTrustedAccessProgramInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTrustedAccessProgramInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTrustedAccessProgramOrganizationEnrollment struct {
+}
+
+func (*validateOpGetTrustedAccessProgramOrganizationEnrollment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTrustedAccessProgramOrganizationEnrollment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTrustedAccessProgramOrganizationEnrollmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTrustedAccessProgramOrganizationEnrollmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTrustedAccessProgramProjectEnrollment struct {
+}
+
+func (*validateOpGetTrustedAccessProgramProjectEnrollment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTrustedAccessProgramProjectEnrollment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTrustedAccessProgramProjectEnrollmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTrustedAccessProgramProjectEnrollmentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1350,6 +1610,26 @@ func (m *validateOpPutAccountDataRetention) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAccountDataRetentionStorage struct {
+}
+
+func (*validateOpPutAccountDataRetentionStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountDataRetentionStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountDataRetentionStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountDataRetentionStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutEnforcedGuardrailConfiguration struct {
 }
 
@@ -1390,6 +1670,46 @@ func (m *validateOpPutModelInvocationLoggingConfiguration) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutOrganizationDataRetentionStorage struct {
+}
+
+func (*validateOpPutOrganizationDataRetentionStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutOrganizationDataRetentionStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutOrganizationDataRetentionStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutOrganizationDataRetentionStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutProjectDataRetentionStorage struct {
+}
+
+func (*validateOpPutProjectDataRetentionStorage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutProjectDataRetentionStorage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutProjectDataRetentionStorageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutProjectDataRetentionStorageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutResourcePolicy struct {
 }
 
@@ -1405,6 +1725,66 @@ func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutTrustedAccessProgramAccountEnrollment struct {
+}
+
+func (*validateOpPutTrustedAccessProgramAccountEnrollment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTrustedAccessProgramAccountEnrollment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTrustedAccessProgramAccountEnrollmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTrustedAccessProgramAccountEnrollmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutTrustedAccessProgramOrganizationEnrollment struct {
+}
+
+func (*validateOpPutTrustedAccessProgramOrganizationEnrollment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTrustedAccessProgramOrganizationEnrollment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTrustedAccessProgramOrganizationEnrollmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTrustedAccessProgramOrganizationEnrollmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutTrustedAccessProgramProjectEnrollment struct {
+}
+
+func (*validateOpPutTrustedAccessProgramProjectEnrollment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTrustedAccessProgramProjectEnrollment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTrustedAccessProgramProjectEnrollmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTrustedAccessProgramProjectEnrollmentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1485,6 +1865,66 @@ func (m *validateOpStartAutomatedReasoningPolicyTestWorkflow) HandleInitialize(c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartAutomatedReasoningPolicyTestWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartTrustedAccessProgramAccountApplication struct {
+}
+
+func (*validateOpStartTrustedAccessProgramAccountApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTrustedAccessProgramAccountApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTrustedAccessProgramAccountApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTrustedAccessProgramAccountApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartTrustedAccessProgramOrganizationApplication struct {
+}
+
+func (*validateOpStartTrustedAccessProgramOrganizationApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTrustedAccessProgramOrganizationApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTrustedAccessProgramOrganizationApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTrustedAccessProgramOrganizationApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartTrustedAccessProgramProjectApplication struct {
+}
+
+func (*validateOpStartTrustedAccessProgramProjectApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartTrustedAccessProgramProjectApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartTrustedAccessProgramProjectApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartTrustedAccessProgramProjectApplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1730,6 +2170,26 @@ func (m *validateOpUpdateMarketplaceModelEndpoint) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProject struct {
+}
+
+func (*validateOpUpdateProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateProvisionedModelThroughput struct {
 }
 
@@ -1748,6 +2208,10 @@ func (m *validateOpUpdateProvisionedModelThroughput) HandleInitialize(ctx contex
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
+}
+
+func addOpArchiveProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpArchiveProject{}, middleware.After)
 }
 
 func addOpBatchDeleteAdvancedPromptOptimizationJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1826,12 +2290,20 @@ func addOpCreateModelInvocationJobValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCreateModelInvocationJob{}, middleware.After)
 }
 
+func addOpCreateProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProject{}, middleware.After)
+}
+
 func addOpCreatePromptRouterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePromptRouter{}, middleware.After)
 }
 
 func addOpCreateProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProvisionedModelThroughput{}, middleware.After)
+}
+
+func addOpDeleteAccountDataRetentionStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccountDataRetentionStorage{}, middleware.After)
 }
 
 func addOpDeleteAutomatedReasoningPolicyBuildWorkflowValidationMiddleware(stack *middleware.Stack) error {
@@ -1878,6 +2350,14 @@ func addOpDeleteMarketplaceModelEndpointValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpDeleteMarketplaceModelEndpoint{}, middleware.After)
 }
 
+func addOpDeleteOrganizationDataRetentionStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteOrganizationDataRetentionStorage{}, middleware.After)
+}
+
+func addOpDeleteProjectDataRetentionStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProjectDataRetentionStorage{}, middleware.After)
+}
+
 func addOpDeletePromptRouterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePromptRouter{}, middleware.After)
 }
@@ -1896,6 +2376,10 @@ func addOpDeregisterMarketplaceModelEndpointValidationMiddleware(stack *middlewa
 
 func addOpExportAutomatedReasoningPolicyVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExportAutomatedReasoningPolicyVersion{}, middleware.After)
+}
+
+func addOpGetAccountDataRetentionStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccountDataRetentionStorage{}, middleware.After)
 }
 
 func addOpGetAdvancedPromptOptimizationJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1982,6 +2466,18 @@ func addOpGetModelInvocationJobValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpGetModelInvocationJob{}, middleware.After)
 }
 
+func addOpGetOrganizationDataRetentionStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetOrganizationDataRetentionStorage{}, middleware.After)
+}
+
+func addOpGetProjectDataRetentionStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetProjectDataRetentionStorage{}, middleware.After)
+}
+
+func addOpGetProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetProject{}, middleware.After)
+}
+
 func addOpGetPromptRouterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPromptRouter{}, middleware.After)
 }
@@ -1992,6 +2488,22 @@ func addOpGetProvisionedModelThroughputValidationMiddleware(stack *middleware.St
 
 func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
+}
+
+func addOpGetTrustedAccessProgramAccountEnrollmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTrustedAccessProgramAccountEnrollment{}, middleware.After)
+}
+
+func addOpGetTrustedAccessProgramValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTrustedAccessProgram{}, middleware.After)
+}
+
+func addOpGetTrustedAccessProgramOrganizationEnrollmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTrustedAccessProgramOrganizationEnrollment{}, middleware.After)
+}
+
+func addOpGetTrustedAccessProgramProjectEnrollmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTrustedAccessProgramProjectEnrollment{}, middleware.After)
 }
 
 func addOpListAutomatedReasoningPolicyBuildWorkflowsValidationMiddleware(stack *middleware.Stack) error {
@@ -2018,6 +2530,10 @@ func addOpPutAccountDataRetentionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpPutAccountDataRetention{}, middleware.After)
 }
 
+func addOpPutAccountDataRetentionStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountDataRetentionStorage{}, middleware.After)
+}
+
 func addOpPutEnforcedGuardrailConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutEnforcedGuardrailConfiguration{}, middleware.After)
 }
@@ -2026,8 +2542,28 @@ func addOpPutModelInvocationLoggingConfigurationValidationMiddleware(stack *midd
 	return stack.Initialize.Add(&validateOpPutModelInvocationLoggingConfiguration{}, middleware.After)
 }
 
+func addOpPutOrganizationDataRetentionStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutOrganizationDataRetentionStorage{}, middleware.After)
+}
+
+func addOpPutProjectDataRetentionStorageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutProjectDataRetentionStorage{}, middleware.After)
+}
+
 func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
+}
+
+func addOpPutTrustedAccessProgramAccountEnrollmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTrustedAccessProgramAccountEnrollment{}, middleware.After)
+}
+
+func addOpPutTrustedAccessProgramOrganizationEnrollmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTrustedAccessProgramOrganizationEnrollment{}, middleware.After)
+}
+
+func addOpPutTrustedAccessProgramProjectEnrollmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTrustedAccessProgramProjectEnrollment{}, middleware.After)
 }
 
 func addOpPutUseCaseForModelAccessValidationMiddleware(stack *middleware.Stack) error {
@@ -2044,6 +2580,18 @@ func addOpStartAutomatedReasoningPolicyBuildWorkflowValidationMiddleware(stack *
 
 func addOpStartAutomatedReasoningPolicyTestWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAutomatedReasoningPolicyTestWorkflow{}, middleware.After)
+}
+
+func addOpStartTrustedAccessProgramAccountApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTrustedAccessProgramAccountApplication{}, middleware.After)
+}
+
+func addOpStartTrustedAccessProgramOrganizationApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTrustedAccessProgramOrganizationApplication{}, middleware.After)
+}
+
+func addOpStartTrustedAccessProgramProjectApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartTrustedAccessProgramProjectApplication{}, middleware.After)
 }
 
 func addOpStopAdvancedPromptOptimizationJobValidationMiddleware(stack *middleware.Stack) error {
@@ -2092,6 +2640,10 @@ func addOpUpdateGuardrailValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMarketplaceModelEndpoint{}, middleware.After)
+}
+
+func addOpUpdateProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProject{}, middleware.After)
 }
 
 func addOpUpdateProvisionedModelThroughputValidationMiddleware(stack *middleware.Stack) error {
@@ -3191,6 +3743,27 @@ func validateCustomModelDataSource(v types.CustomModelDataSource) error {
 			invalidParams.AddNested("[modelPackageArnDataSource]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataRetentionStorageConfiguration(v *types.DataRetentionStorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataRetentionStorageConfiguration"}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if v.S3BucketArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketArn"))
+	}
+	if v.S3BucketOwner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketOwner"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4630,6 +5203,21 @@ func validateOutputDataConfig(v *types.OutputDataConfig) error {
 	}
 }
 
+func validateProjectDataRetention(v *types.ProjectDataRetention) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProjectDataRetention"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePromptRouterTargetModel(v *types.PromptRouterTargetModel) error {
 	if v == nil {
 		return nil
@@ -5218,6 +5806,21 @@ func validateVpcConfig(v *types.VpcConfig) error {
 	}
 }
 
+func validateOpArchiveProjectInput(v *ArchiveProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArchiveProjectInput"}
+	if v.ProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchDeleteAdvancedPromptOptimizationJobInput(v *BatchDeleteAdvancedPromptOptimizationJobInput) error {
 	if v == nil {
 		return nil
@@ -5794,6 +6397,31 @@ func validateOpCreateModelInvocationJobInput(v *CreateModelInvocationJobInput) e
 	}
 }
 
+func validateOpCreateProjectInput(v *CreateProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProjectInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataRetention != nil {
+		if err := validateProjectDataRetention(v.DataRetention); err != nil {
+			invalidParams.AddNested("DataRetention", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreatePromptRouterInput(v *CreatePromptRouterInput) error {
 	if v == nil {
 		return nil
@@ -5853,6 +6481,21 @@ func validateOpCreateProvisionedModelThroughputInput(v *CreateProvisionedModelTh
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAccountDataRetentionStorageInput(v *DeleteAccountDataRetentionStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccountDataRetentionStorageInput"}
+	if len(v.ModelProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelProvider"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6038,6 +6681,39 @@ func validateOpDeleteMarketplaceModelEndpointInput(v *DeleteMarketplaceModelEndp
 	}
 }
 
+func validateOpDeleteOrganizationDataRetentionStorageInput(v *DeleteOrganizationDataRetentionStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteOrganizationDataRetentionStorageInput"}
+	if len(v.ModelProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelProvider"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteProjectDataRetentionStorageInput(v *DeleteProjectDataRetentionStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProjectDataRetentionStorageInput"}
+	if v.ProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectIdentifier"))
+	}
+	if len(v.ModelProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelProvider"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeletePromptRouterInput(v *DeletePromptRouterInput) error {
 	if v == nil {
 		return nil
@@ -6105,6 +6781,21 @@ func validateOpExportAutomatedReasoningPolicyVersionInput(v *ExportAutomatedReas
 	invalidParams := smithy.InvalidParamsError{Context: "ExportAutomatedReasoningPolicyVersionInput"}
 	if v.PolicyArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAccountDataRetentionStorageInput(v *GetAccountDataRetentionStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccountDataRetentionStorageInput"}
+	if len(v.ModelProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelProvider"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6452,6 +7143,54 @@ func validateOpGetModelInvocationJobInput(v *GetModelInvocationJobInput) error {
 	}
 }
 
+func validateOpGetOrganizationDataRetentionStorageInput(v *GetOrganizationDataRetentionStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetOrganizationDataRetentionStorageInput"}
+	if len(v.ModelProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelProvider"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetProjectDataRetentionStorageInput(v *GetProjectDataRetentionStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetProjectDataRetentionStorageInput"}
+	if v.ProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectIdentifier"))
+	}
+	if len(v.ModelProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelProvider"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetProjectInput(v *GetProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetProjectInput"}
+	if v.ProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPromptRouterInput(v *GetPromptRouterInput) error {
 	if v == nil {
 		return nil
@@ -6489,6 +7228,69 @@ func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePolicyInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTrustedAccessProgramAccountEnrollmentInput(v *GetTrustedAccessProgramAccountEnrollmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTrustedAccessProgramAccountEnrollmentInput"}
+	if v.ProgramIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTrustedAccessProgramInput(v *GetTrustedAccessProgramInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTrustedAccessProgramInput"}
+	if v.ProgramIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTrustedAccessProgramOrganizationEnrollmentInput(v *GetTrustedAccessProgramOrganizationEnrollmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTrustedAccessProgramOrganizationEnrollmentInput"}
+	if v.ProgramIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTrustedAccessProgramProjectEnrollmentInput(v *GetTrustedAccessProgramProjectEnrollmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTrustedAccessProgramProjectEnrollmentInput"}
+	if v.ProgramIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramIdentifier"))
+	}
+	if v.ProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6590,6 +7392,29 @@ func validateOpPutAccountDataRetentionInput(v *PutAccountDataRetentionInput) err
 	}
 }
 
+func validateOpPutAccountDataRetentionStorageInput(v *PutAccountDataRetentionStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountDataRetentionStorageInput"}
+	if len(v.ModelProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelProvider"))
+	}
+	if len(v.StorageDestination) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageDestination"))
+	}
+	if v.StorageConfiguration != nil {
+		if err := validateDataRetentionStorageConfiguration(v.StorageConfiguration); err != nil {
+			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutEnforcedGuardrailConfigurationInput(v *PutEnforcedGuardrailConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -6628,6 +7453,55 @@ func validateOpPutModelInvocationLoggingConfigurationInput(v *PutModelInvocation
 	}
 }
 
+func validateOpPutOrganizationDataRetentionStorageInput(v *PutOrganizationDataRetentionStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutOrganizationDataRetentionStorageInput"}
+	if len(v.ModelProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelProvider"))
+	}
+	if len(v.StorageDestination) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageDestination"))
+	}
+	if v.StorageConfiguration != nil {
+		if err := validateDataRetentionStorageConfiguration(v.StorageConfiguration); err != nil {
+			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutProjectDataRetentionStorageInput(v *PutProjectDataRetentionStorageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutProjectDataRetentionStorageInput"}
+	if v.ProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectIdentifier"))
+	}
+	if len(v.ModelProvider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelProvider"))
+	}
+	if len(v.StorageDestination) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageDestination"))
+	}
+	if v.StorageConfiguration != nil {
+		if err := validateDataRetentionStorageConfiguration(v.StorageConfiguration); err != nil {
+			invalidParams.AddNested("StorageConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 	if v == nil {
 		return nil
@@ -6638,6 +7512,63 @@ func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 	}
 	if v.ResourcePolicy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourcePolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutTrustedAccessProgramAccountEnrollmentInput(v *PutTrustedAccessProgramAccountEnrollmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTrustedAccessProgramAccountEnrollmentInput"}
+	if v.ProgramIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramIdentifier"))
+	}
+	if len(v.OptIn) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OptIn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutTrustedAccessProgramOrganizationEnrollmentInput(v *PutTrustedAccessProgramOrganizationEnrollmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTrustedAccessProgramOrganizationEnrollmentInput"}
+	if v.ProgramIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramIdentifier"))
+	}
+	if len(v.OptIn) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OptIn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutTrustedAccessProgramProjectEnrollmentInput(v *PutTrustedAccessProgramProjectEnrollmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTrustedAccessProgramProjectEnrollmentInput"}
+	if v.ProgramIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramIdentifier"))
+	}
+	if v.ProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectIdentifier"))
+	}
+	if len(v.OptIn) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OptIn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6714,6 +7645,54 @@ func validateOpStartAutomatedReasoningPolicyTestWorkflowInput(v *StartAutomatedR
 	}
 	if v.BuildWorkflowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartTrustedAccessProgramAccountApplicationInput(v *StartTrustedAccessProgramAccountApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTrustedAccessProgramAccountApplicationInput"}
+	if v.ProgramIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartTrustedAccessProgramOrganizationApplicationInput(v *StartTrustedAccessProgramOrganizationApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTrustedAccessProgramOrganizationApplicationInput"}
+	if v.ProgramIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartTrustedAccessProgramProjectApplicationInput(v *StartTrustedAccessProgramProjectApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartTrustedAccessProgramProjectApplicationInput"}
+	if v.ProgramIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramIdentifier"))
+	}
+	if v.ProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6989,6 +7968,26 @@ func validateOpUpdateMarketplaceModelEndpointInput(v *UpdateMarketplaceModelEndp
 	} else if v.EndpointConfig != nil {
 		if err := validateEndpointConfig(v.EndpointConfig); err != nil {
 			invalidParams.AddNested("EndpointConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProjectInput(v *UpdateProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProjectInput"}
+	if v.ProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectIdentifier"))
+	}
+	if v.DataRetention != nil {
+		if err := validateProjectDataRetention(v.DataRetention); err != nil {
+			invalidParams.AddNested("DataRetention", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

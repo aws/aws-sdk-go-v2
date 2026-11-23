@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"code":"__Code__","message":"__Message__","sessionArn":"__SessionArn__"},{"code":"__Code__","message":"__Message__","sessionArn":"__SessionArn__"}],"revokedSessions":[{"sessionArn":"__SessionArn__"},{"sessionArn":"__SessionArn__"}]}

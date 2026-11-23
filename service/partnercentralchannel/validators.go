@@ -30,6 +30,26 @@ func (m *validateOpAcceptChannelHandshake) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelChannelContract struct {
+}
+
+func (*validateOpCancelChannelContract) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelChannelContract) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelChannelContractInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelChannelContractInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelChannelHandshake struct {
 }
 
@@ -45,6 +65,26 @@ func (m *validateOpCancelChannelHandshake) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCancelChannelHandshakeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateChannelContract struct {
+}
+
+func (*validateOpCreateChannelContract) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateChannelContract) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateChannelContractInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateChannelContractInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +190,26 @@ func (m *validateOpDeleteRelationship) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetChannelContract struct {
+}
+
+func (*validateOpGetChannelContract) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetChannelContract) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetChannelContractInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetChannelContractInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetRelationship struct {
 }
 
@@ -165,6 +225,26 @@ func (m *validateOpGetRelationship) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetRelationshipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListChannelContracts struct {
+}
+
+func (*validateOpListChannelContracts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListChannelContracts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListChannelContractsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListChannelContractsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -354,8 +434,16 @@ func addOpAcceptChannelHandshakeValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpAcceptChannelHandshake{}, middleware.After)
 }
 
+func addOpCancelChannelContractValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelChannelContract{}, middleware.After)
+}
+
 func addOpCancelChannelHandshakeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelChannelHandshake{}, middleware.After)
+}
+
+func addOpCreateChannelContractValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateChannelContract{}, middleware.After)
 }
 
 func addOpCreateChannelHandshakeValidationMiddleware(stack *middleware.Stack) error {
@@ -378,8 +466,16 @@ func addOpDeleteRelationshipValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteRelationship{}, middleware.After)
 }
 
+func addOpGetChannelContractValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetChannelContract{}, middleware.After)
+}
+
 func addOpGetRelationshipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRelationship{}, middleware.After)
+}
+
+func addOpListChannelContractsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListChannelContracts{}, middleware.After)
 }
 
 func addOpListChannelHandshakesValidationMiddleware(stack *middleware.Stack) error {
@@ -418,6 +514,52 @@ func addOpUpdateRelationshipValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpUpdateRelationship{}, middleware.After)
 }
 
+func validateAddress(v *types.Address) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Address"}
+	if v.City == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("City"))
+	}
+	if v.StateOrRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StateOrRegion"))
+	}
+	if v.PostalCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PostalCode"))
+	}
+	if v.CountryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CountryCode"))
+	}
+	if v.AddressLine == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddressLine"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChannelContractPayload(v types.ChannelContractPayload) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChannelContractPayload"}
+	switch uv := v.(type) {
+	case *types.ChannelContractPayloadMemberManagedServicesAttestationPayload:
+		if err := validateManagedServicesAttestationPayload(&uv.Value); err != nil {
+			invalidParams.AddNested("[managedServicesAttestationPayload]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateChannelHandshakePayload(v types.ChannelHandshakePayload) error {
 	if v == nil {
 		return nil
@@ -432,6 +574,25 @@ func validateChannelHandshakePayload(v types.ChannelHandshakePayload) error {
 	case *types.ChannelHandshakePayloadMemberStartServicePeriodPayload:
 		if err := validateStartServicePeriodPayload(&uv.Value); err != nil {
 			invalidParams.AddNested("[startServicePeriodPayload]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListChannelContractsTypeSort(v types.ListChannelContractsTypeSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListChannelContractsTypeSort"}
+	switch uv := v.(type) {
+	case *types.ListChannelContractsTypeSortMemberManagedServicesAttestationTypeSort:
+		if err := validateManagedServicesAttestationTypeSort(&uv.Value); err != nil {
+			invalidParams.AddNested("[managedServicesAttestationTypeSort]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -494,6 +655,64 @@ func validateListRelationshipsSortBase(v *types.ListRelationshipsSortBase) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListRelationshipsSortBase"}
+	if len(v.SortOrder) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
+	}
+	if len(v.SortBy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortBy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedServicesAttestationPayload(v *types.ManagedServicesAttestationPayload) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedServicesAttestationPayload"}
+	if v.LegalEntityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LegalEntityName"))
+	}
+	if v.RelationshipIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RelationshipIdentifier"))
+	}
+	if v.ProgramManagementAccountIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramManagementAccountIdentifier"))
+	}
+	if v.EndDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDate"))
+	}
+	if v.SupportedServices == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SupportedServices"))
+	}
+	if v.LegalEntityAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LegalEntityAddress"))
+	} else if v.LegalEntityAddress != nil {
+		if err := validateAddress(v.LegalEntityAddress); err != nil {
+			invalidParams.AddNested("LegalEntityAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SignatoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SignatoryName"))
+	}
+	if v.SignatoryEmail == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SignatoryEmail"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedServicesAttestationTypeSort(v *types.ManagedServicesAttestationTypeSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedServicesAttestationTypeSort"}
 	if len(v.SortOrder) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
 	}
@@ -730,6 +949,24 @@ func validateOpAcceptChannelHandshakeInput(v *AcceptChannelHandshakeInput) error
 	}
 }
 
+func validateOpCancelChannelContractInput(v *CancelChannelContractInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelChannelContractInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelChannelHandshakeInput(v *CancelChannelHandshakeInput) error {
 	if v == nil {
 		return nil
@@ -740,6 +977,36 @@ func validateOpCancelChannelHandshakeInput(v *CancelChannelHandshakeInput) error
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateChannelContractInput(v *CreateChannelContractInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateChannelContractInput"}
+	if len(v.ContractType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractType"))
+	}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
+	} else if v.Payload != nil {
+		if err := validateChannelContractPayload(v.Payload); err != nil {
+			invalidParams.AddNested("Payload", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -822,9 +1089,6 @@ func validateOpCreateRelationshipInput(v *CreateRelationshipInput) error {
 	if v.ProgramManagementAccountIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProgramManagementAccountIdentifier"))
 	}
-	if v.AssociatedAccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssociatedAccountId"))
-	}
 	if v.DisplayName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
 	}
@@ -887,6 +1151,24 @@ func validateOpDeleteRelationshipInput(v *DeleteRelationshipInput) error {
 	}
 }
 
+func validateOpGetChannelContractInput(v *GetChannelContractInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetChannelContractInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetRelationshipInput(v *GetRelationshipInput) error {
 	if v == nil {
 		return nil
@@ -900,6 +1182,29 @@ func validateOpGetRelationshipInput(v *GetRelationshipInput) error {
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListChannelContractsInput(v *ListChannelContractsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListChannelContractsInput"}
+	if v.Catalog == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if len(v.ContractType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContractType"))
+	}
+	if v.ContractTypeSort != nil {
+		if err := validateListChannelContractsTypeSort(v.ContractTypeSort); err != nil {
+			invalidParams.AddNested("ContractTypeSort", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

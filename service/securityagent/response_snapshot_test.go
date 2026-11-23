@@ -1760,11 +1760,17 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 							RepoName:        ptr.String("__RepoName__"),
 							CodeDiffLink:    ptr.String("__CodeDiffLink__"),
 							PullRequestLink: ptr.String("__PullRequestLink__"),
+							Status:          types.CodeRemediationJobStatus("IN_PROGRESS"),
+							StatusCode:      ptr.String("__StatusCode__"),
+							StatusReason:    ptr.String("__StatusReason__"),
 						},
 						{
 							RepoName:        ptr.String("__RepoName__"),
 							CodeDiffLink:    ptr.String("__CodeDiffLink__"),
 							PullRequestLink: ptr.String("__PullRequestLink__"),
+							Status:          types.CodeRemediationJobStatus("IN_PROGRESS"),
+							StatusCode:      ptr.String("__StatusCode__"),
+							StatusReason:    ptr.String("__StatusReason__"),
 						},
 					},
 				},
@@ -1844,11 +1850,17 @@ func TestCheckResponseSnapshot_BatchGetFindings(t *testing.T) {
 							RepoName:        ptr.String("__RepoName__"),
 							CodeDiffLink:    ptr.String("__CodeDiffLink__"),
 							PullRequestLink: ptr.String("__PullRequestLink__"),
+							Status:          types.CodeRemediationJobStatus("IN_PROGRESS"),
+							StatusCode:      ptr.String("__StatusCode__"),
+							StatusReason:    ptr.String("__StatusReason__"),
 						},
 						{
 							RepoName:        ptr.String("__RepoName__"),
 							CodeDiffLink:    ptr.String("__CodeDiffLink__"),
 							PullRequestLink: ptr.String("__PullRequestLink__"),
+							Status:          types.CodeRemediationJobStatus("IN_PROGRESS"),
+							StatusCode:      ptr.String("__StatusCode__"),
+							StatusReason:    ptr.String("__StatusReason__"),
 						},
 					},
 				},
@@ -2278,6 +2290,7 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 				TestScope: &types.TestScope{
 					Type: types.TestScopeType("WEB_APP"),
 				},
+				Version:   ptr.String("__Version__"),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -2528,6 +2541,7 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 				TestScope: &types.TestScope{
 					Type: types.TestScopeType("WEB_APP"),
 				},
+				Version:   ptr.String("__Version__"),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -6548,6 +6562,7 @@ func TestCheckResponseSnapshot_ListPentestJobsForPentest(t *testing.T) {
 				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				JobType:      types.JobType("FULL"),
 				ReportUrl:    ptr.String("__ReportUrl__"),
+				Version:      ptr.String("__Version__"),
 			},
 			{
 				PentestJobId: ptr.String("__PentestJobId__"),
@@ -6558,6 +6573,7 @@ func TestCheckResponseSnapshot_ListPentestJobsForPentest(t *testing.T) {
 				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				JobType:      types.JobType("FULL"),
 				ReportUrl:    ptr.String("__ReportUrl__"),
+				Version:      ptr.String("__Version__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -7029,6 +7045,103 @@ func TestCheckResponseSnapshot_ListThreats(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ResumePentestJob(t *testing.T) {
+	want := &ResumePentestJobOutput{
+		Title:        ptr.String("__Title__"),
+		Status:       types.JobStatus("IN_PROGRESS"),
+		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PentestId:    ptr.String("__PentestId__"),
+		PentestJobId: ptr.String("__PentestJobId__"),
+		Version:      ptr.String("__Version__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ResumePentestJob.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ResumePentestJob(context.Background(), &ResumePentestJobInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		PentestJobId: ptr.String("__PentestJobId__"),
+		Actors: []types.Actor{
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Uris: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Authentication: &types.Authentication{
+					ProviderType: types.AuthenticationProviderType("SECRETS_MANAGER"),
+					Value:        ptr.String("__Value__"),
+				},
+				Description:          ptr.String("__Description__"),
+				EnableEmailMfa:       ptr.Bool(true),
+				MfaForwardingAddress: ptr.String("__MfaForwardingAddress__"),
+			},
+			{
+				Identifier: ptr.String("__Identifier__"),
+				Uris: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Authentication: &types.Authentication{
+					ProviderType: types.AuthenticationProviderType("SECRETS_MANAGER"),
+					Value:        ptr.String("__Value__"),
+				},
+				Description:          ptr.String("__Description__"),
+				EnableEmailMfa:       ptr.Bool(true),
+				MfaForwardingAddress: ptr.String("__MfaForwardingAddress__"),
+			},
+		},
+		NetworkTrafficConfig: &types.NetworkTrafficConfig{
+			Rules: []types.NetworkTrafficRule{
+				{
+					Effect:                 types.NetworkTrafficRuleEffect("ALLOW"),
+					Pattern:                ptr.String("__Pattern__"),
+					NetworkTrafficRuleType: types.NetworkTrafficRuleType("URL"),
+				},
+				{
+					Effect:                 types.NetworkTrafficRuleEffect("ALLOW"),
+					Pattern:                ptr.String("__Pattern__"),
+					NetworkTrafficRuleType: types.NetworkTrafficRuleType("URL"),
+				},
+			},
+			CustomHeaders: []types.CustomHeader{
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Name:  ptr.String("__Name__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+		VpcConfig: &types.VpcConfig{
+			VpcArn: ptr.String("__VpcArn__"),
+			SecurityGroupArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			SubnetArns: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		MaxTaskHours:          ptr.Float64(1.0),
+		CopyConfigFromPentest: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ResumePentestJob.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartCodeRemediation(t *testing.T) {
 	want := &StartCodeRemediationOutput{}
 	status, header, body, err := serdeRespReadSnapshot("StartCodeRemediation.response")
@@ -7205,6 +7318,7 @@ func TestCheckResponseSnapshot_StopPentestJob(t *testing.T) {
 	got, err := svc.StopPentestJob(context.Background(), &StopPentestJobInput{
 		AgentSpaceId: ptr.String("__AgentSpaceId__"),
 		PentestJobId: ptr.String("__PentestJobId__"),
+		Pause:        ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)

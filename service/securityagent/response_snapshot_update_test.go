@@ -1737,11 +1737,17 @@ func TestUpdateResponseSnapshot_BatchGetFindings(t *testing.T) {
 							RepoName:        ptr.String("__RepoName__"),
 							CodeDiffLink:    ptr.String("__CodeDiffLink__"),
 							PullRequestLink: ptr.String("__PullRequestLink__"),
+							Status:          types.CodeRemediationJobStatus("IN_PROGRESS"),
+							StatusCode:      ptr.String("__StatusCode__"),
+							StatusReason:    ptr.String("__StatusReason__"),
 						},
 						{
 							RepoName:        ptr.String("__RepoName__"),
 							CodeDiffLink:    ptr.String("__CodeDiffLink__"),
 							PullRequestLink: ptr.String("__PullRequestLink__"),
+							Status:          types.CodeRemediationJobStatus("IN_PROGRESS"),
+							StatusCode:      ptr.String("__StatusCode__"),
+							StatusReason:    ptr.String("__StatusReason__"),
 						},
 					},
 				},
@@ -1821,11 +1827,17 @@ func TestUpdateResponseSnapshot_BatchGetFindings(t *testing.T) {
 							RepoName:        ptr.String("__RepoName__"),
 							CodeDiffLink:    ptr.String("__CodeDiffLink__"),
 							PullRequestLink: ptr.String("__PullRequestLink__"),
+							Status:          types.CodeRemediationJobStatus("IN_PROGRESS"),
+							StatusCode:      ptr.String("__StatusCode__"),
+							StatusReason:    ptr.String("__StatusReason__"),
 						},
 						{
 							RepoName:        ptr.String("__RepoName__"),
 							CodeDiffLink:    ptr.String("__CodeDiffLink__"),
 							PullRequestLink: ptr.String("__PullRequestLink__"),
+							Status:          types.CodeRemediationJobStatus("IN_PROGRESS"),
+							StatusCode:      ptr.String("__StatusCode__"),
+							StatusReason:    ptr.String("__StatusReason__"),
 						},
 					},
 				},
@@ -2249,6 +2261,7 @@ func TestUpdateResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 				TestScope: &types.TestScope{
 					Type: types.TestScopeType("WEB_APP"),
 				},
+				Version:   ptr.String("__Version__"),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -2499,6 +2512,7 @@ func TestUpdateResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 				TestScope: &types.TestScope{
 					Type: types.TestScopeType("WEB_APP"),
 				},
+				Version:   ptr.String("__Version__"),
 				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -5800,6 +5814,7 @@ func TestUpdateResponseSnapshot_ListPentestJobsForPentest(t *testing.T) {
 				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				JobType:      types.JobType("FULL"),
 				ReportUrl:    ptr.String("__ReportUrl__"),
+				Version:      ptr.String("__Version__"),
 			},
 			{
 				PentestJobId: ptr.String("__PentestJobId__"),
@@ -5810,6 +5825,7 @@ func TestUpdateResponseSnapshot_ListPentestJobsForPentest(t *testing.T) {
 				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				JobType:      types.JobType("FULL"),
 				ReportUrl:    ptr.String("__ReportUrl__"),
+				Version:      ptr.String("__Version__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -6262,6 +6278,36 @@ func TestUpdateResponseSnapshot_ListThreats(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListThreats.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ResumePentestJob(t *testing.T) {
+	want := &ResumePentestJobOutput{
+		Title:        ptr.String("__Title__"),
+		Status:       types.JobStatus("IN_PROGRESS"),
+		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PentestId:    ptr.String("__PentestId__"),
+		PentestJobId: ptr.String("__PentestJobId__"),
+		Version:      ptr.String("__Version__"),
+	}
+	proto := restjson1.New(schemas.SecurityAgent)
+	opSchema := smithy.NewOperationSchema(schemas.ResumePentestJob, schemas.ResumePentestJobOutput, schemas.ResumePentestJobOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ResumePentestJob.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

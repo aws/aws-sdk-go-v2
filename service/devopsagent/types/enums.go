@@ -99,6 +99,25 @@ func (AuthFlow) Values() []AuthFlow {
 	}
 }
 
+type AwsSourceMode string
+
+// Enum values for AwsSourceMode
+const (
+	AwsSourceModeStandalone   AwsSourceMode = "standalone"
+	AwsSourceModeOrganization AwsSourceMode = "organization"
+)
+
+// Values returns all known values for AwsSourceMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AwsSourceMode) Values() []AwsSourceMode {
+	return []AwsSourceMode{
+		"standalone",
+		"organization",
+	}
+}
+
 type CapabilityType string
 
 // Enum values for CapabilityType
@@ -454,6 +473,35 @@ func (OrderType) Values() []OrderType {
 	return []OrderType{
 		"ASC",
 		"DESC",
+	}
+}
+
+type OrgSourceAccountReasonCode string
+
+// Enum values for OrgSourceAccountReasonCode
+const (
+	OrgSourceAccountReasonCodeAccountSuspended              OrgSourceAccountReasonCode = "accountSuspended"
+	OrgSourceAccountReasonCodeAccountNotInScope             OrgSourceAccountReasonCode = "accountNotInScope"
+	OrgSourceAccountReasonCodeManagementAccountNotSupported OrgSourceAccountReasonCode = "managementAccountNotSupported"
+	OrgSourceAccountReasonCodeStackInstanceInoperable       OrgSourceAccountReasonCode = "stackInstanceInoperable"
+	OrgSourceAccountReasonCodeAccessDenied                  OrgSourceAccountReasonCode = "accessDenied"
+	OrgSourceAccountReasonCodeDeploymentFailed              OrgSourceAccountReasonCode = "deploymentFailed"
+	OrgSourceAccountReasonCodeSecondaryAccountLimitExceeded OrgSourceAccountReasonCode = "secondaryAccountLimitExceeded"
+)
+
+// Values returns all known values for OrgSourceAccountReasonCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OrgSourceAccountReasonCode) Values() []OrgSourceAccountReasonCode {
+	return []OrgSourceAccountReasonCode{
+		"accountSuspended",
+		"accountNotInScope",
+		"managementAccountNotSupported",
+		"stackInstanceInoperable",
+		"accessDenied",
+		"deploymentFailed",
+		"secondaryAccountLimitExceeded",
 	}
 }
 

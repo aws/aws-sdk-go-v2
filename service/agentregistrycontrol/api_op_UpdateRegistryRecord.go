@@ -14,9 +14,12 @@ import (
 	"time"
 )
 
-// Updates a registry record. The update is asynchronous: the record is returned
-// with the UPDATING status while it is processed. Fields that use update wrappers
-// follow PATCH semantics: omit the field to leave it unchanged.
+// Updates a registry record. The update is asynchronous: the operation returns
+// the record with the UPDATING status while the registry processes it. If a
+// GitHub user must first authorize access to the record's skill source, the
+// operation returns the record with the UPDATE_PENDING_AUTH status instead.
+// Fields that use update wrappers follow PATCH semantics: omit the field to leave
+// it unchanged.
 func (c *Client) UpdateRegistryRecord(ctx context.Context, params *UpdateRegistryRecordInput, optFns ...func(*Options)) (*UpdateRegistryRecordOutput, error) {
 	if params == nil {
 		params = &UpdateRegistryRecordInput{}
@@ -44,6 +47,14 @@ type UpdateRegistryRecordInput struct {
 	// This member is required.
 	RegistryId *string
 
+	// The change to the record's uploaded skill package. Omit it to keep the current
+	// package, specify an empty object to remove an uploaded package, or specify
+	// optionalValue to upload a new package. An empty object doesn't remove a package
+	// that the record synchronizes from a source. To stop that synchronization, remove
+	// skillPackage . A request that changes skillMd.data replaces the record's
+	// package with that text, even if you omit this member.
+	Artifact *types.UpdatedRegistryRecordArtifact
+
 	// The updated custom metadata for the registry record. Values can be strings
 	// (maximum 128 characters) or native JSON booleans ( true or false ). Omit to
 	// leave the existing metadata unchanged. Supply the wrapper with a full
@@ -62,6 +73,15 @@ type UpdateRegistryRecordInput struct {
 	// unchanged; provide an empty wrapper to unset it.
 	DisplayName *types.UpdatedDisplayName
 
+	// Specifies whether to ask a GitHub user to authorize access again, even when the
+	// current authorization still works, for example to use a different GitHub
+	// account. You can use it only together with triggerSynchronization , for a GitHub
+	// source whose credential provider uses the AUTHORIZATION_CODE grant. The new
+	// authorization also replaces the one that the same IAM principal's other records
+	// in the registry use for the same host, credential provider, scopes, and custom
+	// parameters.
+	ForceAuthentication *bool
+
 	// The updated name of the registry record. Omit to leave the name unchanged.
 	Name *string
 
@@ -79,8 +99,12 @@ type UpdateRegistryRecordInput struct {
 	// The updated version of the registry record. Omit to leave the version unchanged.
 	RecordVersion *string
 
-	// Whether to trigger synchronization of the record's descriptor content from its
-	// source
+	// Specifies whether to synchronize the record's descriptor content from its
+	// source. For a skill record, the registry reads the stored skillMd.source or
+	// skillPackage.source again, because it doesn't watch the source for changes. For
+	// a GitHub source, the operation also returns a new authorization link when one is
+	// needed. An update that sets a different skill source starts a synchronization
+	// even if you omit this member.
 	TriggerSynchronization *bool
 
 	noSmithyDocumentSerde
@@ -93,6 +117,11 @@ func (v *UpdateRegistryRecordInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Artifact != nil {
+		s.WriteStruct(schemas.UpdateRegistryRecordRequest_artifact)
+		v.Artifact.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CustomMetadata != nil {
 		s.WriteStruct(schemas.UpdateRegistryRecordRequest_customMetadata)
 		v.CustomMetadata.SerializeMembers(s)
@@ -112,6 +141,9 @@ func (v *UpdateRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteStruct(schemas.UpdateRegistryRecordRequest_displayName)
 		v.DisplayName.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.ForceAuthentication != nil {
+		s.WriteBool(schemas.UpdateRegistryRecordRequest_forceAuthentication, *v.ForceAuthentication)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRegistryRecordRequest_name, *v.Name)
@@ -169,7 +201,10 @@ type UpdateRegistryRecordOutput struct {
 	// This member is required.
 	RegistryArn *string
 
-	// The lifecycle status of the registry record.
+	// The lifecycle status of the registry record. UPDATE_PENDING_AUTH means that the
+	// update waits for a GitHub user to authorize access before the record
+	// synchronizes from its GitHub source. For the authorization link, see
+	// authorizationData .
 	//
 	// This member is required.
 	Status types.RegistryRecordStatus
@@ -178,6 +213,13 @@ type UpdateRegistryRecordOutput struct {
 	//
 	// This member is required.
 	UpdatedAt *time.Time
+
+	// The authorization that a GitHub user must complete before the record's
+	// synchronization starts. Present only in this response, and only while the status
+	// is UPDATE_PENDING_AUTH . If the status is UPDATE_PENDING_AUTH but this member
+	// is absent, call UpdateRegistryRecord again with triggerSynchronization to get a
+	// new authorization link.
+	AuthorizationData types.AuthorizationData
 
 	// The ID of the Amazon Web Services account that created the registry record.
 	CreatedBy *string
@@ -230,6 +272,9 @@ func (v *UpdateRegistryRecordOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationData != nil {
+		serializeAuthorizationData(s, schemas.UpdateRegistryRecordResponse_authorizationData, v.AuthorizationData)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateRegistryRecordResponse_createdAt, *v.CreatedAt)
 	}
@@ -290,6 +335,8 @@ func (v *UpdateRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) 
 func (v *UpdateRegistryRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateRegistryRecordResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UpdateRegistryRecordResponse_authorizationData:
+			return deserializeAuthorizationData(d, schemas.UpdateRegistryRecordResponse_authorizationData, &v.AuthorizationData)
 		case schemas.UpdateRegistryRecordResponse_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.UpdateRegistryRecordResponse_createdAt, v.CreatedAt)

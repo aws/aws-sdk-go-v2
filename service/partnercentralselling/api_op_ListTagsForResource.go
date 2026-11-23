@@ -26,6 +26,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 	return out, nil
 }
 
+// Contains the request parameters for the ListTagsForResource operation.
 type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource for which you want to retrieve
@@ -49,6 +50,7 @@ func (v *ListTagsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
+// Contains the response that the ListTagsForResource action returns.
 type ListTagsForResourceOutput struct {
 
 	// A map of the key-value pairs for the tag or tags assigned to the specified

@@ -204,6 +204,19 @@ func TestCheckResponseSnapshot_AssumeRoleWithSAML(t *testing.T) {
 		SourceIdentity:          ptr.String("__SourceIdentity__"),
 		SessionTokenUtilization: ptr.Int32(1),
 		SessionTokenSize:        ptr.Int32(1),
+		TrustedIdentityPropagationContext: &types.TrustedIdentityPropagationContext{
+			OriginIdentity: &types.OriginIdentity{
+				Subject:              ptr.String("__Subject__"),
+				SubjectType:          ptr.String("__SubjectType__"),
+				Issuer:               ptr.String("__Issuer__"),
+				FederatedProviderArn: ptr.String("__FederatedProviderArn__"),
+			},
+			TransactionContext: &types.TransactionContext{
+				IdentityProvider: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssumeRoleWithSAML.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -256,6 +269,19 @@ func TestCheckResponseSnapshot_AssumeRoleWithWebIdentity(t *testing.T) {
 		SourceIdentity:          ptr.String("__SourceIdentity__"),
 		SessionTokenUtilization: ptr.Int32(1),
 		SessionTokenSize:        ptr.Int32(1),
+		TrustedIdentityPropagationContext: &types.TrustedIdentityPropagationContext{
+			OriginIdentity: &types.OriginIdentity{
+				Subject:              ptr.String("__Subject__"),
+				SubjectType:          ptr.String("__SubjectType__"),
+				Issuer:               ptr.String("__Issuer__"),
+				FederatedProviderArn: ptr.String("__FederatedProviderArn__"),
+			},
+			TransactionContext: &types.TransactionContext{
+				IdentityProvider: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("AssumeRoleWithWebIdentity.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -481,6 +507,45 @@ func TestCheckResponseSnapshot_GetFederationToken(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetScopedCredentials(t *testing.T) {
+	want := &GetScopedCredentialsOutput{
+		Credentials: &types.Credentials{
+			AccessKeyId:     ptr.String("__AccessKeyId__"),
+			SecretAccessKey: ptr.String("__SecretAccessKey__"),
+			SessionToken:    ptr.String("__SessionToken__"),
+			Expiration:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SessionInfo: &types.ScopedSession{
+			ScopedSessionId: ptr.String("__ScopedSessionId__"),
+			Arn:             ptr.String("__Arn__"),
+		},
+		SessionTokenUtilization: ptr.Int32(1),
+		SessionTokenSize:        ptr.Int32(1),
+		ScopedPoliciesCount:     ptr.Int32(1),
+		SourceIdentity:          ptr.String("__SourceIdentity__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetScopedCredentials.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetScopedCredentials(context.Background(), &GetScopedCredentialsInput{
+		Policy:                   ptr.String("__Policy__"),
+		DurationSeconds:          ptr.Int32(1),
+		MinimumSessionTokenSize:  ptr.Int32(1),
+		ScopedSessionDescription: ptr.String("__ScopedSessionDescription__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetScopedCredentials.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetSessionToken(t *testing.T) {
 	want := &GetSessionTokenOutput{
 		Credentials: &types.Credentials{
@@ -534,6 +599,8 @@ func TestCheckResponseSnapshot_GetWebIdentityToken(t *testing.T) {
 		},
 		DurationSeconds:  ptr.Int32(1),
 		SigningAlgorithm: ptr.String("__SigningAlgorithm__"),
+		Scope:            ptr.String("__Scope__"),
+		SubjectMode:      types.WebIdentityTokenSubjectModeType("AWSIdentity"),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -728,6 +795,36 @@ func TestCheckResponseSnapshot_Error_IDPRejectedClaimException(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_InsufficientSessionLifetimeException(t *testing.T) {
+	want := &types.InsufficientSessionLifetimeException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("InsufficientSessionLifetimeException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.GetScopedCredentials(context.Background(), &GetScopedCredentialsInput{
+		Policy:                   ptr.String("__Policy__"),
+		DurationSeconds:          ptr.Int32(1),
+		MinimumSessionTokenSize:  ptr.Int32(1),
+		ScopedSessionDescription: ptr.String("__ScopedSessionDescription__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.InsufficientSessionLifetimeException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.InsufficientSessionLifetimeException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "InsufficientSessionLifetimeException.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_InvalidAuthorizationMessageException(t *testing.T) {
 	want := &types.InvalidAuthorizationMessageException{
 		Message: ptr.String("__Message__"),
@@ -752,6 +849,73 @@ func TestCheckResponseSnapshot_Error_InvalidAuthorizationMessageException(t *tes
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidAuthorizationMessageException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_InvalidContextAssertionException(t *testing.T) {
+	want := &types.InvalidContextAssertionException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("InvalidContextAssertionException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.AssumeRole(context.Background(), &AssumeRoleInput{
+		RoleArn:         ptr.String("__RoleArn__"),
+		RoleSessionName: ptr.String("__RoleSessionName__"),
+		PolicyArns: []types.PolicyDescriptorType{
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+			{
+				Arn: ptr.String("__Arn__"),
+			},
+		},
+		Policy:          ptr.String("__Policy__"),
+		DurationSeconds: ptr.Int32(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		TransitiveTagKeys: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ExternalId:     ptr.String("__ExternalId__"),
+		SerialNumber:   ptr.String("__SerialNumber__"),
+		TokenCode:      ptr.String("__TokenCode__"),
+		SourceIdentity: ptr.String("__SourceIdentity__"),
+		ProvidedContexts: []types.ProvidedContext{
+			{
+				ProviderArn:      ptr.String("__ProviderArn__"),
+				ContextAssertion: ptr.String("__ContextAssertion__"),
+			},
+			{
+				ProviderArn:      ptr.String("__ProviderArn__"),
+				ContextAssertion: ptr.String("__ContextAssertion__"),
+			},
+		},
+		MinimumSessionTokenSize: ptr.Int32(1),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.InvalidContextAssertionException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.InvalidContextAssertionException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidContextAssertionException.error", err)
 	}
 }
 
@@ -795,6 +959,36 @@ func TestCheckResponseSnapshot_Error_InvalidIdentityTokenException(t *testing.T)
 	}
 }
 
+func TestCheckResponseSnapshot_Error_InvalidSubjectCredentialsException(t *testing.T) {
+	want := &types.InvalidSubjectCredentialsException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("InvalidSubjectCredentialsException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.GetScopedCredentials(context.Background(), &GetScopedCredentialsInput{
+		Policy:                   ptr.String("__Policy__"),
+		DurationSeconds:          ptr.Int32(1),
+		MinimumSessionTokenSize:  ptr.Int32(1),
+		ScopedSessionDescription: ptr.String("__ScopedSessionDescription__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.InvalidSubjectCredentialsException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.InvalidSubjectCredentialsException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "InvalidSubjectCredentialsException.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_JWTPayloadSizeExceededException(t *testing.T) {
 	want := &types.JWTPayloadSizeExceededException{
 		Message: ptr.String("__Message__"),
@@ -814,6 +1008,8 @@ func TestCheckResponseSnapshot_Error_JWTPayloadSizeExceededException(t *testing.
 		},
 		DurationSeconds:  ptr.Int32(1),
 		SigningAlgorithm: ptr.String("__SigningAlgorithm__"),
+		Scope:            ptr.String("__Scope__"),
+		SubjectMode:      types.WebIdentityTokenSubjectModeType("AWSIdentity"),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -923,6 +1119,8 @@ func TestCheckResponseSnapshot_Error_OutboundWebIdentityFederationDisabledExcept
 		},
 		DurationSeconds:  ptr.Int32(1),
 		SigningAlgorithm: ptr.String("__SigningAlgorithm__"),
+		Scope:            ptr.String("__Scope__"),
+		SubjectMode:      types.WebIdentityTokenSubjectModeType("AWSIdentity"),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -1099,6 +1297,8 @@ func TestCheckResponseSnapshot_Error_SessionDurationEscalationException(t *testi
 		},
 		DurationSeconds:  ptr.Int32(1),
 		SigningAlgorithm: ptr.String("__SigningAlgorithm__"),
+		Scope:            ptr.String("__Scope__"),
+		SubjectMode:      types.WebIdentityTokenSubjectModeType("AWSIdentity"),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),

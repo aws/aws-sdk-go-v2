@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.StartPointInTimeRecovery
+
+{"Restoration":{"RestoreId":"__RestoreId__","RestorePreview":[{"CreateCount":1,"DeleteCount":1,"Entity":"__Entity__","UpdateCount":1},{"CreateCount":1,"DeleteCount":1,"Entity":"__Entity__","UpdateCount":1}],"RestoreStatus":"PREVIEW_GENERATING","RestoreTimestamp":946684800,"TriggerTimestamp":946684800}}

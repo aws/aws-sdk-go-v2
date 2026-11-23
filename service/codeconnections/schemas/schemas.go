@@ -210,7 +210,7 @@ var ConflictException_Message *smithy.Schema
 var Connection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codeconnections",
 	Name:      "Connection",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var Connection_ConnectionName *smithy.Schema
 
 var Connection_ConnectionArn *smithy.Schema
@@ -222,6 +222,8 @@ var Connection_OwnerAccountId *smithy.Schema
 var Connection_ConnectionStatus *smithy.Schema
 
 var Connection_HostArn *smithy.Schema
+
+var Connection_ProviderEndpoint *smithy.Schema
 
 var _ConnectionArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codeconnections",
@@ -388,7 +390,7 @@ var _Parent = smithy.NewSchema(smithy.ShapeID{
 var ProviderType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codeconnections",
 	Name:      "ProviderType",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 7)
 var ProviderType_BITBUCKET *smithy.Schema
 
 var ProviderType_GITHUB *smithy.Schema
@@ -400,6 +402,8 @@ var ProviderType_GITLAB *smithy.Schema
 var ProviderType_GITLAB_SELF_MANAGED *smithy.Schema
 
 var ProviderType_AZURE_DEV_OPS *smithy.Schema
+
+var ProviderType_GITHUB_ENTERPRISE_CLOUD_DATA_RESIDENCY *smithy.Schema
 
 var PublishDeploymentStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codeconnections",
@@ -867,7 +871,7 @@ var _VpcId = smithy.NewSchema(smithy.ShapeID{
 var CreateConnectionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codeconnections",
 	Name:      "CreateConnectionInput",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var CreateConnectionInput_ProviderType *smithy.Schema
 
 var CreateConnectionInput_ConnectionName *smithy.Schema
@@ -875,6 +879,8 @@ var CreateConnectionInput_ConnectionName *smithy.Schema
 var CreateConnectionInput_Tags *smithy.Schema
 
 var CreateConnectionInput_HostArn *smithy.Schema
+
+var CreateConnectionInput_ProviderEndpoint *smithy.Schema
 
 var CreateConnectionOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codeconnections",
@@ -1110,9 +1116,9 @@ var ListConnectionsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.codeconnections",
 	Name:      "ListConnectionsInput",
 }, smithy.ShapeTypeStructure, 4)
-var ListConnectionsInput_ProviderTypeFilter *smithy.Schema
-
 var ListConnectionsInput_HostArnFilter *smithy.Schema
+
+var ListConnectionsInput_ProviderTypeFilter *smithy.Schema
 
 var ListConnectionsInput_MaxResults *smithy.Schema
 
@@ -1342,6 +1348,8 @@ func init() {
 
 	ProviderType_AZURE_DEV_OPS = ProviderType.AddMember("AZURE_DEV_OPS", smithyprelude.Unit)
 
+	ProviderType_GITHUB_ENTERPRISE_CLOUD_DATA_RESIDENCY = ProviderType.AddMember("GITHUB_ENTERPRISE_CLOUD_DATA_RESIDENCY", smithyprelude.Unit)
+
 	ConnectionStatus_PENDING = ConnectionStatus.AddMember("PENDING", smithyprelude.Unit)
 
 	ConnectionStatus_AVAILABLE = ConnectionStatus.AddMember("AVAILABLE", smithyprelude.Unit)
@@ -1359,6 +1367,8 @@ func init() {
 	Connection_ConnectionStatus = Connection.AddMember("ConnectionStatus", ConnectionStatus)
 
 	Connection_HostArn = Connection.AddMember("HostArn", _HostArn)
+
+	Connection_ProviderEndpoint = Connection.AddMember("ProviderEndpoint", _Url)
 
 	_ConnectionList_member = _ConnectionList.AddMember("member", Connection)
 
@@ -1596,6 +1606,8 @@ func init() {
 
 	CreateConnectionInput_HostArn = CreateConnectionInput.AddMember("HostArn", _HostArn)
 
+	CreateConnectionInput_ProviderEndpoint = CreateConnectionInput.AddMember("ProviderEndpoint", _Url)
+
 	CreateConnectionOutput_ConnectionArn = CreateConnectionOutput.AddMember("ConnectionArn", _ConnectionArn)
 
 	CreateConnectionOutput_Tags = CreateConnectionOutput.AddMember("Tags", _TagList)
@@ -1706,9 +1718,9 @@ func init() {
 
 	GetSyncConfigurationOutput_SyncConfiguration = GetSyncConfigurationOutput.AddMember("SyncConfiguration", SyncConfiguration)
 
-	ListConnectionsInput_ProviderTypeFilter = ListConnectionsInput.AddMember("ProviderTypeFilter", ProviderType)
-
 	ListConnectionsInput_HostArnFilter = ListConnectionsInput.AddMember("HostArnFilter", _HostArn)
+
+	ListConnectionsInput_ProviderTypeFilter = ListConnectionsInput.AddMember("ProviderTypeFilter", ProviderType)
 
 	ListConnectionsInput_MaxResults = ListConnectionsInput.AddMember("MaxResults", _MaxResults)
 

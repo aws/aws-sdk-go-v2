@@ -1993,6 +1993,119 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#AddInferenceGateway": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#AddInferenceGatewayRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#AddInferenceGatewayResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceInUse"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Adds an in-cluster inference gateway to a global inference gateway. This operation is\nasynchronous: the in-cluster inference gateway starts in the `ADDING` status. To check its status,\ncall `ListInferenceGateways`. If the in-cluster inference gateway is already in the global\ninference gateway, the operation succeeds and returns its current status.\n\nAn in-cluster inference gateway can belong to only one global inference gateway. If it already\nbelongs to another global inference gateway, the operation fails with `ResourceInUse`. The\noperation fails with `ConflictException` while another operation is in progress on the global\ninference gateway, or if the global inference gateway failed to create.",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.sagemaker#AddInferenceGatewayRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name, Amazon Resource Name (ARN), or ID of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayClusterArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that runs the in-cluster inference gateway. The cluster must be in the same account and partition as the global inference gateway. It can be in a different Region, but not in an opt-in Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayKubernetesNamespace",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Kubernetes namespace of the in-cluster inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayKubernetesResourceName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the <code>InferenceGatewayConfig</code> resource that defines the in-cluster inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#AddInferenceGatewayResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Gateway": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMember",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The in-cluster inference gateway that you added.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the in-cluster inference gateway in the global inference gateway.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#AddTags": {
             "type": "operation",
             "input": {
@@ -8567,6 +8680,396 @@
                 "smithy.api#documentation": "<p>Information about the Capacity Reservation used by an instance or instance group.</p>"
             }
         },
+        "com.amazonaws.sagemaker#CapacityReservationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a SageMaker Capacity Reservation.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]+:[0-9]{12}:sm-capacity-reservation/smcr-[0-9a-z]{12}$"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationAvailabilityZoneId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID of an Availability Zone, for example <code>use1-az1</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationDetail": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationArn": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SMCapacityReservationId": {
+                    "target": "com.amazonaws.sagemaker#SageMakerCapacityReservationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the SageMaker Capacity Reservation. The ID is the last part of the ARN and starts with <code>smcr-</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.sagemaker#AccountId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the SageMaker Capacity Reservation. SageMaker AI sets the status from the start and end times of the reservation. Valid values:</p> <dl> <dt>Scheduled</dt> <dd> <p>The current time is before <code>StartTime</code>.</p> </dd> <dt>Active</dt> <dd> <p>The current time is between <code>StartTime</code> and <code>EndTime</code>. You can use the reserved instances.</p> </dd> <dt>Expired</dt> <dd> <p>The current time is at or after <code>EndTime</code>.</p> </dd> </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationInstanceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The SageMaker AI instance type of the reserved instances, for example <code>ml.p5.48xlarge</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.sagemaker#AvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Availability Zone of the reserved instances, for example <code>us-east-1a</code>. Availability Zone names can map to different physical zones in different accounts. To identify the same zone across accounts, use <code>AvailabilityZoneId</code>.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationAvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone of the reserved instances, for example <code>use1-az1</code>. An Availability Zone ID identifies the same physical zone in every account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TotalInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of instances in the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when the reserved instances become available.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the SageMaker Capacity Reservation ends. This value is not returned if the reservation has no end time.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when the SageMaker Capacity Reservation was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a SageMaker Capacity Reservation. A SageMaker Capacity Reservation reserves a number of instances of one instance type in one Availability Zone for a period of time.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationEndpointSharing": {
+            "type": "enum",
+            "members": {
+                "SINGLE_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SingleEndpoint"
+                    }
+                },
+                "MULTIPLE_ENDPOINTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MultipleEndpoints"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Whether one endpoint or multiple endpoints can use an ML capacity reservation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationEndpointsAssociation": {
+            "type": "structure",
+            "members": {
+                "MlReservationId": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationMlReservationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ML capacity reservation. The name is the last part of the ML capacity reservation ARN.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationOptInStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the association. Valid values:</p> <dl> <dt>Pending</dt> <dd> <p>SageMaker AI is adding or removing the association.</p> </dd> <dt>Active</dt> <dd> <p>The resources are associated with the SageMaker Capacity Reservation and can use its instances.</p> </dd> <dt>Inactive</dt> <dd> <p>The resources are not associated with the SageMaker Capacity Reservation.</p> </dd> </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MatchCriteria": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationMatchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How endpoints in your account match the ML capacity reservation. Valid values:</p> <dl> <dt>Open</dt> <dd> <p>Endpoints in your account use the ML capacity reservation automatically when their instance type matches. You don't specify the ML capacity reservation ARN when you create the endpoint.</p> </dd> <dt>Targeted</dt> <dd> <p>An endpoint uses the ML capacity reservation only when you specify its ARN when you create or update the endpoint.</p> </dd> </dl>"
+                    }
+                },
+                "EndpointSharing": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationEndpointSharing",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether one endpoint or multiple endpoints can use the ML capacity reservation. Valid values:</p> <dl> <dt>SingleEndpoint</dt> <dd> <p>Only one endpoint can use the ML capacity reservation.</p> </dd> <dt>MultipleEndpoints</dt> <dd> <p>Multiple endpoints can use the ML capacity reservation.</p> </dd> </dl>"
+                    }
+                },
+                "MlReservationArn": {
+                    "target": "com.amazonaws.sagemaker#MlReservationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ML capacity reservation. Specify this ARN in <code>CreateEndpointConfig</code> to use the reserved instances for an endpoint. For a new ML capacity reservation, this value is returned when the status is <code>Active</code>.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the most recent attempt to add or remove the association failed. This value is returned only when the most recent attempt failed. After a failure to add the association, the status is <code>Inactive</code>. After a failure to remove the association, the status is <code>Active</code>.</p>"
+                    }
+                },
+                "AssociatedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when SageMaker AI started the current association. This time resets when you add the association again after it was removed or after it failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The association between the SageMaker AI endpoints in your account and a SageMaker Capacity Reservation, through one ML capacity reservation. To use the reserved instances for an endpoint, specify the ML capacity reservation ARN in the <code>MlReservationArn</code> field of <code>ProductionVariantCapacityReservationConfig</code> when you call <code>CreateEndpointConfig</code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationFilterName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the field to filter on. The only supported value is <code>Status</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationFilterValues",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The values to match. For the <code>Status</code> filter, valid values are <code>Scheduled</code>, <code>Active</code>, and <code>Expired</code>. Values are case sensitive. You can specify up to 10 values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for the <code>ListCapacityReservations</code> operation. A reservation matches the filter when its value for <code>Name</code> equals any of the values in <code>Values</code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationFilterName": {
+            "type": "enum",
+            "members": {
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a field to filter SageMaker Capacity Reservations on.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A value to match in a SageMaker Capacity Reservation filter.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^(Scheduled|Active|Expired)$"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CapacityReservationFilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CapacityReservationFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationHyperPodClustersAssociation": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationOptInStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the association. Valid values:</p> <dl> <dt>Pending</dt> <dd> <p>SageMaker AI is adding or removing the association.</p> </dd> <dt>Active</dt> <dd> <p>The resources are associated with the SageMaker Capacity Reservation and can use its instances.</p> </dd> <dt>Inactive</dt> <dd> <p>The resources are not associated with the SageMaker Capacity Reservation.</p> </dd> </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the most recent attempt to add or remove the association failed. This value is returned only when the most recent attempt failed. After a failure to add the association, the status is <code>Inactive</code>. After a failure to remove the association, the status is <code>Active</code>.</p>"
+                    }
+                },
+                "AssociatedTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when SageMaker AI started the current association. This time resets when you add the association again after it was removed or after it failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The association between the SageMaker AI HyperPod clusters in your account and a SageMaker Capacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationInstanceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The SageMaker AI instance type of a SageMaker Capacity Reservation, for example <code>ml.p5.48xlarge</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationInstanceUsage": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.sagemaker#AccountId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that uses the instances.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InUseInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#InUseInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of instances that the account uses, across all resource types.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourcesUsage": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationResourceUsageSet",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The instance usage for each resource type that has instances in use in the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The instances from a SageMaker Capacity Reservation that one account uses.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationInstanceUsageSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CapacityReservationInstanceUsage"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationMatchCriteria": {
+            "type": "enum",
+            "members": {
+                "OPEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Open"
+                    }
+                },
+                "TARGETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Targeted"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>How endpoints match an ML capacity reservation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationMlReservationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The name of an ML capacity reservation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationOptInStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Pending"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Inactive"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of an association between resources and a SageMaker Capacity Reservation.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#CapacityReservationPreference": {
             "type": "enum",
             "members": {
@@ -8576,6 +9079,206 @@
                         "smithy.api#enumValue": "capacity-reservations-only"
                     }
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationResourceAssociation": {
+            "type": "union",
+            "members": {
+                "HyperPodClusters": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationHyperPodClustersAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association between the SageMaker AI HyperPod clusters in your account and the SageMaker Capacity Reservation. The association applies to all HyperPod clusters in your account.</p>"
+                    }
+                },
+                "Endpoints": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationEndpointsAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association between the SageMaker AI endpoints in your account and the SageMaker Capacity Reservation, through one ML capacity reservation. The response includes one item for each ML capacity reservation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An association between one type of resource in your account and a SageMaker Capacity Reservation. Each item contains exactly one member.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationResourceAssociations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CapacityReservationResourceAssociation"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationResourceType": {
+            "type": "enum",
+            "members": {
+                "HYPERPOD_CLUSTERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HyperPodClusters"
+                    }
+                },
+                "ENDPOINTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Endpoints"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A type of resource that uses instances from a SageMaker Capacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationResourceUsage": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationResourceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of resource that uses the instances. Valid values:</p> <dl> <dt>HyperPodClusters</dt> <dd> <p>SageMaker AI HyperPod clusters.</p> </dd> <dt>Endpoints</dt> <dd> <p>SageMaker AI endpoints.</p> </dd> </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InUseInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#InUseInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of instances from the SageMaker Capacity Reservation that are in use.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The instances from a SageMaker Capacity Reservation that one resource type uses in an account.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationResourceUsageSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CapacityReservationResourceUsage"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationStatus": {
+            "type": "enum",
+            "members": {
+                "SCHEDULED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Scheduled"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Expired"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a SageMaker Capacity Reservation.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#CapacityReservationSummary"
+            }
+        },
+        "com.amazonaws.sagemaker#CapacityReservationSummary": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationArn": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SMCapacityReservationId": {
+                    "target": "com.amazonaws.sagemaker#SageMakerCapacityReservationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the SageMaker Capacity Reservation. The ID is the last part of the ARN and starts with <code>smcr-</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.sagemaker#AccountId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the SageMaker Capacity Reservation. SageMaker AI sets the status from the start and end times of the reservation. Valid values:</p> <dl> <dt>Scheduled</dt> <dd> <p>The current time is before <code>StartTime</code>.</p> </dd> <dt>Active</dt> <dd> <p>The current time is between <code>StartTime</code> and <code>EndTime</code>. You can use the reserved instances.</p> </dd> <dt>Expired</dt> <dd> <p>The current time is at or after <code>EndTime</code>.</p> </dd> </dl>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationInstanceType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The SageMaker AI instance type of the reserved instances, for example <code>ml.p5.48xlarge</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.sagemaker#AvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Availability Zone of the reserved instances, for example <code>us-east-1a</code>. Availability Zone names can map to different physical zones in different accounts. To identify the same zone across accounts, use <code>AvailabilityZoneId</code>.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationAvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone of the reserved instances, for example <code>use1-az1</code>. An Availability Zone ID identifies the same physical zone in every account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TotalInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of instances in the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when the reserved instances become available.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the SageMaker Capacity Reservation ends. This value is not returned if the reservation has no end time.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when the SageMaker Capacity Reservation was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a SageMaker Capacity Reservation.</p>"
             }
         },
         "com.amazonaws.sagemaker#CapacityReservationType": {
@@ -11558,6 +12261,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NotFound"
+                    }
+                },
+                "DETACH_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DetachInProgress"
+                    }
+                },
+                "ATTACH_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AttachInProgress"
                     }
                 }
             }
@@ -18500,6 +19215,136 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#CreateGlobalInferenceGateway": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#CreateGlobalInferenceGatewayRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#CreateGlobalInferenceGatewayResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceInUse"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceLimitExceeded"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates a global inference gateway. This operation is asynchronous: the global inference gateway\nstarts in the `CREATING` status. To check its status, call `DescribeGlobalInferenceGateway` until\nthe status is `ACTIVE` or `FAILED`. The operation fails with `ResourceInUse` if the name is already\nin use, or if one of the in-cluster inference gateways in `Gateways` already belongs to another\nglobal inference gateway."
+            }
+        },
+        "com.amazonaws.sagemaker#CreateGlobalInferenceGatewayRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the global inference gateway. The name must be unique in your account in the current Region, and is case-sensitive. The name can't be exactly 12 lowercase letters or digits, because the global inference gateway ID uses that format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Routing": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayRouting",
+                    "traits": {
+                        "smithy.api#documentation": "The routing configuration of the global inference gateway. If you omit it, the global inference\ngateway uses default routing weights."
+                    }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayExecutionRoleArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the global inference gateway assumes to access your SageMaker HyperPod clusters. The role must be in your account and partition, and you must have <code>iam:PassRole</code> permission for it. You can't change the role after you create the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Gateways": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMembers",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The 1 to 10 in-cluster inference gateways to add to the global inference gateway. A global\ninference gateway must always have at least one in-cluster inference gateway, so\n`RemoveInferenceGateway` can't remove the last one.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. An idempotent operation completes no more than one time. If you don't specify a client token, the Amazon Web Services SDKs and the Amazon Web Services CLI generate one for you.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.sagemaker#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom tags for managing the global inference gateway as an Amazon Web Services resource. You can add tags to your global inference gateway in the same way you add them in other Amazon Web Services services that support tagging. For more information about tagging Amazon Web Services resources, see <a href=\"https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html\">Tagging your Amazon Web Services resources</a> in the <i>Tagging Amazon Web Services Resources User Guide</i>.</p> <p>The global inference gateway doesn't return tags in its responses. To read the tags, use <code>ListTags</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#CreateGlobalInferenceGatewayResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the global inference gateway. A new global inference gateway starts in the <code>CREATING</code> status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayExecutionRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the global inference gateway assumes to access your SageMaker HyperPod clusters.</p>"
+                    }
+                },
+                "Routing": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayRouting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing configuration of the global inference gateway.</p>"
+                    }
+                },
+                "Gateways": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMembers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The in-cluster inference gateways that you specified in the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Contains the identifiers and status of the new global inference gateway, and the parameters from\nthe request except `Tags`. To read the tags, use `ListTags`.",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#CreateHub": {
             "type": "operation",
             "input": {
@@ -25272,6 +26117,66 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#DeleteGlobalInferenceGateway": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DeleteGlobalInferenceGatewayRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DeleteGlobalInferenceGatewayResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ConflictException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Delete a global inference gateway and its member inference gateways, which are then free to join\nanother global inference gateway. Asynchronous: the global inference gateway is DELETING while its\nmanaged endpoint resources are torn down; poll DescribeGlobalInferenceGateway until it returns\nResourceNotFound. Does not touch the customer's clusters. Idempotent: a Delete whose Identifier\nmatches no global inference gateway succeeds and echoes what the Identifier says (Arn and Id for an\nARN or Id, Name for a name).",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteGlobalInferenceGatewayRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name, Amazon Resource Name (ARN), or ID of the global inference gateway to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DeleteGlobalInferenceGatewayResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayArn",
+                    "traits": {
+                        "smithy.api#documentation": "Set when a global inference gateway was deleted, and for an already-gone one when the Identifier was an\nARN or Id."
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "Set when a global inference gateway was deleted, and for an already-gone one when the Identifier was an\nARN or Id."
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayName",
+                    "traits": {
+                        "smithy.api#documentation": "Set when a global inference gateway was deleted, and for an already-gone one when the Identifier was a\nname."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#DeleteHub": {
             "type": "operation",
             "input": {
@@ -28423,6 +29328,55 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#DescribeCapacityReservation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeCapacityReservationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeCapacityReservationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details about a SageMaker Capacity Reservation, such as its instance type, instance count, Availability Zone, and start and end times.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeCapacityReservationRequest": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationArn": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation. The ARN has the format <code>arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeCapacityReservationResponse": {
+            "type": "structure",
+            "members": {
+                "CapacityReservation": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationDetail",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Details about the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#DescribeCluster": {
             "type": "operation",
             "input": {
@@ -31059,6 +32013,118 @@
                     "target": "com.amazonaws.sagemaker#FailureReason",
                     "traits": {
                         "smithy.api#documentation": "<p>The reason your flow definition failed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeGlobalInferenceGateway": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeGlobalInferenceGatewayRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeGlobalInferenceGatewayResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a global inference gateway, including its status, endpoints, and routing configuration. To list the in-cluster inference gateways of the global inference gateway, use <code>ListInferenceGateways</code>. To read the tags of the global inference gateway, use <code>ListTags</code>.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeGlobalInferenceGatewayRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name, Amazon Resource Name (ARN), or ID of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeGlobalInferenceGatewayResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayExecutionRoleArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The Amazon Resource Name (ARN) of the IAM role that the global inference gateway assumes to\naccess your SageMaker HyperPod clusters. You can't change the role after you create the global\ninference gateway.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndpointUrl": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayEndpointUrl",
+                    "traits": {
+                        "smithy.api#documentation": "The URL that you use to invoke the global inference gateway. This value is set after the global\ninference gateway becomes `ACTIVE`."
+                    }
+                },
+                "VpcEndpointServiceName": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayVpcEndpointServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the VPC endpoint service to create an interface VPC endpoint (AWS PrivateLink) from,\nso that you can call `EndpointUrl` without going over the internet. This value is set after the\nglobal inference gateway becomes `ACTIVE`."
+                    }
+                },
+                "Routing": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayRouting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing configuration of the global inference gateway.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the global inference gateway was created.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that the global inference gateway failed. SageMaker returns this value only when the status is <code>FAILED</code>.</p>"
                     }
                 }
             },
@@ -35905,6 +36971,95 @@
                     "target": "com.amazonaws.sagemaker#UltraServerSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>A summary of the UltraServer associated with this reserved capacity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeResourceAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#DescribeResourceAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#DescribeResourceAssociationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the resources in your account that are associated with a SageMaker Capacity Reservation and the status of each association. Resources include SageMaker AI HyperPod clusters and SageMaker AI endpoints.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ResourceAssociations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeResourceAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationArn": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation. The ARN has the format <code>arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If more results are available, the response includes a <code>NextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was truncated, the response includes a <code>NextToken</code> value. To retrieve the next set of results, use that token in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#DescribeResourceAssociationsResponse": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationArn": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SMCapacityReservationId": {
+                    "target": "com.amazonaws.sagemaker#SageMakerCapacityReservationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the SageMaker Capacity Reservation. The ID is the last part of the ARN and starts with <code>smcr-</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceAssociations": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationResourceAssociations",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The associations between resources in your account and the SageMaker Capacity Reservation. The list is empty when your account has no associations with the reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, SageMaker AI returns this token. To retrieve the next set of results, use this token in your next request.</p>"
                     }
                 }
             },
@@ -42944,6 +44099,111 @@
                 "smithy.api#documentation": "<p>The generative AI settings for the SageMaker Canvas application.</p> <p>Configure these settings for Canvas users starting chats with generative AI foundation models. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-fm-chat.html\"> Use generative AI with foundation models</a>.</p>"
             }
         },
+        "com.amazonaws.sagemaker#GetCapacityReservationUsage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#GetCapacityReservationUsageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#GetCapacityReservationUsageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the number of instances in use from a SageMaker Capacity Reservation, for each account that uses them.</p> <p>SageMaker AI refreshes the usage counts periodically. The <code>LastRefreshTime</code> value shows when the counts were last refreshed.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "InstanceUsageSet",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GetCapacityReservationUsageRequest": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationArn": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker Capacity Reservation. The ARN has the format <code>arn:aws:sagemaker:region:account-id:sm-capacity-reservation/smcr-id</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If more results are available, the response includes a <code>NextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was truncated, the response includes a <code>NextToken</code> value. To retrieve the next set of results, use that token in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#GetCapacityReservationUsageResponse": {
+            "type": "structure",
+            "members": {
+                "SMCapacityReservationId": {
+                    "target": "com.amazonaws.sagemaker#SageMakerCapacityReservationId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the SageMaker Capacity Reservation. The ID is the last part of the ARN and starts with <code>smcr-</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#TotalInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of instances in the SageMaker Capacity Reservation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AvailableInstanceCount": {
+                    "target": "com.amazonaws.sagemaker#AvailableInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of instances in the SageMaker Capacity Reservation that are not in use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastRefreshTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The time when SageMaker AI last refreshed the usage counts in this response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceUsageSet": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationInstanceUsageSet",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The instance usage for each account that uses instances from the SageMaker Capacity Reservation, sorted by account ID. Each account appears at most once across all pages. The list is empty when no instances are in use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, SageMaker AI returns this token. To retrieve the next set of results, use this token in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#GetDeviceFleetReport": {
             "type": "operation",
             "input": {
@@ -43435,6 +44695,574 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^https://([^/]+)/?.{3,1016}$"
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]+:[0-9]{12}:global-inference-gateway/[a-z0-9]{12}$"
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayClusterArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]+:[0-9]{12}:cluster/[a-z0-9]{12}$"
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayEndpointUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The URL that you use to invoke the global inference gateway, for example\n`https://k3x9p2m7q1ab.001.sm-gateway.us-east-1.on.aws`.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayExecutionRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The Amazon Resource Name (ARN) of the IAM role that the global inference gateway assumes to access\nyour SageMaker HyperPod clusters. The role must be in the same account and partition as the global\ninference gateway.",
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::[0-9]{12}:role/[\\w+=,.@\\-/]{1,1017}$"
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayFailureReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayFilterName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The attribute to filter global inference gateways on. The only supported value is <code>Status</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayFilterValue",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The value to match. For the <code>Status</code> filter, specify a global inference gateway status.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A filter for `ListGlobalInferenceGateways`. The filter matches the global inference gateways whose\nattribute named by `Name` equals `Value`."
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayFilterName": {
+            "type": "enum",
+            "members": {
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by the status of the global inference gateway.</p>",
+                        "smithy.api#enumValue": "Status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The attribute to filter on when you call `ListGlobalInferenceGateways`."
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The value to match in a `ListGlobalInferenceGateways` filter. For the `Status` filter, specify a\nglobal inference gateway status.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayFilter"
+            },
+            "traits": {
+                "smithy.api#documentation": "The filters to apply to `ListGlobalInferenceGateways`. Multiple filters are combined with a\nlogical AND.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The ID of a global inference gateway. The ID is the last segment of the global inference gateway\nARN and consists of 12 lowercase letters or digits.",
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[a-z0-9]{12}$"
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The name, Amazon Resource Name (ARN), or ID of a global inference gateway.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayKubernetesNamespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayKubernetesResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^[a-z0-9]([-a-z0-9.]*[a-z0-9])?$"
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayMember": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayKubernetesResourceName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the <code>InferenceGatewayConfig</code> resource that defines the in-cluster inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayKubernetesNamespace",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Kubernetes namespace of the in-cluster inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayClusterArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that runs the in-cluster inference gateway. The cluster must be in the same account and partition as the global inference gateway. It can be in a different Region, but not in an opt-in Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An in-cluster inference gateway, identified by the SageMaker HyperPod cluster that runs it\n(`ClusterArn`), its Kubernetes namespace (`Namespace`), and the name of the `InferenceGatewayConfig`\nresource that defines it (`Name`)."
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberFilterName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The attribute to filter in-cluster inference gateways on. Supported values are <code>Status</code> and <code>ClusterArn</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberFilterValue",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The value to match. For the <code>Status</code> filter, specify a status of an in-cluster inference gateway. For the <code>ClusterArn</code> filter, specify the Amazon Resource Name (ARN) of a SageMaker HyperPod cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A filter for `ListInferenceGateways`. The filter matches the in-cluster inference gateways whose\nattribute named by `Name` equals `Value`."
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberFilterName": {
+            "type": "enum",
+            "members": {
+                "STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by the status of the in-cluster inference gateway.</p>",
+                        "smithy.api#enumValue": "Status"
+                    }
+                },
+                "CLUSTER_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter by the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster.</p>",
+                        "smithy.api#enumValue": "ClusterArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The attribute to filter on when you call `ListInferenceGateways`."
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberFilterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The value to match in a `ListInferenceGateways` filter. For the `Status` filter, specify a status\nof an in-cluster inference gateway. For the `ClusterArn` filter, specify the ARN of a SageMaker\nHyperPod cluster.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberFilter"
+            },
+            "traits": {
+                "smithy.api#documentation": "The filters to apply to `ListInferenceGateways`. Multiple filters are combined with a logical AND.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberStatus": {
+            "type": "enum",
+            "members": {
+                "ADDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The in-cluster inference gateway is being added and doesn't receive requests yet.</p>",
+                        "smithy.api#enumValue": "ADDING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The in-cluster inference gateway is added and receives requests.</p>",
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "REMOVING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The in-cluster inference gateway is being removed.</p>",
+                        "smithy.api#enumValue": "REMOVING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adding or removing the in-cluster inference gateway failed. For details, see <code>FailureReason</code>. After you fix the cause, remove the in-cluster inference gateway and add it again.</p>",
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The status of an in-cluster inference gateway in a global inference gateway. This status describes\nthe membership in the global inference gateway, not the health of the in-cluster inference gateway."
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of summaries of the in-cluster inference gateways in a global inference gateway.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayKubernetesResourceName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the <code>InferenceGatewayConfig</code> resource that defines the in-cluster inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayKubernetesNamespace",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Kubernetes namespace of the in-cluster inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayClusterArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that runs the in-cluster inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the in-cluster inference gateway in the global inference gateway. This status describes the membership in the global inference gateway, not the health of the in-cluster inference gateway.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayFailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "The reason that adding or removing the in-cluster inference gateway failed. This value is set\nonly when the status is `FAILED`."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Summary information about an in-cluster inference gateway in a global inference gateway, including\nits status."
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayMembers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMember"
+            },
+            "traits": {
+                "smithy.api#documentation": "A list of 1 to 10 in-cluster inference gateways. A global inference gateway always has at least\none in-cluster inference gateway.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayNextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayRouting": {
+            "type": "structure",
+            "members": {
+                "Weights": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayRoutingWeights",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The weights that the global inference gateway applies to each routing signal when it scores the in-cluster inference gateways for a request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The routing configuration of a global inference gateway. To add or remove in-cluster inference\ngateways, use `AddInferenceGateway` and `RemoveInferenceGateway`."
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayRoutingWeight": {
+            "type": "float",
+            "traits": {
+                "smithy.api#documentation": "The relative weight of one routing signal, from 0 to 1. A weight of 0 turns the signal off. When\nyou specify `Weights`, specify all four weights. The weights must sum to 1.0, within 0.001.",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayRoutingWeights": {
+            "type": "structure",
+            "members": {
+                "KVHeadroom": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayRoutingWeight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weight of the free key-value (KV) cache capacity on the cluster.</p>"
+                    }
+                },
+                "QueueDepth": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayRoutingWeight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weight of the number of requests that are waiting on the cluster.</p>"
+                    }
+                },
+                "RegionProximity": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayRoutingWeight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weight of how close the cluster is to the caller.</p>"
+                    }
+                },
+                "ErrorRate": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayRoutingWeight",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weight of the recent error rate of the cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The relative weights of the four routing signals, each from 0 to 1. Specify all four weights or\nnone. If you specify them, they must sum to 1.0, within 0.001. If you specify none, the global\ninference gateway uses default weights."
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global inference gateway is being created. Don't send inference requests to it yet.</p>",
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global inference gateway is serving requests, and no operation is in progress.</p>",
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An update, add, or remove operation is in progress. The global inference gateway continues to serve requests.</p>",
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global inference gateway is being deleted.</p>",
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global inference gateway failed. For details, see <code>FailureReason</code>.</p>",
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The status of a global inference gateway."
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewaySummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#GlobalInferenceGatewaySummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of summaries of global inference gateways.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewaySummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the global inference gateway was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a global inference gateway.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#GlobalInferenceGatewayVpcEndpointServiceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The name of the VPC endpoint service of the global inference gateway. Use it to create an\ninterface VPC endpoint (AWS PrivateLink), for example\n`com.amazonaws.vpce.us-east-1.vpce-svc-0123456789abcdef0`.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.sagemaker#Group": {
@@ -52914,6 +54742,72 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#ListCapacityReservations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListCapacityReservationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListCapacityReservationsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the SageMaker Capacity Reservations in your account.</p> <p>An empty list is a valid response.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "CapacityReservationSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListCapacityReservationsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. If more results are available, the response includes a <code>NextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was truncated, the response includes a <code>NextToken</code> value. To retrieve the next set of results, use that token in your next request.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns only the reservations that match it. You can specify one filter. If you don't specify a filter, the response includes all reservations in your account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListCapacityReservationsResponse": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationSummaries": {
+                    "target": "com.amazonaws.sagemaker#CapacityReservationSummaries",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Summaries of the SageMaker Capacity Reservations in your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, SageMaker AI returns this token. To retrieve the next set of results, use this token in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#ListClusterEvents": {
             "type": "operation",
             "input": {
@@ -55136,6 +57030,73 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sagemaker#ListGlobalInferenceGateways": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListGlobalInferenceGatewaysRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListGlobalInferenceGatewaysResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists summaries of the global inference gateways in your account. You can filter the results by status.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "GlobalInferenceGatewaySummaries",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListGlobalInferenceGatewaysRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayFilters",
+                    "traits": {
+                        "smithy.api#documentation": "The filters to apply to the results. You can filter by `Status`. Multiple filters are combined\nwith a logical AND."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous <code>ListGlobalInferenceGateways</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of global inference gateways, use the token in the next request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of global inference gateways to return in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListGlobalInferenceGatewaysResponse": {
+            "type": "structure",
+            "members": {
+                "GlobalInferenceGatewaySummaries": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewaySummaries",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The summaries of the global inference gateways.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous <code>ListGlobalInferenceGateways</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of global inference gateways, use the token in the next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#ListHubContentVersions": {
             "type": "operation",
             "input": {
@@ -56080,6 +58041,86 @@
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to use when calling the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListInferenceGateways": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListInferenceGatewaysRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListInferenceGatewaysResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists the in-cluster inference gateways in a global inference gateway, in the order that they were\nadded. Each summary includes the status of the in-cluster inference gateway and, if the status is\n`FAILED`, the reason for the failure. `DescribeGlobalInferenceGateway` doesn't return the in-cluster\ninference gateways; use this operation to list them.",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "InferenceGatewaySummaries",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListInferenceGatewaysRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name, Amazon Resource Name (ARN), or ID of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberFilters",
+                    "traits": {
+                        "smithy.api#documentation": "The filters to apply to the results. You can filter by `Status` and `ClusterArn`. Multiple\nfilters are combined with a logical AND."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous <code>ListInferenceGateways</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of in-cluster inference gateways, use the token in the next request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of in-cluster inference gateways to return in the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListInferenceGatewaysResponse": {
+            "type": "structure",
+            "members": {
+                "InferenceGatewaySummaries": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberSummaries",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The summaries of the in-cluster inference gateways, in the order that they were added.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous <code>ListInferenceGateways</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of in-cluster inference gateways, use the token in the next request.</p>"
                     }
                 }
             },
@@ -59299,7 +61340,7 @@
                 "ManagedBy": {
                     "target": "com.amazonaws.sagemaker#PipelineManagedBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the pipelines by who manages them. Specify <code>AWS</code> to return pipelines that Amazon Web Services manages, or <code>CUSTOMER</code> to return pipelines that you created. If you don't specify a value, the response includes both.</p>"
+                        "smithy.api#documentation": "<p>Filters the pipelines by who manages them. Specify <code>AWS</code> to return pipelines that Amazon Web Services manages, or <code>CUSTOMER</code> to return pipelines that you created. If you don't specify a value, the response includes only pipelines that you created.</p>"
                     }
                 }
             },
@@ -66631,6 +68672,279 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": "^\\/"
+            }
+        },
+        "com.amazonaws.sagemaker#MoveClusterNodeIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClusterNodeId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#MoveClusterNodeLogicalIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ClusterNodeLogicalId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#MoveClusterNodeLogicalIdsError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.sagemaker#MoveClusterNodesErrorCode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The error code associated with the error encountered when moving the node. The error code is one of the following values:</p> <ul> <li> <p> <code>NodeIdNotFound</code>: The node does not exist in the source instance group.</p> </li> <li> <p> <code>InvalidNodeStatus</code>: The node is not in a state that allows the move. For example, the node is not <code>Running</code>, is not in a subnet of the target instance group, or has an attached Amazon EBS volume that you must detach first.</p> </li> <li> <p> <code>NodeIdInUse</code>: Another operation is already in progress for this node. Wait for the operation to complete before retrying.</p> </li> <li> <p> <code>NodeInstanceTypeMismatch</code>: The target instance group does not support the node's instance type.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A human-readable message describing the error encountered when moving the node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeLogicalId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeLogicalId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The <code>NodeLogicalId</code> of the node that could not be moved.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes why a node, identified by its <code>NodeLogicalId</code>, could not be moved in a <code>MoveClusterNodes</code> request. Contains the <code>NodeLogicalId</code>, an error code, and an error message.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#MoveClusterNodeLogicalIdsErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#MoveClusterNodeLogicalIdsError"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#MoveClusterNodes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#MoveClusterNodesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#MoveClusterNodesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Moves running nodes from one instance group to another instance group. The target instance group can be in the same HyperPod cluster or in a different HyperPod cluster in the same account and Region. The underlying instances aren't terminated.</p> <p>Each node keeps its instance ID, its <code>NodeLogicalId</code>, its network interfaces and IP addresses, and its capacity. The node then joins the target instance group with the target's configuration and lifecycle scripts.</p> <important> <p>The move replaces the node's root Amazon Elastic Block Store (Amazon EBS) volume and secondary EBS volume, which deletes any data stored on them. Back up any data that you need before you move the node.</p> </important> <p>Specify the nodes to move with exactly one of <code>NodeIds</code>, <code>NodeLogicalIds</code>, or <code>InstanceCount</code>. The operation is asynchronous and returns after it accepts the nodes for the move. While a node moves, its status is <code>DetachInProgress</code> and then <code>AttachInProgress</code>. The node appears in the source cluster while it detaches. After HyperPod hands the node off to the target instance group, the node appears in the target cluster. To track the node, call <code>DescribeClusterNode</code> or <code>ListClusterNodes</code> on the source or target cluster.</p> <note> <p>Both clusters must be <code>InService</code>, use Amazon EKS orchestration, and use <code>Continuous</code> as the <code>NodeProvisioningMode</code>.</p> <p>The source and target instance groups must also use compatible configurations.</p> </note>"
+            }
+        },
+        "com.amazonaws.sagemaker#MoveClusterNodesError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.sagemaker#MoveClusterNodesErrorCode",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The error code associated with the error encountered when moving the node. The error code is one of the following values:</p> <ul> <li> <p> <code>NodeIdNotFound</code>: The node does not exist in the source instance group.</p> </li> <li> <p> <code>InvalidNodeStatus</code>: The node is not in a state that allows the move. For example, the node is not <code>Running</code>, is not in a subnet of the target instance group, or has an attached Amazon EBS volume that you must detach first.</p> </li> <li> <p> <code>NodeIdInUse</code>: Another operation is already in progress for this node. Wait for the operation to complete before retrying.</p> </li> <li> <p> <code>NodeInstanceTypeMismatch</code>: The target instance group does not support the node's instance type.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A human-readable message describing the error encountered when moving the node.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NodeId": {
+                    "target": "com.amazonaws.sagemaker#ClusterNodeId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The instance ID of the node that could not be moved.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes why a node, identified by its instance ID, could not be moved in a <code>MoveClusterNodes</code> request. Contains the instance ID, an error code, and an error message.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#MoveClusterNodesErrorCode": {
+            "type": "enum",
+            "members": {
+                "NODE_ID_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NodeIdNotFound"
+                    }
+                },
+                "INVALID_NODE_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InvalidNodeStatus"
+                    }
+                },
+                "NODE_ID_IN_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NodeIdInUse"
+                    }
+                },
+                "NODE_INSTANCE_TYPE_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NodeInstanceTypeMismatch"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#MoveClusterNodesErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#MoveClusterNodesError"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#MoveClusterNodesInstanceCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#MoveClusterNodesRequest": {
+            "type": "structure",
+            "members": {
+                "SourceClusterArn": {
+                    "target": "com.amazonaws.sagemaker#ClusterArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the HyperPod cluster that the nodes are moved from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceInstanceGroupName": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceGroupName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the instance group in the source cluster that the nodes are moved from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetClusterArn": {
+                    "target": "com.amazonaws.sagemaker#ClusterArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the HyperPod cluster that the nodes are moved to. The target cluster must be in the same account and Region as the source cluster, and can be the same cluster as the source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetInstanceGroupName": {
+                    "target": "com.amazonaws.sagemaker#ClusterInstanceGroupName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the instance group in the target cluster that the nodes are moved to. If the target cluster is the same as the source cluster, the target instance group must be different from the source instance group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceCount": {
+                    "target": "com.amazonaws.sagemaker#MoveClusterNodesInstanceCount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The number of nodes to move, from 1 to 50. HyperPod selects the nodes from the source instance group. If fewer than this number of nodes are eligible to move, the request fails and no nodes are moved. Specify exactly one of <code>NodeIds</code>, <code>NodeLogicalIds</code>, or <code>InstanceCount</code>.</p>"
+                    }
+                },
+                "NodeIds": {
+                    "target": "com.amazonaws.sagemaker#MoveClusterNodeIds",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of instance IDs of the nodes to move. You can specify up to 50 instance IDs. Each node is evaluated separately, so some nodes can be moved while others fail. The request fails if moving the eligible nodes would reduce the source instance group below its minimum instance count. Specify exactly one of <code>NodeIds</code>, <code>NodeLogicalIds</code>, or <code>InstanceCount</code>.</p>"
+                    }
+                },
+                "NodeLogicalIds": {
+                    "target": "com.amazonaws.sagemaker#MoveClusterNodeLogicalIds",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A list of <code>NodeLogicalIds</code> of the nodes to move. You can specify up to 50 <code>NodeLogicalIds</code>. Each node is evaluated separately, so some nodes can be moved while others fail. The request fails if moving the eligible nodes would reduce the source instance group below its minimum instance count. Specify exactly one of <code>NodeIds</code>, <code>NodeLogicalIds</code>, or <code>InstanceCount</code>.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time. If you retry the request with the same client token and the same parameters within 8 hours, the service returns the original response. It doesn't start a new move. If you reuse a client token with different parameters, the request fails.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[\\x21-\\x7E]+$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#MoveClusterNodesResponse": {
+            "type": "structure",
+            "members": {
+                "Successful": {
+                    "target": "com.amazonaws.sagemaker#MoveClusterNodeIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This list contains the instance IDs of the nodes that were accepted for the move. The response includes this list when you specify <code>NodeIds</code> or <code>InstanceCount</code>.</p>"
+                    }
+                },
+                "Failed": {
+                    "target": "com.amazonaws.sagemaker#MoveClusterNodesErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance IDs that could not be moved, each with an error code and message. The response includes this list when you specify <code>NodeIds</code>. If none of the specified nodes can be moved, the request fails and no nodes are moved.</p>"
+                    }
+                },
+                "SuccessfulNodeLogicalIds": {
+                    "target": "com.amazonaws.sagemaker#MoveClusterNodeLogicalIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NodeLogicalIds</code> of the nodes that were accepted for the move. The response includes this list when you specify <code>NodeLogicalIds</code>.</p>"
+                    }
+                },
+                "FailedNodeLogicalIds": {
+                    "target": "com.amazonaws.sagemaker#MoveClusterNodeLogicalIdsErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>NodeLogicalIds</code> that could not be moved, each with an error code and message. The response includes this list when you specify <code>NodeLogicalIds</code>. If none of the specified nodes can be moved, the request fails and no nodes are moved.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sagemaker#MultiModelConfig": {
@@ -77140,6 +79454,113 @@
                 "smithy.api#documentation": "<p>Configuration for remote debugging for the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateTrainingJob.html\">UpdateTrainingJob</a> API. To learn more about the remote debugging functionality of SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/train-remote-debugging.html\">Access a training container through Amazon Web Services Systems Manager (SSM) for remote debugging</a>.</p>"
             }
         },
+        "com.amazonaws.sagemaker#RemoveInferenceGateway": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#RemoveInferenceGatewayRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#RemoveInferenceGatewayResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Removes an in-cluster inference gateway from a global inference gateway. This operation is\nasynchronous: the in-cluster inference gateway moves to the `REMOVING` status, and then no longer\nappears in `ListInferenceGateways`. If the in-cluster inference gateway isn't in the global\ninference gateway, the operation succeeds and returns no status. The operation returns\n`ResourceNotFound` only if the global inference gateway doesn't exist.\n\nThe operation fails with `ConflictException` while another operation is in progress on the global\ninference gateway. It fails with `ValidationException` if the in-cluster inference gateway is the\nlast one, because a global inference gateway must have at least one.",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.sagemaker#RemoveInferenceGatewayRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name, Amazon Resource Name (ARN), or ID of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayClusterArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that runs the in-cluster inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Namespace": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayKubernetesNamespace",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Kubernetes namespace of the in-cluster inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayKubernetesResourceName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the <code>InferenceGatewayConfig</code> resource that defines the in-cluster inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#RemoveInferenceGatewayResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Gateway": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMember",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The in-cluster inference gateway that you removed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayMemberStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The status of the in-cluster inference gateway in the global inference gateway. This value is\nabsent if the in-cluster inference gateway wasn't in the global inference gateway."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sagemaker#RenderUiTemplate": {
             "type": "operation",
             "input": {
@@ -79073,6 +81494,9 @@
                     "target": "com.amazonaws.sagemaker#AddAssociation"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#AddInferenceGateway"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#AddTags"
                 },
                 {
@@ -79182,6 +81606,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#CreateFlowDefinition"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#CreateGlobalInferenceGateway"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#CreateHub"
@@ -79406,6 +81833,9 @@
                     "target": "com.amazonaws.sagemaker#DeleteFlowDefinition"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#DeleteGlobalInferenceGateway"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#DeleteHub"
                 },
                 {
@@ -79556,6 +81986,9 @@
                     "target": "com.amazonaws.sagemaker#DescribeAutoMLJobV2"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#DescribeCapacityReservation"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#DescribeCluster"
                 },
                 {
@@ -79620,6 +82053,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DescribeFlowDefinition"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#DescribeGlobalInferenceGateway"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#DescribeHub"
@@ -79727,6 +82163,9 @@
                     "target": "com.amazonaws.sagemaker#DescribeReservedCapacity"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#DescribeResourceAssociations"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#DescribeSpace"
                 },
                 {
@@ -79779,6 +82218,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ExtendTrainingPlan"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#GetCapacityReservationUsage"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#GetDeviceFleetReport"
@@ -79839,6 +82281,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListCandidatesForAutoMLJob"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ListCapacityReservations"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListClusterEvents"
@@ -79907,6 +82352,9 @@
                     "target": "com.amazonaws.sagemaker#ListFlowDefinitions"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#ListGlobalInferenceGateways"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#ListHubContents"
                 },
                 {
@@ -79932,6 +82380,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListInferenceExperiments"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ListInferenceGateways"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListInferenceRecommendationsJobs"
@@ -80090,6 +82541,9 @@
                     "target": "com.amazonaws.sagemaker#ListWorkteams"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#MoveClusterNodes"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#PutEndpointPolicy"
                 },
                 {
@@ -80100,6 +82554,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#RegisterDevices"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#RemoveInferenceGateway"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#RenderUiTemplate"
@@ -80256,6 +82713,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#UpdateFeatureMetadata"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#UpdateGlobalInferenceGateway"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#UpdateHub"
@@ -81561,6 +84021,13 @@
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#SageMakerCapacityReservationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The ID of a SageMaker Capacity Reservation.</p>",
+                "smithy.api#pattern": "^smcr-[0-9a-z]{12}$"
             }
         },
         "com.amazonaws.sagemaker#SageMakerImageName": {
@@ -83220,6 +85687,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "RollbackComplete"
+                    }
+                },
+                "PARTIALLY_SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PartiallySucceeded"
                     }
                 }
             }
@@ -94337,6 +96810,97 @@
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateGlobalInferenceGateway": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#UpdateGlobalInferenceGatewayRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#UpdateGlobalInferenceGatewayResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates the routing configuration of a global inference gateway. To add or remove in-cluster\ninference gateways, use `AddInferenceGateway` and `RemoveInferenceGateway`. This operation is\nasynchronous: the global inference gateway moves to the `UPDATING` status. The operation fails with\n`ConflictException` while another operation is in progress on the global inference gateway.",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateGlobalInferenceGatewayRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name, Amazon Resource Name (ARN), or ID of the global inference gateway to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Routing": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayRouting",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The new routing configuration of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateGlobalInferenceGatewayResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayArn",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayStatus",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The status of the global inference gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Routing": {
+                    "target": "com.amazonaws.sagemaker#GlobalInferenceGatewayRouting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing configuration that you specified in the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sagemaker#UpdateHub": {

@@ -1,0 +1,7 @@
+POST /service/AWSPartnerDemandGenerator/operation/DeleteSocialConnection
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿gCatalogcAWSkClientTokeno__ClientToken__jIdentifiern__Identifier__ÿ

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeCapacityReservation
+
+{"CapacityReservation":{"AvailabilityZone":"__AvailabilityZone__","AvailabilityZoneId":"__AvailabilityZoneId__","CreationTime":946684800,"EndTime":946684800,"InstanceType":"__InstanceType__","Owner":"__Owner__","SMCapacityReservationArn":"__SMCapacityReservationArn__","SMCapacityReservationId":"__SMCapacityReservationId__","StartTime":946684800,"Status":"Scheduled","TotalInstanceCount":1}}

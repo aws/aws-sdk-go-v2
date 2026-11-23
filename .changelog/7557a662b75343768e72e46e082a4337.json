@@ -1,0 +1,8 @@
+{
+    "id": "7557a662-b753-4376-8e72-e46e082a4337",
+    "type": "bugfix",
+    "description": "Preserve the abort error alongside the original upload error when an S3 multipart upload and its cleanup both fail.",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}

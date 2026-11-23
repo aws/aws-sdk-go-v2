@@ -107,6 +107,56 @@ func (v *AliasExistsException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// This exception is thrown when Amazon Cognito doesn't have a cached client
+// metadata document for the URL in the request.
+type CachedCIMDURLDoesNotExistException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CachedCIMDURLDoesNotExistException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CachedCIMDURLDoesNotExistException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CachedCIMDURLDoesNotExistException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CachedCIMDURLDoesNotExistException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CachedCIMDURLDoesNotExistException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+func (v *CachedCIMDURLDoesNotExistException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CachedCIMDURLDoesNotExistException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CachedCIMDURLDoesNotExistException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CachedCIMDURLDoesNotExistException_message, *v.Message)
+	}
+}
+func (v *CachedCIMDURLDoesNotExistException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CachedCIMDURLDoesNotExistException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CachedCIMDURLDoesNotExistException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CachedCIMDURLDoesNotExistException_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // This exception is thrown when a verification code fails to deliver successfully.
 type CodeDeliveryFailureException struct {
 	Message *string

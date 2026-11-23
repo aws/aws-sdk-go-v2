@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"findings":[{"category":"INFRASTRUCTURE","findingId":"__FindingId__","message":"__Message__","remediation":{"action":"__Action__","documentationUrl":"__DocumentationUrl__"},"resource":"__Resource__","severity":"ERROR"},{"category":"INFRASTRUCTURE","findingId":"__FindingId__","message":"__Message__","remediation":{"action":"__Action__","documentationUrl":"__DocumentationUrl__"},"resource":"__Resource__","severity":"ERROR"}],"nextToken":"__NextToken__"}

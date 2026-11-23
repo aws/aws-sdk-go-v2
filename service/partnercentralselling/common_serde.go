@@ -10,6 +10,12 @@ import (
 
 func serializeEngagementContextPayload(s smithy.ShapeSerializer, schema *smithy.Schema, v types.EngagementContextPayload) {
 	switch vv := v.(type) {
+	case *types.EngagementContextPayloadMemberCustomerAccount:
+		s.WriteUnion(schema, schemas.EngagementContextPayload_CustomerAccount)
+		s.WriteStruct(schemas.EngagementContextPayload_CustomerAccount)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.EngagementContextPayloadMemberCustomerProject:
 		s.WriteUnion(schema, schemas.EngagementContextPayload_CustomerProject)
 		s.WriteStruct(schemas.EngagementContextPayload_CustomerProject)
@@ -31,8 +37,81 @@ func serializeEngagementContextPayload(s smithy.ShapeSerializer, schema *smithy.
 	}
 }
 
+func serializeEngagementSearchFilterValue(s smithy.ShapeSerializer, schema *smithy.Schema, v types.EngagementSearchFilterValue) {
+	switch vv := v.(type) {
+	case *types.EngagementSearchFilterValueMemberDateValue:
+		s.WriteUnion(schema, schemas.EngagementSearchFilterValue_DateValue)
+		s.WriteTime(schemas.EngagementSearchFilterValue_DateValue, vv.Value)
+		s.CloseUnion()
+	case *types.EngagementSearchFilterValueMemberLongValue:
+		s.WriteUnion(schema, schemas.EngagementSearchFilterValue_LongValue)
+		s.WriteInt64(schemas.EngagementSearchFilterValue_LongValue, vv.Value)
+		s.CloseUnion()
+	case *types.EngagementSearchFilterValueMemberStringListValue:
+		s.WriteUnion(schema, schemas.EngagementSearchFilterValue_StringListValue)
+		serializeEngagementSearchFilterValues(s, schemas.EngagementSearchFilterValue_StringListValue, vv.Value)
+		s.CloseUnion()
+	case *types.EngagementSearchFilterValueMemberStringValue:
+		s.WriteUnion(schema, schemas.EngagementSearchFilterValue_StringValue)
+		s.WriteString(schemas.EngagementSearchFilterValue_StringValue, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeFilterValue(s smithy.ShapeSerializer, schema *smithy.Schema, v types.FilterValue) {
+	switch vv := v.(type) {
+	case *types.FilterValueMemberDateValue:
+		s.WriteUnion(schema, schemas.FilterValue_DateValue)
+		s.WriteTime(schemas.FilterValue_DateValue, vv.Value)
+		s.CloseUnion()
+	case *types.FilterValueMemberLongValue:
+		s.WriteUnion(schema, schemas.FilterValue_LongValue)
+		s.WriteInt64(schemas.FilterValue_LongValue, vv.Value)
+		s.CloseUnion()
+	case *types.FilterValueMemberStringListValue:
+		s.WriteUnion(schema, schemas.FilterValue_StringListValue)
+		serializeAccountFilterStringList(s, schemas.FilterValue_StringListValue, vv.Value)
+		s.CloseUnion()
+	case *types.FilterValueMemberStringValue:
+		s.WriteUnion(schema, schemas.FilterValue_StringValue)
+		s.WriteString(schemas.FilterValue_StringValue, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeOpportunitySearchFilterValue(s smithy.ShapeSerializer, schema *smithy.Schema, v types.OpportunitySearchFilterValue) {
+	switch vv := v.(type) {
+	case *types.OpportunitySearchFilterValueMemberDateValue:
+		s.WriteUnion(schema, schemas.OpportunitySearchFilterValue_DateValue)
+		s.WriteTime(schemas.OpportunitySearchFilterValue_DateValue, vv.Value)
+		s.CloseUnion()
+	case *types.OpportunitySearchFilterValueMemberDoubleValue:
+		s.WriteUnion(schema, schemas.OpportunitySearchFilterValue_DoubleValue)
+		s.WriteFloat64(schemas.OpportunitySearchFilterValue_DoubleValue, vv.Value)
+		s.CloseUnion()
+	case *types.OpportunitySearchFilterValueMemberLongValue:
+		s.WriteUnion(schema, schemas.OpportunitySearchFilterValue_LongValue)
+		s.WriteInt64(schemas.OpportunitySearchFilterValue_LongValue, vv.Value)
+		s.CloseUnion()
+	case *types.OpportunitySearchFilterValueMemberStringListValue:
+		s.WriteUnion(schema, schemas.OpportunitySearchFilterValue_StringListValue)
+		serializeOpportunitySearchFilterValues(s, schemas.OpportunitySearchFilterValue_StringListValue, vv.Value)
+		s.CloseUnion()
+	case *types.OpportunitySearchFilterValueMemberStringValue:
+		s.WriteUnion(schema, schemas.OpportunitySearchFilterValue_StringValue)
+		s.WriteString(schemas.OpportunitySearchFilterValue_StringValue, vv.Value)
+		s.CloseUnion()
+	}
+}
+
 func serializePayload(s smithy.ShapeSerializer, schema *smithy.Schema, v types.Payload) {
 	switch vv := v.(type) {
+	case *types.PayloadMemberAccountPlanningInvitation:
+		s.WriteUnion(schema, schemas.Payload_AccountPlanningInvitation)
+		s.WriteStruct(schemas.Payload_AccountPlanningInvitation)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *types.PayloadMemberLeadInvitation:
 		s.WriteUnion(schema, schemas.Payload_LeadInvitation)
 		s.WriteStruct(schemas.Payload_LeadInvitation)
@@ -102,6 +181,10 @@ func serializeUpdateEngagementContextPayload(s smithy.ShapeSerializer, schema *s
 func deserializeEngagementContextPayload(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.EngagementContextPayload) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.EngagementContextPayload_CustomerAccount:
+			vv := &types.EngagementContextPayloadMemberCustomerAccount{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.EngagementContextPayload_CustomerProject:
 			vv := &types.EngagementContextPayloadMemberCustomerProject{}
 			*v = vv
@@ -119,9 +202,89 @@ func deserializeEngagementContextPayload(d smithy.ShapeDeserializer, s *smithy.S
 	})
 }
 
+func deserializeEngagementSearchFilterValue(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.EngagementSearchFilterValue) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.EngagementSearchFilterValue_DateValue:
+			vv := &types.EngagementSearchFilterValueMemberDateValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.EngagementSearchFilterValue_LongValue:
+			vv := &types.EngagementSearchFilterValueMemberLongValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.EngagementSearchFilterValue_StringListValue:
+			vv := &types.EngagementSearchFilterValueMemberStringListValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.EngagementSearchFilterValue_StringValue:
+			vv := &types.EngagementSearchFilterValueMemberStringValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeFilterValue(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.FilterValue) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.FilterValue_DateValue:
+			vv := &types.FilterValueMemberDateValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.FilterValue_LongValue:
+			vv := &types.FilterValueMemberLongValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.FilterValue_StringListValue:
+			vv := &types.FilterValueMemberStringListValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.FilterValue_StringValue:
+			vv := &types.FilterValueMemberStringValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeOpportunitySearchFilterValue(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.OpportunitySearchFilterValue) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.OpportunitySearchFilterValue_DateValue:
+			vv := &types.OpportunitySearchFilterValueMemberDateValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.OpportunitySearchFilterValue_DoubleValue:
+			vv := &types.OpportunitySearchFilterValueMemberDoubleValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.OpportunitySearchFilterValue_LongValue:
+			vv := &types.OpportunitySearchFilterValueMemberLongValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.OpportunitySearchFilterValue_StringListValue:
+			vv := &types.OpportunitySearchFilterValueMemberStringListValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.OpportunitySearchFilterValue_StringValue:
+			vv := &types.OpportunitySearchFilterValueMemberStringValue{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializePayload(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.Payload) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.Payload_AccountPlanningInvitation:
+			vv := &types.PayloadMemberAccountPlanningInvitation{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.Payload_LeadInvitation:
 			vv := &types.PayloadMemberLeadInvitation{}
 			*v = vv
@@ -181,6 +344,42 @@ func deserializeUpdateEngagementContextPayload(d smithy.ShapeDeserializer, s *sm
 		}
 		return nil
 	})
+}
+
+func serializeAccountFilterStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeAggregatableFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AggregatableField) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeAggregationRequestList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AggregationRequest) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAggregationResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AggregationResult) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
 }
 
 func serializeApnPrograms(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
@@ -285,6 +484,44 @@ func serializeAwsProductsList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	s.CloseList()
 }
 
+func serializeBestOutreachWindowList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BestOutreachWindow) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBucketList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Bucket) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeBucketValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeBulkJobResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BulkJobResult) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeChannels(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Channel) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -301,6 +538,36 @@ func serializeContextIdentifiers(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.CloseList()
 }
 
+func serializeCustomerAccountBulkJobSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CustomerAccountBulkJobSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCustomerAccountSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CustomerAccountSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCustomerAccountTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeCustomerContactsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Contact) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -312,6 +579,14 @@ func serializeCustomerContactsList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeDeliveryModels(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DeliveryModel) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeEligibleProgramList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -341,6 +616,24 @@ func serializeEngagementContextTypeList(s smithy.ShapeSerializer, schema *smithy
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeEngagementGroupIdentifiers(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeEngagementGroupSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EngagementGroupSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -427,6 +720,34 @@ func serializeEngagementResourceAssociationSummaryList(s smithy.ShapeSerializer,
 	s.CloseList()
 }
 
+func serializeEngagementSearchFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EngagementSearchFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeEngagementSearchFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeEngagementSearchSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EngagementSearchSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeEngagementSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EngagementSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -471,6 +792,16 @@ func serializeFilterLifeCycleStage(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializeFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Filter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeFilterStatus(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SolutionStatus) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -483,6 +814,16 @@ func serializeInvitationStatusList(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeIssueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Issue) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -537,10 +878,68 @@ func serializeNextStepsHistories(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.CloseList()
 }
 
+func serializeOpportunityBulkJobSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OpportunityBulkJobSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeOpportunityIdentifiers(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeOpportunitySearchExpectedCustomerSpendList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OpportunitySearchExpectedCustomerSpend) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeOpportunitySearchFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OpportunitySearchFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeOpportunitySearchFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeOpportunitySearchSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OpportunitySearchSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeOpportunitySearchTeamMembersList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OpportunitySearchTeamMember) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -741,6 +1140,92 @@ func serializeValidationExceptionErrorList(s smithy.ShapeSerializer, schema *smi
 		s.CloseStruct()
 	}
 	s.CloseList()
+}
+
+func deserializeAccountFilterStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAggregatableFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AggregatableField) error {
+	*v = make([]types.AggregatableField, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AggregatableField
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.AggregatableField(vv))
+		return nil
+	})
+}
+
+func deserializeAggregationRequestList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AggregationRequest) error {
+	*v = make([]types.AggregationRequest, 0)
+	var vv types.AggregationRequest
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AggregationRequest
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AggregationRequest{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAggregationResultList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AggregationResult) error {
+	*v = make([]types.AggregationResult, 0)
+	var vv types.AggregationResult
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AggregationResult
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AggregationResult{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeApnPrograms(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
@@ -998,6 +1483,93 @@ func deserializeAwsProductsList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	})
 }
 
+func deserializeBestOutreachWindowList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BestOutreachWindow) error {
+	*v = make([]types.BestOutreachWindow, 0)
+	var vv types.BestOutreachWindow
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BestOutreachWindow
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.BestOutreachWindow{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBucketList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Bucket) error {
+	*v = make([]types.Bucket, 0)
+	var vv types.Bucket
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Bucket
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.Bucket{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBucketValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeBulkJobResultList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BulkJobResult) error {
+	*v = make([]types.BulkJobResult, 0)
+	var vv types.BulkJobResult
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.BulkJobResult
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.BulkJobResult{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeChannels(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Channel) error {
 	*v = make([]types.Channel, 0)
 	var vv string
@@ -1032,6 +1604,72 @@ func deserializeContextIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema,
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCustomerAccountBulkJobSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CustomerAccountBulkJobSummary) error {
+	*v = make([]types.CustomerAccountBulkJobSummary, 0)
+	var vv types.CustomerAccountBulkJobSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CustomerAccountBulkJobSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.CustomerAccountBulkJobSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCustomerAccountSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CustomerAccountSummary) error {
+	*v = make([]types.CustomerAccountSummary, 0)
+	var vv types.CustomerAccountSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CustomerAccountSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.CustomerAccountSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCustomerAccountTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
+	var vv types.Tag
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Tag
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.Tag{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -1079,6 +1717,27 @@ func deserializeDeliveryModels(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 		}
 
 		*v = append(*v, types.DeliveryModel(vv))
+		return nil
+	})
+}
+
+func deserializeEligibleProgramList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }
@@ -1143,6 +1802,49 @@ func deserializeEngagementContextTypeList(d smithy.ShapeDeserializer, s *smithy.
 		}
 
 		*v = append(*v, types.EngagementContextType(vv))
+		return nil
+	})
+}
+
+func deserializeEngagementGroupIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEngagementGroupSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EngagementGroupSummary) error {
+	*v = make([]types.EngagementGroupSummary, 0)
+	var vv types.EngagementGroupSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EngagementGroupSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.EngagementGroupSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }
@@ -1341,6 +2043,71 @@ func deserializeEngagementResourceAssociationSummaryList(d smithy.ShapeDeseriali
 	})
 }
 
+func deserializeEngagementSearchFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EngagementSearchFilter) error {
+	*v = make([]types.EngagementSearchFilter, 0)
+	var vv types.EngagementSearchFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EngagementSearchFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.EngagementSearchFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEngagementSearchFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEngagementSearchSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EngagementSearchSummary) error {
+	*v = make([]types.EngagementSearchSummary, 0)
+	var vv types.EngagementSearchSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EngagementSearchSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.EngagementSearchSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeEngagementSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EngagementSummary) error {
 	*v = make([]types.EngagementSummary, 0)
 	var vv types.EngagementSummary
@@ -1448,6 +2215,28 @@ func deserializeFilterLifeCycleStage(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Filter) error {
+	*v = make([]types.Filter, 0)
+	var vv types.Filter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Filter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.Filter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeFilterStatus(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SolutionStatus) error {
 	*v = make([]types.SolutionStatus, 0)
 	var vv string
@@ -1486,6 +2275,28 @@ func deserializeInvitationStatusList(d smithy.ShapeDeserializer, s *smithy.Schem
 		}
 
 		*v = append(*v, types.InvitationStatus(vv))
+		return nil
+	})
+}
+
+func deserializeIssueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Issue) error {
+	*v = make([]types.Issue, 0)
+	var vv types.Issue
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.Issue
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.Issue{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }
@@ -1600,6 +2411,28 @@ func deserializeNextStepsHistories(d smithy.ShapeDeserializer, s *smithy.Schema,
 	})
 }
 
+func deserializeOpportunityBulkJobSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OpportunityBulkJobSummary) error {
+	*v = make([]types.OpportunityBulkJobSummary, 0)
+	var vv types.OpportunityBulkJobSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OpportunityBulkJobSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.OpportunityBulkJobSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeOpportunityIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -1613,6 +2446,115 @@ func deserializeOpportunityIdentifiers(d smithy.ShapeDeserializer, s *smithy.Sch
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOpportunitySearchExpectedCustomerSpendList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OpportunitySearchExpectedCustomerSpend) error {
+	*v = make([]types.OpportunitySearchExpectedCustomerSpend, 0)
+	var vv types.OpportunitySearchExpectedCustomerSpend
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OpportunitySearchExpectedCustomerSpend
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.OpportunitySearchExpectedCustomerSpend{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOpportunitySearchFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OpportunitySearchFilter) error {
+	*v = make([]types.OpportunitySearchFilter, 0)
+	var vv types.OpportunitySearchFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OpportunitySearchFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.OpportunitySearchFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOpportunitySearchFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOpportunitySearchSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OpportunitySearchSummary) error {
+	*v = make([]types.OpportunitySearchSummary, 0)
+	var vv types.OpportunitySearchSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OpportunitySearchSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.OpportunitySearchSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOpportunitySearchTeamMembersList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OpportunitySearchTeamMember) error {
+	*v = make([]types.OpportunitySearchTeamMember, 0)
+	var vv types.OpportunitySearchTeamMember
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OpportunitySearchTeamMember
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.OpportunitySearchTeamMember{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

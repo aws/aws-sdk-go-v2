@@ -98,6 +98,18 @@ func TestCheckSnapshot_DeleteAutomationRule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteOrganizationEnrollmentConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteOrganizationEnrollmentConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteOrganizationEnrollmentConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateAccounts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateAccounts(context.Background(), nil, func(o *Options) {
@@ -230,6 +242,30 @@ func TestCheckSnapshot_ListAutomationRules(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListOrganizationalUnits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOrganizationalUnits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListOrganizationalUnits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListOrganizationEnrollmentConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOrganizationEnrollmentConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListOrganizationEnrollmentConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListRecommendedActions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRecommendedActions(context.Background(), nil, func(o *Options) {
@@ -259,6 +295,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutOrganizationEnrollmentConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutOrganizationEnrollmentConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutOrganizationEnrollmentConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -366,6 +414,18 @@ func TestUpdateSnapshot_DeleteAutomationRule(t *testing.T) {
 	_, err := svc.DeleteAutomationRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteAutomationRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteOrganizationEnrollmentConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteOrganizationEnrollmentConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteOrganizationEnrollmentConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -505,6 +565,30 @@ func TestUpdateSnapshot_ListAutomationRules(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListOrganizationalUnits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOrganizationalUnits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListOrganizationalUnits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListOrganizationEnrollmentConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOrganizationEnrollmentConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListOrganizationEnrollmentConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListRecommendedActions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListRecommendedActions(context.Background(), nil, func(o *Options) {
@@ -534,6 +618,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutOrganizationEnrollmentConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutOrganizationEnrollmentConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutOrganizationEnrollmentConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

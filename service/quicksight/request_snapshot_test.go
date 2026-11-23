@@ -3860,6 +3860,38 @@ func TestCheckRequestSnapshot_BatchDeleteKnowledgeBase(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_BatchDeletePolicyAssignmentByPolicy(t *testing.T) {
+	input := &BatchDeletePolicyAssignmentByPolicyInput{
+		AccountId: ptr.String("__AccountId__"),
+		PolicyArn: ptr.String("__PolicyArn__"),
+		PrincipalArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchDeletePolicyAssignmentByPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDeletePolicyAssignmentByPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
 	input := &BatchDeleteTopicReviewedAnswerInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -3933,6 +3965,46 @@ func TestCheckRequestSnapshot_BatchDescribeUserLimits(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_BatchPutPolicyAssignmentByPolicy(t *testing.T) {
+	input := &BatchPutPolicyAssignmentByPolicyInput{
+		AccountId: ptr.String("__AccountId__"),
+		PolicyArn: ptr.String("__PolicyArn__"),
+		Assignments: []types.PutAssignmentEntry{
+			{
+				PrincipalArn:      ptr.String("__PrincipalArn__"),
+				ExistingPolicyArn: ptr.String("__ExistingPolicyArn__"),
+				Revision:          ptr.Int64(1),
+			},
+			{
+				PrincipalArn:      ptr.String("__PrincipalArn__"),
+				ExistingPolicyArn: ptr.String("__ExistingPolicyArn__"),
+				Revision:          ptr.Int64(1),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchPutPolicyAssignmentByPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchPutPolicyAssignmentByPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CancelIngestion(t *testing.T) {
 	input := &CancelIngestionInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -3958,6 +4030,110 @@ func TestCheckRequestSnapshot_CancelIngestion(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelIngestion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateAccessControlApplication(t *testing.T) {
+	input := &CreateAccessControlApplicationInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		ApplicationId:      ptr.String("__ApplicationId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Namespace:          ptr.String("__Namespace__"),
+		AuthenticationType: types.AccessControlApplicationAuthenticationType("OIDC"),
+		IdpAuthorizingConfiguration: &types.IdpAuthorizingConfigInput{
+			IdpAuthorizingType: types.IdpAuthorizingType("EXTERNAL_IDP_PUBLIC_AUTH_CODE"),
+			IdpAuthorizingConfigurationDetailInput: &types.IdpAuthorizingConfigurationDetailInputMemberExternalIdpPublicAuthCode{
+				Value: types.ExternalIdpPublicAuthCodeAuthorizingConfig{
+					ClientId:  ptr.String("__ClientId__"),
+					IssuerUrl: ptr.String("__IssuerUrl__"),
+				},
+			},
+			IdcTrustedTokenIssuerConfiguration: &types.IdcTrustedTokenIssuerConfig{
+				IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+			},
+		},
+		QuickAuthenticationConfiguration: &types.QuickAuthenticationConfigInput{
+			QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+			QuickAuthenticationConfigurationDetailInput: &types.QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode{
+				Value: types.QuickManagedAuthCodeQuickAuthenticationConfigInput{
+					RedirectUris: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAccessControlApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAccessControlApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateAccessControlApplicationSecret(t *testing.T) {
+	input := &CreateAccessControlApplicationSecretInput{
+		AwsAccountId:  ptr.String("__AwsAccountId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Description:   ptr.String("__Description__"),
+		ClientSecretConfiguration: &types.ClientSecretConfiguration{
+			ClientSecretSourceType: types.ClientSecretSourceType("IDP_PROVIDED"),
+			ClientSecretConfigurationDetail: &types.ClientSecretConfigurationDetailMemberIdp{
+				Value: types.IdpClientSecretInput{
+					RegionalSecretManagerArns: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAccessControlApplicationSecret(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAccessControlApplicationSecret"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6936,6 +7112,9 @@ func TestCheckRequestSnapshot_CreateCustomPermissions(t *testing.T) {
 			CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
 			ShareMCPAction:                             types.CapabilityState("DENY"),
 			UseMCPAction:                               types.CapabilityState("DENY"),
+			LocalMCPAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateLocalMCPAction:              types.CapabilityState("DENY"),
+			UseLocalMCPAction:                          types.CapabilityState("DENY"),
 			OpenAPIAction:                              types.CapabilityState("DENY"),
 			CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
 			ShareOpenAPIAction:                         types.CapabilityState("DENY"),
@@ -10771,6 +10950,22 @@ func TestCheckRequestSnapshot_CreateDataSet(t *testing.T) {
 				},
 			},
 		},
+		UnmaterializedCalculatedColumns: []types.UnmaterializedCalculatedColumn{
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -11207,6 +11402,49 @@ func TestCheckRequestSnapshot_CreateIAMPolicyAssignment(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateInboundConnector(t *testing.T) {
+	input := &CreateInboundConnectorInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		InboundConnectorConfiguration: &types.InboundConnectorConfig{
+			InboundConnectorType: types.InboundConnectorType("QUICK_DESKTOP"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateInboundConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateInboundConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateIngestion(t *testing.T) {
 	input := &CreateIngestionInput{
 		DataSetId:     ptr.String("__DataSetId__"),
@@ -11311,6 +11549,44 @@ func TestCheckRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateKnowledgeBase"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateKnowledgeBaseRefreshSchedule(t *testing.T) {
+	input := &CreateKnowledgeBaseRefreshScheduleInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ScheduleId:      ptr.String("__ScheduleId__"),
+		ScheduleFrequency: &types.KnowledgeBaseRefreshFrequency{
+			Interval: types.KbRefreshInterval("DAILY"),
+			RefreshOnDay: &types.KnowledgeBaseScheduleRefreshOnEntity{
+				DayOfWeek:  types.KbDayOfWeek("SUNDAY"),
+				DayOfMonth: ptr.String("__DayOfMonth__"),
+			},
+		},
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		State:     types.ScheduleState("ENABLED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateKnowledgeBaseRefreshSchedule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateKnowledgeBaseRefreshSchedule"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -15776,6 +16052,64 @@ func TestCheckRequestSnapshot_CreateVPCConnection(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteAccessControlApplication(t *testing.T) {
+	input := &DeleteAccessControlApplicationInput{
+		AwsAccountId:      ptr.String("__AwsAccountId__"),
+		ApplicationId:     ptr.String("__ApplicationId__"),
+		IdcApplicationArn: ptr.String("__IdcApplicationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAccessControlApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAccessControlApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteAccessControlApplicationSecret(t *testing.T) {
+	input := &DeleteAccessControlApplicationSecretInput{
+		AwsAccountId:   ptr.String("__AwsAccountId__"),
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		ClientSecretId: ptr.String("__ClientSecretId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAccessControlApplicationSecret(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAccessControlApplicationSecret"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteAccountCustomization(t *testing.T) {
 	input := &DeleteAccountCustomizationInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -16453,6 +16787,34 @@ func TestCheckRequestSnapshot_DeleteIdentityPropagationConfig(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteInboundConnector(t *testing.T) {
+	input := &DeleteInboundConnectorInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteInboundConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteInboundConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	input := &DeleteKnowledgeBaseInput{
 		AwsAccountId:    ptr.String("__AwsAccountId__"),
@@ -16477,6 +16839,35 @@ func TestCheckRequestSnapshot_DeleteKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteKnowledgeBase"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteKnowledgeBaseRefreshSchedule(t *testing.T) {
+	input := &DeleteKnowledgeBaseRefreshScheduleInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ScheduleId:      ptr.String("__ScheduleId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteKnowledgeBaseRefreshSchedule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteKnowledgeBaseRefreshSchedule"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -16561,6 +16952,36 @@ func TestCheckRequestSnapshot_DeleteOAuthClientApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteOAuthClientApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeletePolicyAssignment(t *testing.T) {
+	input := &DeletePolicyAssignmentInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PolicyArn:    ptr.String("__PolicyArn__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		Revision:     ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeletePolicyAssignment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePolicyAssignment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -16993,6 +17414,34 @@ func TestCheckRequestSnapshot_DeleteVPCConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteVPCConnection"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeAccessControlApplication(t *testing.T) {
+	input := &DescribeAccessControlApplicationInput{
+		AwsAccountId:  ptr.String("__AwsAccountId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAccessControlApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAccessControlApplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -18162,6 +18611,34 @@ func TestCheckRequestSnapshot_DescribeIAMPolicyAssignment(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeInboundConnector(t *testing.T) {
+	input := &DescribeInboundConnectorInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeInboundConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeInboundConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeIngestion(t *testing.T) {
 	input := &DescribeIngestionInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -18298,6 +18775,35 @@ func TestCheckRequestSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeKnowledgeBasePermissions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeKnowledgeBaseRefreshSchedule(t *testing.T) {
+	input := &DescribeKnowledgeBaseRefreshScheduleInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ScheduleId:      ptr.String("__ScheduleId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeKnowledgeBaseRefreshSchedule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeKnowledgeBaseRefreshSchedule"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -19480,6 +19986,35 @@ func TestCheckRequestSnapshot_GetIdentityContext(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetPolicyAssignment(t *testing.T) {
+	input := &GetPolicyAssignmentInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PolicyType:   types.PolicyType("LIMITS_PROFILE"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetPolicyAssignment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicyAssignment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetSessionEmbedUrl(t *testing.T) {
 	input := &GetSessionEmbedUrlInput{
 		AwsAccountId:             ptr.String("__AwsAccountId__"),
@@ -19506,6 +20041,36 @@ func TestCheckRequestSnapshot_GetSessionEmbedUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSessionEmbedUrl"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListAccessControlApplications(t *testing.T) {
+	input := &ListAccessControlApplicationsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		Namespace:    ptr.String("__Namespace__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAccessControlApplications(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAccessControlApplications"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -20186,6 +20751,69 @@ func TestCheckRequestSnapshot_ListIdentityPropagationConfigs(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListInboundConnectorApplicationAssociations(t *testing.T) {
+	input := &ListInboundConnectorApplicationAssociationsInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListInboundConnectorApplicationAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInboundConnectorApplicationAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListInboundConnectors(t *testing.T) {
+	input := &ListInboundConnectorsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		Type: []types.InboundConnectorType{
+			types.InboundConnectorType("QUICK_DESKTOP"),
+			types.InboundConnectorType("QUICK_DESKTOP"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListInboundConnectors(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInboundConnectors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListIngestions(t *testing.T) {
 	input := &ListIngestionsInput{
 		DataSetId:    ptr.String("__DataSetId__"),
@@ -20212,6 +20840,36 @@ func TestCheckRequestSnapshot_ListIngestions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIngestions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListKnowledgeBaseRefreshSchedules(t *testing.T) {
+	input := &ListKnowledgeBaseRefreshSchedulesInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListKnowledgeBaseRefreshSchedules(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListKnowledgeBaseRefreshSchedules"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -20329,6 +20987,37 @@ func TestCheckRequestSnapshot_ListOAuthClientApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOAuthClientApplications"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListPrincipalsForPolicy(t *testing.T) {
+	input := &ListPrincipalsForPolicyInput{
+		AccountId:     ptr.String("__AccountId__"),
+		PolicyArn:     ptr.String("__PolicyArn__"),
+		PrincipalType: types.PrincipalType("USER"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPrincipalsForPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPrincipalsForPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -21004,6 +21693,37 @@ func TestCheckRequestSnapshot_PutDataSetRefreshProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutDataSetRefreshProperties"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutPolicyAssignment(t *testing.T) {
+	input := &PutPolicyAssignmentInput{
+		AccountId:         ptr.String("__AccountId__"),
+		PolicyArn:         ptr.String("__PolicyArn__"),
+		PrincipalArn:      ptr.String("__PrincipalArn__"),
+		ExistingPolicyArn: ptr.String("__ExistingPolicyArn__"),
+		Revision:          ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutPolicyAssignment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutPolicyAssignment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -22983,6 +23703,96 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateAccessControlApplication(t *testing.T) {
+	input := &UpdateAccessControlApplicationInput{
+		AwsAccountId:  ptr.String("__AwsAccountId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		IdpAuthorizingConfiguration: &types.IdpAuthorizingConfigUpdateInput{
+			IdpAuthorizingType: types.IdpAuthorizingType("EXTERNAL_IDP_PUBLIC_AUTH_CODE"),
+			IdpAuthorizingConfigurationDetailInput: &types.IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpPublicAuthCode{
+				Value: types.ExternalIdpPublicAuthCodeAuthorizingConfig{
+					ClientId:  ptr.String("__ClientId__"),
+					IssuerUrl: ptr.String("__IssuerUrl__"),
+				},
+			},
+			IdcTrustedTokenIssuerConfiguration: &types.IdcTrustedTokenIssuerConfig{
+				IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+			},
+		},
+		QuickAuthenticationConfiguration: &types.QuickAuthenticationConfigInput{
+			QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+			QuickAuthenticationConfigurationDetailInput: &types.QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode{
+				Value: types.QuickManagedAuthCodeQuickAuthenticationConfigInput{
+					RedirectUris: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Status: types.AccessControlApplicationStatus("ENABLED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAccessControlApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAccessControlApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateAccessControlApplicationSecret(t *testing.T) {
+	input := &UpdateAccessControlApplicationSecretInput{
+		AwsAccountId:   ptr.String("__AwsAccountId__"),
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		ClientSecretId: ptr.String("__ClientSecretId__"),
+		UpdateRegionalSecretManagerArns: map[string]string{
+			"key0": "__Value__",
+		},
+		RemoveRegionalSecretManagerArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAccessControlApplicationSecret(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAccessControlApplicationSecret"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -26212,6 +27022,9 @@ func TestCheckRequestSnapshot_UpdateCustomPermissions(t *testing.T) {
 			CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
 			ShareMCPAction:                             types.CapabilityState("DENY"),
 			UseMCPAction:                               types.CapabilityState("DENY"),
+			LocalMCPAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateLocalMCPAction:              types.CapabilityState("DENY"),
+			UseLocalMCPAction:                          types.CapabilityState("DENY"),
 			OpenAPIAction:                              types.CapabilityState("DENY"),
 			CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
 			ShareOpenAPIAction:                         types.CapabilityState("DENY"),
@@ -30152,6 +30965,22 @@ func TestCheckRequestSnapshot_UpdateDataSet(t *testing.T) {
 				},
 			},
 		},
+		UnmaterializedCalculatedColumns: []types.UnmaterializedCalculatedColumn{
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -30744,6 +31573,76 @@ func TestCheckRequestSnapshot_UpdateIdentityPropagationConfig(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateInboundConnector(t *testing.T) {
+	input := &UpdateInboundConnectorInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		InboundConnectorConfiguration: &types.InboundConnectorConfig{
+			InboundConnectorType: types.InboundConnectorType("QUICK_DESKTOP"),
+		},
+		InboundConnectorStatus: types.InboundConnectorStatus("ENABLED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateInboundConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateInboundConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateInboundConnectorApplicationAssociations(t *testing.T) {
+	input := &UpdateInboundConnectorApplicationAssociationsInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+		AssociateAccessControlApplications: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DisassociateAccessControlApplications: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateInboundConnectorApplicationAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateInboundConnectorApplicationAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateIpRestriction(t *testing.T) {
 	input := &UpdateIpRestrictionInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -30925,6 +31824,44 @@ func TestCheckRequestSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateKnowledgeBasePermissions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateKnowledgeBaseRefreshSchedule(t *testing.T) {
+	input := &UpdateKnowledgeBaseRefreshScheduleInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ScheduleId:      ptr.String("__ScheduleId__"),
+		ScheduleFrequency: &types.KnowledgeBaseRefreshFrequency{
+			Interval: types.KbRefreshInterval("DAILY"),
+			RefreshOnDay: &types.KnowledgeBaseScheduleRefreshOnEntity{
+				DayOfWeek:  types.KbDayOfWeek("SUNDAY"),
+				DayOfMonth: ptr.String("__DayOfMonth__"),
+			},
+		},
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		State:     types.ScheduleState("ENABLED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateKnowledgeBaseRefreshSchedule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateKnowledgeBaseRefreshSchedule"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -39524,6 +40461,38 @@ func TestUpdateRequestSnapshot_BatchDeleteKnowledgeBase(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_BatchDeletePolicyAssignmentByPolicy(t *testing.T) {
+	input := &BatchDeletePolicyAssignmentByPolicyInput{
+		AccountId: ptr.String("__AccountId__"),
+		PolicyArn: ptr.String("__PolicyArn__"),
+		PrincipalArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchDeletePolicyAssignmentByPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchDeletePolicyAssignmentByPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
 	input := &BatchDeleteTopicReviewedAnswerInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -39597,6 +40566,46 @@ func TestUpdateRequestSnapshot_BatchDescribeUserLimits(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_BatchPutPolicyAssignmentByPolicy(t *testing.T) {
+	input := &BatchPutPolicyAssignmentByPolicyInput{
+		AccountId: ptr.String("__AccountId__"),
+		PolicyArn: ptr.String("__PolicyArn__"),
+		Assignments: []types.PutAssignmentEntry{
+			{
+				PrincipalArn:      ptr.String("__PrincipalArn__"),
+				ExistingPolicyArn: ptr.String("__ExistingPolicyArn__"),
+				Revision:          ptr.Int64(1),
+			},
+			{
+				PrincipalArn:      ptr.String("__PrincipalArn__"),
+				ExistingPolicyArn: ptr.String("__ExistingPolicyArn__"),
+				Revision:          ptr.Int64(1),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.BatchPutPolicyAssignmentByPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "BatchPutPolicyAssignmentByPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CancelIngestion(t *testing.T) {
 	input := &CancelIngestionInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -39622,6 +40631,110 @@ func TestUpdateRequestSnapshot_CancelIngestion(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelIngestion"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateAccessControlApplication(t *testing.T) {
+	input := &CreateAccessControlApplicationInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		ApplicationId:      ptr.String("__ApplicationId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Namespace:          ptr.String("__Namespace__"),
+		AuthenticationType: types.AccessControlApplicationAuthenticationType("OIDC"),
+		IdpAuthorizingConfiguration: &types.IdpAuthorizingConfigInput{
+			IdpAuthorizingType: types.IdpAuthorizingType("EXTERNAL_IDP_PUBLIC_AUTH_CODE"),
+			IdpAuthorizingConfigurationDetailInput: &types.IdpAuthorizingConfigurationDetailInputMemberExternalIdpPublicAuthCode{
+				Value: types.ExternalIdpPublicAuthCodeAuthorizingConfig{
+					ClientId:  ptr.String("__ClientId__"),
+					IssuerUrl: ptr.String("__IssuerUrl__"),
+				},
+			},
+			IdcTrustedTokenIssuerConfiguration: &types.IdcTrustedTokenIssuerConfig{
+				IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+			},
+		},
+		QuickAuthenticationConfiguration: &types.QuickAuthenticationConfigInput{
+			QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+			QuickAuthenticationConfigurationDetailInput: &types.QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode{
+				Value: types.QuickManagedAuthCodeQuickAuthenticationConfigInput{
+					RedirectUris: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAccessControlApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAccessControlApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateAccessControlApplicationSecret(t *testing.T) {
+	input := &CreateAccessControlApplicationSecretInput{
+		AwsAccountId:  ptr.String("__AwsAccountId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Description:   ptr.String("__Description__"),
+		ClientSecretConfiguration: &types.ClientSecretConfiguration{
+			ClientSecretSourceType: types.ClientSecretSourceType("IDP_PROVIDED"),
+			ClientSecretConfigurationDetail: &types.ClientSecretConfigurationDetailMemberIdp{
+				Value: types.IdpClientSecretInput{
+					RegionalSecretManagerArns: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateAccessControlApplicationSecret(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateAccessControlApplicationSecret"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -42600,6 +43713,9 @@ func TestUpdateRequestSnapshot_CreateCustomPermissions(t *testing.T) {
 			CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
 			ShareMCPAction:                             types.CapabilityState("DENY"),
 			UseMCPAction:                               types.CapabilityState("DENY"),
+			LocalMCPAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateLocalMCPAction:              types.CapabilityState("DENY"),
+			UseLocalMCPAction:                          types.CapabilityState("DENY"),
 			OpenAPIAction:                              types.CapabilityState("DENY"),
 			CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
 			ShareOpenAPIAction:                         types.CapabilityState("DENY"),
@@ -46435,6 +47551,22 @@ func TestUpdateRequestSnapshot_CreateDataSet(t *testing.T) {
 				},
 			},
 		},
+		UnmaterializedCalculatedColumns: []types.UnmaterializedCalculatedColumn{
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -46871,6 +48003,49 @@ func TestUpdateRequestSnapshot_CreateIAMPolicyAssignment(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateInboundConnector(t *testing.T) {
+	input := &CreateInboundConnectorInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		InboundConnectorConfiguration: &types.InboundConnectorConfig{
+			InboundConnectorType: types.InboundConnectorType("QUICK_DESKTOP"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateInboundConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateInboundConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateIngestion(t *testing.T) {
 	input := &CreateIngestionInput{
 		DataSetId:     ptr.String("__DataSetId__"),
@@ -46975,6 +48150,44 @@ func TestUpdateRequestSnapshot_CreateKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateKnowledgeBase"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateKnowledgeBaseRefreshSchedule(t *testing.T) {
+	input := &CreateKnowledgeBaseRefreshScheduleInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ScheduleId:      ptr.String("__ScheduleId__"),
+		ScheduleFrequency: &types.KnowledgeBaseRefreshFrequency{
+			Interval: types.KbRefreshInterval("DAILY"),
+			RefreshOnDay: &types.KnowledgeBaseScheduleRefreshOnEntity{
+				DayOfWeek:  types.KbDayOfWeek("SUNDAY"),
+				DayOfMonth: ptr.String("__DayOfMonth__"),
+			},
+		},
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		State:     types.ScheduleState("ENABLED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateKnowledgeBaseRefreshSchedule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateKnowledgeBaseRefreshSchedule"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -51440,6 +52653,64 @@ func TestUpdateRequestSnapshot_CreateVPCConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteAccessControlApplication(t *testing.T) {
+	input := &DeleteAccessControlApplicationInput{
+		AwsAccountId:      ptr.String("__AwsAccountId__"),
+		ApplicationId:     ptr.String("__ApplicationId__"),
+		IdcApplicationArn: ptr.String("__IdcApplicationArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAccessControlApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAccessControlApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteAccessControlApplicationSecret(t *testing.T) {
+	input := &DeleteAccessControlApplicationSecretInput{
+		AwsAccountId:   ptr.String("__AwsAccountId__"),
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		ClientSecretId: ptr.String("__ClientSecretId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAccessControlApplicationSecret(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAccessControlApplicationSecret"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteAccountCustomization(t *testing.T) {
 	input := &DeleteAccountCustomizationInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -52117,6 +53388,34 @@ func TestUpdateRequestSnapshot_DeleteIdentityPropagationConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteInboundConnector(t *testing.T) {
+	input := &DeleteInboundConnectorInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteInboundConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteInboundConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	input := &DeleteKnowledgeBaseInput{
 		AwsAccountId:    ptr.String("__AwsAccountId__"),
@@ -52141,6 +53440,35 @@ func TestUpdateRequestSnapshot_DeleteKnowledgeBase(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteKnowledgeBase"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteKnowledgeBaseRefreshSchedule(t *testing.T) {
+	input := &DeleteKnowledgeBaseRefreshScheduleInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ScheduleId:      ptr.String("__ScheduleId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteKnowledgeBaseRefreshSchedule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteKnowledgeBaseRefreshSchedule"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -52225,6 +53553,36 @@ func TestUpdateRequestSnapshot_DeleteOAuthClientApplication(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteOAuthClientApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeletePolicyAssignment(t *testing.T) {
+	input := &DeletePolicyAssignmentInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PolicyArn:    ptr.String("__PolicyArn__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		Revision:     ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeletePolicyAssignment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeletePolicyAssignment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -52657,6 +54015,34 @@ func TestUpdateRequestSnapshot_DeleteVPCConnection(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteVPCConnection"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeAccessControlApplication(t *testing.T) {
+	input := &DescribeAccessControlApplicationInput{
+		AwsAccountId:  ptr.String("__AwsAccountId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAccessControlApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAccessControlApplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -53826,6 +55212,34 @@ func TestUpdateRequestSnapshot_DescribeIAMPolicyAssignment(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeInboundConnector(t *testing.T) {
+	input := &DescribeInboundConnectorInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeInboundConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeInboundConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeIngestion(t *testing.T) {
 	input := &DescribeIngestionInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -53962,6 +55376,35 @@ func TestUpdateRequestSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeKnowledgeBasePermissions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeKnowledgeBaseRefreshSchedule(t *testing.T) {
+	input := &DescribeKnowledgeBaseRefreshScheduleInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ScheduleId:      ptr.String("__ScheduleId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeKnowledgeBaseRefreshSchedule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeKnowledgeBaseRefreshSchedule"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -55144,6 +56587,35 @@ func TestUpdateRequestSnapshot_GetIdentityContext(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetPolicyAssignment(t *testing.T) {
+	input := &GetPolicyAssignmentInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PolicyType:   types.PolicyType("LIMITS_PROFILE"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetPolicyAssignment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetPolicyAssignment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetSessionEmbedUrl(t *testing.T) {
 	input := &GetSessionEmbedUrlInput{
 		AwsAccountId:             ptr.String("__AwsAccountId__"),
@@ -55170,6 +56642,36 @@ func TestUpdateRequestSnapshot_GetSessionEmbedUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSessionEmbedUrl"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListAccessControlApplications(t *testing.T) {
+	input := &ListAccessControlApplicationsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		Namespace:    ptr.String("__Namespace__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAccessControlApplications(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAccessControlApplications"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -55850,6 +57352,69 @@ func TestUpdateRequestSnapshot_ListIdentityPropagationConfigs(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListInboundConnectorApplicationAssociations(t *testing.T) {
+	input := &ListInboundConnectorApplicationAssociationsInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListInboundConnectorApplicationAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInboundConnectorApplicationAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListInboundConnectors(t *testing.T) {
+	input := &ListInboundConnectorsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		Type: []types.InboundConnectorType{
+			types.InboundConnectorType("QUICK_DESKTOP"),
+			types.InboundConnectorType("QUICK_DESKTOP"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListInboundConnectors(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListInboundConnectors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListIngestions(t *testing.T) {
 	input := &ListIngestionsInput{
 		DataSetId:    ptr.String("__DataSetId__"),
@@ -55876,6 +57441,36 @@ func TestUpdateRequestSnapshot_ListIngestions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIngestions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListKnowledgeBaseRefreshSchedules(t *testing.T) {
+	input := &ListKnowledgeBaseRefreshSchedulesInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListKnowledgeBaseRefreshSchedules(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListKnowledgeBaseRefreshSchedules"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -55993,6 +57588,37 @@ func TestUpdateRequestSnapshot_ListOAuthClientApplications(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOAuthClientApplications"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListPrincipalsForPolicy(t *testing.T) {
+	input := &ListPrincipalsForPolicyInput{
+		AccountId:     ptr.String("__AccountId__"),
+		PolicyArn:     ptr.String("__PolicyArn__"),
+		PrincipalType: types.PrincipalType("USER"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPrincipalsForPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPrincipalsForPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -56668,6 +58294,37 @@ func TestUpdateRequestSnapshot_PutDataSetRefreshProperties(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutDataSetRefreshProperties"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutPolicyAssignment(t *testing.T) {
+	input := &PutPolicyAssignmentInput{
+		AccountId:         ptr.String("__AccountId__"),
+		PolicyArn:         ptr.String("__PolicyArn__"),
+		PrincipalArn:      ptr.String("__PrincipalArn__"),
+		ExistingPolicyArn: ptr.String("__ExistingPolicyArn__"),
+		Revision:          ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutPolicyAssignment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutPolicyAssignment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -58647,6 +60304,96 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UntagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateAccessControlApplication(t *testing.T) {
+	input := &UpdateAccessControlApplicationInput{
+		AwsAccountId:  ptr.String("__AwsAccountId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		IdpAuthorizingConfiguration: &types.IdpAuthorizingConfigUpdateInput{
+			IdpAuthorizingType: types.IdpAuthorizingType("EXTERNAL_IDP_PUBLIC_AUTH_CODE"),
+			IdpAuthorizingConfigurationDetailInput: &types.IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpPublicAuthCode{
+				Value: types.ExternalIdpPublicAuthCodeAuthorizingConfig{
+					ClientId:  ptr.String("__ClientId__"),
+					IssuerUrl: ptr.String("__IssuerUrl__"),
+				},
+			},
+			IdcTrustedTokenIssuerConfiguration: &types.IdcTrustedTokenIssuerConfig{
+				IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+			},
+		},
+		QuickAuthenticationConfiguration: &types.QuickAuthenticationConfigInput{
+			QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+			QuickAuthenticationConfigurationDetailInput: &types.QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode{
+				Value: types.QuickManagedAuthCodeQuickAuthenticationConfigInput{
+					RedirectUris: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Status: types.AccessControlApplicationStatus("ENABLED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAccessControlApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAccessControlApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateAccessControlApplicationSecret(t *testing.T) {
+	input := &UpdateAccessControlApplicationSecretInput{
+		AwsAccountId:   ptr.String("__AwsAccountId__"),
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		ClientSecretId: ptr.String("__ClientSecretId__"),
+		UpdateRegionalSecretManagerArns: map[string]string{
+			"key0": "__Value__",
+		},
+		RemoveRegionalSecretManagerArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateAccessControlApplicationSecret(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAccessControlApplicationSecret"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -61876,6 +63623,9 @@ func TestUpdateRequestSnapshot_UpdateCustomPermissions(t *testing.T) {
 			CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
 			ShareMCPAction:                             types.CapabilityState("DENY"),
 			UseMCPAction:                               types.CapabilityState("DENY"),
+			LocalMCPAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateLocalMCPAction:              types.CapabilityState("DENY"),
+			UseLocalMCPAction:                          types.CapabilityState("DENY"),
 			OpenAPIAction:                              types.CapabilityState("DENY"),
 			CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
 			ShareOpenAPIAction:                         types.CapabilityState("DENY"),
@@ -65816,6 +67566,22 @@ func TestUpdateRequestSnapshot_UpdateDataSet(t *testing.T) {
 				},
 			},
 		},
+		UnmaterializedCalculatedColumns: []types.UnmaterializedCalculatedColumn{
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -66408,6 +68174,76 @@ func TestUpdateRequestSnapshot_UpdateIdentityPropagationConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateInboundConnector(t *testing.T) {
+	input := &UpdateInboundConnectorInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		InboundConnectorConfiguration: &types.InboundConnectorConfig{
+			InboundConnectorType: types.InboundConnectorType("QUICK_DESKTOP"),
+		},
+		InboundConnectorStatus: types.InboundConnectorStatus("ENABLED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateInboundConnector(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateInboundConnector"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateInboundConnectorApplicationAssociations(t *testing.T) {
+	input := &UpdateInboundConnectorApplicationAssociationsInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+		AssociateAccessControlApplications: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DisassociateAccessControlApplications: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateInboundConnectorApplicationAssociations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateInboundConnectorApplicationAssociations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateIpRestriction(t *testing.T) {
 	input := &UpdateIpRestrictionInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -66589,6 +68425,44 @@ func TestUpdateRequestSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateKnowledgeBasePermissions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateKnowledgeBaseRefreshSchedule(t *testing.T) {
+	input := &UpdateKnowledgeBaseRefreshScheduleInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ScheduleId:      ptr.String("__ScheduleId__"),
+		ScheduleFrequency: &types.KnowledgeBaseRefreshFrequency{
+			Interval: types.KbRefreshInterval("DAILY"),
+			RefreshOnDay: &types.KnowledgeBaseScheduleRefreshOnEntity{
+				DayOfWeek:  types.KbDayOfWeek("SUNDAY"),
+				DayOfMonth: ptr.String("__DayOfMonth__"),
+			},
+		},
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		State:     types.ScheduleState("ENABLED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateKnowledgeBaseRefreshSchedule(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateKnowledgeBaseRefreshSchedule"); err != nil {
 		t.Fatal(err)
 	}
 }

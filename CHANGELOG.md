@@ -1,3 +1,236 @@
+# Release (2026-11-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.78.0](service/cloudfront/CHANGELOG.md#v1780-2026-11-23)
+  * **Feature**: Launch CloudFront in AWS European Sovereign Cloud.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore`: [v1.23.0](service/cloudfrontkeyvaluestore/CHANGELOG.md#v1230-2026-11-23)
+  * **Feature**: This release adds support for KVSHQ API in the AWS European Sovereign Cloud. Requests for key value stores in the aws-eusc partition are now routed to account-based endpoints under cloudfront-kvs.global.api.amazonwebservices.eu.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchomni`: [v1.5.0](service/cloudwatchomni/CHANGELOG.md#v150-2026-11-23)
+  * **Feature**: Release of the new integration type in CreateIntegration API - Used to add Microsoft Azure resources to the Amazon CloudWatch Omni context graph through an AWS Config connector for your Azure tenant.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.76.0](service/fsx/CHANGELOG.md#v1760-2026-11-23)
+  * **Feature**: Adds support for new FSx for NetApp ONTAP resources
+
+# Release (2026-11-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.140.0](service/quicksight/CHANGELOG.md#v11400-2026-11-21)
+  * **Feature**: Quicksight public SDK release for November 20
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.293.0](service/sagemaker/CHANGELOG.md#v12930-2026-11-21)
+  * **Feature**: Amazon SageMaker AI adds APIs to view capacity reservations and their usage.
+
+# Release (2026-11-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/agentdiscovery`: [v1.0.0](service/agentdiscovery/CHANGELOG.md#v100-2026-11-20)
+  * **Release**: New AWS service client module
+  * **Feature**: Adds the SearchPublicRecords API, which searches public registry records for AI agents, tools, and skills that their publishers have made discoverable.
+* `github.com/aws/aws-sdk-go-v2/service/agentregistry`: [v1.9.0](service/agentregistry/CHANGELOG.md#v190-2026-11-20)
+  * **Feature**: Adds support for the WEBBOT registry record type
+* `github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol`: [v1.11.0](service/agentregistrycontrol/CHANGELOG.md#v1110-2026-11-20)
+  * **Feature**: Adds APIs to create publishers, verify that a publisher owns a domain, and associate registry records with a publisher. Publishers can approve or reject each association.
+* `github.com/aws/aws-sdk-go-v2/service/apiportal`: [v1.0.0](service/apiportal/CHANGELOG.md#v100-2026-11-20)
+  * **Release**: New AWS service client module
+  * **Feature**: Adds support for API Portal, a new Amazon API Gateway feature that discovers the APIs running behind API Gateway, Application Load Balancer, and CloudFront across an AWS Organization, evaluates their security posture, and publishes documentation portals for them.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.71.0](service/backup/CHANGELOG.md#v1710-2026-11-20)
+  * **Feature**: This release adds ResourceTypeOptInIncremental to the UpdateRegionSettings request and the DescribeRegionSettings response, so customers can opt in to or out of incremental backups. It currently applies only to Amazon DynamoDB table backups.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.75.0](service/bedrock/CHANGELOG.md#v1750-2026-11-20)
+  * **Feature**: Amazon Bedrock adds APIs to manage projects, discover and apply to Trusted Access Programs, manage enrollments, and configure data retention storage for accounts, organizations, and projects. Model and inference profile discovery now supports project context.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.84.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1840-2026-11-20)
+  * **Feature**: Adds responseInterceptionMode and responseStreamingConfiguration to gateway interceptor configurations. Set responseInterceptionMode to STREAM to have the response interceptor process streaming responses from HTTP and inference targets in batches of events.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.64.0](service/bedrockruntime/CHANGELOG.md#v1640-2026-11-20)
+  * **Feature**: Amazon Bedrock Runtime adds an optional projectIdentifier parameter to InvokeModel, InvokeModelWithResponseStream, Converse, and ConverseStream, allowing requests to specify a project by ID or ARN.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.77.0](service/cloudfront/CHANGELOG.md#v1770-2026-11-20)
+  * **Feature**: Amazon CloudFront now supports HTTP2 connections to custom and VPC origins, so you can multiplex many requests over fewer origin connections, including WebSocket connections to HTTP2 origins that support extended CONNECT.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation`: [v1.12.0](service/computeoptimizerautomation/CHANGELOG.md#v1120-2026-11-20)
+  * **Feature**: Adds organization enrollment configurations, which enable Automation and set the organization rule mode for the organization root, organizational units (OUs), and accounts. Organization rules can include and exclude OUs, and recommended actions and automation events can be filtered by OU.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.85.0](service/datazone/CHANGELOG.md#v1850-2026-11-20)
+  * **Feature**: Amazon DataZone now supports detaching a project from its project profile via UpdateProject, specifying the environment blueprint ID in environment configuration user parameters, and transferring asset ownership from a source project to a target project via UpdateAssetOwner.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.54.0](service/devicefarm/CHANGELOG.md#v1540-2026-11-20)
+  * **Feature**: Add support for the use of virtual devices on Device Farm.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.350.0](service/ec2/CHANGELOG.md#v13500-2026-11-20)
+  * **Feature**: This release adds documentation for the T9g instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs, adds the disable-complete state for IPAM routing policy registrations, and adds Network Firewall automated Internet firewall API changes.
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.17.0](service/elementalinference/CHANGELOG.md#v1170-2026-11-20)
+  * **Feature**: Adds Arabic (ara) as a supported language for subtitling transcription and custom vocabulary dictionaries.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.75.0](service/fsx/CHANGELOG.md#v1750-2026-11-20)
+  * **Feature**: Adds support for FSx for NetApp ONTAP 3rd Generation file systems and API operations for new FSx for NetApp ONTAP resources
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.177.0](service/glue/CHANGELOG.md#v11770-2026-11-20)
+  * **Feature**: Minor updates to the Glue Business Context APIs
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.65.0](service/inspector2/CHANGELOG.md#v1650-2026-11-20)
+  * **Feature**: This release adds runtimeReachability, runtimeReachabilityReason, and purl fields to vulnerable packages in the finding model. It also adds runtimeReachability, runtimeReachabilityReason and purlQualifier package filters for listing findings, suppression rules, and findings reports.
+* `github.com/aws/aws-sdk-go-v2/service/lambdamicrovms`: [v1.13.0](service/lambdamicrovms/CHANGELOG.md#v1130-2026-11-20)
+  * **Feature**: AWS Lambda MicroVMs now supports customer managed keys (CMK) in AWS Key Management Service (AWS KMS), enabling you to encrypt Lambda MicroVM data at rest using keys you control.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacediscovery`: [v1.14.0](service/marketplacediscovery/CHANGELOG.md#v1140-2026-11-20)
+  * **Feature**: AWS Marketplace Discovery adds ListListingAttributes, an API for trust center, case study, and specialization details. SearchListings adds summaries, seller engagements and filters. GetListing and GetProduct return purchase indicators when products cannot be subscribed to or require no subscription.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.109.0](service/mediaconvert/CHANGELOG.md#v11090-2026-11-20)
+  * **Feature**: This release adds support for the DTS-X and DTS audio codecs, AV1 encoding improvements including Fast decode, GOP size in seconds, and temporal adaptive quantization, and Dynamic Multiview for H.264 and H.265 outputs.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.117.0](service/medialive/CHANGELOG.md#v11170-2026-11-20)
+  * **Feature**: AWS Elemental MediaLive now supports converting captions from non-embedded sources, such as Teletext and Smart Subtitles, into CEA-608 and CEA-708 embedded captions, and supports WebVTT subtitle renditions from HLS inputs as a caption source.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.82.0](service/networkfirewall/CHANGELOG.md#v1820-2026-11-20)
+  * **Feature**: Adds read-only support for internet gateway firewalls, which are created and managed by AWS Network Security Manager. Adds FirewallType to firewall operations and IgwFirewallConfiguration to Firewall.
+* `github.com/aws/aws-sdk-go-v2/service/networksecuritymanager`: [v1.1.0](service/networksecuritymanager/CHANGELOG.md#v110-2026-11-20)
+  * **Feature**: Adds support for Network Firewall automated internet firewall to Network Security Manager
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.35.0](service/observabilityadmin/CHANGELOG.md#v1350-2026-11-20)
+  * **Feature**: Enablement for Network Firewall and Omni Events via Observability Admin Telemetry Rule for account and organization level
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.29.0](service/odb/CHANGELOG.md#v1290-2026-11-20)
+  * **Feature**: Adds the ListAutonomousDatabaseRefreshableClones and StartAutonomousDatabaseRefresh APIs for listing and refreshing refreshable clones of Autonomous Database Serverless.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.60.0](service/omics/CHANGELOG.md#v1600-2026-11-20)
+  * **Feature**: Adds the parametersUri field to StartRun, which lets you provide run parameters in a JSON file in Amazon S3 instead of inline. GetRun returns parametersUri for runs started this way.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralchannel`: [v1.12.0](service/partnercentralchannel/CHANGELOG.md#v1120-2026-11-20)
+  * **Feature**: Adds MSP program relationships support in AWS Partner Central. Partners can now create, update, list, and delete MSP relationships using the new MSP program type on the CreateProgramManagementAccount, CreateRelationship, UpdateRelationship, and ListRelationships operations.
+* `github.com/aws/aws-sdk-go-v2/service/payments`: [v1.0.0](service/payments/CHANGELOG.md#v100-2026-11-20)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of AWS Payments API, which lets you view your account balance, invoices, credit memos, and payment instruments.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.35.0](service/pcs/CHANGELOG.md#v1350-2026-11-20)
+  * **Feature**: Added support for Instance Health Checks in AWS PCS.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.73.0](service/route53/CHANGELOG.md#v1730-2026-11-20)
+  * **Feature**: Amazon Route 53 support for advanced hosted zones. Including change guardrails, public dns fallback, change history. Also support for AZAffinityRouting.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.292.0](service/sagemaker/CHANGELOG.md#v12920-2026-11-20)
+  * **Feature**: Adds HyperPod Global Inference Gateway APIs to route inference across HyperPod clusters in multiple Regions. Adds the MoveClusterNodes API, which moves running nodes between instance groups, within a cluster or between clusters in the same region, account and subnet, without releasing the instances.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakergatewayruntime`: [v1.0.0](service/sagemakergatewayruntime/CHANGELOG.md#v100-2026-11-20)
+  * **Release**: New AWS service client module
+  * **Feature**: Adds the InvokeGlobalInferenceGateway and InvokeGlobalInferenceGatewayWithResponseStream APIs for sending inference requests to a SageMaker HyperPod Global Inference Gateway.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.84.0](service/ssm/CHANGELOG.md#v1840-2026-11-20)
+  * **Feature**: This release adds a CloudProviders field to SSM documents. Specify the cloud providers (AWS, Azure, GCP) a document can run on in CreateDocument and UpdateDocument, view it in DescribeDocument, ListDocuments and ListDocumentVersions, and filter ListDocuments by cloud provider.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.30.0](service/taxsettings/CHANGELOG.md#v1300-2026-11-20)
+  * **Feature**: Adds support for Norway, New Zealand and United Arab Emirates additional tax information, and the Vietnam VAT credit method and 20-digit payment voucher number.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.51.0](service/textract/CHANGELOG.md#v1510-2026-11-20)
+  * **Feature**: Amazon Textract Insights uses generative AI to split, classify, and extract data from documents with one asynchronous API. Get text, layout, and tables as Markdown, HTML, or CSV, plus summaries and figure captions, and extract the fields you define in a blueprint with confidence scores and locations
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.68.0](service/transcribe/CHANGELOG.md#v1680-2026-11-20)
+  * **Feature**: This release adds the TranscribeAudio API for synchronous transcription. Send a media file inline or from Amazon S3 and receive the transcript in the same response, with support for speaker, channel identification, language identification, custom vocabularies, vocabulary filters, and PII redaction.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.87.0](service/wafv2/CHANGELOG.md#v1870-2026-11-20)
+  * **Feature**: This release adds AI Security AMR configuration and five read-only APIs for AWS WAF API Security events. Use ListEvents and ListEventsByWebACL to list events, GetEvent to get event details including the timeline, and ListEventActors and GetEventActor to view the clients attributed to events
+
+# Release (2026-11-19)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.52.0](service/acm/CHANGELOG.md#v1520-2026-11-19)
+  * **Feature**: AWS Certificate Manager now supports the ability to issue certificates from the Amazon N2 certificate authorities (CAs), an Amazon-operated CA hierarchy.
+* `github.com/aws/aws-sdk-go-v2/service/agentregistry`: [v1.8.0](service/agentregistry/CHANGELOG.md#v180-2026-11-19)
+  * **Feature**: BatchGetDiscoverableRegistryRecord returns a short-lived download URL and SHA-256 checksum for approved skill packages. SearchDiscoverableRegistryRecords adds searchType (KEYWORD, SEMANTIC, HYBRID) and pagination. Adds bearer token authentication for registries that use JWT authorization.
+* `github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol`: [v1.10.0](service/agentregistrycontrol/CHANGELOG.md#v1100-2026-11-19)
+  * **Feature**: Adds skill packages and skill source sync for agent skill records. Upload a skill package (ZIP) or sync SKILL.md or the full package from Amazon S3 or GitHub. GetRegistryRecord returns a short-lived download URL and SHA-256 checksum. GitHub sources use OAuth 2.0 user authorization.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.76.0](service/appstream/CHANGELOG.md#v1760-2026-11-19)
+  * **Feature**: Enable stack-level WebAuthn redirection to relay passkey and security-key authentication from a WorkSpaces Applications streaming session to the user's local device.
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.22.0](service/bcmpricingcalculator/CHANGELOG.md#v1220-2026-11-19)
+  * **Feature**: Adding new API, GetUsageLinesEstimatedCost which can be used to estimate the cost of usage lines.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.60.0](service/bedrockagentcore/CHANGELOG.md#v1600-2026-11-19)
+  * **Feature**: Adds the AWS Billing x402 payment type to ProcessPayment. Agents can purchase x402-enabled AWS Marketplace products and have the charges billed to the AWS account, without a wallet. Requests use the service-managed payment instrument ID aws.agentcorepayments.awsbilling.v1.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.83.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1830-2026-11-19)
+  * **Feature**: Adds AWS Billing payments to ProcessPayment. Agents can pay x402 sellers that accept AWS Marketplace billing, and the charge goes on the buyer's AWS bill. Adds support for nested virtualization in Runtime Instances. When you turn on nested virtualization, Runtime launches instances with KVM enabled.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.86.0](service/cloudformation/CHANGELOG.md#v1860-2026-11-19)
+  * **Feature**: Adds parameters to support custom execution roles for service-managed stack sets to CreateStackSet, UpdateStackSet, and DescribeStackSet, enabling the use of Macros, Transforms, and Nested Stacks.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.76.0](service/cloudfront/CHANGELOG.md#v1760-2026-11-19)
+  * **Feature**: Amazon CloudFront adds configuration for SNI-less clients on Anycast static IPs, introduces Anycast IP based domain routing for Distribution Tenants, provides automatic domain ownership validation when creating or updating Distribution Tenants, and enables HTTP traffic via DNS validation.
+* `github.com/aws/aws-sdk-go-v2/service/codeconnections`: [v1.22.0](service/codeconnections/CHANGELOG.md#v1220-2026-11-19)
+  * **Feature**: AWS CodeConnections now supports GitHub Enterprise Cloud with data residency (GHEC-DR) via the new GitHubEnterpriseCloudDataResidency provider type and ProviderEndpoint parameter in CreateConnection. This release also tightens connection ARN validation to enforce the expected ARN format.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.80.0](service/cognitoidentityprovider/CHANGELOG.md#v1800-2026-11-19)
+  * **Feature**: Adds support for storing user pool app client secrets in AWS Secrets Manager and adds support OAuth Client ID Metadata Document (CIMD) which lets a client use an HTTPS URL as its client ID instead of registering in advance.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.219.0](service/connect/CHANGELOG.md#v12190-2026-11-19)
+  * **Feature**: Amazon Connect adds voicemail support, with new reference types, file use case types, contact details, and a voicemail task contact subtype for managing voicemail recordings and transcripts.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.54.0](service/connectcases/CHANGELOG.md#v1540-2026-11-19)
+  * **Feature**: This release adds support for SLAs that track any single-select field, including custom fields, and for updating the target duration of an SLA with the UpdateRelatedItem API.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.75.0](service/costexplorer/CHANGELOG.md#v1750-2026-11-19)
+  * **Feature**: This release adds five standardized cost metrics to the Cost Explorer API BilledCost, ListCost, ContractedCost, PublicEquivalentBilledCost and PublicOnDemandCost. Use these metrics with GetCostAndUsage and GetCostAndUsageWithResources. The metrics return values for usage from November 2026 onwards.
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.25.0](service/devopsagent/CHANGELOG.md#v1250-2026-11-19)
+  * **Feature**: AWS DevOps Agent adds AWS Organizations support so that agent spaces can monitor member accounts across an organizational unit.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.65.0](service/elasticloadbalancingv2/CHANGELOG.md#v1650-2026-11-19)
+  * **Feature**: Network Load Balancer now supports mutual TLS (mTLS), letting you authenticate client certificates before granting access. You can configure a trust store of certificate authorities on your Network Load Balancer, which will then verify the client certificate on each inbound connection.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridgev2`: [v1.1.0](service/eventbridgev2/CHANGELOG.md#v110-2026-11-19)
+  * **Feature**: This release adds Webhook event sources, which receive events from third-party providers over HTTPS and authenticate them with a static token, HTTP Basic authentication, or an HMAC signature, and Amazon MSK subscribers, which deliver events to a topic in an Amazon MSK and MSK Serverless cluster.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.68.0](service/iam/CHANGELOG.md#v1680-2026-11-19)
+  * **Feature**: This release adds API support for configuring trusted identity propagation for IAM SAML and OpenIDConnect providers.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.64.0](service/inspector2/CHANGELOG.md#v1640-2026-11-19)
+  * **Feature**: Amazon Inspector Code Security now supports GitHub Enterprise Server integrations. For GitHub Enterprise Server and GitLab Self-Managed, you can connect over a private network by adding a VPC configuration when you create an integration.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.66.0](service/kafka/CHANGELOG.md#v1660-2026-11-19)
+  * **Feature**: Amazon MSK now supports in-place migration of provisioned clusters from Standard to Express brokers. This release adds APIs to assess a cluster before migration and to reassign topics, and returns broker type upgrade details in cluster operations.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.59.0](service/lakeformation/CHANGELOG.md#v1590-2026-11-19)
+  * **Feature**: Adds Status and StatusReason to RLSPolicy in GetRLSPolicy and ListRLSPolicies, indicating whether a row-level security policy is valid or references a deleted lookup table or user-defined function
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.118.0](service/lambda/CHANGELOG.md#v11180-2026-11-19)
+  * **Feature**: Increase function timeout limit to 30 minutes for Lambda Event Functions.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.55.0](service/marketplacecatalog/CHANGELOG.md#v1550-2026-11-19)
+  * **Feature**: AI Listing Experience that provides listing quality, content and feature recommendations through ListAssessments and DescribeAssessment APIs. Adds a new API StartAssessment to trigger Seller testing for Metering and Entitlement integration for products.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacedeployment`: [v1.21.0](service/marketplacedeployment/CHANGELOG.md#v1210-2026-11-19)
+  * **Feature**: Add support for deployment configurations for Data as a Service products in AWS Marketplace
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.116.0](service/medialive/CHANGELOG.md#v11160-2026-11-19)
+  * **Feature**: This feature adds a new codec "JPEGXS" to the Input Specification Codec field. It adds a new "MAX 500 MBPS" maximum bitrate to the maximum bitrate Input Specification field. These input spec changes are used to enable TR-07 inputs and are also tied to metering of JPEGXS inputs.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralmarketing`: [v1.0.0](service/partnercentralmarketing/CHANGELOG.md#v100-2026-11-19)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of AWS Partner Central Marketing, which AWS Partners use to create co-branded marketing campaigns from AWS-authored templates, tailor and activate their emails, landing pages, documents and social posts, and export campaign assets.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralrevenuemeasurement`: [v1.7.0](service/partnercentralrevenuemeasurement/CHANGELOG.md#v170-2026-11-19)
+  * **Feature**: Marketplace revenue shares are now identified by a marketplace revenue share ID. Adds the UpdateMarketplaceRevenueShare API, optional grouping of AWS Marketplace products that run on the same backend AWS infrastructure, and context attributes for revenue attributions.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.31.0](service/partnercentralselling/CHANGELOG.md#v1310-2026-11-19)
+  * **Feature**: Adds the Leads APIs (SearchEngagements, ListEngagementGroups), customer account APIs with statistics and bulk jobs, SearchOpportunities, opportunity bulk jobs, account planning invitations, co-sell motion reason on AWS opportunity summaries, and channel recommendations on lead insights.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.34.0](service/pcs/CHANGELOG.md#v1340-2026-11-19)
+  * **Feature**: Added support for Job Submit Plugins in AWS PCS.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.69.0](service/polly/CHANGELOG.md#v1690-2026-11-19)
+  * **Feature**: Adds voice cloning to Amazon Polly. The new CreateVoice, GetVoice and DeleteVoice operations create and manage a custom voice from a speaker's recording, usable with the generative engine in all synthesis operations.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.134.0](service/rds/CHANGELOG.md#v11340-2026-11-19)
+  * **Feature**: Adds the PrimaryEndpoint structure to DBInstance. It returns the connection endpoint for the current primary instance, so no need to reconnect to a different DNS name after the switchover. Create Aurora clusters with express configuration in a VPC, and move clusters into, out of, or between VPCs.
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.35.0](service/rolesanywhere/CHANGELOG.md#v1350-2026-11-19)
+  * **Feature**: Adds the tipConfiguration field to profiles to turn on trusted identity propagation, which adds the identity from an X.509 certificate to sessions as origin identity condition keys.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.72.0](service/route53/CHANGELOG.md#v1720-2026-11-19)
+  * **Feature**: Route 53 Private Endpoint Health Checks support
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.55.0](service/route53resolver/CHANGELOG.md#v1550-2026-11-19)
+  * **Feature**: Route 53 Resolver DNS Firewall adds the AutoAllowlist firewall rule type, which observes the domains your VPCs resolve and allows the ones you approve, and the ListFirewallRuleDomains API.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.18.0](service/rtbfabric/CHANGELOG.md#v1180-2026-11-19)
+  * **Feature**: AWS RTB Fabric now lets you discover modules and attach them to your links. Find modules and their versions with ListAvailableModules, GetAvailableModule, ListAvailableModuleVersions and GetAvailableModuleVersion, attach them with PutLinkFlows and track each change with GetUpdate and ListUpdates.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.27.0](service/s3tables/CHANGELOG.md#v1270-2026-11-19)
+  * **Feature**: Adds support for disassociating replica tables in S3 Tables replication with the new DisassociateTableReplication API, which promotes a read-only replica table to a standalone table.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.31.0](service/securityagent/CHANGELOG.md#v1310-2026-11-19)
+  * **Feature**: This release exposes additional per-job metadata within code remediation tasks.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.53.0](service/sts/CHANGELOG.md#v1530-2026-11-19)
+  * **Feature**: AWS STS adds GetScopedCredentials and expands Trusted Identity Propagation (TIP) to IAM federation and IAM Roles Anywhere. GetScopedCredentials reduces an existing session's permissions and duration. TIP carries verified user or workload identity for authorization and CloudTrail auditing.
+
+# Release (2026-11-18)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/abusesignal`: [v1.0.0](service/abusesignal/CHANGELOG.md#v100-2026-11-18)
+  * **Release**: New AWS service client module
+  * **Feature**: This release introduces the AWS Abuse Signal API, enabling customers to programmatically submit and track AWS abuse reports.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.82.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1820-2026-11-18)
+  * **Feature**: Adds s3BucketMount to mount an Amazon S3 bucket as a file system in AgentCore Runtime, with an optional per-session key prefix and adds operatingSystemConfiguration with a Linux privilegeMode (STANDARD or PRIVILEGED) to the capacity provider configuration
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.51.0](service/braket/CHANGELOG.md#v1510-2026-11-18)
+  * **Feature**: Supporting a new PAUSED device status and a DeviceStatusReason.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.61.0](service/cleanrooms/CHANGELOG.md#v1610-2026-11-18)
+  * **Feature**: Adds support for populating intermediate tables with results from PySpark analysis templates.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.85.0](service/cloudformation/CHANGELOG.md#v1850-2026-11-18)
+  * **Feature**: AWS CloudFormation StackSets now provides stage-by-stage progress for deployments that span thousands of accounts and AWS Regions, which enables you to see where each deployment stands while it runs
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.79.0](service/cognitoidentityprovider/CHANGELOG.md#v1790-2026-11-18)
+  * **Feature**: Add support for restoring user pool's user data to point in time.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.64.1](service/elasticloadbalancingv2/CHANGELOG.md#v1641-2026-11-18)
+  * **Documentation**: This release adds support for the keyExchange field in CloudTrail tlsDetails, enabling customers to distinguish classical from post-quantum hybrid key exchange for TLS connections on Application Load Balancers.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.52.0](service/health/CHANGELOG.md#v1520-2026-11-18)
+  * **Feature**: Adds resource tags functionality to the AWS Health service
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.67.0](service/iam/CHANGELOG.md#v1670-2026-11-18)
+  * **Feature**: Adds MaxSignInSessionDuration to IAM Roles and Login Profiles, allowing customers to configure the maximum Console sign-in session duration per principal. Affects CreateRole, UpdateRole, GetRole and LoginProfile APIs.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.58.0](service/kinesis/CHANGELOG.md#v1580-2026-11-18)
+  * **Feature**: Treat Kinesis ReceiveQueueRecords and ReceiveDeadLetterQueueRecords as long-polling operations, so they back off when the retry quota is exhausted.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.55.0](service/neptune/CHANGELOG.md#v1550-2026-11-18)
+  * **Feature**: Neptune Database Serverless support for graviton3 based r8g instances.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehubv2`: [v1.14.0](service/resiliencehubv2/CHANGELOG.md#v1140-2026-11-18)
+  * **Feature**: This release includes support for adding new field for the effective policy used in test runs and documentation updates.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.116.0](service/s3/CHANGELOG.md#v11160-2026-11-18)
+  * **Feature**: Adds exclusions and Multi-Region key resolution to S3 Replication. Rule filters support a Not element to exclude prefixes and object tags. Destination EncryptionConfiguration supports UseSourceMultiRegionKey to encrypt replicas with the related replica KMS multi-Region key in the destination Region.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.30.0](service/securityagent/CHANGELOG.md#v1300-2026-11-18)
+  * **Feature**: This release adds support for resuming a paused penetration test job from its last saved checkpoint.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.80.0](service/sesv2/CHANGELOG.md#v1800-2026-11-18)
+  * **Feature**: This release adds support for Spillover Routing in Amazon SES.
+* `github.com/aws/aws-sdk-go-v2/service/signin`: [v1.14.0](service/signin/CHANGELOG.md#v1140-2026-11-18)
+  * **Feature**: These APIs enable customers and administrators to list, view, and revoke AWS Sign-In Sessions programmatically using the AWS CLI and SDKs, providing greater visibility and control over authenticated access.
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.43.0](service/support/CHANGELOG.md#v1430-2026-11-18)
+  * **Feature**: Updated endpoint resolution for AWS Support, including FIPS and dual-stack endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.86.0](service/wafv2/CHANGELOG.md#v1860-2026-11-18)
+  * **Feature**: Adds the AnalyticsConfig parameter to CreateWebACL and UpdateWebACL to enable or disable cross-Region security analytics for a WebACL. When you enable security analytics, you authorize AWS to transfer and store full request logs outside the AWS Region where the WebACL is hosted.
+
 # Release (2026-11-17)
 
 ## General Highlights

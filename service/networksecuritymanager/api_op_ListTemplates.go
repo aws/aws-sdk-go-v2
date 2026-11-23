@@ -43,6 +43,13 @@ type ListTemplatesInput struct {
 	// Filters the results by status, either ACTIVE or DRAFT .
 	Status types.EntityStatusFilter
 
+	// Specifies which templates to list. The default is CUSTOMER . Valid values:
+	//
+	//   - CUSTOMER – Lists the templates in your account.
+	//
+	//   - AWS – Lists the AWS managed templates.
+	TemplateOwner types.TemplateOwner
+
 	noSmithyDocumentSerde
 }
 
@@ -61,6 +68,9 @@ func (v *ListTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.ListTemplatesInput_status, string(v.Status))
+	}
+	if v.TemplateOwner != "" {
+		s.WriteString(schemas.ListTemplatesInput_templateOwner, string(v.TemplateOwner))
 	}
 }
 

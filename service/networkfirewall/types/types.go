@@ -107,6 +107,50 @@ func (v *Address) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The public IP addresses that an internet gateway firewall uses for network
+// address translation in one Availability Zone. Resources that don't have a public
+// IP address reach the internet through these addresses. Network Firewall manages
+// the addresses for you: it allocates them in your account and adds or removes
+// addresses automatically based on traffic.
+type AddressTranslations struct {
+
+	// The public IPv4 addresses that the internet gateway firewall uses for network
+	// address translation in this Availability Zone.
+	PublicIPv4Addresses []string
+
+	// The public IPv6 addresses that the internet gateway firewall uses for network
+	// address translation in this Availability Zone.
+	PublicIPv6Addresses []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AddressTranslations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddressTranslations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddressTranslations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PublicIPv4Addresses != nil {
+		serializePublicIPv4Addresses(s, schemas.AddressTranslations_PublicIPv4Addresses, v.PublicIPv4Addresses)
+	}
+	if v.PublicIPv6Addresses != nil {
+		serializePublicIPv6Addresses(s, schemas.AddressTranslations_PublicIPv6Addresses, v.PublicIPv6Addresses)
+	}
+}
+func (v *AddressTranslations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddressTranslations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddressTranslations_PublicIPv4Addresses:
+			return deserializePublicIPv4Addresses(d, schemas.AddressTranslations_PublicIPv4Addresses, &v.PublicIPv4Addresses)
+		case schemas.AddressTranslations_PublicIPv6Addresses:
+			return deserializePublicIPv6Addresses(d, schemas.AddressTranslations_PublicIPv6Addresses, &v.PublicIPv6Addresses)
+		}
+		return nil
+	})
+}
+
 // A report that captures key activity from the last 30 days of network traffic
 // monitored by your firewall.
 //
@@ -382,6 +426,10 @@ type Attachment struct {
 	//
 	// When this value is READY , the endpoint is available to handle network traffic.
 	// Otherwise, this value reflects its state, for example CREATING or DELETING .
+	//
+	// For an internet gateway firewall, STANDBY indicates an Availability Zone that
+	// has no resources yet. Network Firewall provisions the endpoint there when the
+	// first resource is launched in that Availability Zone.
 	Status AttachmentStatus
 
 	// If Network Firewall fails to create or delete the firewall endpoint in the
@@ -1595,6 +1643,12 @@ type Firewall struct {
 	// firewall, the operation initializes this setting to TRUE .
 	FirewallPolicyChangeProtection bool
 
+	// Contains the settings that configure an internet gateway firewall, which Amazon
+	// Web Services Network Security Manager creates and manages for a VPC. Network
+	// Firewall returns this setting only for an internet gateway firewall. For a
+	// standard firewall, this setting isn't present.
+	IgwFirewallConfiguration *IgwFirewallConfiguration
+
 	// The NAT gateways that you specified for Network Firewall to create for a proxy
 	// mode firewall. To get the IDs and status of the NAT gateways that are attached
 	// to the firewall, see NatGatewayAttachments in the firewall's SyncStates .
@@ -1685,6 +1739,11 @@ func (v *Firewall) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallPolicyChangeProtection != false {
 		s.WriteBool(schemas.Firewall_FirewallPolicyChangeProtection, v.FirewallPolicyChangeProtection)
 	}
+	if v.IgwFirewallConfiguration != nil {
+		s.WriteStruct(schemas.Firewall_IgwFirewallConfiguration)
+		v.IgwFirewallConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.NatGatewayCreateMappings != nil {
 		serializeNatGatewayCreateMappingsList(s, schemas.Firewall_NatGatewayCreateMappings, v.NatGatewayCreateMappings)
 	}
@@ -1760,6 +1819,9 @@ func (v *Firewall) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.Firewall_FirewallPolicyArn, v.FirewallPolicyArn)
 		case schemas.Firewall_FirewallPolicyChangeProtection:
 			return d.ReadBool(schemas.Firewall_FirewallPolicyChangeProtection, &v.FirewallPolicyChangeProtection)
+		case schemas.Firewall_IgwFirewallConfiguration:
+			v.IgwFirewallConfiguration = &IgwFirewallConfiguration{}
+			return v.IgwFirewallConfiguration.Deserialize(d)
 		case schemas.Firewall_NatGatewayCreateMappings:
 			return deserializeNatGatewayCreateMappingsList(d, schemas.Firewall_NatGatewayCreateMappings, &v.NatGatewayCreateMappings)
 		case schemas.Firewall_NumberOfAssociations:
@@ -3162,6 +3224,11 @@ type FirewallStatus struct {
 	// only when the ConfigurationSyncStateSummary value is IN_SYNC and the Attachment
 	// Status values for all of the configured subnets are READY .
 	//
+	// For an internet gateway firewall, this setting is STANDBY while no Availability
+	// Zone in the VPC has resources that need the firewall. Network Firewall
+	// provisions the firewall in an Availability Zone when the first resource is
+	// launched there.
+	//
 	// This member is required.
 	Status FirewallStatusValue
 
@@ -3791,6 +3858,51 @@ func (v *Hits) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.Hits_Count:
 			return d.ReadInt32(schemas.Hits_Count, &v.Count)
+		}
+		return nil
+	})
+}
+
+// Contains the settings that configure an internet gateway firewall. An internet
+// gateway firewall inspects all traffic between your VPC and its internet gateway,
+// without changes to your subnets or route tables. You can describe and list
+// internet gateway firewalls in Network Firewall, but you can't create, modify, or
+// delete them directly, because Amazon Web Services Network Security Manager
+// creates and manages them on your behalf.
+type IgwFirewallConfiguration struct {
+
+	// How the internet gateway firewall enforces its rules. The only supported value
+	// is POLICY_CONTROLLED , which means that the enforcement mode is set by the
+	// firewall policy that Amazon Web Services Network Security Manager associates
+	// with the firewall.
+	//
+	// This member is required.
+	EnforcementMode EnforcementMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *IgwFirewallConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IgwFirewallConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IgwFirewallConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnforcementMode != "" {
+		s.WriteString(schemas.IgwFirewallConfiguration_EnforcementMode, string(v.EnforcementMode))
+	}
+}
+func (v *IgwFirewallConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IgwFirewallConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IgwFirewallConfiguration_EnforcementMode:
+			var ev string
+			if err := d.ReadString(schemas.IgwFirewallConfiguration_EnforcementMode, &ev); err != nil {
+				return err
+			}
+			v.EnforcementMode = EnforcementMode(ev)
+			return nil
 		}
 		return nil
 	})
@@ -6922,6 +7034,12 @@ func (v *SummaryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 // or not ready status until the changes are complete.
 type SyncState struct {
 
+	// The public IP addresses that an internet gateway firewall uses for network
+	// address translation in this Availability Zone. Network Firewall allocates these
+	// addresses in your account and adds or removes addresses automatically based on
+	// traffic. This setting is only present for an internet gateway firewall.
+	AddressTranslations *AddressTranslations
+
 	// The configuration and status for a single firewall subnet. For each configured
 	// subnet, Network Firewall creates the attachment by instantiating the firewall
 	// endpoint in the subnet so that it's ready to take traffic.
@@ -6952,6 +7070,11 @@ func (v *SyncState) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SyncState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressTranslations != nil {
+		s.WriteStruct(schemas.SyncState_AddressTranslations)
+		v.AddressTranslations.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Attachment != nil {
 		s.WriteStruct(schemas.SyncState_Attachment)
 		v.Attachment.SerializeMembers(s)
@@ -6967,6 +7090,9 @@ func (v *SyncState) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *SyncState) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SyncState, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.SyncState_AddressTranslations:
+			v.AddressTranslations = &AddressTranslations{}
+			return v.AddressTranslations.Deserialize(d)
 		case schemas.SyncState_Attachment:
 			v.Attachment = &Attachment{}
 			return v.Attachment.Deserialize(d)

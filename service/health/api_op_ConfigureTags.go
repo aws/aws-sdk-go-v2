@@ -33,7 +33,7 @@ type ConfigureTagsInput struct {
 	// The list of resource tag keys to configure for Health event tracking.
 	//
 	// This member is required.
-	TagKeys []types.ResourceTagKey
+	TagKeys []types.ConfigureTagsTagKey
 
 	noSmithyDocumentSerde
 }
@@ -46,7 +46,7 @@ func (v *ConfigureTagsInput) Serialize(s smithy.ShapeSerializer) {
 
 func (v *ConfigureTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TagKeys != nil {
-		serializeConfigureTagsResourceTagKeyList(s, schemas.ConfigureTagsRequest_tagKeys, v.TagKeys)
+		serializeConfigureTagsRequestTagKeyList(s, schemas.ConfigureTagsRequest_tagKeys, v.TagKeys)
 	}
 }
 

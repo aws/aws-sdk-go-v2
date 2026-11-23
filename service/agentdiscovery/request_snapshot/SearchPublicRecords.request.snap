@@ -1,0 +1,5 @@
+POST /records/search
+
+Content-Type: application/json
+
+{"filters":"__Document__","maxResults":1,"nextToken":"__NextToken__","query":"__SearchQuery__"}

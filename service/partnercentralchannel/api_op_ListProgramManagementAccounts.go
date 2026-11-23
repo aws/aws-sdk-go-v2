@@ -55,6 +55,9 @@ type ListProgramManagementAccountsInput struct {
 	// Filter by program management account statuses.
 	Statuses []types.ProgramManagementAccountStatus
 
+	// Filter by program management account type.
+	Type types.ProgramManagementAccountType
+
 	noSmithyDocumentSerde
 }
 
@@ -90,6 +93,9 @@ func (v *ListProgramManagementAccountsInput) SerializeMembers(s smithy.ShapeSeri
 	}
 	if v.Statuses != nil {
 		serializeProgramManagementAccountStatusList(s, schemas.ListProgramManagementAccountsRequest_statuses, v.Statuses)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListProgramManagementAccountsRequest_type, string(v.Type))
 	}
 }
 

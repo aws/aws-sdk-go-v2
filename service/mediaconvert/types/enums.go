@@ -734,6 +734,8 @@ const (
 	AudioCodecAiff        AudioCodec = "AIFF"
 	AudioCodecAc3         AudioCodec = "AC3"
 	AudioCodecAc4         AudioCodec = "AC4"
+	AudioCodecDtsx        AudioCodec = "DTSX"
+	AudioCodecDtsc        AudioCodec = "DTSC"
 	AudioCodecEac3        AudioCodec = "EAC3"
 	AudioCodecEac3Atmos   AudioCodec = "EAC3_ATMOS"
 	AudioCodecVorbis      AudioCodec = "VORBIS"
@@ -755,6 +757,8 @@ func (AudioCodec) Values() []AudioCodec {
 		"AIFF",
 		"AC3",
 		"AC4",
+		"DTSX",
+		"DTSC",
 		"EAC3",
 		"EAC3_ATMOS",
 		"VORBIS",
@@ -980,6 +984,7 @@ type Av1AdaptiveQuantization string
 // Enum values for Av1AdaptiveQuantization
 const (
 	Av1AdaptiveQuantizationOff    Av1AdaptiveQuantization = "OFF"
+	Av1AdaptiveQuantizationAuto   Av1AdaptiveQuantization = "AUTO"
 	Av1AdaptiveQuantizationLow    Av1AdaptiveQuantization = "LOW"
 	Av1AdaptiveQuantizationMedium Av1AdaptiveQuantization = "MEDIUM"
 	Av1AdaptiveQuantizationHigh   Av1AdaptiveQuantization = "HIGH"
@@ -994,6 +999,7 @@ const (
 func (Av1AdaptiveQuantization) Values() []Av1AdaptiveQuantization {
 	return []Av1AdaptiveQuantization{
 		"OFF",
+		"AUTO",
 		"LOW",
 		"MEDIUM",
 		"HIGH",
@@ -1018,6 +1024,25 @@ func (Av1BitDepth) Values() []Av1BitDepth {
 	return []Av1BitDepth{
 		"BIT_8",
 		"BIT_10",
+	}
+}
+
+type Av1FastDecode string
+
+// Enum values for Av1FastDecode
+const (
+	Av1FastDecodeDisabled Av1FastDecode = "DISABLED"
+	Av1FastDecodeEnabled  Av1FastDecode = "ENABLED"
+)
+
+// Values returns all known values for Av1FastDecode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1FastDecode) Values() []Av1FastDecode {
+	return []Av1FastDecode{
+		"DISABLED",
+		"ENABLED",
 	}
 }
 
@@ -1083,6 +1108,25 @@ func (Av1FramerateConversionAlgorithm) Values() []Av1FramerateConversionAlgorith
 	}
 }
 
+type Av1GopSizeUnits string
+
+// Enum values for Av1GopSizeUnits
+const (
+	Av1GopSizeUnitsFrames  Av1GopSizeUnits = "FRAMES"
+	Av1GopSizeUnitsSeconds Av1GopSizeUnits = "SECONDS"
+)
+
+// Values returns all known values for Av1GopSizeUnits. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1GopSizeUnits) Values() []Av1GopSizeUnits {
+	return []Av1GopSizeUnits{
+		"FRAMES",
+		"SECONDS",
+	}
+}
+
 type Av1RateControlMode string
 
 // Enum values for Av1RateControlMode
@@ -1138,6 +1182,26 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (Av1SpatialAdaptiveQuantization) Values() []Av1SpatialAdaptiveQuantization {
 	return []Av1SpatialAdaptiveQuantization{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
+type Av1TemporalAdaptiveQuantization string
+
+// Enum values for Av1TemporalAdaptiveQuantization
+const (
+	Av1TemporalAdaptiveQuantizationDisabled Av1TemporalAdaptiveQuantization = "DISABLED"
+	Av1TemporalAdaptiveQuantizationEnabled  Av1TemporalAdaptiveQuantization = "ENABLED"
+)
+
+// Values returns all known values for Av1TemporalAdaptiveQuantization. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Av1TemporalAdaptiveQuantization) Values() []Av1TemporalAdaptiveQuantization {
+	return []Av1TemporalAdaptiveQuantization{
 		"DISABLED",
 		"ENABLED",
 	}
@@ -3215,6 +3279,25 @@ func (DropFrameTimecode) Values() []DropFrameTimecode {
 	}
 }
 
+type DtsxCodingMode string
+
+// Enum values for DtsxCodingMode
+const (
+	DtsxCodingModeCodingMode51  DtsxCodingMode = "CODING_MODE_5_1"
+	DtsxCodingModeCodingMode514 DtsxCodingMode = "CODING_MODE_5_1_4"
+)
+
+// Values returns all known values for DtsxCodingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DtsxCodingMode) Values() []DtsxCodingMode {
+	return []DtsxCodingMode{
+		"CODING_MODE_5_1",
+		"CODING_MODE_5_1_4",
+	}
+}
+
 type DvbddsHandling string
 
 // Enum values for DvbddsHandling
@@ -3484,6 +3567,26 @@ func (DynamicAudioSelectorType) Values() []DynamicAudioSelectorType {
 	return []DynamicAudioSelectorType{
 		"ALL_TRACKS",
 		"LANGUAGE_CODE",
+	}
+}
+
+type DynamicMultiviewSettingsEnabled string
+
+// Enum values for DynamicMultiviewSettingsEnabled
+const (
+	DynamicMultiviewSettingsEnabledDisabled DynamicMultiviewSettingsEnabled = "DISABLED"
+	DynamicMultiviewSettingsEnabledEnabled  DynamicMultiviewSettingsEnabled = "ENABLED"
+)
+
+// Values returns all known values for DynamicMultiviewSettingsEnabled. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DynamicMultiviewSettingsEnabled) Values() []DynamicMultiviewSettingsEnabled {
+	return []DynamicMultiviewSettingsEnabled{
+		"DISABLED",
+		"ENABLED",
 	}
 }
 

@@ -33,8 +33,17 @@ import (
 //
 //   - A list of thumbprints of one or more server certificates that the IdP uses
 //
-// You get all of this information from the OIDC IdP you want to use to access
-// Amazon Web Services.
+//   - A trusted identity propagation context provider that defines how the
+//     subject is derived and how keys from the provider's token are mapped into
+//     trusted context keys. Specifying a context provider enables trusted identity
+//     propagation for the provider. For more information, see [ContextProvider].
+//
+//   - The ARN of an IAM Identity Center instance to associate with the OIDC
+//     provider. If you specify an IAM Identity Center instance, you must also specify
+//     a context provider.
+//
+// You get the URL, client IDs, and thumbprints from the OIDC IdP you want to use
+// to access Amazon Web Services.
 //
 // Amazon Web Services secures communication with OIDC identity providers (IdPs)
 // using our library of trusted root certificate authorities (CAs) to verify the
@@ -46,9 +55,21 @@ import (
 // operation creates. Therefore, it is best to limit access to the [CreateOpenIDConnectProvider]operation to
 // highly privileged users.
 //
+// To control who can configure trusted identity propagation on an OIDC provider,
+// use the [iam:EnableIdentityPropagation], [iam:EnableIdentityCenterAssociation], [iam:RequestIdentityProviderIssuers], [iam:ResourceIdentityProviderIssuers], [iam:RequestIdentityCenterInstanceArn], and [iam:ResourceIdentityCenterInstanceArn] condition keys in IAM policies. The Request keys contain
+// the values in the request. The Resource keys contain the values stored on the
+// provider.
+//
 // [OpenID Connect (OIDC)]: http://openid.net/connect/
+// [iam:ResourceIdentityCenterInstanceArn]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_ResourceIdentityCenterInstanceArn
+// [iam:RequestIdentityCenterInstanceArn]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_RequestIdentityCenterInstanceArn
 // [Creating a role for web identity or OpenID connect federation]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html
+// [iam:EnableIdentityPropagation]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_EnableIdentityPropagation
+// [iam:EnableIdentityCenterAssociation]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_EnableIdentityCenterAssociation
+// [iam:ResourceIdentityProviderIssuers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_ResourceIdentityProviderIssuers
 // [CreateOpenIDConnectProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html
+// [iam:RequestIdentityProviderIssuers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_RequestIdentityProviderIssuers
+// [ContextProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
 func (c *Client) CreateOpenIDConnectProvider(ctx context.Context, params *CreateOpenIDConnectProviderInput, optFns ...func(*Options)) (*CreateOpenIDConnectProviderOutput, error) {
 	if params == nil {
 		params = &CreateOpenIDConnectProviderInput{}
@@ -93,6 +114,24 @@ type CreateOpenIDConnectProviderInput struct {
 	// CreateOpenIDConnectProviderRequest operation accepts client IDs up to 255
 	// characters long.
 	ClientIDList []string
+
+	// The trusted identity propagation context provider configuration to associate
+	// with the OpenID Connect (OIDC) provider. The context provider defines how the
+	// subject is derived and how keys from the provider's token are mapped into
+	// trusted context keys. Specifying a context provider enables trusted identity
+	// propagation for the provider. For more information, see [ContextProvider].
+	//
+	// [ContextProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+	ContextProvider *types.ContextProvider
+
+	// The Amazon Resource Name (ARN) of the IAM Identity Center instance to associate
+	// with the OpenID Connect (OIDC) provider. If you specify this parameter, you must
+	// also specify ContextProvider .
+	//
+	// For the format, see [InstanceMetadata] in the IAM Identity Center API Reference.
+	//
+	// [InstanceMetadata]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+	IdentityCenterInstanceArn *string
 
 	// A list of tags that you want to attach to the new IAM OpenID Connect (OIDC)
 	// provider. Each tag consists of a key name and an associated value. For more
@@ -145,6 +184,14 @@ func (v *CreateOpenIDConnectProviderInput) Serialize(s smithy.ShapeSerializer) {
 func (v *CreateOpenIDConnectProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientIDList != nil {
 		serializeclientIDListType(s, schemas.CreateOpenIDConnectProviderRequest_ClientIDList, v.ClientIDList)
+	}
+	if v.ContextProvider != nil {
+		s.WriteStruct(schemas.CreateOpenIDConnectProviderRequest_ContextProvider)
+		v.ContextProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityCenterInstanceArn != nil {
+		s.WriteString(schemas.CreateOpenIDConnectProviderRequest_IdentityCenterInstanceArn, *v.IdentityCenterInstanceArn)
 	}
 	if v.Tags != nil {
 		serializetagListType(s, schemas.CreateOpenIDConnectProviderRequest_Tags, v.Tags)

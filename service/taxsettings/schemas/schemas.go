@@ -185,7 +185,7 @@ var _AccountName = smithy.NewSchema(smithy.ShapeID{
 var AdditionalInfoRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "AdditionalInfoRequest",
-}, smithy.ShapeTypeStructure, 26)
+}, smithy.ShapeTypeStructure, 29)
 var AdditionalInfoRequest_malaysiaAdditionalInfo *smithy.Schema
 
 var AdditionalInfoRequest_israelAdditionalInfo *smithy.Schema
@@ -238,10 +238,16 @@ var AdditionalInfoRequest_germanyAdditionalInfo *smithy.Schema
 
 var AdditionalInfoRequest_mexicoAdditionalInfo *smithy.Schema
 
+var AdditionalInfoRequest_unitedArabEmiratesAdditionalInfo *smithy.Schema
+
+var AdditionalInfoRequest_norwayAdditionalInfo *smithy.Schema
+
+var AdditionalInfoRequest_newZealandAdditionalInfo *smithy.Schema
+
 var AdditionalInfoResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "AdditionalInfoResponse",
-}, smithy.ShapeTypeStructure, 29)
+}, smithy.ShapeTypeStructure, 32)
 var AdditionalInfoResponse_malaysiaAdditionalInfo *smithy.Schema
 
 var AdditionalInfoResponse_israelAdditionalInfo *smithy.Schema
@@ -299,6 +305,12 @@ var AdditionalInfoResponse_germanyAdditionalInfo *smithy.Schema
 var AdditionalInfoResponse_mexicoAdditionalInfo *smithy.Schema
 
 var AdditionalInfoResponse_colombiaAdditionalInfo *smithy.Schema
+
+var AdditionalInfoResponse_unitedArabEmiratesAdditionalInfo *smithy.Schema
+
+var AdditionalInfoResponse_norwayAdditionalInfo *smithy.Schema
+
+var AdditionalInfoResponse_newZealandAdditionalInfo *smithy.Schema
 
 var Address = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
@@ -927,6 +939,38 @@ var MonacoAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var MonacoAdditionalInfo_businessNumber *smithy.Schema
 
+var NewZealandAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "NewZealandAdditionalInfo",
+}, smithy.ShapeTypeStructure, 1)
+var NewZealandAdditionalInfo_peppolId *smithy.Schema
+
+var _NewZealandPeppolId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "NewZealandPeppolId",
+}, smithy.ShapeTypeString, 0)
+
+var NorwayAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "NorwayAdditionalInfo",
+}, smithy.ShapeTypeStructure, 2)
+var NorwayAdditionalInfo_taxRegistrationNumberType *smithy.Schema
+
+var NorwayAdditionalInfo_peppolId *smithy.Schema
+
+var _NorwayPeppolId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "NorwayPeppolId",
+}, smithy.ShapeTypeString, 0)
+
+var NorwayTaxRegistrationNumberType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "NorwayTaxRegistrationNumberType",
+}, smithy.ShapeTypeEnum, 2)
+var NorwayTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER *smithy.Schema
+
+var NorwayTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER *smithy.Schema
+
 var _PaginationTokenString = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "PaginationTokenString",
@@ -1438,6 +1482,29 @@ var TurkeyAdditionalInfo_secondaryTaxId *smithy.Schema
 
 var TurkeyAdditionalInfo_industries *smithy.Schema
 
+var _UaeEmiratesId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "UaeEmiratesId",
+}, smithy.ShapeTypeString, 0)
+
+var _UaePeppolId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "UaePeppolId",
+}, smithy.ShapeTypeString, 0)
+
+var UaeTaxRegistrationNumberType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "UaeTaxRegistrationNumberType",
+}, smithy.ShapeTypeEnum, 2)
+var UaeTaxRegistrationNumberType_VAT_TAX_REGISTRATION_NUMBER *smithy.Schema
+
+var UaeTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER *smithy.Schema
+
+var _UaeTradeLicenseNumber = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "UaeTradeLicenseNumber",
+}, smithy.ShapeTypeString, 0)
+
 var UkraineAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "UkraineAdditionalInfo",
@@ -1456,6 +1523,18 @@ var _UniqueIdentificationNumber = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "UniqueIdentificationNumber",
 }, smithy.ShapeTypeString, 0)
+
+var UnitedArabEmiratesAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.taxsettings",
+	Name:      "UnitedArabEmiratesAdditionalInfo",
+}, smithy.ShapeTypeStructure, 4)
+var UnitedArabEmiratesAdditionalInfo_taxRegistrationNumberType *smithy.Schema
+
+var UnitedArabEmiratesAdditionalInfo_peppolId *smithy.Schema
+
+var UnitedArabEmiratesAdditionalInfo_tradeLicenseNumber *smithy.Schema
+
+var UnitedArabEmiratesAdditionalInfo_emiratesId *smithy.Schema
 
 var _Url = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
@@ -1535,7 +1614,7 @@ var VerificationDetails_taxRegistrationDocuments *smithy.Schema
 var VietnamAdditionalInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
 	Name:      "VietnamAdditionalInfo",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var VietnamAdditionalInfo_enterpriseIdentificationNumber *smithy.Schema
 
 var VietnamAdditionalInfo_electronicTransactionCodeNumber *smithy.Schema
@@ -1543,6 +1622,8 @@ var VietnamAdditionalInfo_electronicTransactionCodeNumber *smithy.Schema
 var VietnamAdditionalInfo_paymentVoucherNumber *smithy.Schema
 
 var VietnamAdditionalInfo_paymentVoucherNumberDate *smithy.Schema
+
+var VietnamAdditionalInfo_vatCreditMethod *smithy.Schema
 
 var BatchDeleteTaxRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.taxsettings",
@@ -1970,6 +2051,8 @@ func init() {
 
 	VietnamAdditionalInfo_paymentVoucherNumberDate = VietnamAdditionalInfo.AddMember("paymentVoucherNumberDate", _DateString)
 
+	VietnamAdditionalInfo_vatCreditMethod = VietnamAdditionalInfo.AddMember("vatCreditMethod", smithyprelude.Boolean)
+
 	EgyptAdditionalInfo_uniqueIdentificationNumber = EgyptAdditionalInfo.AddMember("uniqueIdentificationNumber", _UniqueIdentificationNumber)
 
 	EgyptAdditionalInfo_uniqueIdentificationNumberExpirationDate = EgyptAdditionalInfo.AddMember("uniqueIdentificationNumberExpirationDate", _DateString)
@@ -2021,6 +2104,28 @@ func init() {
 	ColombiaAdditionalInfo_taxpayerTypeCode = ColombiaAdditionalInfo.AddMember("taxpayerTypeCode", _ColombiaTipoContribuyenteCode)
 
 	ColombiaAdditionalInfo_issueDate = ColombiaAdditionalInfo.AddMember("issueDate", _DateString)
+
+	UaeTaxRegistrationNumberType_VAT_TAX_REGISTRATION_NUMBER = UaeTaxRegistrationNumberType.AddMember("VAT_TAX_REGISTRATION_NUMBER", smithyprelude.Unit)
+
+	UaeTaxRegistrationNumberType_LOCAL_TAX_REGISTRATION_NUMBER = UaeTaxRegistrationNumberType.AddMember("LOCAL_TAX_REGISTRATION_NUMBER", smithyprelude.Unit)
+
+	UnitedArabEmiratesAdditionalInfo_taxRegistrationNumberType = UnitedArabEmiratesAdditionalInfo.AddMember("taxRegistrationNumberType", UaeTaxRegistrationNumberType)
+
+	UnitedArabEmiratesAdditionalInfo_peppolId = UnitedArabEmiratesAdditionalInfo.AddMember("peppolId", _UaePeppolId)
+
+	UnitedArabEmiratesAdditionalInfo_tradeLicenseNumber = UnitedArabEmiratesAdditionalInfo.AddMember("tradeLicenseNumber", _UaeTradeLicenseNumber)
+
+	UnitedArabEmiratesAdditionalInfo_emiratesId = UnitedArabEmiratesAdditionalInfo.AddMember("emiratesId", _UaeEmiratesId)
+
+	NorwayTaxRegistrationNumberType_TAX_REGISTRATION_NUMBER = NorwayTaxRegistrationNumberType.AddMember("TAX_REGISTRATION_NUMBER", smithyprelude.Unit)
+
+	NorwayTaxRegistrationNumberType_LOCAL_REGISTRATION_NUMBER = NorwayTaxRegistrationNumberType.AddMember("LOCAL_REGISTRATION_NUMBER", smithyprelude.Unit)
+
+	NorwayAdditionalInfo_taxRegistrationNumberType = NorwayAdditionalInfo.AddMember("taxRegistrationNumberType", NorwayTaxRegistrationNumberType)
+
+	NorwayAdditionalInfo_peppolId = NorwayAdditionalInfo.AddMember("peppolId", _NorwayPeppolId)
+
+	NewZealandAdditionalInfo_peppolId = NewZealandAdditionalInfo.AddMember("peppolId", _NewZealandPeppolId)
 
 	AdditionalInfoResponse_malaysiaAdditionalInfo = AdditionalInfoResponse.AddMember("malaysiaAdditionalInfo", MalaysiaAdditionalInfo)
 
@@ -2079,6 +2184,12 @@ func init() {
 	AdditionalInfoResponse_mexicoAdditionalInfo = AdditionalInfoResponse.AddMember("mexicoAdditionalInfo", MexicoAdditionalInfo)
 
 	AdditionalInfoResponse_colombiaAdditionalInfo = AdditionalInfoResponse.AddMember("colombiaAdditionalInfo", ColombiaAdditionalInfo)
+
+	AdditionalInfoResponse_unitedArabEmiratesAdditionalInfo = AdditionalInfoResponse.AddMember("unitedArabEmiratesAdditionalInfo", UnitedArabEmiratesAdditionalInfo)
+
+	AdditionalInfoResponse_norwayAdditionalInfo = AdditionalInfoResponse.AddMember("norwayAdditionalInfo", NorwayAdditionalInfo)
+
+	AdditionalInfoResponse_newZealandAdditionalInfo = AdditionalInfoResponse.AddMember("newZealandAdditionalInfo", NewZealandAdditionalInfo)
 
 	TaxRegistrationStatusReason_code = TaxRegistrationStatusReason.AddMember("code", _StatusReasonCode)
 
@@ -2211,6 +2322,12 @@ func init() {
 	AdditionalInfoRequest_germanyAdditionalInfo = AdditionalInfoRequest.AddMember("germanyAdditionalInfo", GermanyAdditionalInfo)
 
 	AdditionalInfoRequest_mexicoAdditionalInfo = AdditionalInfoRequest.AddMember("mexicoAdditionalInfo", MexicoAdditionalInfo)
+
+	AdditionalInfoRequest_unitedArabEmiratesAdditionalInfo = AdditionalInfoRequest.AddMember("unitedArabEmiratesAdditionalInfo", UnitedArabEmiratesAdditionalInfo)
+
+	AdditionalInfoRequest_norwayAdditionalInfo = AdditionalInfoRequest.AddMember("norwayAdditionalInfo", NorwayAdditionalInfo)
+
+	AdditionalInfoRequest_newZealandAdditionalInfo = AdditionalInfoRequest.AddMember("newZealandAdditionalInfo", NewZealandAdditionalInfo)
 
 	AttachmentUploadException_message = AttachmentUploadException.AddMember("message", _ErrorMessage)
 

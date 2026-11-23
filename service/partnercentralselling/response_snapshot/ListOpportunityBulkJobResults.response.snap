@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListOpportunityBulkJobResults
+
+{"NextToken":"__NextToken__","Results":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","RequestId":"__RequestId__","ResourceIdentifier":"__ResourceIdentifier__","Status":"SUCCEEDED"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","RequestId":"__RequestId__","ResourceIdentifier":"__ResourceIdentifier__","Status":"SUCCEEDED"}]}

@@ -1,5 +1,5 @@
 402
 Content-Type: application/x-amz-json-1.0
-X-Amz-Target: AWSPartnerCentralSelling.CreateEngagement
+X-Amz-Target: AWSPartnerCentralSelling.CreateCustomerAccount
 
 {"__type":"ServiceQuotaExceededException","Message":"__Message__"}

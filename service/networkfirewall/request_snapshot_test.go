@@ -232,6 +232,7 @@ func TestCheckRequestSnapshot_AssociateAvailabilityZones(t *testing.T) {
 				AvailabilityZone: ptr.String("__AvailabilityZone__"),
 			},
 		},
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -262,6 +263,7 @@ func TestCheckRequestSnapshot_AssociateFirewallPolicy(t *testing.T) {
 		FirewallArn:       ptr.String("__FirewallArn__"),
 		FirewallName:      ptr.String("__FirewallName__"),
 		FirewallPolicyArn: ptr.String("__FirewallPolicyArn__"),
+		FirewallType:      types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -463,6 +465,9 @@ func TestCheckRequestSnapshot_CreateFirewall(t *testing.T) {
 			},
 		},
 		AvailabilityZoneChangeProtection: true,
+		IgwFirewallConfiguration: &types.IgwFirewallConfiguration{
+			EnforcementMode: types.EnforcementMode("POLICY_CONTROLLED"),
+		},
 		NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 			{
 				SubnetId: ptr.String("__SubnetId__"),
@@ -1974,6 +1979,7 @@ func TestCheckRequestSnapshot_DeleteFirewall(t *testing.T) {
 	input := &DeleteFirewallInput{
 		FirewallName:                ptr.String("__FirewallName__"),
 		FirewallArn:                 ptr.String("__FirewallArn__"),
+		FirewallType:                types.FirewallType("FIREWALL"),
 		DeleteAssociatedNatGateways: true,
 	}
 	body := &bytes.Buffer{}
@@ -2254,6 +2260,7 @@ func TestCheckRequestSnapshot_DescribeFirewall(t *testing.T) {
 	input := &DescribeFirewallInput{
 		FirewallName: ptr.String("__FirewallName__"),
 		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2398,6 +2405,7 @@ func TestCheckRequestSnapshot_DescribeLoggingConfiguration(t *testing.T) {
 	input := &DescribeLoggingConfigurationInput{
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2634,6 +2642,7 @@ func TestCheckRequestSnapshot_DisassociateAvailabilityZones(t *testing.T) {
 				AvailabilityZone: ptr.String("__AvailabilityZone__"),
 			},
 		},
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2871,7 +2880,8 @@ func TestCheckRequestSnapshot_ListFirewalls(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		MaxResults: ptr.Int32(1),
+		MaxResults:   ptr.Int32(1),
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3499,6 +3509,7 @@ func TestCheckRequestSnapshot_UpdateFirewallAnalysisSettings(t *testing.T) {
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
 		UpdateToken:  ptr.String("__UpdateToken__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3529,6 +3540,7 @@ func TestCheckRequestSnapshot_UpdateFirewallDeleteProtection(t *testing.T) {
 		FirewallArn:      ptr.String("__FirewallArn__"),
 		FirewallName:     ptr.String("__FirewallName__"),
 		DeleteProtection: true,
+		FirewallType:     types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3559,6 +3571,7 @@ func TestCheckRequestSnapshot_UpdateFirewallDescription(t *testing.T) {
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
 		Description:  ptr.String("__Description__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3592,6 +3605,7 @@ func TestCheckRequestSnapshot_UpdateFirewallEncryptionConfiguration(t *testing.T
 			KeyId: ptr.String("__KeyId__"),
 			Type:  types.EncryptionType("CUSTOMER_KMS"),
 		},
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3771,6 +3785,7 @@ func TestCheckRequestSnapshot_UpdateFirewallPolicyChangeProtection(t *testing.T)
 		FirewallArn:                    ptr.String("__FirewallArn__"),
 		FirewallName:                   ptr.String("__FirewallName__"),
 		FirewallPolicyChangeProtection: true,
+		FirewallType:                   types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4210,6 +4225,7 @@ func TestCheckRequestSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 	input := &UpdateLoggingConfigurationInput{
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 		LoggingConfiguration: &types.LoggingConfiguration{
 			LogDestinationConfigs: []types.LogDestinationConfig{
 				{
@@ -5132,6 +5148,7 @@ func TestUpdateRequestSnapshot_AssociateAvailabilityZones(t *testing.T) {
 				AvailabilityZone: ptr.String("__AvailabilityZone__"),
 			},
 		},
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5162,6 +5179,7 @@ func TestUpdateRequestSnapshot_AssociateFirewallPolicy(t *testing.T) {
 		FirewallArn:       ptr.String("__FirewallArn__"),
 		FirewallName:      ptr.String("__FirewallName__"),
 		FirewallPolicyArn: ptr.String("__FirewallPolicyArn__"),
+		FirewallType:      types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5363,6 +5381,9 @@ func TestUpdateRequestSnapshot_CreateFirewall(t *testing.T) {
 			},
 		},
 		AvailabilityZoneChangeProtection: true,
+		IgwFirewallConfiguration: &types.IgwFirewallConfiguration{
+			EnforcementMode: types.EnforcementMode("POLICY_CONTROLLED"),
+		},
 		NatGatewayCreateMappings: []types.NatGatewayCreateMapping{
 			{
 				SubnetId: ptr.String("__SubnetId__"),
@@ -6874,6 +6895,7 @@ func TestUpdateRequestSnapshot_DeleteFirewall(t *testing.T) {
 	input := &DeleteFirewallInput{
 		FirewallName:                ptr.String("__FirewallName__"),
 		FirewallArn:                 ptr.String("__FirewallArn__"),
+		FirewallType:                types.FirewallType("FIREWALL"),
 		DeleteAssociatedNatGateways: true,
 	}
 	body := &bytes.Buffer{}
@@ -7154,6 +7176,7 @@ func TestUpdateRequestSnapshot_DescribeFirewall(t *testing.T) {
 	input := &DescribeFirewallInput{
 		FirewallName: ptr.String("__FirewallName__"),
 		FirewallArn:  ptr.String("__FirewallArn__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7298,6 +7321,7 @@ func TestUpdateRequestSnapshot_DescribeLoggingConfiguration(t *testing.T) {
 	input := &DescribeLoggingConfigurationInput{
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7534,6 +7558,7 @@ func TestUpdateRequestSnapshot_DisassociateAvailabilityZones(t *testing.T) {
 				AvailabilityZone: ptr.String("__AvailabilityZone__"),
 			},
 		},
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7771,7 +7796,8 @@ func TestUpdateRequestSnapshot_ListFirewalls(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		MaxResults: ptr.Int32(1),
+		MaxResults:   ptr.Int32(1),
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8399,6 +8425,7 @@ func TestUpdateRequestSnapshot_UpdateFirewallAnalysisSettings(t *testing.T) {
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
 		UpdateToken:  ptr.String("__UpdateToken__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8429,6 +8456,7 @@ func TestUpdateRequestSnapshot_UpdateFirewallDeleteProtection(t *testing.T) {
 		FirewallArn:      ptr.String("__FirewallArn__"),
 		FirewallName:     ptr.String("__FirewallName__"),
 		DeleteProtection: true,
+		FirewallType:     types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8459,6 +8487,7 @@ func TestUpdateRequestSnapshot_UpdateFirewallDescription(t *testing.T) {
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
 		Description:  ptr.String("__Description__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8492,6 +8521,7 @@ func TestUpdateRequestSnapshot_UpdateFirewallEncryptionConfiguration(t *testing.
 			KeyId: ptr.String("__KeyId__"),
 			Type:  types.EncryptionType("CUSTOMER_KMS"),
 		},
+		FirewallType: types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8671,6 +8701,7 @@ func TestUpdateRequestSnapshot_UpdateFirewallPolicyChangeProtection(t *testing.T
 		FirewallArn:                    ptr.String("__FirewallArn__"),
 		FirewallName:                   ptr.String("__FirewallName__"),
 		FirewallPolicyChangeProtection: true,
+		FirewallType:                   types.FirewallType("FIREWALL"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9110,6 +9141,7 @@ func TestUpdateRequestSnapshot_UpdateLoggingConfiguration(t *testing.T) {
 	input := &UpdateLoggingConfigurationInput{
 		FirewallArn:  ptr.String("__FirewallArn__"),
 		FirewallName: ptr.String("__FirewallName__"),
+		FirewallType: types.FirewallType("FIREWALL"),
 		LoggingConfiguration: &types.LoggingConfiguration{
 			LogDestinationConfigs: []types.LogDestinationConfig{
 				{

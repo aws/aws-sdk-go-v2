@@ -590,6 +590,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTranscribeAudio struct {
+}
+
+func (*validateOpTranscribeAudio) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTranscribeAudio) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TranscribeAudioInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTranscribeAudioInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUntagResource struct {
 }
 
@@ -826,6 +846,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
+func addOpTranscribeAudioValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTranscribeAudio{}, middleware.After)
+}
+
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
@@ -1026,6 +1050,21 @@ func validateSummarization(v *types.Summarization) error {
 	}
 }
 
+func validateSyncOutputConfiguration(v *types.SyncOutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SyncOutputConfiguration"}
+	if v.OutputMediaFileUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputMediaFileUri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -1103,6 +1142,129 @@ func validateTranscriptFilter(v *types.TranscriptFilter) error {
 	}
 	if v.Targets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Targets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVocabularyFilterEntry(v *types.VocabularyFilterEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VocabularyFilterEntry"}
+	if len(v.Language) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVocabularyFilterEntryList(v []types.VocabularyFilterEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VocabularyFilterEntryList"}
+	for i := range v {
+		if err := validateVocabularyFilterEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVocabularyFilterSettings(v *types.VocabularyFilterSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VocabularyFilterSettings"}
+	if len(v.VocabularyFilterMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VocabularyFilterMethod"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateVocabularyFilterEntryList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVocabularyPhrase(v *types.VocabularyPhrase) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VocabularyPhrase"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVocabularyPhraseList(v []types.VocabularyPhrase) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VocabularyPhraseList"}
+	for i := range v {
+		if err := validateVocabularyPhrase(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVocabularySettingsEntry(v *types.VocabularySettingsEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VocabularySettingsEntry"}
+	if len(v.Language) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
+	if v.Phrases != nil {
+		if err := validateVocabularyPhraseList(v.Phrases); err != nil {
+			invalidParams.AddNested("Phrases", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVocabularySettingsList(v []types.VocabularySettingsEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VocabularySettingsList"}
+	for i := range v {
+		if err := validateVocabularySettingsEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1689,6 +1851,41 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTranscribeAudioInput(v *TranscribeAudioInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TranscribeAudioInput"}
+	if v.Media == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Media"))
+	}
+	if v.VocabularySettings != nil {
+		if err := validateVocabularySettingsList(v.VocabularySettings); err != nil {
+			invalidParams.AddNested("VocabularySettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VocabularyFilterSettings != nil {
+		if err := validateVocabularyFilterSettings(v.VocabularyFilterSettings); err != nil {
+			invalidParams.AddNested("VocabularyFilterSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContentRedaction != nil {
+		if err := validateContentRedaction(v.ContentRedaction); err != nil {
+			invalidParams.AddNested("ContentRedaction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfiguration != nil {
+		if err := validateSyncOutputConfiguration(v.OutputConfiguration); err != nil {
+			invalidParams.AddNested("OutputConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

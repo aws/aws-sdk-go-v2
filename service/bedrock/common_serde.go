@@ -709,6 +709,17 @@ func serializeRetrievalFilter(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	}
 }
 
+func serializeTrustedAccessProgramApplicationResult(s smithy.ShapeSerializer, schema *smithy.Schema, v types.TrustedAccessProgramApplicationResult) {
+	switch vv := v.(type) {
+	case *types.TrustedAccessProgramApplicationResultMemberProviderHandoff:
+		s.WriteUnion(schema, schemas.TrustedAccessProgramApplicationResult_providerHandoff)
+		s.WriteStruct(schemas.TrustedAccessProgramApplicationResult_providerHandoff)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func deserializeAutomatedEvaluationCustomMetricSource(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AutomatedEvaluationCustomMetricSource) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -1346,6 +1357,18 @@ func deserializeRetrievalFilter(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 			return vv.Deserialize(d)
 		case schemas.RetrievalFilter_stringContains:
 			vv := &types.RetrievalFilterMemberStringContains{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeTrustedAccessProgramApplicationResult(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.TrustedAccessProgramApplicationResult) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.TrustedAccessProgramApplicationResult_providerHandoff:
+			vv := &types.TrustedAccessProgramApplicationResultMemberProviderHandoff{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -2343,6 +2366,16 @@ func serializeOffers(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.
 	s.CloseList()
 }
 
+func serializeProjectSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ProjectSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializePromptRouterSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PromptRouterSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -2452,6 +2485,16 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeTrustedAccessProgramSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TrustedAccessProgramSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -4778,6 +4821,28 @@ func deserializeOffers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.
 	})
 }
 
+func deserializeProjectSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ProjectSummary) error {
+	*v = make([]types.ProjectSummary, 0)
+	var vv types.ProjectSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ProjectSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ProjectSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializePromptRouterSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PromptRouterSummary) error {
 	*v = make([]types.PromptRouterSummary, 0)
 	var vv types.PromptRouterSummary
@@ -5049,6 +5114,28 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 		}
 
 		vv = types.Tag{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTrustedAccessProgramSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TrustedAccessProgramSummary) error {
+	*v = make([]types.TrustedAccessProgramSummary, 0)
+	var vv types.TrustedAccessProgramSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.TrustedAccessProgramSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.TrustedAccessProgramSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

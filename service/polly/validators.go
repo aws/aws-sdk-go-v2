@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateVoice struct {
+}
+
+func (*validateOpCreateVoice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVoice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVoiceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVoiceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteLexicon struct {
 }
 
@@ -25,6 +45,26 @@ func (m *validateOpDeleteLexicon) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteLexiconInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVoice struct {
+}
+
+func (*validateOpDeleteVoice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVoice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVoiceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVoiceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -65,6 +105,26 @@ func (m *validateOpGetSpeechSynthesisTask) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSpeechSynthesisTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetVoice struct {
+}
+
+func (*validateOpGetVoice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetVoice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetVoiceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetVoiceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,8 +270,16 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateVoiceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVoice{}, middleware.After)
+}
+
 func addOpDeleteLexiconValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLexicon{}, middleware.After)
+}
+
+func addOpDeleteVoiceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVoice{}, middleware.After)
 }
 
 func addOpGetLexiconValidationMiddleware(stack *middleware.Stack) error {
@@ -220,6 +288,10 @@ func addOpGetLexiconValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetSpeechSynthesisTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSpeechSynthesisTask{}, middleware.After)
+}
+
+func addOpGetVoiceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetVoice{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -248,6 +320,56 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func validateCustomerManagedEncryption(v *types.CustomerManagedEncryption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomerManagedEncryption"}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecording(v *types.Recording) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Recording"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecordingList(v []types.Recording) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecordingList"}
+	for i := range v {
+		if err := validateRecording(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateStartSpeechSynthesisStreamActionStream(v types.StartSpeechSynthesisStreamActionStream) error {
@@ -284,6 +406,55 @@ func validateTextEvent(v *types.TextEvent) error {
 	}
 }
 
+func validateVoiceCreationData(v *types.VoiceCreationData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VoiceCreationData"}
+	if v.Recordings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Recordings"))
+	} else if v.Recordings != nil {
+		if err := validateRecordingList(v.Recordings); err != nil {
+			invalidParams.AddNested("Recordings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateVoiceInput(v *CreateVoiceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVoiceInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if v.VoiceCreationData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceCreationData"))
+	} else if v.VoiceCreationData != nil {
+		if err := validateVoiceCreationData(v.VoiceCreationData); err != nil {
+			invalidParams.AddNested("VoiceCreationData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomerManagedEncryption != nil {
+		if err := validateCustomerManagedEncryption(v.CustomerManagedEncryption); err != nil {
+			invalidParams.AddNested("CustomerManagedEncryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteLexiconInput(v *DeleteLexiconInput) error {
 	if v == nil {
 		return nil
@@ -291,6 +462,21 @@ func validateOpDeleteLexiconInput(v *DeleteLexiconInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteLexiconInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVoiceInput(v *DeleteVoiceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVoiceInput"}
+	if v.VoiceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -321,6 +507,21 @@ func validateOpGetSpeechSynthesisTaskInput(v *GetSpeechSynthesisTaskInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "GetSpeechSynthesisTaskInput"}
 	if v.TaskId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetVoiceInput(v *GetVoiceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetVoiceInput"}
+	if v.VoiceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VoiceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

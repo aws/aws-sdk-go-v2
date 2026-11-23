@@ -8,6 +8,28 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeAgentSkillsSourceConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.AgentSkillsSourceConfiguration) {
+	switch vv := v.(type) {
+	case *types.AgentSkillsSourceConfigurationMemberS3:
+		s.WriteUnion(schema, schemas.AgentSkillsSourceConfiguration_s3)
+		s.WriteStruct(schemas.AgentSkillsSourceConfiguration_s3)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func serializeAuthorizationData(s smithy.ShapeSerializer, schema *smithy.Schema, v types.AuthorizationData) {
+	switch vv := v.(type) {
+	case *types.AuthorizationDataMemberOauth2:
+		s.WriteUnion(schema, schemas.AuthorizationData_oauth2)
+		s.WriteStruct(schemas.AuthorizationData_oauth2)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeAuthorizerConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.AuthorizerConfiguration) {
 	switch vv := v.(type) {
 	case *types.AuthorizerConfigurationMemberCustomJWTAuthorizer:
@@ -28,6 +50,15 @@ func serializeClaimMatchValueType(s smithy.ShapeSerializer, schema *smithy.Schem
 	case *types.ClaimMatchValueTypeMemberMatchValueStringList:
 		s.WriteUnion(schema, schemas.ClaimMatchValueType_matchValueStringList)
 		serializeMatchValueStringList(s, schemas.ClaimMatchValueType_matchValueStringList, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeIdentifier(s smithy.ShapeSerializer, schema *smithy.Schema, v types.Identifier) {
+	switch vv := v.(type) {
+	case *types.IdentifierMemberDomain:
+		s.WriteUnion(schema, schemas.Identifier_domain)
+		s.WriteString(schemas.Identifier_domain, vv.Value)
 		s.CloseUnion()
 	}
 }
@@ -64,6 +95,23 @@ func serializeRegistryRecordCredentialProviderUnion(s smithy.ShapeSerializer, sc
 	}
 }
 
+func serializeRegistryRecordSynchronizedSource(s smithy.ShapeSerializer, schema *smithy.Schema, v types.RegistryRecordSynchronizedSource) {
+	switch vv := v.(type) {
+	case *types.RegistryRecordSynchronizedSourceMemberGitHub:
+		s.WriteUnion(schema, schemas.RegistryRecordSynchronizedSource_gitHub)
+		s.WriteStruct(schemas.RegistryRecordSynchronizedSource_gitHub)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.RegistryRecordSynchronizedSourceMemberS3:
+		s.WriteUnion(schema, schemas.RegistryRecordSynchronizedSource_s3)
+		s.WriteStruct(schemas.RegistryRecordSynchronizedSource_s3)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeSelfManagedLatticeResource(s smithy.ShapeSerializer, schema *smithy.Schema, v types.SelfManagedLatticeResource) {
 	switch vv := v.(type) {
 	case *types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier:
@@ -90,6 +138,30 @@ func serializeSourceDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v t
 	}
 }
 
+func deserializeAgentSkillsSourceConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AgentSkillsSourceConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AgentSkillsSourceConfiguration_s3:
+			vv := &types.AgentSkillsSourceConfigurationMemberS3{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeAuthorizationData(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AuthorizationData) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AuthorizationData_oauth2:
+			vv := &types.AuthorizationDataMemberOauth2{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeAuthorizerConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AuthorizerConfiguration) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -111,6 +183,18 @@ func deserializeClaimMatchValueType(d smithy.ShapeDeserializer, s *smithy.Schema
 			return vv.Deserialize(d)
 		case schemas.ClaimMatchValueType_matchValueStringList:
 			vv := &types.ClaimMatchValueTypeMemberMatchValueStringList{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeIdentifier(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.Identifier) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.Identifier_domain:
+			vv := &types.IdentifierMemberDomain{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -143,6 +227,22 @@ func deserializeRegistryRecordCredentialProviderUnion(d smithy.ShapeDeserializer
 			return vv.Deserialize(d)
 		case schemas.RegistryRecordCredentialProviderUnion_oauthCredentialProvider:
 			vv := &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeRegistryRecordSynchronizedSource(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.RegistryRecordSynchronizedSource) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.RegistryRecordSynchronizedSource_gitHub:
+			vv := &types.RegistryRecordSynchronizedSourceMemberGitHub{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.RegistryRecordSynchronizedSource_s3:
+			vv := &types.RegistryRecordSynchronizedSourceMemberS3{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -210,6 +310,14 @@ func serializeAutoApprovalRuleList(s smithy.ShapeSerializer, schema *smithy.Sche
 	s.CloseList()
 }
 
+func serializeCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeCustomClaimValidationsType(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CustomClaimValidationType) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -257,6 +365,26 @@ func serializeProvenanceList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeProvenanceSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ProvenanceSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePublisherAssociationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PublisherAssociation) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializePublisherSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PublisherSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -452,6 +580,27 @@ func deserializeAutoApprovalRuleList(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeCategoryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeCustomClaimValidationsType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CustomClaimValidationType) error {
 	*v = make([]types.CustomClaimValidationType, 0)
 	var vv types.CustomClaimValidationType
@@ -573,6 +722,50 @@ func deserializeProvenanceSummaryList(d smithy.ShapeDeserializer, s *smithy.Sche
 		}
 
 		vv = types.ProvenanceSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePublisherAssociationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PublisherAssociation) error {
+	*v = make([]types.PublisherAssociation, 0)
+	var vv types.PublisherAssociation
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PublisherAssociation
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.PublisherAssociation{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializePublisherSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PublisherSummary) error {
+	*v = make([]types.PublisherSummary, 0)
+	var vv types.PublisherSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PublisherSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.PublisherSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -838,6 +1031,15 @@ func serializeResourceTagsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	s.CloseMap()
 }
 
+func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializeTagsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -869,6 +1071,27 @@ func deserializeCustomParameterMap(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeResourceTagsMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {

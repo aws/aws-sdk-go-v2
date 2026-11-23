@@ -64,6 +64,9 @@ type CreateChannelInput struct {
 	// Specification of network and file inputs for this channel
 	InputSpecification *types.InputSpecification
 
+	// Specification of JPEG XS inputs for this channel
+	JpegXsInputSpecification *types.JpegXsInputSpecification
+
 	// The linked channel settings for the channel.
 	LinkedChannelSettings *types.LinkedChannelSettings
 
@@ -148,6 +151,11 @@ func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InputSpecification != nil {
 		s.WriteStruct(schemas.CreateChannelRequest_InputSpecification)
 		v.InputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JpegXsInputSpecification != nil {
+		s.WriteStruct(schemas.CreateChannelRequest_JpegXsInputSpecification)
+		v.JpegXsInputSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.LinkedChannelSettings != nil {

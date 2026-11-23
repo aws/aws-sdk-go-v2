@@ -1809,11 +1809,17 @@ type IntegrationStatus string
 
 // Enum values for IntegrationStatus
 const (
-	IntegrationStatusPending    IntegrationStatus = "PENDING"
-	IntegrationStatusInProgress IntegrationStatus = "IN_PROGRESS"
-	IntegrationStatusActive     IntegrationStatus = "ACTIVE"
-	IntegrationStatusInactive   IntegrationStatus = "INACTIVE"
-	IntegrationStatusDisabling  IntegrationStatus = "DISABLING"
+	IntegrationStatusPending                          IntegrationStatus = "PENDING"
+	IntegrationStatusInProgress                       IntegrationStatus = "IN_PROGRESS"
+	IntegrationStatusActive                           IntegrationStatus = "ACTIVE"
+	IntegrationStatusInactive                         IntegrationStatus = "INACTIVE"
+	IntegrationStatusDisabling                        IntegrationStatus = "DISABLING"
+	IntegrationStatusEstablishingConnectionInProgress IntegrationStatus = "ESTABLISHING_CONNECTION_IN_PROGRESS"
+	IntegrationStatusEstablishingConnectionCompleted  IntegrationStatus = "ESTABLISHING_CONNECTION_COMPLETED"
+	IntegrationStatusEstablishingConnectionFailed     IntegrationStatus = "ESTABLISHING_CONNECTION_FAILED"
+	IntegrationStatusPendingManifestCode              IntegrationStatus = "PENDING_MANIFEST_CODE"
+	IntegrationStatusDeleteInProgress                 IntegrationStatus = "DELETE_IN_PROGRESS"
+	IntegrationStatusDeleteFailed                     IntegrationStatus = "DELETE_FAILED"
 )
 
 // Values returns all known values for IntegrationStatus. Note that this can be
@@ -1827,6 +1833,12 @@ func (IntegrationStatus) Values() []IntegrationStatus {
 		"ACTIVE",
 		"INACTIVE",
 		"DISABLING",
+		"ESTABLISHING_CONNECTION_IN_PROGRESS",
+		"ESTABLISHING_CONNECTION_COMPLETED",
+		"ESTABLISHING_CONNECTION_FAILED",
+		"PENDING_MANIFEST_CODE",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
 	}
 }
 
@@ -1834,8 +1846,9 @@ type IntegrationType string
 
 // Enum values for IntegrationType
 const (
-	IntegrationTypeGitlabSelfManaged IntegrationType = "GITLAB_SELF_MANAGED"
-	IntegrationTypeGithub            IntegrationType = "GITHUB"
+	IntegrationTypeGitlabSelfManaged      IntegrationType = "GITLAB_SELF_MANAGED"
+	IntegrationTypeGithub                 IntegrationType = "GITHUB"
+	IntegrationTypeGithubEnterpriseServer IntegrationType = "GITHUB_ENTERPRISE_SERVER"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -1846,6 +1859,7 @@ func (IntegrationType) Values() []IntegrationType {
 	return []IntegrationType{
 		"GITLAB_SELF_MANAGED",
 		"GITHUB",
+		"GITHUB_ENTERPRISE_SERVER",
 	}
 }
 
@@ -2245,6 +2259,53 @@ func (ProviderComparison) Values() []ProviderComparison {
 	}
 }
 
+type PurlQualifierKey string
+
+// Enum values for PurlQualifierKey
+const (
+	PurlQualifierKeyArch                 PurlQualifierKey = "arch"
+	PurlQualifierKeyCollector            PurlQualifierKey = "collector"
+	PurlQualifierKeyDevDependency        PurlQualifierKey = "dev_dependency"
+	PurlQualifierKeyDistro               PurlQualifierKey = "distro"
+	PurlQualifierKeyEpoch                PurlQualifierKey = "epoch"
+	PurlQualifierKeyGoToolchain          PurlQualifierKey = "go_toolchain"
+	PurlQualifierKeyHardened             PurlQualifierKey = "hardened"
+	PurlQualifierKeyPrivate              PurlQualifierKey = "private"
+	PurlQualifierKeyRustToolchain        PurlQualifierKey = "rust_toolchain"
+	PurlQualifierKeyScope                PurlQualifierKey = "scope"
+	PurlQualifierKeySkipChromiumDownload PurlQualifierKey = "skip_chromium_download"
+	PurlQualifierKeySource               PurlQualifierKey = "source"
+	PurlQualifierKeyStream               PurlQualifierKey = "stream"
+	PurlQualifierKeyTransitiveDependency PurlQualifierKey = "transitive_dependency"
+	PurlQualifierKeyUnresolved           PurlQualifierKey = "unresolved"
+	PurlQualifierKeyVendor               PurlQualifierKey = "vendor"
+)
+
+// Values returns all known values for PurlQualifierKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PurlQualifierKey) Values() []PurlQualifierKey {
+	return []PurlQualifierKey{
+		"arch",
+		"collector",
+		"dev_dependency",
+		"distro",
+		"epoch",
+		"go_toolchain",
+		"hardened",
+		"private",
+		"rust_toolchain",
+		"scope",
+		"skip_chromium_download",
+		"source",
+		"stream",
+		"transitive_dependency",
+		"unresolved",
+		"vendor",
+	}
+}
+
 type RelationshipStatus string
 
 // Enum values for RelationshipStatus
@@ -2550,6 +2611,70 @@ func (Runtime) Values() []Runtime {
 		"RUBY_3_3",
 		"DOTNET_8",
 		"NODEJS_20_X",
+	}
+}
+
+type RuntimeReachability string
+
+// Enum values for RuntimeReachability
+const (
+	RuntimeReachabilityReachable    RuntimeReachability = "REACHABLE"
+	RuntimeReachabilityNotReachable RuntimeReachability = "NOT_REACHABLE"
+	RuntimeReachabilityUnknown      RuntimeReachability = "UNKNOWN"
+)
+
+// Values returns all known values for RuntimeReachability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuntimeReachability) Values() []RuntimeReachability {
+	return []RuntimeReachability{
+		"REACHABLE",
+		"NOT_REACHABLE",
+		"UNKNOWN",
+	}
+}
+
+type RuntimeReachabilityComparison string
+
+// Enum values for RuntimeReachabilityComparison
+const (
+	RuntimeReachabilityComparisonEquals    RuntimeReachabilityComparison = "EQUALS"
+	RuntimeReachabilityComparisonNotEquals RuntimeReachabilityComparison = "NOT_EQUALS"
+)
+
+// Values returns all known values for RuntimeReachabilityComparison. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuntimeReachabilityComparison) Values() []RuntimeReachabilityComparison {
+	return []RuntimeReachabilityComparison{
+		"EQUALS",
+		"NOT_EQUALS",
+	}
+}
+
+type RuntimeReachabilityReason string
+
+// Enum values for RuntimeReachabilityReason
+const (
+	RuntimeReachabilityReasonPackageInDockerfileWorkloadPath    RuntimeReachabilityReason = "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"
+	RuntimeReachabilityReasonPackageNotInDockerfileWorkloadPath RuntimeReachabilityReason = "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH"
+	RuntimeReachabilityReasonProcessObservedInEc2Runtime        RuntimeReachabilityReason = "PROCESS_OBSERVED_IN_EC2_RUNTIME"
+	RuntimeReachabilityReasonProcessNotObservedInEc2Runtime     RuntimeReachabilityReason = "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME"
+)
+
+// Values returns all known values for RuntimeReachabilityReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuntimeReachabilityReason) Values() []RuntimeReachabilityReason {
+	return []RuntimeReachabilityReason{
+		"PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH",
+		"PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH",
+		"PROCESS_OBSERVED_IN_EC2_RUNTIME",
+		"PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME",
 	}
 }
 

@@ -112,6 +112,10 @@ type GetResponderGatewayOutput struct {
 	// The domain name of the responder gateway.
 	DomainName *string
 
+	// The causes of the failure, such as a deleted subnet. Present only when the
+	// resource has failed.
+	ErrorDetails []types.ErrorDetail
+
 	// The external inbound endpoint for the responder gateway.
 	ExternalInboundEndpoint *string
 
@@ -168,6 +172,9 @@ func (v *GetResponderGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.GetResponderGatewayResponse_domainName, *v.DomainName)
+	}
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.GetResponderGatewayResponse_errorDetails, v.ErrorDetails)
 	}
 	if v.ExternalInboundEndpoint != nil {
 		s.WriteString(schemas.GetResponderGatewayResponse_externalInboundEndpoint, *v.ExternalInboundEndpoint)
@@ -244,6 +251,8 @@ func (v *GetResponderGatewayOutput) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.GetResponderGatewayResponse_domainName:
 			v.DomainName = new(string)
 			return d.ReadString(schemas.GetResponderGatewayResponse_domainName, v.DomainName)
+		case schemas.GetResponderGatewayResponse_errorDetails:
+			return deserializeErrorDetails(d, schemas.GetResponderGatewayResponse_errorDetails, &v.ErrorDetails)
 		case schemas.GetResponderGatewayResponse_externalInboundEndpoint:
 			v.ExternalInboundEndpoint = new(string)
 			return d.ReadString(schemas.GetResponderGatewayResponse_externalInboundEndpoint, v.ExternalInboundEndpoint)
@@ -508,6 +517,16 @@ func responderGatewayActiveStateRetryable(ctx context.Context, input *GetRespond
 
 	if err == nil {
 		v1 := output.Status
+		expectedValue := "CREATE_FAILED"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	if err == nil {
+		v1 := output.Status
 		expectedValue := "ACTIVE"
 		var pathValue string
 		pathValue = string(v1)
@@ -702,6 +721,16 @@ func (w *ResponderGatewayDeletedWaiter) WaitForOutput(ctx context.Context, param
 }
 
 func responderGatewayDeletedStateRetryable(ctx context.Context, input *GetResponderGatewayInput, output *GetResponderGatewayOutput, err error) (bool, error) {
+
+	if err == nil {
+		v1 := output.Status
+		expectedValue := "DELETE_FAILED"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
 
 	if err == nil {
 		v1 := output.Status

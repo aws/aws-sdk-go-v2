@@ -20,6 +20,9 @@ import (
 // previously enabled the Automation feature, the association process automatically
 // enables it.
 //
+// Requests that include an account to which an organization enrollment
+// configuration applies are rejected.
+//
 // Only the management account or a delegated administrator can perform this
 // action.
 func (c *Client) AssociateAccounts(ctx context.Context, params *AssociateAccountsInput, optFns ...func(*Options)) (*AssociateAccountsOutput, error) {
@@ -45,7 +48,7 @@ type AssociateAccountsInput struct {
 	// This member is required.
 	AccountIds []string
 
-	//  A unique identifier to ensure idempotency of the request. Valid for 24 hours
+	//  A unique identifier to ensure idempotency of the request. Valid for 30 minutes
 	// after creation.
 	ClientToken *string
 

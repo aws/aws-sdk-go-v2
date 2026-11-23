@@ -590,6 +590,18 @@ func TestCheckSnapshot_ListFirewallDomains(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListFirewallRuleDomains(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFirewallRuleDomains(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFirewallRuleDomains")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListFirewallRuleGroupAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListFirewallRuleGroupAssociations(context.Background(), nil, func(o *Options) {
@@ -1446,6 +1458,18 @@ func TestUpdateSnapshot_ListFirewallDomains(t *testing.T) {
 	_, err := svc.ListFirewallDomains(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFirewallDomains")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFirewallRuleDomains(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFirewallRuleDomains(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFirewallRuleDomains")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

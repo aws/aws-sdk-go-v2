@@ -104,6 +104,31 @@ func (CleanUpStrategy) Values() []CleanUpStrategy {
 	}
 }
 
+type CodeRemediationJobStatus string
+
+// Enum values for CodeRemediationJobStatus
+const (
+	CodeRemediationJobStatusInProgress       CodeRemediationJobStatus = "IN_PROGRESS"
+	CodeRemediationJobStatusCompleted        CodeRemediationJobStatus = "COMPLETED"
+	CodeRemediationJobStatusFailed           CodeRemediationJobStatus = "FAILED"
+	CodeRemediationJobStatusNoChangeRequired CodeRemediationJobStatus = "NO_CHANGE_REQUIRED"
+	CodeRemediationJobStatusUnknown          CodeRemediationJobStatus = "UNKNOWN"
+)
+
+// Values returns all known values for CodeRemediationJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CodeRemediationJobStatus) Values() []CodeRemediationJobStatus {
+	return []CodeRemediationJobStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"NO_CHANGE_REQUIRED",
+		"UNKNOWN",
+	}
+}
+
 type CodeRemediationStrategy string
 
 // Enum values for CodeRemediationStrategy
@@ -250,6 +275,8 @@ const (
 	ErrorCodeInternalError ErrorCode = "INTERNAL_ERROR"
 	// Pentest job was stopped by the user.
 	ErrorCodeStoppedByUser ErrorCode = "STOPPED_BY_USER"
+	// Pentest job was paused by the user.
+	ErrorCodePausedByUser ErrorCode = "PAUSED_BY_USER"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
@@ -261,6 +288,7 @@ func (ErrorCode) Values() []ErrorCode {
 		"CLIENT_ERROR",
 		"INTERNAL_ERROR",
 		"STOPPED_BY_USER",
+		"PAUSED_BY_USER",
 	}
 }
 
@@ -337,6 +365,11 @@ const (
 	JobStatusStopping JobStatus = "STOPPING"
 	// Pentest job was stopped by the user.
 	JobStatusStopped JobStatus = "STOPPED"
+	// Pentest job is being paused.
+	JobStatusPausing JobStatus = "PAUSING"
+	// Pentest job is paused. A paused job can be resumed from its last saved
+	// checkpoint within 7 days of the job's creation.
+	JobStatusPaused JobStatus = "PAUSED"
 	// Pentest job failed during execution.
 	JobStatusFailed JobStatus = "FAILED"
 	// Pentest job completed successfully.
@@ -352,6 +385,8 @@ func (JobStatus) Values() []JobStatus {
 		"IN_PROGRESS",
 		"STOPPING",
 		"STOPPED",
+		"PAUSING",
+		"PAUSED",
 		"FAILED",
 		"COMPLETED",
 	}

@@ -110,6 +110,66 @@ func (m *validateOpCreateAdapterVersion) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateBlueprint struct {
+}
+
+func (*validateOpCreateBlueprint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBlueprint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBlueprintInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBlueprintInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateBlueprintVersion struct {
+}
+
+func (*validateOpCreateBlueprintVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBlueprintVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBlueprintVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBlueprintVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateProject struct {
+}
+
+func (*validateOpCreateProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateProjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAdapter struct {
 }
 
@@ -145,6 +205,46 @@ func (m *validateOpDeleteAdapterVersion) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteAdapterVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBlueprint struct {
+}
+
+func (*validateOpDeleteBlueprint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBlueprint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBlueprintInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBlueprintInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteProject struct {
+}
+
+func (*validateOpDeleteProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProjectInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -210,6 +310,26 @@ func (m *validateOpGetAdapterVersion) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetBlueprint struct {
+}
+
+func (*validateOpGetBlueprint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBlueprint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBlueprintInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBlueprintInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDocumentAnalysis struct {
 }
 
@@ -225,6 +345,26 @@ func (m *validateOpGetDocumentAnalysis) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDocumentAnalysisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDocumentInsights struct {
+}
+
+func (*validateOpGetDocumentInsights) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDocumentInsights) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDocumentInsightsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDocumentInsightsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +450,66 @@ func (m *validateOpGetLendingAnalysisSummary) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetProject struct {
+}
+
+func (*validateOpGetProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetProjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListBlueprints struct {
+}
+
+func (*validateOpListBlueprints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListBlueprints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListBlueprintsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListBlueprintsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListProjects struct {
+}
+
+func (*validateOpListProjects) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProjects) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListProjectsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListProjectsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -345,6 +545,26 @@ func (m *validateOpStartDocumentAnalysis) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartDocumentAnalysisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartDocumentInsights struct {
+}
+
+func (*validateOpStartDocumentInsights) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDocumentInsights) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDocumentInsightsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDocumentInsightsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +690,46 @@ func (m *validateOpUpdateAdapter) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateBlueprint struct {
+}
+
+func (*validateOpUpdateBlueprint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBlueprint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBlueprintInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBlueprintInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateProject struct {
+}
+
+func (*validateOpUpdateProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAnalyzeDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAnalyzeDocument{}, middleware.After)
 }
@@ -490,12 +750,32 @@ func addOpCreateAdapterVersionValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateAdapterVersion{}, middleware.After)
 }
 
+func addOpCreateBlueprintValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBlueprint{}, middleware.After)
+}
+
+func addOpCreateBlueprintVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBlueprintVersion{}, middleware.After)
+}
+
+func addOpCreateProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateProject{}, middleware.After)
+}
+
 func addOpDeleteAdapterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAdapter{}, middleware.After)
 }
 
 func addOpDeleteAdapterVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAdapterVersion{}, middleware.After)
+}
+
+func addOpDeleteBlueprintValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBlueprint{}, middleware.After)
+}
+
+func addOpDeleteProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProject{}, middleware.After)
 }
 
 func addOpDetectDocumentTextValidationMiddleware(stack *middleware.Stack) error {
@@ -510,8 +790,16 @@ func addOpGetAdapterVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAdapterVersion{}, middleware.After)
 }
 
+func addOpGetBlueprintValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBlueprint{}, middleware.After)
+}
+
 func addOpGetDocumentAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDocumentAnalysis{}, middleware.After)
+}
+
+func addOpGetDocumentInsightsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDocumentInsights{}, middleware.After)
 }
 
 func addOpGetDocumentTextDetectionValidationMiddleware(stack *middleware.Stack) error {
@@ -530,12 +818,28 @@ func addOpGetLendingAnalysisSummaryValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpGetLendingAnalysisSummary{}, middleware.After)
 }
 
+func addOpGetProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetProject{}, middleware.After)
+}
+
+func addOpListBlueprintsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListBlueprints{}, middleware.After)
+}
+
+func addOpListProjectsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProjects{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpStartDocumentAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartDocumentAnalysis{}, middleware.After)
+}
+
+func addOpStartDocumentInsightsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDocumentInsights{}, middleware.After)
 }
 
 func addOpStartDocumentTextDetectionValidationMiddleware(stack *middleware.Stack) error {
@@ -560,6 +864,14 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAdapterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAdapter{}, middleware.After)
+}
+
+func addOpUpdateBlueprintValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBlueprint{}, middleware.After)
+}
+
+func addOpUpdateProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProject{}, middleware.After)
 }
 
 func validateAdapter(v *types.Adapter) error {
@@ -616,6 +928,205 @@ func validateAdaptersConfig(v *types.AdaptersConfig) error {
 	}
 }
 
+func validateBlueprintFilter(v *types.BlueprintFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BlueprintFilter"}
+	if v.BlueprintArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBlueprintItem(v *types.BlueprintItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BlueprintItem"}
+	if v.BlueprintArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBlueprintItems(v []types.BlueprintItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BlueprintItems"}
+	for i := range v {
+		if err := validateBlueprintItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBoundingBoxConfiguration(v *types.BoundingBoxConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BoundingBoxConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomConfiguration(v *types.CustomConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomConfiguration"}
+	if v.Blueprints == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Blueprints"))
+	} else if v.Blueprints != nil {
+		if err := validateBlueprintItems(v.Blueprints); err != nil {
+			invalidParams.AddNested("Blueprints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FallbackBlueprints != nil {
+		if err := validateFallbackBlueprintItems(v.FallbackBlueprints); err != nil {
+			invalidParams.AddNested("FallbackBlueprints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfiguration"}
+	if v.KmsKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEventBridgeConfiguration(v *types.EventBridgeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventBridgeConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExtractionConfiguration(v *types.ExtractionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExtractionConfiguration"}
+	if v.BoundingBox == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BoundingBox"))
+	} else if v.BoundingBox != nil {
+		if err := validateBoundingBoxConfiguration(v.BoundingBox); err != nil {
+			invalidParams.AddNested("BoundingBox", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Granularity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Granularity"))
+	}
+	if v.OutputFormat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputFormat"))
+	} else if v.OutputFormat != nil {
+		if err := validateOutputFormat(v.OutputFormat); err != nil {
+			invalidParams.AddNested("OutputFormat", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFallbackBlueprintItems(v []types.BlueprintItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FallbackBlueprintItems"}
+	for i := range v {
+		if err := validateBlueprintItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFigureCaptionConfiguration(v *types.FigureCaptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FigureCaptionConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGenerativeConfiguration(v *types.GenerativeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GenerativeConfiguration"}
+	if v.Summarization != nil {
+		if err := validateSummarizationConfiguration(v.Summarization); err != nil {
+			invalidParams.AddNested("Summarization", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FigureCaption != nil {
+		if err := validateFigureCaptionConfiguration(v.FigureCaption); err != nil {
+			invalidParams.AddNested("FigureCaption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHumanLoopConfig(v *types.HumanLoopConfig) error {
 	if v == nil {
 		return nil
@@ -626,6 +1137,21 @@ func validateHumanLoopConfig(v *types.HumanLoopConfig) error {
 	}
 	if v.FlowDefinitionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowDefinitionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInputConfiguration(v *types.InputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputConfiguration"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -652,6 +1178,40 @@ func validateNotificationChannel(v *types.NotificationChannel) error {
 	}
 }
 
+func validateNotificationConfiguration(v *types.NotificationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationConfiguration"}
+	if v.EventBridgeConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventBridgeConfiguration"))
+	} else if v.EventBridgeConfiguration != nil {
+		if err := validateEventBridgeConfiguration(v.EventBridgeConfiguration); err != nil {
+			invalidParams.AddNested("EventBridgeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputAdditionalFileFormat(v *types.OutputAdditionalFileFormat) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputAdditionalFileFormat"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOutputConfig(v *types.OutputConfig) error {
 	if v == nil {
 		return nil
@@ -659,6 +1219,76 @@ func validateOutputConfig(v *types.OutputConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "OutputConfig"}
 	if v.S3Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputConfiguration(v *types.OutputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputConfiguration"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputFormat(v *types.OutputFormat) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputFormat"}
+	if v.AdditionalFileFormat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdditionalFileFormat"))
+	} else if v.AdditionalFileFormat != nil {
+		if err := validateOutputAdditionalFileFormat(v.AdditionalFileFormat); err != nil {
+			invalidParams.AddNested("AdditionalFileFormat", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TextFormat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePIIEntitiesConfiguration(v *types.PIIEntitiesConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PIIEntitiesConfiguration"}
+	if v.PiiEntityTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PiiEntityTypes"))
+	}
+	if len(v.RedactionMaskMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RedactionMaskMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProjectFilter(v *types.ProjectFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProjectFilter"}
+	if v.ProjectArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -710,6 +1340,56 @@ func validateQuery(v *types.Query) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Query"}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSensitiveDataConfiguration(v *types.SensitiveDataConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SensitiveDataConfiguration"}
+	if len(v.DetectionMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectionMode"))
+	}
+	if v.PiiEntitiesConfiguration != nil {
+		if err := validatePIIEntitiesConfiguration(v.PiiEntitiesConfiguration); err != nil {
+			invalidParams.AddNested("PiiEntitiesConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSplitterConfiguration(v *types.SplitterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SplitterConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSummarizationConfiguration(v *types.SummarizationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SummarizationConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -824,6 +1504,91 @@ func validateOpCreateAdapterVersionInput(v *CreateAdapterVersionInput) error {
 	}
 }
 
+func validateOpCreateBlueprintInput(v *CreateBlueprintInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBlueprintInput"}
+	if v.BlueprintName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintName"))
+	}
+	if v.Schema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schema"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateBlueprintVersionInput(v *CreateBlueprintVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBlueprintVersionInput"}
+	if v.BlueprintArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateProjectInput(v *CreateProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProjectInput"}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.ExtractionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExtractionConfiguration"))
+	} else if v.ExtractionConfiguration != nil {
+		if err := validateExtractionConfiguration(v.ExtractionConfiguration); err != nil {
+			invalidParams.AddNested("ExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GenerativeConfiguration != nil {
+		if err := validateGenerativeConfiguration(v.GenerativeConfiguration); err != nil {
+			invalidParams.AddNested("GenerativeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomConfiguration != nil {
+		if err := validateCustomConfiguration(v.CustomConfiguration); err != nil {
+			invalidParams.AddNested("CustomConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SplitterConfiguration != nil {
+		if err := validateSplitterConfiguration(v.SplitterConfiguration); err != nil {
+			invalidParams.AddNested("SplitterConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SensitiveDataConfiguration != nil {
+		if err := validateSensitiveDataConfiguration(v.SensitiveDataConfiguration); err != nil {
+			invalidParams.AddNested("SensitiveDataConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAdapterInput(v *DeleteAdapterInput) error {
 	if v == nil {
 		return nil
@@ -849,6 +1614,36 @@ func validateOpDeleteAdapterVersionInput(v *DeleteAdapterVersionInput) error {
 	}
 	if v.AdapterVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AdapterVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBlueprintInput(v *DeleteBlueprintInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBlueprintInput"}
+	if v.BlueprintArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteProjectInput(v *DeleteProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProjectInput"}
+	if v.ProjectArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -905,6 +1700,21 @@ func validateOpGetAdapterVersionInput(v *GetAdapterVersionInput) error {
 	}
 }
 
+func validateOpGetBlueprintInput(v *GetBlueprintInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBlueprintInput"}
+	if v.BlueprintArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDocumentAnalysisInput(v *GetDocumentAnalysisInput) error {
 	if v == nil {
 		return nil
@@ -912,6 +1722,21 @@ func validateOpGetDocumentAnalysisInput(v *GetDocumentAnalysisInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetDocumentAnalysisInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDocumentInsightsInput(v *GetDocumentInsightsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDocumentInsightsInput"}
+	if v.JobArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -980,6 +1805,55 @@ func validateOpGetLendingAnalysisSummaryInput(v *GetLendingAnalysisSummaryInput)
 	}
 }
 
+func validateOpGetProjectInput(v *GetProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetProjectInput"}
+	if v.ProjectArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListBlueprintsInput(v *ListBlueprintsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListBlueprintsInput"}
+	if v.ProjectFilter != nil {
+		if err := validateProjectFilter(v.ProjectFilter); err != nil {
+			invalidParams.AddNested("ProjectFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListProjectsInput(v *ListProjectsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProjectsInput"}
+	if v.BlueprintFilter != nil {
+		if err := validateBlueprintFilter(v.BlueprintFilter); err != nil {
+			invalidParams.AddNested("BlueprintFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1024,6 +1898,47 @@ func validateOpStartDocumentAnalysisInput(v *StartDocumentAnalysisInput) error {
 	if v.AdaptersConfig != nil {
 		if err := validateAdaptersConfig(v.AdaptersConfig); err != nil {
 			invalidParams.AddNested("AdaptersConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDocumentInsightsInput(v *StartDocumentInsightsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDocumentInsightsInput"}
+	if v.InputConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputConfiguration"))
+	} else if v.InputConfiguration != nil {
+		if err := validateInputConfiguration(v.InputConfiguration); err != nil {
+			invalidParams.AddNested("InputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfiguration"))
+	} else if v.OutputConfiguration != nil {
+		if err := validateOutputConfiguration(v.OutputConfiguration); err != nil {
+			invalidParams.AddNested("OutputConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Blueprints != nil {
+		if err := validateBlueprintItems(v.Blueprints); err != nil {
+			invalidParams.AddNested("Blueprints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NotificationConfiguration != nil {
+		if err := validateNotificationConfiguration(v.NotificationConfiguration); err != nil {
+			invalidParams.AddNested("NotificationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1151,6 +2066,71 @@ func validateOpUpdateAdapterInput(v *UpdateAdapterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAdapterInput"}
 	if v.AdapterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AdapterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBlueprintInput(v *UpdateBlueprintInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBlueprintInput"}
+	if v.BlueprintArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintArn"))
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProjectInput(v *UpdateProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProjectInput"}
+	if v.ProjectArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	}
+	if v.ExtractionConfiguration != nil {
+		if err := validateExtractionConfiguration(v.ExtractionConfiguration); err != nil {
+			invalidParams.AddNested("ExtractionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GenerativeConfiguration != nil {
+		if err := validateGenerativeConfiguration(v.GenerativeConfiguration); err != nil {
+			invalidParams.AddNested("GenerativeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomConfiguration != nil {
+		if err := validateCustomConfiguration(v.CustomConfiguration); err != nil {
+			invalidParams.AddNested("CustomConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SplitterConfiguration != nil {
+		if err := validateSplitterConfiguration(v.SplitterConfiguration); err != nil {
+			invalidParams.AddNested("SplitterConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SensitiveDataConfiguration != nil {
+		if err := validateSensitiveDataConfiguration(v.SensitiveDataConfiguration); err != nil {
+			invalidParams.AddNested("SensitiveDataConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

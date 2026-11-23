@@ -763,6 +763,14 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.cloudformation#CancelledStackInstancesCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.cloudformation#Capabilities": {
             "type": "list",
             "member": {
@@ -2792,6 +2800,22 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#CompletedAccountsCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#CompletedStackInstancesCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.cloudformation#ConcurrencyMode": {
             "type": "enum",
             "members": {
@@ -2860,7 +2884,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Continues rolling back a stack from <code>UPDATE_ROLLBACK_FAILED</code> to\n        <code>UPDATE_ROLLBACK_COMPLETE</code> state. Depending on the cause of the failure, you can\n      manually fix the error and continue the rollback. By continuing the rollback, you can return\n      your stack to a working state (the <code>UPDATE_ROLLBACK_COMPLETE</code> state) and then try\n      to update the stack again.</p>\n         <p>A stack enters the <code>UPDATE_ROLLBACK_FAILED</code> state when CloudFormation can't roll\n      back all changes after a failed stack update. For example, this might occur when a stack\n      attempts to roll back to an old database that was deleted outside of CloudFormation. Because\n      CloudFormation doesn't know the instance was deleted, it assumes the instance still exists and\n      attempts to roll back to it, causing the update rollback to fail.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html\">Continue rolling back an update</a> in the <i>CloudFormation User Guide</i>. For\n      information for troubleshooting a failed update rollback, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed\">Update rollback failed</a>.</p>\n         <p>\n            <code>ForceRollback</code> and <code>ResourcesToSkip</code> are mutually exclusive.\n      For details, see <a>ContinueUpdateRollbackInput$ForceRollback</a>.</p>"
+                "smithy.api#documentation": "<p>Continues rolling back a stack from <code>UPDATE_ROLLBACK_FAILED</code> to\n        <code>UPDATE_ROLLBACK_COMPLETE</code> state. Depending on the cause of the failure, you can\n      manually fix the error and continue the rollback. By continuing the rollback, you can return\n      your stack to a working state (the <code>UPDATE_ROLLBACK_COMPLETE</code> state) and then try\n      to update the stack again.</p>\n         <p>A stack enters the <code>UPDATE_ROLLBACK_FAILED</code> state when CloudFormation can't roll\n      back all changes after a failed stack update. For example, this might occur when a stack\n      attempts to roll back to an old database that was deleted outside of CloudFormation. Because\n      CloudFormation doesn't know the instance was deleted, it assumes the instance still exists and\n      attempts to roll back to it, causing the update rollback to fail.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html\">Continue rolling back an update</a> in the <i>CloudFormation User Guide</i>. For\n      information for troubleshooting a failed update rollback, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed\">Update rollback failed</a>.</p>\n         <p>\n            <code>ForceRollback</code> and <code>ResourcesToSkip</code> are mutually exclusive.\n      For details, see the <code>ForceRollback</code> parameter.</p>"
             }
         },
         "com.amazonaws.cloudformation#ContinueUpdateRollbackInput": {
@@ -3628,7 +3652,7 @@
                 "Capabilities": {
                     "target": "com.amazonaws.cloudformation#Capabilities",
                     "traits": {
-                        "smithy.api#documentation": "<p>In some cases, you must explicitly acknowledge that your StackSet template contains\n      certain capabilities in order for CloudFormation to create the StackSet and related stack\n      instances.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CAPABILITY_IAM</code> and <code>CAPABILITY_NAMED_IAM</code>\n               </p>\n               <p>Some stack templates might include resources that can affect permissions in your\n          Amazon Web Services account; for example, by creating new IAM users. For those StackSets, you must\n          explicitly acknowledge this by specifying one of these capabilities.</p>\n               <p>The following IAM resources require you to specify either the\n            <code>CAPABILITY_IAM</code> or <code>CAPABILITY_NAMED_IAM</code> capability.</p>\n               <ul>\n                  <li>\n                     <p>If you have IAM resources, you can specify either capability.</p>\n                  </li>\n                  <li>\n                     <p>If you have IAM resources with custom names, you <i>must</i>\n              specify <code>CAPABILITY_NAMED_IAM</code>.</p>\n                  </li>\n                  <li>\n                     <p>If you don't specify either of these capabilities, CloudFormation returns an\n                <code>InsufficientCapabilities</code> error.</p>\n                  </li>\n               </ul>\n               <p>If your stack template contains these resources, we recommend that you review all\n          permissions associated with them and edit their permissions if necessary.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html\">AWS::IAM::AccessKey</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html\">AWS::IAM::Group</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html\">AWS::IAM::InstanceProfile</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html\">AWS::IAM::Policy</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html\">AWS::IAM::Role</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html\">AWS::IAM::User</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html\">AWS::IAM::UserToGroupAddition</a>\n                     </p>\n                  </li>\n               </ul>\n               <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities\">Acknowledging IAM resources in CloudFormation templates</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CAPABILITY_AUTO_EXPAND</code>\n               </p>\n               <p>Some templates reference macros. If your StackSet template references one or more\n          macros, you must create the StackSet directly from the processed template, without first\n          reviewing the resulting changes in a change set. To create the StackSet directly, you must\n          acknowledge this capability. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html\">Perform custom processing\n            on CloudFormation templates with template macros</a>.</p>\n               <important>\n                  <p>StackSets with service-managed permissions don't currently support the use of macros\n            in templates. (This includes the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html\">AWS::Include</a> and <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html\">AWS::Serverless</a> transforms, which are macros hosted by CloudFormation.) Even if\n            you specify this capability for a StackSet with service-managed permissions, if you\n            reference a macro in your template the StackSet operation will fail.</p>\n               </important>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>In some cases, you must explicitly acknowledge that your StackSet template contains\n      certain capabilities in order for CloudFormation to create the StackSet and related stack\n      instances.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CAPABILITY_IAM</code> and <code>CAPABILITY_NAMED_IAM</code>\n               </p>\n               <p>Some stack templates might include resources that can affect permissions in your\n          Amazon Web Services account; for example, by creating new IAM users. For those StackSets, you must\n          explicitly acknowledge this by specifying one of these capabilities.</p>\n               <p>The following IAM resources require you to specify either the\n            <code>CAPABILITY_IAM</code> or <code>CAPABILITY_NAMED_IAM</code> capability.</p>\n               <ul>\n                  <li>\n                     <p>If you have IAM resources, you can specify either capability.</p>\n                  </li>\n                  <li>\n                     <p>If you have IAM resources with custom names, you <i>must</i>\n              specify <code>CAPABILITY_NAMED_IAM</code>.</p>\n                  </li>\n                  <li>\n                     <p>If you don't specify either of these capabilities, CloudFormation returns an\n                <code>InsufficientCapabilities</code> error.</p>\n                  </li>\n               </ul>\n               <p>If your stack template contains these resources, we recommend that you review all\n          permissions associated with them and edit their permissions if necessary.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html\">AWS::IAM::AccessKey</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html\">AWS::IAM::Group</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html\">AWS::IAM::InstanceProfile</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html\">AWS::IAM::Policy</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html\">AWS::IAM::Role</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html\">AWS::IAM::User</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html\">AWS::IAM::UserToGroupAddition</a>\n                     </p>\n                  </li>\n               </ul>\n               <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities\">Acknowledging IAM resources in CloudFormation templates</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CAPABILITY_AUTO_EXPAND</code>\n               </p>\n               <p>Some templates reference macros. If your StackSet template references one or more\n          macros, you must create the StackSet directly from the processed template, without first\n          reviewing the resulting changes in a change set. To create the StackSet directly, you must\n          acknowledge this capability. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html\">Perform custom processing\n            on CloudFormation templates with template macros</a>.</p>\n               <important>\n                  <p>With service-managed permissions, CloudFormation can process macros, nested stacks, and\n            transforms in your StackSet template only when you provide a custom execution role\n            template. (Macros include the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html\">AWS::Include</a> and <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html\">AWS::Serverless</a> transforms, which are macros hosted by CloudFormation.) The\n            default service-managed execution role can't provision them: if you reference a macro\n            in your template, the StackSet operation fails even when you specify this\n            capability.</p>\n                  <p>To use macros, nested stacks, or transforms with service-managed permissions,\n            specify a custom execution role template in\n              <code>ExecutionRoleTemplateBody</code> or <code>ExecutionRoleTemplateUrl</code>, and\n            specify both <code>CAPABILITY_NAMED_IAM</code> and\n              <code>CAPABILITY_AUTO_EXPAND</code>.</p>\n               </important>\n            </li>\n         </ul>"
                     }
                 },
                 "Tags": {
@@ -3646,7 +3670,7 @@
                 "ExecutionRoleName": {
                     "target": "com.amazonaws.cloudformation#ExecutionRoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM execution role to use to create the StackSet. If you do not specify\n      an execution role, CloudFormation uses the <code>AWSCloudFormationStackSetExecutionRole</code>\n      role for the StackSet operation.</p>\n         <p>Specify an IAM role only if you are using customized execution roles to control which\n      stack resources users and groups can include in their StackSets.</p>\n         <p>Valid only if the permissions model is <code>SELF_MANAGED</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the IAM execution role that CloudFormation uses for StackSet operations in your\n      target accounts.</p>\n         <p>[Self-managed permissions] If you do not specify an execution role, CloudFormation uses the\n        <code>AWSCloudFormationStackSetExecutionRole</code> role for the StackSet operation. Specify\n      an IAM role only if you are using customized execution roles to control which stack\n      resources users and groups can include in their StackSets.</p>\n         <p>[Service-managed permissions] Set this name when you use custom execution roles. The role\n      that your custom execution role template provisions in your target accounts must have this\n      same name, and the name must begin with\n      <code>stacksets-exec-custom-</code>.</p>"
                     }
                 },
                 "PermissionModel": {
@@ -3678,6 +3702,24 @@
                     "target": "com.amazonaws.cloudformation#ManagedExecution",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes whether CloudFormation performs non-conflicting operations concurrently and queues\n      conflicting operations.</p>"
+                    }
+                },
+                "ExecutionRoleTemplateBody": {
+                    "target": "com.amazonaws.cloudformation#TemplateBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the template that creates a custom execution role in target accounts. This parameter applies only when the permissions model is <code>SERVICE_MANAGED</code>.</p>\n         <p>Conditional: Specify either <code>ExecutionRoleTemplateBody</code> or\n      <code>ExecutionRoleTemplateUrl</code>, but not both. If you don't specify either, CloudFormation\n      uses the default service-managed execution role in target accounts.</p>"
+                    }
+                },
+                "ExecutionRoleTemplateUrl": {
+                    "target": "com.amazonaws.cloudformation#TemplateURL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of an Amazon S3 object that contains the template that creates a custom execution role in target accounts. This parameter applies only when the permissions model is <code>SERVICE_MANAGED</code>.</p>\n         <p>Conditional: Specify either <code>ExecutionRoleTemplateBody</code> or\n      <code>ExecutionRoleTemplateUrl</code>, but not both. If you don't specify either, CloudFormation\n      uses the default service-managed execution role in target accounts.</p>"
+                    }
+                },
+                "StackSetOutputBucket": {
+                    "target": "com.amazonaws.cloudformation#StackSetOutputBucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket that stores the execution role stack template body. CloudFormation uses this bucket only when you specify a custom execution role template.</p>"
                     }
                 }
             },
@@ -5708,7 +5750,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the description of the specified StackSet operation.</p>\n         <note>\n            <p>This API provides <i>strongly consistent</i> reads meaning it will always\n        return the most up-to-date data.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns the description of the specified StackSet operation.</p>\n         <p>Reports role provisioning and stack instances deployment progress in <code>StatusDetails.Stages</code>. A breakdown for each Amazon Web Services Region is available in <code>RegionalStatusDetails</code>.</p>\n         <note>\n            <p>This API provides <i>strongly consistent</i> reads meaning it will always\n        return the most up-to-date data.</p>\n         </note>"
             }
         },
         "com.amazonaws.cloudformation#DescribeStackSetOperationInput": {
@@ -7205,6 +7247,14 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudformation#Export"
+            }
+        },
+        "com.amazonaws.cloudformation#FailedAccountsCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.cloudformation#FailedEventsFilter": {
@@ -9874,7 +9924,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns summary information about operations performed on a StackSet.</p>\n         <note>\n            <p>This API provides <i>eventually consistent</i> reads meaning it may take\n        some time but will eventually return the most up-to-date data.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns summary information about operations performed on a StackSet.</p>\n         <p>Reports role provisioning and stack instances deployment progress in <code>StatusDetails.Stages</code>. The breakdown for each Amazon Web Services Region is available only from <a>DescribeStackSetOperation</a>.</p>\n         <note>\n            <p>This API provides <i>eventually consistent</i> reads meaning it may take\n        some time but will eventually return the most up-to-date data.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -11205,6 +11255,22 @@
                 "target": "com.amazonaws.cloudformation#Parameter"
             }
         },
+        "com.amazonaws.cloudformation#PendingAccountsCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#PendingStackInstancesCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.cloudformation#PercentageCompleted": {
             "type": "double"
         },
@@ -11640,6 +11706,113 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudformation#Region"
+            }
+        },
+        "com.amazonaws.cloudformation#RegionalStackInstancesDeployment": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.cloudformation#StageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the stack instances deployment stage can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOT_APPLICABLE</code>: The operation does not deploy stack instances, such as a drift detection operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_STARTED</code>: Stack instances deployment has not started. The operation is still provisioning roles, has not begun, or failed before this stage was reached.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: At least one stack instance has started deploying.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: Deployment finished and succeeded for all stack instances that were not skipped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PARTIAL_SUCCESS</code>: Deployment finished with a mix of succeeded, failed, and canceled stack instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: Deployment finished and every stack instance that was not skipped failed or was canceled.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SucceededStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#SucceededStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stack instances that deployed successfully in this Region.</p>"
+                    }
+                },
+                "FailedStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#StackInstancesDeploymentFailedStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stack instances that failed to deploy in this Region.</p>"
+                    }
+                },
+                "CompletedStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#CompletedStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stack instances in this Region that have reached a final state. This count includes stack instances that succeeded, failed, were skipped, or were canceled.</p>"
+                    }
+                },
+                "PendingStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#PendingStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stack instances in this Region that have not reached a final state. This is the total number of stack instances in this Region minus the completed count.</p>"
+                    }
+                },
+                "CancelledStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#CancelledStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stack instances in this Region that were canceled because the operation exceeded its failure tolerance or was stopped.</p>"
+                    }
+                },
+                "SkippedStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#SkippedStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stack instances in this Region that were skipped because role provisioning failed for their target account.</p>"
+                    }
+                },
+                "TotalStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#RegionalTotalStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of stack instances targeted by this operation in this Region.</p>"
+                    }
+                },
+                "PercentageCompleted": {
+                    "target": "com.amazonaws.cloudformation#StagePercentageCompleted",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of stack instances in this Region that have reached a final state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides visibility into the stack instances deployment stage for a single Region, including per-stack-instance progress counts and a completion percentage for that Region.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#RegionalStages": {
+            "type": "structure",
+            "members": {
+                "RegionalStackInstancesDeployment": {
+                    "target": "com.amazonaws.cloudformation#RegionalStackInstancesDeployment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The progress detail for the stack instances deployment stage in this Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the progress information for the individual stages of a StackSet operation in a single Region. Currently reports the stack instances deployment stage for the Region.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#RegionalStatusDetail": {
+            "type": "structure",
+            "members": {
+                "Stages": {
+                    "target": "com.amazonaws.cloudformation#RegionalStages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The progress information for the individual stages of the operation in this Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the progress detail for a single Region of a StackSet operation. This information is returned only by <a>DescribeStackSetOperation</a>.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#RegionalStatusDetails": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cloudformation#Region"
+            },
+            "value": {
+                "target": "com.amazonaws.cloudformation#RegionalStatusDetail"
+            }
+        },
+        "com.amazonaws.cloudformation#RegionalTotalStackInstancesCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.cloudformation#RegisterPublisher": {
@@ -13036,6 +13209,50 @@
                 "smithy.api#pattern": "^arn:.+:iam::[0-9]{12}:role/.+$"
             }
         },
+        "com.amazonaws.cloudformation#RoleProvisioning": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.cloudformation#StageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the role provisioning stage can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOT_APPLICABLE</code>: The operation does not provision roles. This includes self-managed operations and service-managed operations whose configuration does not require role provisioning.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_STARTED</code>: Role provisioning has not started. The operation has not begun resolving target accounts, or it failed or stopped before the total number of target accounts was resolved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: Role provisioning is actively processing target accounts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: Role provisioning finished and succeeded for all target accounts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PARTIAL_SUCCESS</code>: Role provisioning finished, but succeeded for only a subset of target accounts; one or more accounts failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: Role provisioning finished and failed for all target accounts.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SucceededAccountsCount": {
+                    "target": "com.amazonaws.cloudformation#SucceededAccountsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of accounts for which role provisioning succeeded.</p>"
+                    }
+                },
+                "FailedAccountsCount": {
+                    "target": "com.amazonaws.cloudformation#FailedAccountsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of accounts for which role provisioning failed.</p>"
+                    }
+                },
+                "CompletedAccountsCount": {
+                    "target": "com.amazonaws.cloudformation#CompletedAccountsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of accounts that have finished role provisioning, including both succeeded and failed accounts.</p>"
+                    }
+                },
+                "PendingAccountsCount": {
+                    "target": "com.amazonaws.cloudformation#PendingAccountsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of accounts that are still awaiting role provisioning.</p>"
+                    }
+                },
+                "PercentageCompleted": {
+                    "target": "com.amazonaws.cloudformation#StagePercentageCompleted",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of accounts that have completed role provisioning.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides visibility into the role provisioning stage of a StackSet operation, including per-account progress counts and a completion percentage. For operations that do not provision IAM roles in target accounts, the <code>Status</code> is <code>NOT_APPLICABLE</code> and the progress counts are omitted.</p>"
+            }
+        },
         "com.amazonaws.cloudformation#RollbackConfiguration": {
             "type": "structure",
             "members": {
@@ -13580,6 +13797,14 @@
             "traits": {
                 "smithy.api#documentation": "<p>The input for the <a>SignalResource</a> action.</p>",
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudformation#SkippedStackInstancesCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.cloudformation#Stack": {
@@ -14467,6 +14692,70 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The structure that contains summary information about a stack instance.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#StackInstancesDeployment": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.cloudformation#StageStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the stack instances deployment stage can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOT_APPLICABLE</code>: The operation does not deploy stack instances, such as a drift detection operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_STARTED</code>: Stack instances deployment has not started. The operation is still provisioning roles, has not begun, or failed before this stage was reached.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code>: At least one stack instance has started deploying.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: Deployment finished and succeeded for all stack instances that were not skipped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PARTIAL_SUCCESS</code>: Deployment finished with a mix of succeeded, failed, and canceled stack instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>: Deployment finished and every stack instance that was not skipped failed or was canceled.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SucceededStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#SucceededStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stack instances that deployed successfully.</p>"
+                    }
+                },
+                "FailedStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#StackInstancesDeploymentFailedStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stack instances that failed to deploy.</p>"
+                    }
+                },
+                "CompletedStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#CompletedStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stack instances that have reached a final state. This count includes stack instances that succeeded, failed, were skipped, or were canceled.</p>"
+                    }
+                },
+                "PendingStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#PendingStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stack instances that have not reached a final state. This is the total number of stack instances minus the completed count.</p>"
+                    }
+                },
+                "CancelledStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#CancelledStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stack instances that were canceled because the operation exceeded its failure tolerance or was stopped.</p>"
+                    }
+                },
+                "SkippedStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#SkippedStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of stack instances that were skipped because role provisioning failed for their target account.</p>"
+                    }
+                },
+                "PercentageCompleted": {
+                    "target": "com.amazonaws.cloudformation#StagePercentageCompleted",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of stack instances that have reached a final state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides visibility into the stack instances deployment stage of a StackSet operation, including per-stack-instance progress counts and a completion percentage. For service-managed operations that provision roles, this stage begins after role provisioning finishes.</p>"
+            }
+        },
+        "com.amazonaws.cloudformation#StackInstancesDeploymentFailedStackInstancesCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.cloudformation#StackName": {
@@ -15399,6 +15688,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Returns a list of all Amazon Web Services Regions the given StackSet has stack instances deployed in. The\n   Amazon Web Services Regions list output is in no particular order.</p>"
                     }
+                },
+                "StackSetOutputBucketPath": {
+                    "target": "com.amazonaws.cloudformation#StackSetOutputBucketPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket path where CloudFormation stores the execution role stack template body. CloudFormation uses this bucket only when you specify a custom execution role template.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15686,6 +15981,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Detailed information about the StackSet operation.</p>"
                     }
+                },
+                "RegionalStatusDetails": {
+                    "target": "com.amazonaws.cloudformation#RegionalStatusDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The progress detail for each Region of the operation, keyed by Region. Each entry reports the stack instances deployment progress for that Region. This field is returned only by <a>DescribeStackSetOperation</a>. It is not included in the <a>ListStackSetOperations</a> summary.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15900,6 +16201,24 @@
         "com.amazonaws.cloudformation#StackSetOperationStatusDetails": {
             "type": "structure",
             "members": {
+                "Stages": {
+                    "target": "com.amazonaws.cloudformation#Stages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed progress information for the individual stages of the StackSet operation: the role provisioning stage and the stack instances deployment stage.</p>"
+                    }
+                },
+                "TotalAccountsCount": {
+                    "target": "com.amazonaws.cloudformation#TotalAccountsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of accounts targeted by this StackSet operation. Self-managed operations and service-managed operations that do not provision roles also report this value when it is known. CloudFormation populates this value after it resolves the target accounts. Until then, this field is not present.</p>"
+                    }
+                },
+                "TotalStackInstancesCount": {
+                    "target": "com.amazonaws.cloudformation#StackSetOperationTotalStackInstancesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of stack instances targeted by this StackSet operation. CloudFormation populates this value after it resolves the target stack instances. Until then, this field is not present.</p>"
+                    }
+                },
                 "FailedStackInstancesCount": {
                     "target": "com.amazonaws.cloudformation#FailedStackInstancesCount",
                     "traits": {
@@ -15975,6 +16294,20 @@
             "traits": {
                 "smithy.api#documentation": "<p>The structures that contain summary information about the specified operation.</p>"
             }
+        },
+        "com.amazonaws.cloudformation#StackSetOperationTotalStackInstancesCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#StackSetOutputBucket": {
+            "type": "string"
+        },
+        "com.amazonaws.cloudformation#StackSetOutputBucketPath": {
+            "type": "string"
         },
         "com.amazonaws.cloudformation#StackSetStatus": {
             "type": "enum",
@@ -16317,6 +16650,82 @@
                 "target": "com.amazonaws.cloudformation#TemplateStage"
             }
         },
+        "com.amazonaws.cloudformation#StagePercentageCompleted": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#StageStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_APPLICABLE"
+                    }
+                },
+                "NOT_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_STARTED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "PARTIAL_SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PARTIAL_SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#Stages": {
+            "type": "structure",
+            "members": {
+                "RoleProvisioning": {
+                    "target": "com.amazonaws.cloudformation#RoleProvisioning",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The progress detail for the role provisioning stage. For operations that do not provision roles, this stage is present with a <code>Status</code> of <code>NOT_APPLICABLE</code>.</p>"
+                    }
+                },
+                "StackInstancesDeployment": {
+                    "target": "com.amazonaws.cloudformation#StackInstancesDeployment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The progress detail for the stack instances deployment stage. This stage reports the deployment of stack instances to the target accounts and Amazon Web Services Regions, after any role provisioning has finished.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed progress information for the individual stages of a StackSet operation: the role provisioning stage and the stack instances deployment stage.</p>"
+            }
+        },
         "com.amazonaws.cloudformation#StaleRequestException": {
             "type": "structure",
             "members": {
@@ -16464,6 +16873,22 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cloudformation#SucceededAccountsCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#SucceededStackInstancesCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.cloudformation#SupportedMajorVersion": {
@@ -16890,6 +17315,14 @@
                 "smithy.api#documentation": "<p>A client request token already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudformation#TotalAccountsCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.cloudformation#TotalStackInstancesCount": {
@@ -17864,7 +18297,7 @@
                 "Capabilities": {
                     "target": "com.amazonaws.cloudformation#Capabilities",
                     "traits": {
-                        "smithy.api#documentation": "<p>In some cases, you must explicitly acknowledge that your stack template contains certain\n      capabilities in order for CloudFormation to update the StackSet and its associated stack\n      instances.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CAPABILITY_IAM</code> and <code>CAPABILITY_NAMED_IAM</code>\n               </p>\n               <p>Some stack templates might include resources that can affect permissions in your\n          Amazon Web Services account, for example, by creating new IAM users. For those stacks sets, you must\n          explicitly acknowledge this by specifying one of these capabilities.</p>\n               <p>The following IAM resources require you to specify either the\n            <code>CAPABILITY_IAM</code> or <code>CAPABILITY_NAMED_IAM</code> capability.</p>\n               <ul>\n                  <li>\n                     <p>If you have IAM resources, you can specify either capability.</p>\n                  </li>\n                  <li>\n                     <p>If you have IAM resources with custom names, you <i>must</i>\n              specify <code>CAPABILITY_NAMED_IAM</code>.</p>\n                  </li>\n                  <li>\n                     <p>If you don't specify either of these capabilities, CloudFormation returns an\n                <code>InsufficientCapabilities</code> error.</p>\n                  </li>\n               </ul>\n               <p>If your stack template contains these resources, we recommend that you review all\n          permissions associated with them and edit their permissions if necessary.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html\">AWS::IAM::AccessKey</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html\">AWS::IAM::Group</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html\">AWS::IAM::InstanceProfile</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html\">AWS::IAM::Policy</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html\">AWS::IAM::Role</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html\">AWS::IAM::User</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html\">AWS::IAM::UserToGroupAddition</a>\n                     </p>\n                  </li>\n               </ul>\n               <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities\">Acknowledging IAM resources in CloudFormation templates</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CAPABILITY_AUTO_EXPAND</code>\n               </p>\n               <p>Some templates reference macros. If your StackSet template references one or more\n          macros, you must update the StackSet directly from the processed template, without first\n          reviewing the resulting changes in a change set. To update the StackSet directly, you must\n          acknowledge this capability. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html\">Perform custom processing\n            on CloudFormation templates with template macros</a>.</p>\n               <important>\n                  <p>StackSets with service-managed permissions do not currently support the use of\n            macros in templates. (This includes the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html\">AWS::Include</a> and <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html\">AWS::Serverless</a> transforms, which are macros hosted by CloudFormation.) Even if\n            you specify this capability for a StackSet with service-managed permissions, if you\n            reference a macro in your template the StackSet operation will fail.</p>\n               </important>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>In some cases, you must explicitly acknowledge that your stack template contains certain\n      capabilities in order for CloudFormation to update the StackSet and its associated stack\n      instances.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CAPABILITY_IAM</code> and <code>CAPABILITY_NAMED_IAM</code>\n               </p>\n               <p>Some stack templates might include resources that can affect permissions in your\n          Amazon Web Services account, for example, by creating new IAM users. For those stacks sets, you must\n          explicitly acknowledge this by specifying one of these capabilities.</p>\n               <p>The following IAM resources require you to specify either the\n            <code>CAPABILITY_IAM</code> or <code>CAPABILITY_NAMED_IAM</code> capability.</p>\n               <ul>\n                  <li>\n                     <p>If you have IAM resources, you can specify either capability.</p>\n                  </li>\n                  <li>\n                     <p>If you have IAM resources with custom names, you <i>must</i>\n              specify <code>CAPABILITY_NAMED_IAM</code>.</p>\n                  </li>\n                  <li>\n                     <p>If you don't specify either of these capabilities, CloudFormation returns an\n                <code>InsufficientCapabilities</code> error.</p>\n                  </li>\n               </ul>\n               <p>If your stack template contains these resources, we recommend that you review all\n          permissions associated with them and edit their permissions if necessary.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html\">AWS::IAM::AccessKey</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-group.html\">AWS::IAM::Group</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-instanceprofile.html\">AWS::IAM::InstanceProfile</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-policy.html\">AWS::IAM::Policy</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-role.html\">AWS::IAM::Role</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-user.html\">AWS::IAM::User</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-usertogroupaddition.html\">AWS::IAM::UserToGroupAddition</a>\n                     </p>\n                  </li>\n               </ul>\n               <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/control-access-with-iam.html#using-iam-capabilities\">Acknowledging IAM resources in CloudFormation templates</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CAPABILITY_AUTO_EXPAND</code>\n               </p>\n               <p>Some templates reference macros. If your StackSet template references one or more\n          macros, you must update the StackSet directly from the processed template, without first\n          reviewing the resulting changes in a change set. To update the StackSet directly, you must\n          acknowledge this capability. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html\">Perform custom processing\n            on CloudFormation templates with template macros</a>.</p>\n               <important>\n                  <p>With service-managed permissions, CloudFormation can process macros, nested stacks, and\n            transforms in your StackSet template only when you provide a custom execution role\n            template. (Macros include the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html\">AWS::Include</a> and <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html\">AWS::Serverless</a> transforms, which are macros hosted by CloudFormation.) The\n            default service-managed execution role can't provision them: if you reference a macro\n            in your template, the StackSet operation fails even when you specify this\n            capability.</p>\n                  <p>To use macros, nested stacks, or transforms with service-managed permissions,\n            specify a custom execution role template in\n              <code>ExecutionRoleTemplateBody</code> or <code>ExecutionRoleTemplateUrl</code>, and\n            specify both <code>CAPABILITY_NAMED_IAM</code> and\n              <code>CAPABILITY_AUTO_EXPAND</code>.</p>\n               </important>\n            </li>\n         </ul>"
                     }
                 },
                 "Tags": {
@@ -17888,7 +18321,7 @@
                 "ExecutionRoleName": {
                     "target": "com.amazonaws.cloudformation#ExecutionRoleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Self-managed permissions] The name of the IAM execution role to use to update the stack\n      set. If you do not specify an execution role, CloudFormation uses the\n        <code>AWSCloudFormationStackSetExecutionRole</code> role for the StackSet operation.</p>\n         <p>Specify an IAM role only if you are using customized execution roles to control which\n      stack resources users and groups can include in their StackSets.</p>\n         <p>If you specify a customized execution role, CloudFormation uses that role to update the stack.\n      If you do not specify a customized execution role, CloudFormation performs the update using the\n      role previously associated with the StackSet, so long as you have permissions to perform\n      operations on the StackSet.</p>"
+                        "smithy.api#documentation": "<p>The name of the IAM execution role that CloudFormation uses for StackSet operations in your\n      target accounts.</p>\n         <p>[Self-managed permissions] The name of the IAM execution role to use to update the stack\n      set. If you do not specify an execution role, CloudFormation uses the\n        <code>AWSCloudFormationStackSetExecutionRole</code> role for the StackSet operation. Specify\n      an IAM role only if you are using customized execution roles to control which stack\n      resources users and groups can include in their StackSets.</p>\n         <p>If you specify a customized execution role, CloudFormation uses that role to update the stack.\n      If you do not specify a customized execution role, CloudFormation performs the update using the\n      role previously associated with the StackSet, so long as you have permissions to perform\n      operations on the StackSet.</p>\n         <p>[Service-managed permissions] Set this name when you use custom execution roles. The role\n      that your custom execution role template provisions in your target accounts must have this\n      same name, and the name must begin with\n        <code>stacksets-exec-custom-</code>. You don't need to specify this parameter if an\n      execution role name is already configured for the StackSet and you aren't changing it.</p>"
                     }
                 },
                 "DeploymentTargets": {
@@ -17938,6 +18371,30 @@
                     "target": "com.amazonaws.cloudformation#ManagedExecution",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes whether CloudFormation performs non-conflicting operations concurrently and queues\n      conflicting operations.</p>"
+                    }
+                },
+                "ExecutionRoleTemplateBody": {
+                    "target": "com.amazonaws.cloudformation#TemplateBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The body of the template that creates or updates a custom execution role in target accounts. This parameter applies only when the permissions model is <code>SERVICE_MANAGED</code>.</p>\n         <p>Conditional: Specify either <code>ExecutionRoleTemplateBody</code> or\n        <code>ExecutionRoleTemplateUrl</code>, but not both. If you don't specify either, CloudFormation\n      uses the default service-managed execution role in target accounts.</p>"
+                    }
+                },
+                "ExecutionRoleTemplateUrl": {
+                    "target": "com.amazonaws.cloudformation#TemplateURL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of an Amazon S3 object that contains the template that creates or updates a custom execution role in target accounts. This parameter applies only when the permissions model is <code>SERVICE_MANAGED</code>.</p>\n         <p>Conditional: Specify either <code>ExecutionRoleTemplateBody</code> or\n        <code>ExecutionRoleTemplateUrl</code>, but not both. If you don't specify either, CloudFormation\n      uses the default service-managed execution role in target accounts.</p>"
+                    }
+                },
+                "UseAdminExecutionRole": {
+                    "target": "com.amazonaws.cloudformation#UseAdminExecutionRoleNullable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether CloudFormation uses the default service-managed execution role instead of a custom execution role in target accounts.\n      If you set this to <code>true</code>, CloudFormation ignores any custom execution role template specified in <code>ExecutionRoleTemplateBody</code> or <code>ExecutionRoleTemplateUrl</code>.</p>"
+                    }
+                },
+                "StackSetOutputBucket": {
+                    "target": "com.amazonaws.cloudformation#StackSetOutputBucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket that stores the execution role stack template body. CloudFormation uses this bucket only when you specify a custom execution role template.</p>"
                     }
                 }
             },
@@ -18011,6 +18468,9 @@
         },
         "com.amazonaws.cloudformation#Url": {
             "type": "string"
+        },
+        "com.amazonaws.cloudformation#UseAdminExecutionRoleNullable": {
+            "type": "boolean"
         },
         "com.amazonaws.cloudformation#UsePreviousTemplate": {
             "type": "boolean"

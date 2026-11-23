@@ -60,6 +60,7 @@ func (c *Client) AssociateOpportunity(ctx context.Context, params *AssociateOppo
 	return out, nil
 }
 
+// Contains the request parameters for the AssociateOpportunity operation.
 type AssociateOpportunityInput struct {
 
 	// Specifies the catalog associated with the request. This field takes a string

@@ -1,3 +1,7 @@
+# v1.55.0 (2026-11-19)
+
+* **Feature**: AI Listing Experience that provides listing quality, content and feature recommendations through ListAssessments and DescribeAssessment APIs. Adds a new API StartAssessment to trigger Seller testing for Metering and Entitlement integration for products.
+
 # v1.54.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

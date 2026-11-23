@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clientId":"__ClientId__","clientType":"CLI","expiresAt":1,"issuedAt":1,"issuedInRegion":"__IssuedInRegion__","lastUsedAt":1,"originSessionArn":"__OriginSessionArn__","principalArn":"__PrincipalArn__","resource":"__Resource__","role":"__Role__","sessionArn":"__SessionArn__","status":"ACTIVE","userAgent":"__UserAgent__"}

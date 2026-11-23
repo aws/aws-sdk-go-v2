@@ -73,7 +73,7 @@ func (v *BatchCreateBillScenarioUsageModificationInput) SerializeMembers(s smith
 
 type BatchCreateBillScenarioUsageModificationOutput struct {
 
-	//  Returns the list of errors reason and the usage item keys that cannot be
+	//  Returns the list of errors reason and the usage item keys that can't be
 	// created in the Bill Scenario.
 	Errors []types.BatchCreateBillScenarioUsageModificationError
 

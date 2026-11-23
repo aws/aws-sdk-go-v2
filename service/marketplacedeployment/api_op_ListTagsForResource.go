@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Lists all tags that have been added to a deployment parameter resource.
+// Lists all tags that have been added to a resource.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -27,8 +27,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) associated with the deployment parameter
-	// resource you want to list tags on.
+	// The Amazon Resource Name (ARN) of the resource you want to list tags on.
 	//
 	// This member is required.
 	ResourceArn *string

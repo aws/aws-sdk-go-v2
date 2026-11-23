@@ -97,6 +97,10 @@ func serializeFirewallSyncReason(s smithy.ShapeSerializer, schema *smithy.Schema
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *FirewallSyncReasonMemberInvalidResource:
+		s.WriteUnion(schema, schemas.FirewallSyncReason_invalidResource)
+		serializeInvalidResourcesByType(s, schemas.FirewallSyncReason_invalidResource, vv.Value)
+		s.CloseUnion()
 	case *FirewallSyncReasonMemberMissingFirewall:
 		s.WriteUnion(schema, schemas.FirewallSyncReason_missingFirewall)
 		s.WriteString(schemas.FirewallSyncReason_missingFirewall, vv.Value)
@@ -264,6 +268,10 @@ func deserializeFirewallSyncReason(d smithy.ShapeDeserializer, s *smithy.Schema,
 		switch ms {
 		case schemas.FirewallSyncReason_invalidFirewall:
 			vv := &FirewallSyncReasonMemberInvalidFirewall{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.FirewallSyncReason_invalidResource:
+			vv := &FirewallSyncReasonMemberInvalidResource{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.FirewallSyncReason_missingFirewall:
@@ -447,6 +455,14 @@ func serializeConfigurationIssueList(s smithy.ShapeSerializer, schema *smithy.Sc
 	s.CloseList()
 }
 
+func serializeDeploymentArnSet(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeDeploymentCoverageList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DeploymentCoverageEntry) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -497,6 +513,16 @@ func serializeFirewallTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeInvalidResourceIssueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []InvalidResourceIssue) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -565,6 +591,16 @@ func serializeResourceAssociationList(s smithy.ShapeSerializer, schema *smithy.S
 	s.CloseList()
 }
 
+func serializeResourceCoverageSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceCoverageSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeResourceLogicalExpressionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceLogicalExpression) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -619,6 +655,24 @@ func serializeScopeSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSubnetConnectivityOverrideList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SubnetConnectivityOverride) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSubnetConnectivityScopeArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -854,6 +908,27 @@ func deserializeConfigurationIssueList(d smithy.ShapeDeserializer, s *smithy.Sch
 	})
 }
 
+func deserializeDeploymentArnSet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeDeploymentCoverageList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DeploymentCoverageEntry) error {
 	*v = make([]DeploymentCoverageEntry, 0)
 	var vv DeploymentCoverageEntry
@@ -979,6 +1054,28 @@ func deserializeFirewallTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		*v = append(*v, PolicyFirewallType(vv))
+		return nil
+	})
+}
+
+func deserializeInvalidResourceIssueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]InvalidResourceIssue) error {
+	*v = make([]InvalidResourceIssue, 0)
+	var vv InvalidResourceIssue
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero InvalidResourceIssue
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = InvalidResourceIssue{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }
@@ -1134,6 +1231,28 @@ func deserializeResourceAssociationList(d smithy.ShapeDeserializer, s *smithy.Sc
 	})
 }
 
+func deserializeResourceCoverageSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ResourceCoverageSummary) error {
+	*v = make([]ResourceCoverageSummary, 0)
+	var vv ResourceCoverageSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ResourceCoverageSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ResourceCoverageSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeResourceLogicalExpressionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ResourceLogicalExpression) error {
 	*v = make([]ResourceLogicalExpression, 0)
 	var vv ResourceLogicalExpression
@@ -1265,6 +1384,49 @@ func deserializeScopeSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	})
 }
 
+func deserializeSubnetConnectivityOverrideList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SubnetConnectivityOverride) error {
+	*v = make([]SubnetConnectivityOverride, 0)
+	var vv SubnetConnectivityOverride
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero SubnetConnectivityOverride
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = SubnetConnectivityOverride{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSubnetConnectivityScopeArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -1351,6 +1513,15 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 	})
 }
 
+func serializeInvalidResourcesByType(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]InvalidResourceIssue) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		serializeInvalidResourceIssueList(s, schema.MapValue(), vv)
+	}
+	s.CloseMap()
+}
+
 func serializeOutOfSyncReasons(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]FirewallSyncReason) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -1398,6 +1569,28 @@ func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[stri
 		s.WriteString(schema.MapValue(), string(vv))
 	}
 	s.CloseMap()
+}
+
+func deserializeInvalidResourcesByType(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string][]InvalidResourceIssue) error {
+	*v = make(map[string][]InvalidResourceIssue)
+	var vv []InvalidResourceIssue
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero []InvalidResourceIssue
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = nil
+		if err := deserializeInvalidResourceIssueList(d, s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
 }
 
 func deserializeOutOfSyncReasons(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]FirewallSyncReason) error {

@@ -786,7 +786,7 @@ type DependencyInsight struct {
 	//   the service.
 	//
 	//   - AWS_SERVICE - The insight relates to a dependency on an Amazon Web Services
-	//   service.
+	//   service. Resilience Hub doesn't currently return this value.
 	//
 	// This member is required.
 	Category InsightsCategory
@@ -976,8 +976,8 @@ func (v *DependencySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The AWS DevOps Agent (DevOps Agent) integration configuration that you supply
-// when creating or updating a service. Connecting a service to a DevOps Agent
+// The Amazon Web Services DevOps Agent (DevOps Agent) integration configuration
+// that you supply when creating or updating a service. Connecting a service to an
 // Agent Space lets DevOps Agent investigate the service's resilience test runs and
 // attach its analysis to the results. Include this block with an Agent Space
 // Amazon Resource Name (ARN) to connect or reconnect the service to an Agent
@@ -7470,6 +7470,10 @@ type TestRun struct {
 	// integration is enabled for the service.
 	DevOpsAgentInvestigation *DevOpsAgentInvestigation
 
+	// The effective resilience policy values snapshotted from the service when the
+	// run was started. The test run is evaluated against these values.
+	EffectivePolicyValues *TestRunEffectivePolicyValues
+
 	// The timestamp when the test run ended.
 	EndedAt *time.Time
 
@@ -7538,6 +7542,11 @@ func (v *TestRun) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DevOpsAgentInvestigation != nil {
 		s.WriteStruct(schemas.TestRun_devOpsAgentInvestigation)
 		v.DevOpsAgentInvestigation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EffectivePolicyValues != nil {
+		s.WriteStruct(schemas.TestRun_effectivePolicyValues)
+		v.EffectivePolicyValues.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.EndedAt != nil {
@@ -7627,6 +7636,9 @@ func (v *TestRun) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TestRun_devOpsAgentInvestigation:
 			v.DevOpsAgentInvestigation = &DevOpsAgentInvestigation{}
 			return v.DevOpsAgentInvestigation.Deserialize(d)
+		case schemas.TestRun_effectivePolicyValues:
+			v.EffectivePolicyValues = &TestRunEffectivePolicyValues{}
+			return v.EffectivePolicyValues.Deserialize(d)
 		case schemas.TestRun_endedAt:
 			v.EndedAt = new(time.Time)
 			return d.ReadTime(schemas.TestRun_endedAt, v.EndedAt)
@@ -7803,6 +7815,118 @@ func (v *TestRunDependencySummary) Deserialize(d smithy.ShapeDeserializer) error
 			return nil
 		case schemas.TestRunDependencySummary_sourceRegions:
 			return deserializeRegionList(d, schemas.TestRunDependencySummary_sourceRegions, &v.SourceRegions)
+		}
+		return nil
+	})
+}
+
+// Contains the effective resilience policy values captured onto a test run from
+// the service when the run was started.
+type TestRunEffectivePolicyValues struct {
+
+	// The effective availability SLO value for the test run.
+	AvailabilitySlo *SloSource
+
+	// The effective data recovery time between backups value for the test run.
+	DataRecoveryTimeBetweenBackups *TargetSource
+
+	// The effective multi-Availability Zone (AZ) disaster recovery approach for the
+	// test run.
+	MultiAzDrApproach *DisasterRecoverySource
+
+	// The effective multi-AZ RPO value for the test run, in minutes.
+	MultiAzRpo *TargetSource
+
+	// The effective multi-AZ RTO value for the test run, in minutes.
+	MultiAzRto *TargetSource
+
+	// The effective multi-Region disaster recovery approach for the test run.
+	MultiRegionDrApproach *DisasterRecoverySource
+
+	// The effective multi-Region RPO value for the test run, in minutes.
+	MultiRegionRpo *TargetSource
+
+	// The effective multi-Region RTO value for the test run, in minutes.
+	MultiRegionRto *TargetSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *TestRunEffectivePolicyValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestRunEffectivePolicyValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestRunEffectivePolicyValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilitySlo != nil {
+		s.WriteStruct(schemas.TestRunEffectivePolicyValues_availabilitySlo)
+		v.AvailabilitySlo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataRecoveryTimeBetweenBackups != nil {
+		s.WriteStruct(schemas.TestRunEffectivePolicyValues_dataRecoveryTimeBetweenBackups)
+		v.DataRecoveryTimeBetweenBackups.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiAzDrApproach != nil {
+		s.WriteStruct(schemas.TestRunEffectivePolicyValues_multiAzDrApproach)
+		v.MultiAzDrApproach.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiAzRpo != nil {
+		s.WriteStruct(schemas.TestRunEffectivePolicyValues_multiAzRpo)
+		v.MultiAzRpo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiAzRto != nil {
+		s.WriteStruct(schemas.TestRunEffectivePolicyValues_multiAzRto)
+		v.MultiAzRto.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiRegionDrApproach != nil {
+		s.WriteStruct(schemas.TestRunEffectivePolicyValues_multiRegionDrApproach)
+		v.MultiRegionDrApproach.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiRegionRpo != nil {
+		s.WriteStruct(schemas.TestRunEffectivePolicyValues_multiRegionRpo)
+		v.MultiRegionRpo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiRegionRto != nil {
+		s.WriteStruct(schemas.TestRunEffectivePolicyValues_multiRegionRto)
+		v.MultiRegionRto.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TestRunEffectivePolicyValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestRunEffectivePolicyValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestRunEffectivePolicyValues_availabilitySlo:
+			v.AvailabilitySlo = &SloSource{}
+			return v.AvailabilitySlo.Deserialize(d)
+		case schemas.TestRunEffectivePolicyValues_dataRecoveryTimeBetweenBackups:
+			v.DataRecoveryTimeBetweenBackups = &TargetSource{}
+			return v.DataRecoveryTimeBetweenBackups.Deserialize(d)
+		case schemas.TestRunEffectivePolicyValues_multiAzDrApproach:
+			v.MultiAzDrApproach = &DisasterRecoverySource{}
+			return v.MultiAzDrApproach.Deserialize(d)
+		case schemas.TestRunEffectivePolicyValues_multiAzRpo:
+			v.MultiAzRpo = &TargetSource{}
+			return v.MultiAzRpo.Deserialize(d)
+		case schemas.TestRunEffectivePolicyValues_multiAzRto:
+			v.MultiAzRto = &TargetSource{}
+			return v.MultiAzRto.Deserialize(d)
+		case schemas.TestRunEffectivePolicyValues_multiRegionDrApproach:
+			v.MultiRegionDrApproach = &DisasterRecoverySource{}
+			return v.MultiRegionDrApproach.Deserialize(d)
+		case schemas.TestRunEffectivePolicyValues_multiRegionRpo:
+			v.MultiRegionRpo = &TargetSource{}
+			return v.MultiRegionRpo.Deserialize(d)
+		case schemas.TestRunEffectivePolicyValues_multiRegionRto:
+			v.MultiRegionRto = &TargetSource{}
+			return v.MultiRegionRto.Deserialize(d)
 		}
 		return nil
 	})

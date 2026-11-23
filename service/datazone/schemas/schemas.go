@@ -1226,6 +1226,13 @@ var UpdateAssetFilter = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v2/domains/{domainIdentifier}/assets/{assetIdentifier}/filters/{identifier}",
 	Code: 200})
 
+var UpdateAssetOwner = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "UpdateAssetOwner",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/v2/domains/{domainIdentifier}/assets/{identifier}",
+	Code: 202})
+
 var UpdateConnection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "UpdateConnection",
@@ -1813,6 +1820,30 @@ var _AssetName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "AssetName",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var AssetOwnershipTransfer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "AssetOwnershipTransfer",
+}, smithy.ShapeTypeStructure, 5)
+var AssetOwnershipTransfer_status *smithy.Schema
+
+var AssetOwnershipTransfer_sourceProjectId *smithy.Schema
+
+var AssetOwnershipTransfer_targetProjectId *smithy.Schema
+
+var AssetOwnershipTransfer_startedAt *smithy.Schema
+
+var AssetOwnershipTransfer_updatedAt *smithy.Schema
+
+var AssetOwnershipTransferStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "AssetOwnershipTransferStatus",
+}, smithy.ShapeTypeEnum, 3)
+var AssetOwnershipTransferStatus_IN_PROGRESS *smithy.Schema
+
+var AssetOwnershipTransferStatus_SUCCEEDED *smithy.Schema
+
+var AssetOwnershipTransferStatus_FAILED *smithy.Schema
 
 var AssetPermission = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -3670,8 +3701,10 @@ var _EnvironmentConfigurationsList_member *smithy.Schema
 var EnvironmentConfigurationUserParameter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "EnvironmentConfigurationUserParameter",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var EnvironmentConfigurationUserParameter_environmentId *smithy.Schema
+
+var EnvironmentConfigurationUserParameter_environmentBlueprintId *smithy.Schema
 
 var EnvironmentConfigurationUserParameter_environmentResolvedAccount *smithy.Schema
 
@@ -6368,6 +6401,12 @@ var ProjectPolicyGrantPrincipal_userCreatedDesignationId *smithy.Schema
 var ProjectPolicyGrantPrincipal_projectIdentifier *smithy.Schema
 
 var ProjectPolicyGrantPrincipal_projectGrantFilter *smithy.Schema
+
+var ProjectProfileAction = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "ProjectProfileAction",
+}, smithy.ShapeTypeEnum, 1)
+var ProjectProfileAction_DISASSOCIATE *smithy.Schema
 
 var _ProjectProfileId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -10965,7 +11004,7 @@ var GetAssetInput_revision *smithy.Schema
 var GetAssetOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "GetAssetOutput",
-}, smithy.ShapeTypeStructure, 19)
+}, smithy.ShapeTypeStructure, 20)
 var GetAssetOutput_id *smithy.Schema
 
 var GetAssetOutput_name *smithy.Schema
@@ -11003,6 +11042,8 @@ var GetAssetOutput_formsOutput *smithy.Schema
 var GetAssetOutput_readOnlyFormsOutput *smithy.Schema
 
 var GetAssetOutput_latestTimeSeriesDataPointFormsOutput *smithy.Schema
+
+var GetAssetOutput_ownershipTransfer *smithy.Schema
 
 var GetAssetTypeInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -14107,6 +14148,28 @@ var UpdateAssetFilterOutput_effectiveColumnNames *smithy.Schema
 
 var UpdateAssetFilterOutput_effectiveRowFilter *smithy.Schema
 
+var UpdateAssetOwnerInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "UpdateAssetOwnerInput",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateAssetOwnerInput_domainIdentifier *smithy.Schema
+
+var UpdateAssetOwnerInput_identifier *smithy.Schema
+
+var UpdateAssetOwnerInput_targetProjectIdentifier *smithy.Schema
+
+var UpdateAssetOwnerInput_clientToken *smithy.Schema
+
+var UpdateAssetOwnerOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.datazone",
+	Name:      "UpdateAssetOwnerOutput",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateAssetOwnerOutput_id *smithy.Schema
+
+var UpdateAssetOwnerOutput_revision *smithy.Schema
+
+var UpdateAssetOwnerOutput_ownershipTransfer *smithy.Schema
+
 var UpdateConnectionInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "UpdateConnectionInput",
@@ -14708,7 +14771,7 @@ var UpdateNotebookOutput_gitMetadata *smithy.Schema
 var UpdateProjectInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
 	Name:      "UpdateProjectInput",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var UpdateProjectInput_domainIdentifier *smithy.Schema
 
 var UpdateProjectInput_identifier *smithy.Schema
@@ -14728,6 +14791,8 @@ var UpdateProjectInput_environmentDeploymentDetails *smithy.Schema
 var UpdateProjectInput_userParameters *smithy.Schema
 
 var UpdateProjectInput_projectProfileVersion *smithy.Schema
+
+var UpdateProjectInput_projectProfileAction *smithy.Schema
 
 var UpdateProjectOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.datazone",
@@ -15452,6 +15517,22 @@ func init() {
 	AssetListingItem_owningProjectId = AssetListingItem.AddMember("owningProjectId", _ProjectId)
 
 	AssetListingItem_additionalAttributes = AssetListingItem.AddMember("additionalAttributes", AssetListingItemAdditionalAttributes)
+
+	AssetOwnershipTransferStatus_IN_PROGRESS = AssetOwnershipTransferStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	AssetOwnershipTransferStatus_SUCCEEDED = AssetOwnershipTransferStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
+
+	AssetOwnershipTransferStatus_FAILED = AssetOwnershipTransferStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	AssetOwnershipTransfer_status = AssetOwnershipTransfer.AddMember("status", AssetOwnershipTransferStatus)
+
+	AssetOwnershipTransfer_sourceProjectId = AssetOwnershipTransfer.AddMember("sourceProjectId", _ProjectId)
+
+	AssetOwnershipTransfer_targetProjectId = AssetOwnershipTransfer.AddMember("targetProjectId", _ProjectId)
+
+	AssetOwnershipTransfer_startedAt = AssetOwnershipTransfer.AddMember("startedAt", smithyprelude.Timestamp)
+
+	AssetOwnershipTransfer_updatedAt = AssetOwnershipTransfer.AddMember("updatedAt", smithyprelude.Timestamp)
 
 	S3Permission_READ = S3Permission.AddMember("READ", smithyprelude.Unit)
 
@@ -17373,6 +17454,8 @@ func init() {
 
 	EnvironmentConfigurationUserParameter_environmentId = EnvironmentConfigurationUserParameter.AddMember("environmentId", _EnvironmentId)
 
+	EnvironmentConfigurationUserParameter_environmentBlueprintId = EnvironmentConfigurationUserParameter.AddMember("environmentBlueprintId", _EnvironmentBlueprintId)
+
 	EnvironmentConfigurationUserParameter_environmentResolvedAccount = EnvironmentConfigurationUserParameter.AddMember("environmentResolvedAccount", EnvironmentResolvedAccount)
 
 	EnvironmentConfigurationUserParameter_environmentConfigurationName = EnvironmentConfigurationUserParameter.AddMember("environmentConfigurationName", _EnvironmentConfigurationName)
@@ -18382,6 +18465,8 @@ func init() {
 	ProjectMembershipAssignment_userCreatedDesignationId = ProjectMembershipAssignment.AddMember("userCreatedDesignationId", _DesignationId)
 
 	_ProjectMembershipAssignments_member = _ProjectMembershipAssignments.AddMember("member", ProjectMembershipAssignment)
+
+	ProjectProfileAction_DISASSOCIATE = ProjectProfileAction.AddMember("DISASSOCIATE", smithyprelude.Unit)
 
 	Status_ENABLED = Status.AddMember("ENABLED", smithyprelude.Unit)
 
@@ -20691,6 +20776,8 @@ func init() {
 
 	GetAssetOutput_latestTimeSeriesDataPointFormsOutput = GetAssetOutput.AddMember("latestTimeSeriesDataPointFormsOutput", _TimeSeriesDataPointSummaryFormOutputList)
 
+	GetAssetOutput_ownershipTransfer = GetAssetOutput.AddMember("ownershipTransfer", AssetOwnershipTransfer)
+
 	GetAssetTypeInput_domainIdentifier = GetAssetTypeInput.AddMember("domainIdentifier", _DomainId, &smithytraits.HTTPLabel{})
 
 	GetAssetTypeInput_identifier = GetAssetTypeInput.AddMember("identifier", _AssetTypeIdentifier, &smithytraits.HTTPLabel{})
@@ -22997,6 +23084,20 @@ func init() {
 
 	UpdateAssetFilterOutput_effectiveRowFilter = UpdateAssetFilterOutput.AddMember("effectiveRowFilter", smithyprelude.String)
 
+	UpdateAssetOwnerInput_domainIdentifier = UpdateAssetOwnerInput.AddMember("domainIdentifier", _DomainId, &smithytraits.HTTPLabel{})
+
+	UpdateAssetOwnerInput_identifier = UpdateAssetOwnerInput.AddMember("identifier", _AssetIdentifier, &smithytraits.HTTPLabel{})
+
+	UpdateAssetOwnerInput_targetProjectIdentifier = UpdateAssetOwnerInput.AddMember("targetProjectIdentifier", _ProjectId)
+
+	UpdateAssetOwnerInput_clientToken = UpdateAssetOwnerInput.AddMember("clientToken", _ClientToken)
+
+	UpdateAssetOwnerOutput_id = UpdateAssetOwnerOutput.AddMember("id", _AssetId)
+
+	UpdateAssetOwnerOutput_revision = UpdateAssetOwnerOutput.AddMember("revision", _Revision)
+
+	UpdateAssetOwnerOutput_ownershipTransfer = UpdateAssetOwnerOutput.AddMember("ownershipTransfer", AssetOwnershipTransfer)
+
 	UpdateConnectionInput_configurations = UpdateConnectionInput.AddMember("configurations", _Configurations)
 
 	UpdateConnectionInput_domainIdentifier = UpdateConnectionInput.AddMember("domainIdentifier", _DomainId, &smithytraits.HTTPLabel{})
@@ -23510,6 +23611,8 @@ func init() {
 	UpdateProjectInput_userParameters = UpdateProjectInput.AddMember("userParameters", _EnvironmentConfigurationUserParametersList)
 
 	UpdateProjectInput_projectProfileVersion = UpdateProjectInput.AddMember("projectProfileVersion", smithyprelude.String)
+
+	UpdateProjectInput_projectProfileAction = UpdateProjectInput.AddMember("projectProfileAction", ProjectProfileAction)
 
 	UpdateProjectOutput_domainId = UpdateProjectOutput.AddMember("domainId", _DomainId)
 

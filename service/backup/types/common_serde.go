@@ -1761,6 +1761,15 @@ func serializeResourceTypeManagementPreference(s smithy.ShapeSerializer, schema 
 	s.CloseMap()
 }
 
+func serializeResourceTypeOptInIncremental(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]bool) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteBool(schema.MapValue(), vv)
+	}
+	s.CloseMap()
+}
+
 func serializeResourceTypeOptInPreference(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]bool) {
 	s.WriteMap(schema)
 	for k, vv := range v {
@@ -1933,6 +1942,27 @@ func deserializeMetadata(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[st
 }
 
 func deserializeResourceTypeManagementPreference(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]bool) error {
+	*v = make(map[string]bool)
+	var vv bool
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero bool
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadBool(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeResourceTypeOptInIncremental(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]bool) error {
 	*v = make(map[string]bool)
 	var vv bool
 	return smithy.ReadMap(d, s, func(k string) error {

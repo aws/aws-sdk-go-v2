@@ -39,6 +39,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.BadRequest,
 			New:    func() any { return &types.BadRequest{} },
 		},
+		"com.amazonaws.fsx#ClusterPeerNotFound": {
+			Schema: schemas.ClusterPeerNotFound,
+			New:    func() any { return &types.ClusterPeerNotFound{} },
+		},
 		"com.amazonaws.fsx#DataRepositoryAssociationNotFound": {
 			Schema: schemas.DataRepositoryAssociationNotFound,
 			New:    func() any { return &types.DataRepositoryAssociationNotFound{} },
@@ -147,9 +151,21 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.ServiceLimitExceeded,
 			New:    func() any { return &types.ServiceLimitExceeded{} },
 		},
+		"com.amazonaws.fsx#SnapmirrorPolicyNotFound": {
+			Schema: schemas.SnapmirrorPolicyNotFound,
+			New:    func() any { return &types.SnapmirrorPolicyNotFound{} },
+		},
+		"com.amazonaws.fsx#SnapmirrorRelationshipNotFound": {
+			Schema: schemas.SnapmirrorRelationshipNotFound,
+			New:    func() any { return &types.SnapmirrorRelationshipNotFound{} },
+		},
 		"com.amazonaws.fsx#SnapshotNotFound": {
 			Schema: schemas.SnapshotNotFound,
 			New:    func() any { return &types.SnapshotNotFound{} },
+		},
+		"com.amazonaws.fsx#SnapshotPolicyNotFound": {
+			Schema: schemas.SnapshotPolicyNotFound,
+			New:    func() any { return &types.SnapshotPolicyNotFound{} },
 		},
 		"com.amazonaws.fsx#SourceBackupUnavailable": {
 			Schema: schemas.SourceBackupUnavailable,
@@ -158,6 +174,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 		"com.amazonaws.fsx#StorageVirtualMachineNotFound": {
 			Schema: schemas.StorageVirtualMachineNotFound,
 			New:    func() any { return &types.StorageVirtualMachineNotFound{} },
+		},
+		"com.amazonaws.fsx#StorageVirtualMachinePeerNotFound": {
+			Schema: schemas.StorageVirtualMachinePeerNotFound,
+			New:    func() any { return &types.StorageVirtualMachinePeerNotFound{} },
 		},
 		"com.amazonaws.fsx#TooManyAccessPoints": {
 			Schema: schemas.TooManyAccessPoints,

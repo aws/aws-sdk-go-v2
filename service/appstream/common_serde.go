@@ -313,6 +313,14 @@ func serializePlatforms(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 	s.CloseList()
 }
 
+func serializeProcessCompatibilityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeResourceErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ResourceError) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1217,6 +1225,27 @@ func deserializePlatforms(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 		}
 
 		*v = append(*v, types.PlatformType(vv))
+		return nil
+	})
+}
+
+func deserializeProcessCompatibilityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }

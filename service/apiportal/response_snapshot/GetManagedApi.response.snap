@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"apiSignature":{"hostname":"__Hostname__","method":"GET","path":"__Path__","port":1,"resourceArn":"__ResourceArn__"},"createdAt":946684800,"findings":[{"postureId":"__PostureId__","postureStatus":"TRUE","reason":"AUTHENTICATION_NOT_CONFIGURED","updatedAt":946684800},{"postureId":"__PostureId__","postureStatus":"TRUE","reason":"AUTHENTICATION_NOT_CONFIGURED","updatedAt":946684800}],"managedApiArn":"__ManagedApiArn__","managedApiId":"__ManagedApiId__","tags":{"key0":"__Value__"},"updatedAt":946684800}

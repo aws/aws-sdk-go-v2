@@ -16,6 +16,8 @@ import (
 // There's a quota for the number of fields allowed in a Custom type related item.
 // See [Connect Customer Cases quotas].
 //
+// There's a quota for the number of SLAs that can be attached to a case. See [Connect Customer Cases quotas].
+//
 // # Use cases
 //
 // Following are examples of related items that you may want to associate with a

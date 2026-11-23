@@ -31,6 +31,7 @@ func (c *Client) CreateEngagementContext(ctx context.Context, params *CreateEnga
 	return out, nil
 }
 
+// Contains the request parameters for the CreateEngagementContext operation.
 type CreateEngagementContextInput struct {
 
 	// Specifies the catalog associated with the engagement context request. This
@@ -58,8 +59,8 @@ type CreateEngagementContextInput struct {
 	// This member is required.
 	EngagementIdentifier *string
 
-	// Represents the payload of an Engagement context. The structure of this payload
-	// varies based on the context type specified in the EngagementContextDetails.
+	// Contains the contextual information to add to the engagement. The structure of
+	// this payload depends on the context type in the Type field.
 	//
 	// This member is required.
 	Payload types.EngagementContextPayload
@@ -100,6 +101,7 @@ func (v *CreateEngagementContextInput) SerializeMembers(s smithy.ShapeSerializer
 	}
 }
 
+// Contains the response that the CreateEngagementContext action returns.
 type CreateEngagementContextOutput struct {
 
 	// The unique identifier assigned to the newly created engagement context. This ID

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.UpdateCustomerAccount
+
+{"Account":{"Address":{"City":"__City__","CountryCode":"US","PostalCode":"__PostalCode__","StateOrRegion":"__StateOrRegion__","StreetAddress":"__StreetAddress__"},"CompanyName":"__CompanyName__","Domain":"__Domain__","Duns":"__Duns__","Industry":"__Industry__","OtherIndustry":"__OtherIndustry__","ParentCompanyName":"__ParentCompanyName__","WebsiteUrl":"__WebsiteUrl__"},"Catalog":"__Catalog__","Identifier":"__Identifier__","LastModifiedDate":"2000-01-01T00:00:00Z","PartnerAccountIdentifier":"__PartnerAccountIdentifier__"}

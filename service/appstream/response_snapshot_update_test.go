@@ -1158,6 +1158,13 @@ func TestUpdateResponseSnapshot_CreateStack(t *testing.T) {
 					},
 				},
 			},
+			WebAuthnRedirection: &types.WebAuthnRedirection{
+				Enabled: ptr.Bool(true),
+				ProcessCompatibilityList: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
 			AgentAccessConfig: &types.AgentAccessConfig{
 				Settings: []types.AgentAccessSetting{
 					{
@@ -3320,6 +3327,13 @@ func TestUpdateResponseSnapshot_DescribeStacks(t *testing.T) {
 						},
 					},
 				},
+				WebAuthnRedirection: &types.WebAuthnRedirection{
+					Enabled: ptr.Bool(true),
+					ProcessCompatibilityList: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
 				AgentAccessConfig: &types.AgentAccessConfig{
 					Settings: []types.AgentAccessSetting{
 						{
@@ -3430,6 +3444,13 @@ func TestUpdateResponseSnapshot_DescribeStacks(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+				},
+				WebAuthnRedirection: &types.WebAuthnRedirection{
+					Enabled: ptr.Bool(true),
+					ProcessCompatibilityList: []string{
+						"__Member__",
+						"__Member__",
 					},
 				},
 				AgentAccessConfig: &types.AgentAccessConfig{
@@ -5069,6 +5090,13 @@ func TestUpdateResponseSnapshot_UpdateStack(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+				},
+			},
+			WebAuthnRedirection: &types.WebAuthnRedirection{
+				Enabled: ptr.Bool(true),
+				ProcessCompatibilityList: []string{
+					"__Member__",
+					"__Member__",
 				},
 			},
 			AgentAccessConfig: &types.AgentAccessConfig{

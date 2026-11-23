@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccessControlApplicationStatus":"ENABLED","ApplicationId":"__ApplicationId__","Arn":"__Arn__","CreatedTime":946684800,"IdcApplicationArn":"__IdcApplicationArn__","QuickAuthenticationConfiguration":{"QuickAuthenticationConfigurationDetailCreateOutput":{"QuickManagedPublicAuthCode":{"ClientId":"__ClientId__","RedirectUris":["__Member__","__Member__"]}},"QuickAuthenticationType":"QUICK_MANAGED_PUBLIC_AUTH_CODE"},"RequestId":"__RequestId__","Status":200,"TenantUrl":"__TenantUrl__"}

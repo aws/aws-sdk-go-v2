@@ -1,3 +1,7 @@
+# v1.29.0 (2026-11-20)
+
+* **Feature**: Adds the ListAutonomousDatabaseRefreshableClones and StartAutonomousDatabaseRefresh APIs for listing and refreshing refreshable clones of Autonomous Database Serverless.
+
 # v1.28.0 (2026-11-12)
 
 * **Feature**: ODB now supports scaling for Exadata Dedicated offerings. Customers can scale database and storage servers on Exadata infrastructure, resize VM clusters and Autonomous VM clusters, and add or remove virtual machines in a VM cluster.

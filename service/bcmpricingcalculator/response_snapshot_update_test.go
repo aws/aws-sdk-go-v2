@@ -1434,6 +1434,76 @@ func TestUpdateResponseSnapshot_GetPreferences(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetUsageLinesEstimatedCost(t *testing.T) {
+	want := &GetUsageLinesEstimatedCostOutput{
+		RateType:  types.RateType("BEFORE_DISCOUNTS"),
+		TotalCost: ptr.Float64(1.0),
+		Currency:  types.CurrencyCode("USD"),
+		LineItems: []types.GetUsageLinesEstimatedCostLineItem{
+			{
+				Key:         ptr.String("__Key__"),
+				ServiceCode: ptr.String("__ServiceCode__"),
+				UsageType:   ptr.String("__UsageType__"),
+				Operation:   ptr.String("__Operation__"),
+				EstimatedCost: &types.GetUsageLinesEstimatedCostEstimatedCost{
+					UsageAmount: ptr.Float64(1.0),
+					UsageUnit:   ptr.String("__UsageUnit__"),
+					Cost:        ptr.Float64(1.0),
+					Currency:    types.CurrencyCode("USD"),
+				},
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				ServiceCode: ptr.String("__ServiceCode__"),
+				UsageType:   ptr.String("__UsageType__"),
+				Operation:   ptr.String("__Operation__"),
+				EstimatedCost: &types.GetUsageLinesEstimatedCostEstimatedCost{
+					UsageAmount: ptr.Float64(1.0),
+					UsageUnit:   ptr.String("__UsageUnit__"),
+					Cost:        ptr.Float64(1.0),
+					Currency:    types.CurrencyCode("USD"),
+				},
+			},
+		},
+		Errors: []types.GetUsageLinesEstimatedCostError{
+			{
+				Key:          ptr.String("__Key__"),
+				ServiceCode:  ptr.String("__ServiceCode__"),
+				UsageType:    ptr.String("__UsageType__"),
+				Operation:    ptr.String("__Operation__"),
+				ErrorCode:    types.GetUsageLinesEstimatedCostErrorCode("BAD_REQUEST"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				Key:          ptr.String("__Key__"),
+				ServiceCode:  ptr.String("__ServiceCode__"),
+				UsageType:    ptr.String("__UsageType__"),
+				Operation:    ptr.String("__Operation__"),
+				ErrorCode:    types.GetUsageLinesEstimatedCostErrorCode("BAD_REQUEST"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	proto := awsjson.New10(schemas.AWSBCMPricingCalculator)
+	opSchema := smithy.NewOperationSchema(schemas.GetUsageLinesEstimatedCost, schemas.GetUsageLinesEstimatedCostResponse, schemas.GetUsageLinesEstimatedCostResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetUsageLinesEstimatedCost.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetWorkloadEstimate(t *testing.T) {
 	want := &GetWorkloadEstimateOutput{
 		Id:             ptr.String("__Id__"),

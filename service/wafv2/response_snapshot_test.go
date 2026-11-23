@@ -1161,6 +1161,17 @@ func TestCheckResponseSnapshot_CheckCapacity(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -1325,6 +1336,17 @@ func TestCheckResponseSnapshot_CheckCapacity(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -2733,6 +2755,17 @@ func TestCheckResponseSnapshot_CheckCapacity(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -2897,6 +2930,17 @@ func TestCheckResponseSnapshot_CheckCapacity(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -4461,6 +4505,17 @@ func TestCheckResponseSnapshot_CreateRuleGroup(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -4625,6 +4680,17 @@ func TestCheckResponseSnapshot_CreateRuleGroup(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -6033,6 +6099,17 @@ func TestCheckResponseSnapshot_CreateRuleGroup(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -6197,6 +6274,17 @@ func TestCheckResponseSnapshot_CreateRuleGroup(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -7790,6 +7878,17 @@ func TestCheckResponseSnapshot_CreateWebACL(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -7954,6 +8053,17 @@ func TestCheckResponseSnapshot_CreateWebACL(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -9362,6 +9472,17 @@ func TestCheckResponseSnapshot_CreateWebACL(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -9526,6 +9647,17 @@ func TestCheckResponseSnapshot_CreateWebACL(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -9984,7 +10116,7 @@ func TestCheckResponseSnapshot_CreateWebACL(t *testing.T) {
 		AssociationConfig: &types.AssociationConfig{
 			RequestBody: map[string]types.RequestBodyAssociatedResourceTypeConfig{
 				"key0": {
-					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
+					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_8"),
 				},
 			},
 			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
@@ -10110,6 +10242,9 @@ func TestCheckResponseSnapshot_CreateWebACL(t *testing.T) {
 				},
 			},
 			CurrencyMode: types.CurrencyMode("REAL"),
+		},
+		AnalyticsConfig: &types.AnalyticsConfig{
+			Mode: types.AnalyticsMode("CROSS_REGION"),
 		},
 	})
 	if err != nil {
@@ -10676,6 +10811,236 @@ func TestCheckResponseSnapshot_GetDecryptedAPIKey(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetDecryptedAPIKey.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetEvent(t *testing.T) {
+	want := &GetEventOutput{
+		Event: &types.EventDetailSummary{
+			EventId:         ptr.String("__EventId__"),
+			EventStatus:     types.EventStatus("EVENT_STARTED"),
+			EventCategory:   types.EventCategory("API_SECURITY"),
+			StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ResourceArn:     ptr.String("__ResourceArn__"),
+			WebAclArn:       ptr.String("__WebAclArn__"),
+			ApiSecurityEventDetail: &types.ApiSecurityEventDetail{
+				Label:      ptr.String("__Label__"),
+				Category:   ptr.String("__Category__"),
+				Confidence: types.Confidence("LOW"),
+				ApiPatterns: []types.ApiPattern{
+					{
+						Method:      ptr.String("__Method__"),
+						PathPattern: ptr.String("__PathPattern__"),
+						Port:        1,
+						Domains: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Method:      ptr.String("__Method__"),
+						PathPattern: ptr.String("__PathPattern__"),
+						Port:        1,
+						Domains: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+				EventActors: []types.EventActorReference{
+					{
+						EventActorId:    ptr.String("__EventActorId__"),
+						EventActorValue: ptr.String("__EventActorValue__"),
+					},
+					{
+						EventActorId:    ptr.String("__EventActorId__"),
+						EventActorValue: ptr.String("__EventActorValue__"),
+					},
+				},
+				Timeline: []types.EventTimelineEntry{
+					{
+						ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Label:      ptr.String("__Label__"),
+						Confidence: types.Confidence("LOW"),
+						ApiPatterns: []types.ApiPattern{
+							{
+								Method:      ptr.String("__Method__"),
+								PathPattern: ptr.String("__PathPattern__"),
+								Port:        1,
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Method:      ptr.String("__Method__"),
+								PathPattern: ptr.String("__PathPattern__"),
+								Port:        1,
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					{
+						ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						Label:      ptr.String("__Label__"),
+						Confidence: types.Confidence("LOW"),
+						ApiPatterns: []types.ApiPattern{
+							{
+								Method:      ptr.String("__Method__"),
+								PathPattern: ptr.String("__PathPattern__"),
+								Port:        1,
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+							{
+								Method:      ptr.String("__Method__"),
+								PathPattern: ptr.String("__PathPattern__"),
+								Port:        1,
+								Domains: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetEvent.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetEvent(context.Background(), &GetEventInput{
+		Scope:     types.Scope("CLOUDFRONT"),
+		EventId:   ptr.String("__EventId__"),
+		WebAclArn: ptr.String("__WebAclArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetEvent.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetEventActor(t *testing.T) {
+	want := &GetEventActorOutput{
+		EventActor: &types.EventActorDetail{
+			Summary: &types.EventActorDetailSummary{
+				EventActorId:    ptr.String("__EventActorId__"),
+				ClientIp:        ptr.String("__ClientIp__"),
+				TlsFingerprint:  ptr.String("__TlsFingerprint__"),
+				Asn:             ptr.String("__Asn__"),
+				AsnOrganization: ptr.String("__AsnOrganization__"),
+				Country:         ptr.String("__Country__"),
+				AuthFingerprint: ptr.String("__AuthFingerprint__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			Events: []types.RelatedEvent{
+				{
+					EventId:    ptr.String("__EventId__"),
+					StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Label:      ptr.String("__Label__"),
+					Category:   ptr.String("__Category__"),
+					Confidence: types.Confidence("LOW"),
+					ApiPatterns: []types.ApiPattern{
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+				{
+					EventId:    ptr.String("__EventId__"),
+					StartTime:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					Label:      ptr.String("__Label__"),
+					Category:   ptr.String("__Category__"),
+					Confidence: types.Confidence("LOW"),
+					ApiPatterns: []types.ApiPattern{
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
+			},
+			Changes: []types.EventActorChange{
+				{
+					ChangeTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ClientIp:        ptr.String("__ClientIp__"),
+					TlsFingerprint:  ptr.String("__TlsFingerprint__"),
+					Asn:             ptr.String("__Asn__"),
+					AsnOrganization: ptr.String("__AsnOrganization__"),
+					Country:         ptr.String("__Country__"),
+				},
+				{
+					ChangeTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ClientIp:        ptr.String("__ClientIp__"),
+					TlsFingerprint:  ptr.String("__TlsFingerprint__"),
+					Asn:             ptr.String("__Asn__"),
+					AsnOrganization: ptr.String("__AsnOrganization__"),
+					Country:         ptr.String("__Country__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetEventActor.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetEventActor(context.Background(), &GetEventActorInput{
+		Scope:        types.Scope("CLOUDFRONT"),
+		EventActorId: ptr.String("__EventActorId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetEventActor.response", err)
 	}
 }
 
@@ -12355,6 +12720,17 @@ func TestCheckResponseSnapshot_GetRuleGroup(t *testing.T) {
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
 									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
+									},
 								},
 								{
 									LoginPath:   ptr.String("__LoginPath__"),
@@ -12519,6 +12895,17 @@ func TestCheckResponseSnapshot_GetRuleGroup(t *testing.T) {
 											},
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
+									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
 									},
 								},
 							},
@@ -13927,6 +14314,17 @@ func TestCheckResponseSnapshot_GetRuleGroup(t *testing.T) {
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
 									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
+									},
 								},
 								{
 									LoginPath:   ptr.String("__LoginPath__"),
@@ -14091,6 +14489,17 @@ func TestCheckResponseSnapshot_GetRuleGroup(t *testing.T) {
 											},
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
+									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
 									},
 								},
 							},
@@ -15962,6 +16371,17 @@ func TestCheckResponseSnapshot_GetWebACL(t *testing.T) {
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
 									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
+									},
 								},
 								{
 									LoginPath:   ptr.String("__LoginPath__"),
@@ -16126,6 +16546,17 @@ func TestCheckResponseSnapshot_GetWebACL(t *testing.T) {
 											},
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
+									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
 									},
 								},
 							},
@@ -17534,6 +17965,17 @@ func TestCheckResponseSnapshot_GetWebACL(t *testing.T) {
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
 									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
+									},
 								},
 								{
 									LoginPath:   ptr.String("__LoginPath__"),
@@ -17698,6 +18140,17 @@ func TestCheckResponseSnapshot_GetWebACL(t *testing.T) {
 											},
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
+									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
 									},
 								},
 							},
@@ -18243,6 +18696,7 @@ func TestCheckResponseSnapshot_GetWebACL(t *testing.T) {
 			OnSourceDDoSProtectionConfig: nil,
 			ApplicationConfig:            nil,
 			MonetizationConfig:           nil,
+			AnalyticsConfig:              nil,
 		},
 		LockToken:                 ptr.String("__LockToken__"),
 		ApplicationIntegrationURL: ptr.String("__ApplicationIntegrationURL__"),
@@ -19326,6 +19780,17 @@ func TestCheckResponseSnapshot_GetWebACLForResource(t *testing.T) {
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
 									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
+									},
 								},
 								{
 									LoginPath:   ptr.String("__LoginPath__"),
@@ -19490,6 +19955,17 @@ func TestCheckResponseSnapshot_GetWebACLForResource(t *testing.T) {
 											},
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
+									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
 									},
 								},
 							},
@@ -20898,6 +21374,17 @@ func TestCheckResponseSnapshot_GetWebACLForResource(t *testing.T) {
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
 									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
+									},
 								},
 								{
 									LoginPath:   ptr.String("__LoginPath__"),
@@ -21062,6 +21549,17 @@ func TestCheckResponseSnapshot_GetWebACLForResource(t *testing.T) {
 											},
 										},
 										SensitivityToBlock: types.SensitivityToAct("LOW"),
+									},
+									AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+										BedrockGuardrails: &types.BedrockGuardrails{
+											Disable: &types.DisableBedrockGuardrails{},
+											ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+											ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+												RoleArn: ptr.String("__RoleArn__"),
+											},
+										},
 									},
 								},
 							},
@@ -21607,6 +22105,7 @@ func TestCheckResponseSnapshot_GetWebACLForResource(t *testing.T) {
 			OnSourceDDoSProtectionConfig: nil,
 			ApplicationConfig:            nil,
 			MonetizationConfig:           nil,
+			AnalyticsConfig:              nil,
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetWebACLForResource.response")
@@ -21748,6 +22247,595 @@ func TestCheckResponseSnapshot_ListAvailableManagedRuleGroups(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListAvailableManagedRuleGroups.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListEventActors(t *testing.T) {
+	want := &ListEventActorsOutput{
+		EventActors: []types.EventActorSummary{
+			{
+				EventActorId:    ptr.String("__EventActorId__"),
+				ClientIp:        ptr.String("__ClientIp__"),
+				TlsFingerprint:  ptr.String("__TlsFingerprint__"),
+				Asn:             ptr.String("__Asn__"),
+				AsnOrganization: ptr.String("__AsnOrganization__"),
+				Country:         ptr.String("__Country__"),
+				AuthFingerprint: ptr.String("__AuthFingerprint__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventCount:      1,
+			},
+			{
+				EventActorId:    ptr.String("__EventActorId__"),
+				ClientIp:        ptr.String("__ClientIp__"),
+				TlsFingerprint:  ptr.String("__TlsFingerprint__"),
+				Asn:             ptr.String("__Asn__"),
+				AsnOrganization: ptr.String("__AsnOrganization__"),
+				Country:         ptr.String("__Country__"),
+				AuthFingerprint: ptr.String("__AuthFingerprint__"),
+				CreatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventCount:      1,
+			},
+		},
+		NextMarker: ptr.String("__NextMarker__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListEventActors.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListEventActors(context.Background(), &ListEventActorsInput{
+		Scope: types.Scope("CLOUDFRONT"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SortBy:     types.EventActorSortBy("EVENT_COUNT"),
+		Limit:      ptr.Int32(1),
+		NextMarker: ptr.String("__NextMarker__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListEventActors.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListEvents(t *testing.T) {
+	want := &ListEventsOutput{
+		Events: []types.EventDetailSummary{
+			{
+				EventId:         ptr.String("__EventId__"),
+				EventStatus:     types.EventStatus("EVENT_STARTED"),
+				EventCategory:   types.EventCategory("API_SECURITY"),
+				StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResourceArn:     ptr.String("__ResourceArn__"),
+				WebAclArn:       ptr.String("__WebAclArn__"),
+				ApiSecurityEventDetail: &types.ApiSecurityEventDetail{
+					Label:      ptr.String("__Label__"),
+					Category:   ptr.String("__Category__"),
+					Confidence: types.Confidence("LOW"),
+					ApiPatterns: []types.ApiPattern{
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					EventActors: []types.EventActorReference{
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+					},
+					Timeline: []types.EventTimelineEntry{
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				EventId:         ptr.String("__EventId__"),
+				EventStatus:     types.EventStatus("EVENT_STARTED"),
+				EventCategory:   types.EventCategory("API_SECURITY"),
+				StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResourceArn:     ptr.String("__ResourceArn__"),
+				WebAclArn:       ptr.String("__WebAclArn__"),
+				ApiSecurityEventDetail: &types.ApiSecurityEventDetail{
+					Label:      ptr.String("__Label__"),
+					Category:   ptr.String("__Category__"),
+					Confidence: types.Confidence("LOW"),
+					ApiPatterns: []types.ApiPattern{
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					EventActors: []types.EventActorReference{
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+					},
+					Timeline: []types.EventTimelineEntry{
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		NextMarker: ptr.String("__NextMarker__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListEvents.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListEvents(context.Background(), &ListEventsInput{
+		Scope: types.Scope("CLOUDFRONT"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Filters: []types.EventFilter{
+			{
+				Name: types.EventFilterKey("EVENT_CATEGORY"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.EventFilterKey("EVENT_CATEGORY"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ApiPatternFilters: []types.ApiPatternFilter{
+			{
+				Method:      ptr.String("__Method__"),
+				PathPattern: ptr.String("__PathPattern__"),
+				Port:        1,
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Method:      ptr.String("__Method__"),
+				PathPattern: ptr.String("__PathPattern__"),
+				Port:        1,
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Limit:      ptr.Int32(1),
+		NextMarker: ptr.String("__NextMarker__"),
+		SortOrder:  types.SortOrder("ASC"),
+		SortBy:     types.EventSortBy("START_TIME"),
+		Include: []types.EventIncludeField{
+			types.EventIncludeField("TIMELINE"),
+			types.EventIncludeField("TIMELINE"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListEvents.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListEventsByWebACL(t *testing.T) {
+	want := &ListEventsByWebACLOutput{
+		Events: []types.EventDetailSummary{
+			{
+				EventId:         ptr.String("__EventId__"),
+				EventStatus:     types.EventStatus("EVENT_STARTED"),
+				EventCategory:   types.EventCategory("API_SECURITY"),
+				StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResourceArn:     ptr.String("__ResourceArn__"),
+				WebAclArn:       ptr.String("__WebAclArn__"),
+				ApiSecurityEventDetail: &types.ApiSecurityEventDetail{
+					Label:      ptr.String("__Label__"),
+					Category:   ptr.String("__Category__"),
+					Confidence: types.Confidence("LOW"),
+					ApiPatterns: []types.ApiPattern{
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					EventActors: []types.EventActorReference{
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+					},
+					Timeline: []types.EventTimelineEntry{
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				EventId:         ptr.String("__EventId__"),
+				EventStatus:     types.EventStatus("EVENT_STARTED"),
+				EventCategory:   types.EventCategory("API_SECURITY"),
+				StartTime:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EndTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ResourceArn:     ptr.String("__ResourceArn__"),
+				WebAclArn:       ptr.String("__WebAclArn__"),
+				ApiSecurityEventDetail: &types.ApiSecurityEventDetail{
+					Label:      ptr.String("__Label__"),
+					Category:   ptr.String("__Category__"),
+					Confidence: types.Confidence("LOW"),
+					ApiPatterns: []types.ApiPattern{
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Method:      ptr.String("__Method__"),
+							PathPattern: ptr.String("__PathPattern__"),
+							Port:        1,
+							Domains: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					EventActors: []types.EventActorReference{
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+						{
+							EventActorId:    ptr.String("__EventActorId__"),
+							EventActorValue: ptr.String("__EventActorValue__"),
+						},
+					},
+					Timeline: []types.EventTimelineEntry{
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+						{
+							ChangeTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							Label:      ptr.String("__Label__"),
+							Confidence: types.Confidence("LOW"),
+							ApiPatterns: []types.ApiPattern{
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									Method:      ptr.String("__Method__"),
+									PathPattern: ptr.String("__PathPattern__"),
+									Port:        1,
+									Domains: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		NextMarker: ptr.String("__NextMarker__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListEventsByWebACL.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListEventsByWebACL(context.Background(), &ListEventsByWebACLInput{
+		Scope:     types.Scope("CLOUDFRONT"),
+		WebAclArn: ptr.String("__WebAclArn__"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Filters: []types.EventFilter{
+			{
+				Name: types.EventFilterKey("EVENT_CATEGORY"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.EventFilterKey("EVENT_CATEGORY"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ApiPatternFilters: []types.ApiPatternFilter{
+			{
+				Method:      ptr.String("__Method__"),
+				PathPattern: ptr.String("__PathPattern__"),
+				Port:        1,
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Method:      ptr.String("__Method__"),
+				PathPattern: ptr.String("__PathPattern__"),
+				Port:        1,
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Limit:      ptr.Int32(1),
+		NextMarker: ptr.String("__NextMarker__"),
+		SortOrder:  types.SortOrder("ASC"),
+		SortBy:     types.EventSortBy("START_TIME"),
+		Include: []types.EventIncludeField{
+			types.EventIncludeField("TIMELINE"),
+			types.EventIncludeField("TIMELINE"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListEventsByWebACL.response", err)
 	}
 }
 
@@ -24233,6 +25321,17 @@ func TestCheckResponseSnapshot_UpdateRuleGroup(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -24397,6 +25496,17 @@ func TestCheckResponseSnapshot_UpdateRuleGroup(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -25805,6 +26915,17 @@ func TestCheckResponseSnapshot_UpdateRuleGroup(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -25969,6 +27090,17 @@ func TestCheckResponseSnapshot_UpdateRuleGroup(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -27548,6 +28680,17 @@ func TestCheckResponseSnapshot_UpdateWebACL(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -27712,6 +28855,17 @@ func TestCheckResponseSnapshot_UpdateWebACL(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -29120,6 +30274,17 @@ func TestCheckResponseSnapshot_UpdateWebACL(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -29284,6 +30449,17 @@ func TestCheckResponseSnapshot_UpdateWebACL(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -29733,7 +30909,7 @@ func TestCheckResponseSnapshot_UpdateWebACL(t *testing.T) {
 		AssociationConfig: &types.AssociationConfig{
 			RequestBody: map[string]types.RequestBodyAssociatedResourceTypeConfig{
 				"key0": {
-					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
+					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_8"),
 				},
 			},
 			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
@@ -29859,6 +31035,9 @@ func TestCheckResponseSnapshot_UpdateWebACL(t *testing.T) {
 				},
 			},
 			CurrencyMode: types.CurrencyMode("REAL"),
+		},
+		AnalyticsConfig: &types.AnalyticsConfig{
+			Mode: types.AnalyticsMode("CROSS_REGION"),
 		},
 	})
 	if err != nil {
@@ -30965,6 +32144,17 @@ func TestCheckResponseSnapshot_Error_WAFConfigurationWarningException(t *testing
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -31129,6 +32319,17 @@ func TestCheckResponseSnapshot_Error_WAFConfigurationWarningException(t *testing
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -32537,6 +33738,17 @@ func TestCheckResponseSnapshot_Error_WAFConfigurationWarningException(t *testing
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -32701,6 +33913,17 @@ func TestCheckResponseSnapshot_Error_WAFConfigurationWarningException(t *testing
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -33159,7 +34382,7 @@ func TestCheckResponseSnapshot_Error_WAFConfigurationWarningException(t *testing
 		AssociationConfig: &types.AssociationConfig{
 			RequestBody: map[string]types.RequestBodyAssociatedResourceTypeConfig{
 				"key0": {
-					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
+					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_8"),
 				},
 			},
 			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
@@ -33285,6 +34508,9 @@ func TestCheckResponseSnapshot_Error_WAFConfigurationWarningException(t *testing
 				},
 			},
 			CurrencyMode: types.CurrencyMode("REAL"),
+		},
+		AnalyticsConfig: &types.AnalyticsConfig{
+			Mode: types.AnalyticsMode("CROSS_REGION"),
 		},
 	})
 	if opErr == nil {
@@ -34375,6 +35601,17 @@ func TestCheckResponseSnapshot_Error_WAFExpiredManagedRuleGroupVersionException(
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -34539,6 +35776,17 @@ func TestCheckResponseSnapshot_Error_WAFExpiredManagedRuleGroupVersionException(
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -35947,6 +37195,17 @@ func TestCheckResponseSnapshot_Error_WAFExpiredManagedRuleGroupVersionException(
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -36111,6 +37370,17 @@ func TestCheckResponseSnapshot_Error_WAFExpiredManagedRuleGroupVersionException(
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -37701,6 +38971,17 @@ func TestCheckResponseSnapshot_Error_WAFInvalidResourceException(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -37865,6 +39146,17 @@ func TestCheckResponseSnapshot_Error_WAFInvalidResourceException(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -39273,6 +40565,17 @@ func TestCheckResponseSnapshot_Error_WAFInvalidResourceException(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -39437,6 +40740,17 @@ func TestCheckResponseSnapshot_Error_WAFInvalidResourceException(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -41425,6 +42739,17 @@ func TestCheckResponseSnapshot_Error_WAFSubscriptionNotFoundException(t *testing
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -41589,6 +42914,17 @@ func TestCheckResponseSnapshot_Error_WAFSubscriptionNotFoundException(t *testing
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -42997,6 +44333,17 @@ func TestCheckResponseSnapshot_Error_WAFSubscriptionNotFoundException(t *testing
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -43161,6 +44508,17 @@ func TestCheckResponseSnapshot_Error_WAFSubscriptionNotFoundException(t *testing
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},

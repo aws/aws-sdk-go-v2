@@ -25,7 +25,8 @@ import (
 // For more information, see [Continue rolling back an update] in the CloudFormation User Guide. For information
 // for troubleshooting a failed update rollback, see [Update rollback failed].
 //
-// ForceRollback and ResourcesToSkip are mutually exclusive. For details, see ContinueUpdateRollbackInput$ForceRollback.
+// ForceRollback and ResourcesToSkip are mutually exclusive. For details, see the
+// ForceRollback parameter.
 //
 // [Continue rolling back an update]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html
 // [Update rollback failed]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed

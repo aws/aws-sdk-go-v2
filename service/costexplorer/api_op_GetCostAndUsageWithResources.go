@@ -107,7 +107,13 @@ type GetCostAndUsageWithResourcesInput struct {
 	// unblended rates, see [Why does the "blended" annotation appear on some line items in my bill?].
 	//
 	// Valid values are AmortizedCost , BlendedCost , NetAmortizedCost ,
-	// NetUnblendedCost , NormalizedUsageAmount , UnblendedCost , and UsageQuantity .
+	// NetUnblendedCost , NormalizedUsageAmount , UnblendedCost , UsageQuantity ,
+	// BilledCost , ContractedCost , ListCost , PublicEquivalentBilledCost , and
+	// PublicOnDemandCost .
+	//
+	// BilledCost , ContractedCost , ListCost , PublicEquivalentBilledCost , and
+	// PublicOnDemandCost are cost analytics metrics. They use the same definitions as
+	// the cost analytics columns in Cost and Usage Report (CUR) 2.0.
 	//
 	// If you return the UsageQuantity metric, the service aggregates all usage
 	// numbers without taking the units into account. For example, if you aggregate

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.GetCustomerAccountBulkJob
+
+{"Arn":"__Arn__","CompletedAt":"2000-01-01T00:00:00Z","CreatedAt":"2000-01-01T00:00:00Z","DeletedCount":1,"FailureCount":1,"FailureReason":"__FailureReason__","FileName":"__FileName__","Id":"__Id__","ProcessedRecords":1,"Status":"SUBMITTED","SuccessCount":1,"TotalRecords":1}

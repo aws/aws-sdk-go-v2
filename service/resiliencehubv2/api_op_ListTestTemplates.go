@@ -4,6 +4,7 @@ package resiliencehubv2
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
 	smithy "github.com/aws/smithy-go"
@@ -29,6 +30,13 @@ func (c *Client) ListTestTemplates(ctx context.Context, params *ListTestTemplate
 }
 
 type ListTestTemplatesInput struct {
+
+	// Pagination page size.
+	MaxResults *int32
+
+	// Pagination token.
+	NextToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -39,6 +47,12 @@ func (v *ListTestTemplatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTestTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTestTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestTemplatesRequest_nextToken, *v.NextToken)
+	}
 }
 
 type ListTestTemplatesOutput struct {
@@ -47,6 +61,9 @@ type ListTestTemplatesOutput struct {
 	//
 	// This member is required.
 	TestTemplates []types.TestTemplateSummary
+
+	// Pagination token.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,6 +78,9 @@ func (v *ListTestTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTestTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestTemplatesResponse_nextToken, *v.NextToken)
+	}
 	if v.TestTemplates != nil {
 		serializeTestTemplateSummaryList(s, schemas.ListTestTemplatesResponse_testTemplates, v.TestTemplates)
 	}
@@ -68,6 +88,9 @@ func (v *ListTestTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ListTestTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTestTemplatesResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ListTestTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestTemplatesResponse_nextToken, v.NextToken)
 		case schemas.ListTestTemplatesResponse_testTemplates:
 			return deserializeTestTemplateSummaryList(d, schemas.ListTestTemplatesResponse_testTemplates, &v.TestTemplates)
 		}
@@ -111,3 +134,96 @@ func (c *Client) addOperationListTestTemplatesMiddlewares(stack *middleware.Stac
 	}
 	return nil
 }
+
+// ListTestTemplatesPaginatorOptions is the paginator options for ListTestTemplates
+type ListTestTemplatesPaginatorOptions struct {
+	// Pagination page size.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListTestTemplatesPaginator is a paginator for ListTestTemplates
+type ListTestTemplatesPaginator struct {
+	options   ListTestTemplatesPaginatorOptions
+	client    ListTestTemplatesAPIClient
+	params    *ListTestTemplatesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListTestTemplatesPaginator returns a new ListTestTemplatesPaginator
+func NewListTestTemplatesPaginator(client ListTestTemplatesAPIClient, params *ListTestTemplatesInput, optFns ...func(*ListTestTemplatesPaginatorOptions)) *ListTestTemplatesPaginator {
+	if params == nil {
+		params = &ListTestTemplatesInput{}
+	}
+
+	options := ListTestTemplatesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListTestTemplatesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListTestTemplatesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListTestTemplates page.
+func (p *ListTestTemplatesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListTestTemplatesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	optFns = append([]func(*Options){
+		addIsPaginatorUserAgent,
+	}, optFns...)
+	result, err := p.client.ListTestTemplates(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
+// ListTestTemplatesAPIClient is a client that implements the ListTestTemplates
+// operation.
+type ListTestTemplatesAPIClient interface {
+	ListTestTemplates(context.Context, *ListTestTemplatesInput, ...func(*Options)) (*ListTestTemplatesOutput, error)
+}
+
+var _ ListTestTemplatesAPIClient = (*Client)(nil)

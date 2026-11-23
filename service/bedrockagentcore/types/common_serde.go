@@ -844,6 +844,12 @@ func serializePayloadType(s smithy.ShapeSerializer, schema *smithy.Schema, v Pay
 
 func serializePaymentInput(s smithy.ShapeSerializer, schema *smithy.Schema, v PaymentInput) {
 	switch vv := v.(type) {
+	case *PaymentInputMemberAwsBillingX402:
+		s.WriteUnion(schema, schemas.PaymentInput_awsBillingX402)
+		s.WriteStruct(schemas.PaymentInput_awsBillingX402)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *PaymentInputMemberCryptoX402:
 		s.WriteUnion(schema, schemas.PaymentInput_cryptoX402)
 		s.WriteStruct(schemas.PaymentInput_cryptoX402)
@@ -872,6 +878,12 @@ func serializePaymentInstrumentDetails(s smithy.ShapeSerializer, schema *smithy.
 
 func serializePaymentOutput(s smithy.ShapeSerializer, schema *smithy.Schema, v PaymentOutput) {
 	switch vv := v.(type) {
+	case *PaymentOutputMemberAwsBillingX402:
+		s.WriteUnion(schema, schemas.PaymentOutput_awsBillingX402)
+		s.WriteStruct(schemas.PaymentOutput_awsBillingX402)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *PaymentOutputMemberCryptoX402:
 		s.WriteUnion(schema, schemas.PaymentOutput_cryptoX402)
 		s.WriteStruct(schemas.PaymentOutput_cryptoX402)
@@ -1954,6 +1966,10 @@ func deserializePayloadType(d smithy.ShapeDeserializer, s *smithy.Schema, v *Pay
 func deserializePaymentInput(d smithy.ShapeDeserializer, s *smithy.Schema, v *PaymentInput) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.PaymentInput_awsBillingX402:
+			vv := &PaymentInputMemberAwsBillingX402{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.PaymentInput_cryptoX402:
 			vv := &PaymentInputMemberCryptoX402{}
 			*v = vv
@@ -1982,6 +1998,10 @@ func deserializePaymentInstrumentDetails(d smithy.ShapeDeserializer, s *smithy.S
 func deserializePaymentOutput(d smithy.ShapeDeserializer, s *smithy.Schema, v *PaymentOutput) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.PaymentOutput_awsBillingX402:
+			vv := &PaymentOutputMemberAwsBillingX402{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.PaymentOutput_cryptoX402:
 			vv := &PaymentOutputMemberCryptoX402{}
 			*v = vv

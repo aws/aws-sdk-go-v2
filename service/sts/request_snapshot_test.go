@@ -516,6 +516,36 @@ func TestCheckRequestSnapshot_GetFederationToken(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetScopedCredentials(t *testing.T) {
+	input := &GetScopedCredentialsInput{
+		Policy:                   ptr.String("__Policy__"),
+		DurationSeconds:          ptr.Int32(1),
+		MinimumSessionTokenSize:  ptr.Int32(1),
+		ScopedSessionDescription: ptr.String("__ScopedSessionDescription__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetScopedCredentials(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetScopedCredentials"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetSessionToken(t *testing.T) {
 	input := &GetSessionTokenInput{
 		DurationSeconds:         ptr.Int32(1),
@@ -554,6 +584,8 @@ func TestCheckRequestSnapshot_GetWebIdentityToken(t *testing.T) {
 		},
 		DurationSeconds:  ptr.Int32(1),
 		SigningAlgorithm: ptr.String("__SigningAlgorithm__"),
+		Scope:            ptr.String("__Scope__"),
+		SubjectMode:      types.WebIdentityTokenSubjectModeType("AWSIdentity"),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -921,6 +953,36 @@ func TestUpdateRequestSnapshot_GetFederationToken(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetScopedCredentials(t *testing.T) {
+	input := &GetScopedCredentialsInput{
+		Policy:                   ptr.String("__Policy__"),
+		DurationSeconds:          ptr.Int32(1),
+		MinimumSessionTokenSize:  ptr.Int32(1),
+		ScopedSessionDescription: ptr.String("__ScopedSessionDescription__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetScopedCredentials(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetScopedCredentials"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetSessionToken(t *testing.T) {
 	input := &GetSessionTokenInput{
 		DurationSeconds:         ptr.Int32(1),
@@ -959,6 +1021,8 @@ func TestUpdateRequestSnapshot_GetWebIdentityToken(t *testing.T) {
 		},
 		DurationSeconds:  ptr.Int32(1),
 		SigningAlgorithm: ptr.String("__SigningAlgorithm__"),
+		Scope:            ptr.String("__Scope__"),
+		SubjectMode:      types.WebIdentityTokenSubjectModeType("AWSIdentity"),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),

@@ -1,0 +1,5 @@
+PUT /gateway/__GatewayId__/link/__LinkId__/flows
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","flows":[{"name":"__Name__","pipeline":{"sequential":{"modules":[{"activationPercentage":1,"configurationValues":"__ConfigurationValues__","failureMode":"OPEN","moduleVersionArn":"__ModuleVersionArn__","name":"__Name__","selectedActions":["FILTER","FILTER"]},{"activationPercentage":1,"configurationValues":"__ConfigurationValues__","failureMode":"OPEN","moduleVersionArn":"__ModuleVersionArn__","name":"__Name__","selectedActions":["FILTER","FILTER"]}]}}},{"name":"__Name__","pipeline":{"sequential":{"modules":[{"activationPercentage":1,"configurationValues":"__ConfigurationValues__","failureMode":"OPEN","moduleVersionArn":"__ModuleVersionArn__","name":"__Name__","selectedActions":["FILTER","FILTER"]},{"activationPercentage":1,"configurationValues":"__ConfigurationValues__","failureMode":"OPEN","moduleVersionArn":"__ModuleVersionArn__","name":"__Name__","selectedActions":["FILTER","FILTER"]}]}}}],"lockToken":"__LockToken__"}

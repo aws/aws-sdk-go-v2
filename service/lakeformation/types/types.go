@@ -2451,6 +2451,19 @@ type RLSPolicy struct {
 	// The name of the row-level security policy.
 	Name *string
 
+	// Whether the row-level security policy can be evaluated. VALID means that every
+	// lookup table and user-defined function the filter expression references exists.
+	// INVALID means that a lookup table or user-defined function the filter expression
+	// references was deleted.
+	Status RLSPolicyStatus
+
+	// The reason the row-level security policy is INVALID .
+	// REFERENCED_LOOKUP_TABLE_DELETED means that a lookup table the filter expression
+	// references was deleted. REFERENCED_UDF_DELETED means that a user-defined
+	// function the filter expression references was deleted. Not returned when the
+	// status is VALID .
+	StatusReason RLSPolicyStatusReason
+
 	noSmithyDocumentSerde
 }
 
@@ -2473,6 +2486,12 @@ func (v *RLSPolicy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RLSPolicy_Name, *v.Name)
 	}
+	if v.Status != "" {
+		s.WriteString(schemas.RLSPolicy_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.RLSPolicy_StatusReason, string(v.StatusReason))
+	}
 }
 func (v *RLSPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RLSPolicy, func(s *smithy.Schema) error {
@@ -2488,6 +2507,20 @@ func (v *RLSPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RLSPolicy_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.RLSPolicy_Name, v.Name)
+		case schemas.RLSPolicy_Status:
+			var ev string
+			if err := d.ReadString(schemas.RLSPolicy_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = RLSPolicyStatus(ev)
+			return nil
+		case schemas.RLSPolicy_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.RLSPolicy_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = RLSPolicyStatusReason(ev)
+			return nil
 		}
 		return nil
 	})

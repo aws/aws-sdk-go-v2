@@ -1552,6 +1552,92 @@ func (v *AssetListingItemAdditionalAttributes) Deserialize(d smithy.ShapeDeseria
 	})
 }
 
+// The details of an asset ownership transfer.
+type AssetOwnershipTransfer struct {
+
+	// The ID of the project that owned the asset when the transfer started.
+	//
+	// This member is required.
+	SourceProjectId *string
+
+	// The status of the ownership transfer. Valid values:
+	//
+	//   - IN_PROGRESS — The transfer is in progress. Requests that change the asset or
+	//   its listing fail until the transfer completes.
+	//
+	//   - SUCCEEDED — The transfer completed. The target project owns the asset, its
+	//   listing, and the subscriptions to the asset.
+	//
+	//   - FAILED — The transfer didn't complete, and the service rolled back its
+	//   changes. The source project owns the asset.
+	//
+	// This member is required.
+	Status AssetOwnershipTransferStatus
+
+	// The ID of the project that the asset is transferred to.
+	//
+	// This member is required.
+	TargetProjectId *string
+
+	// The timestamp of when the transfer started.
+	StartedAt *time.Time
+
+	// The timestamp of when the status of the transfer was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AssetOwnershipTransfer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetOwnershipTransfer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetOwnershipTransfer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceProjectId != nil {
+		s.WriteString(schemas.AssetOwnershipTransfer_sourceProjectId, *v.SourceProjectId)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.AssetOwnershipTransfer_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AssetOwnershipTransfer_status, string(v.Status))
+	}
+	if v.TargetProjectId != nil {
+		s.WriteString(schemas.AssetOwnershipTransfer_targetProjectId, *v.TargetProjectId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AssetOwnershipTransfer_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AssetOwnershipTransfer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetOwnershipTransfer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetOwnershipTransfer_sourceProjectId:
+			v.SourceProjectId = new(string)
+			return d.ReadString(schemas.AssetOwnershipTransfer_sourceProjectId, v.SourceProjectId)
+		case schemas.AssetOwnershipTransfer_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.AssetOwnershipTransfer_startedAt, v.StartedAt)
+		case schemas.AssetOwnershipTransfer_status:
+			var ev string
+			if err := d.ReadString(schemas.AssetOwnershipTransfer_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AssetOwnershipTransferStatus(ev)
+			return nil
+		case schemas.AssetOwnershipTransfer_targetProjectId:
+			v.TargetProjectId = new(string)
+			return d.ReadString(schemas.AssetOwnershipTransfer_targetProjectId, v.TargetProjectId)
+		case schemas.AssetOwnershipTransfer_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AssetOwnershipTransfer_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // The asset permissions.
 type AssetPermission struct {
 
@@ -7187,6 +7273,9 @@ func (v *EnvironmentConfigurationParametersDetails) Deserialize(d smithy.ShapeDe
 // The environment configuration user parameters.
 type EnvironmentConfigurationUserParameter struct {
 
+	// The ID of the environment blueprint.
+	EnvironmentBlueprintId *string
+
 	// The environment configuration name.
 	EnvironmentConfigurationName *string
 
@@ -7210,6 +7299,9 @@ func (v *EnvironmentConfigurationUserParameter) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *EnvironmentConfigurationUserParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentBlueprintId != nil {
+		s.WriteString(schemas.EnvironmentConfigurationUserParameter_environmentBlueprintId, *v.EnvironmentBlueprintId)
+	}
 	if v.EnvironmentConfigurationName != nil {
 		s.WriteString(schemas.EnvironmentConfigurationUserParameter_environmentConfigurationName, *v.EnvironmentConfigurationName)
 	}
@@ -7228,6 +7320,9 @@ func (v *EnvironmentConfigurationUserParameter) SerializeMembers(s smithy.ShapeS
 func (v *EnvironmentConfigurationUserParameter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnvironmentConfigurationUserParameter, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.EnvironmentConfigurationUserParameter_environmentBlueprintId:
+			v.EnvironmentBlueprintId = new(string)
+			return d.ReadString(schemas.EnvironmentConfigurationUserParameter_environmentBlueprintId, v.EnvironmentBlueprintId)
 		case schemas.EnvironmentConfigurationUserParameter_environmentConfigurationName:
 			v.EnvironmentConfigurationName = new(string)
 			return d.ReadString(schemas.EnvironmentConfigurationUserParameter_environmentConfigurationName, v.EnvironmentConfigurationName)

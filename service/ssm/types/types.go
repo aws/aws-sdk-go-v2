@@ -5006,6 +5006,10 @@ type DocumentDescription struct {
 	// The value that identifies a document's category.
 	CategoryEnum []string
 
+	// This field specifies the cloud providers that the returned version of the
+	// document can run against.
+	CloudProviders []CloudProvider
+
 	// The date when the document was created.
 	CreatedDate *time.Time
 
@@ -5120,6 +5124,9 @@ func (v *DocumentDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CategoryEnum != nil {
 		serializeCategoryEnumList(s, schemas.DocumentDescription_CategoryEnum, v.CategoryEnum)
 	}
+	if v.CloudProviders != nil {
+		serializeCloudProviderList(s, schemas.DocumentDescription_CloudProviders, v.CloudProviders)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.DocumentDescription_CreatedDate, *v.CreatedDate)
 	}
@@ -5211,6 +5218,8 @@ func (v *DocumentDescription) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeCategoryList(d, schemas.DocumentDescription_Category, &v.Category)
 		case schemas.DocumentDescription_CategoryEnum:
 			return deserializeCategoryEnumList(d, schemas.DocumentDescription_CategoryEnum, &v.CategoryEnum)
+		case schemas.DocumentDescription_CloudProviders:
+			return deserializeCloudProviderList(d, schemas.DocumentDescription_CloudProviders, &v.CloudProviders)
 		case schemas.DocumentDescription_CreatedDate:
 			v.CreatedDate = new(time.Time)
 			return d.ReadTime(schemas.DocumentDescription_CreatedDate, v.CreatedDate)
@@ -5360,6 +5369,10 @@ type DocumentIdentifier struct {
 	// The user in your organization who created the document.
 	Author *string
 
+	// This field specifies the cloud providers that the default version of the
+	// document can run against.
+	CloudProviders []CloudProvider
+
 	// The date the SSM document was created.
 	CreatedDate *time.Time
 
@@ -5425,6 +5438,9 @@ func (v *DocumentIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Author != nil {
 		s.WriteString(schemas.DocumentIdentifier_Author, *v.Author)
 	}
+	if v.CloudProviders != nil {
+		serializeCloudProviderList(s, schemas.DocumentIdentifier_CloudProviders, v.CloudProviders)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.DocumentIdentifier_CreatedDate, *v.CreatedDate)
 	}
@@ -5474,6 +5490,8 @@ func (v *DocumentIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DocumentIdentifier_Author:
 			v.Author = new(string)
 			return d.ReadString(schemas.DocumentIdentifier_Author, v.Author)
+		case schemas.DocumentIdentifier_CloudProviders:
+			return deserializeCloudProviderList(d, schemas.DocumentIdentifier_CloudProviders, &v.CloudProviders)
 		case schemas.DocumentIdentifier_CreatedDate:
 			v.CreatedDate = new(time.Time)
 			return d.ReadTime(schemas.DocumentIdentifier_CreatedDate, v.CreatedDate)
@@ -5537,6 +5555,19 @@ func (v *DocumentIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // You can also use Amazon Web Services-provided keys, some of which have specific
 // allowed values. These keys and their associated values are as follows:
+//
+// CloudProviders Returns documents whose default version can run against any of
+// the specified cloud providers. The CloudProviders key supports the following
+// values:
+//
+//   - AWS - Documents that run against Amazon Web Services resources.
+//
+//   - Azure - Documents that run against Microsoft Azure resources.
+//
+//   - GCP - Documents that run against Google Cloud resources.
+//
+// If you created a document before Systems Manager supported cloud providers, the
+// document runs against AWS .
 //
 // DocumentType
 //
@@ -5970,6 +6001,10 @@ func (v *DocumentReviews) Deserialize(d smithy.ShapeDeserializer) error {
 // Version information about the document.
 type DocumentVersionInfo struct {
 
+	// This field specifies the cloud providers that this version of the document can
+	// run against.
+	CloudProviders []CloudProvider
+
 	// The date the document was created.
 	CreatedDate *time.Time
 
@@ -6017,6 +6052,9 @@ func (v *DocumentVersionInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DocumentVersionInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudProviders != nil {
+		serializeCloudProviderList(s, schemas.DocumentVersionInfo_CloudProviders, v.CloudProviders)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.DocumentVersionInfo_CreatedDate, *v.CreatedDate)
 	}
@@ -6051,6 +6089,8 @@ func (v *DocumentVersionInfo) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *DocumentVersionInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentVersionInfo, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.DocumentVersionInfo_CloudProviders:
+			return deserializeCloudProviderList(d, schemas.DocumentVersionInfo_CloudProviders, &v.CloudProviders)
 		case schemas.DocumentVersionInfo_CreatedDate:
 			v.CreatedDate = new(time.Time)
 			return d.ReadTime(schemas.DocumentVersionInfo_CreatedDate, v.CreatedDate)
@@ -15602,10 +15642,26 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 //     -
 //     Key=CloudConnector,Values={"CloudConnectorId":"cloud-connector-id","SsmManagedNodeFilter":"MANAGED","CloudProviderRegions":["eastus"]}
 //
-// Supported JSON keys: CloudConnectorId (required), SsmManagedNodeFilter ,
+// Instead of CloudConnector , you can use AzureCloudConnector or GcpCloudConnector
 //
-//	CloudProviderRegions , and, for GCP, IncludesLabels , ExcludesLabels ,
-//	OsPolicyComplianceFilter , and OsPolicyOrchestratorId .
+//	for a cloud connector to that provider. You must specify exactly one value. A
+//	cloud connector ID alone targets every running virtual machine (VM) in the cloud
+//	connector's scope. In the JSON value, CloudConnectorId is required, and the
+//	following optional keys narrow that scope:
+//
+//	- For both providers: SsmManagedNodeFilter , which filters VMs by whether they
+//	are Systems Manager managed nodes.
+//
+//	- For Microsoft Azure: CloudProviderRegions , AzureSubscriptions ,
+//	AzureResourceGroups , AzureTag , AzureVmPowerStates , and AzureResourceType .
+//
+//	- For GCP: Zones , GcpProjects , IncludesLabels , ExcludesLabels ,
+//	GcpInstanceStates , OsPolicyComplianceFilter , OsPolicyOrchestratorName ,
+//	OsPolicyOrchestratorId , and GcpAssetType .
+//
+// For descriptions, valid values, and defaults of these keys, see [Cloud Connector target reference]in the Amazon
+//
+//	Web Services Systems Manager User Guide.
 //
 // For Run Command and Maintenance Windows:
 //
@@ -15648,6 +15704,7 @@ func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // [Targeting multiple managed nodes]: https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
 // [Registering maintenance window tasks without targets]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
+// [Cloud Connector target reference]: https://docs.aws.amazon.com/systems-manager/latest/userguide/automation-cloud-connector-target.html
 type Target struct {
 
 	// User-defined criteria for sending commands that target managed nodes that meet

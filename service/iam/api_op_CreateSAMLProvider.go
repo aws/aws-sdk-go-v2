@@ -30,9 +30,20 @@ import (
 //
 // For more information, see [Enabling SAML 2.0 federated users to access the Amazon Web Services Management Console] and [About SAML 2.0-based federation] in the IAM User Guide.
 //
+// To control who can configure trusted identity propagation on a SAML provider,
+// use the [iam:EnableIdentityPropagation], [iam:EnableIdentityCenterAssociation], [iam:RequestIdentityProviderIssuers], [iam:ResourceIdentityProviderIssuers], [iam:RequestIdentityCenterInstanceArn], and [iam:ResourceIdentityCenterInstanceArn] condition keys in IAM policies. The Request keys contain
+// the values in the request. The Resource keys contain the values stored on the
+// provider.
+//
 // [Signature Version 4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+// [iam:ResourceIdentityCenterInstanceArn]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_ResourceIdentityCenterInstanceArn
 // [About SAML 2.0-based federation]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
+// [iam:RequestIdentityCenterInstanceArn]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_RequestIdentityCenterInstanceArn
 // [Enabling SAML 2.0 federated users to access the Amazon Web Services Management Console]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html
+// [iam:EnableIdentityPropagation]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_EnableIdentityPropagation
+// [iam:EnableIdentityCenterAssociation]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_EnableIdentityCenterAssociation
+// [iam:ResourceIdentityProviderIssuers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_ResourceIdentityProviderIssuers
+// [iam:RequestIdentityProviderIssuers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#ck_RequestIdentityProviderIssuers
 func (c *Client) CreateSAMLProvider(ctx context.Context, params *CreateSAMLProviderInput, optFns ...func(*Options)) (*CreateSAMLProviderOutput, error) {
 	if params == nil {
 		params = &CreateSAMLProviderInput{}
@@ -82,6 +93,24 @@ type CreateSAMLProviderInput struct {
 	// Specifies the encryption setting for the SAML provider.
 	AssertionEncryptionMode types.AssertionEncryptionModeType
 
+	// The trusted identity propagation context provider configuration to associate
+	// with the SAML provider. The context provider defines how the subject is derived
+	// and how keys from the provider's SAML assertion are mapped into trusted context
+	// keys. Specifying a context provider enables trusted identity propagation for the
+	// provider. For more information, see [ContextProvider].
+	//
+	// [ContextProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+	ContextProvider *types.ContextProvider
+
+	// The Amazon Resource Name (ARN) of the IAM Identity Center instance to associate
+	// with the SAML provider. If you specify this parameter, you must also specify
+	// ContextProvider .
+	//
+	// For the format, see [InstanceMetadata] in the IAM Identity Center API Reference.
+	//
+	// [InstanceMetadata]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+	IdentityCenterInstanceArn *string
+
 	// A list of tags that you want to attach to the new IAM SAML provider. Each tag
 	// consists of a key name and an associated value. For more information about
 	// tagging, see [Tagging IAM resources]in the IAM User Guide.
@@ -107,6 +136,14 @@ func (v *CreateSAMLProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.AssertionEncryptionMode != "" {
 		s.WriteString(schemas.CreateSAMLProviderRequest_AssertionEncryptionMode, string(v.AssertionEncryptionMode))
+	}
+	if v.ContextProvider != nil {
+		s.WriteStruct(schemas.CreateSAMLProviderRequest_ContextProvider)
+		v.ContextProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityCenterInstanceArn != nil {
+		s.WriteString(schemas.CreateSAMLProviderRequest_IdentityCenterInstanceArn, *v.IdentityCenterInstanceArn)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSAMLProviderRequest_Name, *v.Name)

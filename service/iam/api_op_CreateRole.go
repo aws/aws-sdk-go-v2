@@ -98,6 +98,15 @@ type CreateRoleInput struct {
 	// [Using IAM roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
 	MaxSessionDuration *int32
 
+	// The maximum duration (in seconds) of an Amazon Web Services Sign-In session for
+	// users who sign in with this role. This setting can have a value from 1 hour
+	// (3600 seconds) to 90 days (7776000 seconds), inclusive. If you do not specify a
+	// value, the setting remains unset and the existing sign-in session behavior
+	// applies.
+	//
+	// This setting is independent of MaxSessionDuration .
+	MaxSigninSessionDuration *int32
+
 	//  The path to the role. For more information about paths, see [IAM Identifiers] in the IAM User
 	// Guide.
 	//
@@ -156,6 +165,9 @@ func (v *CreateRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.MaxSessionDuration != nil {
 		s.WriteInt32(schemas.CreateRoleRequest_MaxSessionDuration, *v.MaxSessionDuration)
+	}
+	if v.MaxSigninSessionDuration != nil {
+		s.WriteInt32(schemas.CreateRoleRequest_MaxSigninSessionDuration, *v.MaxSigninSessionDuration)
 	}
 	if v.Path != nil {
 		s.WriteString(schemas.CreateRoleRequest_Path, *v.Path)

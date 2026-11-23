@@ -120734,6 +120734,68 @@ func awsEc2query_deserializeDocumentIdFormatListUnwrapped(v *[]types.IdFormat, d
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentIgwFirewall(v **types.IgwFirewall, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.IgwFirewall
+	if *v == nil {
+		sv = &types.IgwFirewall{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("firewallArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FirewallArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = types.FirewallOnboardingStatus(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentIKEVersionsList(v *[]types.IKEVersionsListValue, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -154183,6 +154245,149 @@ func awsEc2query_deserializeDocumentNetworkCardInterfaceTypeListUnwrapped(v *[]t
 	*v = sv
 	return nil
 }
+func awsEc2query_deserializeDocumentNetworkFirewallAssociation(v **types.NetworkFirewallAssociation, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.NetworkFirewallAssociation
+	if *v == nil {
+		sv = &types.NetworkFirewallAssociation{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("firewallArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FirewallArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("firewallMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FirewallMode = types.FirewallMode(xtv)
+			}
+
+		case strings.EqualFold("firewallOnboardingStatus", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FirewallOnboardingStatus = types.FirewallOnboardingStatus(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentNetworkFirewallAssociationSet(v *[]types.NetworkFirewallAssociation, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.NetworkFirewallAssociation
+	if *v == nil {
+		sv = make([]types.NetworkFirewallAssociation, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("item", t.Name.Local):
+			var col types.NetworkFirewallAssociation
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsEc2query_deserializeDocumentNetworkFirewallAssociation(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentNetworkFirewallAssociationSetUnwrapped(v *[]types.NetworkFirewallAssociation, decoder smithyxml.NodeDecoder) error {
+	var sv []types.NetworkFirewallAssociation
+	if *v == nil {
+		sv = make([]types.NetworkFirewallAssociation, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.NetworkFirewallAssociation
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsEc2query_deserializeDocumentNetworkFirewallAssociation(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsEc2query_deserializeDocumentNetworkInfo(v **types.NetworkInfo, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -168244,6 +168449,12 @@ func awsEc2query_deserializeDocumentRoute(v **types.Route, decoder smithyxml.Nod
 				sv.GatewayId = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("igwFirewall", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentIgwFirewall(&sv.IgwFirewall, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("instanceId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -180365,6 +180576,19 @@ func awsEc2query_deserializeDocumentSubnet(v **types.Subnet, decoder smithyxml.N
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.MapPublicIpOnLaunch = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("networkFirewallConnectivityType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.NetworkFirewallConnectivityType = types.NetworkFirewallConnectivityType(xtv)
 			}
 
 		case strings.EqualFold("outpostArn", t.Name.Local):
@@ -199413,6 +199637,12 @@ func awsEc2query_deserializeDocumentVpc(v **types.Vpc, decoder smithyxml.NodeDec
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
 				sv.IsDefault = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("networkFirewallAssociationSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentNetworkFirewallAssociationSet(&sv.NetworkFirewallAssociations, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("ownerId", t.Name.Local):

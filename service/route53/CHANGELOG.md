@@ -1,3 +1,11 @@
+# v1.73.0 (2026-11-20)
+
+* **Feature**: Amazon Route 53 support for advanced hosted zones. Including change guardrails, public dns fallback, change history. Also support for AZAffinityRouting.
+
+# v1.72.0 (2026-11-19)
+
+* **Feature**: Route 53 Private Endpoint Health Checks support
+
 # v1.71.0 (2026-11-12)
 
 * **Feature**: Amazon Route 53 now supports Record Set Protection, which blocks changes to protected records in a hosted zone.

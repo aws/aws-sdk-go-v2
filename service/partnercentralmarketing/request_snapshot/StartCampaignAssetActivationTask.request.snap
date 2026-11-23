@@ -1,0 +1,7 @@
+POST /service/AWSPartnerDemandGenerator/operation/StartCampaignAssetActivationTask
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿xCampaignAssetIdentifiersŸj__Member__j__Member__ÿrCampaignIdentifierv__CampaignIdentifier__gCatalogcAWSkClientTokeno__ClientToken__ÿ

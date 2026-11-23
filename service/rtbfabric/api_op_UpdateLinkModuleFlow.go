@@ -102,6 +102,11 @@ type UpdateLinkModuleFlowOutput struct {
 	// This member is required.
 	Status types.LinkStatus
 
+	// The ID of the update this call started.
+	//
+	// This member is required.
+	UpdateId *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -124,6 +129,9 @@ func (v *UpdateLinkModuleFlowOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateLinkModuleFlowResponse_status, string(v.Status))
 	}
+	if v.UpdateId != nil {
+		s.WriteString(schemas.UpdateLinkModuleFlowResponse_updateId, *v.UpdateId)
+	}
 }
 func (v *UpdateLinkModuleFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateLinkModuleFlowResponse, func(s *smithy.Schema) error {
@@ -141,6 +149,9 @@ func (v *UpdateLinkModuleFlowOutput) Deserialize(d smithy.ShapeDeserializer) err
 			}
 			v.Status = types.LinkStatus(ev)
 			return nil
+		case schemas.UpdateLinkModuleFlowResponse_updateId:
+			v.UpdateId = new(string)
+			return d.ReadString(schemas.UpdateLinkModuleFlowResponse_updateId, v.UpdateId)
 		}
 		return nil
 	})

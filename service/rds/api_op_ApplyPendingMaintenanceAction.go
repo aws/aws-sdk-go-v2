@@ -41,6 +41,8 @@ type ApplyPendingMaintenanceActionInput struct {
 	//
 	//   - os-upgrade
 	//
+	//   - serverless-platform-version-update
+	//
 	//   - system-update
 	//
 	// For more information about these actions, see [Maintenance actions for Amazon Aurora] or [Maintenance actions for Amazon RDS].

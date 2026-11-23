@@ -1,3 +1,7 @@
+# v1.1.0 (2026-11-19)
+
+* **Feature**: This release adds Webhook event sources, which receive events from third-party providers over HTTPS and authenticate them with a static token, HTTP Basic authentication, or an HMAC signature, and Amazon MSK subscribers, which deliver events to a topic in an Amazon MSK and MSK Serverless cluster.
+
 # v1.0.11 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

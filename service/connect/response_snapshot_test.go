@@ -6440,6 +6440,9 @@ func TestCheckResponseSnapshot_DescribeContact(t *testing.T) {
 					},
 				},
 			},
+			VoicemailInfo: &types.VoicemailInfo{
+				NumberOfVoicemails: ptr.Int32(1),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeContact.response")

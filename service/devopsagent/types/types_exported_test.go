@@ -553,6 +553,9 @@ func ExampleServiceConfiguration_outputUsage() {
 	case *types.ServiceConfigurationMemberSourceAws:
 		_ = v.Value // Value is types.SourceAwsConfiguration
 
+	case *types.ServiceConfigurationMemberSourceAwsOrg:
+		_ = v.Value // Value is types.SourceAwsOrgConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -583,6 +586,7 @@ var _ *types.SourceAwsConfiguration
 var _ *types.AWSConfiguration
 var _ *types.ReleaseManagementConfiguration
 var _ *types.GitHubConfiguration
+var _ *types.SourceAwsOrgConfiguration
 
 func ExampleServiceDetails_outputUsage() {
 	var union types.ServiceDetails

@@ -45,15 +45,11 @@ type GetReservationUtilizationInput struct {
 	//
 	//   - AZ
 	//
-	//   - CACHE_ENGINE
-	//
-	//   - DEPLOYMENT_OPTION
-	//
 	//   - INSTANCE_TYPE
 	//
-	//   - LINKED_ACCOUNT
+	//   - INSTANCE_TYPE_FAMILY
 	//
-	//   - OPERATING_SYSTEM
+	//   - LINKED_ACCOUNT
 	//
 	//   - PLATFORM
 	//
@@ -64,10 +60,14 @@ type GetReservationUtilizationInput struct {
 	// If not specified, the SERVICE filter defaults to Amazon Elastic Compute Cloud -
 	//   Compute. Supported values for SERVICE are Amazon Elastic Compute Cloud -
 	//   Compute, Amazon Relational Database Service, Amazon ElastiCache, Amazon
-	//   Redshift, and Amazon Elasticsearch Service. The value for the SERVICE filter
-	//   should not exceed "1".
+	//   MemoryDB, Amazon Redshift, Amazon Elasticsearch Service, and Amazon OpenSearch
+	//   Service.
 	//
 	//   - SCOPE
+	//
+	//   - SUBSCRIPTION_ID
+	//
+	// Values for SUBSCRIPTION_ID must contain only digits.
 	//
 	//   - TENANCY
 	//

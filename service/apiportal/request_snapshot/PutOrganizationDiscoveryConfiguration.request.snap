@@ -1,0 +1,5 @@
+PUT /org-discovery-configuration
+
+Content-Type: application/json
+
+{"discoveryFilters":{"exclusionFilters":{"accountIds":["__Member__","__Member__"],"organizationalUnitIds":["__Member__","__Member__"],"resourceArns":["__Member__","__Member__"]}},"discoverySources":["API_GATEWAY","API_GATEWAY"],"exclusionFilters":{"accountIds":["__Member__","__Member__"],"organizationalUnitIds":["__Member__","__Member__"],"resourceArns":["__Member__","__Member__"]},"features":["AI_DISCOVERY","AI_DISCOVERY"],"tags":{"key0":"__Value__"}}

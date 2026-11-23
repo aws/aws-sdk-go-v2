@@ -322,6 +322,25 @@ func (ChallengeResponse) Values() []ChallengeResponse {
 	}
 }
 
+type CIMDCacheActionType string
+
+// Enum values for CIMDCacheActionType
+const (
+	CIMDCacheActionTypeRefresh    CIMDCacheActionType = "REFRESH"
+	CIMDCacheActionTypeInvalidate CIMDCacheActionType = "INVALIDATE"
+)
+
+// Values returns all known values for CIMDCacheActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CIMDCacheActionType) Values() []CIMDCacheActionType {
+	return []CIMDCacheActionType{
+		"REFRESH",
+		"INVALIDATE",
+	}
+}
+
 type ClientTypeType string
 
 // Enum values for ClientTypeType
@@ -1040,6 +1059,39 @@ const (
 func (ResourceServerManagedByType) Values() []ResourceServerManagedByType {
 	return []ResourceServerManagedByType{
 		"COGNITO",
+	}
+}
+
+type RestoreStatusType string
+
+// Enum values for RestoreStatusType
+const (
+	RestoreStatusTypePreviewGenerating                    RestoreStatusType = "PREVIEW_GENERATING"
+	RestoreStatusTypePreviewGenerated                     RestoreStatusType = "PREVIEW_GENERATED"
+	RestoreStatusTypePreviewCancelled                     RestoreStatusType = "PREVIEW_CANCELLED"
+	RestoreStatusTypePreviewGenerationFailed              RestoreStatusType = "PREVIEW_GENERATION_FAILED"
+	RestoreStatusTypePreviewExpired                       RestoreStatusType = "PREVIEW_EXPIRED"
+	RestoreStatusTypeRestoring                            RestoreStatusType = "RESTORING"
+	RestoreStatusTypeRestoreCompleted                     RestoreStatusType = "RESTORE_COMPLETED"
+	RestoreStatusTypeTemporaryInternalErrorSeeSupportCase RestoreStatusType = "TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE"
+	RestoreStatusTypeAwsAborted                           RestoreStatusType = "AWS_ABORTED"
+)
+
+// Values returns all known values for RestoreStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RestoreStatusType) Values() []RestoreStatusType {
+	return []RestoreStatusType{
+		"PREVIEW_GENERATING",
+		"PREVIEW_GENERATED",
+		"PREVIEW_CANCELLED",
+		"PREVIEW_GENERATION_FAILED",
+		"PREVIEW_EXPIRED",
+		"RESTORING",
+		"RESTORE_COMPLETED",
+		"TEMPORARY_INTERNAL_ERROR_SEE_SUPPORT_CASE",
+		"AWS_ABORTED",
 	}
 }
 

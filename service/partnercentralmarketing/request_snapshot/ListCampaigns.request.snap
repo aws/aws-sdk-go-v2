@@ -1,0 +1,7 @@
+POST /service/AWSPartnerDemandGenerator/operation/ListCampaigns
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿sCampaignIdentifiersŸj__Member__j__Member__ÿgCatalogcAWSjMaxResultsdNameh__Name__iNextTokenm__NextToken__dSort¿fSortBydNAMEiSortOrderiASCENDINGÿfStatesŸeDRAFTeDRAFTÿÿ

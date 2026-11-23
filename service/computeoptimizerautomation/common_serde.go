@@ -8,6 +8,19 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeOrganizationTarget(s smithy.ShapeSerializer, schema *smithy.Schema, v types.OrganizationTarget) {
+	switch vv := v.(type) {
+	case *types.OrganizationTargetMemberAccountId:
+		s.WriteUnion(schema, schemas.OrganizationTarget_accountId)
+		s.WriteString(schemas.OrganizationTarget_accountId, vv.Value)
+		s.CloseUnion()
+	case *types.OrganizationTargetMemberOrganizationalUnitId:
+		s.WriteUnion(schema, schemas.OrganizationTarget_organizationalUnitId)
+		s.WriteString(schemas.OrganizationTarget_organizationalUnitId, vv.Value)
+		s.CloseUnion()
+	}
+}
+
 func serializeResourceDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v types.ResourceDetails) {
 	switch vv := v.(type) {
 	case *types.ResourceDetailsMemberEbsVolume:
@@ -17,6 +30,22 @@ func serializeResourceDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v
 		s.CloseStruct()
 		s.CloseUnion()
 	}
+}
+
+func deserializeOrganizationTarget(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.OrganizationTarget) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.OrganizationTarget_accountId:
+			vv := &types.OrganizationTargetMemberAccountId{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.OrganizationTarget_organizationalUnitId:
+			vv := &types.OrganizationTargetMemberOrganizationalUnitId{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 func deserializeResourceDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.ResourceDetails) error {
@@ -153,7 +182,51 @@ func serializeIntegerList(s smithy.ShapeSerializer, schema *smithy.Schema, v []i
 	s.CloseList()
 }
 
+func serializeOrganizationalUnitIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeOrganizationalUnitInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OrganizationalUnitInfo) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeOrganizationConfigurationAccountIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeOrganizationConfigurationOrganizationalUnitIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeOrganizationEnrollmentConfigurations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OrganizationEnrollmentConfiguration) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeOrganizationEnrollmentConfigurationTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OrganizationEnrollmentConfigurationType) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -565,6 +638,49 @@ func deserializeIntegerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]i
 	})
 }
 
+func deserializeOrganizationalUnitIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOrganizationalUnitInfoList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OrganizationalUnitInfo) error {
+	*v = make([]types.OrganizationalUnitInfo, 0)
+	var vv types.OrganizationalUnitInfo
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OrganizationalUnitInfo
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.OrganizationalUnitInfo{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeOrganizationConfigurationAccountIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -582,6 +698,70 @@ func deserializeOrganizationConfigurationAccountIds(d smithy.ShapeDeserializer, 
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOrganizationConfigurationOrganizationalUnitIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOrganizationEnrollmentConfigurations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OrganizationEnrollmentConfiguration) error {
+	*v = make([]types.OrganizationEnrollmentConfiguration, 0)
+	var vv types.OrganizationEnrollmentConfiguration
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OrganizationEnrollmentConfiguration
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.OrganizationEnrollmentConfiguration{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeOrganizationEnrollmentConfigurationTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OrganizationEnrollmentConfigurationType) error {
+	*v = make([]types.OrganizationEnrollmentConfigurationType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.OrganizationEnrollmentConfigurationType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.OrganizationEnrollmentConfigurationType(vv))
 		return nil
 	})
 }

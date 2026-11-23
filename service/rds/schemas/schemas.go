@@ -1319,7 +1319,7 @@ var CloudwatchLogsExportConfiguration_DisableLogTypes *smithy.Schema
 var ClusterPendingModifiedValues = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rds",
 	Name:      "ClusterPendingModifiedValues",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 13)
 var ClusterPendingModifiedValues_PendingCloudwatchLogsExports *smithy.Schema
 
 var ClusterPendingModifiedValues_DBClusterIdentifier *smithy.Schema
@@ -1341,6 +1341,10 @@ var ClusterPendingModifiedValues_RdsCustomClusterConfiguration *smithy.Schema
 var ClusterPendingModifiedValues_Iops *smithy.Schema
 
 var ClusterPendingModifiedValues_CertificateDetails *smithy.Schema
+
+var ClusterPendingModifiedValues_VPCNetworkingEnabled *smithy.Schema
+
+var ClusterPendingModifiedValues_InternetAccessGatewayEnabled *smithy.Schema
 
 var ClusterScalabilityType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rds",
@@ -2317,7 +2321,7 @@ var _DBEngineVersionList_member *smithy.Schema
 var DBInstance = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rds",
 	Name:      "DBInstance",
-}, smithy.ShapeTypeStructure, 94)
+}, smithy.ShapeTypeStructure, 96)
 var DBInstance_DBInstanceIdentifier *smithy.Schema
 
 var DBInstance_DBInstanceClass *smithy.Schema
@@ -2331,6 +2335,8 @@ var DBInstance_MasterUsername *smithy.Schema
 var DBInstance_DBName *smithy.Schema
 
 var DBInstance_Endpoint *smithy.Schema
+
+var DBInstance_PrimaryEndpoint *smithy.Schema
 
 var DBInstance_AllocatedStorage *smithy.Schema
 
@@ -2505,6 +2511,8 @@ var DBInstance_StorageOperationStatus *smithy.Schema
 var DBInstance_StorageOperationPercentProgress *smithy.Schema
 
 var DBInstance_DBCapacityReservationIdentifier *smithy.Schema
+
+var DBInstance_VPCNetworkingEnabled *smithy.Schema
 
 var DBInstanceAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rds",
@@ -5261,6 +5269,14 @@ var _PotentiallySensitiveParameterValue = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PotentiallySensitiveParameterValue",
 }, smithy.ShapeTypeString, 0)
 
+var PrimaryEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.rds",
+	Name:      "PrimaryEndpoint",
+}, smithy.ShapeTypeStructure, 2)
+var PrimaryEndpoint_Address *smithy.Schema
+
+var PrimaryEndpoint_HostedZoneId *smithy.Schema
+
 var ProcessorFeature = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rds",
 	Name:      "ProcessorFeature",
@@ -6704,7 +6720,7 @@ var CreateDBClusterEndpointMessage_Tags *smithy.Schema
 var CreateDBClusterMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rds",
 	Name:      "CreateDBClusterMessage",
-}, smithy.ShapeTypeStructure, 62)
+}, smithy.ShapeTypeStructure, 64)
 var CreateDBClusterMessage_AvailabilityZones *smithy.Schema
 
 var CreateDBClusterMessage_BackupRetentionPeriod *smithy.Schema
@@ -6821,7 +6837,11 @@ var CreateDBClusterMessage_TagSpecifications *smithy.Schema
 
 var CreateDBClusterMessage_MasterUserAuthenticationType *smithy.Schema
 
+var CreateDBClusterMessage_EnableVPCNetworking *smithy.Schema
+
 var CreateDBClusterMessage_WithExpressConfiguration *smithy.Schema
+
+var CreateDBClusterMessage_EnableInternetAccessGateway *smithy.Schema
 
 var CreateDBClusterMessage_AssociatedRoles *smithy.Schema
 
@@ -8890,7 +8910,7 @@ var ModifyDBClusterEndpointMessage_ExcludedMembers *smithy.Schema
 var ModifyDBClusterMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rds",
 	Name:      "ModifyDBClusterMessage",
-}, smithy.ShapeTypeStructure, 48)
+}, smithy.ShapeTypeStructure, 51)
 var ModifyDBClusterMessage_DBClusterIdentifier *smithy.Schema
 
 var ModifyDBClusterMessage_NewDBClusterIdentifier *smithy.Schema
@@ -8986,6 +9006,12 @@ var ModifyDBClusterMessage_CACertificateIdentifier *smithy.Schema
 var ModifyDBClusterMessage_MasterUserAuthenticationType *smithy.Schema
 
 var ModifyDBClusterMessage_EngineLifecycleSupport *smithy.Schema
+
+var ModifyDBClusterMessage_EnableInternetAccessGateway *smithy.Schema
+
+var ModifyDBClusterMessage_EnableVPCNetworking *smithy.Schema
+
+var ModifyDBClusterMessage_DBSubnetGroupName *smithy.Schema
 
 var ModifyDBClusterResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rds",
@@ -10686,6 +10712,10 @@ func init() {
 
 	ClusterPendingModifiedValues_CertificateDetails = ClusterPendingModifiedValues.AddMember("CertificateDetails", CertificateDetails)
 
+	ClusterPendingModifiedValues_VPCNetworkingEnabled = ClusterPendingModifiedValues.AddMember("VPCNetworkingEnabled", _BooleanOptional)
+
+	ClusterPendingModifiedValues_InternetAccessGatewayEnabled = ClusterPendingModifiedValues.AddMember("InternetAccessGatewayEnabled", _BooleanOptional)
+
 	ClusterScalabilityType_STANDARD = ClusterScalabilityType.AddMember("STANDARD", smithyprelude.Unit)
 
 	ClusterScalabilityType_LIMITLESS = ClusterScalabilityType.AddMember("LIMITLESS", smithyprelude.Unit)
@@ -11448,6 +11478,10 @@ func init() {
 
 	Endpoint_HostedZoneId = Endpoint.AddMember("HostedZoneId", _String)
 
+	PrimaryEndpoint_Address = PrimaryEndpoint.AddMember("Address", _String)
+
+	PrimaryEndpoint_HostedZoneId = PrimaryEndpoint.AddMember("HostedZoneId", _String)
+
 	DBSecurityGroupMembership_DBSecurityGroupName = DBSecurityGroupMembership.AddMember("DBSecurityGroupName", _String)
 
 	DBSecurityGroupMembership_Status = DBSecurityGroupMembership.AddMember("Status", _String)
@@ -11585,6 +11619,8 @@ func init() {
 	DBInstance_DBName = DBInstance.AddMember("DBName", _String)
 
 	DBInstance_Endpoint = DBInstance.AddMember("Endpoint", Endpoint)
+
+	DBInstance_PrimaryEndpoint = DBInstance.AddMember("PrimaryEndpoint", PrimaryEndpoint)
 
 	DBInstance_AllocatedStorage = DBInstance.AddMember("AllocatedStorage", _Integer)
 
@@ -11759,6 +11795,8 @@ func init() {
 	DBInstance_StorageOperationPercentProgress = DBInstance.AddMember("StorageOperationPercentProgress", _IntegerOptional)
 
 	DBInstance_DBCapacityReservationIdentifier = DBInstance.AddMember("DBCapacityReservationIdentifier", _DBCapacityReservationIdentifier)
+
+	DBInstance_VPCNetworkingEnabled = DBInstance.AddMember("VPCNetworkingEnabled", _BooleanOptional)
 
 	DBInstanceAlreadyExistsFault_message = DBInstanceAlreadyExistsFault.AddMember("message", _ExceptionMessage)
 
@@ -13722,7 +13760,11 @@ func init() {
 
 	CreateDBClusterMessage_MasterUserAuthenticationType = CreateDBClusterMessage.AddMember("MasterUserAuthenticationType", MasterUserAuthenticationType)
 
+	CreateDBClusterMessage_EnableVPCNetworking = CreateDBClusterMessage.AddMember("EnableVPCNetworking", _BooleanOptional)
+
 	CreateDBClusterMessage_WithExpressConfiguration = CreateDBClusterMessage.AddMember("WithExpressConfiguration", _BooleanOptional)
+
+	CreateDBClusterMessage_EnableInternetAccessGateway = CreateDBClusterMessage.AddMember("EnableInternetAccessGateway", _BooleanOptional)
 
 	CreateDBClusterMessage_AssociatedRoles = CreateDBClusterMessage.AddMember("AssociatedRoles", _DBClusterAssociatedRoles)
 
@@ -15145,6 +15187,12 @@ func init() {
 	ModifyDBClusterMessage_MasterUserAuthenticationType = ModifyDBClusterMessage.AddMember("MasterUserAuthenticationType", MasterUserAuthenticationType)
 
 	ModifyDBClusterMessage_EngineLifecycleSupport = ModifyDBClusterMessage.AddMember("EngineLifecycleSupport", _String)
+
+	ModifyDBClusterMessage_EnableInternetAccessGateway = ModifyDBClusterMessage.AddMember("EnableInternetAccessGateway", _BooleanOptional)
+
+	ModifyDBClusterMessage_EnableVPCNetworking = ModifyDBClusterMessage.AddMember("EnableVPCNetworking", _BooleanOptional)
+
+	ModifyDBClusterMessage_DBSubnetGroupName = ModifyDBClusterMessage.AddMember("DBSubnetGroupName", _String)
 
 	ModifyDBClusterResult_DBCluster = ModifyDBClusterResult.AddMember("DBCluster", DBCluster)
 

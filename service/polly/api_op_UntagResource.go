@@ -27,8 +27,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource from which to remove tags.
-	// Currently, the only supported resource is an Amazon Polly lexicon.
+	// The Amazon Resource Name (ARN) of the resource to remove tags from. You can tag
+	// Amazon Polly lexicons and custom voices.
 	//
 	// This member is required.
 	ResourceArn *string

@@ -69,9 +69,40 @@ type GetOpenIDConnectProviderOutput struct {
 	// [CreateOpenIDConnectProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html
 	ClientIDList []string
 
+	// The trusted identity propagation context provider configuration associated with
+	// the IAM OIDC provider resource object. For more information, see [ContextProvider].
+	//
+	// This element is returned only when a trusted identity propagation context
+	// provider is configured for the OIDC provider.
+	//
+	// [ContextProvider]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_ContextProvider.html
+	ContextProvider *types.ContextProvider
+
 	// The date and time when the IAM OIDC provider resource object was created in the
 	// Amazon Web Services account.
 	CreateDate *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM Identity Center instance associated
+	// with the IAM OIDC provider resource object.
+	//
+	// For the format, see [InstanceMetadata] in the IAM Identity Center API Reference.
+	//
+	// This element is returned only when an IAM Identity Center instance is
+	// associated with the OIDC provider.
+	//
+	// [InstanceMetadata]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+	IdentityCenterInstanceArn *string
+
+	// The Amazon Resource Name (ARN) of the identity store that is resolved from the
+	// associated IAM Identity Center instance.
+	//
+	// For the format, see [InstanceMetadata] in the IAM Identity Center API Reference.
+	//
+	// This element is returned only when an IAM Identity Center instance is
+	// associated with the OIDC provider.
+	//
+	// [InstanceMetadata]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_InstanceMetadata.html
+	IdentityStoreArn *string
 
 	// A list of tags that are attached to the specified IAM OIDC provider. The
 	// returned list of tags is sorted by tag key. For more information about tagging,
@@ -108,8 +139,19 @@ func (v *GetOpenIDConnectProviderOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ClientIDList != nil {
 		serializeclientIDListType(s, schemas.GetOpenIDConnectProviderResponse_ClientIDList, v.ClientIDList)
 	}
+	if v.ContextProvider != nil {
+		s.WriteStruct(schemas.GetOpenIDConnectProviderResponse_ContextProvider)
+		v.ContextProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreateDate != nil {
 		s.WriteTime(schemas.GetOpenIDConnectProviderResponse_CreateDate, *v.CreateDate)
+	}
+	if v.IdentityCenterInstanceArn != nil {
+		s.WriteString(schemas.GetOpenIDConnectProviderResponse_IdentityCenterInstanceArn, *v.IdentityCenterInstanceArn)
+	}
+	if v.IdentityStoreArn != nil {
+		s.WriteString(schemas.GetOpenIDConnectProviderResponse_IdentityStoreArn, *v.IdentityStoreArn)
 	}
 	if v.Tags != nil {
 		serializetagListType(s, schemas.GetOpenIDConnectProviderResponse_Tags, v.Tags)
@@ -126,9 +168,18 @@ func (v *GetOpenIDConnectProviderOutput) Deserialize(d smithy.ShapeDeserializer)
 		switch s {
 		case schemas.GetOpenIDConnectProviderResponse_ClientIDList:
 			return deserializeclientIDListType(d, schemas.GetOpenIDConnectProviderResponse_ClientIDList, &v.ClientIDList)
+		case schemas.GetOpenIDConnectProviderResponse_ContextProvider:
+			v.ContextProvider = &types.ContextProvider{}
+			return v.ContextProvider.Deserialize(d)
 		case schemas.GetOpenIDConnectProviderResponse_CreateDate:
 			v.CreateDate = new(time.Time)
 			return d.ReadTime(schemas.GetOpenIDConnectProviderResponse_CreateDate, v.CreateDate)
+		case schemas.GetOpenIDConnectProviderResponse_IdentityCenterInstanceArn:
+			v.IdentityCenterInstanceArn = new(string)
+			return d.ReadString(schemas.GetOpenIDConnectProviderResponse_IdentityCenterInstanceArn, v.IdentityCenterInstanceArn)
+		case schemas.GetOpenIDConnectProviderResponse_IdentityStoreArn:
+			v.IdentityStoreArn = new(string)
+			return d.ReadString(schemas.GetOpenIDConnectProviderResponse_IdentityStoreArn, v.IdentityStoreArn)
 		case schemas.GetOpenIDConnectProviderResponse_Tags:
 			return deserializetagListType(d, schemas.GetOpenIDConnectProviderResponse_Tags, &v.Tags)
 		case schemas.GetOpenIDConnectProviderResponse_ThumbprintList:

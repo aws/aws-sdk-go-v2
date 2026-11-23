@@ -318,13 +318,6 @@ var DeleteAsset = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/assets/{Identifier}",
 	Code: 200})
 
-var DeleteAssetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.glue",
-	Name:      "DeleteAssetType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/asset-types/{Identifier}",
-	Code: 200})
-
 var DeleteAttachment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DeleteAttachment",
@@ -1234,13 +1227,6 @@ var PutAsset = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/assets",
 	Code: 200})
 
-var PutAssetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.glue",
-	Name:      "PutAssetType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/asset-types",
-	Code: 200})
-
 var PutAttachment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "PutAttachment",
@@ -1977,6 +1963,22 @@ var AssetFormEntry_FormTypeId *smithy.Schema
 
 var AssetFormEntry_Content *smithy.Schema
 
+var AssetFormInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "AssetFormInput",
+}, smithy.ShapeTypeStructure, 2)
+var AssetFormInput_FormTypeIdentifier *smithy.Schema
+
+var AssetFormInput_Content *smithy.Schema
+
+var _AssetFormInputMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "AssetFormInputMap",
+}, smithy.ShapeTypeMap, 2)
+var _AssetFormInputMap_key *smithy.Schema
+
+var _AssetFormInputMap_value *smithy.Schema
+
 var _AssetFormKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "AssetFormKey",
@@ -2000,24 +2002,38 @@ var _AssetName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AssetName",
 }, smithy.ShapeTypeString, 0)
 
+var AssetsExport = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "AssetsExport",
+}, smithy.ShapeTypeStructure, 1)
+var AssetsExport_S3TablesExport *smithy.Schema
+
+var AssetsExportResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "AssetsExportResult",
+}, smithy.ShapeTypeStructure, 2)
+var AssetsExportResult_S3TablesExport *smithy.Schema
+
+var AssetsExportResult_S3TablesExportState *smithy.Schema
+
 var _AssetTypeFormKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "AssetTypeFormKey",
 }, smithy.ShapeTypeString, 0)
 
-var AssetTypeFormReference = smithy.NewSchema(smithy.ShapeID{
+var AssetTypeFormOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
-	Name:      "AssetTypeFormReference",
+	Name:      "AssetTypeFormOutput",
 }, smithy.ShapeTypeStructure, 1)
-var AssetTypeFormReference_FormTypeIdentifier *smithy.Schema
+var AssetTypeFormOutput_FormTypeId *smithy.Schema
 
-var _AssetTypeFormsMap = smithy.NewSchema(smithy.ShapeID{
+var _AssetTypeFormOutputMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
-	Name:      "AssetTypeFormsMap",
+	Name:      "AssetTypeFormOutputMap",
 }, smithy.ShapeTypeMap, 2)
-var _AssetTypeFormsMap_key *smithy.Schema
+var _AssetTypeFormOutputMap_key *smithy.Schema
 
-var _AssetTypeFormsMap_value *smithy.Schema
+var _AssetTypeFormOutputMap_value *smithy.Schema
 
 var _AssetTypeId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -2037,6 +2053,11 @@ var _AssetTypeItemList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AssetTypeItemList",
 }, smithy.ShapeTypeList, 1)
 var _AssetTypeItemList_member *smithy.Schema
+
+var _AssetTypeMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "AssetTypeMaxResults",
+}, smithy.ShapeTypeInteger, 0)
 
 var _AssetTypeName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -7145,6 +7166,11 @@ var _FormTypeItemList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _FormTypeItemList_member *smithy.Schema
 
+var _FormTypeMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "FormTypeMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
 var _FormTypeName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "FormTypeName",
@@ -7242,19 +7268,14 @@ var _GlossaryItemList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _GlossaryItemList_member *smithy.Schema
 
-var _GlossaryLongDescription = smithy.NewSchema(smithy.ShapeID{
+var _GlossaryMaxResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
-	Name:      "GlossaryLongDescription",
-}, smithy.ShapeTypeString, 0)
+	Name:      "GlossaryMaxResults",
+}, smithy.ShapeTypeInteger, 0)
 
 var _GlossaryName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GlossaryName",
-}, smithy.ShapeTypeString, 0)
-
-var _GlossaryShortDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.glue",
-	Name:      "GlossaryShortDescription",
 }, smithy.ShapeTypeString, 0)
 
 var _GlossaryTermId = smithy.NewSchema(smithy.ShapeID{
@@ -7267,6 +7288,12 @@ var _GlossaryTermIdList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GlossaryTermIdList",
 }, smithy.ShapeTypeList, 1)
 var _GlossaryTermIdList_member *smithy.Schema
+
+var _GlossaryTermIdOutputList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GlossaryTermIdOutputList",
+}, smithy.ShapeTypeList, 1)
+var _GlossaryTermIdOutputList_member *smithy.Schema
 
 var GlossaryTermItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -7284,9 +7311,24 @@ var _GlossaryTermItemList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _GlossaryTermItemList_member *smithy.Schema
 
+var _GlossaryTermLongDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GlossaryTermLongDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _GlossaryTermMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GlossaryTermMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
 var _GlossaryTermName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GlossaryTermName",
+}, smithy.ShapeTypeString, 0)
+
+var _GlossaryTermShortDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "GlossaryTermShortDescription",
 }, smithy.ShapeTypeString, 0)
 
 var _glueConnectionNameString = smithy.NewSchema(smithy.ShapeID{
@@ -8471,6 +8513,11 @@ var _IterableFormMap_value *smithy.Schema
 var _IterableFormName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "IterableFormName",
+}, smithy.ShapeTypeString, 0)
+
+var _IterableFormTypeId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "IterableFormTypeId",
 }, smithy.ShapeTypeString, 0)
 
 var JDBCConnectionType = smithy.NewSchema(smithy.ShapeID{
@@ -11768,6 +11815,26 @@ var _S3TableBucketArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "S3TableBucketArn",
 }, smithy.ShapeTypeString, 0)
 
+var S3TablesConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "S3TablesConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var S3TablesConfiguration_EncryptionConfiguration *smithy.Schema
+
+var S3TablesConfigurationResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "S3TablesConfigurationResult",
+}, smithy.ShapeTypeStructure, 2)
+var S3TablesConfigurationResult_TableBucketArn *smithy.Schema
+
+var S3TablesConfigurationResult_EncryptionConfiguration *smithy.Schema
+
+var S3TablesExportState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "S3TablesExportState",
+}, smithy.ShapeTypeStructure, 1)
+var S3TablesExportState_Status *smithy.Schema
+
 var S3Target = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "S3Target",
@@ -12030,7 +12097,7 @@ var SearchAttributeFilter = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 3)
 var SearchAttributeFilter_Attribute *smithy.Schema
 
-var SearchAttributeFilter_Operator *smithy.Schema
+var SearchAttributeFilter_Comparator *smithy.Schema
 
 var SearchAttributeFilter_Value *smithy.Schema
 
@@ -12052,26 +12119,26 @@ var _SearchFilterClauseList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _SearchFilterClauseList_member *smithy.Schema
 
+var SearchFilterComparator = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "SearchFilterComparator",
+}, smithy.ShapeTypeEnum, 6)
+var SearchFilterComparator_EQUALS *smithy.Schema
+
+var SearchFilterComparator_GREATER_THAN *smithy.Schema
+
+var SearchFilterComparator_GREATER_THAN_OR_EQUALS *smithy.Schema
+
+var SearchFilterComparator_LESS_THAN *smithy.Schema
+
+var SearchFilterComparator_LESS_THAN_OR_EQUALS *smithy.Schema
+
+var SearchFilterComparator_NOT_EXISTS *smithy.Schema
+
 var _SearchFilterLongValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "SearchFilterLongValue",
 }, smithy.ShapeTypeLong, 0)
-
-var SearchFilterOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.glue",
-	Name:      "SearchFilterOperator",
-}, smithy.ShapeTypeEnum, 6)
-var SearchFilterOperator_equals *smithy.Schema
-
-var SearchFilterOperator_greaterThan *smithy.Schema
-
-var SearchFilterOperator_greaterThanOrEquals *smithy.Schema
-
-var SearchFilterOperator_lessThan *smithy.Schema
-
-var SearchFilterOperator_lessThanOrEquals *smithy.Schema
-
-var SearchFilterOperator_notExists *smithy.Schema
 
 var _SearchFilterStringValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -12126,12 +12193,14 @@ var _SearchPropertyPredicates_member *smithy.Schema
 var SearchResultItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "SearchResultItem",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var SearchResultItem_Id *smithy.Schema
 
-var SearchResultItem_AssetName *smithy.Schema
+var SearchResultItem_Name *smithy.Schema
 
-var SearchResultItem_AssetDescription *smithy.Schema
+var SearchResultItem_Description *smithy.Schema
+
+var SearchResultItem_CreatedAt *smithy.Schema
 
 var SearchResultItem_UpdatedAt *smithy.Schema
 
@@ -12142,11 +12211,6 @@ var _SearchResultItemList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SearchResultItemList",
 }, smithy.ShapeTypeList, 1)
 var _SearchResultItemList_member *smithy.Schema
-
-var _SearchResultName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.glue",
-	Name:      "SearchResultName",
-}, smithy.ShapeTypeString, 0)
 
 var SearchSort = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -13943,6 +14007,21 @@ var _UpdatedTimestamp = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdatedTimestamp",
 }, smithy.ShapeTypeString, 0)
 
+var _UpdateGlossaryDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "UpdateGlossaryDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _UpdateGlossaryTermLongDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "UpdateGlossaryTermLongDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _UpdateGlossaryTermShortDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.glue",
+	Name:      "UpdateGlossaryTermShortDescription",
+}, smithy.ShapeTypeString, 0)
+
 var UpdateGrokClassifierRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "UpdateGrokClassifierRequest",
@@ -14516,11 +14595,11 @@ var AssociateGlossaryTermsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "AssociateGlossaryTermsResponse",
 }, smithy.ShapeTypeStructure, 4)
-var AssociateGlossaryTermsResponse_AssetIdentifier *smithy.Schema
+var AssociateGlossaryTermsResponse_AssetId *smithy.Schema
 
 var AssociateGlossaryTermsResponse_IterableFormName *smithy.Schema
 
-var AssociateGlossaryTermsResponse_ItemIdentifier *smithy.Schema
+var AssociateGlossaryTermsResponse_ItemId *smithy.Schema
 
 var AssociateGlossaryTermsResponse_GlossaryTerms *smithy.Schema
 
@@ -15815,17 +15894,6 @@ var DeleteAssetResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteAssetResponse",
 }, smithy.ShapeTypeStructure, 0)
 
-var DeleteAssetTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.glue",
-	Name:      "DeleteAssetTypeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAssetTypeRequest_Identifier *smithy.Schema
-
-var DeleteAssetTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.glue",
-	Name:      "DeleteAssetTypeResponse",
-}, smithy.ShapeTypeStructure, 0)
-
 var DeleteAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DeleteAttachmentRequest",
@@ -15842,11 +15910,11 @@ var DeleteAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DeleteAttachmentResponse",
 }, smithy.ShapeTypeStructure, 3)
-var DeleteAttachmentResponse_AssetIdentifier *smithy.Schema
+var DeleteAttachmentResponse_AssetId *smithy.Schema
 
 var DeleteAttachmentResponse_IterableFormName *smithy.Schema
 
-var DeleteAttachmentResponse_ItemIdentifier *smithy.Schema
+var DeleteAttachmentResponse_ItemId *smithy.Schema
 
 var DeleteBlueprintRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -16484,11 +16552,11 @@ var DisassociateGlossaryTermsResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "DisassociateGlossaryTermsResponse",
 }, smithy.ShapeTypeStructure, 4)
-var DisassociateGlossaryTermsResponse_AssetIdentifier *smithy.Schema
+var DisassociateGlossaryTermsResponse_AssetId *smithy.Schema
 
 var DisassociateGlossaryTermsResponse_IterableFormName *smithy.Schema
 
-var DisassociateGlossaryTermsResponse_ItemIdentifier *smithy.Schema
+var DisassociateGlossaryTermsResponse_ItemId *smithy.Schema
 
 var DisassociateGlossaryTermsResponse_GlossaryTerms *smithy.Schema
 
@@ -16928,18 +16996,14 @@ var GetDataCatalogExportConfigurationInput = smithy.NewSchema(smithy.ShapeID{
 var GetDataCatalogExportConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "GetDataCatalogExportConfigurationOutput",
-}, smithy.ShapeTypeStructure, 6)
-var GetDataCatalogExportConfigurationOutput_ExportSetting *smithy.Schema
-
-var GetDataCatalogExportConfigurationOutput_Status *smithy.Schema
-
-var GetDataCatalogExportConfigurationOutput_EncryptionConfiguration *smithy.Schema
-
-var GetDataCatalogExportConfigurationOutput_S3TableBucketArn *smithy.Schema
-
+}, smithy.ShapeTypeStructure, 4)
 var GetDataCatalogExportConfigurationOutput_CreatedAt *smithy.Schema
 
 var GetDataCatalogExportConfigurationOutput_UpdatedAt *smithy.Schema
+
+var GetDataCatalogExportConfigurationOutput_S3TablesConfiguration *smithy.Schema
+
+var GetDataCatalogExportConfigurationOutput_Assets *smithy.Schema
 
 var GetDataflowGraphRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -19187,7 +19251,7 @@ var PutAssetRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "PutAssetRequest",
 }, smithy.ShapeTypeStructure, 6)
-var PutAssetRequest_AssetTypeId *smithy.Schema
+var PutAssetRequest_AssetTypeIdentifier *smithy.Schema
 
 var PutAssetRequest_Identifier *smithy.Schema
 
@@ -19202,36 +19266,18 @@ var PutAssetRequest_ClientToken *smithy.Schema
 var PutAssetResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "PutAssetResponse",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var PutAssetResponse_Id *smithy.Schema
 
 var PutAssetResponse_Name *smithy.Schema
 
 var PutAssetResponse_Description *smithy.Schema
 
+var PutAssetResponse_AssetTypeId *smithy.Schema
+
 var PutAssetResponse_CreatedAt *smithy.Schema
 
 var PutAssetResponse_Forms *smithy.Schema
-
-var PutAssetTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.glue",
-	Name:      "PutAssetTypeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutAssetTypeRequest_Name *smithy.Schema
-
-var PutAssetTypeRequest_Forms *smithy.Schema
-
-var PutAssetTypeRequest_ClientToken *smithy.Schema
-
-var PutAssetTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.glue",
-	Name:      "PutAssetTypeResponse",
-}, smithy.ShapeTypeStructure, 3)
-var PutAssetTypeResponse_Id *smithy.Schema
-
-var PutAssetTypeResponse_Name *smithy.Schema
-
-var PutAssetTypeResponse_Forms *smithy.Schema
 
 var PutAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -19247,7 +19293,7 @@ var PutAttachmentRequest_AttachmentName *smithy.Schema
 
 var PutAttachmentRequest_Content *smithy.Schema
 
-var PutAttachmentRequest_FormTypeId *smithy.Schema
+var PutAttachmentRequest_FormTypeIdentifier *smithy.Schema
 
 var PutAttachmentRequest_ClientToken *smithy.Schema
 
@@ -19255,11 +19301,11 @@ var PutAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "PutAttachmentResponse",
 }, smithy.ShapeTypeStructure, 5)
-var PutAttachmentResponse_AssetIdentifier *smithy.Schema
+var PutAttachmentResponse_AssetId *smithy.Schema
 
 var PutAttachmentResponse_IterableFormName *smithy.Schema
 
-var PutAttachmentResponse_ItemIdentifier *smithy.Schema
+var PutAttachmentResponse_ItemId *smithy.Schema
 
 var PutAttachmentResponse_AttachmentName *smithy.Schema
 
@@ -19282,19 +19328,19 @@ var PutDataCatalogExportConfigurationInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "PutDataCatalogExportConfigurationInput",
 }, smithy.ShapeTypeStructure, 3)
-var PutDataCatalogExportConfigurationInput_ExportSetting *smithy.Schema
-
-var PutDataCatalogExportConfigurationInput_EncryptionConfiguration *smithy.Schema
-
 var PutDataCatalogExportConfigurationInput_ClientToken *smithy.Schema
+
+var PutDataCatalogExportConfigurationInput_S3TablesConfiguration *smithy.Schema
+
+var PutDataCatalogExportConfigurationInput_Assets *smithy.Schema
 
 var PutDataCatalogExportConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
 	Name:      "PutDataCatalogExportConfigurationOutput",
 }, smithy.ShapeTypeStructure, 2)
-var PutDataCatalogExportConfigurationOutput_ExportSetting *smithy.Schema
+var PutDataCatalogExportConfigurationOutput_S3TablesConfiguration *smithy.Schema
 
-var PutDataCatalogExportConfigurationOutput_EncryptionConfiguration *smithy.Schema
+var PutDataCatalogExportConfigurationOutput_Assets *smithy.Schema
 
 var PutDataQualityProfileAnnotationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.glue",
@@ -20980,15 +21026,45 @@ func init() {
 
 	AssetFormEntry_Content = AssetFormEntry.AddMember("Content", _FormContent)
 
+	AssetFormInput_FormTypeIdentifier = AssetFormInput.AddMember("FormTypeIdentifier", _FormTypeId)
+
+	AssetFormInput_Content = AssetFormInput.AddMember("Content", _FormContent)
+
+	_AssetFormInputMap_key = _AssetFormInputMap.AddMember("key", _AssetFormKey)
+
+	_AssetFormInputMap_value = _AssetFormInputMap.AddMember("value", AssetFormInput)
+
 	_AssetFormMap_key = _AssetFormMap.AddMember("key", _AssetFormKey)
 
 	_AssetFormMap_value = _AssetFormMap.AddMember("value", AssetFormEntry)
 
-	AssetTypeFormReference_FormTypeIdentifier = AssetTypeFormReference.AddMember("FormTypeIdentifier", _FormTypeId)
+	ExportSetting_ENABLED = ExportSetting.AddMember("ENABLED", smithyprelude.Unit)
 
-	_AssetTypeFormsMap_key = _AssetTypeFormsMap.AddMember("key", _AssetTypeFormKey)
+	ExportSetting_DISABLED = ExportSetting.AddMember("DISABLED", smithyprelude.Unit)
 
-	_AssetTypeFormsMap_value = _AssetTypeFormsMap.AddMember("value", AssetTypeFormReference)
+	AssetsExport_S3TablesExport = AssetsExport.AddMember("S3TablesExport", ExportSetting)
+
+	ExportStatus_ENABLING = ExportStatus.AddMember("ENABLING", smithyprelude.Unit)
+
+	ExportStatus_ENABLED = ExportStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	ExportStatus_DISABLING = ExportStatus.AddMember("DISABLING", smithyprelude.Unit)
+
+	ExportStatus_DISABLED = ExportStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	ExportStatus_FAILED = ExportStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	S3TablesExportState_Status = S3TablesExportState.AddMember("Status", ExportStatus)
+
+	AssetsExportResult_S3TablesExport = AssetsExportResult.AddMember("S3TablesExport", ExportSetting)
+
+	AssetsExportResult_S3TablesExportState = AssetsExportResult.AddMember("S3TablesExportState", S3TablesExportState)
+
+	AssetTypeFormOutput_FormTypeId = AssetTypeFormOutput.AddMember("FormTypeId", _FormTypeId)
+
+	_AssetTypeFormOutputMap_key = _AssetTypeFormOutputMap.AddMember("key", _AssetTypeFormKey)
+
+	_AssetTypeFormOutputMap_value = _AssetTypeFormOutputMap.AddMember("value", AssetTypeFormOutput)
 
 	AssetTypeItem_Id = AssetTypeItem.AddMember("Id", _AssetTypeId)
 
@@ -25872,20 +25948,6 @@ func init() {
 
 	ExportLabelsTaskRunProperties_OutputS3Path = ExportLabelsTaskRunProperties.AddMember("OutputS3Path", _UriString)
 
-	ExportSetting_ENABLED = ExportSetting.AddMember("ENABLED", smithyprelude.Unit)
-
-	ExportSetting_DISABLED = ExportSetting.AddMember("DISABLED", smithyprelude.Unit)
-
-	ExportStatus_ENABLING = ExportStatus.AddMember("ENABLING", smithyprelude.Unit)
-
-	ExportStatus_ENABLED = ExportStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	ExportStatus_DISABLING = ExportStatus.AddMember("DISABLING", smithyprelude.Unit)
-
-	ExportStatus_DISABLED = ExportStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	ExportStatus_FAILED = ExportStatus.AddMember("FAILED", smithyprelude.Unit)
-
 	FederatedResourceAlreadyExistsException_Message = FederatedResourceAlreadyExistsException.AddMember("Message", _MessageString)
 
 	FederatedResourceAlreadyExistsException_AssociatedGlueResource = FederatedResourceAlreadyExistsException.AddMember("AssociatedGlueResource", _GlueResourceArn)
@@ -26264,11 +26326,13 @@ func init() {
 
 	_GlossaryTermIdList_member = _GlossaryTermIdList.AddMember("member", _GlossaryTermId)
 
+	_GlossaryTermIdOutputList_member = _GlossaryTermIdOutputList.AddMember("member", _GlossaryTermId)
+
 	GlossaryTermItem_Id = GlossaryTermItem.AddMember("Id", _GlossaryTermId)
 
 	GlossaryTermItem_Name = GlossaryTermItem.AddMember("Name", _GlossaryTermName)
 
-	GlossaryTermItem_ShortDescription = GlossaryTermItem.AddMember("ShortDescription", _GlossaryShortDescription)
+	GlossaryTermItem_ShortDescription = GlossaryTermItem.AddMember("ShortDescription", _GlossaryTermShortDescription)
 
 	_GlossaryTermItemList_member = _GlossaryTermItemList.AddMember("member", GlossaryTermItem)
 
@@ -26560,13 +26624,13 @@ func init() {
 
 	_ItemIdentifierList_member = _ItemIdentifierList.AddMember("member", _ItemIdentifier)
 
-	IterableFormEntry_FormTypeId = IterableFormEntry.AddMember("FormTypeId", _FormTypeId)
+	IterableFormEntry_FormTypeId = IterableFormEntry.AddMember("FormTypeId", _IterableFormTypeId)
 
 	IterableFormItem_ItemId = IterableFormItem.AddMember("ItemId", _ItemId)
 
 	IterableFormItem_ItemName = IterableFormItem.AddMember("ItemName", _ItemName)
 
-	IterableFormItem_GlossaryTerms = IterableFormItem.AddMember("GlossaryTerms", _GlossaryTermIdList)
+	IterableFormItem_GlossaryTerms = IterableFormItem.AddMember("GlossaryTerms", _GlossaryTermIdOutputList)
 
 	IterableFormItem_Forms = IterableFormItem.AddMember("Forms", _AssetFormMap)
 
@@ -26580,7 +26644,7 @@ func init() {
 
 	IterableFormListItem_Description = IterableFormListItem.AddMember("Description", _ItemDescription)
 
-	IterableFormListItem_GlossaryTerms = IterableFormListItem.AddMember("GlossaryTerms", _GlossaryTermIdList)
+	IterableFormListItem_GlossaryTerms = IterableFormListItem.AddMember("GlossaryTerms", _GlossaryTermIdOutputList)
 
 	_IterableFormListItemList_member = _IterableFormListItemList.AddMember("member", IterableFormListItem)
 
@@ -27240,6 +27304,12 @@ func init() {
 
 	RunIdentifier_JobRunId = RunIdentifier.AddMember("JobRunId", _HashString)
 
+	S3TablesConfiguration_EncryptionConfiguration = S3TablesConfiguration.AddMember("EncryptionConfiguration", ExportEncryptionConfiguration)
+
+	S3TablesConfigurationResult_TableBucketArn = S3TablesConfigurationResult.AddMember("TableBucketArn", _S3TableBucketArn)
+
+	S3TablesConfigurationResult_EncryptionConfiguration = S3TablesConfigurationResult.AddMember("EncryptionConfiguration", ExportEncryptionConfiguration)
+
 	SchedulerNotRunningException_Message = SchedulerNotRunningException.AddMember("Message", _MessageString)
 
 	SchedulerRunningException_Message = SchedulerRunningException.AddMember("Message", _MessageString)
@@ -27300,17 +27370,17 @@ func init() {
 
 	SchemaVersionNumber_VersionNumber = SchemaVersionNumber.AddMember("VersionNumber", _VersionLongNumber)
 
-	SearchFilterOperator_equals = SearchFilterOperator.AddMember("equals", smithyprelude.Unit)
+	SearchFilterComparator_EQUALS = SearchFilterComparator.AddMember("EQUALS", smithyprelude.Unit)
 
-	SearchFilterOperator_greaterThan = SearchFilterOperator.AddMember("greaterThan", smithyprelude.Unit)
+	SearchFilterComparator_GREATER_THAN = SearchFilterComparator.AddMember("GREATER_THAN", smithyprelude.Unit)
 
-	SearchFilterOperator_greaterThanOrEquals = SearchFilterOperator.AddMember("greaterThanOrEquals", smithyprelude.Unit)
+	SearchFilterComparator_GREATER_THAN_OR_EQUALS = SearchFilterComparator.AddMember("GREATER_THAN_OR_EQUALS", smithyprelude.Unit)
 
-	SearchFilterOperator_lessThan = SearchFilterOperator.AddMember("lessThan", smithyprelude.Unit)
+	SearchFilterComparator_LESS_THAN = SearchFilterComparator.AddMember("LESS_THAN", smithyprelude.Unit)
 
-	SearchFilterOperator_lessThanOrEquals = SearchFilterOperator.AddMember("lessThanOrEquals", smithyprelude.Unit)
+	SearchFilterComparator_LESS_THAN_OR_EQUALS = SearchFilterComparator.AddMember("LESS_THAN_OR_EQUALS", smithyprelude.Unit)
 
-	SearchFilterOperator_notExists = SearchFilterOperator.AddMember("notExists", smithyprelude.Unit)
+	SearchFilterComparator_NOT_EXISTS = SearchFilterComparator.AddMember("NOT_EXISTS", smithyprelude.Unit)
 
 	SearchFilterValue_StringValue = SearchFilterValue.AddMember("StringValue", _SearchFilterStringValue)
 
@@ -27318,7 +27388,7 @@ func init() {
 
 	SearchAttributeFilter_Attribute = SearchAttributeFilter.AddMember("Attribute", _SearchAttribute)
 
-	SearchAttributeFilter_Operator = SearchAttributeFilter.AddMember("Operator", SearchFilterOperator)
+	SearchAttributeFilter_Comparator = SearchAttributeFilter.AddMember("Comparator", SearchFilterComparator)
 
 	SearchAttributeFilter_Value = SearchAttributeFilter.AddMember("Value", SearchFilterValue)
 
@@ -27344,9 +27414,11 @@ func init() {
 
 	SearchResultItem_Id = SearchResultItem.AddMember("Id", _AssetId)
 
-	SearchResultItem_AssetName = SearchResultItem.AddMember("AssetName", _SearchResultName)
+	SearchResultItem_Name = SearchResultItem.AddMember("Name", _AssetName)
 
-	SearchResultItem_AssetDescription = SearchResultItem.AddMember("AssetDescription", _AssetDescription)
+	SearchResultItem_Description = SearchResultItem.AddMember("Description", _AssetDescription)
+
+	SearchResultItem_CreatedAt = SearchResultItem.AddMember("CreatedAt", _CreatedAt)
 
 	SearchResultItem_UpdatedAt = SearchResultItem.AddMember("UpdatedAt", _UpdatedAt)
 
@@ -28018,13 +28090,13 @@ func init() {
 
 	AssociateGlossaryTermsRequest_ClientToken = AssociateGlossaryTermsRequest.AddMember("ClientToken", _HashString)
 
-	AssociateGlossaryTermsResponse_AssetIdentifier = AssociateGlossaryTermsResponse.AddMember("AssetIdentifier", _AssetId)
+	AssociateGlossaryTermsResponse_AssetId = AssociateGlossaryTermsResponse.AddMember("AssetId", _AssetId)
 
 	AssociateGlossaryTermsResponse_IterableFormName = AssociateGlossaryTermsResponse.AddMember("IterableFormName", _IterableFormName)
 
-	AssociateGlossaryTermsResponse_ItemIdentifier = AssociateGlossaryTermsResponse.AddMember("ItemIdentifier", _ItemIdentifier)
+	AssociateGlossaryTermsResponse_ItemId = AssociateGlossaryTermsResponse.AddMember("ItemId", _ItemId)
 
-	AssociateGlossaryTermsResponse_GlossaryTerms = AssociateGlossaryTermsResponse.AddMember("GlossaryTerms", _GlossaryTermIdList)
+	AssociateGlossaryTermsResponse_GlossaryTerms = AssociateGlossaryTermsResponse.AddMember("GlossaryTerms", _GlossaryTermIdOutputList)
 
 	BatchCreatePartitionRequest_CatalogId = BatchCreatePartitionRequest.AddMember("CatalogId", _CatalogIdString)
 
@@ -28458,9 +28530,9 @@ func init() {
 
 	CreateGlossaryTermRequest_Name = CreateGlossaryTermRequest.AddMember("Name", _GlossaryTermName)
 
-	CreateGlossaryTermRequest_ShortDescription = CreateGlossaryTermRequest.AddMember("ShortDescription", _GlossaryShortDescription)
+	CreateGlossaryTermRequest_ShortDescription = CreateGlossaryTermRequest.AddMember("ShortDescription", _GlossaryTermShortDescription)
 
-	CreateGlossaryTermRequest_LongDescription = CreateGlossaryTermRequest.AddMember("LongDescription", _GlossaryLongDescription)
+	CreateGlossaryTermRequest_LongDescription = CreateGlossaryTermRequest.AddMember("LongDescription", _GlossaryTermLongDescription)
 
 	CreateGlossaryTermRequest_ClientToken = CreateGlossaryTermRequest.AddMember("ClientToken", _HashString)
 
@@ -28470,9 +28542,9 @@ func init() {
 
 	CreateGlossaryTermResponse_Name = CreateGlossaryTermResponse.AddMember("Name", _GlossaryTermName)
 
-	CreateGlossaryTermResponse_ShortDescription = CreateGlossaryTermResponse.AddMember("ShortDescription", _GlossaryShortDescription)
+	CreateGlossaryTermResponse_ShortDescription = CreateGlossaryTermResponse.AddMember("ShortDescription", _GlossaryTermShortDescription)
 
-	CreateGlossaryTermResponse_LongDescription = CreateGlossaryTermResponse.AddMember("LongDescription", _GlossaryLongDescription)
+	CreateGlossaryTermResponse_LongDescription = CreateGlossaryTermResponse.AddMember("LongDescription", _GlossaryTermLongDescription)
 
 	CreateGlueIdentityCenterConfigurationRequest_InstanceArn = CreateGlueIdentityCenterConfigurationRequest.AddMember("InstanceArn", _IdentityCenterInstanceArn)
 
@@ -28830,8 +28902,6 @@ func init() {
 
 	DeleteAssetRequest_Identifier = DeleteAssetRequest.AddMember("Identifier", _AssetId, &smithytraits.HTTPLabel{})
 
-	DeleteAssetTypeRequest_Identifier = DeleteAssetTypeRequest.AddMember("Identifier", _AssetTypeId, &smithytraits.HTTPLabel{})
-
 	DeleteAttachmentRequest_AssetIdentifier = DeleteAttachmentRequest.AddMember("AssetIdentifier", _AssetId, &smithytraits.HTTPLabel{})
 
 	DeleteAttachmentRequest_IterableFormName = DeleteAttachmentRequest.AddMember("IterableFormName", _IterableFormName, &smithytraits.HTTPQuery{Name: "iterableFormName"})
@@ -28840,11 +28910,11 @@ func init() {
 
 	DeleteAttachmentRequest_AttachmentName = DeleteAttachmentRequest.AddMember("AttachmentName", _AttachmentName, &smithytraits.HTTPLabel{})
 
-	DeleteAttachmentResponse_AssetIdentifier = DeleteAttachmentResponse.AddMember("AssetIdentifier", _AssetId)
+	DeleteAttachmentResponse_AssetId = DeleteAttachmentResponse.AddMember("AssetId", _AssetId)
 
 	DeleteAttachmentResponse_IterableFormName = DeleteAttachmentResponse.AddMember("IterableFormName", _IterableFormName)
 
-	DeleteAttachmentResponse_ItemIdentifier = DeleteAttachmentResponse.AddMember("ItemIdentifier", _ItemIdentifier)
+	DeleteAttachmentResponse_ItemId = DeleteAttachmentResponse.AddMember("ItemId", _ItemId)
 
 	DeleteBlueprintRequest_Name = DeleteBlueprintRequest.AddMember("Name", _NameString)
 
@@ -29110,13 +29180,13 @@ func init() {
 
 	DisassociateGlossaryTermsRequest_ClientToken = DisassociateGlossaryTermsRequest.AddMember("ClientToken", _HashString)
 
-	DisassociateGlossaryTermsResponse_AssetIdentifier = DisassociateGlossaryTermsResponse.AddMember("AssetIdentifier", _AssetId)
+	DisassociateGlossaryTermsResponse_AssetId = DisassociateGlossaryTermsResponse.AddMember("AssetId", _AssetId)
 
 	DisassociateGlossaryTermsResponse_IterableFormName = DisassociateGlossaryTermsResponse.AddMember("IterableFormName", _IterableFormName)
 
-	DisassociateGlossaryTermsResponse_ItemIdentifier = DisassociateGlossaryTermsResponse.AddMember("ItemIdentifier", _ItemIdentifier)
+	DisassociateGlossaryTermsResponse_ItemId = DisassociateGlossaryTermsResponse.AddMember("ItemId", _ItemId)
 
-	DisassociateGlossaryTermsResponse_GlossaryTerms = DisassociateGlossaryTermsResponse.AddMember("GlossaryTerms", _GlossaryTermIdList)
+	DisassociateGlossaryTermsResponse_GlossaryTerms = DisassociateGlossaryTermsResponse.AddMember("GlossaryTerms", _GlossaryTermIdOutputList)
 
 	GetAssetInput_Identifier = GetAssetInput.AddMember("Identifier", _AssetId, &smithytraits.HTTPLabel{})
 
@@ -29132,7 +29202,7 @@ func init() {
 
 	GetAssetOutput_AssetTypeId = GetAssetOutput.AddMember("AssetTypeId", _AssetTypeId)
 
-	GetAssetOutput_GlossaryTerms = GetAssetOutput.AddMember("GlossaryTerms", _GlossaryTermIdList)
+	GetAssetOutput_GlossaryTerms = GetAssetOutput.AddMember("GlossaryTerms", _GlossaryTermIdOutputList)
 
 	GetAssetOutput_Forms = GetAssetOutput.AddMember("Forms", _AssetFormMap)
 
@@ -29146,7 +29216,7 @@ func init() {
 
 	GetAssetTypeResponse_Name = GetAssetTypeResponse.AddMember("Name", _AssetTypeName)
 
-	GetAssetTypeResponse_Forms = GetAssetTypeResponse.AddMember("Forms", _AssetTypeFormsMap)
+	GetAssetTypeResponse_Forms = GetAssetTypeResponse.AddMember("Forms", _AssetTypeFormOutputMap)
 
 	GetBlueprintRequest_Name = GetBlueprintRequest.AddMember("Name", _NameString)
 
@@ -29346,17 +29416,13 @@ func init() {
 
 	GetDataCatalogEncryptionSettingsResponse_DataCatalogEncryptionSettings = GetDataCatalogEncryptionSettingsResponse.AddMember("DataCatalogEncryptionSettings", DataCatalogEncryptionSettings)
 
-	GetDataCatalogExportConfigurationOutput_ExportSetting = GetDataCatalogExportConfigurationOutput.AddMember("ExportSetting", ExportSetting)
-
-	GetDataCatalogExportConfigurationOutput_Status = GetDataCatalogExportConfigurationOutput.AddMember("Status", ExportStatus)
-
-	GetDataCatalogExportConfigurationOutput_EncryptionConfiguration = GetDataCatalogExportConfigurationOutput.AddMember("EncryptionConfiguration", ExportEncryptionConfiguration)
-
-	GetDataCatalogExportConfigurationOutput_S3TableBucketArn = GetDataCatalogExportConfigurationOutput.AddMember("S3TableBucketArn", _S3TableBucketArn)
-
 	GetDataCatalogExportConfigurationOutput_CreatedAt = GetDataCatalogExportConfigurationOutput.AddMember("CreatedAt", _CreatedAt)
 
 	GetDataCatalogExportConfigurationOutput_UpdatedAt = GetDataCatalogExportConfigurationOutput.AddMember("UpdatedAt", _UpdatedAt)
+
+	GetDataCatalogExportConfigurationOutput_S3TablesConfiguration = GetDataCatalogExportConfigurationOutput.AddMember("S3TablesConfiguration", S3TablesConfigurationResult)
+
+	GetDataCatalogExportConfigurationOutput_Assets = GetDataCatalogExportConfigurationOutput.AddMember("Assets", AssetsExportResult)
 
 	GetDataflowGraphRequest_PythonScript = GetDataflowGraphRequest.AddMember("PythonScript", _PythonScript)
 
@@ -29640,9 +29706,9 @@ func init() {
 
 	GetGlossaryTermResponse_Name = GetGlossaryTermResponse.AddMember("Name", _GlossaryTermName)
 
-	GetGlossaryTermResponse_ShortDescription = GetGlossaryTermResponse.AddMember("ShortDescription", _GlossaryShortDescription)
+	GetGlossaryTermResponse_ShortDescription = GetGlossaryTermResponse.AddMember("ShortDescription", _GlossaryTermShortDescription)
 
-	GetGlossaryTermResponse_LongDescription = GetGlossaryTermResponse.AddMember("LongDescription", _GlossaryLongDescription)
+	GetGlossaryTermResponse_LongDescription = GetGlossaryTermResponse.AddMember("LongDescription", _GlossaryTermLongDescription)
 
 	GetGlueIdentityCenterConfigurationResponse_ApplicationArn = GetGlueIdentityCenterConfigurationResponse.AddMember("ApplicationArn", _ApplicationArn)
 
@@ -30314,7 +30380,7 @@ func init() {
 
 	ImportCatalogToGlueRequest_CatalogId = ImportCatalogToGlueRequest.AddMember("CatalogId", _CatalogIdString)
 
-	ListAssetTypesRequest_MaxResults = ListAssetTypesRequest.AddMember("MaxResults", _PageSize, &smithytraits.HTTPQuery{Name: "maxResults"})
+	ListAssetTypesRequest_MaxResults = ListAssetTypesRequest.AddMember("MaxResults", _AssetTypeMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListAssetTypesRequest_NextToken = ListAssetTypesRequest.AddMember("NextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
 
@@ -30496,7 +30562,7 @@ func init() {
 
 	ListEntitiesResponse_NextToken = ListEntitiesResponse.AddMember("NextToken", _NextToken)
 
-	ListFormTypesRequest_MaxResults = ListFormTypesRequest.AddMember("MaxResults", _PageSize, &smithytraits.HTTPQuery{Name: "maxResults"})
+	ListFormTypesRequest_MaxResults = ListFormTypesRequest.AddMember("MaxResults", _FormTypeMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListFormTypesRequest_NextToken = ListFormTypesRequest.AddMember("NextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
 
@@ -30504,7 +30570,7 @@ func init() {
 
 	ListFormTypesResponse_NextToken = ListFormTypesResponse.AddMember("NextToken", _Token)
 
-	ListGlossariesRequest_MaxResults = ListGlossariesRequest.AddMember("MaxResults", _PageSize, &smithytraits.HTTPQuery{Name: "maxResults"})
+	ListGlossariesRequest_MaxResults = ListGlossariesRequest.AddMember("MaxResults", _GlossaryMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListGlossariesRequest_NextToken = ListGlossariesRequest.AddMember("NextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
 
@@ -30514,7 +30580,7 @@ func init() {
 
 	ListGlossaryTermsRequest_GlossaryIdentifier = ListGlossaryTermsRequest.AddMember("GlossaryIdentifier", _GlossaryId, &smithytraits.HTTPQuery{Name: "glossaryIdentifier"})
 
-	ListGlossaryTermsRequest_MaxResults = ListGlossaryTermsRequest.AddMember("MaxResults", _PageSize, &smithytraits.HTTPQuery{Name: "maxResults"})
+	ListGlossaryTermsRequest_MaxResults = ListGlossaryTermsRequest.AddMember("MaxResults", _GlossaryTermMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListGlossaryTermsRequest_NextToken = ListGlossaryTermsRequest.AddMember("NextToken", _Token, &smithytraits.HTTPQuery{Name: "nextToken"})
 
@@ -30766,7 +30832,7 @@ func init() {
 
 	PublishDataQualityResultV2Response_ResultId = PublishDataQualityResultV2Response.AddMember("ResultId", _HashString)
 
-	PutAssetRequest_AssetTypeId = PutAssetRequest.AddMember("AssetTypeId", _AssetTypeId)
+	PutAssetRequest_AssetTypeIdentifier = PutAssetRequest.AddMember("AssetTypeIdentifier", _AssetTypeId)
 
 	PutAssetRequest_Identifier = PutAssetRequest.AddMember("Identifier", _AssetId)
 
@@ -30774,7 +30840,7 @@ func init() {
 
 	PutAssetRequest_Description = PutAssetRequest.AddMember("Description", _AssetDescription)
 
-	PutAssetRequest_Forms = PutAssetRequest.AddMember("Forms", _AssetFormMap)
+	PutAssetRequest_Forms = PutAssetRequest.AddMember("Forms", _AssetFormInputMap)
 
 	PutAssetRequest_ClientToken = PutAssetRequest.AddMember("ClientToken", _HashString)
 
@@ -30784,21 +30850,11 @@ func init() {
 
 	PutAssetResponse_Description = PutAssetResponse.AddMember("Description", _AssetDescription)
 
+	PutAssetResponse_AssetTypeId = PutAssetResponse.AddMember("AssetTypeId", _AssetTypeId)
+
 	PutAssetResponse_CreatedAt = PutAssetResponse.AddMember("CreatedAt", _CreatedAt)
 
 	PutAssetResponse_Forms = PutAssetResponse.AddMember("Forms", _AssetFormMap)
-
-	PutAssetTypeRequest_Name = PutAssetTypeRequest.AddMember("Name", _AssetTypeName)
-
-	PutAssetTypeRequest_Forms = PutAssetTypeRequest.AddMember("Forms", _AssetTypeFormsMap)
-
-	PutAssetTypeRequest_ClientToken = PutAssetTypeRequest.AddMember("ClientToken", _HashString)
-
-	PutAssetTypeResponse_Id = PutAssetTypeResponse.AddMember("Id", _AssetTypeId)
-
-	PutAssetTypeResponse_Name = PutAssetTypeResponse.AddMember("Name", _AssetTypeName)
-
-	PutAssetTypeResponse_Forms = PutAssetTypeResponse.AddMember("Forms", _AssetTypeFormsMap)
 
 	PutAttachmentRequest_AssetIdentifier = PutAttachmentRequest.AddMember("AssetIdentifier", _AssetId, &smithytraits.HTTPLabel{})
 
@@ -30810,15 +30866,15 @@ func init() {
 
 	PutAttachmentRequest_Content = PutAttachmentRequest.AddMember("Content", _FormContent)
 
-	PutAttachmentRequest_FormTypeId = PutAttachmentRequest.AddMember("FormTypeId", _FormTypeId)
+	PutAttachmentRequest_FormTypeIdentifier = PutAttachmentRequest.AddMember("FormTypeIdentifier", _FormTypeId)
 
 	PutAttachmentRequest_ClientToken = PutAttachmentRequest.AddMember("ClientToken", _HashString)
 
-	PutAttachmentResponse_AssetIdentifier = PutAttachmentResponse.AddMember("AssetIdentifier", _AssetId)
+	PutAttachmentResponse_AssetId = PutAttachmentResponse.AddMember("AssetId", _AssetId)
 
 	PutAttachmentResponse_IterableFormName = PutAttachmentResponse.AddMember("IterableFormName", _IterableFormName)
 
-	PutAttachmentResponse_ItemIdentifier = PutAttachmentResponse.AddMember("ItemIdentifier", _ItemIdentifier)
+	PutAttachmentResponse_ItemId = PutAttachmentResponse.AddMember("ItemId", _ItemId)
 
 	PutAttachmentResponse_AttachmentName = PutAttachmentResponse.AddMember("AttachmentName", _AttachmentName)
 
@@ -30828,15 +30884,15 @@ func init() {
 
 	PutDataCatalogEncryptionSettingsRequest_DataCatalogEncryptionSettings = PutDataCatalogEncryptionSettingsRequest.AddMember("DataCatalogEncryptionSettings", DataCatalogEncryptionSettings)
 
-	PutDataCatalogExportConfigurationInput_ExportSetting = PutDataCatalogExportConfigurationInput.AddMember("ExportSetting", ExportSetting)
-
-	PutDataCatalogExportConfigurationInput_EncryptionConfiguration = PutDataCatalogExportConfigurationInput.AddMember("EncryptionConfiguration", ExportEncryptionConfiguration)
-
 	PutDataCatalogExportConfigurationInput_ClientToken = PutDataCatalogExportConfigurationInput.AddMember("ClientToken", _HashString)
 
-	PutDataCatalogExportConfigurationOutput_ExportSetting = PutDataCatalogExportConfigurationOutput.AddMember("ExportSetting", ExportSetting)
+	PutDataCatalogExportConfigurationInput_S3TablesConfiguration = PutDataCatalogExportConfigurationInput.AddMember("S3TablesConfiguration", S3TablesConfiguration)
 
-	PutDataCatalogExportConfigurationOutput_EncryptionConfiguration = PutDataCatalogExportConfigurationOutput.AddMember("EncryptionConfiguration", ExportEncryptionConfiguration)
+	PutDataCatalogExportConfigurationInput_Assets = PutDataCatalogExportConfigurationInput.AddMember("Assets", AssetsExport)
+
+	PutDataCatalogExportConfigurationOutput_S3TablesConfiguration = PutDataCatalogExportConfigurationOutput.AddMember("S3TablesConfiguration", S3TablesConfiguration)
+
+	PutDataCatalogExportConfigurationOutput_Assets = PutDataCatalogExportConfigurationOutput.AddMember("Assets", AssetsExport)
 
 	PutDataQualityProfileAnnotationRequest_ProfileId = PutDataQualityProfileAnnotationRequest.AddMember("ProfileId", _HashString)
 
@@ -31446,7 +31502,7 @@ func init() {
 
 	UpdateGlossaryRequest_Name = UpdateGlossaryRequest.AddMember("Name", _GlossaryName)
 
-	UpdateGlossaryRequest_Description = UpdateGlossaryRequest.AddMember("Description", _MetadataDescription)
+	UpdateGlossaryRequest_Description = UpdateGlossaryRequest.AddMember("Description", _UpdateGlossaryDescription)
 
 	UpdateGlossaryRequest_ClientToken = UpdateGlossaryRequest.AddMember("ClientToken", _HashString)
 
@@ -31460,9 +31516,9 @@ func init() {
 
 	UpdateGlossaryTermRequest_Name = UpdateGlossaryTermRequest.AddMember("Name", _GlossaryTermName)
 
-	UpdateGlossaryTermRequest_ShortDescription = UpdateGlossaryTermRequest.AddMember("ShortDescription", _GlossaryShortDescription)
+	UpdateGlossaryTermRequest_ShortDescription = UpdateGlossaryTermRequest.AddMember("ShortDescription", _UpdateGlossaryTermShortDescription)
 
-	UpdateGlossaryTermRequest_LongDescription = UpdateGlossaryTermRequest.AddMember("LongDescription", _GlossaryLongDescription)
+	UpdateGlossaryTermRequest_LongDescription = UpdateGlossaryTermRequest.AddMember("LongDescription", _UpdateGlossaryTermLongDescription)
 
 	UpdateGlossaryTermRequest_ClientToken = UpdateGlossaryTermRequest.AddMember("ClientToken", _HashString)
 
@@ -31472,9 +31528,9 @@ func init() {
 
 	UpdateGlossaryTermResponse_Name = UpdateGlossaryTermResponse.AddMember("Name", _GlossaryTermName)
 
-	UpdateGlossaryTermResponse_ShortDescription = UpdateGlossaryTermResponse.AddMember("ShortDescription", _GlossaryShortDescription)
+	UpdateGlossaryTermResponse_ShortDescription = UpdateGlossaryTermResponse.AddMember("ShortDescription", _GlossaryTermShortDescription)
 
-	UpdateGlossaryTermResponse_LongDescription = UpdateGlossaryTermResponse.AddMember("LongDescription", _GlossaryLongDescription)
+	UpdateGlossaryTermResponse_LongDescription = UpdateGlossaryTermResponse.AddMember("LongDescription", _GlossaryTermLongDescription)
 
 	UpdateGlueIdentityCenterConfigurationRequest_Scopes = UpdateGlueIdentityCenterConfigurationRequest.AddMember("Scopes", _IdentityCenterScopesList)
 

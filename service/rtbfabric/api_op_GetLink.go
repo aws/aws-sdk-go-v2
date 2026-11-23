@@ -104,11 +104,23 @@ type GetLinkOutput struct {
 	// The direction of the link.
 	Direction types.LinkDirection
 
+	// The causes of the failure, such as a deleted subnet. Present only when the
+	// resource has failed.
+	ErrorDetails []types.ErrorDetail
+
 	// The configuration of flow modules.
 	FlowModules []types.ModuleConfiguration
 
+	// The link's active flows, in the form PutLinkFlows takes. Empty when the link
+	// has no modules, and absent when its modules were set with UpdateLinkModuleFlow.
+	Flows []types.Flow
+
 	// Boolean to specify if an HTTP responder is allowed.
 	HttpResponderAllowed *bool
+
+	// The link's concurrency token. Pass it to PutLinkFlows unchanged; it changes
+	// whenever the link does.
+	LockToken *string
 
 	// Settings for the application logs.
 	LogSettings *types.LinkLogSettings
@@ -150,8 +162,14 @@ func (v *GetLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Direction != "" {
 		s.WriteString(schemas.GetLinkResponse_direction, string(v.Direction))
 	}
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.GetLinkResponse_errorDetails, v.ErrorDetails)
+	}
 	if v.FlowModules != nil {
 		serializeModuleConfigurationList(s, schemas.GetLinkResponse_flowModules, v.FlowModules)
+	}
+	if v.Flows != nil {
+		serializeFlowList(s, schemas.GetLinkResponse_flows, v.Flows)
 	}
 	if v.GatewayId != nil {
 		s.WriteString(schemas.GetLinkResponse_gatewayId, *v.GatewayId)
@@ -161,6 +179,9 @@ func (v *GetLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.LinkId != nil {
 		s.WriteString(schemas.GetLinkResponse_linkId, *v.LinkId)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.GetLinkResponse_lockToken, *v.LockToken)
 	}
 	if v.LogSettings != nil {
 		s.WriteStruct(schemas.GetLinkResponse_logSettings)
@@ -209,8 +230,12 @@ func (v *GetLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Direction = types.LinkDirection(ev)
 			return nil
+		case schemas.GetLinkResponse_errorDetails:
+			return deserializeErrorDetails(d, schemas.GetLinkResponse_errorDetails, &v.ErrorDetails)
 		case schemas.GetLinkResponse_flowModules:
 			return deserializeModuleConfigurationList(d, schemas.GetLinkResponse_flowModules, &v.FlowModules)
+		case schemas.GetLinkResponse_flows:
+			return deserializeFlowList(d, schemas.GetLinkResponse_flows, &v.Flows)
 		case schemas.GetLinkResponse_gatewayId:
 			v.GatewayId = new(string)
 			return d.ReadString(schemas.GetLinkResponse_gatewayId, v.GatewayId)
@@ -220,6 +245,9 @@ func (v *GetLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetLinkResponse_linkId:
 			v.LinkId = new(string)
 			return d.ReadString(schemas.GetLinkResponse_linkId, v.LinkId)
+		case schemas.GetLinkResponse_lockToken:
+			v.LockToken = new(string)
+			return d.ReadString(schemas.GetLinkResponse_lockToken, v.LockToken)
 		case schemas.GetLinkResponse_logSettings:
 			v.LogSettings = &types.LinkLogSettings{}
 			return v.LogSettings.Deserialize(d)
@@ -448,6 +476,16 @@ func linkAcceptedStateRetryable(ctx context.Context, input *GetLinkInput, output
 
 	if err == nil {
 		v1 := output.Status
+		expectedValue := "CREATE_FAILED"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	if err == nil {
+		v1 := output.Status
 		expectedValue := "ACCEPTED"
 		var pathValue string
 		pathValue = string(v1)
@@ -652,6 +690,16 @@ func linkActiveStateRetryable(ctx context.Context, input *GetLinkInput, output *
 
 	if err == nil {
 		v1 := output.Status
+		expectedValue := "CREATE_FAILED"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	if err == nil {
+		v1 := output.Status
 		expectedValue := "ACTIVE"
 		var pathValue string
 		pathValue = string(v1)
@@ -853,6 +901,16 @@ func (w *LinkDeletedWaiter) WaitForOutput(ctx context.Context, params *GetLinkIn
 }
 
 func linkDeletedStateRetryable(ctx context.Context, input *GetLinkInput, output *GetLinkOutput, err error) (bool, error) {
+
+	if err == nil {
+		v1 := output.Status
+		expectedValue := "DELETE_FAILED"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
 
 	if err == nil {
 		v1 := output.Status

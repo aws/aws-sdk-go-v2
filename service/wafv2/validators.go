@@ -430,6 +430,46 @@ func (m *validateOpGetDecryptedAPIKey) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEventActor struct {
+}
+
+func (*validateOpGetEventActor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEventActor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEventActorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEventActorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEvent struct {
+}
+
+func (*validateOpGetEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetIPSet struct {
 }
 
@@ -745,6 +785,66 @@ func (m *validateOpListAvailableManagedRuleGroupVersions) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAvailableManagedRuleGroupVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEventActors struct {
+}
+
+func (*validateOpListEventActors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEventActors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEventActorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEventActorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEventsByWebACL struct {
+}
+
+func (*validateOpListEventsByWebACL) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEventsByWebACL) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEventsByWebACLInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEventsByWebACLInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEvents struct {
+}
+
+func (*validateOpListEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEventsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1234,6 +1334,14 @@ func addOpGetDecryptedAPIKeyValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpGetDecryptedAPIKey{}, middleware.After)
 }
 
+func addOpGetEventActorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEventActor{}, middleware.After)
+}
+
+func addOpGetEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEvent{}, middleware.After)
+}
+
 func addOpGetIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIPSet{}, middleware.After)
 }
@@ -1296,6 +1404,18 @@ func addOpListAvailableManagedRuleGroupsValidationMiddleware(stack *middleware.S
 
 func addOpListAvailableManagedRuleGroupVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAvailableManagedRuleGroupVersions{}, middleware.After)
+}
+
+func addOpListEventActorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEventActors{}, middleware.After)
+}
+
+func addOpListEventsByWebACLValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEventsByWebACL{}, middleware.After)
+}
+
+func addOpListEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEvents{}, middleware.After)
 }
 
 func addOpListIPSetsValidationMiddleware(stack *middleware.Stack) error {
@@ -1442,6 +1562,21 @@ func validateAllowAction(v *types.AllowAction) error {
 	}
 }
 
+func validateAnalyticsConfig(v *types.AnalyticsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsConfig"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAndStatement(v *types.AndStatement) error {
 	if v == nil {
 		return nil
@@ -1528,6 +1663,25 @@ func validateAWSManagedRulesACFPRuleSet(v *types.AWSManagedRulesACFPRuleSet) err
 	}
 }
 
+func validateAWSManagedRulesAISecurityRuleSet(v *types.AWSManagedRulesAISecurityRuleSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AWSManagedRulesAISecurityRuleSet"}
+	if v.BedrockGuardrails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BedrockGuardrails"))
+	} else if v.BedrockGuardrails != nil {
+		if err := validateBedrockGuardrails(v.BedrockGuardrails); err != nil {
+			invalidParams.AddNested("BedrockGuardrails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAWSManagedRulesAntiDDoSRuleSet(v *types.AWSManagedRulesAntiDDoSRuleSet) error {
 	if v == nil {
 		return nil
@@ -1579,6 +1733,58 @@ func validateAWSManagedRulesBotControlRuleSet(v *types.AWSManagedRulesBotControl
 	invalidParams := smithy.InvalidParamsError{Context: "AWSManagedRulesBotControlRuleSet"}
 	if len(v.InspectionLevel) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("InspectionLevel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBedrockGuardrails(v *types.BedrockGuardrails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BedrockGuardrails"}
+	if v.ProtectRequestOnly != nil {
+		if err := validateBedrockGuardrailsRequestOnly(v.ProtectRequestOnly); err != nil {
+			invalidParams.AddNested("ProtectRequestOnly", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProtectRequestAndResponse != nil {
+		if err := validateBedrockGuardrailsRequestAndResponse(v.ProtectRequestAndResponse); err != nil {
+			invalidParams.AddNested("ProtectRequestAndResponse", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBedrockGuardrailsRequestAndResponse(v *types.BedrockGuardrailsRequestAndResponse) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BedrockGuardrailsRequestAndResponse"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBedrockGuardrailsRequestOnly(v *types.BedrockGuardrailsRequestOnly) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BedrockGuardrailsRequestOnly"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2157,6 +2363,41 @@ func validateEmailField(v *types.EmailField) error {
 	}
 }
 
+func validateEventFilter(v *types.EventFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEventFilterList(v []types.EventFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventFilterList"}
+	for i := range v {
+		if err := validateEventFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExcludedRule(v *types.ExcludedRule) error {
 	if v == nil {
 		return nil
@@ -2621,6 +2862,11 @@ func validateManagedRuleGroupConfig(v *types.ManagedRuleGroupConfig) error {
 	if v.AWSManagedRulesAntiDDoSRuleSet != nil {
 		if err := validateAWSManagedRulesAntiDDoSRuleSet(v.AWSManagedRulesAntiDDoSRuleSet); err != nil {
 			invalidParams.AddNested("AWSManagedRulesAntiDDoSRuleSet", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AWSManagedRulesAISecurityRuleSet != nil {
+		if err := validateAWSManagedRulesAISecurityRuleSet(v.AWSManagedRulesAISecurityRuleSet); err != nil {
+			invalidParams.AddNested("AWSManagedRulesAISecurityRuleSet", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4269,6 +4515,11 @@ func validateOpCreateWebACLInput(v *CreateWebACLInput) error {
 			invalidParams.AddNested("MonetizationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AnalyticsConfig != nil {
+		if err := validateAnalyticsConfig(v.AnalyticsConfig); err != nil {
+			invalidParams.AddNested("AnalyticsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4535,6 +4786,45 @@ func validateOpGetDecryptedAPIKeyInput(v *GetDecryptedAPIKeyInput) error {
 	}
 	if v.APIKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("APIKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEventActorInput(v *GetEventActorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEventActorInput"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.EventActorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventActorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEventInput(v *GetEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEventInput"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.EventId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventId"))
+	}
+	if v.WebAclArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WebAclArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4897,6 +5187,81 @@ func validateOpListAvailableManagedRuleGroupVersionsInput(v *ListAvailableManage
 	}
 	if len(v.Scope) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEventActorsInput(v *ListEventActorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEventActorsInput"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.TimeWindow == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeWindow"))
+	} else if v.TimeWindow != nil {
+		if err := validateTimeWindow(v.TimeWindow); err != nil {
+			invalidParams.AddNested("TimeWindow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEventsByWebACLInput(v *ListEventsByWebACLInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEventsByWebACLInput"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.WebAclArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WebAclArn"))
+	}
+	if v.TimeWindow != nil {
+		if err := validateTimeWindow(v.TimeWindow); err != nil {
+			invalidParams.AddNested("TimeWindow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateEventFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEventsInput(v *ListEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEventsInput"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.TimeWindow != nil {
+		if err := validateTimeWindow(v.TimeWindow); err != nil {
+			invalidParams.AddNested("TimeWindow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateEventFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5370,6 +5735,11 @@ func validateOpUpdateWebACLInput(v *UpdateWebACLInput) error {
 	if v.MonetizationConfig != nil {
 		if err := validateMonetizationConfig(v.MonetizationConfig); err != nil {
 			invalidParams.AddNested("MonetizationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AnalyticsConfig != nil {
+		if err := validateAnalyticsConfig(v.AnalyticsConfig); err != nil {
+			invalidParams.AddNested("AnalyticsConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

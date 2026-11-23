@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"time"
 )
 
 // Creates a new partner relationship between accounts.
@@ -28,11 +29,6 @@ func (c *Client) CreateRelationship(ctx context.Context, params *CreateRelations
 }
 
 type CreateRelationshipInput struct {
-
-	// The AWS account ID to associate in this relationship.
-	//
-	// This member is required.
-	AssociatedAccountId *string
 
 	// The type of association for the relationship (e.g., reseller, distributor).
 	//
@@ -59,14 +55,28 @@ type CreateRelationshipInput struct {
 	// This member is required.
 	Sector types.Sector
 
+	// The account scope for a managed services relationship (for example, entire
+	// organization, specific member accounts). Applies only to managed services
+	// relationships.
+	AccountScope types.AccountScope
+
+	// The AWS account ID to associate in this relationship.
+	AssociatedAccountId *string
+
 	// A unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
 
-	// The support plan requested for this relationship.
+	// The support plan requested for this relationship. Applies only to billing
+	// transfer relationships.
 	RequestedSupportPlan types.SupportPlan
 
-	// The resale account model for the relationship.
+	// The resale account model for the relationship. Applies only to billing transfer
+	// relationships.
 	ResaleAccountModel types.ResaleAccountModel
+
+	// The start date of the managed services relationship. Applies only to managed
+	// services relationships.
+	StartDate *time.Time
 
 	// Key-value pairs to associate with the relationship.
 	Tags []types.Tag
@@ -81,6 +91,9 @@ func (v *CreateRelationshipInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRelationshipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountScope != "" {
+		s.WriteString(schemas.CreateRelationshipRequest_accountScope, string(v.AccountScope))
+	}
 	if v.AssociatedAccountId != nil {
 		s.WriteString(schemas.CreateRelationshipRequest_associatedAccountId, *v.AssociatedAccountId)
 	}
@@ -107,6 +120,9 @@ func (v *CreateRelationshipInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Sector != "" {
 		s.WriteString(schemas.CreateRelationshipRequest_sector, string(v.Sector))
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.CreateRelationshipRequest_startDate, *v.StartDate)
 	}
 	if v.Tags != nil {
 		serializeTagList(s, schemas.CreateRelationshipRequest_tags, v.Tags)

@@ -3213,6 +3213,44 @@
                 "smithy.api#documentation": "<p>List of code locations.</p>"
             }
         },
+        "com.amazonaws.securityagent#CodeRemediationJobStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "NO_CHANGE_REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_CHANGE_REQUIRED"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Code remediation status for a particular repository.</p>"
+            }
+        },
         "com.amazonaws.securityagent#CodeRemediationStrategy": {
             "type": "enum",
             "members": {
@@ -3241,20 +3279,20 @@
                 "status": {
                     "target": "com.amazonaws.securityagent#CodeRemediationTaskStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the code remediation task.</p>",
+                        "smithy.api#documentation": "<p>The current status of the overall code remediation task.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "statusReason": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason for the current status of the code remediation task.</p>"
+                        "smithy.api#documentation": "<p>The reason for the current status of the overall code remediation task.</p>"
                     }
                 },
                 "taskDetails": {
                     "target": "com.amazonaws.securityagent#CodeRemediationTaskDetailsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of details for the code remediation task, including repository name, code diff link, and pull request link.</p>"
+                        "smithy.api#documentation": "<p>The list of details for a code remediation task, including repository names, status of code remediation for each associated repository, and generated code diff or pull request links.</p>"
                     }
                 }
             },
@@ -3268,7 +3306,7 @@
                 "repoName": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the repository where the remediation was applied.</p>"
+                        "smithy.api#documentation": "<p>The name of an associated repository where the remediation was applied.</p>"
                     }
                 },
                 "codeDiffLink": {
@@ -3281,6 +3319,24 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The link to the pull request created for the remediation.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.securityagent#CodeRemediationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the code remediation task for the particular repository.</p>"
+                    }
+                },
+                "statusCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A category classifier if a repository's code remediation fails.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive reason when a repository's code remediation fails.</p>"
                     }
                 }
             },
@@ -6680,6 +6736,13 @@
                         "smithy.api#documentation": "<p>Pentest job was stopped by the user.</p>",
                         "smithy.api#enumValue": "STOPPED_BY_USER"
                     }
+                },
+                "PAUSED_BY_USER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pentest job was paused by the user.</p>",
+                        "smithy.api#enumValue": "PAUSED_BY_USER"
+                    }
                 }
             },
             "traits": {
@@ -8647,6 +8710,20 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Pentest job was stopped by the user.</p>",
                         "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "PAUSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pentest job is being paused.</p>",
+                        "smithy.api#enumValue": "PAUSING"
+                    }
+                },
+                "PAUSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pentest job is paused. A paused job can be resumed from its last saved checkpoint within 7 days of the job's creation.</p>",
+                        "smithy.api#enumValue": "PAUSED"
                     }
                 },
                 "FAILED": {
@@ -11415,6 +11492,12 @@
                 "testScope": {
                     "target": "com.amazonaws.securityagent#TestScope"
                 },
+                "version": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the pentest job. The version increases each time the job is resumed. This value is absent for jobs created before versions were recorded.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -11499,6 +11582,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The URL to view this pentest job's findings report in the console.</p>"
+                    }
+                },
+                "version": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the pentest job. The version increases each time the job is resumed. This value is absent for jobs created before versions were recorded.</p>"
                     }
                 }
             },
@@ -12177,6 +12266,126 @@
                 "smithy.api#documentation": "<p>Type of resource.</p>"
             }
         },
+        "com.amazonaws.securityagent#ResumePentestJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityagent#ResumePentestJobInput"
+            },
+            "output": {
+                "target": "com.amazonaws.securityagent#ResumePentestJobOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Resumes a stopped or paused pentest job from its last saved checkpoint. The job keeps its pentest job identifier and continues as a new version, keeping the findings and progress from earlier runs. You can resume a job within 7 days of when it was created.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ResumePentestJob"
+                }
+            }
+        },
+        "com.amazonaws.securityagent#ResumePentestJobInput": {
+            "type": "structure",
+            "members": {
+                "agentSpaceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the agent space.</p>"
+                    }
+                },
+                "pentestJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the pentest job to resume.</p>"
+                    }
+                },
+                "actors": {
+                    "target": "com.amazonaws.securityagent#ActorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actors to use for the resumed job. When specified, replaces the actors the job used before it stopped.</p>"
+                    }
+                },
+                "networkTrafficConfig": {
+                    "target": "com.amazonaws.securityagent#NetworkTrafficConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The network traffic configuration to use for the resumed job. When specified, replaces the configuration the job used before it stopped.</p>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.securityagent#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration to use for the resumed job. When specified, replaces the configuration the job used before it stopped.</p>"
+                    }
+                },
+                "maxTaskHours": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of task hours for the resumed job. To resume a job that stopped because it reached its task hours limit, specify a higher value.</p>"
+                    }
+                },
+                "copyConfigFromPentest": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to copy the current actors, network traffic configuration, VPC configuration, and maximum task hours from the pentest to the resumed job. The job's scope, such as its target endpoints, is never changed. Values you specify in this request take precedence over copied values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input for resuming a stopped or paused pentest job.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityagent#ResumePentestJobOutput": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the pentest job.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.securityagent#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the pentest job.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the pentest job was created, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the pentest job was last updated, in UTC format.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "pentestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the pentest.</p>"
+                    }
+                },
+                "pentestJobId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the resumed pentest job.</p>"
+                    }
+                },
+                "version": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the pentest job that the resume started. The version increases each time the job is resumed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output for the ResumePentestJob operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityagent#RiskLevel": {
             "type": "enum",
             "members": {
@@ -12736,6 +12945,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityagent#ListThreats"
+                },
+                {
+                    "target": "com.amazonaws.securityagent#ResumePentestJob"
                 },
                 {
                     "target": "com.amazonaws.securityagent#StartCodeRemediation"
@@ -14282,6 +14494,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the pentest job to stop.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "pause": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to pause the job instead of stopping it. A paused job moves to <code>PAUSING</code> and then to <code>PAUSED</code>, and you can resume it later with <code>ResumePentestJob</code>. You can pause only a job that is <code>IN_PROGRESS</code>. The default is false.</p>"
                     }
                 }
             },

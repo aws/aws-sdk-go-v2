@@ -508,6 +508,27 @@ func TestCheckResponseSnapshot_DeleteTableReplication(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DisassociateTableReplication(t *testing.T) {
+	want := &DisassociateTableReplicationOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DisassociateTableReplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociateTableReplication(context.Background(), &DisassociateTableReplicationInput{
+		TableArn: ptr.String("__TableArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateTableReplication.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetNamespace(t *testing.T) {
 	want := &GetNamespaceOutput{
 		Namespace: []string{

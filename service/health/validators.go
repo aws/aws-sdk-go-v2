@@ -226,6 +226,55 @@ func addOpDescribeEventDetailsValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpDescribeEventDetails{}, middleware.After)
 }
 
+func validateConfigureTagsForOrganizationTagKeyList(v []types.TagKeyForOrganization) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigureTagsForOrganizationTagKeyList"}
+	for i := range v {
+		if err := validateTagKeyForOrganization(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfigureTagsRequestTagKeyList(v []types.ConfigureTagsTagKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigureTagsRequestTagKeyList"}
+	for i := range v {
+		if err := validateConfigureTagsTagKey(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfigureTagsTagKey(v *types.ConfigureTagsTagKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigureTagsTagKey"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEntityAccountFilter(v *types.EntityAccountFilter) error {
 	if v == nil {
 		return nil
@@ -322,6 +371,21 @@ func validateOrganizationEventDetailFiltersList(v []types.EventAccountFilter) er
 	}
 }
 
+func validateTagKeyForOrganization(v *types.TagKeyForOrganization) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagKeyForOrganization"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpConfigureTagsForOrganizationInput(v *ConfigureTagsForOrganizationInput) error {
 	if v == nil {
 		return nil
@@ -329,6 +393,10 @@ func validateOpConfigureTagsForOrganizationInput(v *ConfigureTagsForOrganization
 	invalidParams := smithy.InvalidParamsError{Context: "ConfigureTagsForOrganizationInput"}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	} else if v.TagKeys != nil {
+		if err := validateConfigureTagsForOrganizationTagKeyList(v.TagKeys); err != nil {
+			invalidParams.AddNested("TagKeys", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -344,6 +412,10 @@ func validateOpConfigureTagsInput(v *ConfigureTagsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ConfigureTagsInput"}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	} else if v.TagKeys != nil {
+		if err := validateConfigureTagsRequestTagKeyList(v.TagKeys); err != nil {
+			invalidParams.AddNested("TagKeys", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

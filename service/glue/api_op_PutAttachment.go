@@ -45,14 +45,12 @@ type PutAttachmentInput struct {
 	// This member is required.
 	Content *string
 
-	// The identifier of the form type for this attachment.
-	//
-	// This member is required.
-	FormTypeId *string
-
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
+	// The identifier of the form type for this attachment. This field is required.
+	FormTypeIdentifier *string
 
 	// The identifier of the item within the iterable form. Required when
 	// iterableFormName is specified.
@@ -85,8 +83,8 @@ func (v *PutAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Content != nil {
 		s.WriteString(schemas.PutAttachmentRequest_Content, *v.Content)
 	}
-	if v.FormTypeId != nil {
-		s.WriteString(schemas.PutAttachmentRequest_FormTypeId, *v.FormTypeId)
+	if v.FormTypeIdentifier != nil {
+		s.WriteString(schemas.PutAttachmentRequest_FormTypeIdentifier, *v.FormTypeIdentifier)
 	}
 	if v.ItemIdentifier != nil {
 		s.WriteString(schemas.PutAttachmentRequest_ItemIdentifier, *v.ItemIdentifier)
@@ -99,7 +97,7 @@ func (v *PutAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 type PutAttachmentOutput struct {
 
 	// The unique identifier of the asset.
-	AssetIdentifier *string
+	AssetId *string
 
 	// The name of the attachment.
 	AttachmentName *string
@@ -108,7 +106,7 @@ type PutAttachmentOutput struct {
 	FormTypeId *string
 
 	// The identifier of the item within the iterable form, if applicable.
-	ItemIdentifier *string
+	ItemId *string
 
 	// The name of the iterable form, if the attachment targets an item.
 	IterableFormName *string
@@ -126,8 +124,8 @@ func (v *PutAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetIdentifier != nil {
-		s.WriteString(schemas.PutAttachmentResponse_AssetIdentifier, *v.AssetIdentifier)
+	if v.AssetId != nil {
+		s.WriteString(schemas.PutAttachmentResponse_AssetId, *v.AssetId)
 	}
 	if v.AttachmentName != nil {
 		s.WriteString(schemas.PutAttachmentResponse_AttachmentName, *v.AttachmentName)
@@ -135,8 +133,8 @@ func (v *PutAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FormTypeId != nil {
 		s.WriteString(schemas.PutAttachmentResponse_FormTypeId, *v.FormTypeId)
 	}
-	if v.ItemIdentifier != nil {
-		s.WriteString(schemas.PutAttachmentResponse_ItemIdentifier, *v.ItemIdentifier)
+	if v.ItemId != nil {
+		s.WriteString(schemas.PutAttachmentResponse_ItemId, *v.ItemId)
 	}
 	if v.IterableFormName != nil {
 		s.WriteString(schemas.PutAttachmentResponse_IterableFormName, *v.IterableFormName)
@@ -145,18 +143,18 @@ func (v *PutAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *PutAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutAttachmentResponse, func(s *smithy.Schema) error {
 		switch s {
-		case schemas.PutAttachmentResponse_AssetIdentifier:
-			v.AssetIdentifier = new(string)
-			return d.ReadString(schemas.PutAttachmentResponse_AssetIdentifier, v.AssetIdentifier)
+		case schemas.PutAttachmentResponse_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.PutAttachmentResponse_AssetId, v.AssetId)
 		case schemas.PutAttachmentResponse_AttachmentName:
 			v.AttachmentName = new(string)
 			return d.ReadString(schemas.PutAttachmentResponse_AttachmentName, v.AttachmentName)
 		case schemas.PutAttachmentResponse_FormTypeId:
 			v.FormTypeId = new(string)
 			return d.ReadString(schemas.PutAttachmentResponse_FormTypeId, v.FormTypeId)
-		case schemas.PutAttachmentResponse_ItemIdentifier:
-			v.ItemIdentifier = new(string)
-			return d.ReadString(schemas.PutAttachmentResponse_ItemIdentifier, v.ItemIdentifier)
+		case schemas.PutAttachmentResponse_ItemId:
+			v.ItemId = new(string)
+			return d.ReadString(schemas.PutAttachmentResponse_ItemId, v.ItemId)
 		case schemas.PutAttachmentResponse_IterableFormName:
 			v.IterableFormName = new(string)
 			return d.ReadString(schemas.PutAttachmentResponse_IterableFormName, v.IterableFormName)

@@ -1,0 +1,5 @@
+POST /api-inventory
+
+Content-Type: application/json
+
+{"filters":{"discoverySource":"API_GATEWAY","resourceArn":"__ResourceArn__"},"maxResults":1,"nextToken":"__NextToken__"}

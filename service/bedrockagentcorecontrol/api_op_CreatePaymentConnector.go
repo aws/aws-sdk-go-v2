@@ -32,13 +32,6 @@ func (c *Client) CreatePaymentConnector(ctx context.Context, params *CreatePayme
 
 type CreatePaymentConnectorInput struct {
 
-	// The credential provider configurations for the payment connector. These
-	// configurations specify how the connector authenticates with the payment
-	// provider.
-	//
-	// This member is required.
-	CredentialProviderConfigurations []types.CredentialsProviderConfiguration
-
 	// The name of the payment connector.
 	//
 	// This member is required.
@@ -62,6 +55,16 @@ type CreatePaymentConnectorInput struct {
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
+
+	// The credential provider configurations for the payment connector. These
+	// configurations specify how the connector authenticates with the payment
+	// provider.
+	//
+	// For an AwsBilling payment connector, omit this parameter or specify an empty
+	// list. The service uses the AWS Marketplace service-linked role in your account,
+	// which must exist before you create the connector, and you must have permission
+	// to call iam:GetRole on it.
+	CredentialProviderConfigurations []types.CredentialsProviderConfiguration
 
 	// A description of the payment connector.
 	Description *string

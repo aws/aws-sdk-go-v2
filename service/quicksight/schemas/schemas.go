@@ -22,6 +22,13 @@ var BatchDeleteKnowledgeBase = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/accounts/{AwsAccountId}/knowledge-bases/batch-delete",
 	Code: 202})
 
+var BatchDeletePolicyAssignmentByPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchDeletePolicyAssignmentByPolicy",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/governance-policy-mgmt/accounts/{AccountId}/policy-assignments/batch-delete",
+	Code: 200})
+
 var BatchDeleteTopicReviewedAnswer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "BatchDeleteTopicReviewedAnswer",
@@ -36,12 +43,33 @@ var BatchDescribeUserLimits = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/governance/limits/accounts/{accountId}/user-limits",
 	Code: 200})
 
+var BatchPutPolicyAssignmentByPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchPutPolicyAssignmentByPolicy",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/governance-policy-mgmt/accounts/{AccountId}/policy-assignments/batch-put",
+	Code: 200})
+
 var CancelIngestion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "CancelIngestion",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/accounts/{AwsAccountId}/data-sets/{DataSetId}/ingestions/{IngestionId}",
 	Code: 200})
+
+var CreateAccessControlApplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "CreateAccessControlApplication",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/accounts/{AwsAccountId}/access-control-applications",
+	Code: 201})
+
+var CreateAccessControlApplicationSecret = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "CreateAccessControlApplicationSecret",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/accounts/{AwsAccountId}/access-control-applications/{ApplicationId}/client-secrets",
+	Code: 201})
 
 var CreateAccountCustomization = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -169,6 +197,13 @@ var CreateIAMPolicyAssignment = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments",
 	Code: 200})
 
+var CreateInboundConnector = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "CreateInboundConnector",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/accounts/{AwsAccountId}/inbound-connectors",
+	Code: 201})
+
 var CreateIngestion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "CreateIngestion",
@@ -182,6 +217,13 @@ var CreateKnowledgeBase = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/accounts/{AwsAccountId}/knowledge-bases",
 	Code: 202})
+
+var CreateKnowledgeBaseRefreshSchedule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "CreateKnowledgeBaseRefreshSchedule",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/kb-refresh-schedules",
+	Code: 201})
 
 var CreateLimitsProfile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -279,6 +321,20 @@ var CreateVPCConnection = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateVPCConnection",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AwsAccountId}/vpc-connections",
+	Code: 200})
+
+var DeleteAccessControlApplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeleteAccessControlApplication",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/accounts/{AwsAccountId}/access-control-applications",
+	Code: 200})
+
+var DeleteAccessControlApplicationSecret = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeleteAccessControlApplicationSecret",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/accounts/{AwsAccountId}/access-control-applications/{ApplicationId}/client-secrets/{ClientSecretId}",
 	Code: 200})
 
 var DeleteAccountCustomization = smithy.NewSchema(smithy.ShapeID{
@@ -449,12 +505,26 @@ var DeleteIdentityPropagationConfig = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/accounts/{AwsAccountId}/identity-propagation-config/{Service}",
 	Code: 200})
 
+var DeleteInboundConnector = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeleteInboundConnector",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/accounts/{AwsAccountId}/inbound-connectors/{InboundConnectorId}",
+	Code: 200})
+
 var DeleteKnowledgeBase = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "DeleteKnowledgeBase",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}",
 	Code: 202})
+
+var DeleteKnowledgeBaseRefreshSchedule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeleteKnowledgeBaseRefreshSchedule",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/kb-refresh-schedules/{ScheduleId}",
+	Code: 200})
 
 var DeleteLimitsProfile = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -475,6 +545,13 @@ var DeleteOAuthClientApplication = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteOAuthClientApplication",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/accounts/{AwsAccountId}/oauth-client-applications/{OAuthClientApplicationId}",
+	Code: 200})
+
+var DeletePolicyAssignment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeletePolicyAssignment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/governance-policy-mgmt/accounts/{AccountId}/policy-assignments",
 	Code: 200})
 
 var DeleteRefreshSchedule = smithy.NewSchema(smithy.ShapeID{
@@ -580,6 +657,13 @@ var DeleteVPCConnection = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DeleteVPCConnection",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/accounts/{AwsAccountId}/vpc-connections/{VPCConnectionId}",
+	Code: 200})
+
+var DescribeAccessControlApplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DescribeAccessControlApplication",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/accounts/{AwsAccountId}/access-control-applications/{ApplicationId}",
 	Code: 200})
 
 var DescribeAccountCustomization = smithy.NewSchema(smithy.ShapeID{
@@ -869,6 +953,13 @@ var DescribeIAMPolicyAssignment = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments/{AssignmentName}",
 	Code: 200})
 
+var DescribeInboundConnector = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DescribeInboundConnector",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/accounts/{AwsAccountId}/inbound-connectors/{InboundConnectorId}",
+	Code: 200})
+
 var DescribeIngestion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "DescribeIngestion",
@@ -902,6 +993,13 @@ var DescribeKnowledgeBasePermissions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescribeKnowledgeBasePermissions",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/permissions",
+	Code: 200})
+
+var DescribeKnowledgeBaseRefreshSchedule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DescribeKnowledgeBaseRefreshSchedule",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/kb-refresh-schedules/{ScheduleId}",
 	Code: 200})
 
 var DescribeLimitsProfile = smithy.NewSchema(smithy.ShapeID{
@@ -1135,11 +1233,25 @@ var GetIdentityContext = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/accounts/{AwsAccountId}/identity-context",
 	Code: 200})
 
+var GetPolicyAssignment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "GetPolicyAssignment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/governance-policy-mgmt/accounts/{AccountId}/policy-assignments",
+	Code: 200})
+
 var GetSessionEmbedUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "GetSessionEmbedUrl",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AwsAccountId}/session-embed-url",
+	Code: 200})
+
+var ListAccessControlApplications = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListAccessControlApplications",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/accounts/{AwsAccountId}/access-control-applications",
 	Code: 200})
 
 var ListActionConnectors = smithy.NewSchema(smithy.ShapeID{
@@ -1303,11 +1415,32 @@ var ListIdentityPropagationConfigs = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/accounts/{AwsAccountId}/identity-propagation-config",
 	Code: 200})
 
+var ListInboundConnectorApplicationAssociations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListInboundConnectorApplicationAssociations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/accounts/{AwsAccountId}/inbound-connectors/{InboundConnectorId}/associations",
+	Code: 200})
+
+var ListInboundConnectors = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListInboundConnectors",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/accounts/{AwsAccountId}/inbound-connectors",
+	Code: 200})
+
 var ListIngestions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ListIngestions",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AwsAccountId}/data-sets/{DataSetId}/ingestions",
+	Code: 200})
+
+var ListKnowledgeBaseRefreshSchedules = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListKnowledgeBaseRefreshSchedules",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/kb-refresh-schedules",
 	Code: 200})
 
 var ListKnowledgeBases = smithy.NewSchema(smithy.ShapeID{
@@ -1336,6 +1469,13 @@ var ListOAuthClientApplications = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListOAuthClientApplications",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AwsAccountId}/oauth-client-applications",
+	Code: 200})
+
+var ListPrincipalsForPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListPrincipalsForPolicy",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/governance-policy-mgmt/accounts/{AccountId}/policy-assignments/by-policy",
 	Code: 200})
 
 var ListRefreshSchedules = smithy.NewSchema(smithy.ShapeID{
@@ -1490,6 +1630,13 @@ var PutDataSetRefreshProperties = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PutDataSetRefreshProperties",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-properties",
+	Code: 200})
+
+var PutPolicyAssignment = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "PutPolicyAssignment",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/governance-policy-mgmt/accounts/{AccountId}/policy-assignments",
 	Code: 200})
 
 var RegisterUser = smithy.NewSchema(smithy.ShapeID{
@@ -1651,6 +1798,20 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UntagResource",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/resources/{ResourceArn}/tags",
+	Code: 200})
+
+var UpdateAccessControlApplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateAccessControlApplication",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/accounts/{AwsAccountId}/access-control-applications/{ApplicationId}",
+	Code: 200})
+
+var UpdateAccessControlApplicationSecret = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateAccessControlApplicationSecret",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/accounts/{AwsAccountId}/access-control-applications/{ApplicationId}/client-secrets/{ClientSecretId}",
 	Code: 200})
 
 var UpdateAccountCustomization = smithy.NewSchema(smithy.ShapeID{
@@ -1891,6 +2052,20 @@ var UpdateIdentityPropagationConfig = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/accounts/{AwsAccountId}/identity-propagation-config/{Service}",
 	Code: 200})
 
+var UpdateInboundConnector = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateInboundConnector",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/accounts/{AwsAccountId}/inbound-connectors/{InboundConnectorId}",
+	Code: 200})
+
+var UpdateInboundConnectorApplicationAssociations = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateInboundConnectorApplicationAssociations",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/accounts/{AwsAccountId}/inbound-connectors/{InboundConnectorId}/associations",
+	Code: 200})
+
 var UpdateIpRestriction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "UpdateIpRestriction",
@@ -1917,6 +2092,13 @@ var UpdateKnowledgeBasePermissions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateKnowledgeBasePermissions",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/permissions",
+	Code: 200})
+
+var UpdateKnowledgeBaseRefreshSchedule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateKnowledgeBaseRefreshSchedule",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/v1/accounts/{AwsAccountId}/knowledge-bases/{KnowledgeBaseId}/kb-refresh-schedules/{ScheduleId}",
 	Code: 200})
 
 var UpdateLimitsProfile = smithy.NewSchema(smithy.ShapeID{
@@ -2121,6 +2303,94 @@ var _QuickSight_20180401 = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeService, 0)
 
 var QuickSight_20180401 = smithy.NewServiceSchema(_QuickSight_20180401, "2018-04-01")
+
+var AccessControlApplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "AccessControlApplication",
+}, smithy.ShapeTypeStructure, 13)
+var AccessControlApplication_ApplicationId *smithy.Schema
+
+var AccessControlApplication_Arn *smithy.Schema
+
+var AccessControlApplication_Name *smithy.Schema
+
+var AccessControlApplication_Namespace *smithy.Schema
+
+var AccessControlApplication_AuthenticationType *smithy.Schema
+
+var AccessControlApplication_Status *smithy.Schema
+
+var AccessControlApplication_CreatedTime *smithy.Schema
+
+var AccessControlApplication_LastUpdatedTime *smithy.Schema
+
+var AccessControlApplication_TenantUrl *smithy.Schema
+
+var AccessControlApplication_Description *smithy.Schema
+
+var AccessControlApplication_IdcApplicationArn *smithy.Schema
+
+var AccessControlApplication_IdpAuthorizingConfiguration *smithy.Schema
+
+var AccessControlApplication_QuickAuthenticationConfiguration *smithy.Schema
+
+var AccessControlApplicationAuthenticationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "AccessControlApplicationAuthenticationType",
+}, smithy.ShapeTypeEnum, 1)
+var AccessControlApplicationAuthenticationType_OIDC *smithy.Schema
+
+var _AccessControlApplicationDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "AccessControlApplicationDescription",
+}, smithy.ShapeTypeString, 0)
+
+var _AccessControlApplicationSecretManagerArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "AccessControlApplicationSecretManagerArn",
+}, smithy.ShapeTypeString, 0)
+
+var AccessControlApplicationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "AccessControlApplicationStatus",
+}, smithy.ShapeTypeEnum, 2)
+var AccessControlApplicationStatus_ENABLED *smithy.Schema
+
+var AccessControlApplicationStatus_DISABLED *smithy.Schema
+
+var AccessControlApplicationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "AccessControlApplicationSummary",
+}, smithy.ShapeTypeStructure, 12)
+var AccessControlApplicationSummary_ApplicationId *smithy.Schema
+
+var AccessControlApplicationSummary_Arn *smithy.Schema
+
+var AccessControlApplicationSummary_Name *smithy.Schema
+
+var AccessControlApplicationSummary_Namespace *smithy.Schema
+
+var AccessControlApplicationSummary_AuthenticationType *smithy.Schema
+
+var AccessControlApplicationSummary_Status *smithy.Schema
+
+var AccessControlApplicationSummary_CreatedTime *smithy.Schema
+
+var AccessControlApplicationSummary_LastUpdatedTime *smithy.Schema
+
+var AccessControlApplicationSummary_TenantUrl *smithy.Schema
+
+var AccessControlApplicationSummary_IdpAuthorizingConfiguration *smithy.Schema
+
+var AccessControlApplicationSummary_QuickAuthenticationConfiguration *smithy.Schema
+
+var AccessControlApplicationSummary_Description *smithy.Schema
+
+var _AccessControlApplicationSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "AccessControlApplicationSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _AccessControlApplicationSummaryList_member *smithy.Schema
 
 var AccessControlConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -4291,12 +4561,14 @@ var AssetOptions_VisualMessages *smithy.Schema
 var AssetType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "AssetType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var AssetType_AGENT *smithy.Schema
 
 var AssetType_SPACE *smithy.Schema
 
 var AssetType_KNOWLEDGE_BASE *smithy.Schema
+
+var AssetType_FLOW *smithy.Schema
 
 var _AssetTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -4550,6 +4822,17 @@ var AwsIotAnalyticsParameters = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AwsIotAnalyticsParameters",
 }, smithy.ShapeTypeStructure, 1)
 var AwsIotAnalyticsParameters_DataSetName *smithy.Schema
+
+var _AwsRegion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "AwsRegion",
+}, smithy.ShapeTypeString, 0)
+
+var _AwsRegionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "AwsRegionList",
+}, smithy.ShapeTypeList, 1)
+var _AwsRegionList_member *smithy.Schema
 
 var AxisBinding = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -4858,6 +5141,40 @@ var _BatchDeleteKnowledgeBaseSuccessList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _BatchDeleteKnowledgeBaseSuccessList_member *smithy.Schema
 
+var _BatchDeletePolicyAssignmentByPolicyRequestPrincipalArnsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchDeletePolicyAssignmentByPolicyRequestPrincipalArnsList",
+}, smithy.ShapeTypeList, 1)
+var _BatchDeletePolicyAssignmentByPolicyRequestPrincipalArnsList_member *smithy.Schema
+
+var BatchDeletePolicyAssignmentError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchDeletePolicyAssignmentError",
+}, smithy.ShapeTypeStructure, 3)
+var BatchDeletePolicyAssignmentError_PrincipalArn *smithy.Schema
+
+var BatchDeletePolicyAssignmentError_ErrorCode *smithy.Schema
+
+var BatchDeletePolicyAssignmentError_ErrorMessage *smithy.Schema
+
+var _BatchDeletePolicyAssignmentErrorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchDeletePolicyAssignmentErrorList",
+}, smithy.ShapeTypeList, 1)
+var _BatchDeletePolicyAssignmentErrorList_member *smithy.Schema
+
+var BatchDeletePolicyAssignmentSuccess = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchDeletePolicyAssignmentSuccess",
+}, smithy.ShapeTypeStructure, 1)
+var BatchDeletePolicyAssignmentSuccess_PrincipalArn *smithy.Schema
+
+var _BatchDeletePolicyAssignmentSuccessList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchDeletePolicyAssignmentSuccessList",
+}, smithy.ShapeTypeList, 1)
+var _BatchDeletePolicyAssignmentSuccessList_member *smithy.Schema
+
 var BatchDescribeUserLimitsError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "BatchDescribeUserLimitsError",
@@ -4883,6 +5200,44 @@ var _BatchDescribeUserLimitsRequestUsersList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BatchDescribeUserLimitsRequestUsersList",
 }, smithy.ShapeTypeList, 1)
 var _BatchDescribeUserLimitsRequestUsersList_member *smithy.Schema
+
+var _BatchPutPolicyAssignmentByPolicyRequestAssignmentsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchPutPolicyAssignmentByPolicyRequestAssignmentsList",
+}, smithy.ShapeTypeList, 1)
+var _BatchPutPolicyAssignmentByPolicyRequestAssignmentsList_member *smithy.Schema
+
+var BatchPutPolicyAssignmentError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchPutPolicyAssignmentError",
+}, smithy.ShapeTypeStructure, 3)
+var BatchPutPolicyAssignmentError_PrincipalArn *smithy.Schema
+
+var BatchPutPolicyAssignmentError_ErrorCode *smithy.Schema
+
+var BatchPutPolicyAssignmentError_ErrorMessage *smithy.Schema
+
+var _BatchPutPolicyAssignmentErrorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchPutPolicyAssignmentErrorList",
+}, smithy.ShapeTypeList, 1)
+var _BatchPutPolicyAssignmentErrorList_member *smithy.Schema
+
+var BatchPutPolicyAssignmentSuccess = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchPutPolicyAssignmentSuccess",
+}, smithy.ShapeTypeStructure, 3)
+var BatchPutPolicyAssignmentSuccess_PrincipalArn *smithy.Schema
+
+var BatchPutPolicyAssignmentSuccess_ReplacedPolicyArn *smithy.Schema
+
+var BatchPutPolicyAssignmentSuccess_Revision *smithy.Schema
+
+var _BatchPutPolicyAssignmentSuccessList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchPutPolicyAssignmentSuccessList",
+}, smithy.ShapeTypeList, 1)
+var _BatchPutPolicyAssignmentSuccessList_member *smithy.Schema
 
 var BigQueryParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -5324,7 +5679,7 @@ var CalculatedMeasureField_Expression *smithy.Schema
 var Capabilities = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "Capabilities",
-}, smithy.ShapeTypeStructure, 575)
+}, smithy.ShapeTypeStructure, 578)
 var Capabilities_ExportToCsv *smithy.Schema
 
 var Capabilities_ExportToExcel *smithy.Schema
@@ -5718,6 +6073,12 @@ var Capabilities_CreateAndUpdateMCPAction *smithy.Schema
 var Capabilities_ShareMCPAction *smithy.Schema
 
 var Capabilities_UseMCPAction *smithy.Schema
+
+var Capabilities_LocalMCPAction *smithy.Schema
+
+var Capabilities_CreateAndUpdateLocalMCPAction *smithy.Schema
+
+var Capabilities_UseLocalMCPAction *smithy.Schema
 
 var Capabilities_OpenAPIAction *smithy.Schema
 
@@ -6757,6 +7118,26 @@ var _ClientSecret = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ClientSecret",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+
+var ClientSecretConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ClientSecretConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var ClientSecretConfiguration_ClientSecretSourceType *smithy.Schema
+
+var ClientSecretConfiguration_ClientSecretConfigurationDetail *smithy.Schema
+
+var ClientSecretConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ClientSecretConfigurationDetail",
+}, smithy.ShapeTypeUnion, 1)
+var ClientSecretConfigurationDetail_Idp *smithy.Schema
+
+var ClientSecretSourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ClientSecretSourceType",
+}, smithy.ShapeTypeEnum, 1)
+var ClientSecretSourceType_IDP_PROVIDED *smithy.Schema
 
 var _ClusterId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -8730,7 +9111,7 @@ var DataQnAConfigurations_Enabled *smithy.Schema
 var DataSet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "DataSet",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var DataSet_Arn *smithy.Schema
 
 var DataSet_DataSetId *smithy.Schema
@@ -8772,6 +9153,8 @@ var DataSet_UseAs *smithy.Schema
 var DataSet_DataPrepConfiguration *smithy.Schema
 
 var DataSet_SemanticModelConfiguration *smithy.Schema
+
+var DataSet_UnmaterializedCalculatedColumns *smithy.Schema
 
 var _DataSetArnsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -10659,6 +11042,70 @@ var _Expression = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Expression",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
+var ExternalIdpConfidentialAuthCodeAuthorizingConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ExternalIdpConfidentialAuthCodeAuthorizingConfig",
+}, smithy.ShapeTypeStructure, 3)
+var ExternalIdpConfidentialAuthCodeAuthorizingConfig_ClientId *smithy.Schema
+
+var ExternalIdpConfidentialAuthCodeAuthorizingConfig_IssuerUrl *smithy.Schema
+
+var ExternalIdpConfidentialAuthCodeAuthorizingConfig_ClientSecrets *smithy.Schema
+
+var ExternalIdpConfidentialAuthCodeAuthorizingConfigInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ExternalIdpConfidentialAuthCodeAuthorizingConfigInput",
+}, smithy.ShapeTypeStructure, 3)
+var ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_ClientId *smithy.Schema
+
+var ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_IssuerUrl *smithy.Schema
+
+var ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_ClientSecret *smithy.Schema
+
+var ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary",
+}, smithy.ShapeTypeStructure, 2)
+var ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary_ClientId *smithy.Schema
+
+var ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary_IssuerUrl *smithy.Schema
+
+var ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput",
+}, smithy.ShapeTypeStructure, 2)
+var ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput_ClientId *smithy.Schema
+
+var ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput_IssuerUrl *smithy.Schema
+
+var ExternalIdpConfidentialClientSecret = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ExternalIdpConfidentialClientSecret",
+}, smithy.ShapeTypeStructure, 5)
+var ExternalIdpConfidentialClientSecret_ClientSecretId *smithy.Schema
+
+var ExternalIdpConfidentialClientSecret_RegionalSecretManagerArns *smithy.Schema
+
+var ExternalIdpConfidentialClientSecret_CreatedAt *smithy.Schema
+
+var ExternalIdpConfidentialClientSecret_UpdatedAt *smithy.Schema
+
+var ExternalIdpConfidentialClientSecret_Description *smithy.Schema
+
+var _ExternalIdpConfidentialClientSecretList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ExternalIdpConfidentialClientSecretList",
+}, smithy.ShapeTypeList, 1)
+var _ExternalIdpConfidentialClientSecretList_member *smithy.Schema
+
+var ExternalIdpPublicAuthCodeAuthorizingConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ExternalIdpPublicAuthCodeAuthorizingConfig",
+}, smithy.ShapeTypeStructure, 2)
+var ExternalIdpPublicAuthCodeAuthorizingConfig_ClientId *smithy.Schema
+
+var ExternalIdpPublicAuthCodeAuthorizingConfig_IssuerUrl *smithy.Schema
+
 var _FailedKeyRegistrationEntries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "FailedKeyRegistrationEntries",
@@ -10708,6 +11155,11 @@ var _FailedToUpdateAssociationList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FailedToUpdateAssociationList",
 }, smithy.ShapeTypeList, 1)
 var _FailedToUpdateAssociationList_member *smithy.Schema
+
+var _FederatedCatalog = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "FederatedCatalog",
+}, smithy.ShapeTypeString, 0)
 
 var FieldBarSeriesItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -12546,6 +12998,11 @@ var GeospatialWindowOptions_Bounds *smithy.Schema
 
 var GeospatialWindowOptions_MapZoomMode *smithy.Schema
 
+var _GetPolicyAssignmentResponsePolicyNameString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "GetPolicyAssignmentResponsePolicyNameString",
+}, smithy.ShapeTypeString, 0)
+
 var GlobalTableBorderOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "GlobalTableBorderOptions",
@@ -12574,8 +13031,10 @@ var _GovernanceCategoryName = smithy.NewSchema(smithy.ShapeID{
 var GovernedAction = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "GovernedAction",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var GovernedAction_SHARE *smithy.Schema
+
+var GovernedAction_PUBLISH *smithy.Schema
 
 var _GovernedActionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -13258,6 +13717,17 @@ var _IconId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "IconId",
 }, smithy.ShapeTypeString, 0)
 
+var _IdcTrustedTokenIssuerArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "IdcTrustedTokenIssuerArn",
+}, smithy.ShapeTypeString, 0)
+
+var IdcTrustedTokenIssuerConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "IdcTrustedTokenIssuerConfig",
+}, smithy.ShapeTypeStructure, 1)
+var IdcTrustedTokenIssuerConfig_IdcTrustedTokenIssuerArn *smithy.Schema
+
 var Identifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "Identifier",
@@ -13318,6 +13788,96 @@ var IdentityTypeNotSupportedException = smithy.NewSchema(smithy.ShapeID{
 var IdentityTypeNotSupportedException_Message *smithy.Schema
 
 var IdentityTypeNotSupportedException_RequestId *smithy.Schema
+
+var IdpAuthorizingConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "IdpAuthorizingConfig",
+}, smithy.ShapeTypeStructure, 3)
+var IdpAuthorizingConfig_IdpAuthorizingType *smithy.Schema
+
+var IdpAuthorizingConfig_IdpAuthorizingConfigurationDetail *smithy.Schema
+
+var IdpAuthorizingConfig_IdcTrustedTokenIssuerConfiguration *smithy.Schema
+
+var IdpAuthorizingConfigInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "IdpAuthorizingConfigInput",
+}, smithy.ShapeTypeStructure, 3)
+var IdpAuthorizingConfigInput_IdpAuthorizingType *smithy.Schema
+
+var IdpAuthorizingConfigInput_IdpAuthorizingConfigurationDetailInput *smithy.Schema
+
+var IdpAuthorizingConfigInput_IdcTrustedTokenIssuerConfiguration *smithy.Schema
+
+var IdpAuthorizingConfigSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "IdpAuthorizingConfigSummary",
+}, smithy.ShapeTypeStructure, 3)
+var IdpAuthorizingConfigSummary_IdpAuthorizingType *smithy.Schema
+
+var IdpAuthorizingConfigSummary_IdpAuthorizingConfigurationSummaryDetail *smithy.Schema
+
+var IdpAuthorizingConfigSummary_IdcTrustedTokenIssuerConfiguration *smithy.Schema
+
+var IdpAuthorizingConfigUpdateInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "IdpAuthorizingConfigUpdateInput",
+}, smithy.ShapeTypeStructure, 3)
+var IdpAuthorizingConfigUpdateInput_IdpAuthorizingType *smithy.Schema
+
+var IdpAuthorizingConfigUpdateInput_IdpAuthorizingConfigurationDetailInput *smithy.Schema
+
+var IdpAuthorizingConfigUpdateInput_IdcTrustedTokenIssuerConfiguration *smithy.Schema
+
+var IdpAuthorizingConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "IdpAuthorizingConfigurationDetail",
+}, smithy.ShapeTypeUnion, 2)
+var IdpAuthorizingConfigurationDetail_ExternalIdpPublicAuthCode *smithy.Schema
+
+var IdpAuthorizingConfigurationDetail_ExternalIdpConfidentialAuthCode *smithy.Schema
+
+var IdpAuthorizingConfigurationDetailInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "IdpAuthorizingConfigurationDetailInput",
+}, smithy.ShapeTypeUnion, 2)
+var IdpAuthorizingConfigurationDetailInput_ExternalIdpPublicAuthCode *smithy.Schema
+
+var IdpAuthorizingConfigurationDetailInput_ExternalIdpConfidentialAuthCode *smithy.Schema
+
+var IdpAuthorizingConfigurationDetailUpdateInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "IdpAuthorizingConfigurationDetailUpdateInput",
+}, smithy.ShapeTypeUnion, 2)
+var IdpAuthorizingConfigurationDetailUpdateInput_ExternalIdpPublicAuthCode *smithy.Schema
+
+var IdpAuthorizingConfigurationDetailUpdateInput_ExternalIdpConfidentialAuthCode *smithy.Schema
+
+var IdpAuthorizingConfigurationSummaryDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "IdpAuthorizingConfigurationSummaryDetail",
+}, smithy.ShapeTypeUnion, 2)
+var IdpAuthorizingConfigurationSummaryDetail_ExternalIdpPublicAuthCode *smithy.Schema
+
+var IdpAuthorizingConfigurationSummaryDetail_ExternalIdpConfidentialAuthCode *smithy.Schema
+
+var IdpAuthorizingType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "IdpAuthorizingType",
+}, smithy.ShapeTypeEnum, 4)
+var IdpAuthorizingType_EXTERNAL_IDP_PUBLIC_AUTH_CODE *smithy.Schema
+
+var IdpAuthorizingType_EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE *smithy.Schema
+
+var IdpAuthorizingType_QUICK_MANAGED_AUTH_CODE *smithy.Schema
+
+var IdpAuthorizingType_IDC_AUTH_CODE *smithy.Schema
+
+var IdpClientSecretInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "IdpClientSecretInput",
+}, smithy.ShapeTypeStructure, 1)
+var IdpClientSecretInput_RegionalSecretManagerArns *smithy.Schema
 
 var Image = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -13467,6 +14027,107 @@ var ImportTableOperationSource = smithy.NewSchema(smithy.ShapeID{
 var ImportTableOperationSource_SourceTableId *smithy.Schema
 
 var ImportTableOperationSource_ColumnIdMappings *smithy.Schema
+
+var InboundConnector = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "InboundConnector",
+}, smithy.ShapeTypeStructure, 9)
+var InboundConnector_InboundConnectorId *smithy.Schema
+
+var InboundConnector_Arn *smithy.Schema
+
+var InboundConnector_Name *smithy.Schema
+
+var InboundConnector_Status *smithy.Schema
+
+var InboundConnector_TenantUrl *smithy.Schema
+
+var InboundConnector_CreatedTime *smithy.Schema
+
+var InboundConnector_LastUpdatedTime *smithy.Schema
+
+var InboundConnector_InboundConnectorConfiguration *smithy.Schema
+
+var InboundConnector_Description *smithy.Schema
+
+var InboundConnectorApplicationAssociationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "InboundConnectorApplicationAssociationSummary",
+}, smithy.ShapeTypeStructure, 2)
+var InboundConnectorApplicationAssociationSummary_AccessControlApplicationArn *smithy.Schema
+
+var InboundConnectorApplicationAssociationSummary_CreatedTime *smithy.Schema
+
+var _InboundConnectorApplicationAssociationSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "InboundConnectorApplicationAssociationSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _InboundConnectorApplicationAssociationSummaryList_member *smithy.Schema
+
+var _InboundConnectorAssociationArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "InboundConnectorAssociationArnList",
+}, smithy.ShapeTypeList, 1)
+var _InboundConnectorAssociationArnList_member *smithy.Schema
+
+var InboundConnectorConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "InboundConnectorConfig",
+}, smithy.ShapeTypeStructure, 1)
+var InboundConnectorConfig_InboundConnectorType *smithy.Schema
+
+var _InboundConnectorDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "InboundConnectorDescription",
+}, smithy.ShapeTypeString, 0)
+
+var InboundConnectorStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "InboundConnectorStatus",
+}, smithy.ShapeTypeEnum, 2)
+var InboundConnectorStatus_ENABLED *smithy.Schema
+
+var InboundConnectorStatus_DISABLED *smithy.Schema
+
+var InboundConnectorSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "InboundConnectorSummary",
+}, smithy.ShapeTypeStructure, 9)
+var InboundConnectorSummary_InboundConnectorId *smithy.Schema
+
+var InboundConnectorSummary_Arn *smithy.Schema
+
+var InboundConnectorSummary_Name *smithy.Schema
+
+var InboundConnectorSummary_Status *smithy.Schema
+
+var InboundConnectorSummary_CreatedTime *smithy.Schema
+
+var InboundConnectorSummary_LastUpdatedTime *smithy.Schema
+
+var InboundConnectorSummary_TenantUrl *smithy.Schema
+
+var InboundConnectorSummary_InboundConnectorConfiguration *smithy.Schema
+
+var InboundConnectorSummary_Description *smithy.Schema
+
+var _InboundConnectorSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "InboundConnectorSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _InboundConnectorSummaryList_member *smithy.Schema
+
+var InboundConnectorType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "InboundConnectorType",
+}, smithy.ShapeTypeEnum, 1)
+var InboundConnectorType_QUICK_DESKTOP *smithy.Schema
+
+var _InboundConnectorTypeFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "InboundConnectorTypeFilterList",
+}, smithy.ShapeTypeList, 1)
+var _InboundConnectorTypeFilterList_member *smithy.Schema
 
 var IncludeFolderMembers = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -14048,6 +14709,24 @@ var _KbAwsAccountId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "KbAwsAccountId",
 }, smithy.ShapeTypeString, 0)
 
+var KbDayOfWeek = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "KbDayOfWeek",
+}, smithy.ShapeTypeEnum, 7)
+var KbDayOfWeek_SUNDAY *smithy.Schema
+
+var KbDayOfWeek_MONDAY *smithy.Schema
+
+var KbDayOfWeek_TUESDAY *smithy.Schema
+
+var KbDayOfWeek_WEDNESDAY *smithy.Schema
+
+var KbDayOfWeek_THURSDAY *smithy.Schema
+
+var KbDayOfWeek_FRIDAY *smithy.Schema
+
+var KbDayOfWeek_SATURDAY *smithy.Schema
+
 var _KbIngestionId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "KbIngestionId",
@@ -14072,6 +14751,18 @@ var KbIngestionStatus_CANCELLED *smithy.Schema
 var KbIngestionStatus_CANCELLING *smithy.Schema
 
 var KbIngestionStatus_TIMEOUT *smithy.Schema
+
+var KbRefreshInterval = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "KbRefreshInterval",
+}, smithy.ShapeTypeEnum, 4)
+var KbRefreshInterval_DAILY *smithy.Schema
+
+var KbRefreshInterval_WEEKLY *smithy.Schema
+
+var KbRefreshInterval_MONTHLY *smithy.Schema
+
+var KbRefreshInterval_HOURLY *smithy.Schema
 
 var _KbTemplate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -14180,6 +14871,45 @@ var KnowledgeBaseIngestionSummary_EndTime *smithy.Schema
 var _KnowledgeBaseName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "KnowledgeBaseName",
+}, smithy.ShapeTypeString, 0)
+
+var KnowledgeBaseRefreshFrequency = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "KnowledgeBaseRefreshFrequency",
+}, smithy.ShapeTypeStructure, 2)
+var KnowledgeBaseRefreshFrequency_Interval *smithy.Schema
+
+var KnowledgeBaseRefreshFrequency_RefreshOnDay *smithy.Schema
+
+var _KnowledgeBaseRefreshScheduleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "KnowledgeBaseRefreshScheduleList",
+}, smithy.ShapeTypeList, 1)
+var _KnowledgeBaseRefreshScheduleList_member *smithy.Schema
+
+var KnowledgeBaseRefreshScheduleSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "KnowledgeBaseRefreshScheduleSummary",
+}, smithy.ShapeTypeStructure, 4)
+var KnowledgeBaseRefreshScheduleSummary_ScheduleId *smithy.Schema
+
+var KnowledgeBaseRefreshScheduleSummary_ScheduleFrequency *smithy.Schema
+
+var KnowledgeBaseRefreshScheduleSummary_StartTime *smithy.Schema
+
+var KnowledgeBaseRefreshScheduleSummary_State *smithy.Schema
+
+var KnowledgeBaseScheduleRefreshOnEntity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "KnowledgeBaseScheduleRefreshOnEntity",
+}, smithy.ShapeTypeStructure, 2)
+var KnowledgeBaseScheduleRefreshOnEntity_DayOfWeek *smithy.Schema
+
+var KnowledgeBaseScheduleRefreshOnEntity_DayOfMonth *smithy.Schema
+
+var _KnowledgeBaseScheduleRefreshOnEntityDayOfMonthString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "KnowledgeBaseScheduleRefreshOnEntityDayOfMonthString",
 }, smithy.ShapeTypeString, 0)
 
 var KnowledgeBaseSearchFilter = smithy.NewSchema(smithy.ShapeID{
@@ -14918,6 +15648,11 @@ var LinkSharingConfiguration = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var LinkSharingConfiguration_Permissions *smithy.Schema
 
+var _ListAccessControlApplicationsRequestMaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListAccessControlApplicationsRequestMaxResultsInteger",
+}, smithy.ShapeTypeInteger, 0)
+
 var _ListAgentsRequestMaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ListAgentsRequestMaxResultsInteger",
@@ -14952,10 +15687,35 @@ var _ListIdentityPropagationMaxResults = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListIdentityPropagationMaxResults",
 }, smithy.ShapeTypeInteger, 0)
 
+var _ListInboundConnectorApplicationAssociationsRequestMaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListInboundConnectorApplicationAssociationsRequestMaxResultsInteger",
+}, smithy.ShapeTypeInteger, 0)
+
+var _ListInboundConnectorsRequestMaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListInboundConnectorsRequestMaxResultsInteger",
+}, smithy.ShapeTypeInteger, 0)
+
 var _ListLimitsProfilesRequestMaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ListLimitsProfilesRequestMaxResultsInteger",
 }, smithy.ShapeTypeInteger, 0)
+
+var _ListPrincipalsForPolicyRequestMaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListPrincipalsForPolicyRequestMaxResultsInteger",
+}, smithy.ShapeTypeInteger, 0)
+
+var _ListPrincipalsForPolicyRequestNextTokenString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListPrincipalsForPolicyRequestNextTokenString",
+}, smithy.ShapeTypeString, 0)
+
+var _ListPrincipalsForPolicyResponseNextTokenString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListPrincipalsForPolicyResponseNextTokenString",
+}, smithy.ShapeTypeString, 0)
 
 var _ListUsersIndexCapacityRequestMaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -15866,6 +16626,11 @@ var NumericSeparatorSymbol_COMMA *smithy.Schema
 var NumericSeparatorSymbol_DOT *smithy.Schema
 
 var NumericSeparatorSymbol_SPACE *smithy.Schema
+
+var _OAuthApplicationClientId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "OAuthApplicationClientId",
+}, smithy.ShapeTypeString, 0)
 
 var _OAuthAuthorizationEndpointUrl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -17123,6 +17888,11 @@ var PluginVisualTableQuerySort_RowSort *smithy.Schema
 
 var PluginVisualTableQuerySort_ItemsLimitConfiguration *smithy.Schema
 
+var _PolicyArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "PolicyArn",
+}, smithy.ShapeTypeString, 0)
+
 var _PolicyDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "PolicyDescription",
@@ -17137,6 +17907,32 @@ var _PolicyName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "PolicyName",
 }, smithy.ShapeTypeString, 0)
+
+var PolicyPrincipal = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "PolicyPrincipal",
+}, smithy.ShapeTypeStructure, 4)
+var PolicyPrincipal_PrincipalArn *smithy.Schema
+
+var PolicyPrincipal_PrincipalType *smithy.Schema
+
+var PolicyPrincipal_UpdatedAt *smithy.Schema
+
+var PolicyPrincipal_Revision *smithy.Schema
+
+var _PolicyPrincipalList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "PolicyPrincipalList",
+}, smithy.ShapeTypeList, 1)
+var _PolicyPrincipalList_member *smithy.Schema
+
+var PolicyType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "PolicyType",
+}, smithy.ShapeTypeEnum, 2)
+var PolicyType_LIMITS_PROFILE *smithy.Schema
+
+var PolicyType_CUSTOM_PERMISSIONS *smithy.Schema
 
 var _Port = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -17223,11 +18019,26 @@ var _Principal = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Principal",
 }, smithy.ShapeTypeString, 0)
 
+var _PrincipalArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "PrincipalArn",
+}, smithy.ShapeTypeString, 0)
+
 var _PrincipalList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "PrincipalList",
 }, smithy.ShapeTypeList, 1)
 var _PrincipalList_member *smithy.Schema
+
+var PrincipalType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "PrincipalType",
+}, smithy.ShapeTypeEnum, 3)
+var PrincipalType_USER *smithy.Schema
+
+var PrincipalType_GROUP *smithy.Schema
+
+var PrincipalType_ACCOUNT *smithy.Schema
 
 var _PrivateKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -17335,6 +18146,16 @@ var PurchaseMode = smithy.NewSchema(smithy.ShapeID{
 var PurchaseMode_MANUAL *smithy.Schema
 
 var PurchaseMode_AUTO_PURCHASE *smithy.Schema
+
+var PutAssignmentEntry = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "PutAssignmentEntry",
+}, smithy.ShapeTypeStructure, 3)
+var PutAssignmentEntry_PrincipalArn *smithy.Schema
+
+var PutAssignmentEntry_ExistingPolicyArn *smithy.Schema
+
+var PutAssignmentEntry_Revision *smithy.Schema
 
 var _QAQueryText = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -17446,6 +18267,68 @@ var QueueInfo = smithy.NewSchema(smithy.ShapeID{
 var QueueInfo_WaitingOnIngestion *smithy.Schema
 
 var QueueInfo_QueuedIngestion *smithy.Schema
+
+var QuickAuthenticationConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "QuickAuthenticationConfig",
+}, smithy.ShapeTypeStructure, 2)
+var QuickAuthenticationConfig_QuickAuthenticationType *smithy.Schema
+
+var QuickAuthenticationConfig_QuickAuthenticationConfigurationDetail *smithy.Schema
+
+var QuickAuthenticationConfigCreateOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "QuickAuthenticationConfigCreateOutput",
+}, smithy.ShapeTypeStructure, 2)
+var QuickAuthenticationConfigCreateOutput_QuickAuthenticationType *smithy.Schema
+
+var QuickAuthenticationConfigCreateOutput_QuickAuthenticationConfigurationDetailCreateOutput *smithy.Schema
+
+var QuickAuthenticationConfigInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "QuickAuthenticationConfigInput",
+}, smithy.ShapeTypeStructure, 2)
+var QuickAuthenticationConfigInput_QuickAuthenticationType *smithy.Schema
+
+var QuickAuthenticationConfigInput_QuickAuthenticationConfigurationDetailInput *smithy.Schema
+
+var QuickAuthenticationConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "QuickAuthenticationConfigurationDetail",
+}, smithy.ShapeTypeUnion, 1)
+var QuickAuthenticationConfigurationDetail_QuickManagedPublicAuthCode *smithy.Schema
+
+var QuickAuthenticationConfigurationDetailCreateOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "QuickAuthenticationConfigurationDetailCreateOutput",
+}, smithy.ShapeTypeUnion, 1)
+var QuickAuthenticationConfigurationDetailCreateOutput_QuickManagedPublicAuthCode *smithy.Schema
+
+var QuickAuthenticationConfigurationDetailInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "QuickAuthenticationConfigurationDetailInput",
+}, smithy.ShapeTypeUnion, 1)
+var QuickAuthenticationConfigurationDetailInput_QuickManagedPublicAuthCode *smithy.Schema
+
+var QuickAuthenticationType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "QuickAuthenticationType",
+}, smithy.ShapeTypeEnum, 1)
+var QuickAuthenticationType_QUICK_MANAGED_PUBLIC_AUTH_CODE *smithy.Schema
+
+var QuickManagedAuthCodeQuickAuthenticationConfigInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "QuickManagedAuthCodeQuickAuthenticationConfigInput",
+}, smithy.ShapeTypeStructure, 1)
+var QuickManagedAuthCodeQuickAuthenticationConfigInput_RedirectUris *smithy.Schema
+
+var QuickManagedPublicAuthCodeQuickAuthenticationConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "QuickManagedPublicAuthCodeQuickAuthenticationConfig",
+}, smithy.ShapeTypeStructure, 2)
+var QuickManagedPublicAuthCodeQuickAuthenticationConfig_RedirectUris *smithy.Schema
+
+var QuickManagedPublicAuthCodeQuickAuthenticationConfig_ClientId *smithy.Schema
 
 var QuickSightUserNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -17736,6 +18619,12 @@ var _RecoveryWindowInDays = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RecoveryWindowInDays",
 }, smithy.ShapeTypeLong, 0)
 
+var _RedirectUriList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "RedirectUriList",
+}, smithy.ShapeTypeList, 1)
+var _RedirectUriList_member *smithy.Schema
+
 var RedshiftIAMParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "RedshiftIAMParameters",
@@ -17751,12 +18640,14 @@ var RedshiftIAMParameters_AutoCreateDatabaseUser *smithy.Schema
 var RedshiftParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "RedshiftParameters",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var RedshiftParameters_Host *smithy.Schema
 
 var RedshiftParameters_Port *smithy.Schema
 
 var RedshiftParameters_Database *smithy.Schema
+
+var RedshiftParameters_FederatedCatalog *smithy.Schema
 
 var RedshiftParameters_ClusterId *smithy.Schema
 
@@ -17970,6 +18861,14 @@ var _Region = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "Region",
 }, smithy.ShapeTypeString, 0)
+
+var _RegionalSecretManagerArnMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "RegionalSecretManagerArnMap",
+}, smithy.ShapeTypeMap, 2)
+var _RegionalSecretManagerArnMap_key *smithy.Schema
+
+var _RegionalSecretManagerArnMap_value *smithy.Schema
 
 var RegisteredCustomerManagedKey = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -18333,6 +19232,11 @@ var ReviewedAnswerErrorCode_DUPLICATED_ANSWER *smithy.Schema
 var ReviewedAnswerErrorCode_INVALID_DATA *smithy.Schema
 
 var ReviewedAnswerErrorCode_MISSING_REQUIRED_FIELDS *smithy.Schema
+
+var _Revision = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "Revision",
+}, smithy.ShapeTypeLong, 0)
 
 var Role = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -18718,6 +19622,11 @@ var ScatterPlotVisual_ColumnHierarchies *smithy.Schema
 
 var ScatterPlotVisual_VisualContentAltText *smithy.Schema
 
+var _ScheduleId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ScheduleId",
+}, smithy.ShapeTypeString, 0)
+
 var ScheduleRefreshOnEntity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ScheduleRefreshOnEntity",
@@ -18731,6 +19640,14 @@ var SchedulesConfigurations = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SchedulesConfigurations",
 }, smithy.ShapeTypeStructure, 1)
 var SchedulesConfigurations_Enabled *smithy.Schema
+
+var ScheduleState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ScheduleState",
+}, smithy.ShapeTypeEnum, 2)
+var ScheduleState_ENABLED *smithy.Schema
+
+var ScheduleState_DISABLED *smithy.Schema
 
 var ScrollBarOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -23103,6 +24020,26 @@ var _UnlimitedPixelLength = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UnlimitedPixelLength",
 }, smithy.ShapeTypeString, 0)
 
+var UnmaterializedCalculatedColumn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UnmaterializedCalculatedColumn",
+}, smithy.ShapeTypeStructure, 5)
+var UnmaterializedCalculatedColumn_ColumnId *smithy.Schema
+
+var UnmaterializedCalculatedColumn_ColumnName *smithy.Schema
+
+var UnmaterializedCalculatedColumn_Expression *smithy.Schema
+
+var UnmaterializedCalculatedColumn_Type *smithy.Schema
+
+var UnmaterializedCalculatedColumn_SubType *smithy.Schema
+
+var _UnmaterializedCalculatedColumnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UnmaterializedCalculatedColumnList",
+}, smithy.ShapeTypeList, 1)
+var _UnmaterializedCalculatedColumnList_member *smithy.Schema
+
 var UnpivotOperation = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "UnpivotOperation",
@@ -23238,6 +24175,11 @@ var UploadSettings_TextQualifier *smithy.Schema
 var UploadSettings_Delimiter *smithy.Schema
 
 var UploadSettings_CustomCellAddressRange *smithy.Schema
+
+var _Uri = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "Uri",
+}, smithy.ShapeTypeString, 0)
 
 var _URLOperationTemplate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -23406,6 +24348,31 @@ var UserRole_ADMIN_PRO *smithy.Schema
 var UserRole_AUTHOR_PRO *smithy.Schema
 
 var UserRole_READER_PRO *smithy.Schema
+
+var ValidationException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ValidationException",
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
+var ValidationException_Message *smithy.Schema
+
+var ValidationException_RequestId *smithy.Schema
+
+var ValidationException_FieldList *smithy.Schema
+
+var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ValidationExceptionField",
+}, smithy.ShapeTypeStructure, 2)
+var ValidationExceptionField_Name *smithy.Schema
+
+var ValidationExceptionField_Message *smithy.Schema
+
+var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ValidationExceptionFieldList",
+}, smithy.ShapeTypeList, 1)
+var _ValidationExceptionFieldList_member *smithy.Schema
 
 var ValidationStrategy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -24294,6 +25261,26 @@ var BatchDeleteKnowledgeBaseResponse_RequestId *smithy.Schema
 
 var BatchDeleteKnowledgeBaseResponse_Status *smithy.Schema
 
+var BatchDeletePolicyAssignmentByPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchDeletePolicyAssignmentByPolicyRequest",
+}, smithy.ShapeTypeStructure, 3)
+var BatchDeletePolicyAssignmentByPolicyRequest_AccountId *smithy.Schema
+
+var BatchDeletePolicyAssignmentByPolicyRequest_PolicyArn *smithy.Schema
+
+var BatchDeletePolicyAssignmentByPolicyRequest_PrincipalArns *smithy.Schema
+
+var BatchDeletePolicyAssignmentByPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchDeletePolicyAssignmentByPolicyResponse",
+}, smithy.ShapeTypeStructure, 3)
+var BatchDeletePolicyAssignmentByPolicyResponse_PolicyArn *smithy.Schema
+
+var BatchDeletePolicyAssignmentByPolicyResponse_Success *smithy.Schema
+
+var BatchDeletePolicyAssignmentByPolicyResponse_Errors *smithy.Schema
+
 var BatchDeleteTopicReviewedAnswerRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "BatchDeleteTopicReviewedAnswerRequest",
@@ -24338,6 +25325,26 @@ var BatchDescribeUserLimitsResponse_userLimits *smithy.Schema
 
 var BatchDescribeUserLimitsResponse_errors *smithy.Schema
 
+var BatchPutPolicyAssignmentByPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchPutPolicyAssignmentByPolicyRequest",
+}, smithy.ShapeTypeStructure, 3)
+var BatchPutPolicyAssignmentByPolicyRequest_AccountId *smithy.Schema
+
+var BatchPutPolicyAssignmentByPolicyRequest_PolicyArn *smithy.Schema
+
+var BatchPutPolicyAssignmentByPolicyRequest_Assignments *smithy.Schema
+
+var BatchPutPolicyAssignmentByPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "BatchPutPolicyAssignmentByPolicyResponse",
+}, smithy.ShapeTypeStructure, 3)
+var BatchPutPolicyAssignmentByPolicyResponse_PolicyArn *smithy.Schema
+
+var BatchPutPolicyAssignmentByPolicyResponse_Success *smithy.Schema
+
+var BatchPutPolicyAssignmentByPolicyResponse_Errors *smithy.Schema
+
 var CancelIngestionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "CancelIngestionRequest",
@@ -24359,6 +25366,74 @@ var CancelIngestionResponse_IngestionId *smithy.Schema
 var CancelIngestionResponse_RequestId *smithy.Schema
 
 var CancelIngestionResponse_Status *smithy.Schema
+
+var CreateAccessControlApplicationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "CreateAccessControlApplicationRequest",
+}, smithy.ShapeTypeStructure, 9)
+var CreateAccessControlApplicationRequest_AwsAccountId *smithy.Schema
+
+var CreateAccessControlApplicationRequest_ApplicationId *smithy.Schema
+
+var CreateAccessControlApplicationRequest_Name *smithy.Schema
+
+var CreateAccessControlApplicationRequest_Description *smithy.Schema
+
+var CreateAccessControlApplicationRequest_Namespace *smithy.Schema
+
+var CreateAccessControlApplicationRequest_AuthenticationType *smithy.Schema
+
+var CreateAccessControlApplicationRequest_IdpAuthorizingConfiguration *smithy.Schema
+
+var CreateAccessControlApplicationRequest_QuickAuthenticationConfiguration *smithy.Schema
+
+var CreateAccessControlApplicationRequest_Tags *smithy.Schema
+
+var CreateAccessControlApplicationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "CreateAccessControlApplicationResponse",
+}, smithy.ShapeTypeStructure, 9)
+var CreateAccessControlApplicationResponse_Status *smithy.Schema
+
+var CreateAccessControlApplicationResponse_RequestId *smithy.Schema
+
+var CreateAccessControlApplicationResponse_ApplicationId *smithy.Schema
+
+var CreateAccessControlApplicationResponse_Arn *smithy.Schema
+
+var CreateAccessControlApplicationResponse_AccessControlApplicationStatus *smithy.Schema
+
+var CreateAccessControlApplicationResponse_CreatedTime *smithy.Schema
+
+var CreateAccessControlApplicationResponse_TenantUrl *smithy.Schema
+
+var CreateAccessControlApplicationResponse_IdcApplicationArn *smithy.Schema
+
+var CreateAccessControlApplicationResponse_QuickAuthenticationConfiguration *smithy.Schema
+
+var CreateAccessControlApplicationSecretRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "CreateAccessControlApplicationSecretRequest",
+}, smithy.ShapeTypeStructure, 4)
+var CreateAccessControlApplicationSecretRequest_AwsAccountId *smithy.Schema
+
+var CreateAccessControlApplicationSecretRequest_ApplicationId *smithy.Schema
+
+var CreateAccessControlApplicationSecretRequest_Description *smithy.Schema
+
+var CreateAccessControlApplicationSecretRequest_ClientSecretConfiguration *smithy.Schema
+
+var CreateAccessControlApplicationSecretResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "CreateAccessControlApplicationSecretResponse",
+}, smithy.ShapeTypeStructure, 4)
+var CreateAccessControlApplicationSecretResponse_Status *smithy.Schema
+
+var CreateAccessControlApplicationSecretResponse_RequestId *smithy.Schema
+
+var CreateAccessControlApplicationSecretResponse_ClientSecretId *smithy.Schema
+
+var CreateAccessControlApplicationSecretResponse_CreatedAt *smithy.Schema
 
 var CreateAccountCustomizationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -24679,7 +25754,7 @@ var CreateDashboardResponse_RequestId *smithy.Schema
 var CreateDataSetRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "CreateDataSetRequest",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var CreateDataSetRequest_AwsAccountId *smithy.Schema
 
 var CreateDataSetRequest_DataSetId *smithy.Schema
@@ -24719,6 +25794,8 @@ var CreateDataSetRequest_UseAs *smithy.Schema
 var CreateDataSetRequest_DataPrepConfiguration *smithy.Schema
 
 var CreateDataSetRequest_SemanticModelConfiguration *smithy.Schema
+
+var CreateDataSetRequest_UnmaterializedCalculatedColumns *smithy.Schema
 
 var CreateDataSetResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -24966,6 +26043,40 @@ var CreateIAMPolicyAssignmentResponse_RequestId *smithy.Schema
 
 var CreateIAMPolicyAssignmentResponse_Status *smithy.Schema
 
+var CreateInboundConnectorRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "CreateInboundConnectorRequest",
+}, smithy.ShapeTypeStructure, 6)
+var CreateInboundConnectorRequest_AwsAccountId *smithy.Schema
+
+var CreateInboundConnectorRequest_InboundConnectorId *smithy.Schema
+
+var CreateInboundConnectorRequest_Name *smithy.Schema
+
+var CreateInboundConnectorRequest_Description *smithy.Schema
+
+var CreateInboundConnectorRequest_InboundConnectorConfiguration *smithy.Schema
+
+var CreateInboundConnectorRequest_Tags *smithy.Schema
+
+var CreateInboundConnectorResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "CreateInboundConnectorResponse",
+}, smithy.ShapeTypeStructure, 7)
+var CreateInboundConnectorResponse_Status *smithy.Schema
+
+var CreateInboundConnectorResponse_RequestId *smithy.Schema
+
+var CreateInboundConnectorResponse_InboundConnectorId *smithy.Schema
+
+var CreateInboundConnectorResponse_Arn *smithy.Schema
+
+var CreateInboundConnectorResponse_TenantUrl *smithy.Schema
+
+var CreateInboundConnectorResponse_InboundConnectorStatus *smithy.Schema
+
+var CreateInboundConnectorResponse_CreatedTime *smithy.Schema
+
 var CreateIngestionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "CreateIngestionRequest",
@@ -25031,6 +26142,34 @@ var CreateKnowledgeBaseResponse_CreationStatus *smithy.Schema
 var CreateKnowledgeBaseResponse_RequestId *smithy.Schema
 
 var CreateKnowledgeBaseResponse_Status *smithy.Schema
+
+var CreateKnowledgeBaseRefreshScheduleRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "CreateKnowledgeBaseRefreshScheduleRequest",
+}, smithy.ShapeTypeStructure, 6)
+var CreateKnowledgeBaseRefreshScheduleRequest_AwsAccountId *smithy.Schema
+
+var CreateKnowledgeBaseRefreshScheduleRequest_KnowledgeBaseId *smithy.Schema
+
+var CreateKnowledgeBaseRefreshScheduleRequest_ScheduleId *smithy.Schema
+
+var CreateKnowledgeBaseRefreshScheduleRequest_ScheduleFrequency *smithy.Schema
+
+var CreateKnowledgeBaseRefreshScheduleRequest_StartTime *smithy.Schema
+
+var CreateKnowledgeBaseRefreshScheduleRequest_State *smithy.Schema
+
+var CreateKnowledgeBaseRefreshScheduleResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "CreateKnowledgeBaseRefreshScheduleResponse",
+}, smithy.ShapeTypeStructure, 4)
+var CreateKnowledgeBaseRefreshScheduleResponse_ScheduleId *smithy.Schema
+
+var CreateKnowledgeBaseRefreshScheduleResponse_KnowledgeBaseArn *smithy.Schema
+
+var CreateKnowledgeBaseRefreshScheduleResponse_RequestId *smithy.Schema
+
+var CreateKnowledgeBaseRefreshScheduleResponse_Status *smithy.Schema
 
 var CreateLimitsProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -25429,6 +26568,44 @@ var CreateVPCConnectionResponse_AvailabilityStatus *smithy.Schema
 var CreateVPCConnectionResponse_RequestId *smithy.Schema
 
 var CreateVPCConnectionResponse_Status *smithy.Schema
+
+var DeleteAccessControlApplicationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeleteAccessControlApplicationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteAccessControlApplicationRequest_AwsAccountId *smithy.Schema
+
+var DeleteAccessControlApplicationRequest_ApplicationId *smithy.Schema
+
+var DeleteAccessControlApplicationRequest_IdcApplicationArn *smithy.Schema
+
+var DeleteAccessControlApplicationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeleteAccessControlApplicationResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteAccessControlApplicationResponse_Status *smithy.Schema
+
+var DeleteAccessControlApplicationResponse_RequestId *smithy.Schema
+
+var DeleteAccessControlApplicationResponse_ApplicationId *smithy.Schema
+
+var DeleteAccessControlApplicationSecretRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeleteAccessControlApplicationSecretRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteAccessControlApplicationSecretRequest_AwsAccountId *smithy.Schema
+
+var DeleteAccessControlApplicationSecretRequest_ApplicationId *smithy.Schema
+
+var DeleteAccessControlApplicationSecretRequest_ClientSecretId *smithy.Schema
+
+var DeleteAccessControlApplicationSecretResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeleteAccessControlApplicationSecretResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteAccessControlApplicationSecretResponse_Status *smithy.Schema
+
+var DeleteAccessControlApplicationSecretResponse_RequestId *smithy.Schema
 
 var DeleteAccountCustomizationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -25845,6 +27022,24 @@ var DeleteIdentityPropagationConfigResponse_RequestId *smithy.Schema
 
 var DeleteIdentityPropagationConfigResponse_Status *smithy.Schema
 
+var DeleteInboundConnectorRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeleteInboundConnectorRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteInboundConnectorRequest_AwsAccountId *smithy.Schema
+
+var DeleteInboundConnectorRequest_InboundConnectorId *smithy.Schema
+
+var DeleteInboundConnectorResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeleteInboundConnectorResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteInboundConnectorResponse_Status *smithy.Schema
+
+var DeleteInboundConnectorResponse_RequestId *smithy.Schema
+
+var DeleteInboundConnectorResponse_InboundConnectorId *smithy.Schema
+
 var DeleteKnowledgeBaseRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "DeleteKnowledgeBaseRequest",
@@ -25864,6 +27059,28 @@ var DeleteKnowledgeBaseResponse_KnowledgeBaseId *smithy.Schema
 var DeleteKnowledgeBaseResponse_RequestId *smithy.Schema
 
 var DeleteKnowledgeBaseResponse_Status *smithy.Schema
+
+var DeleteKnowledgeBaseRefreshScheduleRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeleteKnowledgeBaseRefreshScheduleRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DeleteKnowledgeBaseRefreshScheduleRequest_AwsAccountId *smithy.Schema
+
+var DeleteKnowledgeBaseRefreshScheduleRequest_KnowledgeBaseId *smithy.Schema
+
+var DeleteKnowledgeBaseRefreshScheduleRequest_ScheduleId *smithy.Schema
+
+var DeleteKnowledgeBaseRefreshScheduleResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeleteKnowledgeBaseRefreshScheduleResponse",
+}, smithy.ShapeTypeStructure, 4)
+var DeleteKnowledgeBaseRefreshScheduleResponse_ScheduleId *smithy.Schema
+
+var DeleteKnowledgeBaseRefreshScheduleResponse_KnowledgeBaseArn *smithy.Schema
+
+var DeleteKnowledgeBaseRefreshScheduleResponse_RequestId *smithy.Schema
+
+var DeleteKnowledgeBaseRefreshScheduleResponse_Status *smithy.Schema
 
 var DeleteLimitsProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -25914,6 +27131,23 @@ var DeleteOAuthClientApplicationResponse_OAuthClientApplicationId *smithy.Schema
 var DeleteOAuthClientApplicationResponse_RequestId *smithy.Schema
 
 var DeleteOAuthClientApplicationResponse_Status *smithy.Schema
+
+var DeletePolicyAssignmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeletePolicyAssignmentRequest",
+}, smithy.ShapeTypeStructure, 4)
+var DeletePolicyAssignmentRequest_AccountId *smithy.Schema
+
+var DeletePolicyAssignmentRequest_PolicyArn *smithy.Schema
+
+var DeletePolicyAssignmentRequest_PrincipalArn *smithy.Schema
+
+var DeletePolicyAssignmentRequest_Revision *smithy.Schema
+
+var DeletePolicyAssignmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DeletePolicyAssignmentResponse",
+}, smithy.ShapeTypeStructure, 0)
 
 var DeleteRefreshScheduleRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -26226,6 +27460,24 @@ var DeleteVPCConnectionResponse_AvailabilityStatus *smithy.Schema
 var DeleteVPCConnectionResponse_RequestId *smithy.Schema
 
 var DeleteVPCConnectionResponse_Status *smithy.Schema
+
+var DescribeAccessControlApplicationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DescribeAccessControlApplicationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeAccessControlApplicationRequest_AwsAccountId *smithy.Schema
+
+var DescribeAccessControlApplicationRequest_ApplicationId *smithy.Schema
+
+var DescribeAccessControlApplicationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DescribeAccessControlApplicationResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DescribeAccessControlApplicationResponse_Status *smithy.Schema
+
+var DescribeAccessControlApplicationResponse_RequestId *smithy.Schema
+
+var DescribeAccessControlApplicationResponse_AccessControlApplication *smithy.Schema
 
 var DescribeAccountCustomizationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -27147,6 +28399,24 @@ var DescribeIAMPolicyAssignmentResponse_RequestId *smithy.Schema
 
 var DescribeIAMPolicyAssignmentResponse_Status *smithy.Schema
 
+var DescribeInboundConnectorRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DescribeInboundConnectorRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DescribeInboundConnectorRequest_AwsAccountId *smithy.Schema
+
+var DescribeInboundConnectorRequest_InboundConnectorId *smithy.Schema
+
+var DescribeInboundConnectorResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DescribeInboundConnectorResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DescribeInboundConnectorResponse_Status *smithy.Schema
+
+var DescribeInboundConnectorResponse_RequestId *smithy.Schema
+
+var DescribeInboundConnectorResponse_InboundConnector *smithy.Schema
+
 var DescribeIngestionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "DescribeIngestionRequest",
@@ -27252,6 +28522,28 @@ var DescribeKnowledgeBasePermissionsResponse_Permissions *smithy.Schema
 var DescribeKnowledgeBasePermissionsResponse_RequestId *smithy.Schema
 
 var DescribeKnowledgeBasePermissionsResponse_Status *smithy.Schema
+
+var DescribeKnowledgeBaseRefreshScheduleRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DescribeKnowledgeBaseRefreshScheduleRequest",
+}, smithy.ShapeTypeStructure, 3)
+var DescribeKnowledgeBaseRefreshScheduleRequest_AwsAccountId *smithy.Schema
+
+var DescribeKnowledgeBaseRefreshScheduleRequest_KnowledgeBaseId *smithy.Schema
+
+var DescribeKnowledgeBaseRefreshScheduleRequest_ScheduleId *smithy.Schema
+
+var DescribeKnowledgeBaseRefreshScheduleResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "DescribeKnowledgeBaseRefreshScheduleResponse",
+}, smithy.ShapeTypeStructure, 4)
+var DescribeKnowledgeBaseRefreshScheduleResponse_Schedule *smithy.Schema
+
+var DescribeKnowledgeBaseRefreshScheduleResponse_KnowledgeBaseArn *smithy.Schema
+
+var DescribeKnowledgeBaseRefreshScheduleResponse_RequestId *smithy.Schema
+
+var DescribeKnowledgeBaseRefreshScheduleResponse_Status *smithy.Schema
 
 var DescribeLimitsProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -27983,6 +29275,28 @@ var GetIdentityContextResponse_RequestId *smithy.Schema
 
 var GetIdentityContextResponse_Context *smithy.Schema
 
+var GetPolicyAssignmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "GetPolicyAssignmentRequest",
+}, smithy.ShapeTypeStructure, 3)
+var GetPolicyAssignmentRequest_AccountId *smithy.Schema
+
+var GetPolicyAssignmentRequest_PolicyType *smithy.Schema
+
+var GetPolicyAssignmentRequest_PrincipalArn *smithy.Schema
+
+var GetPolicyAssignmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "GetPolicyAssignmentResponse",
+}, smithy.ShapeTypeStructure, 4)
+var GetPolicyAssignmentResponse_PolicyArn *smithy.Schema
+
+var GetPolicyAssignmentResponse_PolicyName *smithy.Schema
+
+var GetPolicyAssignmentResponse_UpdatedAt *smithy.Schema
+
+var GetPolicyAssignmentResponse_Revision *smithy.Schema
+
 var GetSessionEmbedUrlRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "GetSessionEmbedUrlRequest",
@@ -28004,6 +29318,30 @@ var GetSessionEmbedUrlResponse_EmbedUrl *smithy.Schema
 var GetSessionEmbedUrlResponse_Status *smithy.Schema
 
 var GetSessionEmbedUrlResponse_RequestId *smithy.Schema
+
+var ListAccessControlApplicationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListAccessControlApplicationsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListAccessControlApplicationsRequest_AwsAccountId *smithy.Schema
+
+var ListAccessControlApplicationsRequest_Namespace *smithy.Schema
+
+var ListAccessControlApplicationsRequest_MaxResults *smithy.Schema
+
+var ListAccessControlApplicationsRequest_NextToken *smithy.Schema
+
+var ListAccessControlApplicationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListAccessControlApplicationsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var ListAccessControlApplicationsResponse_Status *smithy.Schema
+
+var ListAccessControlApplicationsResponse_RequestId *smithy.Schema
+
+var ListAccessControlApplicationsResponse_AccessControlApplications *smithy.Schema
+
+var ListAccessControlApplicationsResponse_NextToken *smithy.Schema
 
 var ListActionConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -28515,6 +29853,54 @@ var ListIdentityPropagationConfigsResponse_Status *smithy.Schema
 
 var ListIdentityPropagationConfigsResponse_RequestId *smithy.Schema
 
+var ListInboundConnectorApplicationAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListInboundConnectorApplicationAssociationsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListInboundConnectorApplicationAssociationsRequest_AwsAccountId *smithy.Schema
+
+var ListInboundConnectorApplicationAssociationsRequest_InboundConnectorId *smithy.Schema
+
+var ListInboundConnectorApplicationAssociationsRequest_MaxResults *smithy.Schema
+
+var ListInboundConnectorApplicationAssociationsRequest_NextToken *smithy.Schema
+
+var ListInboundConnectorApplicationAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListInboundConnectorApplicationAssociationsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var ListInboundConnectorApplicationAssociationsResponse_Status *smithy.Schema
+
+var ListInboundConnectorApplicationAssociationsResponse_RequestId *smithy.Schema
+
+var ListInboundConnectorApplicationAssociationsResponse_ApplicationAssociations *smithy.Schema
+
+var ListInboundConnectorApplicationAssociationsResponse_NextToken *smithy.Schema
+
+var ListInboundConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListInboundConnectorsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListInboundConnectorsRequest_AwsAccountId *smithy.Schema
+
+var ListInboundConnectorsRequest_MaxResults *smithy.Schema
+
+var ListInboundConnectorsRequest_NextToken *smithy.Schema
+
+var ListInboundConnectorsRequest_Type *smithy.Schema
+
+var ListInboundConnectorsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListInboundConnectorsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var ListInboundConnectorsResponse_Status *smithy.Schema
+
+var ListInboundConnectorsResponse_RequestId *smithy.Schema
+
+var ListInboundConnectorsResponse_InboundConnectorSummaries *smithy.Schema
+
+var ListInboundConnectorsResponse_NextToken *smithy.Schema
+
 var ListIngestionsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "ListIngestionsRequest",
@@ -28538,6 +29924,32 @@ var ListIngestionsResponse_NextToken *smithy.Schema
 var ListIngestionsResponse_RequestId *smithy.Schema
 
 var ListIngestionsResponse_Status *smithy.Schema
+
+var ListKnowledgeBaseRefreshSchedulesRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListKnowledgeBaseRefreshSchedulesRequest",
+}, smithy.ShapeTypeStructure, 4)
+var ListKnowledgeBaseRefreshSchedulesRequest_AwsAccountId *smithy.Schema
+
+var ListKnowledgeBaseRefreshSchedulesRequest_KnowledgeBaseId *smithy.Schema
+
+var ListKnowledgeBaseRefreshSchedulesRequest_NextToken *smithy.Schema
+
+var ListKnowledgeBaseRefreshSchedulesRequest_MaxResults *smithy.Schema
+
+var ListKnowledgeBaseRefreshSchedulesResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListKnowledgeBaseRefreshSchedulesResponse",
+}, smithy.ShapeTypeStructure, 5)
+var ListKnowledgeBaseRefreshSchedulesResponse_ScheduleSummaries *smithy.Schema
+
+var ListKnowledgeBaseRefreshSchedulesResponse_KnowledgeBaseArn *smithy.Schema
+
+var ListKnowledgeBaseRefreshSchedulesResponse_NextToken *smithy.Schema
+
+var ListKnowledgeBaseRefreshSchedulesResponse_RequestId *smithy.Schema
+
+var ListKnowledgeBaseRefreshSchedulesResponse_Status *smithy.Schema
 
 var ListKnowledgeBasesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -28624,6 +30036,28 @@ var ListOAuthClientApplicationsResponse_NextToken *smithy.Schema
 var ListOAuthClientApplicationsResponse_RequestId *smithy.Schema
 
 var ListOAuthClientApplicationsResponse_Status *smithy.Schema
+
+var ListPrincipalsForPolicyRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListPrincipalsForPolicyRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListPrincipalsForPolicyRequest_AccountId *smithy.Schema
+
+var ListPrincipalsForPolicyRequest_PolicyArn *smithy.Schema
+
+var ListPrincipalsForPolicyRequest_PrincipalType *smithy.Schema
+
+var ListPrincipalsForPolicyRequest_MaxResults *smithy.Schema
+
+var ListPrincipalsForPolicyRequest_NextToken *smithy.Schema
+
+var ListPrincipalsForPolicyResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "ListPrincipalsForPolicyResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListPrincipalsForPolicyResponse_Principals *smithy.Schema
+
+var ListPrincipalsForPolicyResponse_NextToken *smithy.Schema
 
 var ListRefreshSchedulesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -29126,6 +30560,30 @@ var PutDataSetRefreshPropertiesResponse = smithy.NewSchema(smithy.ShapeID{
 var PutDataSetRefreshPropertiesResponse_RequestId *smithy.Schema
 
 var PutDataSetRefreshPropertiesResponse_Status *smithy.Schema
+
+var PutPolicyAssignmentRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "PutPolicyAssignmentRequest",
+}, smithy.ShapeTypeStructure, 5)
+var PutPolicyAssignmentRequest_AccountId *smithy.Schema
+
+var PutPolicyAssignmentRequest_PolicyArn *smithy.Schema
+
+var PutPolicyAssignmentRequest_PrincipalArn *smithy.Schema
+
+var PutPolicyAssignmentRequest_ExistingPolicyArn *smithy.Schema
+
+var PutPolicyAssignmentRequest_Revision *smithy.Schema
+
+var PutPolicyAssignmentResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "PutPolicyAssignmentResponse",
+}, smithy.ShapeTypeStructure, 3)
+var PutPolicyAssignmentResponse_PolicyArn *smithy.Schema
+
+var PutPolicyAssignmentResponse_ReplacedPolicyArn *smithy.Schema
+
+var PutPolicyAssignmentResponse_Revision *smithy.Schema
 
 var RegisterUserRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -29701,6 +31159,68 @@ var UntagResourceResponse_RequestId *smithy.Schema
 
 var UntagResourceResponse_Status *smithy.Schema
 
+var UpdateAccessControlApplicationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateAccessControlApplicationRequest",
+}, smithy.ShapeTypeStructure, 7)
+var UpdateAccessControlApplicationRequest_AwsAccountId *smithy.Schema
+
+var UpdateAccessControlApplicationRequest_ApplicationId *smithy.Schema
+
+var UpdateAccessControlApplicationRequest_Name *smithy.Schema
+
+var UpdateAccessControlApplicationRequest_Description *smithy.Schema
+
+var UpdateAccessControlApplicationRequest_IdpAuthorizingConfiguration *smithy.Schema
+
+var UpdateAccessControlApplicationRequest_QuickAuthenticationConfiguration *smithy.Schema
+
+var UpdateAccessControlApplicationRequest_Status *smithy.Schema
+
+var UpdateAccessControlApplicationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateAccessControlApplicationResponse",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateAccessControlApplicationResponse_Status *smithy.Schema
+
+var UpdateAccessControlApplicationResponse_RequestId *smithy.Schema
+
+var UpdateAccessControlApplicationResponse_ApplicationId *smithy.Schema
+
+var UpdateAccessControlApplicationResponse_Arn *smithy.Schema
+
+var UpdateAccessControlApplicationResponse_AccessControlApplicationStatus *smithy.Schema
+
+var UpdateAccessControlApplicationResponse_LastUpdatedTime *smithy.Schema
+
+var UpdateAccessControlApplicationSecretRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateAccessControlApplicationSecretRequest",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateAccessControlApplicationSecretRequest_AwsAccountId *smithy.Schema
+
+var UpdateAccessControlApplicationSecretRequest_ApplicationId *smithy.Schema
+
+var UpdateAccessControlApplicationSecretRequest_ClientSecretId *smithy.Schema
+
+var UpdateAccessControlApplicationSecretRequest_UpdateRegionalSecretManagerArns *smithy.Schema
+
+var UpdateAccessControlApplicationSecretRequest_RemoveRegionalSecretManagerArns *smithy.Schema
+
+var UpdateAccessControlApplicationSecretResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateAccessControlApplicationSecretResponse",
+}, smithy.ShapeTypeStructure, 5)
+var UpdateAccessControlApplicationSecretResponse_Status *smithy.Schema
+
+var UpdateAccessControlApplicationSecretResponse_RequestId *smithy.Schema
+
+var UpdateAccessControlApplicationSecretResponse_ClientSecretId *smithy.Schema
+
+var UpdateAccessControlApplicationSecretResponse_UpdatedAt *smithy.Schema
+
+var UpdateAccessControlApplicationSecretResponse_RegionalSecretManagerArns *smithy.Schema
+
 var UpdateAccountCustomizationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "UpdateAccountCustomizationRequest",
@@ -30232,7 +31752,7 @@ var UpdateDashboardsQAConfigurationResponse_Status *smithy.Schema
 var UpdateDataSetRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "UpdateDataSetRequest",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 17)
 var UpdateDataSetRequest_AwsAccountId *smithy.Schema
 
 var UpdateDataSetRequest_DataSetId *smithy.Schema
@@ -30264,6 +31784,8 @@ var UpdateDataSetRequest_PerformanceConfiguration *smithy.Schema
 var UpdateDataSetRequest_DataPrepConfiguration *smithy.Schema
 
 var UpdateDataSetRequest_SemanticModelConfiguration *smithy.Schema
+
+var UpdateDataSetRequest_UnmaterializedCalculatedColumns *smithy.Schema
 
 var UpdateDataSetResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -30583,6 +32105,58 @@ var UpdateIdentityPropagationConfigResponse_RequestId *smithy.Schema
 
 var UpdateIdentityPropagationConfigResponse_Status *smithy.Schema
 
+var UpdateInboundConnectorApplicationAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateInboundConnectorApplicationAssociationsRequest",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateInboundConnectorApplicationAssociationsRequest_AwsAccountId *smithy.Schema
+
+var UpdateInboundConnectorApplicationAssociationsRequest_InboundConnectorId *smithy.Schema
+
+var UpdateInboundConnectorApplicationAssociationsRequest_AssociateAccessControlApplications *smithy.Schema
+
+var UpdateInboundConnectorApplicationAssociationsRequest_DisassociateAccessControlApplications *smithy.Schema
+
+var UpdateInboundConnectorApplicationAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateInboundConnectorApplicationAssociationsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateInboundConnectorApplicationAssociationsResponse_Status *smithy.Schema
+
+var UpdateInboundConnectorApplicationAssociationsResponse_RequestId *smithy.Schema
+
+var UpdateInboundConnectorRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateInboundConnectorRequest",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateInboundConnectorRequest_AwsAccountId *smithy.Schema
+
+var UpdateInboundConnectorRequest_InboundConnectorId *smithy.Schema
+
+var UpdateInboundConnectorRequest_Name *smithy.Schema
+
+var UpdateInboundConnectorRequest_Description *smithy.Schema
+
+var UpdateInboundConnectorRequest_InboundConnectorConfiguration *smithy.Schema
+
+var UpdateInboundConnectorRequest_InboundConnectorStatus *smithy.Schema
+
+var UpdateInboundConnectorResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateInboundConnectorResponse",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateInboundConnectorResponse_Status *smithy.Schema
+
+var UpdateInboundConnectorResponse_RequestId *smithy.Schema
+
+var UpdateInboundConnectorResponse_InboundConnectorId *smithy.Schema
+
+var UpdateInboundConnectorResponse_Arn *smithy.Schema
+
+var UpdateInboundConnectorResponse_InboundConnectorStatus *smithy.Schema
+
+var UpdateInboundConnectorResponse_LastUpdatedTime *smithy.Schema
+
 var UpdateIpRestrictionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
 	Name:      "UpdateIpRestrictionRequest",
@@ -30682,6 +32256,34 @@ var UpdateKnowledgeBasePermissionsResponse_Permissions *smithy.Schema
 var UpdateKnowledgeBasePermissionsResponse_RequestId *smithy.Schema
 
 var UpdateKnowledgeBasePermissionsResponse_Status *smithy.Schema
+
+var UpdateKnowledgeBaseRefreshScheduleRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateKnowledgeBaseRefreshScheduleRequest",
+}, smithy.ShapeTypeStructure, 6)
+var UpdateKnowledgeBaseRefreshScheduleRequest_AwsAccountId *smithy.Schema
+
+var UpdateKnowledgeBaseRefreshScheduleRequest_KnowledgeBaseId *smithy.Schema
+
+var UpdateKnowledgeBaseRefreshScheduleRequest_ScheduleId *smithy.Schema
+
+var UpdateKnowledgeBaseRefreshScheduleRequest_ScheduleFrequency *smithy.Schema
+
+var UpdateKnowledgeBaseRefreshScheduleRequest_StartTime *smithy.Schema
+
+var UpdateKnowledgeBaseRefreshScheduleRequest_State *smithy.Schema
+
+var UpdateKnowledgeBaseRefreshScheduleResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.quicksight",
+	Name:      "UpdateKnowledgeBaseRefreshScheduleResponse",
+}, smithy.ShapeTypeStructure, 4)
+var UpdateKnowledgeBaseRefreshScheduleResponse_ScheduleId *smithy.Schema
+
+var UpdateKnowledgeBaseRefreshScheduleResponse_KnowledgeBaseArn *smithy.Schema
+
+var UpdateKnowledgeBaseRefreshScheduleResponse_RequestId *smithy.Schema
+
+var UpdateKnowledgeBaseRefreshScheduleResponse_Status *smithy.Schema
 
 var UpdateLimitsProfileRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.quicksight",
@@ -31366,6 +32968,138 @@ var UpdateVPCConnectionResponse_Status *smithy.Schema
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
 func init() {
+	AccessControlApplicationAuthenticationType_OIDC = AccessControlApplicationAuthenticationType.AddMember("OIDC", smithyprelude.Unit)
+
+	AccessControlApplicationStatus_ENABLED = AccessControlApplicationStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	AccessControlApplicationStatus_DISABLED = AccessControlApplicationStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	IdpAuthorizingType_EXTERNAL_IDP_PUBLIC_AUTH_CODE = IdpAuthorizingType.AddMember("EXTERNAL_IDP_PUBLIC_AUTH_CODE", smithyprelude.Unit)
+
+	IdpAuthorizingType_EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE = IdpAuthorizingType.AddMember("EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE", smithyprelude.Unit)
+
+	IdpAuthorizingType_QUICK_MANAGED_AUTH_CODE = IdpAuthorizingType.AddMember("QUICK_MANAGED_AUTH_CODE", smithyprelude.Unit)
+
+	IdpAuthorizingType_IDC_AUTH_CODE = IdpAuthorizingType.AddMember("IDC_AUTH_CODE", smithyprelude.Unit)
+
+	ExternalIdpPublicAuthCodeAuthorizingConfig_ClientId = ExternalIdpPublicAuthCodeAuthorizingConfig.AddMember("ClientId", _OAuthApplicationClientId)
+
+	ExternalIdpPublicAuthCodeAuthorizingConfig_IssuerUrl = ExternalIdpPublicAuthCodeAuthorizingConfig.AddMember("IssuerUrl", _Uri)
+
+	_RegionalSecretManagerArnMap_key = _RegionalSecretManagerArnMap.AddMember("key", _AwsRegion)
+
+	_RegionalSecretManagerArnMap_value = _RegionalSecretManagerArnMap.AddMember("value", _AccessControlApplicationSecretManagerArn)
+
+	ExternalIdpConfidentialClientSecret_ClientSecretId = ExternalIdpConfidentialClientSecret.AddMember("ClientSecretId", _ShortRestrictiveResourceId)
+
+	ExternalIdpConfidentialClientSecret_RegionalSecretManagerArns = ExternalIdpConfidentialClientSecret.AddMember("RegionalSecretManagerArns", _RegionalSecretManagerArnMap)
+
+	ExternalIdpConfidentialClientSecret_CreatedAt = ExternalIdpConfidentialClientSecret.AddMember("CreatedAt", smithyprelude.Timestamp)
+
+	ExternalIdpConfidentialClientSecret_UpdatedAt = ExternalIdpConfidentialClientSecret.AddMember("UpdatedAt", smithyprelude.Timestamp)
+
+	ExternalIdpConfidentialClientSecret_Description = ExternalIdpConfidentialClientSecret.AddMember("Description", _AccessControlApplicationDescription)
+
+	_ExternalIdpConfidentialClientSecretList_member = _ExternalIdpConfidentialClientSecretList.AddMember("member", ExternalIdpConfidentialClientSecret)
+
+	ExternalIdpConfidentialAuthCodeAuthorizingConfig_ClientId = ExternalIdpConfidentialAuthCodeAuthorizingConfig.AddMember("ClientId", _OAuthApplicationClientId)
+
+	ExternalIdpConfidentialAuthCodeAuthorizingConfig_IssuerUrl = ExternalIdpConfidentialAuthCodeAuthorizingConfig.AddMember("IssuerUrl", _Uri)
+
+	ExternalIdpConfidentialAuthCodeAuthorizingConfig_ClientSecrets = ExternalIdpConfidentialAuthCodeAuthorizingConfig.AddMember("ClientSecrets", _ExternalIdpConfidentialClientSecretList)
+
+	IdpAuthorizingConfigurationDetail_ExternalIdpPublicAuthCode = IdpAuthorizingConfigurationDetail.AddMember("ExternalIdpPublicAuthCode", ExternalIdpPublicAuthCodeAuthorizingConfig)
+
+	IdpAuthorizingConfigurationDetail_ExternalIdpConfidentialAuthCode = IdpAuthorizingConfigurationDetail.AddMember("ExternalIdpConfidentialAuthCode", ExternalIdpConfidentialAuthCodeAuthorizingConfig)
+
+	IdcTrustedTokenIssuerConfig_IdcTrustedTokenIssuerArn = IdcTrustedTokenIssuerConfig.AddMember("IdcTrustedTokenIssuerArn", _IdcTrustedTokenIssuerArn)
+
+	IdpAuthorizingConfig_IdpAuthorizingType = IdpAuthorizingConfig.AddMember("IdpAuthorizingType", IdpAuthorizingType)
+
+	IdpAuthorizingConfig_IdpAuthorizingConfigurationDetail = IdpAuthorizingConfig.AddMember("IdpAuthorizingConfigurationDetail", IdpAuthorizingConfigurationDetail)
+
+	IdpAuthorizingConfig_IdcTrustedTokenIssuerConfiguration = IdpAuthorizingConfig.AddMember("IdcTrustedTokenIssuerConfiguration", IdcTrustedTokenIssuerConfig)
+
+	QuickAuthenticationType_QUICK_MANAGED_PUBLIC_AUTH_CODE = QuickAuthenticationType.AddMember("QUICK_MANAGED_PUBLIC_AUTH_CODE", smithyprelude.Unit)
+
+	_RedirectUriList_member = _RedirectUriList.AddMember("member", _Uri)
+
+	QuickManagedPublicAuthCodeQuickAuthenticationConfig_RedirectUris = QuickManagedPublicAuthCodeQuickAuthenticationConfig.AddMember("RedirectUris", _RedirectUriList)
+
+	QuickManagedPublicAuthCodeQuickAuthenticationConfig_ClientId = QuickManagedPublicAuthCodeQuickAuthenticationConfig.AddMember("ClientId", _OAuthApplicationClientId)
+
+	QuickAuthenticationConfigurationDetail_QuickManagedPublicAuthCode = QuickAuthenticationConfigurationDetail.AddMember("QuickManagedPublicAuthCode", QuickManagedPublicAuthCodeQuickAuthenticationConfig)
+
+	QuickAuthenticationConfig_QuickAuthenticationType = QuickAuthenticationConfig.AddMember("QuickAuthenticationType", QuickAuthenticationType)
+
+	QuickAuthenticationConfig_QuickAuthenticationConfigurationDetail = QuickAuthenticationConfig.AddMember("QuickAuthenticationConfigurationDetail", QuickAuthenticationConfigurationDetail)
+
+	AccessControlApplication_ApplicationId = AccessControlApplication.AddMember("ApplicationId", _ShortRestrictiveResourceId)
+
+	AccessControlApplication_Arn = AccessControlApplication.AddMember("Arn", _Arn)
+
+	AccessControlApplication_Name = AccessControlApplication.AddMember("Name", _ResourceName)
+
+	AccessControlApplication_Namespace = AccessControlApplication.AddMember("Namespace", smithyprelude.String)
+
+	AccessControlApplication_AuthenticationType = AccessControlApplication.AddMember("AuthenticationType", AccessControlApplicationAuthenticationType)
+
+	AccessControlApplication_Status = AccessControlApplication.AddMember("Status", AccessControlApplicationStatus)
+
+	AccessControlApplication_CreatedTime = AccessControlApplication.AddMember("CreatedTime", smithyprelude.Timestamp)
+
+	AccessControlApplication_LastUpdatedTime = AccessControlApplication.AddMember("LastUpdatedTime", smithyprelude.Timestamp)
+
+	AccessControlApplication_TenantUrl = AccessControlApplication.AddMember("TenantUrl", smithyprelude.String)
+
+	AccessControlApplication_Description = AccessControlApplication.AddMember("Description", _AccessControlApplicationDescription)
+
+	AccessControlApplication_IdcApplicationArn = AccessControlApplication.AddMember("IdcApplicationArn", smithyprelude.String)
+
+	AccessControlApplication_IdpAuthorizingConfiguration = AccessControlApplication.AddMember("IdpAuthorizingConfiguration", IdpAuthorizingConfig)
+
+	AccessControlApplication_QuickAuthenticationConfiguration = AccessControlApplication.AddMember("QuickAuthenticationConfiguration", QuickAuthenticationConfig)
+
+	ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary_ClientId = ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary.AddMember("ClientId", _OAuthApplicationClientId)
+
+	ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary_IssuerUrl = ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary.AddMember("IssuerUrl", _Uri)
+
+	IdpAuthorizingConfigurationSummaryDetail_ExternalIdpPublicAuthCode = IdpAuthorizingConfigurationSummaryDetail.AddMember("ExternalIdpPublicAuthCode", ExternalIdpPublicAuthCodeAuthorizingConfig)
+
+	IdpAuthorizingConfigurationSummaryDetail_ExternalIdpConfidentialAuthCode = IdpAuthorizingConfigurationSummaryDetail.AddMember("ExternalIdpConfidentialAuthCode", ExternalIdpConfidentialAuthCodeAuthorizingConfigSummary)
+
+	IdpAuthorizingConfigSummary_IdpAuthorizingType = IdpAuthorizingConfigSummary.AddMember("IdpAuthorizingType", IdpAuthorizingType)
+
+	IdpAuthorizingConfigSummary_IdpAuthorizingConfigurationSummaryDetail = IdpAuthorizingConfigSummary.AddMember("IdpAuthorizingConfigurationSummaryDetail", IdpAuthorizingConfigurationSummaryDetail)
+
+	IdpAuthorizingConfigSummary_IdcTrustedTokenIssuerConfiguration = IdpAuthorizingConfigSummary.AddMember("IdcTrustedTokenIssuerConfiguration", IdcTrustedTokenIssuerConfig)
+
+	AccessControlApplicationSummary_ApplicationId = AccessControlApplicationSummary.AddMember("ApplicationId", _ShortRestrictiveResourceId)
+
+	AccessControlApplicationSummary_Arn = AccessControlApplicationSummary.AddMember("Arn", _Arn)
+
+	AccessControlApplicationSummary_Name = AccessControlApplicationSummary.AddMember("Name", _ResourceName)
+
+	AccessControlApplicationSummary_Namespace = AccessControlApplicationSummary.AddMember("Namespace", smithyprelude.String)
+
+	AccessControlApplicationSummary_AuthenticationType = AccessControlApplicationSummary.AddMember("AuthenticationType", AccessControlApplicationAuthenticationType)
+
+	AccessControlApplicationSummary_Status = AccessControlApplicationSummary.AddMember("Status", AccessControlApplicationStatus)
+
+	AccessControlApplicationSummary_CreatedTime = AccessControlApplicationSummary.AddMember("CreatedTime", smithyprelude.Timestamp)
+
+	AccessControlApplicationSummary_LastUpdatedTime = AccessControlApplicationSummary.AddMember("LastUpdatedTime", smithyprelude.Timestamp)
+
+	AccessControlApplicationSummary_TenantUrl = AccessControlApplicationSummary.AddMember("TenantUrl", smithyprelude.String)
+
+	AccessControlApplicationSummary_IdpAuthorizingConfiguration = AccessControlApplicationSummary.AddMember("IdpAuthorizingConfiguration", IdpAuthorizingConfigSummary)
+
+	AccessControlApplicationSummary_QuickAuthenticationConfiguration = AccessControlApplicationSummary.AddMember("QuickAuthenticationConfiguration", QuickAuthenticationConfig)
+
+	AccessControlApplicationSummary_Description = AccessControlApplicationSummary.AddMember("Description", _AccessControlApplicationDescription)
+
+	_AccessControlApplicationSummaryList_member = _AccessControlApplicationSummaryList.AddMember("member", AccessControlApplicationSummary)
+
 	AccessControlConfiguration_isACLEnabled = AccessControlConfiguration.AddMember("isACLEnabled", _Boolean)
 
 	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _String)
@@ -37344,6 +39078,8 @@ func init() {
 
 	GovernedAction_SHARE = GovernedAction.AddMember("SHARE", smithyprelude.Unit)
 
+	GovernedAction_PUBLISH = GovernedAction.AddMember("PUBLISH", smithyprelude.Unit)
+
 	_GovernedActionList_member = _GovernedActionList.AddMember("member", GovernedAction)
 
 	AssetType_AGENT = AssetType.AddMember("AGENT", smithyprelude.Unit)
@@ -37351,6 +39087,8 @@ func init() {
 	AssetType_SPACE = AssetType.AddMember("SPACE", smithyprelude.Unit)
 
 	AssetType_KNOWLEDGE_BASE = AssetType.AddMember("KNOWLEDGE_BASE", smithyprelude.Unit)
+
+	AssetType_FLOW = AssetType.AddMember("FLOW", smithyprelude.Unit)
 
 	_AssetTypeList_member = _AssetTypeList.AddMember("member", AssetType)
 
@@ -37789,6 +39527,8 @@ func init() {
 	RedshiftParameters_Port = RedshiftParameters.AddMember("Port", _OptionalPort)
 
 	RedshiftParameters_Database = RedshiftParameters.AddMember("Database", _Database)
+
+	RedshiftParameters_FederatedCatalog = RedshiftParameters.AddMember("FederatedCatalog", _FederatedCatalog)
 
 	RedshiftParameters_ClusterId = RedshiftParameters.AddMember("ClusterId", _ClusterId)
 
@@ -38402,6 +40142,8 @@ func init() {
 
 	AutomationJobStatus_STOPPED = AutomationJobStatus.AddMember("STOPPED", smithyprelude.Unit)
 
+	_AwsRegionList_member = _AwsRegionList.AddMember("member", _AwsRegion)
+
 	BatchDeleteKnowledgeBaseFailure_KnowledgeBaseId = BatchDeleteKnowledgeBaseFailure.AddMember("KnowledgeBaseId", _KnowledgeBaseId)
 
 	BatchDeleteKnowledgeBaseFailure_ErrorCode = BatchDeleteKnowledgeBaseFailure.AddMember("ErrorCode", smithyprelude.String)
@@ -38417,6 +40159,20 @@ func init() {
 	BatchDeleteKnowledgeBaseSuccess_KnowledgeBaseArn = BatchDeleteKnowledgeBaseSuccess.AddMember("KnowledgeBaseArn", _KnowledgeBaseArn)
 
 	_BatchDeleteKnowledgeBaseSuccessList_member = _BatchDeleteKnowledgeBaseSuccessList.AddMember("member", BatchDeleteKnowledgeBaseSuccess)
+
+	_BatchDeletePolicyAssignmentByPolicyRequestPrincipalArnsList_member = _BatchDeletePolicyAssignmentByPolicyRequestPrincipalArnsList.AddMember("member", _PrincipalArn)
+
+	BatchDeletePolicyAssignmentError_PrincipalArn = BatchDeletePolicyAssignmentError.AddMember("PrincipalArn", _PrincipalArn)
+
+	BatchDeletePolicyAssignmentError_ErrorCode = BatchDeletePolicyAssignmentError.AddMember("ErrorCode", smithyprelude.String)
+
+	BatchDeletePolicyAssignmentError_ErrorMessage = BatchDeletePolicyAssignmentError.AddMember("ErrorMessage", smithyprelude.String)
+
+	_BatchDeletePolicyAssignmentErrorList_member = _BatchDeletePolicyAssignmentErrorList.AddMember("member", BatchDeletePolicyAssignmentError)
+
+	BatchDeletePolicyAssignmentSuccess_PrincipalArn = BatchDeletePolicyAssignmentSuccess.AddMember("PrincipalArn", _PrincipalArn)
+
+	_BatchDeletePolicyAssignmentSuccessList_member = _BatchDeletePolicyAssignmentSuccessList.AddMember("member", BatchDeletePolicyAssignmentSuccess)
 
 	BatchDescribeUserLimitsError_userName = BatchDescribeUserLimitsError.AddMember("userName", smithyprelude.String)
 
@@ -38435,6 +40191,30 @@ func init() {
 	UserLimitsEntry_namespace = UserLimitsEntry.AddMember("namespace", smithyprelude.String)
 
 	_BatchDescribeUserLimitsRequestUsersList_member = _BatchDescribeUserLimitsRequestUsersList.AddMember("member", UserLimitsEntry)
+
+	PutAssignmentEntry_PrincipalArn = PutAssignmentEntry.AddMember("PrincipalArn", _PrincipalArn)
+
+	PutAssignmentEntry_ExistingPolicyArn = PutAssignmentEntry.AddMember("ExistingPolicyArn", _PolicyArn)
+
+	PutAssignmentEntry_Revision = PutAssignmentEntry.AddMember("Revision", _Revision)
+
+	_BatchPutPolicyAssignmentByPolicyRequestAssignmentsList_member = _BatchPutPolicyAssignmentByPolicyRequestAssignmentsList.AddMember("member", PutAssignmentEntry)
+
+	BatchPutPolicyAssignmentError_PrincipalArn = BatchPutPolicyAssignmentError.AddMember("PrincipalArn", _PrincipalArn)
+
+	BatchPutPolicyAssignmentError_ErrorCode = BatchPutPolicyAssignmentError.AddMember("ErrorCode", smithyprelude.String)
+
+	BatchPutPolicyAssignmentError_ErrorMessage = BatchPutPolicyAssignmentError.AddMember("ErrorMessage", smithyprelude.String)
+
+	_BatchPutPolicyAssignmentErrorList_member = _BatchPutPolicyAssignmentErrorList.AddMember("member", BatchPutPolicyAssignmentError)
+
+	BatchPutPolicyAssignmentSuccess_PrincipalArn = BatchPutPolicyAssignmentSuccess.AddMember("PrincipalArn", _PrincipalArn)
+
+	BatchPutPolicyAssignmentSuccess_ReplacedPolicyArn = BatchPutPolicyAssignmentSuccess.AddMember("ReplacedPolicyArn", _PolicyArn)
+
+	BatchPutPolicyAssignmentSuccess_Revision = BatchPutPolicyAssignmentSuccess.AddMember("Revision", _Revision)
+
+	_BatchPutPolicyAssignmentSuccessList_member = _BatchPutPolicyAssignmentSuccessList.AddMember("member", BatchPutPolicyAssignmentSuccess)
 
 	BookmarksConfigurations_Enabled = BookmarksConfigurations.AddMember("Enabled", _Boolean)
 
@@ -38947,6 +40727,12 @@ func init() {
 	Capabilities_ShareMCPAction = Capabilities.AddMember("ShareMCPAction", CapabilityState)
 
 	Capabilities_UseMCPAction = Capabilities.AddMember("UseMCPAction", CapabilityState)
+
+	Capabilities_LocalMCPAction = Capabilities.AddMember("LocalMCPAction", CapabilityState)
+
+	Capabilities_CreateAndUpdateLocalMCPAction = Capabilities.AddMember("CreateAndUpdateLocalMCPAction", CapabilityState)
+
+	Capabilities_UseLocalMCPAction = Capabilities.AddMember("UseLocalMCPAction", CapabilityState)
 
 	Capabilities_OpenAPIAction = Capabilities.AddMember("OpenAPIAction", CapabilityState)
 
@@ -39753,6 +41539,16 @@ func init() {
 	CellValueSynonym_Synonyms = CellValueSynonym.AddMember("Synonyms", _SensitiveStringList)
 
 	_CellValueSynonyms_member = _CellValueSynonyms.AddMember("member", CellValueSynonym)
+
+	ClientSecretSourceType_IDP_PROVIDED = ClientSecretSourceType.AddMember("IDP_PROVIDED", smithyprelude.Unit)
+
+	IdpClientSecretInput_RegionalSecretManagerArns = IdpClientSecretInput.AddMember("RegionalSecretManagerArns", _RegionalSecretManagerArnMap)
+
+	ClientSecretConfigurationDetail_Idp = ClientSecretConfigurationDetail.AddMember("Idp", IdpClientSecretInput)
+
+	ClientSecretConfiguration_ClientSecretSourceType = ClientSecretConfiguration.AddMember("ClientSecretSourceType", ClientSecretSourceType)
+
+	ClientSecretConfiguration_ClientSecretConfigurationDetail = ClientSecretConfiguration.AddMember("ClientSecretConfigurationDetail", ClientSecretConfigurationDetail)
 
 	_StringList_member = _StringList.AddMember("member", _String)
 
@@ -41184,6 +42980,18 @@ func init() {
 
 	SemanticModelConfiguration_SemanticMetadata = SemanticModelConfiguration.AddMember("SemanticMetadata", _DataSetSemanticMetadataList)
 
+	UnmaterializedCalculatedColumn_ColumnId = UnmaterializedCalculatedColumn.AddMember("ColumnId", _ColumnId)
+
+	UnmaterializedCalculatedColumn_ColumnName = UnmaterializedCalculatedColumn.AddMember("ColumnName", _ColumnName)
+
+	UnmaterializedCalculatedColumn_Expression = UnmaterializedCalculatedColumn.AddMember("Expression", _DataSetCalculatedFieldExpression)
+
+	UnmaterializedCalculatedColumn_Type = UnmaterializedCalculatedColumn.AddMember("Type", ColumnDataType)
+
+	UnmaterializedCalculatedColumn_SubType = UnmaterializedCalculatedColumn.AddMember("SubType", ColumnDataSubType)
+
+	_UnmaterializedCalculatedColumnList_member = _UnmaterializedCalculatedColumnList.AddMember("member", UnmaterializedCalculatedColumn)
+
 	DataSet_Arn = DataSet.AddMember("Arn", _Arn)
 
 	DataSet_DataSetId = DataSet.AddMember("DataSetId", _ResourceId)
@@ -41225,6 +43033,8 @@ func init() {
 	DataSet_DataPrepConfiguration = DataSet.AddMember("DataPrepConfiguration", DataPrepConfiguration)
 
 	DataSet_SemanticModelConfiguration = DataSet.AddMember("SemanticModelConfiguration", SemanticModelConfiguration)
+
+	DataSet_UnmaterializedCalculatedColumns = DataSet.AddMember("UnmaterializedCalculatedColumns", _UnmaterializedCalculatedColumnList)
 
 	DataSetSchema_ColumnSchemaList = DataSetSchema.AddMember("ColumnSchemaList", _ColumnSchemaList)
 
@@ -42106,6 +43916,16 @@ func init() {
 
 	ExceptionResourceType_INGESTION = ExceptionResourceType.AddMember("INGESTION", smithyprelude.Unit)
 
+	ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_ClientId = ExternalIdpConfidentialAuthCodeAuthorizingConfigInput.AddMember("ClientId", _OAuthApplicationClientId)
+
+	ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_IssuerUrl = ExternalIdpConfidentialAuthCodeAuthorizingConfigInput.AddMember("IssuerUrl", _Uri)
+
+	ExternalIdpConfidentialAuthCodeAuthorizingConfigInput_ClientSecret = ExternalIdpConfidentialAuthCodeAuthorizingConfigInput.AddMember("ClientSecret", IdpClientSecretInput)
+
+	ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput_ClientId = ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput.AddMember("ClientId", _OAuthApplicationClientId)
+
+	ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput_IssuerUrl = ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput.AddMember("IssuerUrl", _Uri)
+
 	FailedKeyRegistrationEntry_KeyArn = FailedKeyRegistrationEntry.AddMember("KeyArn", _String)
 
 	FailedKeyRegistrationEntry_Message = FailedKeyRegistrationEntry.AddMember("Message", _NonEmptyString)
@@ -42398,11 +44218,87 @@ func init() {
 
 	IdentityTypeNotSupportedException_RequestId = IdentityTypeNotSupportedException.AddMember("RequestId", _String)
 
+	IdpAuthorizingConfigurationDetailInput_ExternalIdpPublicAuthCode = IdpAuthorizingConfigurationDetailInput.AddMember("ExternalIdpPublicAuthCode", ExternalIdpPublicAuthCodeAuthorizingConfig)
+
+	IdpAuthorizingConfigurationDetailInput_ExternalIdpConfidentialAuthCode = IdpAuthorizingConfigurationDetailInput.AddMember("ExternalIdpConfidentialAuthCode", ExternalIdpConfidentialAuthCodeAuthorizingConfigInput)
+
+	IdpAuthorizingConfigInput_IdpAuthorizingType = IdpAuthorizingConfigInput.AddMember("IdpAuthorizingType", IdpAuthorizingType)
+
+	IdpAuthorizingConfigInput_IdpAuthorizingConfigurationDetailInput = IdpAuthorizingConfigInput.AddMember("IdpAuthorizingConfigurationDetailInput", IdpAuthorizingConfigurationDetailInput)
+
+	IdpAuthorizingConfigInput_IdcTrustedTokenIssuerConfiguration = IdpAuthorizingConfigInput.AddMember("IdcTrustedTokenIssuerConfiguration", IdcTrustedTokenIssuerConfig)
+
+	IdpAuthorizingConfigurationDetailUpdateInput_ExternalIdpPublicAuthCode = IdpAuthorizingConfigurationDetailUpdateInput.AddMember("ExternalIdpPublicAuthCode", ExternalIdpPublicAuthCodeAuthorizingConfig)
+
+	IdpAuthorizingConfigurationDetailUpdateInput_ExternalIdpConfidentialAuthCode = IdpAuthorizingConfigurationDetailUpdateInput.AddMember("ExternalIdpConfidentialAuthCode", ExternalIdpConfidentialAuthCodeAuthorizingConfigUpdateInput)
+
+	IdpAuthorizingConfigUpdateInput_IdpAuthorizingType = IdpAuthorizingConfigUpdateInput.AddMember("IdpAuthorizingType", IdpAuthorizingType)
+
+	IdpAuthorizingConfigUpdateInput_IdpAuthorizingConfigurationDetailInput = IdpAuthorizingConfigUpdateInput.AddMember("IdpAuthorizingConfigurationDetailInput", IdpAuthorizingConfigurationDetailUpdateInput)
+
+	IdpAuthorizingConfigUpdateInput_IdcTrustedTokenIssuerConfiguration = IdpAuthorizingConfigUpdateInput.AddMember("IdcTrustedTokenIssuerConfiguration", IdcTrustedTokenIssuerConfig)
+
 	ImageExtractionStatus_ENABLED = ImageExtractionStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	ImageExtractionStatus_DISABLED = ImageExtractionStatus.AddMember("DISABLED", smithyprelude.Unit)
 
 	ImageExtractionConfiguration_imageExtractionStatus = ImageExtractionConfiguration.AddMember("imageExtractionStatus", ImageExtractionStatus)
+
+	InboundConnectorStatus_ENABLED = InboundConnectorStatus.AddMember("ENABLED", smithyprelude.Unit)
+
+	InboundConnectorStatus_DISABLED = InboundConnectorStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	InboundConnectorType_QUICK_DESKTOP = InboundConnectorType.AddMember("QUICK_DESKTOP", smithyprelude.Unit)
+
+	InboundConnectorConfig_InboundConnectorType = InboundConnectorConfig.AddMember("InboundConnectorType", InboundConnectorType)
+
+	InboundConnector_InboundConnectorId = InboundConnector.AddMember("InboundConnectorId", _ShortRestrictiveResourceId)
+
+	InboundConnector_Arn = InboundConnector.AddMember("Arn", _Arn)
+
+	InboundConnector_Name = InboundConnector.AddMember("Name", _ResourceName)
+
+	InboundConnector_Status = InboundConnector.AddMember("Status", InboundConnectorStatus)
+
+	InboundConnector_TenantUrl = InboundConnector.AddMember("TenantUrl", smithyprelude.String)
+
+	InboundConnector_CreatedTime = InboundConnector.AddMember("CreatedTime", smithyprelude.Timestamp)
+
+	InboundConnector_LastUpdatedTime = InboundConnector.AddMember("LastUpdatedTime", smithyprelude.Timestamp)
+
+	InboundConnector_InboundConnectorConfiguration = InboundConnector.AddMember("InboundConnectorConfiguration", InboundConnectorConfig)
+
+	InboundConnector_Description = InboundConnector.AddMember("Description", _InboundConnectorDescription)
+
+	InboundConnectorApplicationAssociationSummary_AccessControlApplicationArn = InboundConnectorApplicationAssociationSummary.AddMember("AccessControlApplicationArn", _Arn)
+
+	InboundConnectorApplicationAssociationSummary_CreatedTime = InboundConnectorApplicationAssociationSummary.AddMember("CreatedTime", smithyprelude.Timestamp)
+
+	_InboundConnectorApplicationAssociationSummaryList_member = _InboundConnectorApplicationAssociationSummaryList.AddMember("member", InboundConnectorApplicationAssociationSummary)
+
+	_InboundConnectorAssociationArnList_member = _InboundConnectorAssociationArnList.AddMember("member", _Arn)
+
+	InboundConnectorSummary_InboundConnectorId = InboundConnectorSummary.AddMember("InboundConnectorId", _ShortRestrictiveResourceId)
+
+	InboundConnectorSummary_Arn = InboundConnectorSummary.AddMember("Arn", _Arn)
+
+	InboundConnectorSummary_Name = InboundConnectorSummary.AddMember("Name", _ResourceName)
+
+	InboundConnectorSummary_Status = InboundConnectorSummary.AddMember("Status", InboundConnectorStatus)
+
+	InboundConnectorSummary_CreatedTime = InboundConnectorSummary.AddMember("CreatedTime", smithyprelude.Timestamp)
+
+	InboundConnectorSummary_LastUpdatedTime = InboundConnectorSummary.AddMember("LastUpdatedTime", smithyprelude.Timestamp)
+
+	InboundConnectorSummary_TenantUrl = InboundConnectorSummary.AddMember("TenantUrl", smithyprelude.String)
+
+	InboundConnectorSummary_InboundConnectorConfiguration = InboundConnectorSummary.AddMember("InboundConnectorConfiguration", InboundConnectorConfig)
+
+	InboundConnectorSummary_Description = InboundConnectorSummary.AddMember("Description", _InboundConnectorDescription)
+
+	_InboundConnectorSummaryList_member = _InboundConnectorSummaryList.AddMember("member", InboundConnectorSummary)
+
+	_InboundConnectorTypeFilterList_member = _InboundConnectorTypeFilterList.AddMember("member", InboundConnectorType)
 
 	IncludeFolderMembers_RECURSE = IncludeFolderMembers.AddMember("RECURSE", smithyprelude.Unit)
 
@@ -42538,6 +44434,20 @@ func init() {
 
 	_IpRestrictionRuleMap_value = _IpRestrictionRuleMap.AddMember("value", _IpRestrictionRuleDescription)
 
+	KbDayOfWeek_SUNDAY = KbDayOfWeek.AddMember("SUNDAY", smithyprelude.Unit)
+
+	KbDayOfWeek_MONDAY = KbDayOfWeek.AddMember("MONDAY", smithyprelude.Unit)
+
+	KbDayOfWeek_TUESDAY = KbDayOfWeek.AddMember("TUESDAY", smithyprelude.Unit)
+
+	KbDayOfWeek_WEDNESDAY = KbDayOfWeek.AddMember("WEDNESDAY", smithyprelude.Unit)
+
+	KbDayOfWeek_THURSDAY = KbDayOfWeek.AddMember("THURSDAY", smithyprelude.Unit)
+
+	KbDayOfWeek_FRIDAY = KbDayOfWeek.AddMember("FRIDAY", smithyprelude.Unit)
+
+	KbDayOfWeek_SATURDAY = KbDayOfWeek.AddMember("SATURDAY", smithyprelude.Unit)
+
 	KbIngestionStatus_QUEUED = KbIngestionStatus.AddMember("QUEUED", smithyprelude.Unit)
 
 	KbIngestionStatus_RUNNING = KbIngestionStatus.AddMember("RUNNING", smithyprelude.Unit)
@@ -42553,6 +44463,14 @@ func init() {
 	KbIngestionStatus_CANCELLING = KbIngestionStatus.AddMember("CANCELLING", smithyprelude.Unit)
 
 	KbIngestionStatus_TIMEOUT = KbIngestionStatus.AddMember("TIMEOUT", smithyprelude.Unit)
+
+	KbRefreshInterval_DAILY = KbRefreshInterval.AddMember("DAILY", smithyprelude.Unit)
+
+	KbRefreshInterval_WEEKLY = KbRefreshInterval.AddMember("WEEKLY", smithyprelude.Unit)
+
+	KbRefreshInterval_MONTHLY = KbRefreshInterval.AddMember("MONTHLY", smithyprelude.Unit)
+
+	KbRefreshInterval_HOURLY = KbRefreshInterval.AddMember("HOURLY", smithyprelude.Unit)
 
 	KbTemplateConfiguration_template = KbTemplateConfiguration.AddMember("template", _KbTemplate)
 
@@ -42629,6 +44547,28 @@ func init() {
 	KnowledgeBase_PrimaryOwnerArn = KnowledgeBase.AddMember("PrimaryOwnerArn", _String)
 
 	KnowledgeBase_PrimaryOwnerUsername = KnowledgeBase.AddMember("PrimaryOwnerUsername", _SensitiveString)
+
+	KnowledgeBaseScheduleRefreshOnEntity_DayOfWeek = KnowledgeBaseScheduleRefreshOnEntity.AddMember("DayOfWeek", KbDayOfWeek)
+
+	KnowledgeBaseScheduleRefreshOnEntity_DayOfMonth = KnowledgeBaseScheduleRefreshOnEntity.AddMember("DayOfMonth", _KnowledgeBaseScheduleRefreshOnEntityDayOfMonthString)
+
+	KnowledgeBaseRefreshFrequency_Interval = KnowledgeBaseRefreshFrequency.AddMember("Interval", KbRefreshInterval)
+
+	KnowledgeBaseRefreshFrequency_RefreshOnDay = KnowledgeBaseRefreshFrequency.AddMember("RefreshOnDay", KnowledgeBaseScheduleRefreshOnEntity)
+
+	ScheduleState_ENABLED = ScheduleState.AddMember("ENABLED", smithyprelude.Unit)
+
+	ScheduleState_DISABLED = ScheduleState.AddMember("DISABLED", smithyprelude.Unit)
+
+	KnowledgeBaseRefreshScheduleSummary_ScheduleId = KnowledgeBaseRefreshScheduleSummary.AddMember("ScheduleId", _ScheduleId)
+
+	KnowledgeBaseRefreshScheduleSummary_ScheduleFrequency = KnowledgeBaseRefreshScheduleSummary.AddMember("ScheduleFrequency", KnowledgeBaseRefreshFrequency)
+
+	KnowledgeBaseRefreshScheduleSummary_StartTime = KnowledgeBaseRefreshScheduleSummary.AddMember("StartTime", smithyprelude.Timestamp)
+
+	KnowledgeBaseRefreshScheduleSummary_State = KnowledgeBaseRefreshScheduleSummary.AddMember("State", ScheduleState)
+
+	_KnowledgeBaseRefreshScheduleList_member = _KnowledgeBaseRefreshScheduleList.AddMember("member", KnowledgeBaseRefreshScheduleSummary)
 
 	KnowledgeBaseSearchFilterName_KNOWLEDGE_BASE_ID = KnowledgeBaseSearchFilterName.AddMember("KNOWLEDGE_BASE_ID", smithyprelude.Unit)
 
@@ -42872,6 +44812,26 @@ func init() {
 
 	PersonalizationMode_DISABLED = PersonalizationMode.AddMember("DISABLED", smithyprelude.Unit)
 
+	PrincipalType_USER = PrincipalType.AddMember("USER", smithyprelude.Unit)
+
+	PrincipalType_GROUP = PrincipalType.AddMember("GROUP", smithyprelude.Unit)
+
+	PrincipalType_ACCOUNT = PrincipalType.AddMember("ACCOUNT", smithyprelude.Unit)
+
+	PolicyPrincipal_PrincipalArn = PolicyPrincipal.AddMember("PrincipalArn", _PrincipalArn)
+
+	PolicyPrincipal_PrincipalType = PolicyPrincipal.AddMember("PrincipalType", PrincipalType)
+
+	PolicyPrincipal_UpdatedAt = PolicyPrincipal.AddMember("UpdatedAt", smithyprelude.Timestamp)
+
+	PolicyPrincipal_Revision = PolicyPrincipal.AddMember("Revision", _Revision)
+
+	_PolicyPrincipalList_member = _PolicyPrincipalList.AddMember("member", PolicyPrincipal)
+
+	PolicyType_LIMITS_PROFILE = PolicyType.AddMember("LIMITS_PROFILE", smithyprelude.Unit)
+
+	PolicyType_CUSTOM_PERMISSIONS = PolicyType.AddMember("CUSTOM_PERMISSIONS", smithyprelude.Unit)
+
 	PreconditionNotMetException_Message = PreconditionNotMetException.AddMember("Message", _String)
 
 	PreconditionNotMetException_RequestId = PreconditionNotMetException.AddMember("RequestId", _String)
@@ -42905,6 +44865,20 @@ func init() {
 	QSearchStatus_ENABLED = QSearchStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	QSearchStatus_DISABLED = QSearchStatus.AddMember("DISABLED", smithyprelude.Unit)
+
+	QuickAuthenticationConfigurationDetailCreateOutput_QuickManagedPublicAuthCode = QuickAuthenticationConfigurationDetailCreateOutput.AddMember("QuickManagedPublicAuthCode", QuickManagedPublicAuthCodeQuickAuthenticationConfig)
+
+	QuickAuthenticationConfigCreateOutput_QuickAuthenticationType = QuickAuthenticationConfigCreateOutput.AddMember("QuickAuthenticationType", QuickAuthenticationType)
+
+	QuickAuthenticationConfigCreateOutput_QuickAuthenticationConfigurationDetailCreateOutput = QuickAuthenticationConfigCreateOutput.AddMember("QuickAuthenticationConfigurationDetailCreateOutput", QuickAuthenticationConfigurationDetailCreateOutput)
+
+	QuickManagedAuthCodeQuickAuthenticationConfigInput_RedirectUris = QuickManagedAuthCodeQuickAuthenticationConfigInput.AddMember("RedirectUris", _RedirectUriList)
+
+	QuickAuthenticationConfigurationDetailInput_QuickManagedPublicAuthCode = QuickAuthenticationConfigurationDetailInput.AddMember("QuickManagedPublicAuthCode", QuickManagedAuthCodeQuickAuthenticationConfigInput)
+
+	QuickAuthenticationConfigInput_QuickAuthenticationType = QuickAuthenticationConfigInput.AddMember("QuickAuthenticationType", QuickAuthenticationType)
+
+	QuickAuthenticationConfigInput_QuickAuthenticationConfigurationDetailInput = QuickAuthenticationConfigInput.AddMember("QuickAuthenticationConfigurationDetailInput", QuickAuthenticationConfigurationDetailInput)
 
 	QuickSightUserNotFoundException_Message = QuickSightUserNotFoundException.AddMember("Message", _String)
 
@@ -43868,6 +45842,18 @@ func init() {
 
 	_UserList_member = _UserList.AddMember("member", User)
 
+	ValidationExceptionField_Name = ValidationExceptionField.AddMember("Name", _String)
+
+	ValidationExceptionField_Message = ValidationExceptionField.AddMember("Message", _String)
+
+	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
+
+	ValidationException_Message = ValidationException.AddMember("Message", _String)
+
+	ValidationException_RequestId = ValidationException.AddMember("RequestId", _String)
+
+	ValidationException_FieldList = ValidationException.AddMember("FieldList", _ValidationExceptionFieldList)
+
 	ValidationStrategyMode_STRICT = ValidationStrategyMode.AddMember("STRICT", smithyprelude.Unit)
 
 	ValidationStrategyMode_LENIENT = ValidationStrategyMode.AddMember("LENIENT", smithyprelude.Unit)
@@ -43986,6 +45972,18 @@ func init() {
 
 	BatchDeleteKnowledgeBaseResponse_Status = BatchDeleteKnowledgeBaseResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
+	BatchDeletePolicyAssignmentByPolicyRequest_AccountId = BatchDeletePolicyAssignmentByPolicyRequest.AddMember("AccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	BatchDeletePolicyAssignmentByPolicyRequest_PolicyArn = BatchDeletePolicyAssignmentByPolicyRequest.AddMember("PolicyArn", _PolicyArn)
+
+	BatchDeletePolicyAssignmentByPolicyRequest_PrincipalArns = BatchDeletePolicyAssignmentByPolicyRequest.AddMember("PrincipalArns", _BatchDeletePolicyAssignmentByPolicyRequestPrincipalArnsList)
+
+	BatchDeletePolicyAssignmentByPolicyResponse_PolicyArn = BatchDeletePolicyAssignmentByPolicyResponse.AddMember("PolicyArn", _PolicyArn)
+
+	BatchDeletePolicyAssignmentByPolicyResponse_Success = BatchDeletePolicyAssignmentByPolicyResponse.AddMember("Success", _BatchDeletePolicyAssignmentSuccessList)
+
+	BatchDeletePolicyAssignmentByPolicyResponse_Errors = BatchDeletePolicyAssignmentByPolicyResponse.AddMember("Errors", _BatchDeletePolicyAssignmentErrorList)
+
 	BatchDeleteTopicReviewedAnswerRequest_AwsAccountId = BatchDeleteTopicReviewedAnswerRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
 
 	BatchDeleteTopicReviewedAnswerRequest_TopicId = BatchDeleteTopicReviewedAnswerRequest.AddMember("TopicId", _TopicId, &smithytraits.HTTPLabel{})
@@ -44014,6 +46012,18 @@ func init() {
 
 	BatchDescribeUserLimitsResponse_errors = BatchDescribeUserLimitsResponse.AddMember("errors", _BatchDescribeUserLimitsErrorList)
 
+	BatchPutPolicyAssignmentByPolicyRequest_AccountId = BatchPutPolicyAssignmentByPolicyRequest.AddMember("AccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	BatchPutPolicyAssignmentByPolicyRequest_PolicyArn = BatchPutPolicyAssignmentByPolicyRequest.AddMember("PolicyArn", _PolicyArn)
+
+	BatchPutPolicyAssignmentByPolicyRequest_Assignments = BatchPutPolicyAssignmentByPolicyRequest.AddMember("Assignments", _BatchPutPolicyAssignmentByPolicyRequestAssignmentsList)
+
+	BatchPutPolicyAssignmentByPolicyResponse_PolicyArn = BatchPutPolicyAssignmentByPolicyResponse.AddMember("PolicyArn", _PolicyArn)
+
+	BatchPutPolicyAssignmentByPolicyResponse_Success = BatchPutPolicyAssignmentByPolicyResponse.AddMember("Success", _BatchPutPolicyAssignmentSuccessList)
+
+	BatchPutPolicyAssignmentByPolicyResponse_Errors = BatchPutPolicyAssignmentByPolicyResponse.AddMember("Errors", _BatchPutPolicyAssignmentErrorList)
+
 	CancelIngestionRequest_AwsAccountId = CancelIngestionRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
 
 	CancelIngestionRequest_DataSetId = CancelIngestionRequest.AddMember("DataSetId", _String, &smithytraits.HTTPLabel{})
@@ -44027,6 +46037,58 @@ func init() {
 	CancelIngestionResponse_RequestId = CancelIngestionResponse.AddMember("RequestId", _String)
 
 	CancelIngestionResponse_Status = CancelIngestionResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
+
+	CreateAccessControlApplicationRequest_AwsAccountId = CreateAccessControlApplicationRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	CreateAccessControlApplicationRequest_ApplicationId = CreateAccessControlApplicationRequest.AddMember("ApplicationId", _ShortRestrictiveResourceId)
+
+	CreateAccessControlApplicationRequest_Name = CreateAccessControlApplicationRequest.AddMember("Name", _ResourceName)
+
+	CreateAccessControlApplicationRequest_Description = CreateAccessControlApplicationRequest.AddMember("Description", _AccessControlApplicationDescription)
+
+	CreateAccessControlApplicationRequest_Namespace = CreateAccessControlApplicationRequest.AddMember("Namespace", _Namespace)
+
+	CreateAccessControlApplicationRequest_AuthenticationType = CreateAccessControlApplicationRequest.AddMember("AuthenticationType", AccessControlApplicationAuthenticationType)
+
+	CreateAccessControlApplicationRequest_IdpAuthorizingConfiguration = CreateAccessControlApplicationRequest.AddMember("IdpAuthorizingConfiguration", IdpAuthorizingConfigInput)
+
+	CreateAccessControlApplicationRequest_QuickAuthenticationConfiguration = CreateAccessControlApplicationRequest.AddMember("QuickAuthenticationConfiguration", QuickAuthenticationConfigInput)
+
+	CreateAccessControlApplicationRequest_Tags = CreateAccessControlApplicationRequest.AddMember("Tags", _TagList)
+
+	CreateAccessControlApplicationResponse_Status = CreateAccessControlApplicationResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	CreateAccessControlApplicationResponse_RequestId = CreateAccessControlApplicationResponse.AddMember("RequestId", smithyprelude.String)
+
+	CreateAccessControlApplicationResponse_ApplicationId = CreateAccessControlApplicationResponse.AddMember("ApplicationId", smithyprelude.String)
+
+	CreateAccessControlApplicationResponse_Arn = CreateAccessControlApplicationResponse.AddMember("Arn", smithyprelude.String)
+
+	CreateAccessControlApplicationResponse_AccessControlApplicationStatus = CreateAccessControlApplicationResponse.AddMember("AccessControlApplicationStatus", AccessControlApplicationStatus)
+
+	CreateAccessControlApplicationResponse_CreatedTime = CreateAccessControlApplicationResponse.AddMember("CreatedTime", smithyprelude.Timestamp)
+
+	CreateAccessControlApplicationResponse_TenantUrl = CreateAccessControlApplicationResponse.AddMember("TenantUrl", smithyprelude.String)
+
+	CreateAccessControlApplicationResponse_IdcApplicationArn = CreateAccessControlApplicationResponse.AddMember("IdcApplicationArn", smithyprelude.String)
+
+	CreateAccessControlApplicationResponse_QuickAuthenticationConfiguration = CreateAccessControlApplicationResponse.AddMember("QuickAuthenticationConfiguration", QuickAuthenticationConfigCreateOutput)
+
+	CreateAccessControlApplicationSecretRequest_AwsAccountId = CreateAccessControlApplicationSecretRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	CreateAccessControlApplicationSecretRequest_ApplicationId = CreateAccessControlApplicationSecretRequest.AddMember("ApplicationId", _ShortRestrictiveResourceId, &smithytraits.HTTPLabel{})
+
+	CreateAccessControlApplicationSecretRequest_Description = CreateAccessControlApplicationSecretRequest.AddMember("Description", _AccessControlApplicationDescription)
+
+	CreateAccessControlApplicationSecretRequest_ClientSecretConfiguration = CreateAccessControlApplicationSecretRequest.AddMember("ClientSecretConfiguration", ClientSecretConfiguration)
+
+	CreateAccessControlApplicationSecretResponse_Status = CreateAccessControlApplicationSecretResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	CreateAccessControlApplicationSecretResponse_RequestId = CreateAccessControlApplicationSecretResponse.AddMember("RequestId", smithyprelude.String)
+
+	CreateAccessControlApplicationSecretResponse_ClientSecretId = CreateAccessControlApplicationSecretResponse.AddMember("ClientSecretId", _ShortRestrictiveResourceId)
+
+	CreateAccessControlApplicationSecretResponse_CreatedAt = CreateAccessControlApplicationSecretResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
 
 	CreateAccountCustomizationRequest_AwsAccountId = CreateAccountCustomizationRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
 
@@ -44312,6 +46374,8 @@ func init() {
 
 	CreateDataSetRequest_SemanticModelConfiguration = CreateDataSetRequest.AddMember("SemanticModelConfiguration", SemanticModelConfiguration)
 
+	CreateDataSetRequest_UnmaterializedCalculatedColumns = CreateDataSetRequest.AddMember("UnmaterializedCalculatedColumns", _UnmaterializedCalculatedColumnList)
+
 	CreateDataSetResponse_Arn = CreateDataSetResponse.AddMember("Arn", _Arn)
 
 	CreateDataSetResponse_DataSetId = CreateDataSetResponse.AddMember("DataSetId", _ResourceId)
@@ -44490,6 +46554,32 @@ func init() {
 
 	CreateIAMPolicyAssignmentResponse_Status = CreateIAMPolicyAssignmentResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
+	CreateInboundConnectorRequest_AwsAccountId = CreateInboundConnectorRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	CreateInboundConnectorRequest_InboundConnectorId = CreateInboundConnectorRequest.AddMember("InboundConnectorId", _ShortRestrictiveResourceId)
+
+	CreateInboundConnectorRequest_Name = CreateInboundConnectorRequest.AddMember("Name", _ResourceName)
+
+	CreateInboundConnectorRequest_Description = CreateInboundConnectorRequest.AddMember("Description", _InboundConnectorDescription)
+
+	CreateInboundConnectorRequest_InboundConnectorConfiguration = CreateInboundConnectorRequest.AddMember("InboundConnectorConfiguration", InboundConnectorConfig)
+
+	CreateInboundConnectorRequest_Tags = CreateInboundConnectorRequest.AddMember("Tags", _TagList)
+
+	CreateInboundConnectorResponse_Status = CreateInboundConnectorResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	CreateInboundConnectorResponse_RequestId = CreateInboundConnectorResponse.AddMember("RequestId", smithyprelude.String)
+
+	CreateInboundConnectorResponse_InboundConnectorId = CreateInboundConnectorResponse.AddMember("InboundConnectorId", smithyprelude.String)
+
+	CreateInboundConnectorResponse_Arn = CreateInboundConnectorResponse.AddMember("Arn", smithyprelude.String)
+
+	CreateInboundConnectorResponse_TenantUrl = CreateInboundConnectorResponse.AddMember("TenantUrl", smithyprelude.String)
+
+	CreateInboundConnectorResponse_InboundConnectorStatus = CreateInboundConnectorResponse.AddMember("InboundConnectorStatus", InboundConnectorStatus)
+
+	CreateInboundConnectorResponse_CreatedTime = CreateInboundConnectorResponse.AddMember("CreatedTime", smithyprelude.Timestamp)
+
 	CreateIngestionRequest_DataSetId = CreateIngestionRequest.AddMember("DataSetId", _String, &smithytraits.HTTPLabel{})
 
 	CreateIngestionRequest_IngestionId = CreateIngestionRequest.AddMember("IngestionId", _IngestionId, &smithytraits.HTTPLabel{})
@@ -44539,6 +46629,26 @@ func init() {
 	CreateKnowledgeBaseResponse_RequestId = CreateKnowledgeBaseResponse.AddMember("RequestId", _String)
 
 	CreateKnowledgeBaseResponse_Status = CreateKnowledgeBaseResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
+
+	CreateKnowledgeBaseRefreshScheduleRequest_AwsAccountId = CreateKnowledgeBaseRefreshScheduleRequest.AddMember("AwsAccountId", _KbAwsAccountId, &smithytraits.HTTPLabel{})
+
+	CreateKnowledgeBaseRefreshScheduleRequest_KnowledgeBaseId = CreateKnowledgeBaseRefreshScheduleRequest.AddMember("KnowledgeBaseId", _KnowledgeBaseId, &smithytraits.HTTPLabel{})
+
+	CreateKnowledgeBaseRefreshScheduleRequest_ScheduleId = CreateKnowledgeBaseRefreshScheduleRequest.AddMember("ScheduleId", _ScheduleId)
+
+	CreateKnowledgeBaseRefreshScheduleRequest_ScheduleFrequency = CreateKnowledgeBaseRefreshScheduleRequest.AddMember("ScheduleFrequency", KnowledgeBaseRefreshFrequency)
+
+	CreateKnowledgeBaseRefreshScheduleRequest_StartTime = CreateKnowledgeBaseRefreshScheduleRequest.AddMember("StartTime", smithyprelude.Timestamp)
+
+	CreateKnowledgeBaseRefreshScheduleRequest_State = CreateKnowledgeBaseRefreshScheduleRequest.AddMember("State", ScheduleState)
+
+	CreateKnowledgeBaseRefreshScheduleResponse_ScheduleId = CreateKnowledgeBaseRefreshScheduleResponse.AddMember("ScheduleId", _ScheduleId)
+
+	CreateKnowledgeBaseRefreshScheduleResponse_KnowledgeBaseArn = CreateKnowledgeBaseRefreshScheduleResponse.AddMember("KnowledgeBaseArn", _KnowledgeBaseArn)
+
+	CreateKnowledgeBaseRefreshScheduleResponse_RequestId = CreateKnowledgeBaseRefreshScheduleResponse.AddMember("RequestId", _String)
+
+	CreateKnowledgeBaseRefreshScheduleResponse_Status = CreateKnowledgeBaseRefreshScheduleResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
 	CreateLimitsProfileRequest_accountId = CreateLimitsProfileRequest.AddMember("accountId", _AwsAccountId, &smithytraits.HTTPLabel{})
 
@@ -44826,6 +46936,28 @@ func init() {
 
 	CreateVPCConnectionResponse_Status = CreateVPCConnectionResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
+	DeleteAccessControlApplicationRequest_AwsAccountId = DeleteAccessControlApplicationRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	DeleteAccessControlApplicationRequest_ApplicationId = DeleteAccessControlApplicationRequest.AddMember("ApplicationId", _ShortRestrictiveResourceId, &smithytraits.HTTPQuery{Name: "ApplicationId"})
+
+	DeleteAccessControlApplicationRequest_IdcApplicationArn = DeleteAccessControlApplicationRequest.AddMember("IdcApplicationArn", _Arn, &smithytraits.HTTPQuery{Name: "IdcApplicationArn"})
+
+	DeleteAccessControlApplicationResponse_Status = DeleteAccessControlApplicationResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	DeleteAccessControlApplicationResponse_RequestId = DeleteAccessControlApplicationResponse.AddMember("RequestId", smithyprelude.String)
+
+	DeleteAccessControlApplicationResponse_ApplicationId = DeleteAccessControlApplicationResponse.AddMember("ApplicationId", smithyprelude.String)
+
+	DeleteAccessControlApplicationSecretRequest_AwsAccountId = DeleteAccessControlApplicationSecretRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	DeleteAccessControlApplicationSecretRequest_ApplicationId = DeleteAccessControlApplicationSecretRequest.AddMember("ApplicationId", _ShortRestrictiveResourceId, &smithytraits.HTTPLabel{})
+
+	DeleteAccessControlApplicationSecretRequest_ClientSecretId = DeleteAccessControlApplicationSecretRequest.AddMember("ClientSecretId", _ShortRestrictiveResourceId, &smithytraits.HTTPLabel{})
+
+	DeleteAccessControlApplicationSecretResponse_Status = DeleteAccessControlApplicationSecretResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	DeleteAccessControlApplicationSecretResponse_RequestId = DeleteAccessControlApplicationSecretResponse.AddMember("RequestId", smithyprelude.String)
+
 	DeleteAccountCustomizationRequest_AwsAccountId = DeleteAccountCustomizationRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
 
 	DeleteAccountCustomizationRequest_Namespace = DeleteAccountCustomizationRequest.AddMember("Namespace", _Namespace, &smithytraits.HTTPQuery{Name: "namespace"})
@@ -45048,6 +47180,16 @@ func init() {
 
 	DeleteIdentityPropagationConfigResponse_Status = DeleteIdentityPropagationConfigResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
+	DeleteInboundConnectorRequest_AwsAccountId = DeleteInboundConnectorRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	DeleteInboundConnectorRequest_InboundConnectorId = DeleteInboundConnectorRequest.AddMember("InboundConnectorId", _ShortRestrictiveResourceId, &smithytraits.HTTPLabel{})
+
+	DeleteInboundConnectorResponse_Status = DeleteInboundConnectorResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	DeleteInboundConnectorResponse_RequestId = DeleteInboundConnectorResponse.AddMember("RequestId", smithyprelude.String)
+
+	DeleteInboundConnectorResponse_InboundConnectorId = DeleteInboundConnectorResponse.AddMember("InboundConnectorId", smithyprelude.String)
+
 	DeleteKnowledgeBaseRequest_AwsAccountId = DeleteKnowledgeBaseRequest.AddMember("AwsAccountId", _KbAwsAccountId, &smithytraits.HTTPLabel{})
 
 	DeleteKnowledgeBaseRequest_KnowledgeBaseId = DeleteKnowledgeBaseRequest.AddMember("KnowledgeBaseId", _KnowledgeBaseId, &smithytraits.HTTPLabel{})
@@ -45059,6 +47201,20 @@ func init() {
 	DeleteKnowledgeBaseResponse_RequestId = DeleteKnowledgeBaseResponse.AddMember("RequestId", _String)
 
 	DeleteKnowledgeBaseResponse_Status = DeleteKnowledgeBaseResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
+
+	DeleteKnowledgeBaseRefreshScheduleRequest_AwsAccountId = DeleteKnowledgeBaseRefreshScheduleRequest.AddMember("AwsAccountId", _KbAwsAccountId, &smithytraits.HTTPLabel{})
+
+	DeleteKnowledgeBaseRefreshScheduleRequest_KnowledgeBaseId = DeleteKnowledgeBaseRefreshScheduleRequest.AddMember("KnowledgeBaseId", _KnowledgeBaseId, &smithytraits.HTTPLabel{})
+
+	DeleteKnowledgeBaseRefreshScheduleRequest_ScheduleId = DeleteKnowledgeBaseRefreshScheduleRequest.AddMember("ScheduleId", _ScheduleId, &smithytraits.HTTPLabel{})
+
+	DeleteKnowledgeBaseRefreshScheduleResponse_ScheduleId = DeleteKnowledgeBaseRefreshScheduleResponse.AddMember("ScheduleId", _ScheduleId)
+
+	DeleteKnowledgeBaseRefreshScheduleResponse_KnowledgeBaseArn = DeleteKnowledgeBaseRefreshScheduleResponse.AddMember("KnowledgeBaseArn", _KnowledgeBaseArn)
+
+	DeleteKnowledgeBaseRefreshScheduleResponse_RequestId = DeleteKnowledgeBaseRefreshScheduleResponse.AddMember("RequestId", _String)
+
+	DeleteKnowledgeBaseRefreshScheduleResponse_Status = DeleteKnowledgeBaseRefreshScheduleResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
 	DeleteLimitsProfileRequest_profileId = DeleteLimitsProfileRequest.AddMember("profileId", _ProfileId, &smithytraits.HTTPLabel{})
 
@@ -45085,6 +47241,14 @@ func init() {
 	DeleteOAuthClientApplicationResponse_RequestId = DeleteOAuthClientApplicationResponse.AddMember("RequestId", _String)
 
 	DeleteOAuthClientApplicationResponse_Status = DeleteOAuthClientApplicationResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
+
+	DeletePolicyAssignmentRequest_AccountId = DeletePolicyAssignmentRequest.AddMember("AccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	DeletePolicyAssignmentRequest_PolicyArn = DeletePolicyAssignmentRequest.AddMember("PolicyArn", _PolicyArn, &smithytraits.HTTPQuery{Name: "PolicyArn"})
+
+	DeletePolicyAssignmentRequest_PrincipalArn = DeletePolicyAssignmentRequest.AddMember("PrincipalArn", _PrincipalArn, &smithytraits.HTTPQuery{Name: "PrincipalArn"})
+
+	DeletePolicyAssignmentRequest_Revision = DeletePolicyAssignmentRequest.AddMember("Revision", _Revision, &smithytraits.HTTPQuery{Name: "Revision"})
 
 	DeleteRefreshScheduleRequest_DataSetId = DeleteRefreshScheduleRequest.AddMember("DataSetId", _ResourceId, &smithytraits.HTTPLabel{})
 
@@ -45277,6 +47441,16 @@ func init() {
 	DeleteVPCConnectionResponse_RequestId = DeleteVPCConnectionResponse.AddMember("RequestId", _String)
 
 	DeleteVPCConnectionResponse_Status = DeleteVPCConnectionResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
+
+	DescribeAccessControlApplicationRequest_AwsAccountId = DescribeAccessControlApplicationRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	DescribeAccessControlApplicationRequest_ApplicationId = DescribeAccessControlApplicationRequest.AddMember("ApplicationId", _ShortRestrictiveResourceId, &smithytraits.HTTPLabel{})
+
+	DescribeAccessControlApplicationResponse_Status = DescribeAccessControlApplicationResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	DescribeAccessControlApplicationResponse_RequestId = DescribeAccessControlApplicationResponse.AddMember("RequestId", smithyprelude.String)
+
+	DescribeAccessControlApplicationResponse_AccessControlApplication = DescribeAccessControlApplicationResponse.AddMember("AccessControlApplication", AccessControlApplication)
 
 	DescribeAccountCustomizationRequest_AwsAccountId = DescribeAccountCustomizationRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
 
@@ -45870,6 +48044,16 @@ func init() {
 
 	DescribeIAMPolicyAssignmentResponse_Status = DescribeIAMPolicyAssignmentResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
+	DescribeInboundConnectorRequest_AwsAccountId = DescribeInboundConnectorRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	DescribeInboundConnectorRequest_InboundConnectorId = DescribeInboundConnectorRequest.AddMember("InboundConnectorId", _ShortRestrictiveResourceId, &smithytraits.HTTPLabel{})
+
+	DescribeInboundConnectorResponse_Status = DescribeInboundConnectorResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	DescribeInboundConnectorResponse_RequestId = DescribeInboundConnectorResponse.AddMember("RequestId", smithyprelude.String)
+
+	DescribeInboundConnectorResponse_InboundConnector = DescribeInboundConnectorResponse.AddMember("InboundConnector", InboundConnector)
+
 	DescribeIngestionRequest_AwsAccountId = DescribeIngestionRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
 
 	DescribeIngestionRequest_DataSetId = DescribeIngestionRequest.AddMember("DataSetId", _String, &smithytraits.HTTPLabel{})
@@ -45935,6 +48119,20 @@ func init() {
 	DescribeKnowledgeBasePermissionsResponse_RequestId = DescribeKnowledgeBasePermissionsResponse.AddMember("RequestId", _String)
 
 	DescribeKnowledgeBasePermissionsResponse_Status = DescribeKnowledgeBasePermissionsResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
+
+	DescribeKnowledgeBaseRefreshScheduleRequest_AwsAccountId = DescribeKnowledgeBaseRefreshScheduleRequest.AddMember("AwsAccountId", _KbAwsAccountId, &smithytraits.HTTPLabel{})
+
+	DescribeKnowledgeBaseRefreshScheduleRequest_KnowledgeBaseId = DescribeKnowledgeBaseRefreshScheduleRequest.AddMember("KnowledgeBaseId", _KnowledgeBaseId, &smithytraits.HTTPLabel{})
+
+	DescribeKnowledgeBaseRefreshScheduleRequest_ScheduleId = DescribeKnowledgeBaseRefreshScheduleRequest.AddMember("ScheduleId", _ScheduleId, &smithytraits.HTTPLabel{})
+
+	DescribeKnowledgeBaseRefreshScheduleResponse_Schedule = DescribeKnowledgeBaseRefreshScheduleResponse.AddMember("Schedule", KnowledgeBaseRefreshScheduleSummary)
+
+	DescribeKnowledgeBaseRefreshScheduleResponse_KnowledgeBaseArn = DescribeKnowledgeBaseRefreshScheduleResponse.AddMember("KnowledgeBaseArn", _KnowledgeBaseArn)
+
+	DescribeKnowledgeBaseRefreshScheduleResponse_RequestId = DescribeKnowledgeBaseRefreshScheduleResponse.AddMember("RequestId", _String)
+
+	DescribeKnowledgeBaseRefreshScheduleResponse_Status = DescribeKnowledgeBaseRefreshScheduleResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
 	DescribeLimitsProfileRequest_profileId = DescribeLimitsProfileRequest.AddMember("profileId", _ProfileId, &smithytraits.HTTPLabel{})
 
@@ -46402,6 +48600,20 @@ func init() {
 
 	GetIdentityContextResponse_Context = GetIdentityContextResponse.AddMember("Context", smithyprelude.String)
 
+	GetPolicyAssignmentRequest_AccountId = GetPolicyAssignmentRequest.AddMember("AccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	GetPolicyAssignmentRequest_PolicyType = GetPolicyAssignmentRequest.AddMember("PolicyType", PolicyType, &smithytraits.HTTPQuery{Name: "PolicyType"})
+
+	GetPolicyAssignmentRequest_PrincipalArn = GetPolicyAssignmentRequest.AddMember("PrincipalArn", _PrincipalArn, &smithytraits.HTTPQuery{Name: "PrincipalArn"})
+
+	GetPolicyAssignmentResponse_PolicyArn = GetPolicyAssignmentResponse.AddMember("PolicyArn", _PolicyArn)
+
+	GetPolicyAssignmentResponse_PolicyName = GetPolicyAssignmentResponse.AddMember("PolicyName", _GetPolicyAssignmentResponsePolicyNameString)
+
+	GetPolicyAssignmentResponse_UpdatedAt = GetPolicyAssignmentResponse.AddMember("UpdatedAt", smithyprelude.Timestamp)
+
+	GetPolicyAssignmentResponse_Revision = GetPolicyAssignmentResponse.AddMember("Revision", _Revision)
+
 	GetSessionEmbedUrlRequest_AwsAccountId = GetSessionEmbedUrlRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
 
 	GetSessionEmbedUrlRequest_EntryPoint = GetSessionEmbedUrlRequest.AddMember("EntryPoint", _EntryPoint, &smithytraits.HTTPQuery{Name: "entry-point"})
@@ -46415,6 +48627,22 @@ func init() {
 	GetSessionEmbedUrlResponse_Status = GetSessionEmbedUrlResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
 	GetSessionEmbedUrlResponse_RequestId = GetSessionEmbedUrlResponse.AddMember("RequestId", _String)
+
+	ListAccessControlApplicationsRequest_AwsAccountId = ListAccessControlApplicationsRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	ListAccessControlApplicationsRequest_Namespace = ListAccessControlApplicationsRequest.AddMember("Namespace", _Namespace, &smithytraits.HTTPQuery{Name: "namespace"})
+
+	ListAccessControlApplicationsRequest_MaxResults = ListAccessControlApplicationsRequest.AddMember("MaxResults", _ListAccessControlApplicationsRequestMaxResultsInteger, &smithytraits.HTTPQuery{Name: "max-results"})
+
+	ListAccessControlApplicationsRequest_NextToken = ListAccessControlApplicationsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next-token"})
+
+	ListAccessControlApplicationsResponse_Status = ListAccessControlApplicationsResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	ListAccessControlApplicationsResponse_RequestId = ListAccessControlApplicationsResponse.AddMember("RequestId", smithyprelude.String)
+
+	ListAccessControlApplicationsResponse_AccessControlApplications = ListAccessControlApplicationsResponse.AddMember("AccessControlApplications", _AccessControlApplicationSummaryList)
+
+	ListAccessControlApplicationsResponse_NextToken = ListAccessControlApplicationsResponse.AddMember("NextToken", smithyprelude.String)
 
 	ListActionConnectorsRequest_AwsAccountId = ListActionConnectorsRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
 
@@ -46742,6 +48970,38 @@ func init() {
 
 	ListIdentityPropagationConfigsResponse_RequestId = ListIdentityPropagationConfigsResponse.AddMember("RequestId", _String)
 
+	ListInboundConnectorApplicationAssociationsRequest_AwsAccountId = ListInboundConnectorApplicationAssociationsRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	ListInboundConnectorApplicationAssociationsRequest_InboundConnectorId = ListInboundConnectorApplicationAssociationsRequest.AddMember("InboundConnectorId", _ShortRestrictiveResourceId, &smithytraits.HTTPLabel{})
+
+	ListInboundConnectorApplicationAssociationsRequest_MaxResults = ListInboundConnectorApplicationAssociationsRequest.AddMember("MaxResults", _ListInboundConnectorApplicationAssociationsRequestMaxResultsInteger, &smithytraits.HTTPQuery{Name: "max-results"})
+
+	ListInboundConnectorApplicationAssociationsRequest_NextToken = ListInboundConnectorApplicationAssociationsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next-token"})
+
+	ListInboundConnectorApplicationAssociationsResponse_Status = ListInboundConnectorApplicationAssociationsResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	ListInboundConnectorApplicationAssociationsResponse_RequestId = ListInboundConnectorApplicationAssociationsResponse.AddMember("RequestId", smithyprelude.String)
+
+	ListInboundConnectorApplicationAssociationsResponse_ApplicationAssociations = ListInboundConnectorApplicationAssociationsResponse.AddMember("ApplicationAssociations", _InboundConnectorApplicationAssociationSummaryList)
+
+	ListInboundConnectorApplicationAssociationsResponse_NextToken = ListInboundConnectorApplicationAssociationsResponse.AddMember("NextToken", smithyprelude.String)
+
+	ListInboundConnectorsRequest_AwsAccountId = ListInboundConnectorsRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	ListInboundConnectorsRequest_MaxResults = ListInboundConnectorsRequest.AddMember("MaxResults", _ListInboundConnectorsRequestMaxResultsInteger, &smithytraits.HTTPQuery{Name: "max-results"})
+
+	ListInboundConnectorsRequest_NextToken = ListInboundConnectorsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "next-token"})
+
+	ListInboundConnectorsRequest_Type = ListInboundConnectorsRequest.AddMember("Type", _InboundConnectorTypeFilterList, &smithytraits.HTTPQuery{Name: "type"})
+
+	ListInboundConnectorsResponse_Status = ListInboundConnectorsResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	ListInboundConnectorsResponse_RequestId = ListInboundConnectorsResponse.AddMember("RequestId", smithyprelude.String)
+
+	ListInboundConnectorsResponse_InboundConnectorSummaries = ListInboundConnectorsResponse.AddMember("InboundConnectorSummaries", _InboundConnectorSummaryList)
+
+	ListInboundConnectorsResponse_NextToken = ListInboundConnectorsResponse.AddMember("NextToken", smithyprelude.String)
+
 	ListIngestionsRequest_DataSetId = ListIngestionsRequest.AddMember("DataSetId", _String, &smithytraits.HTTPLabel{})
 
 	ListIngestionsRequest_NextToken = ListIngestionsRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
@@ -46757,6 +49017,24 @@ func init() {
 	ListIngestionsResponse_RequestId = ListIngestionsResponse.AddMember("RequestId", _String)
 
 	ListIngestionsResponse_Status = ListIngestionsResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
+
+	ListKnowledgeBaseRefreshSchedulesRequest_AwsAccountId = ListKnowledgeBaseRefreshSchedulesRequest.AddMember("AwsAccountId", _KbAwsAccountId, &smithytraits.HTTPLabel{})
+
+	ListKnowledgeBaseRefreshSchedulesRequest_KnowledgeBaseId = ListKnowledgeBaseRefreshSchedulesRequest.AddMember("KnowledgeBaseId", _KnowledgeBaseId, &smithytraits.HTTPLabel{})
+
+	ListKnowledgeBaseRefreshSchedulesRequest_NextToken = ListKnowledgeBaseRefreshSchedulesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "next-token"})
+
+	ListKnowledgeBaseRefreshSchedulesRequest_MaxResults = ListKnowledgeBaseRefreshSchedulesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
+
+	ListKnowledgeBaseRefreshSchedulesResponse_ScheduleSummaries = ListKnowledgeBaseRefreshSchedulesResponse.AddMember("ScheduleSummaries", _KnowledgeBaseRefreshScheduleList)
+
+	ListKnowledgeBaseRefreshSchedulesResponse_KnowledgeBaseArn = ListKnowledgeBaseRefreshSchedulesResponse.AddMember("KnowledgeBaseArn", _KnowledgeBaseArn)
+
+	ListKnowledgeBaseRefreshSchedulesResponse_NextToken = ListKnowledgeBaseRefreshSchedulesResponse.AddMember("NextToken", _NextToken)
+
+	ListKnowledgeBaseRefreshSchedulesResponse_RequestId = ListKnowledgeBaseRefreshSchedulesResponse.AddMember("RequestId", _String)
+
+	ListKnowledgeBaseRefreshSchedulesResponse_Status = ListKnowledgeBaseRefreshSchedulesResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
 	ListKnowledgeBasesRequest_AwsAccountId = ListKnowledgeBasesRequest.AddMember("AwsAccountId", _KbAwsAccountId, &smithytraits.HTTPLabel{})
 
@@ -46811,6 +49089,20 @@ func init() {
 	ListOAuthClientApplicationsResponse_RequestId = ListOAuthClientApplicationsResponse.AddMember("RequestId", _String)
 
 	ListOAuthClientApplicationsResponse_Status = ListOAuthClientApplicationsResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
+
+	ListPrincipalsForPolicyRequest_AccountId = ListPrincipalsForPolicyRequest.AddMember("AccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	ListPrincipalsForPolicyRequest_PolicyArn = ListPrincipalsForPolicyRequest.AddMember("PolicyArn", _PolicyArn, &smithytraits.HTTPQuery{Name: "PolicyArn"})
+
+	ListPrincipalsForPolicyRequest_PrincipalType = ListPrincipalsForPolicyRequest.AddMember("PrincipalType", PrincipalType, &smithytraits.HTTPQuery{Name: "PrincipalType"})
+
+	ListPrincipalsForPolicyRequest_MaxResults = ListPrincipalsForPolicyRequest.AddMember("MaxResults", _ListPrincipalsForPolicyRequestMaxResultsInteger, &smithytraits.HTTPQuery{Name: "MaxResults"})
+
+	ListPrincipalsForPolicyRequest_NextToken = ListPrincipalsForPolicyRequest.AddMember("NextToken", _ListPrincipalsForPolicyRequestNextTokenString, &smithytraits.HTTPQuery{Name: "NextToken"})
+
+	ListPrincipalsForPolicyResponse_Principals = ListPrincipalsForPolicyResponse.AddMember("Principals", _PolicyPrincipalList)
+
+	ListPrincipalsForPolicyResponse_NextToken = ListPrincipalsForPolicyResponse.AddMember("NextToken", _ListPrincipalsForPolicyResponseNextTokenString)
 
 	ListRefreshSchedulesRequest_AwsAccountId = ListRefreshSchedulesRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
 
@@ -47137,6 +49429,22 @@ func init() {
 	PutDataSetRefreshPropertiesResponse_RequestId = PutDataSetRefreshPropertiesResponse.AddMember("RequestId", _String)
 
 	PutDataSetRefreshPropertiesResponse_Status = PutDataSetRefreshPropertiesResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
+
+	PutPolicyAssignmentRequest_AccountId = PutPolicyAssignmentRequest.AddMember("AccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	PutPolicyAssignmentRequest_PolicyArn = PutPolicyAssignmentRequest.AddMember("PolicyArn", _PolicyArn)
+
+	PutPolicyAssignmentRequest_PrincipalArn = PutPolicyAssignmentRequest.AddMember("PrincipalArn", _PrincipalArn)
+
+	PutPolicyAssignmentRequest_ExistingPolicyArn = PutPolicyAssignmentRequest.AddMember("ExistingPolicyArn", _PolicyArn)
+
+	PutPolicyAssignmentRequest_Revision = PutPolicyAssignmentRequest.AddMember("Revision", _Revision)
+
+	PutPolicyAssignmentResponse_PolicyArn = PutPolicyAssignmentResponse.AddMember("PolicyArn", _PolicyArn)
+
+	PutPolicyAssignmentResponse_ReplacedPolicyArn = PutPolicyAssignmentResponse.AddMember("ReplacedPolicyArn", _PolicyArn)
+
+	PutPolicyAssignmentResponse_Revision = PutPolicyAssignmentResponse.AddMember("Revision", _Revision)
 
 	RegisterUserRequest_IdentityType = RegisterUserRequest.AddMember("IdentityType", IdentityType)
 
@@ -47527,6 +49835,52 @@ func init() {
 	UntagResourceResponse_RequestId = UntagResourceResponse.AddMember("RequestId", _String)
 
 	UntagResourceResponse_Status = UntagResourceResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
+
+	UpdateAccessControlApplicationRequest_AwsAccountId = UpdateAccessControlApplicationRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	UpdateAccessControlApplicationRequest_ApplicationId = UpdateAccessControlApplicationRequest.AddMember("ApplicationId", _ShortRestrictiveResourceId, &smithytraits.HTTPLabel{})
+
+	UpdateAccessControlApplicationRequest_Name = UpdateAccessControlApplicationRequest.AddMember("Name", _ResourceName)
+
+	UpdateAccessControlApplicationRequest_Description = UpdateAccessControlApplicationRequest.AddMember("Description", _AccessControlApplicationDescription)
+
+	UpdateAccessControlApplicationRequest_IdpAuthorizingConfiguration = UpdateAccessControlApplicationRequest.AddMember("IdpAuthorizingConfiguration", IdpAuthorizingConfigUpdateInput)
+
+	UpdateAccessControlApplicationRequest_QuickAuthenticationConfiguration = UpdateAccessControlApplicationRequest.AddMember("QuickAuthenticationConfiguration", QuickAuthenticationConfigInput)
+
+	UpdateAccessControlApplicationRequest_Status = UpdateAccessControlApplicationRequest.AddMember("Status", AccessControlApplicationStatus)
+
+	UpdateAccessControlApplicationResponse_Status = UpdateAccessControlApplicationResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	UpdateAccessControlApplicationResponse_RequestId = UpdateAccessControlApplicationResponse.AddMember("RequestId", smithyprelude.String)
+
+	UpdateAccessControlApplicationResponse_ApplicationId = UpdateAccessControlApplicationResponse.AddMember("ApplicationId", smithyprelude.String)
+
+	UpdateAccessControlApplicationResponse_Arn = UpdateAccessControlApplicationResponse.AddMember("Arn", smithyprelude.String)
+
+	UpdateAccessControlApplicationResponse_AccessControlApplicationStatus = UpdateAccessControlApplicationResponse.AddMember("AccessControlApplicationStatus", AccessControlApplicationStatus)
+
+	UpdateAccessControlApplicationResponse_LastUpdatedTime = UpdateAccessControlApplicationResponse.AddMember("LastUpdatedTime", smithyprelude.Timestamp)
+
+	UpdateAccessControlApplicationSecretRequest_AwsAccountId = UpdateAccessControlApplicationSecretRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	UpdateAccessControlApplicationSecretRequest_ApplicationId = UpdateAccessControlApplicationSecretRequest.AddMember("ApplicationId", _ShortRestrictiveResourceId, &smithytraits.HTTPLabel{})
+
+	UpdateAccessControlApplicationSecretRequest_ClientSecretId = UpdateAccessControlApplicationSecretRequest.AddMember("ClientSecretId", _ShortRestrictiveResourceId, &smithytraits.HTTPLabel{})
+
+	UpdateAccessControlApplicationSecretRequest_UpdateRegionalSecretManagerArns = UpdateAccessControlApplicationSecretRequest.AddMember("UpdateRegionalSecretManagerArns", _RegionalSecretManagerArnMap)
+
+	UpdateAccessControlApplicationSecretRequest_RemoveRegionalSecretManagerArns = UpdateAccessControlApplicationSecretRequest.AddMember("RemoveRegionalSecretManagerArns", _AwsRegionList)
+
+	UpdateAccessControlApplicationSecretResponse_Status = UpdateAccessControlApplicationSecretResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	UpdateAccessControlApplicationSecretResponse_RequestId = UpdateAccessControlApplicationSecretResponse.AddMember("RequestId", smithyprelude.String)
+
+	UpdateAccessControlApplicationSecretResponse_ClientSecretId = UpdateAccessControlApplicationSecretResponse.AddMember("ClientSecretId", _ShortRestrictiveResourceId)
+
+	UpdateAccessControlApplicationSecretResponse_UpdatedAt = UpdateAccessControlApplicationSecretResponse.AddMember("UpdatedAt", smithyprelude.Timestamp)
+
+	UpdateAccessControlApplicationSecretResponse_RegionalSecretManagerArns = UpdateAccessControlApplicationSecretResponse.AddMember("RegionalSecretManagerArns", _RegionalSecretManagerArnMap)
 
 	UpdateAccountCustomizationRequest_AwsAccountId = UpdateAccountCustomizationRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
 
@@ -47920,6 +50274,8 @@ func init() {
 
 	UpdateDataSetRequest_SemanticModelConfiguration = UpdateDataSetRequest.AddMember("SemanticModelConfiguration", SemanticModelConfiguration)
 
+	UpdateDataSetRequest_UnmaterializedCalculatedColumns = UpdateDataSetRequest.AddMember("UnmaterializedCalculatedColumns", _UnmaterializedCalculatedColumnList)
+
 	UpdateDataSetResponse_Arn = UpdateDataSetResponse.AddMember("Arn", _Arn)
 
 	UpdateDataSetResponse_DataSetId = UpdateDataSetResponse.AddMember("DataSetId", _ResourceId)
@@ -48138,6 +50494,42 @@ func init() {
 
 	UpdateIdentityPropagationConfigResponse_Status = UpdateIdentityPropagationConfigResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
+	UpdateInboundConnectorApplicationAssociationsRequest_AwsAccountId = UpdateInboundConnectorApplicationAssociationsRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	UpdateInboundConnectorApplicationAssociationsRequest_InboundConnectorId = UpdateInboundConnectorApplicationAssociationsRequest.AddMember("InboundConnectorId", _ShortRestrictiveResourceId, &smithytraits.HTTPLabel{})
+
+	UpdateInboundConnectorApplicationAssociationsRequest_AssociateAccessControlApplications = UpdateInboundConnectorApplicationAssociationsRequest.AddMember("AssociateAccessControlApplications", _InboundConnectorAssociationArnList)
+
+	UpdateInboundConnectorApplicationAssociationsRequest_DisassociateAccessControlApplications = UpdateInboundConnectorApplicationAssociationsRequest.AddMember("DisassociateAccessControlApplications", _InboundConnectorAssociationArnList)
+
+	UpdateInboundConnectorApplicationAssociationsResponse_Status = UpdateInboundConnectorApplicationAssociationsResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	UpdateInboundConnectorApplicationAssociationsResponse_RequestId = UpdateInboundConnectorApplicationAssociationsResponse.AddMember("RequestId", smithyprelude.String)
+
+	UpdateInboundConnectorRequest_AwsAccountId = UpdateInboundConnectorRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
+
+	UpdateInboundConnectorRequest_InboundConnectorId = UpdateInboundConnectorRequest.AddMember("InboundConnectorId", _ShortRestrictiveResourceId, &smithytraits.HTTPLabel{})
+
+	UpdateInboundConnectorRequest_Name = UpdateInboundConnectorRequest.AddMember("Name", _ResourceName)
+
+	UpdateInboundConnectorRequest_Description = UpdateInboundConnectorRequest.AddMember("Description", _InboundConnectorDescription)
+
+	UpdateInboundConnectorRequest_InboundConnectorConfiguration = UpdateInboundConnectorRequest.AddMember("InboundConnectorConfiguration", InboundConnectorConfig)
+
+	UpdateInboundConnectorRequest_InboundConnectorStatus = UpdateInboundConnectorRequest.AddMember("InboundConnectorStatus", InboundConnectorStatus)
+
+	UpdateInboundConnectorResponse_Status = UpdateInboundConnectorResponse.AddMember("Status", _StatusCode2, &smithytraits.HTTPResponseCode{})
+
+	UpdateInboundConnectorResponse_RequestId = UpdateInboundConnectorResponse.AddMember("RequestId", smithyprelude.String)
+
+	UpdateInboundConnectorResponse_InboundConnectorId = UpdateInboundConnectorResponse.AddMember("InboundConnectorId", smithyprelude.String)
+
+	UpdateInboundConnectorResponse_Arn = UpdateInboundConnectorResponse.AddMember("Arn", smithyprelude.String)
+
+	UpdateInboundConnectorResponse_InboundConnectorStatus = UpdateInboundConnectorResponse.AddMember("InboundConnectorStatus", InboundConnectorStatus)
+
+	UpdateInboundConnectorResponse_LastUpdatedTime = UpdateInboundConnectorResponse.AddMember("LastUpdatedTime", smithyprelude.Timestamp)
+
 	UpdateIpRestrictionRequest_AwsAccountId = UpdateIpRestrictionRequest.AddMember("AwsAccountId", _AwsAccountId, &smithytraits.HTTPLabel{})
 
 	UpdateIpRestrictionRequest_IpRestrictionRuleMap = UpdateIpRestrictionRequest.AddMember("IpRestrictionRuleMap", _IpRestrictionRuleMap)
@@ -48205,6 +50597,26 @@ func init() {
 	UpdateKnowledgeBasePermissionsResponse_RequestId = UpdateKnowledgeBasePermissionsResponse.AddMember("RequestId", _String)
 
 	UpdateKnowledgeBasePermissionsResponse_Status = UpdateKnowledgeBasePermissionsResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
+
+	UpdateKnowledgeBaseRefreshScheduleRequest_AwsAccountId = UpdateKnowledgeBaseRefreshScheduleRequest.AddMember("AwsAccountId", _KbAwsAccountId, &smithytraits.HTTPLabel{})
+
+	UpdateKnowledgeBaseRefreshScheduleRequest_KnowledgeBaseId = UpdateKnowledgeBaseRefreshScheduleRequest.AddMember("KnowledgeBaseId", _KnowledgeBaseId, &smithytraits.HTTPLabel{})
+
+	UpdateKnowledgeBaseRefreshScheduleRequest_ScheduleId = UpdateKnowledgeBaseRefreshScheduleRequest.AddMember("ScheduleId", _ScheduleId, &smithytraits.HTTPLabel{})
+
+	UpdateKnowledgeBaseRefreshScheduleRequest_ScheduleFrequency = UpdateKnowledgeBaseRefreshScheduleRequest.AddMember("ScheduleFrequency", KnowledgeBaseRefreshFrequency)
+
+	UpdateKnowledgeBaseRefreshScheduleRequest_StartTime = UpdateKnowledgeBaseRefreshScheduleRequest.AddMember("StartTime", smithyprelude.Timestamp)
+
+	UpdateKnowledgeBaseRefreshScheduleRequest_State = UpdateKnowledgeBaseRefreshScheduleRequest.AddMember("State", ScheduleState)
+
+	UpdateKnowledgeBaseRefreshScheduleResponse_ScheduleId = UpdateKnowledgeBaseRefreshScheduleResponse.AddMember("ScheduleId", _ScheduleId)
+
+	UpdateKnowledgeBaseRefreshScheduleResponse_KnowledgeBaseArn = UpdateKnowledgeBaseRefreshScheduleResponse.AddMember("KnowledgeBaseArn", _KnowledgeBaseArn)
+
+	UpdateKnowledgeBaseRefreshScheduleResponse_RequestId = UpdateKnowledgeBaseRefreshScheduleResponse.AddMember("RequestId", _String)
+
+	UpdateKnowledgeBaseRefreshScheduleResponse_Status = UpdateKnowledgeBaseRefreshScheduleResponse.AddMember("Status", _StatusCode, &smithytraits.HTTPResponseCode{})
 
 	UpdateLimitsProfileRequest_profileId = UpdateLimitsProfileRequest.AddMember("profileId", _ProfileId, &smithytraits.HTTPLabel{})
 

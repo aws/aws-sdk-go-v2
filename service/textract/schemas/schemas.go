@@ -33,6 +33,21 @@ var CreateAdapterVersion = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CreateAdapterVersion",
 }, smithy.ShapeTypeOperation, 0)
 
+var CreateBlueprint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "CreateBlueprint",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateBlueprintVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "CreateBlueprintVersion",
+}, smithy.ShapeTypeOperation, 0)
+
+var CreateProject = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "CreateProject",
+}, smithy.ShapeTypeOperation, 0)
+
 var DeleteAdapter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "DeleteAdapter",
@@ -41,6 +56,16 @@ var DeleteAdapter = smithy.NewSchema(smithy.ShapeID{
 var DeleteAdapterVersion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "DeleteAdapterVersion",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteBlueprint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "DeleteBlueprint",
+}, smithy.ShapeTypeOperation, 0)
+
+var DeleteProject = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "DeleteProject",
 }, smithy.ShapeTypeOperation, 0)
 
 var DetectDocumentText = smithy.NewSchema(smithy.ShapeID{
@@ -58,9 +83,19 @@ var GetAdapterVersion = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetAdapterVersion",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetBlueprint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "GetBlueprint",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetDocumentAnalysis = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "GetDocumentAnalysis",
+}, smithy.ShapeTypeOperation, 0)
+
+var GetDocumentInsights = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "GetDocumentInsights",
 }, smithy.ShapeTypeOperation, 0)
 
 var GetDocumentTextDetection = smithy.NewSchema(smithy.ShapeID{
@@ -83,6 +118,11 @@ var GetLendingAnalysisSummary = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetLendingAnalysisSummary",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetProject = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "GetProject",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListAdapters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "ListAdapters",
@@ -93,6 +133,16 @@ var ListAdapterVersions = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListAdapterVersions",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListBlueprints = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ListBlueprints",
+}, smithy.ShapeTypeOperation, 0)
+
+var ListProjects = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ListProjects",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "ListTagsForResource",
@@ -101,6 +151,11 @@ var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 var StartDocumentAnalysis = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "StartDocumentAnalysis",
+}, smithy.ShapeTypeOperation, 0)
+
+var StartDocumentInsights = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "StartDocumentInsights",
 }, smithy.ShapeTypeOperation, 0)
 
 var StartDocumentTextDetection = smithy.NewSchema(smithy.ShapeID{
@@ -131,6 +186,16 @@ var UntagResource = smithy.NewSchema(smithy.ShapeID{
 var UpdateAdapter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "UpdateAdapter",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateBlueprint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "UpdateBlueprint",
+}, smithy.ShapeTypeOperation, 0)
+
+var UpdateProject = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "UpdateProject",
 }, smithy.ShapeTypeOperation, 0)
 
 var _Textract = smithy.NewSchema(smithy.ShapeID{
@@ -410,6 +475,70 @@ var BlockType_LAYOUT_TABLE *smithy.Schema
 
 var BlockType_LAYOUT_KEY_VALUE *smithy.Schema
 
+var _BlueprintArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "BlueprintArn",
+}, smithy.ShapeTypeString, 0)
+
+var BlueprintFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "BlueprintFilter",
+}, smithy.ShapeTypeStructure, 2)
+var BlueprintFilter_BlueprintArn *smithy.Schema
+
+var BlueprintFilter_BlueprintVersion *smithy.Schema
+
+var BlueprintItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "BlueprintItem",
+}, smithy.ShapeTypeStructure, 2)
+var BlueprintItem_BlueprintArn *smithy.Schema
+
+var BlueprintItem_BlueprintVersion *smithy.Schema
+
+var _BlueprintItems = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "BlueprintItems",
+}, smithy.ShapeTypeList, 1)
+var _BlueprintItems_member *smithy.Schema
+
+var _BlueprintName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "BlueprintName",
+}, smithy.ShapeTypeString, 0)
+
+var _BlueprintSchema = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "BlueprintSchema",
+}, smithy.ShapeTypeString, 0)
+
+var BlueprintSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "BlueprintSummary",
+}, smithy.ShapeTypeStructure, 6)
+var BlueprintSummary_BlueprintArn *smithy.Schema
+
+var BlueprintSummary_BlueprintName *smithy.Schema
+
+var BlueprintSummary_BlueprintVersion *smithy.Schema
+
+var BlueprintSummary_ResourceOwner *smithy.Schema
+
+var BlueprintSummary_CreationTime *smithy.Schema
+
+var BlueprintSummary_LastModifiedTime *smithy.Schema
+
+var _BlueprintSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "BlueprintSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _BlueprintSummaryList_member *smithy.Schema
+
+var _BlueprintVersion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "BlueprintVersion",
+}, smithy.ShapeTypeString, 0)
+
 var BoundingBox = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "BoundingBox",
@@ -421,6 +550,12 @@ var BoundingBox_Height *smithy.Schema
 var BoundingBox_Left *smithy.Schema
 
 var BoundingBox_Top *smithy.Schema
+
+var BoundingBoxConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "BoundingBoxConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var BoundingBoxConfiguration_State *smithy.Schema
 
 var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
@@ -448,6 +583,14 @@ var _ContentClassifiers = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ContentClassifiers",
 }, smithy.ShapeTypeList, 1)
 var _ContentClassifiers_member *smithy.Schema
+
+var CustomConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "CustomConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var CustomConfiguration_Blueprints *smithy.Schema
+
+var CustomConfiguration_FallbackBlueprints *smithy.Schema
 
 var _DateTime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
@@ -518,6 +661,29 @@ var DocumentTooLargeException_Message *smithy.Schema
 
 var DocumentTooLargeException_Code *smithy.Schema
 
+var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "EncryptionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var EncryptionConfiguration_KmsKeyId *smithy.Schema
+
+var EncryptionConfiguration_KmsEncryptionContext *smithy.Schema
+
+var _EncryptionContextKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "EncryptionContextKey",
+}, smithy.ShapeTypeString, 0)
+
+var _EncryptionContextValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "EncryptionContextValue",
+}, smithy.ShapeTypeString, 0)
+
+var _EncryptionKmsKeyId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "EncryptionKmsKeyId",
+}, smithy.ShapeTypeString, 0)
+
 var EntityType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "EntityType",
@@ -551,6 +717,16 @@ var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ErrorCode",
 }, smithy.ShapeTypeString, 0)
 
+var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ErrorMessage",
+}, smithy.ShapeTypeString, 0)
+
+var _ErrorType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ErrorType",
+}, smithy.ShapeTypeString, 0)
+
 var EvaluationMetric = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "EvaluationMetric",
@@ -560,6 +736,12 @@ var EvaluationMetric_F1Score *smithy.Schema
 var EvaluationMetric_Precision *smithy.Schema
 
 var EvaluationMetric_Recall *smithy.Schema
+
+var EventBridgeConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "EventBridgeConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var EventBridgeConfiguration_State *smithy.Schema
 
 var ExpenseCurrency = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
@@ -651,11 +833,53 @@ var Extraction_ExpenseDocument *smithy.Schema
 
 var Extraction_IdentityDocument *smithy.Schema
 
+var ExtractionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ExtractionConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var ExtractionConfiguration_BoundingBox *smithy.Schema
+
+var ExtractionConfiguration_Granularity *smithy.Schema
+
+var ExtractionConfiguration_OutputFormat *smithy.Schema
+
+var ExtractionGranularity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ExtractionGranularity",
+}, smithy.ShapeTypeStructure, 1)
+var ExtractionGranularity_Types *smithy.Schema
+
+var ExtractionGranularityType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ExtractionGranularityType",
+}, smithy.ShapeTypeEnum, 5)
+var ExtractionGranularityType_DOCUMENT *smithy.Schema
+
+var ExtractionGranularityType_PAGE *smithy.Schema
+
+var ExtractionGranularityType_ELEMENT *smithy.Schema
+
+var ExtractionGranularityType_WORD *smithy.Schema
+
+var ExtractionGranularityType_LINE *smithy.Schema
+
+var _ExtractionGranularityTypes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ExtractionGranularityTypes",
+}, smithy.ShapeTypeList, 1)
+var _ExtractionGranularityTypes_member *smithy.Schema
+
 var _ExtractionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "ExtractionList",
 }, smithy.ShapeTypeList, 1)
 var _ExtractionList_member *smithy.Schema
+
+var _FallbackBlueprintItems = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "FallbackBlueprintItems",
+}, smithy.ShapeTypeList, 1)
+var _FallbackBlueprintItems_member *smithy.Schema
 
 var FeatureType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
@@ -677,6 +901,12 @@ var _FeatureTypes = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _FeatureTypes_member *smithy.Schema
 
+var FigureCaptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "FigureCaptionConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var FigureCaptionConfiguration_State *smithy.Schema
+
 var _Float = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "Float",
@@ -686,6 +916,14 @@ var _FlowDefinitionArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "FlowDefinitionArn",
 }, smithy.ShapeTypeString, 0)
+
+var GenerativeConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "GenerativeConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var GenerativeConfiguration_Summarization *smithy.Schema
+
+var GenerativeConfiguration_FigureCaption *smithy.Schema
 
 var Geometry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
@@ -808,6 +1046,17 @@ var _ImageBlob = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ImageBlob",
 }, smithy.ShapeTypeBlob, 0)
 
+var InputConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "InputConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var InputConfiguration_S3Uri *smithy.Schema
+
+var _IntelligencePaginationToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "IntelligencePaginationToken",
+}, smithy.ShapeTypeString, 0)
+
 var InternalServerError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "InternalServerError",
@@ -848,6 +1097,11 @@ var InvalidS3ObjectException_Message *smithy.Schema
 
 var InvalidS3ObjectException_Code *smithy.Schema
 
+var _JobArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "JobArn",
+}, smithy.ShapeTypeString, 0)
+
 var _JobId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "JobId",
@@ -869,6 +1123,14 @@ var _JobTag = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "JobTag",
 }, smithy.ShapeTypeString, 0)
+
+var _KmsEncryptionContext = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "KmsEncryptionContext",
+}, smithy.ShapeTypeMap, 2)
+var _KmsEncryptionContext_key *smithy.Schema
+
+var _KmsEncryptionContext_value *smithy.Schema
 
 var _KMSKeyId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
@@ -1001,6 +1263,18 @@ var NotificationChannel_SNSTopicArn *smithy.Schema
 
 var NotificationChannel_RoleArn *smithy.Schema
 
+var NotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "NotificationConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var NotificationConfiguration_EventBridgeConfiguration *smithy.Schema
+
+var OutputAdditionalFileFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "OutputAdditionalFileFormat",
+}, smithy.ShapeTypeStructure, 1)
+var OutputAdditionalFileFormat_State *smithy.Schema
+
 var OutputConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "OutputConfig",
@@ -1008,6 +1282,44 @@ var OutputConfig = smithy.NewSchema(smithy.ShapeID{
 var OutputConfig_S3Bucket *smithy.Schema
 
 var OutputConfig_S3Prefix *smithy.Schema
+
+var OutputConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "OutputConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var OutputConfiguration_S3Uri *smithy.Schema
+
+var OutputFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "OutputFormat",
+}, smithy.ShapeTypeStructure, 2)
+var OutputFormat_AdditionalFileFormat *smithy.Schema
+
+var OutputFormat_TextFormat *smithy.Schema
+
+var OutputTextFormat = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "OutputTextFormat",
+}, smithy.ShapeTypeStructure, 1)
+var OutputTextFormat_Types *smithy.Schema
+
+var OutputTextFormatType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "OutputTextFormatType",
+}, smithy.ShapeTypeEnum, 4)
+var OutputTextFormatType_PLAIN_TEXT *smithy.Schema
+
+var OutputTextFormatType_MARKDOWN *smithy.Schema
+
+var OutputTextFormatType_HTML *smithy.Schema
+
+var OutputTextFormatType_CSV *smithy.Schema
+
+var _OutputTextFormatTypes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "OutputTextFormatTypes",
+}, smithy.ShapeTypeList, 1)
+var _OutputTextFormatTypes_member *smithy.Schema
 
 var PageClassification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
@@ -1039,6 +1351,96 @@ var _Percent = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Percent",
 }, smithy.ShapeTypeFloat, 0)
 
+var PIIEntitiesConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "PIIEntitiesConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var PIIEntitiesConfiguration_PiiEntityTypes *smithy.Schema
+
+var PIIEntitiesConfiguration_RedactionMaskMode *smithy.Schema
+
+var PIIEntityType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "PIIEntityType",
+}, smithy.ShapeTypeEnum, 32)
+var PIIEntityType_ALL *smithy.Schema
+
+var PIIEntityType_ADDRESS *smithy.Schema
+
+var PIIEntityType_AGE *smithy.Schema
+
+var PIIEntityType_NAME *smithy.Schema
+
+var PIIEntityType_EMAIL *smithy.Schema
+
+var PIIEntityType_PHONE *smithy.Schema
+
+var PIIEntityType_USERNAME *smithy.Schema
+
+var PIIEntityType_PASSWORD *smithy.Schema
+
+var PIIEntityType_DRIVER_ID *smithy.Schema
+
+var PIIEntityType_LICENSE_PLATE *smithy.Schema
+
+var PIIEntityType_VEHICLE_IDENTIFICATION_NUMBER *smithy.Schema
+
+var PIIEntityType_CREDIT_DEBIT_CARD_CVV *smithy.Schema
+
+var PIIEntityType_CREDIT_DEBIT_CARD_EXPIRY *smithy.Schema
+
+var PIIEntityType_CREDIT_DEBIT_CARD_NUMBER *smithy.Schema
+
+var PIIEntityType_PIN *smithy.Schema
+
+var PIIEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER *smithy.Schema
+
+var PIIEntityType_SWIFT_CODE *smithy.Schema
+
+var PIIEntityType_IP_ADDRESS *smithy.Schema
+
+var PIIEntityType_MAC_ADDRESS *smithy.Schema
+
+var PIIEntityType_URL *smithy.Schema
+
+var PIIEntityType_AWS_ACCESS_KEY *smithy.Schema
+
+var PIIEntityType_AWS_SECRET_KEY *smithy.Schema
+
+var PIIEntityType_US_BANK_ACCOUNT_NUMBER *smithy.Schema
+
+var PIIEntityType_US_BANK_ROUTING_NUMBER *smithy.Schema
+
+var PIIEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER *smithy.Schema
+
+var PIIEntityType_US_PASSPORT_NUMBER *smithy.Schema
+
+var PIIEntityType_US_SOCIAL_SECURITY_NUMBER *smithy.Schema
+
+var PIIEntityType_CA_HEALTH_NUMBER *smithy.Schema
+
+var PIIEntityType_CA_SOCIAL_INSURANCE_NUMBER *smithy.Schema
+
+var PIIEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER *smithy.Schema
+
+var PIIEntityType_UK_NATIONAL_INSURANCE_NUMBER *smithy.Schema
+
+var PIIEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER *smithy.Schema
+
+var _PIIEntityTypes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "PIIEntityTypes",
+}, smithy.ShapeTypeList, 1)
+var _PIIEntityTypes_member *smithy.Schema
+
+var PIIRedactionMaskMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "PIIRedactionMaskMode",
+}, smithy.ShapeTypeEnum, 2)
+var PIIRedactionMaskMode_PII *smithy.Schema
+
+var PIIRedactionMaskMode_ENTITY_TYPE *smithy.Schema
+
 var Point = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "Point",
@@ -1066,6 +1468,53 @@ var _PredictionList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PredictionList",
 }, smithy.ShapeTypeList, 1)
 var _PredictionList_member *smithy.Schema
+
+var _ProjectArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ProjectArn",
+}, smithy.ShapeTypeString, 0)
+
+var _ProjectDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ProjectDescription",
+}, smithy.ShapeTypeString, 0)
+
+var ProjectFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ProjectFilter",
+}, smithy.ShapeTypeStructure, 1)
+var ProjectFilter_ProjectArn *smithy.Schema
+
+var _ProjectName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ProjectName",
+}, smithy.ShapeTypeString, 0)
+
+var ProjectStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ProjectStatus",
+}, smithy.ShapeTypeEnum, 2)
+var ProjectStatus_COMPLETED *smithy.Schema
+
+var ProjectStatus_FAILED *smithy.Schema
+
+var ProjectSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ProjectSummary",
+}, smithy.ShapeTypeStructure, 4)
+var ProjectSummary_ProjectArn *smithy.Schema
+
+var ProjectSummary_ProjectName *smithy.Schema
+
+var ProjectSummary_CreationTime *smithy.Schema
+
+var ProjectSummary_LastModifiedTime *smithy.Schema
+
+var _ProjectSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ProjectSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _ProjectSummaryList_member *smithy.Schema
 
 var ProvisionedThroughputExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
@@ -1157,6 +1606,14 @@ var ResourceNotFoundException_Message *smithy.Schema
 
 var ResourceNotFoundException_Code *smithy.Schema
 
+var ResourceOwner = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ResourceOwner",
+}, smithy.ShapeTypeEnum, 2)
+var ResourceOwner_ACCOUNT *smithy.Schema
+
+var ResourceOwner_SERVICE *smithy.Schema
+
 var _RoleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "RoleArn",
@@ -1187,6 +1644,11 @@ var _S3ObjectVersion = smithy.NewSchema(smithy.ShapeID{
 	Name:      "S3ObjectVersion",
 }, smithy.ShapeTypeString, 0)
 
+var _S3Uri = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "S3Uri",
+}, smithy.ShapeTypeString, 0)
+
 var SelectionStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "SelectionStatus",
@@ -1194,6 +1656,24 @@ var SelectionStatus = smithy.NewSchema(smithy.ShapeID{
 var SelectionStatus_SELECTED *smithy.Schema
 
 var SelectionStatus_NOT_SELECTED *smithy.Schema
+
+var SensitiveDataConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "SensitiveDataConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var SensitiveDataConfiguration_DetectionMode *smithy.Schema
+
+var SensitiveDataConfiguration_PiiEntitiesConfiguration *smithy.Schema
+
+var SensitiveDataDetectionMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "SensitiveDataDetectionMode",
+}, smithy.ShapeTypeEnum, 3)
+var SensitiveDataDetectionMode_DETECTION *smithy.Schema
+
+var SensitiveDataDetectionMode_DETECTION_AND_REDACTION *smithy.Schema
+
+var SensitiveDataDetectionMode_DISABLED *smithy.Schema
 
 var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
@@ -1236,6 +1716,20 @@ var _SplitDocumentList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _SplitDocumentList_member *smithy.Schema
 
+var SplitterConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "SplitterConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var SplitterConfiguration_State *smithy.Schema
+
+var State = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "State",
+}, smithy.ShapeTypeEnum, 2)
+var State_ENABLED *smithy.Schema
+
+var State_DISABLED *smithy.Schema
+
 var _StatusMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "StatusMessage",
@@ -1251,6 +1745,12 @@ var _StringList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StringList",
 }, smithy.ShapeTypeList, 1)
 var _StringList_member *smithy.Schema
+
+var SummarizationConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "SummarizationConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var SummarizationConfiguration_State *smithy.Schema
 
 var _SynthesizedJsonHumanLoopActivationConditionsEvaluationResults = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
@@ -1458,6 +1958,74 @@ var CreateAdapterVersionResponse_AdapterId *smithy.Schema
 
 var CreateAdapterVersionResponse_AdapterVersion *smithy.Schema
 
+var CreateBlueprintRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "CreateBlueprintRequest",
+}, smithy.ShapeTypeStructure, 5)
+var CreateBlueprintRequest_ClientRequestToken *smithy.Schema
+
+var CreateBlueprintRequest_BlueprintName *smithy.Schema
+
+var CreateBlueprintRequest_Schema *smithy.Schema
+
+var CreateBlueprintRequest_EncryptionConfiguration *smithy.Schema
+
+var CreateBlueprintRequest_Tags *smithy.Schema
+
+var CreateBlueprintResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "CreateBlueprintResponse",
+}, smithy.ShapeTypeStructure, 1)
+var CreateBlueprintResponse_BlueprintArn *smithy.Schema
+
+var CreateBlueprintVersionRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "CreateBlueprintVersionRequest",
+}, smithy.ShapeTypeStructure, 2)
+var CreateBlueprintVersionRequest_BlueprintArn *smithy.Schema
+
+var CreateBlueprintVersionRequest_ClientRequestToken *smithy.Schema
+
+var CreateBlueprintVersionResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "CreateBlueprintVersionResponse",
+}, smithy.ShapeTypeStructure, 2)
+var CreateBlueprintVersionResponse_BlueprintArn *smithy.Schema
+
+var CreateBlueprintVersionResponse_BlueprintVersion *smithy.Schema
+
+var CreateProjectRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "CreateProjectRequest",
+}, smithy.ShapeTypeStructure, 10)
+var CreateProjectRequest_ClientRequestToken *smithy.Schema
+
+var CreateProjectRequest_ProjectName *smithy.Schema
+
+var CreateProjectRequest_ProjectDescription *smithy.Schema
+
+var CreateProjectRequest_ExtractionConfiguration *smithy.Schema
+
+var CreateProjectRequest_GenerativeConfiguration *smithy.Schema
+
+var CreateProjectRequest_CustomConfiguration *smithy.Schema
+
+var CreateProjectRequest_SplitterConfiguration *smithy.Schema
+
+var CreateProjectRequest_SensitiveDataConfiguration *smithy.Schema
+
+var CreateProjectRequest_EncryptionConfiguration *smithy.Schema
+
+var CreateProjectRequest_Tags *smithy.Schema
+
+var CreateProjectResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "CreateProjectResponse",
+}, smithy.ShapeTypeStructure, 2)
+var CreateProjectResponse_ProjectArn *smithy.Schema
+
+var CreateProjectResponse_Status *smithy.Schema
+
 var DeleteAdapterRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "DeleteAdapterRequest",
@@ -1480,6 +2048,30 @@ var DeleteAdapterVersionRequest_AdapterVersion *smithy.Schema
 var DeleteAdapterVersionResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "DeleteAdapterVersionResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteBlueprintRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "DeleteBlueprintRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DeleteBlueprintRequest_BlueprintArn *smithy.Schema
+
+var DeleteBlueprintRequest_BlueprintVersion *smithy.Schema
+
+var DeleteBlueprintResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "DeleteBlueprintResponse",
+}, smithy.ShapeTypeStructure, 0)
+
+var DeleteProjectRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "DeleteProjectRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeleteProjectRequest_ProjectArn *smithy.Schema
+
+var DeleteProjectResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "DeleteProjectResponse",
 }, smithy.ShapeTypeStructure, 0)
 
 var DetectDocumentTextRequest = smithy.NewSchema(smithy.ShapeID{
@@ -1556,6 +2148,34 @@ var GetAdapterVersionResponse_EvaluationMetrics *smithy.Schema
 
 var GetAdapterVersionResponse_Tags *smithy.Schema
 
+var GetBlueprintRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "GetBlueprintRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetBlueprintRequest_BlueprintArn *smithy.Schema
+
+var GetBlueprintRequest_BlueprintVersion *smithy.Schema
+
+var GetBlueprintResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "GetBlueprintResponse",
+}, smithy.ShapeTypeStructure, 8)
+var GetBlueprintResponse_BlueprintArn *smithy.Schema
+
+var GetBlueprintResponse_BlueprintName *smithy.Schema
+
+var GetBlueprintResponse_BlueprintVersion *smithy.Schema
+
+var GetBlueprintResponse_Schema *smithy.Schema
+
+var GetBlueprintResponse_KmsKeyId *smithy.Schema
+
+var GetBlueprintResponse_KmsEncryptionContext *smithy.Schema
+
+var GetBlueprintResponse_CreationTime *smithy.Schema
+
+var GetBlueprintResponse_LastModifiedTime *smithy.Schema
+
 var GetDocumentAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "GetDocumentAnalysisRequest",
@@ -1583,6 +2203,24 @@ var GetDocumentAnalysisResponse_Warnings *smithy.Schema
 var GetDocumentAnalysisResponse_StatusMessage *smithy.Schema
 
 var GetDocumentAnalysisResponse_AnalyzeDocumentModelVersion *smithy.Schema
+
+var GetDocumentInsightsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "GetDocumentInsightsRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetDocumentInsightsRequest_JobArn *smithy.Schema
+
+var GetDocumentInsightsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "GetDocumentInsightsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var GetDocumentInsightsResponse_Status *smithy.Schema
+
+var GetDocumentInsightsResponse_OutputConfiguration *smithy.Schema
+
+var GetDocumentInsightsResponse_ErrorType *smithy.Schema
+
+var GetDocumentInsightsResponse_ErrorMessage *smithy.Schema
 
 var GetDocumentTextDetectionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
@@ -1690,6 +2328,40 @@ var GetLendingAnalysisSummaryResponse_StatusMessage *smithy.Schema
 
 var GetLendingAnalysisSummaryResponse_AnalyzeLendingModelVersion *smithy.Schema
 
+var GetProjectRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "GetProjectRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetProjectRequest_ProjectArn *smithy.Schema
+
+var GetProjectResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "GetProjectResponse",
+}, smithy.ShapeTypeStructure, 12)
+var GetProjectResponse_ProjectArn *smithy.Schema
+
+var GetProjectResponse_ProjectName *smithy.Schema
+
+var GetProjectResponse_ProjectDescription *smithy.Schema
+
+var GetProjectResponse_Status *smithy.Schema
+
+var GetProjectResponse_ExtractionConfiguration *smithy.Schema
+
+var GetProjectResponse_GenerativeConfiguration *smithy.Schema
+
+var GetProjectResponse_CustomConfiguration *smithy.Schema
+
+var GetProjectResponse_SplitterConfiguration *smithy.Schema
+
+var GetProjectResponse_SensitiveDataConfiguration *smithy.Schema
+
+var GetProjectResponse_EncryptionConfiguration *smithy.Schema
+
+var GetProjectResponse_CreationTime *smithy.Schema
+
+var GetProjectResponse_LastModifiedTime *smithy.Schema
+
 var ListAdaptersRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "ListAdaptersRequest",
@@ -1732,6 +2404,46 @@ var ListAdapterVersionsResponse_AdapterVersions *smithy.Schema
 
 var ListAdapterVersionsResponse_NextToken *smithy.Schema
 
+var ListBlueprintsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ListBlueprintsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListBlueprintsRequest_MaxResults *smithy.Schema
+
+var ListBlueprintsRequest_NextToken *smithy.Schema
+
+var ListBlueprintsRequest_BlueprintArn *smithy.Schema
+
+var ListBlueprintsRequest_ProjectFilter *smithy.Schema
+
+var ListBlueprintsRequest_ResourceOwner *smithy.Schema
+
+var ListBlueprintsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ListBlueprintsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListBlueprintsResponse_Blueprints *smithy.Schema
+
+var ListBlueprintsResponse_NextToken *smithy.Schema
+
+var ListProjectsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ListProjectsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListProjectsRequest_MaxResults *smithy.Schema
+
+var ListProjectsRequest_NextToken *smithy.Schema
+
+var ListProjectsRequest_BlueprintFilter *smithy.Schema
+
+var ListProjectsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "ListProjectsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListProjectsResponse_Projects *smithy.Schema
+
+var ListProjectsResponse_NextToken *smithy.Schema
+
 var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
 	Name:      "ListTagsForResourceRequest",
@@ -1771,6 +2483,30 @@ var StartDocumentAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StartDocumentAnalysisResponse",
 }, smithy.ShapeTypeStructure, 1)
 var StartDocumentAnalysisResponse_JobId *smithy.Schema
+
+var StartDocumentInsightsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "StartDocumentInsightsRequest",
+}, smithy.ShapeTypeStructure, 7)
+var StartDocumentInsightsRequest_InputConfiguration *smithy.Schema
+
+var StartDocumentInsightsRequest_OutputConfiguration *smithy.Schema
+
+var StartDocumentInsightsRequest_ProjectArn *smithy.Schema
+
+var StartDocumentInsightsRequest_Blueprints *smithy.Schema
+
+var StartDocumentInsightsRequest_EncryptionConfiguration *smithy.Schema
+
+var StartDocumentInsightsRequest_NotificationConfiguration *smithy.Schema
+
+var StartDocumentInsightsRequest_Tags *smithy.Schema
+
+var StartDocumentInsightsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "StartDocumentInsightsResponse",
+}, smithy.ShapeTypeStructure, 1)
+var StartDocumentInsightsResponse_JobArn *smithy.Schema
 
 var StartDocumentTextDetectionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.textract",
@@ -1891,6 +2627,50 @@ var UpdateAdapterResponse_Description *smithy.Schema
 var UpdateAdapterResponse_FeatureTypes *smithy.Schema
 
 var UpdateAdapterResponse_AutoUpdate *smithy.Schema
+
+var UpdateBlueprintRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "UpdateBlueprintRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateBlueprintRequest_BlueprintArn *smithy.Schema
+
+var UpdateBlueprintRequest_Schema *smithy.Schema
+
+var UpdateBlueprintRequest_EncryptionConfiguration *smithy.Schema
+
+var UpdateBlueprintResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "UpdateBlueprintResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateBlueprintResponse_BlueprintArn *smithy.Schema
+
+var UpdateProjectRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "UpdateProjectRequest",
+}, smithy.ShapeTypeStructure, 8)
+var UpdateProjectRequest_ProjectArn *smithy.Schema
+
+var UpdateProjectRequest_ProjectDescription *smithy.Schema
+
+var UpdateProjectRequest_ExtractionConfiguration *smithy.Schema
+
+var UpdateProjectRequest_GenerativeConfiguration *smithy.Schema
+
+var UpdateProjectRequest_CustomConfiguration *smithy.Schema
+
+var UpdateProjectRequest_SplitterConfiguration *smithy.Schema
+
+var UpdateProjectRequest_SensitiveDataConfiguration *smithy.Schema
+
+var UpdateProjectRequest_EncryptionConfiguration *smithy.Schema
+
+var UpdateProjectResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.textract",
+	Name:      "UpdateProjectResponse",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateProjectResponse_ProjectArn *smithy.Schema
+
+var UpdateProjectResponse_Status *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -2161,6 +2941,40 @@ func init() {
 
 	_BlockList_member = _BlockList.AddMember("member", Block)
 
+	BlueprintFilter_BlueprintArn = BlueprintFilter.AddMember("BlueprintArn", _BlueprintArn)
+
+	BlueprintFilter_BlueprintVersion = BlueprintFilter.AddMember("BlueprintVersion", _BlueprintVersion)
+
+	BlueprintItem_BlueprintArn = BlueprintItem.AddMember("BlueprintArn", _BlueprintArn)
+
+	BlueprintItem_BlueprintVersion = BlueprintItem.AddMember("BlueprintVersion", _BlueprintVersion)
+
+	_BlueprintItems_member = _BlueprintItems.AddMember("member", BlueprintItem)
+
+	ResourceOwner_ACCOUNT = ResourceOwner.AddMember("ACCOUNT", smithyprelude.Unit)
+
+	ResourceOwner_SERVICE = ResourceOwner.AddMember("SERVICE", smithyprelude.Unit)
+
+	BlueprintSummary_BlueprintArn = BlueprintSummary.AddMember("BlueprintArn", _BlueprintArn)
+
+	BlueprintSummary_BlueprintName = BlueprintSummary.AddMember("BlueprintName", _BlueprintName)
+
+	BlueprintSummary_BlueprintVersion = BlueprintSummary.AddMember("BlueprintVersion", _BlueprintVersion)
+
+	BlueprintSummary_ResourceOwner = BlueprintSummary.AddMember("ResourceOwner", ResourceOwner)
+
+	BlueprintSummary_CreationTime = BlueprintSummary.AddMember("CreationTime", _DateTime)
+
+	BlueprintSummary_LastModifiedTime = BlueprintSummary.AddMember("LastModifiedTime", _DateTime)
+
+	_BlueprintSummaryList_member = _BlueprintSummaryList.AddMember("member", BlueprintSummary)
+
+	State_ENABLED = State.AddMember("ENABLED", smithyprelude.Unit)
+
+	State_DISABLED = State.AddMember("DISABLED", smithyprelude.Unit)
+
+	BoundingBoxConfiguration_State = BoundingBoxConfiguration.AddMember("State", State)
+
 	ConflictException_Message = ConflictException.AddMember("Message", _String)
 
 	ConflictException_Code = ConflictException.AddMember("Code", _String)
@@ -2170,6 +2984,12 @@ func init() {
 	ContentClassifier_FREE_OF_ADULT_CONTENT = ContentClassifier.AddMember("FREE_OF_ADULT_CONTENT", smithyprelude.Unit)
 
 	_ContentClassifiers_member = _ContentClassifiers.AddMember("member", ContentClassifier)
+
+	_FallbackBlueprintItems_member = _FallbackBlueprintItems.AddMember("member", BlueprintItem)
+
+	CustomConfiguration_Blueprints = CustomConfiguration.AddMember("Blueprints", _BlueprintItems)
+
+	CustomConfiguration_FallbackBlueprints = CustomConfiguration.AddMember("FallbackBlueprints", _FallbackBlueprintItems)
 
 	DetectedSignature_Page = DetectedSignature.AddMember("Page", _UInteger)
 
@@ -2210,6 +3030,16 @@ func init() {
 	DocumentTooLargeException_Message = DocumentTooLargeException.AddMember("Message", _String)
 
 	DocumentTooLargeException_Code = DocumentTooLargeException.AddMember("Code", _String)
+
+	_KmsEncryptionContext_key = _KmsEncryptionContext.AddMember("key", _EncryptionContextKey)
+
+	_KmsEncryptionContext_value = _KmsEncryptionContext.AddMember("value", _EncryptionContextValue)
+
+	EncryptionConfiguration_KmsKeyId = EncryptionConfiguration.AddMember("KmsKeyId", _EncryptionKmsKeyId)
+
+	EncryptionConfiguration_KmsEncryptionContext = EncryptionConfiguration.AddMember("KmsEncryptionContext", _KmsEncryptionContext)
+
+	EventBridgeConfiguration_State = EventBridgeConfiguration.AddMember("State", State)
 
 	ExpenseCurrency_Code = ExpenseCurrency.AddMember("Code", _String)
 
@@ -2313,7 +3143,53 @@ func init() {
 
 	Extraction_IdentityDocument = Extraction.AddMember("IdentityDocument", IdentityDocument)
 
+	ExtractionGranularityType_DOCUMENT = ExtractionGranularityType.AddMember("DOCUMENT", smithyprelude.Unit)
+
+	ExtractionGranularityType_PAGE = ExtractionGranularityType.AddMember("PAGE", smithyprelude.Unit)
+
+	ExtractionGranularityType_ELEMENT = ExtractionGranularityType.AddMember("ELEMENT", smithyprelude.Unit)
+
+	ExtractionGranularityType_WORD = ExtractionGranularityType.AddMember("WORD", smithyprelude.Unit)
+
+	ExtractionGranularityType_LINE = ExtractionGranularityType.AddMember("LINE", smithyprelude.Unit)
+
+	_ExtractionGranularityTypes_member = _ExtractionGranularityTypes.AddMember("member", ExtractionGranularityType)
+
+	ExtractionGranularity_Types = ExtractionGranularity.AddMember("Types", _ExtractionGranularityTypes)
+
+	OutputAdditionalFileFormat_State = OutputAdditionalFileFormat.AddMember("State", State)
+
+	OutputTextFormatType_PLAIN_TEXT = OutputTextFormatType.AddMember("PLAIN_TEXT", smithyprelude.Unit)
+
+	OutputTextFormatType_MARKDOWN = OutputTextFormatType.AddMember("MARKDOWN", smithyprelude.Unit)
+
+	OutputTextFormatType_HTML = OutputTextFormatType.AddMember("HTML", smithyprelude.Unit)
+
+	OutputTextFormatType_CSV = OutputTextFormatType.AddMember("CSV", smithyprelude.Unit)
+
+	_OutputTextFormatTypes_member = _OutputTextFormatTypes.AddMember("member", OutputTextFormatType)
+
+	OutputTextFormat_Types = OutputTextFormat.AddMember("Types", _OutputTextFormatTypes)
+
+	OutputFormat_AdditionalFileFormat = OutputFormat.AddMember("AdditionalFileFormat", OutputAdditionalFileFormat)
+
+	OutputFormat_TextFormat = OutputFormat.AddMember("TextFormat", OutputTextFormat)
+
+	ExtractionConfiguration_BoundingBox = ExtractionConfiguration.AddMember("BoundingBox", BoundingBoxConfiguration)
+
+	ExtractionConfiguration_Granularity = ExtractionConfiguration.AddMember("Granularity", ExtractionGranularity)
+
+	ExtractionConfiguration_OutputFormat = ExtractionConfiguration.AddMember("OutputFormat", OutputFormat)
+
 	_ExtractionList_member = _ExtractionList.AddMember("member", Extraction)
+
+	FigureCaptionConfiguration_State = FigureCaptionConfiguration.AddMember("State", State)
+
+	SummarizationConfiguration_State = SummarizationConfiguration.AddMember("State", State)
+
+	GenerativeConfiguration_Summarization = GenerativeConfiguration.AddMember("Summarization", SummarizationConfiguration)
+
+	GenerativeConfiguration_FigureCaption = GenerativeConfiguration.AddMember("FigureCaption", FigureCaptionConfiguration)
 
 	_HumanLoopActivationReasons_member = _HumanLoopActivationReasons.AddMember("member", _HumanLoopActivationReason)
 
@@ -2346,6 +3222,8 @@ func init() {
 	IdempotentParameterMismatchException_Code = IdempotentParameterMismatchException.AddMember("Code", _String)
 
 	_IdentityDocumentList_member = _IdentityDocumentList.AddMember("member", IdentityDocument)
+
+	InputConfiguration_S3Uri = InputConfiguration.AddMember("S3Uri", _S3Uri)
 
 	InternalServerError_Message = InternalServerError.AddMember("Message", _String)
 
@@ -2407,11 +3285,105 @@ func init() {
 
 	NotificationChannel_RoleArn = NotificationChannel.AddMember("RoleArn", _RoleArn)
 
+	NotificationConfiguration_EventBridgeConfiguration = NotificationConfiguration.AddMember("EventBridgeConfiguration", EventBridgeConfiguration)
+
 	OutputConfig_S3Bucket = OutputConfig.AddMember("S3Bucket", _S3Bucket)
 
 	OutputConfig_S3Prefix = OutputConfig.AddMember("S3Prefix", _S3ObjectName)
 
+	OutputConfiguration_S3Uri = OutputConfiguration.AddMember("S3Uri", _S3Uri)
+
 	_Pages_member = _Pages.AddMember("member", _UInteger)
+
+	PIIEntityType_ALL = PIIEntityType.AddMember("ALL", smithyprelude.Unit)
+
+	PIIEntityType_ADDRESS = PIIEntityType.AddMember("ADDRESS", smithyprelude.Unit)
+
+	PIIEntityType_AGE = PIIEntityType.AddMember("AGE", smithyprelude.Unit)
+
+	PIIEntityType_NAME = PIIEntityType.AddMember("NAME", smithyprelude.Unit)
+
+	PIIEntityType_EMAIL = PIIEntityType.AddMember("EMAIL", smithyprelude.Unit)
+
+	PIIEntityType_PHONE = PIIEntityType.AddMember("PHONE", smithyprelude.Unit)
+
+	PIIEntityType_USERNAME = PIIEntityType.AddMember("USERNAME", smithyprelude.Unit)
+
+	PIIEntityType_PASSWORD = PIIEntityType.AddMember("PASSWORD", smithyprelude.Unit)
+
+	PIIEntityType_DRIVER_ID = PIIEntityType.AddMember("DRIVER_ID", smithyprelude.Unit)
+
+	PIIEntityType_LICENSE_PLATE = PIIEntityType.AddMember("LICENSE_PLATE", smithyprelude.Unit)
+
+	PIIEntityType_VEHICLE_IDENTIFICATION_NUMBER = PIIEntityType.AddMember("VEHICLE_IDENTIFICATION_NUMBER", smithyprelude.Unit)
+
+	PIIEntityType_CREDIT_DEBIT_CARD_CVV = PIIEntityType.AddMember("CREDIT_DEBIT_CARD_CVV", smithyprelude.Unit)
+
+	PIIEntityType_CREDIT_DEBIT_CARD_EXPIRY = PIIEntityType.AddMember("CREDIT_DEBIT_CARD_EXPIRY", smithyprelude.Unit)
+
+	PIIEntityType_CREDIT_DEBIT_CARD_NUMBER = PIIEntityType.AddMember("CREDIT_DEBIT_CARD_NUMBER", smithyprelude.Unit)
+
+	PIIEntityType_PIN = PIIEntityType.AddMember("PIN", smithyprelude.Unit)
+
+	PIIEntityType_INTERNATIONAL_BANK_ACCOUNT_NUMBER = PIIEntityType.AddMember("INTERNATIONAL_BANK_ACCOUNT_NUMBER", smithyprelude.Unit)
+
+	PIIEntityType_SWIFT_CODE = PIIEntityType.AddMember("SWIFT_CODE", smithyprelude.Unit)
+
+	PIIEntityType_IP_ADDRESS = PIIEntityType.AddMember("IP_ADDRESS", smithyprelude.Unit)
+
+	PIIEntityType_MAC_ADDRESS = PIIEntityType.AddMember("MAC_ADDRESS", smithyprelude.Unit)
+
+	PIIEntityType_URL = PIIEntityType.AddMember("URL", smithyprelude.Unit)
+
+	PIIEntityType_AWS_ACCESS_KEY = PIIEntityType.AddMember("AWS_ACCESS_KEY", smithyprelude.Unit)
+
+	PIIEntityType_AWS_SECRET_KEY = PIIEntityType.AddMember("AWS_SECRET_KEY", smithyprelude.Unit)
+
+	PIIEntityType_US_BANK_ACCOUNT_NUMBER = PIIEntityType.AddMember("US_BANK_ACCOUNT_NUMBER", smithyprelude.Unit)
+
+	PIIEntityType_US_BANK_ROUTING_NUMBER = PIIEntityType.AddMember("US_BANK_ROUTING_NUMBER", smithyprelude.Unit)
+
+	PIIEntityType_US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER = PIIEntityType.AddMember("US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", smithyprelude.Unit)
+
+	PIIEntityType_US_PASSPORT_NUMBER = PIIEntityType.AddMember("US_PASSPORT_NUMBER", smithyprelude.Unit)
+
+	PIIEntityType_US_SOCIAL_SECURITY_NUMBER = PIIEntityType.AddMember("US_SOCIAL_SECURITY_NUMBER", smithyprelude.Unit)
+
+	PIIEntityType_CA_HEALTH_NUMBER = PIIEntityType.AddMember("CA_HEALTH_NUMBER", smithyprelude.Unit)
+
+	PIIEntityType_CA_SOCIAL_INSURANCE_NUMBER = PIIEntityType.AddMember("CA_SOCIAL_INSURANCE_NUMBER", smithyprelude.Unit)
+
+	PIIEntityType_UK_NATIONAL_HEALTH_SERVICE_NUMBER = PIIEntityType.AddMember("UK_NATIONAL_HEALTH_SERVICE_NUMBER", smithyprelude.Unit)
+
+	PIIEntityType_UK_NATIONAL_INSURANCE_NUMBER = PIIEntityType.AddMember("UK_NATIONAL_INSURANCE_NUMBER", smithyprelude.Unit)
+
+	PIIEntityType_UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER = PIIEntityType.AddMember("UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", smithyprelude.Unit)
+
+	_PIIEntityTypes_member = _PIIEntityTypes.AddMember("member", PIIEntityType)
+
+	PIIRedactionMaskMode_PII = PIIRedactionMaskMode.AddMember("PII", smithyprelude.Unit)
+
+	PIIRedactionMaskMode_ENTITY_TYPE = PIIRedactionMaskMode.AddMember("ENTITY_TYPE", smithyprelude.Unit)
+
+	PIIEntitiesConfiguration_PiiEntityTypes = PIIEntitiesConfiguration.AddMember("PiiEntityTypes", _PIIEntityTypes)
+
+	PIIEntitiesConfiguration_RedactionMaskMode = PIIEntitiesConfiguration.AddMember("RedactionMaskMode", PIIRedactionMaskMode)
+
+	ProjectFilter_ProjectArn = ProjectFilter.AddMember("ProjectArn", _ProjectArn)
+
+	ProjectStatus_COMPLETED = ProjectStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	ProjectStatus_FAILED = ProjectStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	ProjectSummary_ProjectArn = ProjectSummary.AddMember("ProjectArn", _ProjectArn)
+
+	ProjectSummary_ProjectName = ProjectSummary.AddMember("ProjectName", _ProjectName)
+
+	ProjectSummary_CreationTime = ProjectSummary.AddMember("CreationTime", _DateTime)
+
+	ProjectSummary_LastModifiedTime = ProjectSummary.AddMember("LastModifiedTime", _DateTime)
+
+	_ProjectSummaryList_member = _ProjectSummaryList.AddMember("member", ProjectSummary)
 
 	ProvisionedThroughputExceededException_Message = ProvisionedThroughputExceededException.AddMember("Message", _String)
 
@@ -2425,9 +3397,21 @@ func init() {
 
 	ResourceNotFoundException_Code = ResourceNotFoundException.AddMember("Code", _String)
 
+	SensitiveDataDetectionMode_DETECTION = SensitiveDataDetectionMode.AddMember("DETECTION", smithyprelude.Unit)
+
+	SensitiveDataDetectionMode_DETECTION_AND_REDACTION = SensitiveDataDetectionMode.AddMember("DETECTION_AND_REDACTION", smithyprelude.Unit)
+
+	SensitiveDataDetectionMode_DISABLED = SensitiveDataDetectionMode.AddMember("DISABLED", smithyprelude.Unit)
+
+	SensitiveDataConfiguration_DetectionMode = SensitiveDataConfiguration.AddMember("DetectionMode", SensitiveDataDetectionMode)
+
+	SensitiveDataConfiguration_PiiEntitiesConfiguration = SensitiveDataConfiguration.AddMember("PiiEntitiesConfiguration", PIIEntitiesConfiguration)
+
 	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _String)
 
 	ServiceQuotaExceededException_Code = ServiceQuotaExceededException.AddMember("Code", _String)
+
+	SplitterConfiguration_State = SplitterConfiguration.AddMember("State", State)
 
 	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
 
@@ -2515,11 +3499,61 @@ func init() {
 
 	CreateAdapterVersionResponse_AdapterVersion = CreateAdapterVersionResponse.AddMember("AdapterVersion", _AdapterVersion)
 
+	CreateBlueprintRequest_ClientRequestToken = CreateBlueprintRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	CreateBlueprintRequest_BlueprintName = CreateBlueprintRequest.AddMember("BlueprintName", _BlueprintName)
+
+	CreateBlueprintRequest_Schema = CreateBlueprintRequest.AddMember("Schema", _BlueprintSchema)
+
+	CreateBlueprintRequest_EncryptionConfiguration = CreateBlueprintRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
+	CreateBlueprintRequest_Tags = CreateBlueprintRequest.AddMember("Tags", _TagMap)
+
+	CreateBlueprintResponse_BlueprintArn = CreateBlueprintResponse.AddMember("BlueprintArn", _BlueprintArn)
+
+	CreateBlueprintVersionRequest_BlueprintArn = CreateBlueprintVersionRequest.AddMember("BlueprintArn", _BlueprintArn)
+
+	CreateBlueprintVersionRequest_ClientRequestToken = CreateBlueprintVersionRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	CreateBlueprintVersionResponse_BlueprintArn = CreateBlueprintVersionResponse.AddMember("BlueprintArn", _BlueprintArn)
+
+	CreateBlueprintVersionResponse_BlueprintVersion = CreateBlueprintVersionResponse.AddMember("BlueprintVersion", _BlueprintVersion)
+
+	CreateProjectRequest_ClientRequestToken = CreateProjectRequest.AddMember("ClientRequestToken", _ClientRequestToken)
+
+	CreateProjectRequest_ProjectName = CreateProjectRequest.AddMember("ProjectName", _ProjectName)
+
+	CreateProjectRequest_ProjectDescription = CreateProjectRequest.AddMember("ProjectDescription", _ProjectDescription)
+
+	CreateProjectRequest_ExtractionConfiguration = CreateProjectRequest.AddMember("ExtractionConfiguration", ExtractionConfiguration)
+
+	CreateProjectRequest_GenerativeConfiguration = CreateProjectRequest.AddMember("GenerativeConfiguration", GenerativeConfiguration)
+
+	CreateProjectRequest_CustomConfiguration = CreateProjectRequest.AddMember("CustomConfiguration", CustomConfiguration)
+
+	CreateProjectRequest_SplitterConfiguration = CreateProjectRequest.AddMember("SplitterConfiguration", SplitterConfiguration)
+
+	CreateProjectRequest_SensitiveDataConfiguration = CreateProjectRequest.AddMember("SensitiveDataConfiguration", SensitiveDataConfiguration)
+
+	CreateProjectRequest_EncryptionConfiguration = CreateProjectRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
+	CreateProjectRequest_Tags = CreateProjectRequest.AddMember("Tags", _TagMap)
+
+	CreateProjectResponse_ProjectArn = CreateProjectResponse.AddMember("ProjectArn", _ProjectArn)
+
+	CreateProjectResponse_Status = CreateProjectResponse.AddMember("Status", ProjectStatus)
+
 	DeleteAdapterRequest_AdapterId = DeleteAdapterRequest.AddMember("AdapterId", _AdapterId)
 
 	DeleteAdapterVersionRequest_AdapterId = DeleteAdapterVersionRequest.AddMember("AdapterId", _AdapterId)
 
 	DeleteAdapterVersionRequest_AdapterVersion = DeleteAdapterVersionRequest.AddMember("AdapterVersion", _AdapterVersion)
+
+	DeleteBlueprintRequest_BlueprintArn = DeleteBlueprintRequest.AddMember("BlueprintArn", _BlueprintArn)
+
+	DeleteBlueprintRequest_BlueprintVersion = DeleteBlueprintRequest.AddMember("BlueprintVersion", _BlueprintVersion)
+
+	DeleteProjectRequest_ProjectArn = DeleteProjectRequest.AddMember("ProjectArn", _ProjectArn)
 
 	DetectDocumentTextRequest_Document = DetectDocumentTextRequest.AddMember("Document", Document)
 
@@ -2571,6 +3605,26 @@ func init() {
 
 	GetAdapterVersionResponse_Tags = GetAdapterVersionResponse.AddMember("Tags", _TagMap)
 
+	GetBlueprintRequest_BlueprintArn = GetBlueprintRequest.AddMember("BlueprintArn", _BlueprintArn)
+
+	GetBlueprintRequest_BlueprintVersion = GetBlueprintRequest.AddMember("BlueprintVersion", _BlueprintVersion)
+
+	GetBlueprintResponse_BlueprintArn = GetBlueprintResponse.AddMember("BlueprintArn", _BlueprintArn)
+
+	GetBlueprintResponse_BlueprintName = GetBlueprintResponse.AddMember("BlueprintName", _BlueprintName)
+
+	GetBlueprintResponse_BlueprintVersion = GetBlueprintResponse.AddMember("BlueprintVersion", _BlueprintVersion)
+
+	GetBlueprintResponse_Schema = GetBlueprintResponse.AddMember("Schema", _BlueprintSchema)
+
+	GetBlueprintResponse_KmsKeyId = GetBlueprintResponse.AddMember("KmsKeyId", _KMSKeyId)
+
+	GetBlueprintResponse_KmsEncryptionContext = GetBlueprintResponse.AddMember("KmsEncryptionContext", _KmsEncryptionContext)
+
+	GetBlueprintResponse_CreationTime = GetBlueprintResponse.AddMember("CreationTime", _DateTime)
+
+	GetBlueprintResponse_LastModifiedTime = GetBlueprintResponse.AddMember("LastModifiedTime", _DateTime)
+
 	GetDocumentAnalysisRequest_JobId = GetDocumentAnalysisRequest.AddMember("JobId", _JobId)
 
 	GetDocumentAnalysisRequest_MaxResults = GetDocumentAnalysisRequest.AddMember("MaxResults", _MaxResults)
@@ -2590,6 +3644,16 @@ func init() {
 	GetDocumentAnalysisResponse_StatusMessage = GetDocumentAnalysisResponse.AddMember("StatusMessage", _StatusMessage)
 
 	GetDocumentAnalysisResponse_AnalyzeDocumentModelVersion = GetDocumentAnalysisResponse.AddMember("AnalyzeDocumentModelVersion", _String)
+
+	GetDocumentInsightsRequest_JobArn = GetDocumentInsightsRequest.AddMember("JobArn", _JobArn)
+
+	GetDocumentInsightsResponse_Status = GetDocumentInsightsResponse.AddMember("Status", JobStatus)
+
+	GetDocumentInsightsResponse_OutputConfiguration = GetDocumentInsightsResponse.AddMember("OutputConfiguration", OutputConfiguration)
+
+	GetDocumentInsightsResponse_ErrorType = GetDocumentInsightsResponse.AddMember("ErrorType", _ErrorType)
+
+	GetDocumentInsightsResponse_ErrorMessage = GetDocumentInsightsResponse.AddMember("ErrorMessage", _ErrorMessage)
 
 	GetDocumentTextDetectionRequest_JobId = GetDocumentTextDetectionRequest.AddMember("JobId", _JobId)
 
@@ -2665,6 +3729,32 @@ func init() {
 
 	GetLendingAnalysisSummaryResponse_AnalyzeLendingModelVersion = GetLendingAnalysisSummaryResponse.AddMember("AnalyzeLendingModelVersion", _String)
 
+	GetProjectRequest_ProjectArn = GetProjectRequest.AddMember("ProjectArn", _ProjectArn)
+
+	GetProjectResponse_ProjectArn = GetProjectResponse.AddMember("ProjectArn", _ProjectArn)
+
+	GetProjectResponse_ProjectName = GetProjectResponse.AddMember("ProjectName", _ProjectName)
+
+	GetProjectResponse_ProjectDescription = GetProjectResponse.AddMember("ProjectDescription", _ProjectDescription)
+
+	GetProjectResponse_Status = GetProjectResponse.AddMember("Status", ProjectStatus)
+
+	GetProjectResponse_ExtractionConfiguration = GetProjectResponse.AddMember("ExtractionConfiguration", ExtractionConfiguration)
+
+	GetProjectResponse_GenerativeConfiguration = GetProjectResponse.AddMember("GenerativeConfiguration", GenerativeConfiguration)
+
+	GetProjectResponse_CustomConfiguration = GetProjectResponse.AddMember("CustomConfiguration", CustomConfiguration)
+
+	GetProjectResponse_SplitterConfiguration = GetProjectResponse.AddMember("SplitterConfiguration", SplitterConfiguration)
+
+	GetProjectResponse_SensitiveDataConfiguration = GetProjectResponse.AddMember("SensitiveDataConfiguration", SensitiveDataConfiguration)
+
+	GetProjectResponse_EncryptionConfiguration = GetProjectResponse.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
+	GetProjectResponse_CreationTime = GetProjectResponse.AddMember("CreationTime", _DateTime)
+
+	GetProjectResponse_LastModifiedTime = GetProjectResponse.AddMember("LastModifiedTime", _DateTime)
+
 	ListAdaptersRequest_AfterCreationTime = ListAdaptersRequest.AddMember("AfterCreationTime", _DateTime)
 
 	ListAdaptersRequest_BeforeCreationTime = ListAdaptersRequest.AddMember("BeforeCreationTime", _DateTime)
@@ -2691,6 +3781,30 @@ func init() {
 
 	ListAdapterVersionsResponse_NextToken = ListAdapterVersionsResponse.AddMember("NextToken", _PaginationToken)
 
+	ListBlueprintsRequest_MaxResults = ListBlueprintsRequest.AddMember("MaxResults", _MaxResults)
+
+	ListBlueprintsRequest_NextToken = ListBlueprintsRequest.AddMember("NextToken", _IntelligencePaginationToken)
+
+	ListBlueprintsRequest_BlueprintArn = ListBlueprintsRequest.AddMember("BlueprintArn", _BlueprintArn)
+
+	ListBlueprintsRequest_ProjectFilter = ListBlueprintsRequest.AddMember("ProjectFilter", ProjectFilter)
+
+	ListBlueprintsRequest_ResourceOwner = ListBlueprintsRequest.AddMember("ResourceOwner", ResourceOwner)
+
+	ListBlueprintsResponse_Blueprints = ListBlueprintsResponse.AddMember("Blueprints", _BlueprintSummaryList)
+
+	ListBlueprintsResponse_NextToken = ListBlueprintsResponse.AddMember("NextToken", _IntelligencePaginationToken)
+
+	ListProjectsRequest_MaxResults = ListProjectsRequest.AddMember("MaxResults", _MaxResults)
+
+	ListProjectsRequest_NextToken = ListProjectsRequest.AddMember("NextToken", _IntelligencePaginationToken)
+
+	ListProjectsRequest_BlueprintFilter = ListProjectsRequest.AddMember("BlueprintFilter", BlueprintFilter)
+
+	ListProjectsResponse_Projects = ListProjectsResponse.AddMember("Projects", _ProjectSummaryList)
+
+	ListProjectsResponse_NextToken = ListProjectsResponse.AddMember("NextToken", _IntelligencePaginationToken)
+
 	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
 
 	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagMap)
@@ -2714,6 +3828,22 @@ func init() {
 	StartDocumentAnalysisRequest_AdaptersConfig = StartDocumentAnalysisRequest.AddMember("AdaptersConfig", AdaptersConfig)
 
 	StartDocumentAnalysisResponse_JobId = StartDocumentAnalysisResponse.AddMember("JobId", _JobId)
+
+	StartDocumentInsightsRequest_InputConfiguration = StartDocumentInsightsRequest.AddMember("InputConfiguration", InputConfiguration)
+
+	StartDocumentInsightsRequest_OutputConfiguration = StartDocumentInsightsRequest.AddMember("OutputConfiguration", OutputConfiguration)
+
+	StartDocumentInsightsRequest_ProjectArn = StartDocumentInsightsRequest.AddMember("ProjectArn", _ProjectArn)
+
+	StartDocumentInsightsRequest_Blueprints = StartDocumentInsightsRequest.AddMember("Blueprints", _BlueprintItems)
+
+	StartDocumentInsightsRequest_EncryptionConfiguration = StartDocumentInsightsRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
+	StartDocumentInsightsRequest_NotificationConfiguration = StartDocumentInsightsRequest.AddMember("NotificationConfiguration", NotificationConfiguration)
+
+	StartDocumentInsightsRequest_Tags = StartDocumentInsightsRequest.AddMember("Tags", _TagMap)
+
+	StartDocumentInsightsResponse_JobArn = StartDocumentInsightsResponse.AddMember("JobArn", _JobArn)
 
 	StartDocumentTextDetectionRequest_DocumentLocation = StartDocumentTextDetectionRequest.AddMember("DocumentLocation", DocumentLocation)
 
@@ -2784,5 +3914,33 @@ func init() {
 	UpdateAdapterResponse_FeatureTypes = UpdateAdapterResponse.AddMember("FeatureTypes", _FeatureTypes)
 
 	UpdateAdapterResponse_AutoUpdate = UpdateAdapterResponse.AddMember("AutoUpdate", AutoUpdate)
+
+	UpdateBlueprintRequest_BlueprintArn = UpdateBlueprintRequest.AddMember("BlueprintArn", _BlueprintArn)
+
+	UpdateBlueprintRequest_Schema = UpdateBlueprintRequest.AddMember("Schema", _BlueprintSchema)
+
+	UpdateBlueprintRequest_EncryptionConfiguration = UpdateBlueprintRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
+	UpdateBlueprintResponse_BlueprintArn = UpdateBlueprintResponse.AddMember("BlueprintArn", _BlueprintArn)
+
+	UpdateProjectRequest_ProjectArn = UpdateProjectRequest.AddMember("ProjectArn", _ProjectArn)
+
+	UpdateProjectRequest_ProjectDescription = UpdateProjectRequest.AddMember("ProjectDescription", _ProjectDescription)
+
+	UpdateProjectRequest_ExtractionConfiguration = UpdateProjectRequest.AddMember("ExtractionConfiguration", ExtractionConfiguration)
+
+	UpdateProjectRequest_GenerativeConfiguration = UpdateProjectRequest.AddMember("GenerativeConfiguration", GenerativeConfiguration)
+
+	UpdateProjectRequest_CustomConfiguration = UpdateProjectRequest.AddMember("CustomConfiguration", CustomConfiguration)
+
+	UpdateProjectRequest_SplitterConfiguration = UpdateProjectRequest.AddMember("SplitterConfiguration", SplitterConfiguration)
+
+	UpdateProjectRequest_SensitiveDataConfiguration = UpdateProjectRequest.AddMember("SensitiveDataConfiguration", SensitiveDataConfiguration)
+
+	UpdateProjectRequest_EncryptionConfiguration = UpdateProjectRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
+
+	UpdateProjectResponse_ProjectArn = UpdateProjectResponse.AddMember("ProjectArn", _ProjectArn)
+
+	UpdateProjectResponse_Status = UpdateProjectResponse.AddMember("Status", ProjectStatus)
 
 }

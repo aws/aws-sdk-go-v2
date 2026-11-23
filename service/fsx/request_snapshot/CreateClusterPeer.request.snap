@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.CreateClusterPeer
+
+{"AllowedSvmIds":["__Member__","__Member__"],"AllowedSvmMode":"ALL","ClientRequestToken":"__ClientRequestToken__","FileSystemId":"__FileSystemId__","PassphraseSecretArn":"__PassphraseSecretArn__","PeerAddresses":["__Member__","__Member__"],"PeerClusterName":"__PeerClusterName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

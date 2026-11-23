@@ -713,6 +713,176 @@ func (v *Block) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A filter used to limit results to a specific blueprint, and optionally a
+// specific version.
+type BlueprintFilter struct {
+
+	// The Amazon Resource Name (ARN) of the blueprint to filter by.
+	//
+	// This member is required.
+	BlueprintArn *string
+
+	// The version of the blueprint to filter by.
+	BlueprintVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BlueprintFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlueprintFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlueprintFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueprintArn != nil {
+		s.WriteString(schemas.BlueprintFilter_BlueprintArn, *v.BlueprintArn)
+	}
+	if v.BlueprintVersion != nil {
+		s.WriteString(schemas.BlueprintFilter_BlueprintVersion, *v.BlueprintVersion)
+	}
+}
+func (v *BlueprintFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlueprintFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlueprintFilter_BlueprintArn:
+			v.BlueprintArn = new(string)
+			return d.ReadString(schemas.BlueprintFilter_BlueprintArn, v.BlueprintArn)
+		case schemas.BlueprintFilter_BlueprintVersion:
+			v.BlueprintVersion = new(string)
+			return d.ReadString(schemas.BlueprintFilter_BlueprintVersion, v.BlueprintVersion)
+		}
+		return nil
+	})
+}
+
+// Associates a blueprint, and optionally a specific blueprint version, with a
+// project for custom output extraction.
+type BlueprintItem struct {
+
+	// The Amazon Resource Name (ARN) of the blueprint.
+	//
+	// This member is required.
+	BlueprintArn *string
+
+	// The version of the blueprint. If omitted, the latest version is used.
+	BlueprintVersion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BlueprintItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlueprintItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlueprintItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueprintArn != nil {
+		s.WriteString(schemas.BlueprintItem_BlueprintArn, *v.BlueprintArn)
+	}
+	if v.BlueprintVersion != nil {
+		s.WriteString(schemas.BlueprintItem_BlueprintVersion, *v.BlueprintVersion)
+	}
+}
+func (v *BlueprintItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlueprintItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlueprintItem_BlueprintArn:
+			v.BlueprintArn = new(string)
+			return d.ReadString(schemas.BlueprintItem_BlueprintArn, v.BlueprintArn)
+		case schemas.BlueprintItem_BlueprintVersion:
+			v.BlueprintVersion = new(string)
+			return d.ReadString(schemas.BlueprintItem_BlueprintVersion, v.BlueprintVersion)
+		}
+		return nil
+	})
+}
+
+// A summary of a blueprint, returned in the results of ListBlueprints .
+type BlueprintSummary struct {
+
+	// The Amazon Resource Name (ARN) of the blueprint.
+	//
+	// This member is required.
+	BlueprintArn *string
+
+	// The date and time that the blueprint was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The name of the blueprint.
+	BlueprintName *string
+
+	// The version of the blueprint.
+	BlueprintVersion *string
+
+	// The date and time that the blueprint was last modified.
+	LastModifiedTime *time.Time
+
+	// Whether the blueprint is owned by your account or provided by Amazon Textract.
+	ResourceOwner ResourceOwner
+
+	noSmithyDocumentSerde
+}
+
+func (v *BlueprintSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlueprintSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlueprintSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueprintArn != nil {
+		s.WriteString(schemas.BlueprintSummary_BlueprintArn, *v.BlueprintArn)
+	}
+	if v.BlueprintName != nil {
+		s.WriteString(schemas.BlueprintSummary_BlueprintName, *v.BlueprintName)
+	}
+	if v.BlueprintVersion != nil {
+		s.WriteString(schemas.BlueprintSummary_BlueprintVersion, *v.BlueprintVersion)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.BlueprintSummary_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.BlueprintSummary_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ResourceOwner != "" {
+		s.WriteString(schemas.BlueprintSummary_ResourceOwner, string(v.ResourceOwner))
+	}
+}
+func (v *BlueprintSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlueprintSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlueprintSummary_BlueprintArn:
+			v.BlueprintArn = new(string)
+			return d.ReadString(schemas.BlueprintSummary_BlueprintArn, v.BlueprintArn)
+		case schemas.BlueprintSummary_BlueprintName:
+			v.BlueprintName = new(string)
+			return d.ReadString(schemas.BlueprintSummary_BlueprintName, v.BlueprintName)
+		case schemas.BlueprintSummary_BlueprintVersion:
+			v.BlueprintVersion = new(string)
+			return d.ReadString(schemas.BlueprintSummary_BlueprintVersion, v.BlueprintVersion)
+		case schemas.BlueprintSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.BlueprintSummary_CreationTime, v.CreationTime)
+		case schemas.BlueprintSummary_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.BlueprintSummary_LastModifiedTime, v.LastModifiedTime)
+		case schemas.BlueprintSummary_ResourceOwner:
+			var ev string
+			if err := d.ReadString(schemas.BlueprintSummary_ResourceOwner, &ev); err != nil {
+				return err
+			}
+			v.ResourceOwner = ResourceOwner(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The bounding box around the detected page, text, key-value pair, table, table
 // cell, or selection element on a document page. The left (x-coordinate) and top
 // (y-coordinate) are coordinates that represent the top and left sides of the
@@ -777,6 +947,86 @@ func (v *BoundingBox) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadFloat32(schemas.BoundingBox_Top, &v.Top)
 		case schemas.BoundingBox_Width:
 			return d.ReadFloat32(schemas.BoundingBox_Width, &v.Width)
+		}
+		return nil
+	})
+}
+
+// Controls whether bounding box geometry is returned in the extraction output.
+type BoundingBoxConfiguration struct {
+
+	// Set to ENABLED to return bounding box geometry, or DISABLED to omit it.
+	//
+	// This member is required.
+	State State
+
+	noSmithyDocumentSerde
+}
+
+func (v *BoundingBoxConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BoundingBoxConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BoundingBoxConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.BoundingBoxConfiguration_State, string(v.State))
+	}
+}
+func (v *BoundingBoxConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BoundingBoxConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BoundingBoxConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.BoundingBoxConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = State(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Associates blueprints with a project to produce custom structured output. A
+// fallback blueprint can be supplied for documents that do not match a primary
+// blueprint.
+type CustomConfiguration struct {
+
+	// The blueprints used to extract custom structured output.
+	//
+	// This member is required.
+	Blueprints []BlueprintItem
+
+	// The blueprint used when a document does not match any of the primary
+	// blueprints. Requires at least one blueprint in Blueprints .
+	FallbackBlueprints []BlueprintItem
+
+	noSmithyDocumentSerde
+}
+
+func (v *CustomConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blueprints != nil {
+		serializeBlueprintItems(s, schemas.CustomConfiguration_Blueprints, v.Blueprints)
+	}
+	if v.FallbackBlueprints != nil {
+		serializeFallbackBlueprintItems(s, schemas.CustomConfiguration_FallbackBlueprints, v.FallbackBlueprints)
+	}
+}
+func (v *CustomConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomConfiguration_Blueprints:
+			return deserializeBlueprintItems(d, schemas.CustomConfiguration_Blueprints, &v.Blueprints)
+		case schemas.CustomConfiguration_FallbackBlueprints:
+			return deserializeFallbackBlueprintItems(d, schemas.CustomConfiguration_FallbackBlueprints, &v.FallbackBlueprints)
 		}
 		return nil
 	})
@@ -1007,6 +1257,56 @@ func (v *DocumentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Specifies the AWS Key Management Service (AWS KMS) key and encryption context
+// used to encrypt a resource at rest. When omitted, Amazon Textract encrypts the
+// resource using an AWS owned key.
+type EncryptionConfiguration struct {
+
+	// The identifier of the AWS KMS key to use for encryption. This can be a key ID,
+	// key ARN, alias name, or alias ARN.
+	//
+	// This member is required.
+	KmsKeyId *string
+
+	// A set of key-value pairs that Amazon Textract includes as the AWS KMS
+	// encryption context when encrypting and decrypting the resource.
+	//
+	// On UpdateProject and UpdateBlueprint , this member is the one exception to
+	// replacing a supplied configuration whole. If you omit it, the stored encryption
+	// context is kept. To clear a custom encryption context, specify an empty map ( {}
+	// ).
+	KmsEncryptionContext map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsEncryptionContext != nil {
+		serializeKmsEncryptionContext(s, schemas.EncryptionConfiguration_KmsEncryptionContext, v.KmsEncryptionContext)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.EncryptionConfiguration_KmsKeyId, *v.KmsKeyId)
+	}
+}
+func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfiguration_KmsEncryptionContext:
+			return deserializeKmsEncryptionContext(d, schemas.EncryptionConfiguration_KmsEncryptionContext, &v.KmsEncryptionContext)
+		case schemas.EncryptionConfiguration_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.EncryptionConfiguration_KmsKeyId, v.KmsKeyId)
+		}
+		return nil
+	})
+}
+
 // The evaluation metrics (F1 score, Precision, and Recall) for an adapter version.
 type EvaluationMetric struct {
 
@@ -1048,6 +1348,43 @@ func (v *EvaluationMetric) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadFloat32(schemas.EvaluationMetric_Precision, &v.Precision)
 		case schemas.EvaluationMetric_Recall:
 			return d.ReadFloat32(schemas.EvaluationMetric_Recall, &v.Recall)
+		}
+		return nil
+	})
+}
+
+// Event bus settings for a job.
+type EventBridgeConfiguration struct {
+
+	// Set to ENABLED to send events to an event bus, or DISABLED to not send them.
+	//
+	// This member is required.
+	State State
+
+	noSmithyDocumentSerde
+}
+
+func (v *EventBridgeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventBridgeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventBridgeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.EventBridgeConfiguration_State, string(v.State))
+	}
+}
+func (v *EventBridgeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventBridgeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventBridgeConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.EventBridgeConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = State(ev)
+			return nil
 		}
 		return nil
 	})
@@ -1452,6 +1789,186 @@ func (v *Extraction) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Controls how Amazon Textract extracts content from a document, including
+// whether bounding boxes are returned, the granularity of extraction, and the
+// output format.
+type ExtractionConfiguration struct {
+
+	// Controls whether bounding box geometry is included in the extraction output.
+	//
+	// This member is required.
+	BoundingBox *BoundingBoxConfiguration
+
+	// Controls the granularity levels at which content is extracted.
+	//
+	// This member is required.
+	Granularity *ExtractionGranularity
+
+	// Controls the format of the extraction output.
+	//
+	// This member is required.
+	OutputFormat *OutputFormat
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExtractionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtractionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtractionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BoundingBox != nil {
+		s.WriteStruct(schemas.ExtractionConfiguration_BoundingBox)
+		v.BoundingBox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != nil {
+		s.WriteStruct(schemas.ExtractionConfiguration_Granularity)
+		v.Granularity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputFormat != nil {
+		s.WriteStruct(schemas.ExtractionConfiguration_OutputFormat)
+		v.OutputFormat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExtractionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtractionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtractionConfiguration_BoundingBox:
+			v.BoundingBox = &BoundingBoxConfiguration{}
+			return v.BoundingBox.Deserialize(d)
+		case schemas.ExtractionConfiguration_Granularity:
+			v.Granularity = &ExtractionGranularity{}
+			return v.Granularity.Deserialize(d)
+		case schemas.ExtractionConfiguration_OutputFormat:
+			v.OutputFormat = &OutputFormat{}
+			return v.OutputFormat.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies the granularity levels at which Amazon Textract extracts content from
+// a document.
+type ExtractionGranularity struct {
+
+	// The granularity levels at which Amazon Textract extracts content, from the
+	// whole document down to individual lines of text. Each type can appear only once.
+	Types []ExtractionGranularityType
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExtractionGranularity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtractionGranularity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtractionGranularity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Types != nil {
+		serializeExtractionGranularityTypes(s, schemas.ExtractionGranularity_Types, v.Types)
+	}
+}
+func (v *ExtractionGranularity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtractionGranularity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtractionGranularity_Types:
+			return deserializeExtractionGranularityTypes(d, schemas.ExtractionGranularity_Types, &v.Types)
+		}
+		return nil
+	})
+}
+
+// Controls whether generative captions are produced for figures detected in the
+// document.
+type FigureCaptionConfiguration struct {
+
+	// Set to ENABLED to produce figure captions, or DISABLED to omit them.
+	//
+	// This member is required.
+	State State
+
+	noSmithyDocumentSerde
+}
+
+func (v *FigureCaptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FigureCaptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FigureCaptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.FigureCaptionConfiguration_State, string(v.State))
+	}
+}
+func (v *FigureCaptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FigureCaptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FigureCaptionConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.FigureCaptionConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = State(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Controls the generative capabilities applied during a document insights job,
+// such as summarization and figure captioning.
+type GenerativeConfiguration struct {
+
+	// Controls whether generative captions are produced for figures detected in the
+	// document. If you omit it, no figure captions are produced.
+	FigureCaption *FigureCaptionConfiguration
+
+	// Controls whether a generative summary of the document is produced. If you omit
+	// it, no summary is produced.
+	Summarization *SummarizationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *GenerativeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerativeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerativeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FigureCaption != nil {
+		s.WriteStruct(schemas.GenerativeConfiguration_FigureCaption)
+		v.FigureCaption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Summarization != nil {
+		s.WriteStruct(schemas.GenerativeConfiguration_Summarization)
+		v.Summarization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GenerativeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerativeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerativeConfiguration_FigureCaption:
+			v.FigureCaption = &FigureCaptionConfiguration{}
+			return v.FigureCaption.Deserialize(d)
+		case schemas.GenerativeConfiguration_Summarization:
+			v.Summarization = &SummarizationConfiguration{}
+			return v.Summarization.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about where the following items are located on a document page:
 // detected page, text, key-value pairs, tables, table cells, and selection
 // elements.
@@ -1746,6 +2263,39 @@ func (v *IdentityDocumentField) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.IdentityDocumentField_ValueDetection:
 			v.ValueDetection = &AnalyzeIDDetections{}
 			return v.ValueDetection.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The Amazon S3 location of the input document for a document insights job.
+type InputConfiguration struct {
+
+	// The Amazon S3 URI of the input document.
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InputConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.InputConfiguration_S3Uri, *v.S3Uri)
+	}
+}
+func (v *InputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputConfiguration_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.InputConfiguration_S3Uri, v.S3Uri)
 		}
 		return nil
 	})
@@ -2159,6 +2709,79 @@ func (v *NotificationChannel) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Notification settings for a job.
+type NotificationConfiguration struct {
+
+	// Event bus settings.
+	//
+	// This member is required.
+	EventBridgeConfiguration *EventBridgeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *NotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventBridgeConfiguration != nil {
+		s.WriteStruct(schemas.NotificationConfiguration_EventBridgeConfiguration)
+		v.EventBridgeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationConfiguration_EventBridgeConfiguration:
+			v.EventBridgeConfiguration = &EventBridgeConfiguration{}
+			return v.EventBridgeConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Controls whether an additional file format is produced alongside the primary
+// extraction output.
+type OutputAdditionalFileFormat struct {
+
+	// Set to ENABLED to produce an additional file format, or DISABLED to omit it.
+	//
+	// This member is required.
+	State State
+
+	noSmithyDocumentSerde
+}
+
+func (v *OutputAdditionalFileFormat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputAdditionalFileFormat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputAdditionalFileFormat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.OutputAdditionalFileFormat_State, string(v.State))
+	}
+}
+func (v *OutputAdditionalFileFormat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputAdditionalFileFormat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputAdditionalFileFormat_State:
+			var ev string
+			if err := d.ReadString(schemas.OutputAdditionalFileFormat_State, &ev); err != nil {
+				return err
+			}
+			v.State = State(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Sets whether or not your output will go to a user created bucket. Used to set
 // the name of the bucket, and the prefix on the output file.
 //
@@ -2224,6 +2847,120 @@ func (v *OutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The Amazon S3 location where the results of a document insights job are written.
+type OutputConfiguration struct {
+
+	// The Amazon S3 URI where the analysis results are written.
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OutputConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Uri != nil {
+		s.WriteString(schemas.OutputConfiguration_S3Uri, *v.S3Uri)
+	}
+}
+func (v *OutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputConfiguration_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.OutputConfiguration_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
+// Controls the format of the extraction output, including the text format and any
+// additional file formats.
+type OutputFormat struct {
+
+	// Controls whether an additional file format is produced alongside the primary
+	// output.
+	//
+	// This member is required.
+	AdditionalFileFormat *OutputAdditionalFileFormat
+
+	// Controls the text formats produced in the extraction output.
+	//
+	// This member is required.
+	TextFormat *OutputTextFormat
+
+	noSmithyDocumentSerde
+}
+
+func (v *OutputFormat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputFormat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputFormat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalFileFormat != nil {
+		s.WriteStruct(schemas.OutputFormat_AdditionalFileFormat)
+		v.AdditionalFileFormat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TextFormat != nil {
+		s.WriteStruct(schemas.OutputFormat_TextFormat)
+		v.TextFormat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OutputFormat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputFormat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputFormat_AdditionalFileFormat:
+			v.AdditionalFileFormat = &OutputAdditionalFileFormat{}
+			return v.AdditionalFileFormat.Deserialize(d)
+		case schemas.OutputFormat_TextFormat:
+			v.TextFormat = &OutputTextFormat{}
+			return v.TextFormat.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies the text formats produced in the extraction output.
+type OutputTextFormat struct {
+
+	// The text formats produced in the extraction output. Each type can appear only
+	// once, and CSV can't be the only type.
+	Types []OutputTextFormatType
+
+	noSmithyDocumentSerde
+}
+
+func (v *OutputTextFormat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputTextFormat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputTextFormat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Types != nil {
+		serializeOutputTextFormatTypes(s, schemas.OutputTextFormat_Types, v.Types)
+	}
+}
+func (v *OutputTextFormat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputTextFormat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputTextFormat_Types:
+			return deserializeOutputTextFormatTypes(d, schemas.OutputTextFormat_Types, &v.Types)
+		}
+		return nil
+	})
+}
+
 // The class assigned to a Page object detected in an input document. Contains
 // information regarding the predicted type/class of a document's page and the page
 // number that the Page object was detected on.
@@ -2265,6 +3002,54 @@ func (v *PageClassification) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializePredictionList(d, schemas.PageClassification_PageNumber, &v.PageNumber)
 		case schemas.PageClassification_PageType:
 			return deserializePredictionList(d, schemas.PageClassification_PageType, &v.PageType)
+		}
+		return nil
+	})
+}
+
+// Specifies which personally identifiable information (PII) entity types to
+// detect and how to mask them.
+type PIIEntitiesConfiguration struct {
+
+	// The list of PII entity types to detect. Each type can appear only once.
+	//
+	// This member is required.
+	PiiEntityTypes []PIIEntityType
+
+	// How detected PII is masked in the redacted output.
+	//
+	// This member is required.
+	RedactionMaskMode PIIRedactionMaskMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *PIIEntitiesConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PIIEntitiesConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PIIEntitiesConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PiiEntityTypes != nil {
+		serializePIIEntityTypes(s, schemas.PIIEntitiesConfiguration_PiiEntityTypes, v.PiiEntityTypes)
+	}
+	if v.RedactionMaskMode != "" {
+		s.WriteString(schemas.PIIEntitiesConfiguration_RedactionMaskMode, string(v.RedactionMaskMode))
+	}
+}
+func (v *PIIEntitiesConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PIIEntitiesConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PIIEntitiesConfiguration_PiiEntityTypes:
+			return deserializePIIEntityTypes(d, schemas.PIIEntitiesConfiguration_PiiEntityTypes, &v.PiiEntityTypes)
+		case schemas.PIIEntitiesConfiguration_RedactionMaskMode:
+			var ev string
+			if err := d.ReadString(schemas.PIIEntitiesConfiguration_RedactionMaskMode, &ev); err != nil {
+				return err
+			}
+			v.RedactionMaskMode = PIIRedactionMaskMode(ev)
+			return nil
 		}
 		return nil
 	})
@@ -2352,6 +3137,101 @@ func (v *Prediction) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Prediction_Value:
 			v.Value = new(string)
 			return d.ReadString(schemas.Prediction_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// A filter used to limit results to a specific project.
+type ProjectFilter struct {
+
+	// The Amazon Resource Name (ARN) of the project to filter by.
+	//
+	// This member is required.
+	ProjectArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProjectFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProjectFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProjectFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.ProjectFilter_ProjectArn, *v.ProjectArn)
+	}
+}
+func (v *ProjectFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProjectFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProjectFilter_ProjectArn:
+			v.ProjectArn = new(string)
+			return d.ReadString(schemas.ProjectFilter_ProjectArn, v.ProjectArn)
+		}
+		return nil
+	})
+}
+
+// A summary of a project, returned in the results of ListProjects .
+type ProjectSummary struct {
+
+	// The date and time that the project was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the project.
+	//
+	// This member is required.
+	ProjectArn *string
+
+	// The date and time that the project was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the project.
+	ProjectName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProjectSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProjectSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProjectSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ProjectSummary_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ProjectSummary_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.ProjectSummary_ProjectArn, *v.ProjectArn)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.ProjectSummary_ProjectName, *v.ProjectName)
+	}
+}
+func (v *ProjectSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProjectSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProjectSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ProjectSummary_CreationTime, v.CreationTime)
+		case schemas.ProjectSummary_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ProjectSummary_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ProjectSummary_ProjectArn:
+			v.ProjectArn = new(string)
+			return d.ReadString(schemas.ProjectSummary_ProjectArn, v.ProjectArn)
+		case schemas.ProjectSummary_ProjectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.ProjectSummary_ProjectName, v.ProjectName)
 		}
 		return nil
 	})
@@ -2582,6 +3462,63 @@ func (v *S3Object) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Controls detection and redaction of sensitive data, such as personally
+// identifiable information (PII), in the output.
+type SensitiveDataConfiguration struct {
+
+	// The detection mode. Valid values:
+	//
+	//   - DETECTION - Only detects sensitive data.
+	//
+	//   - DETECTION_AND_REDACTION - Detects and redacts sensitive data in the output.
+	//
+	//   - DISABLED - Does not detect sensitive data.
+	//
+	// This member is required.
+	DetectionMode SensitiveDataDetectionMode
+
+	// The configuration that specifies which PII entity types to detect and how to
+	// mask them. If you omit it, Amazon Textract detects all PII entity types ( ALL )
+	// and masks them with ENTITY_TYPE .
+	PiiEntitiesConfiguration *PIIEntitiesConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *SensitiveDataConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SensitiveDataConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SensitiveDataConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectionMode != "" {
+		s.WriteString(schemas.SensitiveDataConfiguration_DetectionMode, string(v.DetectionMode))
+	}
+	if v.PiiEntitiesConfiguration != nil {
+		s.WriteStruct(schemas.SensitiveDataConfiguration_PiiEntitiesConfiguration)
+		v.PiiEntitiesConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SensitiveDataConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SensitiveDataConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SensitiveDataConfiguration_DetectionMode:
+			var ev string
+			if err := d.ReadString(schemas.SensitiveDataConfiguration_DetectionMode, &ev); err != nil {
+				return err
+			}
+			v.DetectionMode = SensitiveDataDetectionMode(ev)
+			return nil
+		case schemas.SensitiveDataConfiguration_PiiEntitiesConfiguration:
+			v.PiiEntitiesConfiguration = &PIIEntitiesConfiguration{}
+			return v.PiiEntitiesConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information regarding a detected signature on a page.
 type SignatureDetection struct {
 
@@ -2661,6 +3598,82 @@ func (v *SplitDocument) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadInt32(schemas.SplitDocument_Index, v.Index)
 		case schemas.SplitDocument_Pages:
 			return deserializePageList(d, schemas.SplitDocument_Pages, &v.Pages)
+		}
+		return nil
+	})
+}
+
+// Controls whether a multi-document packet is split into individual documents
+// before analysis.
+type SplitterConfiguration struct {
+
+	// Set to ENABLED to split multi-document packets, or DISABLED to treat the input
+	// as a single document.
+	//
+	// This member is required.
+	State State
+
+	noSmithyDocumentSerde
+}
+
+func (v *SplitterConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SplitterConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SplitterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.SplitterConfiguration_State, string(v.State))
+	}
+}
+func (v *SplitterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SplitterConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SplitterConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.SplitterConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = State(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Controls whether a generative summary of the document is produced.
+type SummarizationConfiguration struct {
+
+	// Set to ENABLED to produce a summary, or DISABLED to omit it.
+	//
+	// This member is required.
+	State State
+
+	noSmithyDocumentSerde
+}
+
+func (v *SummarizationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SummarizationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SummarizationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.SummarizationConfiguration_State, string(v.State))
+	}
+}
+func (v *SummarizationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SummarizationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SummarizationConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.SummarizationConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = State(ev)
+			return nil
 		}
 		return nil
 	})

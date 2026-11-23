@@ -1,3 +1,7 @@
+# v1.66.0 (2026-11-19)
+
+* **Feature**: Amazon MSK now supports in-place migration of provisioned clusters from Standard to Express brokers. This release adds APIs to assess a cluster before migration and to reassign topics, and returns broker type upgrade details in cluster operations.
+
 # v1.65.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

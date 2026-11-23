@@ -104,6 +104,10 @@ type GetDeviceOutput struct {
 	// The number of quantum tasks and hybrid jobs currently queued on the device.
 	DeviceQueueInfo []types.DeviceQueueInfo
 
+	// The reason for the current status of the device, including status reason codes
+	// and timestamps.
+	DeviceStatusReason *types.DeviceStatusReason
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -131,6 +135,11 @@ func (v *GetDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DeviceStatus != "" {
 		s.WriteString(schemas.GetDeviceResponse_deviceStatus, string(v.DeviceStatus))
+	}
+	if v.DeviceStatusReason != nil {
+		s.WriteStruct(schemas.GetDeviceResponse_deviceStatusReason)
+		v.DeviceStatusReason.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.DeviceType != "" {
 		s.WriteString(schemas.GetDeviceResponse_deviceType, string(v.DeviceType))
@@ -160,6 +169,9 @@ func (v *GetDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.DeviceStatus = types.DeviceStatus(ev)
 			return nil
+		case schemas.GetDeviceResponse_deviceStatusReason:
+			v.DeviceStatusReason = &types.DeviceStatusReason{}
+			return v.DeviceStatusReason.Deserialize(d)
 		case schemas.GetDeviceResponse_deviceType:
 			var ev string
 			if err := d.ReadString(schemas.GetDeviceResponse_deviceType, &ev); err != nil {

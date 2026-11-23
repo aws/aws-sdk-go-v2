@@ -37,6 +37,19 @@ type GetInferenceProfileInput struct {
 	// This member is required.
 	InferenceProfileIdentifier *string
 
+	// The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock uses the
+	// project's trusted access program participation when determining whether to
+	// return a system-defined inference profile. The project must belong to your
+	// account in the same AWS Region and partition as the request.
+	//
+	// If you omit this parameter or specify default , Amazon Bedrock uses your
+	// account's participation, including organization inheritance.
+	//
+	// A project that doesn't exist or is archived causes a ValidationException .
+	// Specifying a project other than default for an application inference profile
+	// also causes a ValidationException .
+	ProjectIdentifier *string
+
 	noSmithyDocumentSerde
 }
 
@@ -49,6 +62,9 @@ func (v *GetInferenceProfileInput) Serialize(s smithy.ShapeSerializer) {
 func (v *GetInferenceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InferenceProfileIdentifier != nil {
 		s.WriteString(schemas.GetInferenceProfileRequest_inferenceProfileIdentifier, *v.InferenceProfileIdentifier)
+	}
+	if v.ProjectIdentifier != nil {
+		s.WriteString(schemas.GetInferenceProfileRequest_projectIdentifier, *v.ProjectIdentifier)
 	}
 }
 

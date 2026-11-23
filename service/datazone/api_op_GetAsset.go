@@ -157,6 +157,10 @@ type GetAssetOutput struct {
 	// The listing of the asset.
 	Listing *types.AssetListingDetails
 
+	// The most recent ownership transfer of the asset. The response omits this member
+	// if the asset has never had an ownership transfer.
+	OwnershipTransfer *types.AssetOwnershipTransfer
+
 	// The read-only metadata forms attached to the asset.
 	ReadOnlyFormsOutput []types.FormOutput
 
@@ -217,6 +221,11 @@ func (v *GetAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetAssetOutput_name, *v.Name)
 	}
+	if v.OwnershipTransfer != nil {
+		s.WriteStruct(schemas.GetAssetOutput_ownershipTransfer)
+		v.OwnershipTransfer.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.OwningProjectId != nil {
 		s.WriteString(schemas.GetAssetOutput_owningProjectId, *v.OwningProjectId)
 	}
@@ -274,6 +283,9 @@ func (v *GetAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetAssetOutput_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.GetAssetOutput_name, v.Name)
+		case schemas.GetAssetOutput_ownershipTransfer:
+			v.OwnershipTransfer = &types.AssetOwnershipTransfer{}
+			return v.OwnershipTransfer.Deserialize(d)
 		case schemas.GetAssetOutput_owningProjectId:
 			v.OwningProjectId = new(string)
 			return d.ReadString(schemas.GetAssetOutput_owningProjectId, v.OwningProjectId)

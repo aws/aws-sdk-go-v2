@@ -1171,6 +1171,47 @@ func validateAuthenticateOidcActionConfig(v *types.AuthenticateOidcActionConfig)
 	}
 }
 
+func validateClientCertificateIdentityFilter(v *types.ClientCertificateIdentityFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientCertificateIdentityFilter"}
+	if len(v.Field) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Field"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if len(v.MatchType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MatchType"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClientCertificateIdentityFilters(v []types.ClientCertificateIdentityFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientCertificateIdentityFilters"}
+	for i := range v {
+		if err := validateClientCertificateIdentityFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFixedResponseActionConfig(v *types.FixedResponseActionConfig) error {
 	if v == nil {
 		return nil
@@ -1255,6 +1296,23 @@ func validateJwtValidationActionConfig(v *types.JwtValidationActionConfig) error
 	if v.AdditionalClaims != nil {
 		if err := validateJwtValidationActionAdditionalClaims(v.AdditionalClaims); err != nil {
 			invalidParams.AddNested("AdditionalClaims", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMutualAuthenticationAttributes(v *types.MutualAuthenticationAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MutualAuthenticationAttributes"}
+	if v.ClientCertificateIdentityFilters != nil {
+		if err := validateClientCertificateIdentityFilters(v.ClientCertificateIdentityFilters); err != nil {
+			invalidParams.AddNested("ClientCertificateIdentityFilters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1510,6 +1568,11 @@ func validateOpCreateListenerInput(v *CreateListenerInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MutualAuthentication != nil {
+		if err := validateMutualAuthenticationAttributes(v.MutualAuthentication); err != nil {
+			invalidParams.AddNested("MutualAuthentication", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1985,6 +2048,11 @@ func validateOpModifyListenerInput(v *ModifyListenerInput) error {
 	if v.DefaultActions != nil {
 		if err := validateActions(v.DefaultActions); err != nil {
 			invalidParams.AddNested("DefaultActions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MutualAuthentication != nil {
+		if err := validateMutualAuthenticationAttributes(v.MutualAuthentication); err != nil {
+			invalidParams.AddNested("MutualAuthentication", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

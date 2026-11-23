@@ -343,6 +343,9 @@ func ExampleIntermediateTableComputeConfiguration_outputUsage() {
 	var union types.IntermediateTableComputeConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.IntermediateTableComputeConfigurationMemberJobComputeConfiguration:
+		_ = v.Value // Value is types.ProtectedJobComputeConfiguration
+
 	case *types.IntermediateTableComputeConfigurationMemberQueryComputeConfiguration:
 		_ = v.Value // Value is types.WorkerComputeConfiguration
 
@@ -356,6 +359,7 @@ func ExampleIntermediateTableComputeConfiguration_outputUsage() {
 }
 
 var _ *types.WorkerComputeConfiguration
+var _ types.ProtectedJobComputeConfiguration
 
 func ExampleMembershipProtectedJobOutputConfiguration_outputUsage() {
 	var union types.MembershipProtectedJobOutputConfiguration
@@ -397,6 +401,9 @@ func ExamplePopulationAnalysisConfiguration_outputUsage() {
 	var union types.PopulationAnalysisConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.PopulationAnalysisConfigurationMemberJobParameters:
+		_ = v.Value // Value is types.PopulationAnalysisJobParameters
+
 	case *types.PopulationAnalysisConfigurationMemberSqlParameters:
 		_ = v.Value // Value is types.PopulationAnalysisSqlParameters
 
@@ -409,6 +416,7 @@ func ExamplePopulationAnalysisConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.PopulationAnalysisJobParameters
 var _ *types.PopulationAnalysisSqlParameters
 
 func ExamplePreviewPrivacyImpactParametersInput_outputUsage() {
@@ -615,6 +623,9 @@ func ExampleProtectedJobOutputConfigurationOutput_outputUsage() {
 	var union types.ProtectedJobOutputConfigurationOutput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ProtectedJobOutputConfigurationOutputMemberIntermediateTable:
+		_ = v.Value // Value is types.IntermediateTableOutputConfiguration
+
 	case *types.ProtectedJobOutputConfigurationOutputMemberMember:
 		_ = v.Value // Value is types.ProtectedJobMemberOutputConfigurationOutput
 
@@ -630,6 +641,7 @@ func ExampleProtectedJobOutputConfigurationOutput_outputUsage() {
 	}
 }
 
+var _ *types.IntermediateTableOutputConfiguration
 var _ *types.ProtectedJobMemberOutputConfigurationOutput
 var _ *types.ProtectedJobS3OutputConfigurationOutput
 

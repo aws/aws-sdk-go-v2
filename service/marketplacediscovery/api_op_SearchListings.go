@@ -11,9 +11,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns a list of product listings based on search criteria and filters. You
-// can search by keyword, filter by category, pricing model, fulfillment type, and
-// other attributes, and sort results by relevance or customer rating.
+// Searches for listings that match your search criteria and filters. You can
+// search by keyword, filter by category, pricing model, fulfillment type, and
+// other attributes, and sort results by relevance or customer rating. The
+// operation returns results in pages. Use nextToken to retrieve the next page.
 func (c *Client) SearchListings(ctx context.Context, params *SearchListingsInput, optFns ...func(*Options)) (*SearchListingsOutput, error) {
 	if params == nil {
 		params = &SearchListingsInput{}
@@ -31,32 +32,44 @@ func (c *Client) SearchListings(ctx context.Context, params *SearchListingsInput
 
 type SearchListingsInput struct {
 
-	// Filters to narrow search results. Multiple filters are combined with AND logic.
-	// Multiple values within the same filter are combined with OR logic.
+	// Filters to narrow search results. A result must match every filter. Within one
+	// filter, a result matches if it has any of the values.
 	Filters []types.SearchFilter
 
-	// A BCP 47 language tag or comma-separated priority list specifying the preferred
-	// locale for response content. See Locale for supported values, constraints,
-	// fallback behavior, and the default locale. If omitted, the service returns
-	// content in the default locale.
+	// The preferred locale for response content, as a Best Current Practice 47 (BCP
+	// 47) language tag or a comma-separated priority list of language tags. See Locale
+	// for supported values, constraints, fallback behavior, and the default locale. If
+	// you omit this field, the service returns content in the default locale.
 	Locale *string
 
-	// The maximum number of results that are returned per call. You can use nextToken
-	// to get more results.
+	// The maximum number of listings to return in each call. If you omit this field,
+	// the default is 25. Use nextToken to retrieve the next page.
 	MaxResults *int32
 
-	// If nextToken is returned, there are more results available. Make the call again
-	// using the returned token to retrieve the next page.
+	// If the service returns nextToken , more results are available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again with
+	// the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 24 hours. An expired pagination
+	// token returns a ValidationException .
 	NextToken *string
 
 	// The search query text to find relevant listings.
 	SearchText *string
 
-	// The field to sort results by. Valid values are RELEVANCE and
-	// AVERAGE_CUSTOMER_RATING .
+	// The field to sort results by. If you do not specify a value, the service sorts
+	// by RELEVANCE . This field has one of the following values:
+	//
+	// AVERAGE_CUSTOMER_RATING Sorts by average customer rating.
+	//
+	// RELEVANCE Sorts by relevance to the search query.
 	SortBy types.SearchListingsSortBy
 
-	// The sort direction. Valid values are DESCENDING and ASCENDING .
+	// The sort direction. If you do not specify a value, the service sorts in
+	// DESCENDING order. This field has one of the following values:
+	//
+	// ASCENDING Sorts from lowest to highest.
+	//
+	// DESCENDING Sorts from highest to lowest.
 	SortOrder types.SearchListingsSortOrder
 
 	noSmithyDocumentSerde
@@ -106,8 +119,11 @@ type SearchListingsOutput struct {
 	// This member is required.
 	TotalResults *int64
 
-	// If nextToken is returned, there are more results available. Make the call again
-	// using the returned token to retrieve the next page.
+	// If the service returns nextToken , more results are available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again with
+	// the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 24 hours. An expired pagination
+	// token returns a ValidationException .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -191,8 +207,8 @@ func (c *Client) addOperationSearchListingsMiddlewares(stack *middleware.Stack, 
 
 // SearchListingsPaginatorOptions is the paginator options for SearchListings
 type SearchListingsPaginatorOptions struct {
-	// The maximum number of results that are returned per call. You can use nextToken
-	// to get more results.
+	// The maximum number of listings to return in each call. If you omit this field,
+	// the default is 25. Use nextToken to retrieve the next page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

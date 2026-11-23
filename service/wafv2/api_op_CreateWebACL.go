@@ -71,6 +71,10 @@ type CreateWebACLInput struct {
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
 
+	// Specifies the security analytics configuration for the web ACL. For more
+	// information, see AnalyticsConfig.
+	AnalyticsConfig *types.AnalyticsConfig
+
 	// Configures the ability for the WAF console to store and retrieve application
 	// attributes during the web ACL creation process. Application attributes help WAF
 	// give recommendations for protection packs.
@@ -81,14 +85,14 @@ type CreateWebACLInput struct {
 	//
 	// Use this to customize the maximum size of the request body that your protected
 	// resources forward to WAF for inspection. You can customize this setting for
-	// CloudFront, API Gateway, Amazon Cognito, App Runner, or Verified Access
-	// resources. The default setting is 16 KB (16,384 bytes).
+	// Application Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner,
+	// or Verified Access resources. The default setting is 8 KB (8,192 bytes) for
+	// Application Load Balancer and 16 KB (16,384 bytes) for the other resource types.
 	//
 	// You are charged additional fees when your protected resources forward body
 	// sizes that are larger than the default. For more information, see [WAF Pricing].
 	//
-	// For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192
-	// bytes).
+	// For AppSync, the limit is fixed at 8 KB (8,192 bytes).
 	//
 	// You can also use this to have your CloudFront distributions insert the WAF
 	// challenge JavaScript SDK into the HTML responses that they return. For more
@@ -178,6 +182,11 @@ func (v *CreateWebACLInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsConfig != nil {
+		s.WriteStruct(schemas.CreateWebACLRequest_AnalyticsConfig)
+		v.AnalyticsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ApplicationConfig != nil {
 		s.WriteStruct(schemas.CreateWebACLRequest_ApplicationConfig)
 		v.ApplicationConfig.SerializeMembers(s)

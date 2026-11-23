@@ -225,6 +225,12 @@ func serializeCodeSecurityResource(s smithy.ShapeSerializer, schema *smithy.Sche
 
 func serializeCreateIntegrationDetail(s smithy.ShapeSerializer, schema *smithy.Schema, v CreateIntegrationDetail) {
 	switch vv := v.(type) {
+	case *CreateIntegrationDetailMemberGithubEnterprise:
+		s.WriteUnion(schema, schemas.CreateIntegrationDetail_githubEnterprise)
+		s.WriteStruct(schemas.CreateIntegrationDetail_githubEnterprise)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *CreateIntegrationDetailMemberGitlabSelfManaged:
 		s.WriteUnion(schema, schemas.CreateIntegrationDetail_gitlabSelfManaged)
 		s.WriteStruct(schemas.CreateIntegrationDetail_gitlabSelfManaged)
@@ -297,6 +303,23 @@ func serializeSchedule(s smithy.ShapeSerializer, schema *smithy.Schema, v Schedu
 	}
 }
 
+func serializeUpdateGitHubEnterpriseServerIntegrationDetail(s smithy.ShapeSerializer, schema *smithy.Schema, v UpdateGitHubEnterpriseServerIntegrationDetail) {
+	switch vv := v.(type) {
+	case *UpdateGitHubEnterpriseServerIntegrationDetailMemberAppInstallation:
+		s.WriteUnion(schema, schemas.UpdateGitHubEnterpriseServerIntegrationDetail_appInstallation)
+		s.WriteStruct(schemas.UpdateGitHubEnterpriseServerIntegrationDetail_appInstallation)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *UpdateGitHubEnterpriseServerIntegrationDetailMemberAppRegistration:
+		s.WriteUnion(schema, schemas.UpdateGitHubEnterpriseServerIntegrationDetail_appRegistration)
+		s.WriteStruct(schemas.UpdateGitHubEnterpriseServerIntegrationDetail_appRegistration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeUpdateIntegrationDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v UpdateIntegrationDetails) {
 	switch vv := v.(type) {
 	case *UpdateIntegrationDetailsMemberGithub:
@@ -304,6 +327,10 @@ func serializeUpdateIntegrationDetails(s smithy.ShapeSerializer, schema *smithy.
 		s.WriteStruct(schemas.UpdateIntegrationDetails_github)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
+		s.CloseUnion()
+	case *UpdateIntegrationDetailsMemberGithubEnterpriseServer:
+		s.WriteUnion(schema, schemas.UpdateIntegrationDetails_githubEnterpriseServer)
+		serializeUpdateGitHubEnterpriseServerIntegrationDetail(s, schemas.UpdateIntegrationDetails_githubEnterpriseServer, vv.Value)
 		s.CloseUnion()
 	case *UpdateIntegrationDetailsMemberGitlabSelfManaged:
 		s.WriteUnion(schema, schemas.UpdateIntegrationDetails_gitlabSelfManaged)
@@ -481,6 +508,10 @@ func deserializeCodeSecurityResource(d smithy.ShapeDeserializer, s *smithy.Schem
 func deserializeCreateIntegrationDetail(d smithy.ShapeDeserializer, s *smithy.Schema, v *CreateIntegrationDetail) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.CreateIntegrationDetail_githubEnterprise:
+			vv := &CreateIntegrationDetailMemberGithubEnterprise{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.CreateIntegrationDetail_gitlabSelfManaged:
 			vv := &CreateIntegrationDetailMemberGitlabSelfManaged{}
 			*v = vv
@@ -546,11 +577,31 @@ func deserializeSchedule(d smithy.ShapeDeserializer, s *smithy.Schema, v *Schedu
 	})
 }
 
+func deserializeUpdateGitHubEnterpriseServerIntegrationDetail(d smithy.ShapeDeserializer, s *smithy.Schema, v *UpdateGitHubEnterpriseServerIntegrationDetail) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.UpdateGitHubEnterpriseServerIntegrationDetail_appInstallation:
+			vv := &UpdateGitHubEnterpriseServerIntegrationDetailMemberAppInstallation{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.UpdateGitHubEnterpriseServerIntegrationDetail_appRegistration:
+			vv := &UpdateGitHubEnterpriseServerIntegrationDetailMemberAppRegistration{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeUpdateIntegrationDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *UpdateIntegrationDetails) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
 		case schemas.UpdateIntegrationDetails_github:
 			vv := &UpdateIntegrationDetailsMemberGithub{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.UpdateIntegrationDetails_githubEnterpriseServer:
+			vv := &UpdateIntegrationDetailsMemberGithubEnterpriseServer{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.UpdateIntegrationDetails_gitlabSelfManaged:

@@ -170,6 +170,18 @@ func TestCheckSnapshot_GetFederationToken(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetScopedCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetScopedCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetScopedCredentials")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSessionToken(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSessionToken(context.Background(), nil, func(o *Options) {
@@ -294,6 +306,18 @@ func TestUpdateSnapshot_GetFederationToken(t *testing.T) {
 	_, err := svc.GetFederationToken(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetFederationToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetScopedCredentials(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetScopedCredentials(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetScopedCredentials")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

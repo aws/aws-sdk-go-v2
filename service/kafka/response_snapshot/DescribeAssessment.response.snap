@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assessmentArn":"__AssessmentArn__","assessmentParameters":{"targetInstanceType":"__TargetInstanceType__"},"assessmentType":"UPDATE_BROKER_TYPE","clusterArn":"__ClusterArn__","completionTime":"2000-01-01T00:00:00Z","creationTime":"2000-01-01T00:00:00Z","status":"IN_PROGRESS","statusMessage":"__StatusMessage__","summary":{"byCategory":{"key0":1},"bySeverity":{"key0":1},"findingsCapped":true,"hasBlockingFindings":true,"totalFindings":1},"tags":{"key0":"__Value__"}}

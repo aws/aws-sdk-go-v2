@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"kmsKeyStatus":"pending","modelProvider":"anthropic","s3BucketStatus":"pending","scope":"account","storageConfiguration":{"kmsKeyArn":"__KmsKeyArn__","s3BucketArn":"__S3BucketArn__","s3BucketOwner":"__S3BucketOwner__"},"storageDestination":"customer_managed","updatedAt":"2000-01-01T00:00:00Z"}

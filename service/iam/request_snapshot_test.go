@@ -645,9 +645,10 @@ func TestCheckRequestSnapshot_CreateInstanceProfile(t *testing.T) {
 
 func TestCheckRequestSnapshot_CreateLoginProfile(t *testing.T) {
 	input := &CreateLoginProfileInput{
-		UserName:              ptr.String("__UserName__"),
-		Password:              ptr.String("__Password__"),
-		PasswordResetRequired: true,
+		UserName:                 ptr.String("__UserName__"),
+		Password:                 ptr.String("__Password__"),
+		PasswordResetRequired:    true,
+		MaxSigninSessionDuration: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -693,6 +694,22 @@ func TestCheckRequestSnapshot_CreateOpenIDConnectProvider(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		ContextProvider: &types.ContextProvider{
+			KeyDefinitionList: []types.ContextProviderKeyDefinition{
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+			},
+			SubjectSourceKey:     ptr.String("__SubjectSourceKey__"),
+			SubjectTypeValue:     ptr.String("__SubjectTypeValue__"),
+			SubjectTypeSourceKey: ptr.String("__SubjectTypeSourceKey__"),
+		},
+		IdentityCenterInstanceArn: ptr.String("__IdentityCenterInstanceArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -793,6 +810,7 @@ func TestCheckRequestSnapshot_CreateRole(t *testing.T) {
 		AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 		Description:              ptr.String("__Description__"),
 		MaxSessionDuration:       ptr.Int32(1),
+		MaxSigninSessionDuration: ptr.Int32(1),
 		PermissionsBoundary:      ptr.String("__PermissionsBoundary__"),
 		Tags: []types.Tag{
 			{
@@ -844,6 +862,22 @@ func TestCheckRequestSnapshot_CreateSAMLProvider(t *testing.T) {
 		},
 		AssertionEncryptionMode: types.AssertionEncryptionModeType("Required"),
 		AddPrivateKey:           ptr.String("__AddPrivateKey__"),
+		ContextProvider: &types.ContextProvider{
+			KeyDefinitionList: []types.ContextProviderKeyDefinition{
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+			},
+			SubjectSourceKey:     ptr.String("__SubjectSourceKey__"),
+			SubjectTypeValue:     ptr.String("__SubjectTypeValue__"),
+			SubjectTypeSourceKey: ptr.String("__SubjectTypeSourceKey__"),
+		},
+		IdentityCenterInstanceArn: ptr.String("__IdentityCenterInstanceArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5181,9 +5215,11 @@ func TestCheckRequestSnapshot_UpdateGroup(t *testing.T) {
 
 func TestCheckRequestSnapshot_UpdateLoginProfile(t *testing.T) {
 	input := &UpdateLoginProfileInput{
-		UserName:              ptr.String("__UserName__"),
-		Password:              ptr.String("__Password__"),
-		PasswordResetRequired: ptr.Bool(true),
+		UserName:                      ptr.String("__UserName__"),
+		Password:                      ptr.String("__Password__"),
+		PasswordResetRequired:         ptr.Bool(true),
+		MaxSigninSessionDuration:      ptr.Int32(1),
+		ResetMaxSigninSessionDuration: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5204,6 +5240,51 @@ func TestCheckRequestSnapshot_UpdateLoginProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLoginProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateOpenIDConnectProvider(t *testing.T) {
+	input := &UpdateOpenIDConnectProviderInput{
+		OpenIDConnectProviderArn: ptr.String("__OpenIDConnectProviderArn__"),
+		ContextProvider: &types.ContextProvider{
+			KeyDefinitionList: []types.ContextProviderKeyDefinition{
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+			},
+			SubjectSourceKey:     ptr.String("__SubjectSourceKey__"),
+			SubjectTypeValue:     ptr.String("__SubjectTypeValue__"),
+			SubjectTypeSourceKey: ptr.String("__SubjectTypeSourceKey__"),
+		},
+		IdentityCenterInstanceArn:    ptr.String("__IdentityCenterInstanceArn__"),
+		RemoveContextProvider:        true,
+		RemoveIdentityCenterInstance: true,
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateOpenIDConnectProvider(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateOpenIDConnectProvider"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5241,9 +5322,11 @@ func TestCheckRequestSnapshot_UpdateOpenIDConnectProviderThumbprint(t *testing.T
 
 func TestCheckRequestSnapshot_UpdateRole(t *testing.T) {
 	input := &UpdateRoleInput{
-		RoleName:           ptr.String("__RoleName__"),
-		Description:        ptr.String("__Description__"),
-		MaxSessionDuration: ptr.Int32(1),
+		RoleName:                      ptr.String("__RoleName__"),
+		Description:                   ptr.String("__Description__"),
+		MaxSessionDuration:            ptr.Int32(1),
+		MaxSigninSessionDuration:      ptr.Int32(1),
+		ResetMaxSigninSessionDuration: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5303,6 +5386,24 @@ func TestCheckRequestSnapshot_UpdateSAMLProvider(t *testing.T) {
 		AssertionEncryptionMode: types.AssertionEncryptionModeType("Required"),
 		AddPrivateKey:           ptr.String("__AddPrivateKey__"),
 		RemovePrivateKey:        ptr.String("__RemovePrivateKey__"),
+		ContextProvider: &types.ContextProvider{
+			KeyDefinitionList: []types.ContextProviderKeyDefinition{
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+			},
+			SubjectSourceKey:     ptr.String("__SubjectSourceKey__"),
+			SubjectTypeValue:     ptr.String("__SubjectTypeValue__"),
+			SubjectTypeSourceKey: ptr.String("__SubjectTypeSourceKey__"),
+		},
+		IdentityCenterInstanceArn:    ptr.String("__IdentityCenterInstanceArn__"),
+		RemoveContextProvider:        true,
+		RemoveIdentityCenterInstance: true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6031,9 +6132,10 @@ func TestUpdateRequestSnapshot_CreateInstanceProfile(t *testing.T) {
 
 func TestUpdateRequestSnapshot_CreateLoginProfile(t *testing.T) {
 	input := &CreateLoginProfileInput{
-		UserName:              ptr.String("__UserName__"),
-		Password:              ptr.String("__Password__"),
-		PasswordResetRequired: true,
+		UserName:                 ptr.String("__UserName__"),
+		Password:                 ptr.String("__Password__"),
+		PasswordResetRequired:    true,
+		MaxSigninSessionDuration: ptr.Int32(1),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6079,6 +6181,22 @@ func TestUpdateRequestSnapshot_CreateOpenIDConnectProvider(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		ContextProvider: &types.ContextProvider{
+			KeyDefinitionList: []types.ContextProviderKeyDefinition{
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+			},
+			SubjectSourceKey:     ptr.String("__SubjectSourceKey__"),
+			SubjectTypeValue:     ptr.String("__SubjectTypeValue__"),
+			SubjectTypeSourceKey: ptr.String("__SubjectTypeSourceKey__"),
+		},
+		IdentityCenterInstanceArn: ptr.String("__IdentityCenterInstanceArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6179,6 +6297,7 @@ func TestUpdateRequestSnapshot_CreateRole(t *testing.T) {
 		AssumeRolePolicyDocument: ptr.String("__AssumeRolePolicyDocument__"),
 		Description:              ptr.String("__Description__"),
 		MaxSessionDuration:       ptr.Int32(1),
+		MaxSigninSessionDuration: ptr.Int32(1),
 		PermissionsBoundary:      ptr.String("__PermissionsBoundary__"),
 		Tags: []types.Tag{
 			{
@@ -6230,6 +6349,22 @@ func TestUpdateRequestSnapshot_CreateSAMLProvider(t *testing.T) {
 		},
 		AssertionEncryptionMode: types.AssertionEncryptionModeType("Required"),
 		AddPrivateKey:           ptr.String("__AddPrivateKey__"),
+		ContextProvider: &types.ContextProvider{
+			KeyDefinitionList: []types.ContextProviderKeyDefinition{
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+			},
+			SubjectSourceKey:     ptr.String("__SubjectSourceKey__"),
+			SubjectTypeValue:     ptr.String("__SubjectTypeValue__"),
+			SubjectTypeSourceKey: ptr.String("__SubjectTypeSourceKey__"),
+		},
+		IdentityCenterInstanceArn: ptr.String("__IdentityCenterInstanceArn__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -10567,9 +10702,11 @@ func TestUpdateRequestSnapshot_UpdateGroup(t *testing.T) {
 
 func TestUpdateRequestSnapshot_UpdateLoginProfile(t *testing.T) {
 	input := &UpdateLoginProfileInput{
-		UserName:              ptr.String("__UserName__"),
-		Password:              ptr.String("__Password__"),
-		PasswordResetRequired: ptr.Bool(true),
+		UserName:                      ptr.String("__UserName__"),
+		Password:                      ptr.String("__Password__"),
+		PasswordResetRequired:         ptr.Bool(true),
+		MaxSigninSessionDuration:      ptr.Int32(1),
+		ResetMaxSigninSessionDuration: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -10590,6 +10727,51 @@ func TestUpdateRequestSnapshot_UpdateLoginProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateLoginProfile"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateOpenIDConnectProvider(t *testing.T) {
+	input := &UpdateOpenIDConnectProviderInput{
+		OpenIDConnectProviderArn: ptr.String("__OpenIDConnectProviderArn__"),
+		ContextProvider: &types.ContextProvider{
+			KeyDefinitionList: []types.ContextProviderKeyDefinition{
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+			},
+			SubjectSourceKey:     ptr.String("__SubjectSourceKey__"),
+			SubjectTypeValue:     ptr.String("__SubjectTypeValue__"),
+			SubjectTypeSourceKey: ptr.String("__SubjectTypeSourceKey__"),
+		},
+		IdentityCenterInstanceArn:    ptr.String("__IdentityCenterInstanceArn__"),
+		RemoveContextProvider:        true,
+		RemoveIdentityCenterInstance: true,
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateOpenIDConnectProvider(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateOpenIDConnectProvider"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10627,9 +10809,11 @@ func TestUpdateRequestSnapshot_UpdateOpenIDConnectProviderThumbprint(t *testing.
 
 func TestUpdateRequestSnapshot_UpdateRole(t *testing.T) {
 	input := &UpdateRoleInput{
-		RoleName:           ptr.String("__RoleName__"),
-		Description:        ptr.String("__Description__"),
-		MaxSessionDuration: ptr.Int32(1),
+		RoleName:                      ptr.String("__RoleName__"),
+		Description:                   ptr.String("__Description__"),
+		MaxSessionDuration:            ptr.Int32(1),
+		MaxSigninSessionDuration:      ptr.Int32(1),
+		ResetMaxSigninSessionDuration: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -10689,6 +10873,24 @@ func TestUpdateRequestSnapshot_UpdateSAMLProvider(t *testing.T) {
 		AssertionEncryptionMode: types.AssertionEncryptionModeType("Required"),
 		AddPrivateKey:           ptr.String("__AddPrivateKey__"),
 		RemovePrivateKey:        ptr.String("__RemovePrivateKey__"),
+		ContextProvider: &types.ContextProvider{
+			KeyDefinitionList: []types.ContextProviderKeyDefinition{
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+				{
+					SourceKey: ptr.String("__SourceKey__"),
+					TargetKey: ptr.String("__TargetKey__"),
+				},
+			},
+			SubjectSourceKey:     ptr.String("__SubjectSourceKey__"),
+			SubjectTypeValue:     ptr.String("__SubjectTypeValue__"),
+			SubjectTypeSourceKey: ptr.String("__SubjectTypeSourceKey__"),
+		},
+		IdentityCenterInstanceArn:    ptr.String("__IdentityCenterInstanceArn__"),
+		RemoveContextProvider:        true,
+		RemoveIdentityCenterInstance: true,
 	}
 	body := &bytes.Buffer{}
 	method := ""

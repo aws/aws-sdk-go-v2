@@ -31,6 +31,7 @@ func (c *Client) ListEngagementMembers(ctx context.Context, params *ListEngageme
 	return out, nil
 }
 
+// Contains the request parameters for the ListEngagementMembers operation.
 type ListEngagementMembersInput struct {
 
 	// The catalog related to the request.
@@ -73,6 +74,7 @@ func (v *ListEngagementMembersInput) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 }
 
+// Contains the response that the ListEngagementMembers action returns.
 type ListEngagementMembersOutput struct {
 
 	//  Provides a list of engagement members.

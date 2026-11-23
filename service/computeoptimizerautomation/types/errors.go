@@ -55,6 +55,55 @@ func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+//	The request conflicts with a concurrent change to the same resource. Retry the
+//
+// request.
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // You are not authorized to perform this action.
 type ForbiddenException struct {
 	Message *string
@@ -293,7 +342,9 @@ func (v *InvalidParameterValueException) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
-// The operation can only be performed by a management account.
+//	The operation can only be performed by an organization's management account or
+//
+// a delegated administrator.
 type NotManagementAccountException struct {
 	Message *string
 

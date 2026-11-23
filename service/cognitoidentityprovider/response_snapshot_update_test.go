@@ -1168,6 +1168,49 @@ func TestUpdateResponseSnapshot_AssociateSoftwareToken(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CancelPointInTimeRecovery(t *testing.T) {
+	want := &CancelPointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.CancelPointInTimeRecovery, schemas.CancelPointInTimeRecoveryResponse, schemas.CancelPointInTimeRecoveryResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CancelPointInTimeRecovery.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ChangePassword(t *testing.T) {
 	want := &ChangePasswordOutput{}
 	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
@@ -1278,6 +1321,42 @@ func TestUpdateResponseSnapshot_ConfirmSignUp(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ConfirmSignUp.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateCIMDPolicy(t *testing.T) {
+	want := &CreateCIMDPolicyOutput{
+		CIMDPolicy: &types.CIMDPolicyType{
+			UserPoolId:    ptr.String("__UserPoolId__"),
+			CIMDPolicyId:  ptr.String("__CIMDPolicyId__"),
+			ClientId:      ptr.String("__ClientId__"),
+			PolicyName:    ptr.String("__PolicyName__"),
+			CacheDuration: ptr.Int32(1),
+			URLPatterns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.CreateCIMDPolicy, schemas.CreateCIMDPolicyResponse, schemas.CreateCIMDPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateCIMDPolicy.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1758,6 +1837,7 @@ func TestUpdateResponseSnapshot_CreateUserPoolClient(t *testing.T) {
 			ClientName:           ptr.String("__ClientName__"),
 			ClientId:             ptr.String("__ClientId__"),
 			ClientSecret:         ptr.String("__ClientSecret__"),
+			ClientSecretArn:      ptr.String("__ClientSecretArn__"),
 			LastModifiedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			RefreshTokenValidity: 1,
@@ -1896,6 +1976,28 @@ func TestUpdateResponseSnapshot_CreateUserPoolReplica(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CreateUserPoolReplica.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DeleteCIMDPolicy(t *testing.T) {
+	want := &DeleteCIMDPolicyOutput{}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteCIMDPolicy, schemas.DeleteCIMDPolicyResponse, schemas.DeleteCIMDPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DeleteCIMDPolicy.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2193,6 +2295,42 @@ func TestUpdateResponseSnapshot_DeleteWebAuthnCredential(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeCIMDPolicy(t *testing.T) {
+	want := &DescribeCIMDPolicyOutput{
+		CIMDPolicy: &types.CIMDPolicyType{
+			UserPoolId:    ptr.String("__UserPoolId__"),
+			CIMDPolicyId:  ptr.String("__CIMDPolicyId__"),
+			ClientId:      ptr.String("__ClientId__"),
+			PolicyName:    ptr.String("__PolicyName__"),
+			CacheDuration: ptr.Int32(1),
+			URLPatterns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeCIMDPolicy, schemas.DescribeCIMDPolicyResponse, schemas.DescribeCIMDPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeCIMDPolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeIdentityProvider(t *testing.T) {
 	want := &DescribeIdentityProviderOutput{
 		IdentityProvider: &types.IdentityProviderType{
@@ -2326,6 +2464,49 @@ func TestUpdateResponseSnapshot_DescribeManagedLoginBrandingByClient(t *testing.
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DescribeManagedLoginBrandingByClient.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DescribePointInTimeRecovery(t *testing.T) {
+	want := &DescribePointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.DescribePointInTimeRecovery, schemas.DescribePointInTimeRecoveryResponse, schemas.DescribePointInTimeRecoveryResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribePointInTimeRecovery.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2803,6 +2984,7 @@ func TestUpdateResponseSnapshot_DescribeUserPoolClient(t *testing.T) {
 			ClientName:           ptr.String("__ClientName__"),
 			ClientId:             ptr.String("__ClientId__"),
 			ClientSecret:         ptr.String("__ClientSecret__"),
+			ClientSecretArn:      ptr.String("__ClientSecretArn__"),
 			LastModifiedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			RefreshTokenValidity: 1,
@@ -3640,6 +3822,127 @@ func TestUpdateResponseSnapshot_InitiateAuth(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_InitiatePointInTimeRecovery(t *testing.T) {
+	want := &InitiatePointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.InitiatePointInTimeRecovery, schemas.InitiatePointInTimeRecoveryResponse, schemas.InitiatePointInTimeRecoveryResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("InitiatePointInTimeRecovery.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListCIMDPolicies(t *testing.T) {
+	want := &ListCIMDPoliciesOutput{
+		NextToken: ptr.String("__NextToken__"),
+		CIMDPolicies: []types.CIMDPolicySummaryType{
+			{
+				CIMDPolicyId:     ptr.String("__CIMDPolicyId__"),
+				ClientId:         ptr.String("__ClientId__"),
+				PolicyName:       ptr.String("__PolicyName__"),
+				CacheDuration:    ptr.Int32(1),
+				CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				CIMDPolicyId:     ptr.String("__CIMDPolicyId__"),
+				ClientId:         ptr.String("__ClientId__"),
+				PolicyName:       ptr.String("__PolicyName__"),
+				CacheDuration:    ptr.Int32(1),
+				CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.ListCIMDPolicies, schemas.ListCIMDPoliciesResponse, schemas.ListCIMDPoliciesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListCIMDPolicies.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListClientMetadataURLs(t *testing.T) {
+	want := &ListClientMetadataURLsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		ClientMetadataURLs: []types.ClientMetadataURLType{
+			{
+				URL:            ptr.String("__URL__"),
+				CachedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpirationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				URL:            ptr.String("__URL__"),
+				CachedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ExpirationDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.ListClientMetadataURLs, schemas.ListClientMetadataURLsResponse, schemas.ListClientMetadataURLsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListClientMetadataURLs.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListDevices(t *testing.T) {
 	want := &ListDevicesOutput{
 		Devices: []types.DeviceType{
@@ -3776,6 +4079,42 @@ func TestUpdateResponseSnapshot_ListIdentityProviders(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListIdentityProviders.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListPointInTimeRecoveries(t *testing.T) {
+	want := &ListPointInTimeRecoveriesOutput{
+		Restorations: []types.RestorationDescriptionType{
+			{
+				RestoreId:        ptr.String("__RestoreId__"),
+				RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+				RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				RestoreId:        ptr.String("__RestoreId__"),
+				RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+				RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.ListPointInTimeRecoveries, schemas.ListPointInTimeRecoveriesResponse, schemas.ListPointInTimeRecoveriesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListPointInTimeRecoveries.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4910,6 +5249,49 @@ func TestUpdateResponseSnapshot_SignUp(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_StartPointInTimeRecovery(t *testing.T) {
+	want := &StartPointInTimeRecoveryOutput{
+		Restoration: &types.RestorationType{
+			RestoreId:        ptr.String("__RestoreId__"),
+			RestoreStatus:    types.RestoreStatusType("PREVIEW_GENERATING"),
+			RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TriggerTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RestorePreview: []types.RestorePreviewType{
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+				{
+					Entity:      ptr.String("__Entity__"),
+					CreateCount: 1,
+					UpdateCount: 1,
+					DeleteCount: 1,
+				},
+			},
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.StartPointInTimeRecovery, schemas.StartPointInTimeRecoveryResponse, schemas.StartPointInTimeRecoveryResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartPointInTimeRecovery.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_StartUserImportJob(t *testing.T) {
 	want := &StartUserImportJobOutput{
 		UserImportJob: &types.UserImportJobType{
@@ -5074,6 +5456,64 @@ func TestUpdateResponseSnapshot_UpdateAuthEventFeedback(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateAuthEventFeedback.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateCIMDPolicy(t *testing.T) {
+	want := &UpdateCIMDPolicyOutput{
+		CIMDPolicy: &types.CIMDPolicyType{
+			UserPoolId:    ptr.String("__UserPoolId__"),
+			CIMDPolicyId:  ptr.String("__CIMDPolicyId__"),
+			ClientId:      ptr.String("__ClientId__"),
+			PolicyName:    ptr.String("__PolicyName__"),
+			CacheDuration: ptr.Int32(1),
+			URLPatterns: []string{
+				"__Member__",
+				"__Member__",
+			},
+			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateCIMDPolicy, schemas.UpdateCIMDPolicyResponse, schemas.UpdateCIMDPolicyResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateCIMDPolicy.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateClientMetadataURLState(t *testing.T) {
+	want := &UpdateClientMetadataURLStateOutput{}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateClientMetadataURLState, schemas.UpdateClientMetadataURLStateResponse, schemas.UpdateClientMetadataURLStateResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateClientMetadataURLState.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5394,6 +5834,7 @@ func TestUpdateResponseSnapshot_UpdateUserPoolClient(t *testing.T) {
 			ClientName:           ptr.String("__ClientName__"),
 			ClientId:             ptr.String("__ClientId__"),
 			ClientSecret:         ptr.String("__ClientSecret__"),
+			ClientSecretArn:      ptr.String("__ClientSecretArn__"),
 			LastModifiedDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			CreationDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			RefreshTokenValidity: 1,
@@ -5629,6 +6070,31 @@ func TestUpdateResponseSnapshot_Error_AliasExistsException(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("AliasExistsException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_CachedCIMDURLDoesNotExistException(t *testing.T) {
+	want := &types.CachedCIMDURLDoesNotExistException{
+		Message: ptr.String("__Message__"),
+	}
+	proto := awsjson.New11(schemas.AWSCognitoIdentityProviderService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateClientMetadataURLState, schemas.CachedCIMDURLDoesNotExistException, schemas.CachedCIMDURLDoesNotExistException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("CachedCIMDURLDoesNotExistException.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

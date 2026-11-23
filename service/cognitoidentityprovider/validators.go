@@ -650,6 +650,26 @@ func (m *validateOpAdminUserGlobalSignOut) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelPointInTimeRecovery struct {
+}
+
+func (*validateOpCancelPointInTimeRecovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelPointInTimeRecovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelPointInTimeRecoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelPointInTimeRecoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpChangePassword struct {
 }
 
@@ -745,6 +765,26 @@ func (m *validateOpConfirmSignUp) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpConfirmSignUpInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCIMDPolicy struct {
+}
+
+func (*validateOpCreateCIMDPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCIMDPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCIMDPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCIMDPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -945,6 +985,26 @@ func (m *validateOpCreateUserPoolReplica) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateUserPoolReplicaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCIMDPolicy struct {
+}
+
+func (*validateOpDeleteCIMDPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCIMDPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCIMDPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCIMDPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1210,6 +1270,26 @@ func (m *validateOpDeleteWebAuthnCredential) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeCIMDPolicy struct {
+}
+
+func (*validateOpDescribeCIMDPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCIMDPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCIMDPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCIMDPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeIdentityProvider struct {
 }
 
@@ -1265,6 +1345,26 @@ func (m *validateOpDescribeManagedLoginBranding) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeManagedLoginBrandingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribePointInTimeRecovery struct {
+}
+
+func (*validateOpDescribePointInTimeRecovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePointInTimeRecovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePointInTimeRecoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePointInTimeRecoveryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1850,6 +1950,66 @@ func (m *validateOpInitiateAuth) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInitiatePointInTimeRecovery struct {
+}
+
+func (*validateOpInitiatePointInTimeRecovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInitiatePointInTimeRecovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InitiatePointInTimeRecoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInitiatePointInTimeRecoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCIMDPolicies struct {
+}
+
+func (*validateOpListCIMDPolicies) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCIMDPolicies) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCIMDPoliciesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCIMDPoliciesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListClientMetadataURLs struct {
+}
+
+func (*validateOpListClientMetadataURLs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListClientMetadataURLs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListClientMetadataURLsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListClientMetadataURLsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDevices struct {
 }
 
@@ -1905,6 +2065,26 @@ func (m *validateOpListIdentityProviders) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListIdentityProvidersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPointInTimeRecoveries struct {
+}
+
+func (*validateOpListPointInTimeRecoveries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPointInTimeRecoveries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPointInTimeRecoveriesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPointInTimeRecoveriesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2410,6 +2590,26 @@ func (m *validateOpSignUp) HandleInitialize(ctx context.Context, in middleware.I
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartPointInTimeRecovery struct {
+}
+
+func (*validateOpStartPointInTimeRecovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartPointInTimeRecovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartPointInTimeRecoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartPointInTimeRecoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartUserImportJob struct {
 }
 
@@ -2525,6 +2725,46 @@ func (m *validateOpUpdateAuthEventFeedback) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateAuthEventFeedbackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCIMDPolicy struct {
+}
+
+func (*validateOpUpdateCIMDPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCIMDPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCIMDPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCIMDPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateClientMetadataURLState struct {
+}
+
+func (*validateOpUpdateClientMetadataURLState) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateClientMetadataURLState) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateClientMetadataURLStateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateClientMetadataURLStateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2938,6 +3178,10 @@ func addOpAdminUserGlobalSignOutValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpAdminUserGlobalSignOut{}, middleware.After)
 }
 
+func addOpCancelPointInTimeRecoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelPointInTimeRecovery{}, middleware.After)
+}
+
 func addOpChangePasswordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpChangePassword{}, middleware.After)
 }
@@ -2956,6 +3200,10 @@ func addOpConfirmForgotPasswordValidationMiddleware(stack *middleware.Stack) err
 
 func addOpConfirmSignUpValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpConfirmSignUp{}, middleware.After)
+}
+
+func addOpCreateCIMDPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCIMDPolicy{}, middleware.After)
 }
 
 func addOpCreateGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -2996,6 +3244,10 @@ func addOpCreateUserPoolValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateUserPoolReplicaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUserPoolReplica{}, middleware.After)
+}
+
+func addOpDeleteCIMDPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCIMDPolicy{}, middleware.After)
 }
 
 func addOpDeleteGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -3050,6 +3302,10 @@ func addOpDeleteWebAuthnCredentialValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDeleteWebAuthnCredential{}, middleware.After)
 }
 
+func addOpDescribeCIMDPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCIMDPolicy{}, middleware.After)
+}
+
 func addOpDescribeIdentityProviderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeIdentityProvider{}, middleware.After)
 }
@@ -3060,6 +3316,10 @@ func addOpDescribeManagedLoginBrandingByClientValidationMiddleware(stack *middle
 
 func addOpDescribeManagedLoginBrandingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeManagedLoginBranding{}, middleware.After)
+}
+
+func addOpDescribePointInTimeRecoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePointInTimeRecovery{}, middleware.After)
 }
 
 func addOpDescribeResourceServerValidationMiddleware(stack *middleware.Stack) error {
@@ -3178,6 +3438,18 @@ func addOpInitiateAuthValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInitiateAuth{}, middleware.After)
 }
 
+func addOpInitiatePointInTimeRecoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInitiatePointInTimeRecovery{}, middleware.After)
+}
+
+func addOpListCIMDPoliciesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCIMDPolicies{}, middleware.After)
+}
+
+func addOpListClientMetadataURLsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListClientMetadataURLs{}, middleware.After)
+}
+
 func addOpListDevicesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDevices{}, middleware.After)
 }
@@ -3188,6 +3460,10 @@ func addOpListGroupsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListIdentityProvidersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListIdentityProviders{}, middleware.After)
+}
+
+func addOpListPointInTimeRecoveriesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPointInTimeRecoveries{}, middleware.After)
 }
 
 func addOpListResourceServersValidationMiddleware(stack *middleware.Stack) error {
@@ -3290,6 +3566,10 @@ func addOpSignUpValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSignUp{}, middleware.After)
 }
 
+func addOpStartPointInTimeRecoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartPointInTimeRecovery{}, middleware.After)
+}
+
 func addOpStartUserImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartUserImportJob{}, middleware.After)
 }
@@ -3312,6 +3592,14 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateAuthEventFeedbackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAuthEventFeedback{}, middleware.After)
+}
+
+func addOpUpdateCIMDPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCIMDPolicy{}, middleware.After)
+}
+
+func addOpUpdateClientMetadataURLStateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateClientMetadataURLState{}, middleware.After)
 }
 
 func addOpUpdateDeviceStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -4705,6 +4993,24 @@ func validateOpAdminUserGlobalSignOutInput(v *AdminUserGlobalSignOutInput) error
 	}
 }
 
+func validateOpCancelPointInTimeRecoveryInput(v *CancelPointInTimeRecoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelPointInTimeRecoveryInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.RestoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpChangePasswordInput(v *ChangePasswordInput) error {
 	if v == nil {
 		return nil
@@ -4796,6 +5102,30 @@ func validateOpConfirmSignUpInput(v *ConfirmSignUpInput) error {
 	}
 	if v.ConfirmationCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfirmationCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCIMDPolicyInput(v *CreateCIMDPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCIMDPolicyInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
+	}
+	if v.URLPatterns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("URLPatterns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5057,6 +5387,24 @@ func validateOpCreateUserPoolReplicaInput(v *CreateUserPoolReplicaInput) error {
 	}
 }
 
+func validateOpDeleteCIMDPolicyInput(v *DeleteCIMDPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCIMDPolicyInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.CIMDPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CIMDPolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteGroupInput(v *DeleteGroupInput) error {
 	if v == nil {
 		return nil
@@ -5288,6 +5636,24 @@ func validateOpDeleteWebAuthnCredentialInput(v *DeleteWebAuthnCredentialInput) e
 	}
 }
 
+func validateOpDescribeCIMDPolicyInput(v *DescribeCIMDPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCIMDPolicyInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.CIMDPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CIMDPolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeIdentityProviderInput(v *DescribeIdentityProviderInput) error {
 	if v == nil {
 		return nil
@@ -5334,6 +5700,24 @@ func validateOpDescribeManagedLoginBrandingInput(v *DescribeManagedLoginBranding
 	}
 	if v.ManagedLoginBrandingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManagedLoginBrandingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribePointInTimeRecoveryInput(v *DescribePointInTimeRecoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePointInTimeRecoveryInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.RestoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestoreId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5829,6 +6213,57 @@ func validateOpInitiateAuthInput(v *InitiateAuthInput) error {
 	}
 }
 
+func validateOpInitiatePointInTimeRecoveryInput(v *InitiatePointInTimeRecoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InitiatePointInTimeRecoveryInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.RestoreTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestoreTimestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCIMDPoliciesInput(v *ListCIMDPoliciesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCIMDPoliciesInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListClientMetadataURLsInput(v *ListClientMetadataURLsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListClientMetadataURLsInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.CIMDPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CIMDPolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListDevicesInput(v *ListDevicesInput) error {
 	if v == nil {
 		return nil
@@ -5864,6 +6299,21 @@ func validateOpListIdentityProvidersInput(v *ListIdentityProvidersInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListIdentityProvidersInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPointInTimeRecoveriesInput(v *ListPointInTimeRecoveriesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPointInTimeRecoveriesInput"}
 	if v.UserPoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
 	}
@@ -6328,6 +6778,24 @@ func validateOpSignUpInput(v *SignUpInput) error {
 	}
 }
 
+func validateOpStartPointInTimeRecoveryInput(v *StartPointInTimeRecoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartPointInTimeRecoveryInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.RestoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartUserImportJobInput(v *StartUserImportJobInput) error {
 	if v == nil {
 		return nil
@@ -6434,6 +6902,54 @@ func validateOpUpdateAuthEventFeedbackInput(v *UpdateAuthEventFeedbackInput) err
 	}
 	if len(v.FeedbackValue) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("FeedbackValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCIMDPolicyInput(v *UpdateCIMDPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCIMDPolicyInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.CIMDPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CIMDPolicyId"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.URLPatterns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("URLPatterns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateClientMetadataURLStateInput(v *UpdateClientMetadataURLStateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateClientMetadataURLStateInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.CIMDPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CIMDPolicyId"))
+	}
+	if v.URL == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("URL"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

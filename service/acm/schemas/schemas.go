@@ -227,7 +227,7 @@ var AccessDeniedException_Message *smithy.Schema
 var AcmCertificateMetadata = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "AcmCertificateMetadata",
-}, smithy.ShapeTypeStructure, 16)
+}, smithy.ShapeTypeStructure, 18)
 var AcmCertificateMetadata_CreatedAt *smithy.Schema
 
 var AcmCertificateMetadata_Exported *smithy.Schema
@@ -260,10 +260,14 @@ var AcmCertificateMetadata_AcmeEndpointArn *smithy.Schema
 
 var AcmCertificateMetadata_AcmeAccountId *smithy.Schema
 
+var AcmCertificateMetadata_CertificateUsage *smithy.Schema
+
+var AcmCertificateMetadata_RootHierarchyType *smithy.Schema
+
 var AcmCertificateMetadataFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "AcmCertificateMetadataFilter",
-}, smithy.ShapeTypeUnion, 11)
+}, smithy.ShapeTypeUnion, 12)
 var AcmCertificateMetadataFilter_Status *smithy.Schema
 
 var AcmCertificateMetadataFilter_RenewalStatus *smithy.Schema
@@ -285,6 +289,8 @@ var AcmCertificateMetadataFilter_CertificateKeyPairOrigin *smithy.Schema
 var AcmCertificateMetadataFilter_AcmeEndpointArn *smithy.Schema
 
 var AcmCertificateMetadataFilter_AcmeAccountId *smithy.Schema
+
+var AcmCertificateMetadataFilter_RootHierarchyType *smithy.Schema
 
 var AcmeAccount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
@@ -608,7 +614,7 @@ var _CertificateChainBlob = smithy.NewSchema(smithy.ShapeID{
 var CertificateDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "CertificateDetail",
-}, smithy.ShapeTypeStructure, 31)
+}, smithy.ShapeTypeStructure, 33)
 var CertificateDetail_CertificateArn *smithy.Schema
 
 var CertificateDetail_DomainName *smithy.Schema
@@ -670,6 +676,10 @@ var CertificateDetail_CertificateKeyPairOrigin *smithy.Schema
 var CertificateDetail_AcmeEndpointArn *smithy.Schema
 
 var CertificateDetail_AcmeAccountId *smithy.Schema
+
+var CertificateDetail_CertificateUsage *smithy.Schema
+
+var CertificateDetail_RootHierarchyType *smithy.Schema
 
 var CertificateExport = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
@@ -788,7 +798,7 @@ var _CertificateStatuses_member *smithy.Schema
 var CertificateSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "CertificateSummary",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 23)
 var CertificateSummary_CertificateArn *smithy.Schema
 
 var CertificateSummary_DomainName *smithy.Schema
@@ -831,6 +841,10 @@ var CertificateSummary_ManagedBy *smithy.Schema
 
 var CertificateSummary_CertificateKeyPairOrigin *smithy.Schema
 
+var CertificateSummary_CertificateUsage *smithy.Schema
+
+var CertificateSummary_RootHierarchyType *smithy.Schema
+
 var _CertificateSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "CertificateSummaryList",
@@ -854,6 +868,14 @@ var CertificateType_IMPORTED *smithy.Schema
 var CertificateType_AMAZON_ISSUED *smithy.Schema
 
 var CertificateType_PRIVATE *smithy.Schema
+
+var CertificateUsage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.acm",
+	Name:      "CertificateUsage",
+}, smithy.ShapeTypeEnum, 2)
+var CertificateUsage_CLIENT_AND_SERVER_AUTH *smithy.Schema
+
+var CertificateUsage_CLIENT_AUTH_ONLY *smithy.Schema
 
 var CommonNameFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
@@ -1588,6 +1610,20 @@ var _RoleArn = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RoleArn",
 }, smithy.ShapeTypeString, 0)
 
+var RootHierarchyType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.acm",
+	Name:      "RootHierarchyType",
+}, smithy.ShapeTypeEnum, 2)
+var RootHierarchyType_N2_AMAZON_MANAGED *smithy.Schema
+
+var RootHierarchyType_N2_SFG2_AMAZON_MANAGED *smithy.Schema
+
+var _RootHierarchyTypes = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.acm",
+	Name:      "RootHierarchyTypes",
+}, smithy.ShapeTypeList, 1)
+var _RootHierarchyTypes_member *smithy.Schema
+
 var SearchCertificatesSortBy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "SearchCertificatesSortBy",
@@ -2223,10 +2259,12 @@ var ListCertificateDomainValidationsResponse_NextToken *smithy.Schema
 var ListCertificatesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "ListCertificatesRequest",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var ListCertificatesRequest_CertificateStatuses *smithy.Schema
 
 var ListCertificatesRequest_CertificateKeyPairOrigins *smithy.Schema
+
+var ListCertificatesRequest_RootHierarchyTypes *smithy.Schema
 
 var ListCertificatesRequest_Includes *smithy.Schema
 
@@ -2295,7 +2333,7 @@ var RenewCertificateRequest_CertificateArn *smithy.Schema
 var RequestCertificateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
 	Name:      "RequestCertificateRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var RequestCertificateRequest_DomainName *smithy.Schema
 
 var RequestCertificateRequest_ValidationMethod *smithy.Schema
@@ -2315,6 +2353,10 @@ var RequestCertificateRequest_Tags *smithy.Schema
 var RequestCertificateRequest_KeyAlgorithm *smithy.Schema
 
 var RequestCertificateRequest_ManagedBy *smithy.Schema
+
+var RequestCertificateRequest_CertificateUsage *smithy.Schema
+
+var RequestCertificateRequest_RootHierarchyType *smithy.Schema
 
 var RequestCertificateResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.acm",
@@ -2481,6 +2523,14 @@ func init() {
 
 	CertificateKeyPairOrigin_CUSTOMER_PROVIDED = CertificateKeyPairOrigin.AddMember("CUSTOMER_PROVIDED", smithyprelude.Unit)
 
+	CertificateUsage_CLIENT_AND_SERVER_AUTH = CertificateUsage.AddMember("CLIENT_AND_SERVER_AUTH", smithyprelude.Unit)
+
+	CertificateUsage_CLIENT_AUTH_ONLY = CertificateUsage.AddMember("CLIENT_AUTH_ONLY", smithyprelude.Unit)
+
+	RootHierarchyType_N2_AMAZON_MANAGED = RootHierarchyType.AddMember("N2_AMAZON_MANAGED", smithyprelude.Unit)
+
+	RootHierarchyType_N2_SFG2_AMAZON_MANAGED = RootHierarchyType.AddMember("N2_SFG2_AMAZON_MANAGED", smithyprelude.Unit)
+
 	AcmCertificateMetadata_CreatedAt = AcmCertificateMetadata.AddMember("CreatedAt", _TStamp)
 
 	AcmCertificateMetadata_Exported = AcmCertificateMetadata.AddMember("Exported", _NullableBoolean)
@@ -2513,6 +2563,10 @@ func init() {
 
 	AcmCertificateMetadata_AcmeAccountId = AcmCertificateMetadata.AddMember("AcmeAccountId", _AcmeAccountId)
 
+	AcmCertificateMetadata_CertificateUsage = AcmCertificateMetadata.AddMember("CertificateUsage", CertificateUsage)
+
+	AcmCertificateMetadata_RootHierarchyType = AcmCertificateMetadata.AddMember("RootHierarchyType", RootHierarchyType)
+
 	AcmCertificateMetadataFilter_Status = AcmCertificateMetadataFilter.AddMember("Status", CertificateStatus)
 
 	AcmCertificateMetadataFilter_RenewalStatus = AcmCertificateMetadataFilter.AddMember("RenewalStatus", RenewalStatus)
@@ -2534,6 +2588,8 @@ func init() {
 	AcmCertificateMetadataFilter_AcmeEndpointArn = AcmCertificateMetadataFilter.AddMember("AcmeEndpointArn", _Arn)
 
 	AcmCertificateMetadataFilter_AcmeAccountId = AcmCertificateMetadataFilter.AddMember("AcmeAccountId", _AcmeAccountId)
+
+	AcmCertificateMetadataFilter_RootHierarchyType = AcmCertificateMetadataFilter.AddMember("RootHierarchyType", RootHierarchyType)
 
 	AcmeAccountStatus_VALID = AcmeAccountStatus.AddMember("VALID", smithyprelude.Unit)
 
@@ -3033,6 +3089,10 @@ func init() {
 
 	CertificateDetail_AcmeAccountId = CertificateDetail.AddMember("AcmeAccountId", _AcmeAccountId)
 
+	CertificateDetail_CertificateUsage = CertificateDetail.AddMember("CertificateUsage", CertificateUsage)
+
+	CertificateDetail_RootHierarchyType = CertificateDetail.AddMember("RootHierarchyType", RootHierarchyType)
+
 	ComparisonOperator_CONTAINS = ComparisonOperator.AddMember("CONTAINS", smithyprelude.Unit)
 
 	ComparisonOperator_EQUALS = ComparisonOperator.AddMember("EQUALS", smithyprelude.Unit)
@@ -3223,6 +3283,10 @@ func init() {
 
 	CertificateSummary_CertificateKeyPairOrigin = CertificateSummary.AddMember("CertificateKeyPairOrigin", CertificateKeyPairOrigin)
 
+	CertificateSummary_CertificateUsage = CertificateSummary.AddMember("CertificateUsage", CertificateUsage)
+
+	CertificateSummary_RootHierarchyType = CertificateSummary.AddMember("RootHierarchyType", RootHierarchyType)
+
 	_CertificateSummaryList_member = _CertificateSummaryList.AddMember("member", CertificateSummary)
 
 	ConflictException_message = ConflictException.AddMember("message", _String)
@@ -3312,6 +3376,8 @@ func init() {
 	ResourceInUseException_message = ResourceInUseException.AddMember("message", _String)
 
 	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _String)
+
+	_RootHierarchyTypes_member = _RootHierarchyTypes.AddMember("member", RootHierarchyType)
 
 	SearchCertificatesSortBy_CREATED_AT = SearchCertificatesSortBy.AddMember("CREATED_AT", smithyprelude.Unit)
 
@@ -3545,6 +3611,8 @@ func init() {
 
 	ListCertificatesRequest_CertificateKeyPairOrigins = ListCertificatesRequest.AddMember("CertificateKeyPairOrigins", _CertificateKeyPairOrigins)
 
+	ListCertificatesRequest_RootHierarchyTypes = ListCertificatesRequest.AddMember("RootHierarchyTypes", _RootHierarchyTypes)
+
 	ListCertificatesRequest_Includes = ListCertificatesRequest.AddMember("Includes", Filters)
 
 	ListCertificatesRequest_NextToken = ListCertificatesRequest.AddMember("NextToken", _NextToken)
@@ -3596,6 +3664,10 @@ func init() {
 	RequestCertificateRequest_KeyAlgorithm = RequestCertificateRequest.AddMember("KeyAlgorithm", KeyAlgorithm)
 
 	RequestCertificateRequest_ManagedBy = RequestCertificateRequest.AddMember("ManagedBy", CertificateManagedBy)
+
+	RequestCertificateRequest_CertificateUsage = RequestCertificateRequest.AddMember("CertificateUsage", CertificateUsage)
+
+	RequestCertificateRequest_RootHierarchyType = RequestCertificateRequest.AddMember("RootHierarchyType", RootHierarchyType)
 
 	RequestCertificateResponse_CertificateArn = RequestCertificateResponse.AddMember("CertificateArn", _Arn)
 

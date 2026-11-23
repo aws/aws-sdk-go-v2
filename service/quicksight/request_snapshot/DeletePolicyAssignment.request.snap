@@ -1,0 +1,3 @@
+DELETE /governance-policy-mgmt/accounts/__AccountId__/policy-assignments?PolicyArn=__PolicyArn__&PrincipalArn=__PrincipalArn__&Revision=1
+
+

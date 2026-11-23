@@ -9,10 +9,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Changes the password for the specified IAM user. You can use the CLI, the
-// Amazon Web Services API, or the Users page in the IAM console to change the
-// password for any IAM user. Use [ChangePassword]to change your own password in the My Security
-// Credentials page in the Amazon Web Services Management Console.
+// Changes the password or the maximum sign-in session duration for the specified
+// IAM user. You can use the CLI, the Amazon Web Services API, or the Users page in
+// the IAM console to change the password for any IAM user. Use [ChangePassword]to change your own
+// password in the My Security Credentials page in the Amazon Web Services
+// Management Console.
 //
 // For more information about modifying passwords, see [Managing passwords] in the IAM User Guide.
 //
@@ -46,6 +47,23 @@ type UpdateLoginProfileInput struct {
 	// This member is required.
 	UserName *string
 
+	// The maximum duration (in seconds) of an Amazon Web Services Sign-In session for
+	// the specified IAM user. This setting can have a value from 1 hour (3600 seconds)
+	// to 90 days (7776000 seconds), inclusive, and replaces any value currently
+	// configured for the user.
+	//
+	// If you omit both this parameter and ResetMaxSigninSessionDuration , the current
+	// setting is unchanged. You cannot specify this parameter and set
+	// ResetMaxSigninSessionDuration to true in the same request. If you update only
+	// the sign-in session duration, the user's password and PasswordResetRequired
+	// setting do not change.
+	//
+	// Changes to this setting apply to new sign-in sessions. Sessions that are
+	// already established are not affected.
+	//
+	// This setting is not supported for the root user.
+	MaxSigninSessionDuration *int32
+
 	// The new password for the specified IAM user.
 	//
 	// The [regex pattern] used to validate this parameter is a string of characters consisting of
@@ -72,6 +90,16 @@ type UpdateLoginProfileInput struct {
 	// user to set a new password on next sign-in.
 	PasswordResetRequired *bool
 
+	// Specifies whether to clear the maximum sign-in session duration for the
+	// specified IAM user. Set this value to true to return the setting to its unset
+	// state, so that the existing sign-in session behavior applies. When the setting
+	// is unset, the user's MaxSigninSessionDuration is omitted from responses.
+	//
+	// If you set this value to false or omit it, the current setting is not cleared.
+	// You cannot set this value to true and specify MaxSigninSessionDuration in the
+	// same request. Clearing a setting that is already unset has no effect.
+	ResetMaxSigninSessionDuration *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -82,11 +110,17 @@ func (v *UpdateLoginProfileInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateLoginProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxSigninSessionDuration != nil {
+		s.WriteInt32(schemas.UpdateLoginProfileRequest_MaxSigninSessionDuration, *v.MaxSigninSessionDuration)
+	}
 	if v.Password != nil {
 		s.WriteString(schemas.UpdateLoginProfileRequest_Password, *v.Password)
 	}
 	if v.PasswordResetRequired != nil {
 		s.WriteBool(schemas.UpdateLoginProfileRequest_PasswordResetRequired, *v.PasswordResetRequired)
+	}
+	if v.ResetMaxSigninSessionDuration != nil {
+		s.WriteBool(schemas.UpdateLoginProfileRequest_ResetMaxSigninSessionDuration, *v.ResetMaxSigninSessionDuration)
 	}
 	if v.UserName != nil {
 		s.WriteString(schemas.UpdateLoginProfileRequest_UserName, *v.UserName)

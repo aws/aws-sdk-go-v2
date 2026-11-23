@@ -737,6 +737,106 @@ func (v *Cipher) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Describes a client certificate identity filter.
+type ClientCertificateIdentityFilter struct {
+
+	// The action to take when the client certificate matches the filter. The only
+	// supported action is accept .
+	//
+	// This member is required.
+	Action ClientCertificateIdentityFilterAction
+
+	// The client certificate field to match. The possible values are:
+	//
+	//   - subject-cn – The common name in the certificate subject.
+	//
+	//   - subject-ou – The organizational unit in the certificate subject.
+	//
+	//   - san-dns – A DNS name in the subject alternative name (SAN).
+	//
+	//   - san-uri – A URI in the subject alternative name (SAN).
+	//
+	// If the client certificate doesn't contain the field, the filter doesn't match.
+	// If the field has multiple values, the filter matches if it matches any one of
+	// the values.
+	//
+	// This member is required.
+	Field ClientCertificateIdentityFilterField
+
+	// The match type. The possible values are exact and prefix .
+	//
+	// For the subject-cn , subject-ou , and san-dns fields, matching is
+	// case-insensitive. For the san-uri field, the scheme and host are matched
+	// case-insensitively, and the rest of the URI is matched case-sensitively.
+	//
+	// This member is required.
+	MatchType ClientCertificateIdentityFilterMatchType
+
+	// The value to match. The value must be 1–256 printable ASCII characters.
+	//
+	// If the field is san-uri , the value must begin with a letter. Before the first
+	// colon, the value can contain only letters, digits, plus signs (+), hyphens (-),
+	// or periods (.). If the match type is exact , the value must contain a colon. For
+	// example, spiffe://example.com/workload is a valid value.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClientCertificateIdentityFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientCertificateIdentityFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientCertificateIdentityFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ClientCertificateIdentityFilter_Action, string(v.Action))
+	}
+	if v.Field != "" {
+		s.WriteString(schemas.ClientCertificateIdentityFilter_Field, string(v.Field))
+	}
+	if v.MatchType != "" {
+		s.WriteString(schemas.ClientCertificateIdentityFilter_MatchType, string(v.MatchType))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ClientCertificateIdentityFilter_Value, *v.Value)
+	}
+}
+func (v *ClientCertificateIdentityFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientCertificateIdentityFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientCertificateIdentityFilter_Action:
+			var ev string
+			if err := d.ReadString(schemas.ClientCertificateIdentityFilter_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ClientCertificateIdentityFilterAction(ev)
+			return nil
+		case schemas.ClientCertificateIdentityFilter_Field:
+			var ev string
+			if err := d.ReadString(schemas.ClientCertificateIdentityFilter_Field, &ev); err != nil {
+				return err
+			}
+			v.Field = ClientCertificateIdentityFilterField(ev)
+			return nil
+		case schemas.ClientCertificateIdentityFilter_MatchType:
+			var ev string
+			if err := d.ReadString(schemas.ClientCertificateIdentityFilter_MatchType, &ev); err != nil {
+				return err
+			}
+			v.MatchType = ClientCertificateIdentityFilterMatchType(ev)
+			return nil
+		case schemas.ClientCertificateIdentityFilter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ClientCertificateIdentityFilter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Information about the revocations used by a trust store.
 type DescribeTrustStoreRevocation struct {
 
@@ -1872,6 +1972,12 @@ type LoadBalancerAttribute struct {
 	//   cipher suite negotiated with the client. Both headers are in OpenSSL format. The
 	//   possible values for the attribute are true and false . The default is false .
 	//
+	//   - routing.http.x_amzn_tls_kx.enabled - Indicates whether the x-amzn-tls-kx
+	//   header, which contains information about the negotiated key exchange group, is
+	//   added to the client request before sending it to the target. The x-amzn-tls-kx
+	//   header uses IANA TLS Supported Groups registry naming. The possible values for
+	//   the attribute are true and false . The default is false .
+	//
 	//   - routing.http.xff_client_port.enabled - Indicates whether the X-Forwarded-For
 	//   header should preserve the source port that the client used to connect to the
 	//   load balancer. The possible values are true and false . The default is false .
@@ -2091,11 +2197,24 @@ type MutualAuthenticationAttributes struct {
 	// Indicates whether trust store CA certificate names are advertised.
 	AdvertiseTrustStoreCaNames AdvertiseTrustStoreCaNamesEnum
 
+	// [Network Load Balancers] The client certificate identity filters. The load
+	// balancer admits a connection only if the client certificate matches at least one
+	// filter. If you don't specify any filters, the load balancer admits every client
+	// certificate that passes trust store validation and revocation checks.
+	//
+	// You can specify filters only when the mode is verify . You can specify up to 100
+	// filters per listener.
+	ClientCertificateIdentityFilters []ClientCertificateIdentityFilter
+
 	// Indicates whether expired client certificates are ignored.
 	IgnoreClientCertificateExpiry *bool
 
-	// The client certificate handling method. Options are off , passthrough or verify
-	// . The default value is off .
+	// The client certificate handling method. The default value is off .
+	//
+	// [Application Load Balancers] The possible values are off , passthrough , and
+	// verify .
+	//
+	// [Network Load Balancers] The possible values are off and verify .
 	Mode *string
 
 	// The Amazon Resource Name (ARN) of the trust store.
@@ -2116,6 +2235,9 @@ func (v *MutualAuthenticationAttributes) Serialize(s smithy.ShapeSerializer) {
 func (v *MutualAuthenticationAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdvertiseTrustStoreCaNames != "" {
 		s.WriteString(schemas.MutualAuthenticationAttributes_AdvertiseTrustStoreCaNames, string(v.AdvertiseTrustStoreCaNames))
+	}
+	if v.ClientCertificateIdentityFilters != nil {
+		serializeClientCertificateIdentityFilters(s, schemas.MutualAuthenticationAttributes_ClientCertificateIdentityFilters, v.ClientCertificateIdentityFilters)
 	}
 	if v.IgnoreClientCertificateExpiry != nil {
 		s.WriteBool(schemas.MutualAuthenticationAttributes_IgnoreClientCertificateExpiry, *v.IgnoreClientCertificateExpiry)
@@ -2140,6 +2262,8 @@ func (v *MutualAuthenticationAttributes) Deserialize(d smithy.ShapeDeserializer)
 			}
 			v.AdvertiseTrustStoreCaNames = AdvertiseTrustStoreCaNamesEnum(ev)
 			return nil
+		case schemas.MutualAuthenticationAttributes_ClientCertificateIdentityFilters:
+			return deserializeClientCertificateIdentityFilters(d, schemas.MutualAuthenticationAttributes_ClientCertificateIdentityFilters, &v.ClientCertificateIdentityFilters)
 		case schemas.MutualAuthenticationAttributes_IgnoreClientCertificateExpiry:
 			v.IgnoreClientCertificateExpiry = new(bool)
 			return d.ReadBool(schemas.MutualAuthenticationAttributes_IgnoreClientCertificateExpiry, v.IgnoreClientCertificateExpiry)
@@ -3554,6 +3678,22 @@ type TargetGroupAttribute struct {
 	//   time period expires, the load balancer-generated cookie is considered stale. The
 	//   range is 1 second to 1 week (604800 seconds). The default value is 1 day (86400
 	//   seconds).
+	//
+	//   - waf.http2.traffic_inspection_behavior – Specifies when Amazon Web Services
+	//   WAF inspects HTTP/2 requests. This attribute applies only to target groups that
+	//   use the HTTP2 protocol version. The possible values are:
+	//
+	//   - inspect_immediately – Inspects each request as soon as data is available.
+	//   This is the default.
+	//
+	//   - inspect_after_sufficient_data – Accumulates HTTP/2 data frames before
+	//   inspection.
+	//
+	//   - routing.http2.rst_stream_error_forwarding.enabled – Specifies whether the
+	//   load balancer forwards an HTTP/2 or gRPC target's RST_STREAM error code to the
+	//   client, instead of returning an HTTP 502 (Bad Gateway) response. This attribute
+	//   applies only to target groups that use the HTTP2 or GRPC protocol version. The
+	//   value is true or false . The default is false .
 	//
 	// The following attribute is supported only if the load balancer is an
 	// Application Load Balancer and the target is a Lambda function:

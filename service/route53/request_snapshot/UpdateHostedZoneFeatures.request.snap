@@ -2,4 +2,4 @@ POST /2013-04-01/hostedzone/__HostedZoneId__/features
 
 Content-Type: application/xml
 
-<UpdateHostedZoneFeaturesRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><EnableAcceleratedRecovery>true</EnableAcceleratedRecovery></UpdateHostedZoneFeaturesRequest>
+<UpdateHostedZoneFeaturesRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><ChangeGuardrails><ChangeGuardrail><Name>NS_FORMAT_CHECK</Name><Status>ENABLED</Status></ChangeGuardrail><ChangeGuardrail><Name>NS_FORMAT_CHECK</Name><Status>ENABLED</Status></ChangeGuardrail></ChangeGuardrails><DryRun>true</DryRun><EnableAcceleratedRecovery>true</EnableAcceleratedRecovery><EnablePublicDNSFallback>true</EnablePublicDNSFallback></UpdateHostedZoneFeaturesRequest>

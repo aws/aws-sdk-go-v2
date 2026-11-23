@@ -40,8 +40,9 @@ type ListEventBusesInput struct {
 
 	// Name of an event bus. The first character must be alphanumeric; the remaining
 	// characters may also include '.', '-', and '_'. The grammar matches the name
-	// segment of EventBusArn (event-busv2//), so every valid name can be represented
-	// in the bus's ARN. The same type is used everywhere a bus name appears.
+	// segment of EventBusArn (event-busv2/<name>/<id>), so every valid name can be
+	// represented in the bus's ARN. The same type is used everywhere a bus name
+	// appears.
 	NamePrefix *string
 
 	// Opaque pagination token returned by a List operation. Pass it back in the next

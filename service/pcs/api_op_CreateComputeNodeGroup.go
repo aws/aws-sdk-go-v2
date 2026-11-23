@@ -100,6 +100,13 @@ type CreateComputeNodeGroupInput struct {
 	// Don't specify this value when launchTemplateMode is MANAGED .
 	CustomLaunchTemplate *types.CustomLaunchTemplate
 
+	// The instance health check settings for the compute node group. Instance health
+	// checks detect faults on instances in the compute node group and respond with the
+	// repair action that you choose. You can configure health monitoring, deep health
+	// checks, or both. You can't specify an empty object ( {} ). Instance health
+	// checks require Slurm version 26.05 or later.
+	InstanceHealthChecks *types.InstanceHealthChecksRequest
+
 	// Specifies whether the compute node group uses a custom launch template or a
 	// launch template that PCS manages. The default value is CUSTOM .
 	//
@@ -195,6 +202,11 @@ func (v *CreateComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer)
 	}
 	if v.InstanceConfigs != nil {
 		serializeInstanceList(s, schemas.CreateComputeNodeGroupRequest_instanceConfigs, v.InstanceConfigs)
+	}
+	if v.InstanceHealthChecks != nil {
+		s.WriteStruct(schemas.CreateComputeNodeGroupRequest_instanceHealthChecks)
+		v.InstanceHealthChecks.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.LaunchTemplateMode != "" {
 		s.WriteString(schemas.CreateComputeNodeGroupRequest_launchTemplateMode, string(v.LaunchTemplateMode))

@@ -24,6 +24,7 @@ import (
 	"slices"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeSSPrefix = "request_snapshot"
@@ -1326,6 +1327,34 @@ func TestCheckRequestSnapshot_AssociateSoftwareToken(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CancelPointInTimeRecovery(t *testing.T) {
+	input := &CancelPointInTimeRecoveryInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RestoreId:  ptr.String("__RestoreId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelPointInTimeRecovery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelPointInTimeRecovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ChangePassword(t *testing.T) {
 	input := &ChangePasswordInput{
 		PreviousPassword: ptr.String("__PreviousPassword__"),
@@ -1495,6 +1524,40 @@ func TestCheckRequestSnapshot_ConfirmSignUp(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ConfirmSignUp"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateCIMDPolicy(t *testing.T) {
+	input := &CreateCIMDPolicyInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		ClientId:      ptr.String("__ClientId__"),
+		PolicyName:    ptr.String("__PolicyName__"),
+		CacheDuration: ptr.Int32(1),
+		URLPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateCIMDPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCIMDPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2008,6 +2071,7 @@ func TestCheckRequestSnapshot_CreateUserPoolClient(t *testing.T) {
 			Feature:                 types.FeatureType("ENABLED"),
 			RetryGracePeriodSeconds: ptr.Int32(1),
 		},
+		PublishSecretsInAWSSecretsManager: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2098,6 +2162,34 @@ func TestCheckRequestSnapshot_CreateUserPoolReplica(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateUserPoolReplica"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteCIMDPolicy(t *testing.T) {
+	input := &DeleteCIMDPolicyInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteCIMDPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCIMDPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2468,6 +2560,34 @@ func TestCheckRequestSnapshot_DeleteWebAuthnCredential(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeCIMDPolicy(t *testing.T) {
+	input := &DescribeCIMDPolicyInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeCIMDPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeCIMDPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeIdentityProvider(t *testing.T) {
 	input := &DescribeIdentityProviderInput{
 		UserPoolId:   ptr.String("__UserPoolId__"),
@@ -2550,6 +2670,34 @@ func TestCheckRequestSnapshot_DescribeManagedLoginBrandingByClient(t *testing.T)
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeManagedLoginBrandingByClient"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribePointInTimeRecovery(t *testing.T) {
+	input := &DescribePointInTimeRecoveryInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RestoreId:  ptr.String("__RestoreId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribePointInTimeRecovery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribePointInTimeRecovery"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3420,6 +3568,93 @@ func TestCheckRequestSnapshot_InitiateAuth(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_InitiatePointInTimeRecovery(t *testing.T) {
+	input := &InitiatePointInTimeRecoveryInput{
+		UserPoolId:       ptr.String("__UserPoolId__"),
+		RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.InitiatePointInTimeRecovery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "InitiatePointInTimeRecovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListCIMDPolicies(t *testing.T) {
+	input := &ListCIMDPoliciesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListCIMDPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCIMDPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListClientMetadataURLs(t *testing.T) {
+	input := &ListClientMetadataURLsInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListClientMetadataURLs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClientMetadataURLs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListDevices(t *testing.T) {
 	input := &ListDevicesInput{
 		AccessToken:     ptr.String("__AccessToken__"),
@@ -3503,6 +3738,35 @@ func TestCheckRequestSnapshot_ListIdentityProviders(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIdentityProviders"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListPointInTimeRecoveries(t *testing.T) {
+	input := &ListPointInTimeRecoveriesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPointInTimeRecoveries(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPointInTimeRecoveries"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4423,6 +4687,34 @@ func TestCheckRequestSnapshot_SignUp(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_StartPointInTimeRecovery(t *testing.T) {
+	input := &StartPointInTimeRecoveryInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RestoreId:  ptr.String("__RestoreId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartPointInTimeRecovery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartPointInTimeRecovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StartUserImportJob(t *testing.T) {
 	input := &StartUserImportJobInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -4594,6 +4886,71 @@ func TestCheckRequestSnapshot_UpdateAuthEventFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAuthEventFeedback"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateCIMDPolicy(t *testing.T) {
+	input := &UpdateCIMDPolicyInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		CIMDPolicyId:  ptr.String("__CIMDPolicyId__"),
+		ClientId:      ptr.String("__ClientId__"),
+		PolicyName:    ptr.String("__PolicyName__"),
+		CacheDuration: ptr.Int32(1),
+		URLPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCIMDPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCIMDPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateClientMetadataURLState(t *testing.T) {
+	input := &UpdateClientMetadataURLStateInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+		URL:          ptr.String("__URL__"),
+		Action:       types.CIMDCacheActionType("REFRESH"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateClientMetadataURLState(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateClientMetadataURLState"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5135,6 +5492,7 @@ func TestCheckRequestSnapshot_UpdateUserPoolClient(t *testing.T) {
 			Feature:                 types.FeatureType("ENABLED"),
 			RetryGracePeriodSeconds: ptr.Int32(1),
 		},
+		PublishSecretsInAWSSecretsManager: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6405,6 +6763,34 @@ func TestUpdateRequestSnapshot_AssociateSoftwareToken(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CancelPointInTimeRecovery(t *testing.T) {
+	input := &CancelPointInTimeRecoveryInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RestoreId:  ptr.String("__RestoreId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelPointInTimeRecovery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelPointInTimeRecovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ChangePassword(t *testing.T) {
 	input := &ChangePasswordInput{
 		PreviousPassword: ptr.String("__PreviousPassword__"),
@@ -6574,6 +6960,40 @@ func TestUpdateRequestSnapshot_ConfirmSignUp(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ConfirmSignUp"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateCIMDPolicy(t *testing.T) {
+	input := &CreateCIMDPolicyInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		ClientId:      ptr.String("__ClientId__"),
+		PolicyName:    ptr.String("__PolicyName__"),
+		CacheDuration: ptr.Int32(1),
+		URLPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateCIMDPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCIMDPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7087,6 +7507,7 @@ func TestUpdateRequestSnapshot_CreateUserPoolClient(t *testing.T) {
 			Feature:                 types.FeatureType("ENABLED"),
 			RetryGracePeriodSeconds: ptr.Int32(1),
 		},
+		PublishSecretsInAWSSecretsManager: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7177,6 +7598,34 @@ func TestUpdateRequestSnapshot_CreateUserPoolReplica(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateUserPoolReplica"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteCIMDPolicy(t *testing.T) {
+	input := &DeleteCIMDPolicyInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteCIMDPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCIMDPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7547,6 +7996,34 @@ func TestUpdateRequestSnapshot_DeleteWebAuthnCredential(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeCIMDPolicy(t *testing.T) {
+	input := &DescribeCIMDPolicyInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeCIMDPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeCIMDPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeIdentityProvider(t *testing.T) {
 	input := &DescribeIdentityProviderInput{
 		UserPoolId:   ptr.String("__UserPoolId__"),
@@ -7629,6 +8106,34 @@ func TestUpdateRequestSnapshot_DescribeManagedLoginBrandingByClient(t *testing.T
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeManagedLoginBrandingByClient"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribePointInTimeRecovery(t *testing.T) {
+	input := &DescribePointInTimeRecoveryInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RestoreId:  ptr.String("__RestoreId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribePointInTimeRecovery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribePointInTimeRecovery"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8499,6 +9004,93 @@ func TestUpdateRequestSnapshot_InitiateAuth(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_InitiatePointInTimeRecovery(t *testing.T) {
+	input := &InitiatePointInTimeRecoveryInput{
+		UserPoolId:       ptr.String("__UserPoolId__"),
+		RestoreTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.InitiatePointInTimeRecovery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "InitiatePointInTimeRecovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListCIMDPolicies(t *testing.T) {
+	input := &ListCIMDPoliciesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListCIMDPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCIMDPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListClientMetadataURLs(t *testing.T) {
+	input := &ListClientMetadataURLsInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListClientMetadataURLs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListClientMetadataURLs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListDevices(t *testing.T) {
 	input := &ListDevicesInput{
 		AccessToken:     ptr.String("__AccessToken__"),
@@ -8582,6 +9174,35 @@ func TestUpdateRequestSnapshot_ListIdentityProviders(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListIdentityProviders"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListPointInTimeRecoveries(t *testing.T) {
+	input := &ListPointInTimeRecoveriesInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListPointInTimeRecoveries(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListPointInTimeRecoveries"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -9502,6 +10123,34 @@ func TestUpdateRequestSnapshot_SignUp(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_StartPointInTimeRecovery(t *testing.T) {
+	input := &StartPointInTimeRecoveryInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		RestoreId:  ptr.String("__RestoreId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartPointInTimeRecovery(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartPointInTimeRecovery"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StartUserImportJob(t *testing.T) {
 	input := &StartUserImportJobInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -9673,6 +10322,71 @@ func TestUpdateRequestSnapshot_UpdateAuthEventFeedback(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAuthEventFeedback"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateCIMDPolicy(t *testing.T) {
+	input := &UpdateCIMDPolicyInput{
+		UserPoolId:    ptr.String("__UserPoolId__"),
+		CIMDPolicyId:  ptr.String("__CIMDPolicyId__"),
+		ClientId:      ptr.String("__ClientId__"),
+		PolicyName:    ptr.String("__PolicyName__"),
+		CacheDuration: ptr.Int32(1),
+		URLPatterns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCIMDPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCIMDPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateClientMetadataURLState(t *testing.T) {
+	input := &UpdateClientMetadataURLStateInput{
+		UserPoolId:   ptr.String("__UserPoolId__"),
+		CIMDPolicyId: ptr.String("__CIMDPolicyId__"),
+		URL:          ptr.String("__URL__"),
+		Action:       types.CIMDCacheActionType("REFRESH"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateClientMetadataURLState(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateClientMetadataURLState"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -10214,6 +10928,7 @@ func TestUpdateRequestSnapshot_UpdateUserPoolClient(t *testing.T) {
 			Feature:                 types.FeatureType("ENABLED"),
 			RetryGracePeriodSeconds: ptr.Int32(1),
 		},
+		PublishSecretsInAWSSecretsManager: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

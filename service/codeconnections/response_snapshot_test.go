@@ -142,7 +142,8 @@ func TestCheckResponseSnapshot_CreateConnection(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		HostArn: ptr.String("__HostArn__"),
+		HostArn:          ptr.String("__HostArn__"),
+		ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -391,6 +392,7 @@ func TestCheckResponseSnapshot_GetConnection(t *testing.T) {
 			OwnerAccountId:   ptr.String("__OwnerAccountId__"),
 			ConnectionStatus: types.ConnectionStatus("PENDING"),
 			HostArn:          ptr.String("__HostArn__"),
+			ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetConnection.response")
@@ -738,6 +740,7 @@ func TestCheckResponseSnapshot_ListConnections(t *testing.T) {
 				OwnerAccountId:   ptr.String("__OwnerAccountId__"),
 				ConnectionStatus: types.ConnectionStatus("PENDING"),
 				HostArn:          ptr.String("__HostArn__"),
+				ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 			},
 			{
 				ConnectionName:   ptr.String("__ConnectionName__"),
@@ -746,6 +749,7 @@ func TestCheckResponseSnapshot_ListConnections(t *testing.T) {
 				OwnerAccountId:   ptr.String("__OwnerAccountId__"),
 				ConnectionStatus: types.ConnectionStatus("PENDING"),
 				HostArn:          ptr.String("__HostArn__"),
+				ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -759,8 +763,8 @@ func TestCheckResponseSnapshot_ListConnections(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListConnections(context.Background(), &ListConnectionsInput{
-		ProviderTypeFilter: types.ProviderType("Bitbucket"),
 		HostArnFilter:      ptr.String("__HostArnFilter__"),
+		ProviderTypeFilter: types.ProviderType("Bitbucket"),
 		MaxResults:         1,
 		NextToken:          ptr.String("__NextToken__"),
 	})
@@ -1422,11 +1426,9 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRepositoryLink(context.Background(), &CreateRepositoryLinkInput{
-		ConnectionArn:    ptr.String("__ConnectionArn__"),
-		OwnerId:          ptr.String("__OwnerId__"),
-		RepositoryName:   ptr.String("__RepositoryName__"),
-		EncryptionKeyArn: ptr.String("__EncryptionKeyArn__"),
+	_, opErr := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		ProviderType:   types.ProviderType("Bitbucket"),
+		ConnectionName: ptr.String("__ConnectionName__"),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -1437,6 +1439,8 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		HostArn:          ptr.String("__HostArn__"),
+		ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1475,7 +1479,8 @@ func TestCheckResponseSnapshot_Error_LimitExceededException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		HostArn: ptr.String("__HostArn__"),
+		HostArn:          ptr.String("__HostArn__"),
+		ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1554,7 +1559,8 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		HostArn: ptr.String("__HostArn__"),
+		HostArn:          ptr.String("__HostArn__"),
+		ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1593,7 +1599,8 @@ func TestCheckResponseSnapshot_Error_ResourceUnavailableException(t *testing.T) 
 				Value: ptr.String("__Value__"),
 			},
 		},
-		HostArn: ptr.String("__HostArn__"),
+		HostArn:          ptr.String("__HostArn__"),
+		ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1786,8 +1793,21 @@ func TestCheckResponseSnapshot_Error_UnsupportedProviderTypeException(t *testing
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeleteRepositoryLink(context.Background(), &DeleteRepositoryLinkInput{
-		RepositoryLinkId: ptr.String("__RepositoryLinkId__"),
+	_, opErr := svc.CreateConnection(context.Background(), &CreateConnectionInput{
+		ProviderType:   types.ProviderType("Bitbucket"),
+		ConnectionName: ptr.String("__ConnectionName__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		HostArn:          ptr.String("__HostArn__"),
+		ProviderEndpoint: ptr.String("__ProviderEndpoint__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

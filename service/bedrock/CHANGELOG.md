@@ -1,3 +1,7 @@
+# v1.75.0 (2026-11-20)
+
+* **Feature**: Amazon Bedrock adds APIs to manage projects, discover and apply to Trusted Access Programs, manage enrollments, and configure data retention storage for accounts, organizations, and projects. Model and inference profile discovery now supports project context.
+
 # v1.74.7 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

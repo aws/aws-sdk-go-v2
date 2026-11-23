@@ -37,6 +37,11 @@ type CreateAgentSpaceInput struct {
 	// This member is required.
 	Name *string
 
+	// Specifies whether the AgentSpace's Amazon Web Services source configuration
+	// targets an individual Amazon Web Services account or an Amazon Web Services
+	// Organization.
+	AwsSourceMode types.AwsSourceMode
+
 	// Client-provided token to ensure request idempotency. When the same token is
 	// provided in subsequent calls, the same response is returned within a 8-hour
 	// window.
@@ -70,6 +75,9 @@ func (v *CreateAgentSpaceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAgentSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsSourceMode != "" {
+		s.WriteString(schemas.CreateAgentSpaceInput_awsSourceMode, string(v.AwsSourceMode))
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAgentSpaceInput_clientToken, *v.ClientToken)
 	}

@@ -1354,6 +1354,44 @@ func (v *AuthorizingClaimMatchValueType) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
+// The configuration for an AWS Billing payment connector. Payments made through
+// an AWS Billing payment connector are charged to the AWS account that owns the
+// payment manager, and appear on that account's AWS bill as AWS Marketplace
+// charges.
+type AwsBillingConnectorConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the AWS Marketplace service-linked role in
+	// the account that owns the payment manager. The service sets this value when it
+	// creates the connector.
+	//
+	// This member is required.
+	IamRoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AwsBillingConnectorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsBillingConnectorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsBillingConnectorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.AwsBillingConnectorConfiguration_iamRoleArn, *v.IamRoleArn)
+	}
+}
+func (v *AwsBillingConnectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsBillingConnectorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsBillingConnectorConfiguration_iamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.AwsBillingConnectorConfiguration_iamRoleArn, v.IamRoleArn)
+		}
+		return nil
+	})
+}
+
 // A rate limit definition within a batch put request. If you provide a rateLimitId
 // , the service uses it for upsert matching against existing rate limits.
 type BatchPutLimitEntry struct {
@@ -1920,6 +1958,10 @@ type CapacityProviderConfiguration struct {
 	// This member is required.
 	CapacityProviderArn *string
 
+	// The operating system configuration of the agents that Amazon Bedrock AgentCore
+	// Runtime runs on the capacity provider.
+	OperatingSystemConfiguration OperatingSystemConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -1933,6 +1975,9 @@ func (v *CapacityProviderConfiguration) SerializeMembers(s smithy.ShapeSerialize
 	if v.CapacityProviderArn != nil {
 		s.WriteString(schemas.CapacityProviderConfiguration_capacityProviderArn, *v.CapacityProviderArn)
 	}
+	if v.OperatingSystemConfiguration != nil {
+		serializeOperatingSystemConfiguration(s, schemas.CapacityProviderConfiguration_operatingSystemConfiguration, v.OperatingSystemConfiguration)
+	}
 }
 func (v *CapacityProviderConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CapacityProviderConfiguration, func(s *smithy.Schema) error {
@@ -1940,6 +1985,8 @@ func (v *CapacityProviderConfiguration) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.CapacityProviderConfiguration_capacityProviderArn:
 			v.CapacityProviderArn = new(string)
 			return d.ReadString(schemas.CapacityProviderConfiguration_capacityProviderArn, v.CapacityProviderArn)
+		case schemas.CapacityProviderConfiguration_operatingSystemConfiguration:
+			return deserializeOperatingSystemConfiguration(d, schemas.CapacityProviderConfiguration_operatingSystemConfiguration, &v.OperatingSystemConfiguration)
 		}
 		return nil
 	})
@@ -4076,6 +4123,50 @@ func (v *ContentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The CPU configuration for capacity provider instances, including nested
+// virtualization.
+type CpuOptions struct {
+
+	// Specifies whether your agents can use hardware virtualization on their
+	// instances. The following values are possible:
+	//
+	//   - ENABLED – Your agents can use hardware virtualization on their instances. To
+	//   use this value, choose the LINUX_X86_64 operating system and instance types
+	//   that support nested virtualization.
+	//
+	//   - DISABLED – Your agents can't use hardware virtualization on their instances.
+	//   This is the default.
+	NestedVirtualization NestedVirtualization
+
+	noSmithyDocumentSerde
+}
+
+func (v *CpuOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CpuOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CpuOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NestedVirtualization != "" {
+		s.WriteString(schemas.CpuOptions_nestedVirtualization, string(v.NestedVirtualization))
+	}
+}
+func (v *CpuOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CpuOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CpuOptions_nestedVirtualization:
+			var ev string
+			if err := d.ReadString(schemas.CpuOptions_nestedVirtualization, &ev); err != nil {
+				return err
+			}
+			v.NestedVirtualization = NestedVirtualization(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A credential provider for gateway authentication. This structure contains the
 // configuration for authenticating with the target endpoint.
 //
@@ -4217,15 +4308,36 @@ func (v *CredentialRotationConfigMemberCoinbaseCDP) Deserialize(d smithy.ShapeDe
 	return v.Value.Deserialize(d)
 }
 
-// The credential provider configuration for a payment connector. Specifies the
-// payment provider type and its associated credential provider.
+// The configuration for a payment connector. Specifies the payment provider type
+// and either its associated credential provider or, for an AWS Billing payment
+// connector, its billing configuration.
 //
 // The following types satisfy this interface:
 //
+//	CredentialsProviderConfigurationMemberAwsBilling
 //	CredentialsProviderConfigurationMemberCoinbaseCDP
 //	CredentialsProviderConfigurationMemberStripePrivy
 type CredentialsProviderConfiguration interface {
 	isCredentialsProviderConfiguration()
+}
+
+// The configuration for an AWS Billing payment connector. The service sets this
+// configuration when it creates the connector and returns it in responses. Don't
+// specify it when you create an AWS Billing payment connector.
+type CredentialsProviderConfigurationMemberAwsBilling struct {
+	Value AwsBillingConnectorConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*CredentialsProviderConfigurationMemberAwsBilling) isCredentialsProviderConfiguration() {}
+func (v *CredentialsProviderConfigurationMemberAwsBilling) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CredentialsProviderConfiguration_awsBilling)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CredentialsProviderConfigurationMemberAwsBilling) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The credential provider configuration for a Coinbase CDP payment connector.
@@ -7709,6 +7821,7 @@ func (v *FallbackTriggers) Deserialize(d smithy.ShapeDeserializer) error {
 //
 //	FilesystemConfigurationMemberCapacityProviderVolume
 //	FilesystemConfigurationMemberEfsAccessPoint
+//	FilesystemConfigurationMemberS3BucketMount
 //	FilesystemConfigurationMemberS3FilesAccessPoint
 //	FilesystemConfigurationMemberSessionStorage
 type FilesystemConfiguration interface {
@@ -7749,6 +7862,23 @@ func (v *FilesystemConfigurationMemberEfsAccessPoint) Serialize(s smithy.ShapeSe
 	s.CloseStruct()
 }
 func (v *FilesystemConfigurationMemberEfsAccessPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Mounts an Amazon S3 bucket as a file system in the AgentCore Runtime.
+type FilesystemConfigurationMemberS3BucketMount struct {
+	Value S3BucketMountConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*FilesystemConfigurationMemberS3BucketMount) isFilesystemConfiguration() {}
+func (v *FilesystemConfigurationMemberS3BucketMount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilesystemConfiguration_s3BucketMount)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FilesystemConfigurationMemberS3BucketMount) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -8096,6 +8226,24 @@ type GatewayInterceptorConfiguration struct {
 	// the input to the interceptor is constructed
 	InputConfiguration *InterceptorInputConfiguration
 
+	// Specifies how the interceptor processes streamed target responses. You can set
+	// this field only on an interceptor that includes the RESPONSE interception
+	// point. Valid values include:
+	//
+	//   - BUFFERED - The gateway collects the complete target response and then
+	//   invokes the interceptor once. This is the default.
+	//
+	//   - STREAM - The gateway sends a streamed target response to the interceptor in
+	//   batches of events and returns each processed batch to the client as soon as it's
+	//   ready. Non-streamed responses still use BUFFERED processing. If you specify
+	//   STREAM , you must also specify responseStreamingConfiguration , and the input
+	//   configuration can't exclude the response body.
+	ResponseInterceptionMode ResponseInterceptionMode
+
+	// Specifies the batching settings for a streamed response. Specify this field
+	// only when responseInterceptionMode is STREAM . You must specify it for STREAM .
+	ResponseStreamingConfiguration *ResponseStreamingConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -8117,6 +8265,14 @@ func (v *GatewayInterceptorConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.Interceptor != nil {
 		serializeInterceptorConfiguration(s, schemas.GatewayInterceptorConfiguration_interceptor, v.Interceptor)
 	}
+	if v.ResponseInterceptionMode != "" {
+		s.WriteString(schemas.GatewayInterceptorConfiguration_responseInterceptionMode, string(v.ResponseInterceptionMode))
+	}
+	if v.ResponseStreamingConfiguration != nil {
+		s.WriteStruct(schemas.GatewayInterceptorConfiguration_responseStreamingConfiguration)
+		v.ResponseStreamingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *GatewayInterceptorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GatewayInterceptorConfiguration, func(s *smithy.Schema) error {
@@ -8128,6 +8284,16 @@ func (v *GatewayInterceptorConfiguration) Deserialize(d smithy.ShapeDeserializer
 			return deserializeGatewayInterceptionPoints(d, schemas.GatewayInterceptorConfiguration_interceptionPoints, &v.InterceptionPoints)
 		case schemas.GatewayInterceptorConfiguration_interceptor:
 			return deserializeInterceptorConfiguration(d, schemas.GatewayInterceptorConfiguration_interceptor, &v.Interceptor)
+		case schemas.GatewayInterceptorConfiguration_responseInterceptionMode:
+			var ev string
+			if err := d.ReadString(schemas.GatewayInterceptorConfiguration_responseInterceptionMode, &ev); err != nil {
+				return err
+			}
+			v.ResponseInterceptionMode = ResponseInterceptionMode(ev)
+			return nil
+		case schemas.GatewayInterceptorConfiguration_responseStreamingConfiguration:
+			v.ResponseStreamingConfiguration = &ResponseStreamingConfiguration{}
+			return v.ResponseStreamingConfiguration.Deserialize(d)
 		}
 		return nil
 	})
@@ -13380,6 +13546,10 @@ type LaunchParameters struct {
 	// The Capacity Reservation targeting option for the instances.
 	CapacityReservationSpecification *CapacityReservationSpecification
 
+	// The central processing unit (CPU) options for the instances that the capacity
+	// provider launches.
+	CpuOptions *CpuOptions
+
 	// The block device mappings for instance store (ephemeral) volumes. You can
 	// specify up to five mappings.
 	EphemeralVolumes []EphemeralBlockDeviceMapping
@@ -13417,6 +13587,11 @@ func (v *LaunchParameters) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CapacityReservationSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.CpuOptions != nil {
+		s.WriteStruct(schemas.LaunchParameters_cpuOptions)
+		v.CpuOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.EphemeralVolumes != nil {
 		serializeEphemeralBlockDeviceMappingList(s, schemas.LaunchParameters_ephemeralVolumes, v.EphemeralVolumes)
 	}
@@ -13450,6 +13625,9 @@ func (v *LaunchParameters) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LaunchParameters_capacityReservationSpecification:
 			v.CapacityReservationSpecification = &CapacityReservationSpecification{}
 			return v.CapacityReservationSpecification.Deserialize(d)
+		case schemas.LaunchParameters_cpuOptions:
+			v.CpuOptions = &CpuOptions{}
+			return v.CpuOptions.Deserialize(d)
 		case schemas.LaunchParameters_ephemeralVolumes:
 			return deserializeEphemeralBlockDeviceMappingList(d, schemas.LaunchParameters_ephemeralVolumes, &v.EphemeralVolumes)
 		case schemas.LaunchParameters_instanceProfileArn:
@@ -13829,6 +14007,49 @@ func (v *LinkedinOauth2ProviderConfigOutput) Deserialize(d smithy.ShapeDeseriali
 			return d.ReadString(schemas.LinkedinOauth2ProviderConfigOutput_clientId, v.ClientId)
 		case schemas.LinkedinOauth2ProviderConfigOutput_oauthDiscovery:
 			return deserializeOauth2Discovery(d, schemas.LinkedinOauth2ProviderConfigOutput_oauthDiscovery, &v.OauthDiscovery)
+		}
+		return nil
+	})
+}
+
+// Contains the operating system configuration of agents that run on Linux
+// instances, such as the privilege mode.
+type LinuxOperatingSystemConfiguration struct {
+
+	// The privilege mode of the agents. If you omit this field, the agents run in
+	// STANDARD privilege mode. The following values are possible:
+	//
+	//   - STANDARD – The agent runs without elevated privileges. This is the default.
+	//
+	//   - PRIVILEGED – The agent runs with elevated privileges on its instance. Use
+	//   this mode for agents that build container images, run containers, or install
+	//   system packages. A session that runs a PRIVILEGED agent runs only that agent.
+	PrivilegeMode PrivilegeMode
+
+	noSmithyDocumentSerde
+}
+
+func (v *LinuxOperatingSystemConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LinuxOperatingSystemConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LinuxOperatingSystemConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrivilegeMode != "" {
+		s.WriteString(schemas.LinuxOperatingSystemConfiguration_privilegeMode, string(v.PrivilegeMode))
+	}
+}
+func (v *LinuxOperatingSystemConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinuxOperatingSystemConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinuxOperatingSystemConfiguration_privilegeMode:
+			var ev string
+			if err := d.ReadString(schemas.LinuxOperatingSystemConfiguration_privilegeMode, &ev); err != nil {
+				return err
+			}
+			v.PrivilegeMode = PrivilegeMode(ev)
+			return nil
 		}
 		return nil
 	})
@@ -17323,6 +17544,34 @@ func (v *OpenResponsesEvaluatorModelConfig) Deserialize(d smithy.ShapeDeserializ
 	})
 }
 
+// Contains the operating system configuration of the agents that AgentCore
+// Runtime runs on a capacity provider. Specify the member for the operating system
+// of the capacity provider.
+//
+// The following types satisfy this interface:
+//
+//	OperatingSystemConfigurationMemberLinux
+type OperatingSystemConfiguration interface {
+	isOperatingSystemConfiguration()
+}
+
+// The operating system configuration of agents that run on Linux instances.
+type OperatingSystemConfigurationMemberLinux struct {
+	Value LinuxOperatingSystemConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*OperatingSystemConfigurationMemberLinux) isOperatingSystemConfiguration() {}
+func (v *OperatingSystemConfigurationMemberLinux) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperatingSystemConfiguration_linux)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OperatingSystemConfigurationMemberLinux) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 //	The configuration that specifies where evaluation results should be written
 //
 // for monitoring and analysis.
@@ -20239,6 +20488,41 @@ func (v *ResourceLocationMemberS3) Deserialize(d smithy.ShapeDeserializer) error
 	return v.Value.Deserialize(d)
 }
 
+// Specifies the settings that the gateway uses to send a streamed target response
+// to the interceptor in batches.
+type ResponseStreamingConfiguration struct {
+
+	// Specifies the maximum number of response events that the gateway sends to the
+	// interceptor in one invocation. The interceptor's output for the first batch
+	// determines the status code and headers of the response. The gateway ignores the
+	// status code and headers that the interceptor returns for later batches.
+	MaxEventsPerInvocation *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ResponseStreamingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseStreamingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseStreamingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxEventsPerInvocation != nil {
+		s.WriteInt32(schemas.ResponseStreamingConfiguration_maxEventsPerInvocation, *v.MaxEventsPerInvocation)
+	}
+}
+func (v *ResponseStreamingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseStreamingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseStreamingConfiguration_maxEventsPerInvocation:
+			v.MaxEventsPerInvocation = new(int32)
+			return d.ReadInt32(schemas.ResponseStreamingConfiguration_maxEventsPerInvocation, v.MaxEventsPerInvocation)
+		}
+		return nil
+	})
+}
+
 // The configuration for the root volume of a capacity provider instance. Specify
 // the amount of free space to guarantee on the root volume. The device name and
 // delete-on-termination settings are fixed and cannot be changed.
@@ -20554,6 +20838,85 @@ func (v *RuntimeTargetConfiguration) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.RuntimeTargetConfiguration_schema:
 			v.Schema = &HttpApiSchemaConfiguration{}
 			return v.Schema.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Mounts an Amazon S3 bucket in the AgentCore Runtime with Mountpoint for Amazon
+// S3. Files under the mount path map to objects in the bucket.
+type S3BucketMountConfiguration struct {
+
+	// The name of the S3 bucket to mount. You can specify a general purpose bucket or
+	// a directory bucket.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The mount path for the S3 bucket inside the AgentCore Runtime. The path must be
+	// under /mnt with exactly one subdirectory level (for example, /mnt/data ).
+	//
+	// This member is required.
+	MountPath *string
+
+	// The key prefix to mount. Only objects under this prefix are visible at the
+	// mount path. To give each session its own prefix, include {runtimeSessionId}
+	// (for example, data/{runtimeSessionId}/ ). If you omit the prefix, the whole
+	// bucket is mounted.
+	Prefix *string
+
+	// The AWS account ID that must own the bucket. If you omit it, the bucket must be
+	// owned by the account that owns the AgentCore Runtime.
+	S3BucketOwner *string
+
+	// The AWS Region of the S3 bucket. If you omit it, the bucket must be in the same
+	// Region as the AgentCore Runtime.
+	S3BucketRegion *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3BucketMountConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3BucketMountConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3BucketMountConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.S3BucketMountConfiguration_bucket, *v.Bucket)
+	}
+	if v.MountPath != nil {
+		s.WriteString(schemas.S3BucketMountConfiguration_mountPath, *v.MountPath)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.S3BucketMountConfiguration_prefix, *v.Prefix)
+	}
+	if v.S3BucketOwner != nil {
+		s.WriteString(schemas.S3BucketMountConfiguration_s3BucketOwner, *v.S3BucketOwner)
+	}
+	if v.S3BucketRegion != nil {
+		s.WriteString(schemas.S3BucketMountConfiguration_s3BucketRegion, *v.S3BucketRegion)
+	}
+}
+func (v *S3BucketMountConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3BucketMountConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3BucketMountConfiguration_bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.S3BucketMountConfiguration_bucket, v.Bucket)
+		case schemas.S3BucketMountConfiguration_mountPath:
+			v.MountPath = new(string)
+			return d.ReadString(schemas.S3BucketMountConfiguration_mountPath, v.MountPath)
+		case schemas.S3BucketMountConfiguration_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.S3BucketMountConfiguration_prefix, v.Prefix)
+		case schemas.S3BucketMountConfiguration_s3BucketOwner:
+			v.S3BucketOwner = new(string)
+			return d.ReadString(schemas.S3BucketMountConfiguration_s3BucketOwner, v.S3BucketOwner)
+		case schemas.S3BucketMountConfiguration_s3BucketRegion:
+			v.S3BucketRegion = new(string)
+			return d.ReadString(schemas.S3BucketMountConfiguration_s3BucketRegion, v.S3BucketRegion)
 		}
 		return nil
 	})
@@ -25491,6 +25854,7 @@ func (*UnknownUnionMember) isModifyReflectionConfiguration()          {}
 func (*UnknownUnionMember) isOauth2Discovery()                        {}
 func (*UnknownUnionMember) isOauth2ProviderConfigInput()              {}
 func (*UnknownUnionMember) isOauth2ProviderConfigOutput()             {}
+func (*UnknownUnionMember) isOperatingSystemConfiguration()           {}
 func (*UnknownUnionMember) isPaymentProviderConfigurationInput()      {}
 func (*UnknownUnionMember) isPaymentProviderConfigurationOutput()     {}
 func (*UnknownUnionMember) isPolicyDefinition()                       {}
