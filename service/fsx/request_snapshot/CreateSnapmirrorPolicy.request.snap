@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.CreateSnapmirrorPolicy
+
+{"ClientRequestToken":"__ClientRequestToken__","FileSystemId":"__FileSystemId__","Name":"__Name__","NetworkCompressionEnabled":true,"RetentionRules":[{"Count":1,"CreationSchedule":"__CreationSchedule__","Label":"__Label__"},{"Count":1,"CreationSchedule":"__CreationSchedule__","Label":"__Label__"}],"SnapshotCopyMode":"COPY_ALL_SOURCE_SNAPSHOTS","StorageVirtualMachineId":"__StorageVirtualMachineId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"ThrottleInKbps":1,"TransferSchedule":"__TransferSchedule__"}

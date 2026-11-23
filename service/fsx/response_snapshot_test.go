@@ -381,6 +381,10 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 									TotalConstituents: ptr.Int32(1),
 								},
 								SizeInBytes: ptr.Int64(1),
+								CloneConfiguration: &types.CloneConfiguration{
+									ParentVolumeId: ptr.String("__ParentVolumeId__"),
+									SnapshotId:     ptr.String("__SnapshotId__"),
+								},
 							},
 							ResourceARN: ptr.String("__ResourceARN__"),
 							Tags: []types.Tag{
@@ -397,6 +401,10 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 							VolumeType: types.VolumeType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
@@ -481,8 +489,13 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -497,6 +510,13 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -566,6 +586,10 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 									TotalConstituents: ptr.Int32(1),
 								},
 								SizeInBytes: ptr.Int64(1),
+								CloneConfiguration: &types.CloneConfiguration{
+									ParentVolumeId: ptr.String("__ParentVolumeId__"),
+									SnapshotId:     ptr.String("__SnapshotId__"),
+								},
 							},
 							ResourceARN: ptr.String("__ResourceARN__"),
 							Tags: []types.Tag{
@@ -582,6 +606,10 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 							VolumeType: types.VolumeType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
@@ -666,8 +694,13 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -682,6 +715,13 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -827,6 +867,10 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 						TotalConstituents: ptr.Int32(1),
 					},
 					SizeInBytes: ptr.Int64(1),
+					CloneConfiguration: &types.CloneConfiguration{
+						ParentVolumeId: ptr.String("__ParentVolumeId__"),
+						SnapshotId:     ptr.String("__SnapshotId__"),
+					},
 				},
 				ResourceARN: ptr.String("__ResourceARN__"),
 				Tags: []types.Tag{
@@ -843,6 +887,10 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 				VolumeType: types.VolumeType("ONTAP"),
 				LifecycleTransitionReason: &types.LifecycleTransitionReason{
 					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
 				},
 				AdministrativeActions: []types.AdministrativeAction{
 					{
@@ -1066,8 +1114,13 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -1082,6 +1135,13 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -1309,8 +1369,13 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -1325,6 +1390,13 @@ func TestCheckResponseSnapshot_CopyBackup(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -1712,6 +1784,10 @@ func TestCheckResponseSnapshot_CopySnapshotAndUpdateVolume(t *testing.T) {
 							TotalConstituents: ptr.Int32(1),
 						},
 						SizeInBytes: ptr.Int64(1),
+						CloneConfiguration: &types.CloneConfiguration{
+							ParentVolumeId: ptr.String("__ParentVolumeId__"),
+							SnapshotId:     ptr.String("__SnapshotId__"),
+						},
 					},
 					ResourceARN: ptr.String("__ResourceARN__"),
 					Tags: []types.Tag{
@@ -1728,6 +1804,10 @@ func TestCheckResponseSnapshot_CopySnapshotAndUpdateVolume(t *testing.T) {
 					VolumeType: types.VolumeType("ONTAP"),
 					LifecycleTransitionReason: &types.LifecycleTransitionReason{
 						Message: ptr.String("__Message__"),
+						OntapError: &types.OntapError{
+							Message: ptr.String("__Message__"),
+							Code:    ptr.String("__Code__"),
+						},
 					},
 					AdministrativeActions: []types.AdministrativeAction{
 						{},
@@ -1812,8 +1892,13 @@ func TestCheckResponseSnapshot_CopySnapshotAndUpdateVolume(t *testing.T) {
 					VolumeId:     ptr.String("__VolumeId__"),
 					CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					Lifecycle:    types.SnapshotLifecycle("PENDING"),
+					SnapshotType: types.SnapshotType("ONTAP"),
 					LifecycleTransitionReason: &types.LifecycleTransitionReason{
 						Message: ptr.String("__Message__"),
+						OntapError: &types.OntapError{
+							Message: ptr.String("__Message__"),
+							Code:    ptr.String("__Code__"),
+						},
 					},
 					Tags: []types.Tag{
 						{
@@ -1828,6 +1913,13 @@ func TestCheckResponseSnapshot_CopySnapshotAndUpdateVolume(t *testing.T) {
 					AdministrativeActions: []types.AdministrativeAction{
 						{},
 						{},
+					},
+					OntapConfiguration: &types.OntapSnapshotConfiguration{
+						SizeInMegabytes:    ptr.Int64(1),
+						SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+						ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						UUID:               ptr.String("__UUID__"),
 					},
 				},
 				TotalTransferBytes:     ptr.Int64(1),
@@ -2101,6 +2193,10 @@ func TestCheckResponseSnapshot_CopySnapshotAndUpdateVolume(t *testing.T) {
 							TotalConstituents: ptr.Int32(1),
 						},
 						SizeInBytes: ptr.Int64(1),
+						CloneConfiguration: &types.CloneConfiguration{
+							ParentVolumeId: ptr.String("__ParentVolumeId__"),
+							SnapshotId:     ptr.String("__SnapshotId__"),
+						},
 					},
 					ResourceARN: ptr.String("__ResourceARN__"),
 					Tags: []types.Tag{
@@ -2117,6 +2213,10 @@ func TestCheckResponseSnapshot_CopySnapshotAndUpdateVolume(t *testing.T) {
 					VolumeType: types.VolumeType("ONTAP"),
 					LifecycleTransitionReason: &types.LifecycleTransitionReason{
 						Message: ptr.String("__Message__"),
+						OntapError: &types.OntapError{
+							Message: ptr.String("__Message__"),
+							Code:    ptr.String("__Code__"),
+						},
 					},
 					AdministrativeActions: []types.AdministrativeAction{
 						{},
@@ -2201,8 +2301,13 @@ func TestCheckResponseSnapshot_CopySnapshotAndUpdateVolume(t *testing.T) {
 					VolumeId:     ptr.String("__VolumeId__"),
 					CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					Lifecycle:    types.SnapshotLifecycle("PENDING"),
+					SnapshotType: types.SnapshotType("ONTAP"),
 					LifecycleTransitionReason: &types.LifecycleTransitionReason{
 						Message: ptr.String("__Message__"),
+						OntapError: &types.OntapError{
+							Message: ptr.String("__Message__"),
+							Code:    ptr.String("__Code__"),
+						},
 					},
 					Tags: []types.Tag{
 						{
@@ -2217,6 +2322,13 @@ func TestCheckResponseSnapshot_CopySnapshotAndUpdateVolume(t *testing.T) {
 					AdministrativeActions: []types.AdministrativeAction{
 						{},
 						{},
+					},
+					OntapConfiguration: &types.OntapSnapshotConfiguration{
+						SizeInMegabytes:    ptr.Int64(1),
+						SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+						ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						UUID:               ptr.String("__UUID__"),
 					},
 				},
 				TotalTransferBytes:     ptr.Int64(1),
@@ -2257,6 +2369,10 @@ func TestCheckResponseSnapshot_CreateAndAttachS3AccessPoint(t *testing.T) {
 			Lifecycle: types.S3AccessPointAttachmentLifecycle("AVAILABLE"),
 			LifecycleTransitionReason: &types.LifecycleTransitionReason{
 				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
 			},
 			CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Name:         ptr.String("__Name__"),
@@ -2562,6 +2678,10 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 									TotalConstituents: ptr.Int32(1),
 								},
 								SizeInBytes: ptr.Int64(1),
+								CloneConfiguration: &types.CloneConfiguration{
+									ParentVolumeId: ptr.String("__ParentVolumeId__"),
+									SnapshotId:     ptr.String("__SnapshotId__"),
+								},
 							},
 							ResourceARN: ptr.String("__ResourceARN__"),
 							Tags: []types.Tag{
@@ -2578,6 +2698,10 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 							VolumeType: types.VolumeType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
@@ -2662,8 +2786,13 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -2678,6 +2807,13 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -2747,6 +2883,10 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 									TotalConstituents: ptr.Int32(1),
 								},
 								SizeInBytes: ptr.Int64(1),
+								CloneConfiguration: &types.CloneConfiguration{
+									ParentVolumeId: ptr.String("__ParentVolumeId__"),
+									SnapshotId:     ptr.String("__SnapshotId__"),
+								},
 							},
 							ResourceARN: ptr.String("__ResourceARN__"),
 							Tags: []types.Tag{
@@ -2763,6 +2903,10 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 							VolumeType: types.VolumeType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
@@ -2847,8 +2991,13 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -2863,6 +3012,13 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -3008,6 +3164,10 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 						TotalConstituents: ptr.Int32(1),
 					},
 					SizeInBytes: ptr.Int64(1),
+					CloneConfiguration: &types.CloneConfiguration{
+						ParentVolumeId: ptr.String("__ParentVolumeId__"),
+						SnapshotId:     ptr.String("__SnapshotId__"),
+					},
 				},
 				ResourceARN: ptr.String("__ResourceARN__"),
 				Tags: []types.Tag{
@@ -3024,6 +3184,10 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 				VolumeType: types.VolumeType("ONTAP"),
 				LifecycleTransitionReason: &types.LifecycleTransitionReason{
 					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
 				},
 				AdministrativeActions: []types.AdministrativeAction{
 					{
@@ -3247,8 +3411,13 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -3263,6 +3432,13 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -3490,8 +3666,13 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -3506,6 +3687,13 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -3616,6 +3804,90 @@ func TestCheckResponseSnapshot_CreateBackup(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateBackup.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateClusterPeer(t *testing.T) {
+	want := &CreateClusterPeerOutput{
+		ClusterPeer: &types.ClusterPeer{
+			ResourceARN:   ptr.String("__ResourceARN__"),
+			ClusterPeerId: ptr.String("__ClusterPeerId__"),
+			FileSystemId:  ptr.String("__FileSystemId__"),
+			Lifecycle:     types.ClusterPeerLifecycle("CREATING"),
+			LifecycleTransitionReason: &types.LifecycleTransitionReason{
+				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			PeerAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			PeerClusterName:     ptr.String("__PeerClusterName__"),
+			PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+			AllowedSvmMode:      types.AllowedSvmMode("ALL"),
+			AllowedSvmIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Status: ptr.String("__Status__"),
+			UUID:   ptr.String("__UUID__"),
+			AuthenticationStatus: &types.ClusterPeerAuthenticationStatus{
+				State: ptr.String("__State__"),
+				InUse: ptr.String("__InUse__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateClusterPeer.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateClusterPeer(context.Background(), &CreateClusterPeerInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		PeerAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+		PeerClusterName:     ptr.String("__PeerClusterName__"),
+		AllowedSvmMode:      types.AllowedSvmMode("ALL"),
+		AllowedSvmIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateClusterPeer.response", err)
 	}
 }
 
@@ -4155,6 +4427,10 @@ func TestCheckResponseSnapshot_CreateFileSystem(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -4171,6 +4447,10 @@ func TestCheckResponseSnapshot_CreateFileSystem(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -4255,8 +4535,13 @@ func TestCheckResponseSnapshot_CreateFileSystem(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -4271,6 +4556,13 @@ func TestCheckResponseSnapshot_CreateFileSystem(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -4340,6 +4632,10 @@ func TestCheckResponseSnapshot_CreateFileSystem(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -4356,6 +4652,10 @@ func TestCheckResponseSnapshot_CreateFileSystem(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -4440,8 +4740,13 @@ func TestCheckResponseSnapshot_CreateFileSystem(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -4456,6 +4761,13 @@ func TestCheckResponseSnapshot_CreateFileSystem(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -4949,6 +5261,10 @@ func TestCheckResponseSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -4965,6 +5281,10 @@ func TestCheckResponseSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -5049,8 +5369,13 @@ func TestCheckResponseSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -5065,6 +5390,13 @@ func TestCheckResponseSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -5134,6 +5466,10 @@ func TestCheckResponseSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -5150,6 +5486,10 @@ func TestCheckResponseSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -5234,8 +5574,13 @@ func TestCheckResponseSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -5250,6 +5595,13 @@ func TestCheckResponseSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -5530,6 +5882,193 @@ func TestCheckResponseSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateSnapmirrorPolicy(t *testing.T) {
+	want := &CreateSnapmirrorPolicyOutput{
+		SnapmirrorPolicy: &types.SnapmirrorPolicy{
+			ResourceARN:             ptr.String("__ResourceARN__"),
+			SnapmirrorPolicyId:      ptr.String("__SnapmirrorPolicyId__"),
+			FileSystemId:            ptr.String("__FileSystemId__"),
+			StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+			Name:                    ptr.String("__Name__"),
+			SnapshotCopyMode:        types.SnapmirrorPolicySnapshotCopyMode("COPY_ALL_SOURCE_SNAPSHOTS"),
+			RetentionRules: []types.SnapmirrorPolicyRetentionRule{
+				{
+					Label:            ptr.String("__Label__"),
+					Count:            ptr.Int32(1),
+					CreationSchedule: ptr.String("__CreationSchedule__"),
+				},
+				{
+					Label:            ptr.String("__Label__"),
+					Count:            ptr.Int32(1),
+					CreationSchedule: ptr.String("__CreationSchedule__"),
+				},
+			},
+			TransferSchedule:          ptr.String("__TransferSchedule__"),
+			NetworkCompressionEnabled: ptr.Bool(true),
+			ThrottleInKbps:            ptr.Int64(1),
+			Scope:                     types.SnapmirrorPolicyScope("FILESYSTEM"),
+			Lifecycle:                 types.SnapmirrorPolicyLifecycle("CREATING"),
+			UUID:                      ptr.String("__UUID__"),
+			LifecycleTransitionReason: &types.LifecycleTransitionReason{
+				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateSnapmirrorPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateSnapmirrorPolicy(context.Background(), &CreateSnapmirrorPolicyInput{
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		FileSystemId:            ptr.String("__FileSystemId__"),
+		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+		Name:                    ptr.String("__Name__"),
+		SnapshotCopyMode:        types.SnapmirrorPolicySnapshotCopyMode("COPY_ALL_SOURCE_SNAPSHOTS"),
+		RetentionRules: []types.SnapmirrorPolicyRetentionRule{
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
+			},
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
+			},
+		},
+		TransferSchedule:          ptr.String("__TransferSchedule__"),
+		NetworkCompressionEnabled: ptr.Bool(true),
+		ThrottleInKbps:            ptr.Int64(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateSnapmirrorPolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateSnapmirrorRelationship(t *testing.T) {
+	want := &CreateSnapmirrorRelationshipOutput{
+		SnapmirrorRelationship: &types.SnapmirrorRelationship{
+			ResourceARN:              ptr.String("__ResourceARN__"),
+			SnapmirrorRelationshipId: ptr.String("__SnapmirrorRelationshipId__"),
+			FileSystemId:             ptr.String("__FileSystemId__"),
+			Lifecycle:                types.SnapmirrorRelationshipLifecycle("CREATING"),
+			LifecycleTransitionReason: &types.LifecycleTransitionReason{
+				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Source: &types.SnapmirrorSource{
+				Path: ptr.String("__Path__"),
+			},
+			Destination: &types.SnapmirrorDestination{
+				Path:     ptr.String("__Path__"),
+				VolumeId: ptr.String("__VolumeId__"),
+			},
+			SnapmirrorPolicy: &types.SnapmirrorRelationshipPolicy{
+				PolicyId:   ptr.String("__PolicyId__"),
+				PolicyName: ptr.String("__PolicyName__"),
+			},
+			TransferSchedule: ptr.String("__TransferSchedule__"),
+			ThrottleInKbps:   ptr.Int64(1),
+			State:            types.SnapmirrorRelationshipState("UNINITIALIZED"),
+			Healthy:          ptr.Bool(true),
+			UnhealthyReason:  ptr.String("__UnhealthyReason__"),
+			LagTimeInMinutes: ptr.Int64(1),
+			ExportedSnapshot: &types.SnapmirrorExportedSnapshot{
+				SnapshotId:   ptr.String("__SnapshotId__"),
+				SnapshotName: ptr.String("__SnapshotName__"),
+			},
+			TransferState: &types.SnapmirrorTransferState{
+				State:            ptr.String("__State__"),
+				Type:             ptr.String("__Type__"),
+				BytesTransferred: ptr.Int64(1),
+				Duration:         ptr.String("__Duration__"),
+				EndTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			UUID: ptr.String("__UUID__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateSnapmirrorRelationship.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateSnapmirrorRelationship(context.Background(), &CreateSnapmirrorRelationshipInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Source: &types.CreateSnapmirrorSource{
+			Path: ptr.String("__Path__"),
+		},
+		Destination: &types.CreateSnapmirrorDestination{
+			VolumeId: ptr.String("__VolumeId__"),
+		},
+		PolicyId:         ptr.String("__PolicyId__"),
+		TransferSchedule: ptr.String("__TransferSchedule__"),
+		ThrottleInKbps:   ptr.Int64(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateSnapmirrorRelationship.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
 	want := &CreateSnapshotOutput{
 		Snapshot: &types.Snapshot{
@@ -5539,8 +6078,13 @@ func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
 			VolumeId:     ptr.String("__VolumeId__"),
 			CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Lifecycle:    types.SnapshotLifecycle("PENDING"),
+			SnapshotType: types.SnapshotType("ONTAP"),
 			LifecycleTransitionReason: &types.LifecycleTransitionReason{
 				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
 			},
 			Tags: []types.Tag{
 				{
@@ -5820,6 +6364,10 @@ func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -5836,6 +6384,10 @@ func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -6185,6 +6737,10 @@ func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -6201,6 +6757,10 @@ func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -6284,6 +6844,13 @@ func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
 					Message:                ptr.String("__Message__"),
 				},
 			},
+			OntapConfiguration: &types.OntapSnapshotConfiguration{
+				SizeInMegabytes:    ptr.Int64(1),
+				SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+				ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UUID:               ptr.String("__UUID__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateSnapshot.response")
@@ -6308,12 +6875,125 @@ func TestCheckResponseSnapshot_CreateSnapshot(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		OntapConfiguration: &types.CreateOntapSnapshotConfiguration{
+			SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+			ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateSnapshot.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateSnapshotPolicy(t *testing.T) {
+	want := &CreateSnapshotPolicyOutput{
+		SnapshotPolicy: &types.SnapshotPolicy{
+			ResourceARN:             ptr.String("__ResourceARN__"),
+			SnapshotPolicyId:        ptr.String("__SnapshotPolicyId__"),
+			FileSystemId:            ptr.String("__FileSystemId__"),
+			StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+			Name:                    ptr.String("__Name__"),
+			Enabled:                 ptr.Bool(true),
+			Schedules: []types.SnapshotPolicySchedule{
+				{
+					Name:            ptr.String("__Name__"),
+					Count:           ptr.Int32(1),
+					Prefix:          ptr.String("__Prefix__"),
+					SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+					RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+						Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+				},
+				{
+					Name:            ptr.String("__Name__"),
+					Count:           ptr.Int32(1),
+					Prefix:          ptr.String("__Prefix__"),
+					SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+					RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+						Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+				},
+			},
+			Scope:     types.SnapshotPolicyScope("FILESYSTEM"),
+			Lifecycle: types.SnapshotPolicyLifecycle("CREATING"),
+			UUID:      ptr.String("__UUID__"),
+			LifecycleTransitionReason: &types.LifecycleTransitionReason{
+				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateSnapshotPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateSnapshotPolicy(context.Background(), &CreateSnapshotPolicyInput{
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		FileSystemId:            ptr.String("__FileSystemId__"),
+		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+		Name:                    ptr.String("__Name__"),
+		Enabled:                 ptr.Bool(true),
+		Schedules: []types.SnapshotPolicySchedule{
+			{
+				Name:            ptr.String("__Name__"),
+				Count:           ptr.Int32(1),
+				Prefix:          ptr.String("__Prefix__"),
+				SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+				RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+					Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+					Value: ptr.Int32(1),
+				},
+			},
+			{
+				Name:            ptr.String("__Name__"),
+				Count:           ptr.Int32(1),
+				Prefix:          ptr.String("__Prefix__"),
+				SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+				RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+					Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+					Value: ptr.Int32(1),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateSnapshotPolicy.response", err)
 	}
 }
 
@@ -6400,6 +7080,10 @@ func TestCheckResponseSnapshot_CreateStorageVirtualMachine(t *testing.T) {
 			},
 			LifecycleTransitionReason: &types.LifecycleTransitionReason{
 				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
 			},
 			RootVolumeSecurityStyle: types.StorageVirtualMachineRootVolumeSecurityStyle("UNIX"),
 		},
@@ -6449,6 +7133,79 @@ func TestCheckResponseSnapshot_CreateStorageVirtualMachine(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateStorageVirtualMachine.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateStorageVirtualMachinePeer(t *testing.T) {
+	want := &CreateStorageVirtualMachinePeerOutput{
+		StorageVirtualMachinePeer: &types.StorageVirtualMachinePeer{
+			ResourceARN:                 ptr.String("__ResourceARN__"),
+			StorageVirtualMachinePeerId: ptr.String("__StorageVirtualMachinePeerId__"),
+			StorageVirtualMachineId:     ptr.String("__StorageVirtualMachineId__"),
+			FileSystemId:                ptr.String("__FileSystemId__"),
+			Lifecycle:                   types.StorageVirtualMachinePeerLifecycle("CREATING"),
+			LifecycleTransitionReason: &types.LifecycleTransitionReason{
+				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			PeerSvmName:     ptr.String("__PeerSvmName__"),
+			PeerSvmAlias:    ptr.String("__PeerSvmAlias__"),
+			PeerClusterName: ptr.String("__PeerClusterName__"),
+			Applications: []types.StorageVirtualMachinePeerApplication{
+				types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+				types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+			},
+			State: types.StorageVirtualMachinePeerState("PEERED"),
+			UUID:  ptr.String("__UUID__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateStorageVirtualMachinePeer.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateStorageVirtualMachinePeer(context.Background(), &CreateStorageVirtualMachinePeerInput{
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+		PeerSvmName:             ptr.String("__PeerSvmName__"),
+		PeerClusterName:         ptr.String("__PeerClusterName__"),
+		Applications: []types.StorageVirtualMachinePeerApplication{
+			types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+			types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+		},
+		PeerSvmAlias: ptr.String("__PeerSvmAlias__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateStorageVirtualMachinePeer.response", err)
 	}
 }
 
@@ -6508,6 +7265,10 @@ func TestCheckResponseSnapshot_CreateVolume(t *testing.T) {
 					TotalConstituents: ptr.Int32(1),
 				},
 				SizeInBytes: ptr.Int64(1),
+				CloneConfiguration: &types.CloneConfiguration{
+					ParentVolumeId: ptr.String("__ParentVolumeId__"),
+					SnapshotId:     ptr.String("__SnapshotId__"),
+				},
 			},
 			ResourceARN: ptr.String("__ResourceARN__"),
 			Tags: []types.Tag{
@@ -6524,6 +7285,10 @@ func TestCheckResponseSnapshot_CreateVolume(t *testing.T) {
 			VolumeType: types.VolumeType("ONTAP"),
 			LifecycleTransitionReason: &types.LifecycleTransitionReason{
 				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
 			},
 			AdministrativeActions: []types.AdministrativeAction{
 				{
@@ -6747,8 +7512,13 @@ func TestCheckResponseSnapshot_CreateVolume(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -6763,6 +7533,13 @@ func TestCheckResponseSnapshot_CreateVolume(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -6990,8 +7767,13 @@ func TestCheckResponseSnapshot_CreateVolume(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -7006,6 +7788,13 @@ func TestCheckResponseSnapshot_CreateVolume(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -7144,6 +7933,10 @@ func TestCheckResponseSnapshot_CreateVolume(t *testing.T) {
 				ConstituentsPerAggregate: ptr.Int32(1),
 			},
 			SizeInBytes: ptr.Int64(1),
+			CloneConfiguration: &types.CreateCloneConfiguration{
+				ParentVolumeId: ptr.String("__ParentVolumeId__"),
+				SnapshotId:     ptr.String("__SnapshotId__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -7283,6 +8076,10 @@ func TestCheckResponseSnapshot_CreateVolumeFromBackup(t *testing.T) {
 					TotalConstituents: ptr.Int32(1),
 				},
 				SizeInBytes: ptr.Int64(1),
+				CloneConfiguration: &types.CloneConfiguration{
+					ParentVolumeId: ptr.String("__ParentVolumeId__"),
+					SnapshotId:     ptr.String("__SnapshotId__"),
+				},
 			},
 			ResourceARN: ptr.String("__ResourceARN__"),
 			Tags: []types.Tag{
@@ -7299,6 +8096,10 @@ func TestCheckResponseSnapshot_CreateVolumeFromBackup(t *testing.T) {
 			VolumeType: types.VolumeType("ONTAP"),
 			LifecycleTransitionReason: &types.LifecycleTransitionReason{
 				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
 			},
 			AdministrativeActions: []types.AdministrativeAction{
 				{
@@ -7522,8 +8323,13 @@ func TestCheckResponseSnapshot_CreateVolumeFromBackup(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -7538,6 +8344,13 @@ func TestCheckResponseSnapshot_CreateVolumeFromBackup(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -7765,8 +8578,13 @@ func TestCheckResponseSnapshot_CreateVolumeFromBackup(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -7781,6 +8599,13 @@ func TestCheckResponseSnapshot_CreateVolumeFromBackup(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -7919,6 +8744,10 @@ func TestCheckResponseSnapshot_CreateVolumeFromBackup(t *testing.T) {
 				ConstituentsPerAggregate: ptr.Int32(1),
 			},
 			SizeInBytes: ptr.Int64(1),
+			CloneConfiguration: &types.CreateCloneConfiguration{
+				ParentVolumeId: ptr.String("__ParentVolumeId__"),
+				SnapshotId:     ptr.String("__SnapshotId__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -7961,6 +8790,31 @@ func TestCheckResponseSnapshot_DeleteBackup(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteBackup.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteClusterPeer(t *testing.T) {
+	want := &DeleteClusterPeerOutput{
+		ClusterPeerId: ptr.String("__ClusterPeerId__"),
+		Lifecycle:     types.ClusterPeerLifecycle("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteClusterPeer.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteClusterPeer(context.Background(), &DeleteClusterPeerInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ClusterPeerId:      ptr.String("__ClusterPeerId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteClusterPeer.response", err)
 	}
 }
 
@@ -8123,6 +8977,56 @@ func TestCheckResponseSnapshot_DeleteFileSystem(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteSnapmirrorPolicy(t *testing.T) {
+	want := &DeleteSnapmirrorPolicyOutput{
+		SnapmirrorPolicyId: ptr.String("__SnapmirrorPolicyId__"),
+		Lifecycle:          types.SnapmirrorPolicyLifecycle("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteSnapmirrorPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteSnapmirrorPolicy(context.Background(), &DeleteSnapmirrorPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapmirrorPolicyId: ptr.String("__SnapmirrorPolicyId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteSnapmirrorPolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteSnapmirrorRelationship(t *testing.T) {
+	want := &DeleteSnapmirrorRelationshipOutput{
+		SnapmirrorRelationshipId: ptr.String("__SnapmirrorRelationshipId__"),
+		Lifecycle:                types.SnapmirrorRelationshipLifecycle("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteSnapmirrorRelationship.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteSnapmirrorRelationship(context.Background(), &DeleteSnapmirrorRelationshipInput{
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		SnapmirrorRelationshipId: ptr.String("__SnapmirrorRelationshipId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteSnapmirrorRelationship.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteSnapshot(t *testing.T) {
 	want := &DeleteSnapshotOutput{
 		SnapshotId: ptr.String("__SnapshotId__"),
@@ -8148,6 +9052,31 @@ func TestCheckResponseSnapshot_DeleteSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteSnapshotPolicy(t *testing.T) {
+	want := &DeleteSnapshotPolicyOutput{
+		SnapshotPolicyId: ptr.String("__SnapshotPolicyId__"),
+		Lifecycle:        types.SnapshotPolicyLifecycle("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteSnapshotPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteSnapshotPolicy(context.Background(), &DeleteSnapshotPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapshotPolicyId:   ptr.String("__SnapshotPolicyId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteSnapshotPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteStorageVirtualMachine(t *testing.T) {
 	want := &DeleteStorageVirtualMachineOutput{
 		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
@@ -8170,6 +9099,31 @@ func TestCheckResponseSnapshot_DeleteStorageVirtualMachine(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteStorageVirtualMachine.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteStorageVirtualMachinePeer(t *testing.T) {
+	want := &DeleteStorageVirtualMachinePeerOutput{
+		StorageVirtualMachinePeerId: ptr.String("__StorageVirtualMachinePeerId__"),
+		Lifecycle:                   types.StorageVirtualMachinePeerLifecycle("CREATING"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteStorageVirtualMachinePeer.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteStorageVirtualMachinePeer(context.Background(), &DeleteStorageVirtualMachinePeerInput{
+		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
+		StorageVirtualMachinePeerId: ptr.String("__StorageVirtualMachinePeerId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteStorageVirtualMachinePeer.response", err)
 	}
 }
 
@@ -8445,6 +9399,10 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 										TotalConstituents: ptr.Int32(1),
 									},
 									SizeInBytes: ptr.Int64(1),
+									CloneConfiguration: &types.CloneConfiguration{
+										ParentVolumeId: ptr.String("__ParentVolumeId__"),
+										SnapshotId:     ptr.String("__SnapshotId__"),
+									},
 								},
 								ResourceARN: ptr.String("__ResourceARN__"),
 								Tags: []types.Tag{
@@ -8461,6 +9419,10 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								VolumeType: types.VolumeType("ONTAP"),
 								LifecycleTransitionReason: &types.LifecycleTransitionReason{
 									Message: ptr.String("__Message__"),
+									OntapError: &types.OntapError{
+										Message: ptr.String("__Message__"),
+										Code:    ptr.String("__Code__"),
+									},
 								},
 								AdministrativeActions: []types.AdministrativeAction{
 									{},
@@ -8545,8 +9507,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								VolumeId:     ptr.String("__VolumeId__"),
 								CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 								Lifecycle:    types.SnapshotLifecycle("PENDING"),
+								SnapshotType: types.SnapshotType("ONTAP"),
 								LifecycleTransitionReason: &types.LifecycleTransitionReason{
 									Message: ptr.String("__Message__"),
+									OntapError: &types.OntapError{
+										Message: ptr.String("__Message__"),
+										Code:    ptr.String("__Code__"),
+									},
 								},
 								Tags: []types.Tag{
 									{
@@ -8561,6 +9528,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								AdministrativeActions: []types.AdministrativeAction{
 									{},
 									{},
+								},
+								OntapConfiguration: &types.OntapSnapshotConfiguration{
+									SizeInMegabytes:    ptr.Int64(1),
+									SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+									ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									UUID:               ptr.String("__UUID__"),
 								},
 							},
 							TotalTransferBytes:     ptr.Int64(1),
@@ -8630,6 +9604,10 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 										TotalConstituents: ptr.Int32(1),
 									},
 									SizeInBytes: ptr.Int64(1),
+									CloneConfiguration: &types.CloneConfiguration{
+										ParentVolumeId: ptr.String("__ParentVolumeId__"),
+										SnapshotId:     ptr.String("__SnapshotId__"),
+									},
 								},
 								ResourceARN: ptr.String("__ResourceARN__"),
 								Tags: []types.Tag{
@@ -8646,6 +9624,10 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								VolumeType: types.VolumeType("ONTAP"),
 								LifecycleTransitionReason: &types.LifecycleTransitionReason{
 									Message: ptr.String("__Message__"),
+									OntapError: &types.OntapError{
+										Message: ptr.String("__Message__"),
+										Code:    ptr.String("__Code__"),
+									},
 								},
 								AdministrativeActions: []types.AdministrativeAction{
 									{},
@@ -8730,8 +9712,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								VolumeId:     ptr.String("__VolumeId__"),
 								CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 								Lifecycle:    types.SnapshotLifecycle("PENDING"),
+								SnapshotType: types.SnapshotType("ONTAP"),
 								LifecycleTransitionReason: &types.LifecycleTransitionReason{
 									Message: ptr.String("__Message__"),
+									OntapError: &types.OntapError{
+										Message: ptr.String("__Message__"),
+										Code:    ptr.String("__Code__"),
+									},
 								},
 								Tags: []types.Tag{
 									{
@@ -8746,6 +9733,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								AdministrativeActions: []types.AdministrativeAction{
 									{},
 									{},
+								},
+								OntapConfiguration: &types.OntapSnapshotConfiguration{
+									SizeInMegabytes:    ptr.Int64(1),
+									SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+									ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									UUID:               ptr.String("__UUID__"),
 								},
 							},
 							TotalTransferBytes:     ptr.Int64(1),
@@ -8891,6 +9885,10 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 							TotalConstituents: ptr.Int32(1),
 						},
 						SizeInBytes: ptr.Int64(1),
+						CloneConfiguration: &types.CloneConfiguration{
+							ParentVolumeId: ptr.String("__ParentVolumeId__"),
+							SnapshotId:     ptr.String("__SnapshotId__"),
+						},
 					},
 					ResourceARN: ptr.String("__ResourceARN__"),
 					Tags: []types.Tag{
@@ -8907,6 +9905,10 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 					VolumeType: types.VolumeType("ONTAP"),
 					LifecycleTransitionReason: &types.LifecycleTransitionReason{
 						Message: ptr.String("__Message__"),
+						OntapError: &types.OntapError{
+							Message: ptr.String("__Message__"),
+							Code:    ptr.String("__Code__"),
+						},
 					},
 					AdministrativeActions: []types.AdministrativeAction{
 						{
@@ -9130,8 +10132,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								VolumeId:     ptr.String("__VolumeId__"),
 								CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 								Lifecycle:    types.SnapshotLifecycle("PENDING"),
+								SnapshotType: types.SnapshotType("ONTAP"),
 								LifecycleTransitionReason: &types.LifecycleTransitionReason{
 									Message: ptr.String("__Message__"),
+									OntapError: &types.OntapError{
+										Message: ptr.String("__Message__"),
+										Code:    ptr.String("__Code__"),
+									},
 								},
 								Tags: []types.Tag{
 									{
@@ -9146,6 +10153,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								AdministrativeActions: []types.AdministrativeAction{
 									{},
 									{},
+								},
+								OntapConfiguration: &types.OntapSnapshotConfiguration{
+									SizeInMegabytes:    ptr.Int64(1),
+									SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+									ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									UUID:               ptr.String("__UUID__"),
 								},
 							},
 							TotalTransferBytes:     ptr.Int64(1),
@@ -9373,8 +10387,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								VolumeId:     ptr.String("__VolumeId__"),
 								CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 								Lifecycle:    types.SnapshotLifecycle("PENDING"),
+								SnapshotType: types.SnapshotType("ONTAP"),
 								LifecycleTransitionReason: &types.LifecycleTransitionReason{
 									Message: ptr.String("__Message__"),
+									OntapError: &types.OntapError{
+										Message: ptr.String("__Message__"),
+										Code:    ptr.String("__Code__"),
+									},
 								},
 								Tags: []types.Tag{
 									{
@@ -9389,6 +10408,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								AdministrativeActions: []types.AdministrativeAction{
 									{},
 									{},
+								},
+								OntapConfiguration: &types.OntapSnapshotConfiguration{
+									SizeInMegabytes:    ptr.Int64(1),
+									SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+									ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									UUID:               ptr.String("__UUID__"),
 								},
 							},
 							TotalTransferBytes:     ptr.Int64(1),
@@ -9681,6 +10707,10 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 										TotalConstituents: ptr.Int32(1),
 									},
 									SizeInBytes: ptr.Int64(1),
+									CloneConfiguration: &types.CloneConfiguration{
+										ParentVolumeId: ptr.String("__ParentVolumeId__"),
+										SnapshotId:     ptr.String("__SnapshotId__"),
+									},
 								},
 								ResourceARN: ptr.String("__ResourceARN__"),
 								Tags: []types.Tag{
@@ -9697,6 +10727,10 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								VolumeType: types.VolumeType("ONTAP"),
 								LifecycleTransitionReason: &types.LifecycleTransitionReason{
 									Message: ptr.String("__Message__"),
+									OntapError: &types.OntapError{
+										Message: ptr.String("__Message__"),
+										Code:    ptr.String("__Code__"),
+									},
 								},
 								AdministrativeActions: []types.AdministrativeAction{
 									{},
@@ -9781,8 +10815,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								VolumeId:     ptr.String("__VolumeId__"),
 								CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 								Lifecycle:    types.SnapshotLifecycle("PENDING"),
+								SnapshotType: types.SnapshotType("ONTAP"),
 								LifecycleTransitionReason: &types.LifecycleTransitionReason{
 									Message: ptr.String("__Message__"),
+									OntapError: &types.OntapError{
+										Message: ptr.String("__Message__"),
+										Code:    ptr.String("__Code__"),
+									},
 								},
 								Tags: []types.Tag{
 									{
@@ -9797,6 +10836,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								AdministrativeActions: []types.AdministrativeAction{
 									{},
 									{},
+								},
+								OntapConfiguration: &types.OntapSnapshotConfiguration{
+									SizeInMegabytes:    ptr.Int64(1),
+									SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+									ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									UUID:               ptr.String("__UUID__"),
 								},
 							},
 							TotalTransferBytes:     ptr.Int64(1),
@@ -9866,6 +10912,10 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 										TotalConstituents: ptr.Int32(1),
 									},
 									SizeInBytes: ptr.Int64(1),
+									CloneConfiguration: &types.CloneConfiguration{
+										ParentVolumeId: ptr.String("__ParentVolumeId__"),
+										SnapshotId:     ptr.String("__SnapshotId__"),
+									},
 								},
 								ResourceARN: ptr.String("__ResourceARN__"),
 								Tags: []types.Tag{
@@ -9882,6 +10932,10 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								VolumeType: types.VolumeType("ONTAP"),
 								LifecycleTransitionReason: &types.LifecycleTransitionReason{
 									Message: ptr.String("__Message__"),
+									OntapError: &types.OntapError{
+										Message: ptr.String("__Message__"),
+										Code:    ptr.String("__Code__"),
+									},
 								},
 								AdministrativeActions: []types.AdministrativeAction{
 									{},
@@ -9966,8 +11020,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								VolumeId:     ptr.String("__VolumeId__"),
 								CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 								Lifecycle:    types.SnapshotLifecycle("PENDING"),
+								SnapshotType: types.SnapshotType("ONTAP"),
 								LifecycleTransitionReason: &types.LifecycleTransitionReason{
 									Message: ptr.String("__Message__"),
+									OntapError: &types.OntapError{
+										Message: ptr.String("__Message__"),
+										Code:    ptr.String("__Code__"),
+									},
 								},
 								Tags: []types.Tag{
 									{
@@ -9982,6 +11041,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								AdministrativeActions: []types.AdministrativeAction{
 									{},
 									{},
+								},
+								OntapConfiguration: &types.OntapSnapshotConfiguration{
+									SizeInMegabytes:    ptr.Int64(1),
+									SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+									ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									UUID:               ptr.String("__UUID__"),
 								},
 							},
 							TotalTransferBytes:     ptr.Int64(1),
@@ -10127,6 +11193,10 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 							TotalConstituents: ptr.Int32(1),
 						},
 						SizeInBytes: ptr.Int64(1),
+						CloneConfiguration: &types.CloneConfiguration{
+							ParentVolumeId: ptr.String("__ParentVolumeId__"),
+							SnapshotId:     ptr.String("__SnapshotId__"),
+						},
 					},
 					ResourceARN: ptr.String("__ResourceARN__"),
 					Tags: []types.Tag{
@@ -10143,6 +11213,10 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 					VolumeType: types.VolumeType("ONTAP"),
 					LifecycleTransitionReason: &types.LifecycleTransitionReason{
 						Message: ptr.String("__Message__"),
+						OntapError: &types.OntapError{
+							Message: ptr.String("__Message__"),
+							Code:    ptr.String("__Code__"),
+						},
 					},
 					AdministrativeActions: []types.AdministrativeAction{
 						{
@@ -10366,8 +11440,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								VolumeId:     ptr.String("__VolumeId__"),
 								CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 								Lifecycle:    types.SnapshotLifecycle("PENDING"),
+								SnapshotType: types.SnapshotType("ONTAP"),
 								LifecycleTransitionReason: &types.LifecycleTransitionReason{
 									Message: ptr.String("__Message__"),
+									OntapError: &types.OntapError{
+										Message: ptr.String("__Message__"),
+										Code:    ptr.String("__Code__"),
+									},
 								},
 								Tags: []types.Tag{
 									{
@@ -10382,6 +11461,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								AdministrativeActions: []types.AdministrativeAction{
 									{},
 									{},
+								},
+								OntapConfiguration: &types.OntapSnapshotConfiguration{
+									SizeInMegabytes:    ptr.Int64(1),
+									SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+									ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									UUID:               ptr.String("__UUID__"),
 								},
 							},
 							TotalTransferBytes:     ptr.Int64(1),
@@ -10609,8 +11695,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								VolumeId:     ptr.String("__VolumeId__"),
 								CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 								Lifecycle:    types.SnapshotLifecycle("PENDING"),
+								SnapshotType: types.SnapshotType("ONTAP"),
 								LifecycleTransitionReason: &types.LifecycleTransitionReason{
 									Message: ptr.String("__Message__"),
+									OntapError: &types.OntapError{
+										Message: ptr.String("__Message__"),
+										Code:    ptr.String("__Code__"),
+									},
 								},
 								Tags: []types.Tag{
 									{
@@ -10625,6 +11716,13 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 								AdministrativeActions: []types.AdministrativeAction{
 									{},
 									{},
+								},
+								OntapConfiguration: &types.OntapSnapshotConfiguration{
+									SizeInMegabytes:    ptr.Int64(1),
+									SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+									ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+									UUID:               ptr.String("__UUID__"),
 								},
 							},
 							TotalTransferBytes:     ptr.Int64(1),
@@ -10746,6 +11844,132 @@ func TestCheckResponseSnapshot_DescribeBackups(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeBackups.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeClusterPeers(t *testing.T) {
+	want := &DescribeClusterPeersOutput{
+		ClusterPeers: []types.ClusterPeer{
+			{
+				ResourceARN:   ptr.String("__ResourceARN__"),
+				ClusterPeerId: ptr.String("__ClusterPeerId__"),
+				FileSystemId:  ptr.String("__FileSystemId__"),
+				Lifecycle:     types.ClusterPeerLifecycle("CREATING"),
+				LifecycleTransitionReason: &types.LifecycleTransitionReason{
+					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				PeerAddresses: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PeerClusterName:     ptr.String("__PeerClusterName__"),
+				PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+				AllowedSvmMode:      types.AllowedSvmMode("ALL"),
+				AllowedSvmIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Status: ptr.String("__Status__"),
+				UUID:   ptr.String("__UUID__"),
+				AuthenticationStatus: &types.ClusterPeerAuthenticationStatus{
+					State: ptr.String("__State__"),
+					InUse: ptr.String("__InUse__"),
+				},
+			},
+			{
+				ResourceARN:   ptr.String("__ResourceARN__"),
+				ClusterPeerId: ptr.String("__ClusterPeerId__"),
+				FileSystemId:  ptr.String("__FileSystemId__"),
+				Lifecycle:     types.ClusterPeerLifecycle("CREATING"),
+				LifecycleTransitionReason: &types.LifecycleTransitionReason{
+					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				PeerAddresses: []string{
+					"__Member__",
+					"__Member__",
+				},
+				PeerClusterName:     ptr.String("__PeerClusterName__"),
+				PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+				AllowedSvmMode:      types.AllowedSvmMode("ALL"),
+				AllowedSvmIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				Status: ptr.String("__Status__"),
+				UUID:   ptr.String("__UUID__"),
+				AuthenticationStatus: &types.ClusterPeerAuthenticationStatus{
+					State: ptr.String("__State__"),
+					InUse: ptr.String("__InUse__"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeClusterPeers.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeClusterPeers(context.Background(), &DescribeClusterPeersInput{
+		ClusterPeerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.ClusterPeerFilter{
+			{
+				Name: types.ClusterPeerFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.ClusterPeerFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeClusterPeers.response", err)
 	}
 }
 
@@ -11392,6 +12616,10 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 									TotalConstituents: ptr.Int32(1),
 								},
 								SizeInBytes: ptr.Int64(1),
+								CloneConfiguration: &types.CloneConfiguration{
+									ParentVolumeId: ptr.String("__ParentVolumeId__"),
+									SnapshotId:     ptr.String("__SnapshotId__"),
+								},
 							},
 							ResourceARN: ptr.String("__ResourceARN__"),
 							Tags: []types.Tag{
@@ -11408,6 +12636,10 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 							VolumeType: types.VolumeType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
@@ -11492,8 +12724,13 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -11508,6 +12745,13 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -11577,6 +12821,10 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 									TotalConstituents: ptr.Int32(1),
 								},
 								SizeInBytes: ptr.Int64(1),
+								CloneConfiguration: &types.CloneConfiguration{
+									ParentVolumeId: ptr.String("__ParentVolumeId__"),
+									SnapshotId:     ptr.String("__SnapshotId__"),
+								},
 							},
 							ResourceARN: ptr.String("__ResourceARN__"),
 							Tags: []types.Tag{
@@ -11593,6 +12841,10 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 							VolumeType: types.VolumeType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
@@ -11677,8 +12929,13 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -11693,6 +12950,13 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -11965,6 +13229,10 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 									TotalConstituents: ptr.Int32(1),
 								},
 								SizeInBytes: ptr.Int64(1),
+								CloneConfiguration: &types.CloneConfiguration{
+									ParentVolumeId: ptr.String("__ParentVolumeId__"),
+									SnapshotId:     ptr.String("__SnapshotId__"),
+								},
 							},
 							ResourceARN: ptr.String("__ResourceARN__"),
 							Tags: []types.Tag{
@@ -11981,6 +13249,10 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 							VolumeType: types.VolumeType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
@@ -12065,8 +13337,13 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -12081,6 +13358,13 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -12150,6 +13434,10 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 									TotalConstituents: ptr.Int32(1),
 								},
 								SizeInBytes: ptr.Int64(1),
+								CloneConfiguration: &types.CloneConfiguration{
+									ParentVolumeId: ptr.String("__ParentVolumeId__"),
+									SnapshotId:     ptr.String("__SnapshotId__"),
+								},
 							},
 							ResourceARN: ptr.String("__ResourceARN__"),
 							Tags: []types.Tag{
@@ -12166,6 +13454,10 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 							VolumeType: types.VolumeType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
@@ -12250,8 +13542,13 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -12266,6 +13563,13 @@ func TestCheckResponseSnapshot_DescribeFileSystems(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -12382,6 +13686,10 @@ func TestCheckResponseSnapshot_DescribeS3AccessPointAttachments(t *testing.T) {
 				Lifecycle: types.S3AccessPointAttachmentLifecycle("AVAILABLE"),
 				LifecycleTransitionReason: &types.LifecycleTransitionReason{
 					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
 				},
 				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Name:         ptr.String("__Name__"),
@@ -12424,6 +13732,10 @@ func TestCheckResponseSnapshot_DescribeS3AccessPointAttachments(t *testing.T) {
 				Lifecycle: types.S3AccessPointAttachmentLifecycle("AVAILABLE"),
 				LifecycleTransitionReason: &types.LifecycleTransitionReason{
 					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
 				},
 				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Name:         ptr.String("__Name__"),
@@ -12526,6 +13838,434 @@ func TestCheckResponseSnapshot_DescribeSharedVpcConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeSnapmirrorPolicies(t *testing.T) {
+	want := &DescribeSnapmirrorPoliciesOutput{
+		SnapmirrorPolicies: []types.SnapmirrorPolicy{
+			{
+				ResourceARN:             ptr.String("__ResourceARN__"),
+				SnapmirrorPolicyId:      ptr.String("__SnapmirrorPolicyId__"),
+				FileSystemId:            ptr.String("__FileSystemId__"),
+				StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+				Name:                    ptr.String("__Name__"),
+				SnapshotCopyMode:        types.SnapmirrorPolicySnapshotCopyMode("COPY_ALL_SOURCE_SNAPSHOTS"),
+				RetentionRules: []types.SnapmirrorPolicyRetentionRule{
+					{
+						Label:            ptr.String("__Label__"),
+						Count:            ptr.Int32(1),
+						CreationSchedule: ptr.String("__CreationSchedule__"),
+					},
+					{
+						Label:            ptr.String("__Label__"),
+						Count:            ptr.Int32(1),
+						CreationSchedule: ptr.String("__CreationSchedule__"),
+					},
+				},
+				TransferSchedule:          ptr.String("__TransferSchedule__"),
+				NetworkCompressionEnabled: ptr.Bool(true),
+				ThrottleInKbps:            ptr.Int64(1),
+				Scope:                     types.SnapmirrorPolicyScope("FILESYSTEM"),
+				Lifecycle:                 types.SnapmirrorPolicyLifecycle("CREATING"),
+				UUID:                      ptr.String("__UUID__"),
+				LifecycleTransitionReason: &types.LifecycleTransitionReason{
+					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceARN:             ptr.String("__ResourceARN__"),
+				SnapmirrorPolicyId:      ptr.String("__SnapmirrorPolicyId__"),
+				FileSystemId:            ptr.String("__FileSystemId__"),
+				StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+				Name:                    ptr.String("__Name__"),
+				SnapshotCopyMode:        types.SnapmirrorPolicySnapshotCopyMode("COPY_ALL_SOURCE_SNAPSHOTS"),
+				RetentionRules: []types.SnapmirrorPolicyRetentionRule{
+					{
+						Label:            ptr.String("__Label__"),
+						Count:            ptr.Int32(1),
+						CreationSchedule: ptr.String("__CreationSchedule__"),
+					},
+					{
+						Label:            ptr.String("__Label__"),
+						Count:            ptr.Int32(1),
+						CreationSchedule: ptr.String("__CreationSchedule__"),
+					},
+				},
+				TransferSchedule:          ptr.String("__TransferSchedule__"),
+				NetworkCompressionEnabled: ptr.Bool(true),
+				ThrottleInKbps:            ptr.Int64(1),
+				Scope:                     types.SnapmirrorPolicyScope("FILESYSTEM"),
+				Lifecycle:                 types.SnapmirrorPolicyLifecycle("CREATING"),
+				UUID:                      ptr.String("__UUID__"),
+				LifecycleTransitionReason: &types.LifecycleTransitionReason{
+					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeSnapmirrorPolicies.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeSnapmirrorPolicies(context.Background(), &DescribeSnapmirrorPoliciesInput{
+		SnapmirrorPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.SnapmirrorPolicyFilter{
+			{
+				Name: types.SnapmirrorPolicyFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SnapmirrorPolicyFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeSnapmirrorPolicies.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeSnapmirrorRelationships(t *testing.T) {
+	want := &DescribeSnapmirrorRelationshipsOutput{
+		SnapmirrorRelationships: []types.SnapmirrorRelationship{
+			{
+				ResourceARN:              ptr.String("__ResourceARN__"),
+				SnapmirrorRelationshipId: ptr.String("__SnapmirrorRelationshipId__"),
+				FileSystemId:             ptr.String("__FileSystemId__"),
+				Lifecycle:                types.SnapmirrorRelationshipLifecycle("CREATING"),
+				LifecycleTransitionReason: &types.LifecycleTransitionReason{
+					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Source: &types.SnapmirrorSource{
+					Path: ptr.String("__Path__"),
+				},
+				Destination: &types.SnapmirrorDestination{
+					Path:     ptr.String("__Path__"),
+					VolumeId: ptr.String("__VolumeId__"),
+				},
+				SnapmirrorPolicy: &types.SnapmirrorRelationshipPolicy{
+					PolicyId:   ptr.String("__PolicyId__"),
+					PolicyName: ptr.String("__PolicyName__"),
+				},
+				TransferSchedule: ptr.String("__TransferSchedule__"),
+				ThrottleInKbps:   ptr.Int64(1),
+				State:            types.SnapmirrorRelationshipState("UNINITIALIZED"),
+				Healthy:          ptr.Bool(true),
+				UnhealthyReason:  ptr.String("__UnhealthyReason__"),
+				LagTimeInMinutes: ptr.Int64(1),
+				ExportedSnapshot: &types.SnapmirrorExportedSnapshot{
+					SnapshotId:   ptr.String("__SnapshotId__"),
+					SnapshotName: ptr.String("__SnapshotName__"),
+				},
+				TransferState: &types.SnapmirrorTransferState{
+					State:            ptr.String("__State__"),
+					Type:             ptr.String("__Type__"),
+					BytesTransferred: ptr.Int64(1),
+					Duration:         ptr.String("__Duration__"),
+					EndTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				UUID: ptr.String("__UUID__"),
+			},
+			{
+				ResourceARN:              ptr.String("__ResourceARN__"),
+				SnapmirrorRelationshipId: ptr.String("__SnapmirrorRelationshipId__"),
+				FileSystemId:             ptr.String("__FileSystemId__"),
+				Lifecycle:                types.SnapmirrorRelationshipLifecycle("CREATING"),
+				LifecycleTransitionReason: &types.LifecycleTransitionReason{
+					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				Source: &types.SnapmirrorSource{
+					Path: ptr.String("__Path__"),
+				},
+				Destination: &types.SnapmirrorDestination{
+					Path:     ptr.String("__Path__"),
+					VolumeId: ptr.String("__VolumeId__"),
+				},
+				SnapmirrorPolicy: &types.SnapmirrorRelationshipPolicy{
+					PolicyId:   ptr.String("__PolicyId__"),
+					PolicyName: ptr.String("__PolicyName__"),
+				},
+				TransferSchedule: ptr.String("__TransferSchedule__"),
+				ThrottleInKbps:   ptr.Int64(1),
+				State:            types.SnapmirrorRelationshipState("UNINITIALIZED"),
+				Healthy:          ptr.Bool(true),
+				UnhealthyReason:  ptr.String("__UnhealthyReason__"),
+				LagTimeInMinutes: ptr.Int64(1),
+				ExportedSnapshot: &types.SnapmirrorExportedSnapshot{
+					SnapshotId:   ptr.String("__SnapshotId__"),
+					SnapshotName: ptr.String("__SnapshotName__"),
+				},
+				TransferState: &types.SnapmirrorTransferState{
+					State:            ptr.String("__State__"),
+					Type:             ptr.String("__Type__"),
+					BytesTransferred: ptr.Int64(1),
+					Duration:         ptr.String("__Duration__"),
+					EndTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				UUID: ptr.String("__UUID__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeSnapmirrorRelationships.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeSnapmirrorRelationships(context.Background(), &DescribeSnapmirrorRelationshipsInput{
+		SnapmirrorRelationshipIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.SnapmirrorRelationshipFilter{
+			{
+				Name: types.SnapmirrorRelationshipFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SnapmirrorRelationshipFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeSnapmirrorRelationships.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeSnapshotPolicies(t *testing.T) {
+	want := &DescribeSnapshotPoliciesOutput{
+		SnapshotPolicies: []types.SnapshotPolicy{
+			{
+				ResourceARN:             ptr.String("__ResourceARN__"),
+				SnapshotPolicyId:        ptr.String("__SnapshotPolicyId__"),
+				FileSystemId:            ptr.String("__FileSystemId__"),
+				StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+				Name:                    ptr.String("__Name__"),
+				Enabled:                 ptr.Bool(true),
+				Schedules: []types.SnapshotPolicySchedule{
+					{
+						Name:            ptr.String("__Name__"),
+						Count:           ptr.Int32(1),
+						Prefix:          ptr.String("__Prefix__"),
+						SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+						RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+							Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+							Value: ptr.Int32(1),
+						},
+					},
+					{
+						Name:            ptr.String("__Name__"),
+						Count:           ptr.Int32(1),
+						Prefix:          ptr.String("__Prefix__"),
+						SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+						RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+							Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+							Value: ptr.Int32(1),
+						},
+					},
+				},
+				Scope:     types.SnapshotPolicyScope("FILESYSTEM"),
+				Lifecycle: types.SnapshotPolicyLifecycle("CREATING"),
+				UUID:      ptr.String("__UUID__"),
+				LifecycleTransitionReason: &types.LifecycleTransitionReason{
+					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+			{
+				ResourceARN:             ptr.String("__ResourceARN__"),
+				SnapshotPolicyId:        ptr.String("__SnapshotPolicyId__"),
+				FileSystemId:            ptr.String("__FileSystemId__"),
+				StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+				Name:                    ptr.String("__Name__"),
+				Enabled:                 ptr.Bool(true),
+				Schedules: []types.SnapshotPolicySchedule{
+					{
+						Name:            ptr.String("__Name__"),
+						Count:           ptr.Int32(1),
+						Prefix:          ptr.String("__Prefix__"),
+						SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+						RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+							Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+							Value: ptr.Int32(1),
+						},
+					},
+					{
+						Name:            ptr.String("__Name__"),
+						Count:           ptr.Int32(1),
+						Prefix:          ptr.String("__Prefix__"),
+						SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+						RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+							Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+							Value: ptr.Int32(1),
+						},
+					},
+				},
+				Scope:     types.SnapshotPolicyScope("FILESYSTEM"),
+				Lifecycle: types.SnapshotPolicyLifecycle("CREATING"),
+				UUID:      ptr.String("__UUID__"),
+				LifecycleTransitionReason: &types.LifecycleTransitionReason{
+					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeSnapshotPolicies.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeSnapshotPolicies(context.Background(), &DescribeSnapshotPoliciesInput{
+		SnapshotPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.SnapshotPolicyFilter{
+			{
+				Name: types.SnapshotPolicyFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SnapshotPolicyFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeSnapshotPolicies.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 	want := &DescribeSnapshotsOutput{
 		Snapshots: []types.Snapshot{
@@ -12536,8 +14276,13 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 				VolumeId:     ptr.String("__VolumeId__"),
 				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Lifecycle:    types.SnapshotLifecycle("PENDING"),
+				SnapshotType: types.SnapshotType("ONTAP"),
 				LifecycleTransitionReason: &types.LifecycleTransitionReason{
 					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
 				},
 				Tags: []types.Tag{
 					{
@@ -12817,6 +14562,10 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 									TotalConstituents: ptr.Int32(1),
 								},
 								SizeInBytes: ptr.Int64(1),
+								CloneConfiguration: &types.CloneConfiguration{
+									ParentVolumeId: ptr.String("__ParentVolumeId__"),
+									SnapshotId:     ptr.String("__SnapshotId__"),
+								},
 							},
 							ResourceARN: ptr.String("__ResourceARN__"),
 							Tags: []types.Tag{
@@ -12833,6 +14582,10 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 							VolumeType: types.VolumeType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
@@ -13182,6 +14935,10 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 									TotalConstituents: ptr.Int32(1),
 								},
 								SizeInBytes: ptr.Int64(1),
+								CloneConfiguration: &types.CloneConfiguration{
+									ParentVolumeId: ptr.String("__ParentVolumeId__"),
+									SnapshotId:     ptr.String("__SnapshotId__"),
+								},
 							},
 							ResourceARN: ptr.String("__ResourceARN__"),
 							Tags: []types.Tag{
@@ -13198,6 +14955,10 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 							VolumeType: types.VolumeType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
@@ -13280,6 +15041,13 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 						RemainingTransferBytes: ptr.Int64(1),
 						Message:                ptr.String("__Message__"),
 					},
+				},
+				OntapConfiguration: &types.OntapSnapshotConfiguration{
+					SizeInMegabytes:    ptr.Int64(1),
+					SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+					ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					UUID:               ptr.String("__UUID__"),
 				},
 			},
 			{
@@ -13289,8 +15057,13 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 				VolumeId:     ptr.String("__VolumeId__"),
 				CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Lifecycle:    types.SnapshotLifecycle("PENDING"),
+				SnapshotType: types.SnapshotType("ONTAP"),
 				LifecycleTransitionReason: &types.LifecycleTransitionReason{
 					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
 				},
 				Tags: []types.Tag{
 					{
@@ -13570,6 +15343,10 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 									TotalConstituents: ptr.Int32(1),
 								},
 								SizeInBytes: ptr.Int64(1),
+								CloneConfiguration: &types.CloneConfiguration{
+									ParentVolumeId: ptr.String("__ParentVolumeId__"),
+									SnapshotId:     ptr.String("__SnapshotId__"),
+								},
 							},
 							ResourceARN: ptr.String("__ResourceARN__"),
 							Tags: []types.Tag{
@@ -13586,6 +15363,10 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 							VolumeType: types.VolumeType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
@@ -13935,6 +15716,10 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 									TotalConstituents: ptr.Int32(1),
 								},
 								SizeInBytes: ptr.Int64(1),
+								CloneConfiguration: &types.CloneConfiguration{
+									ParentVolumeId: ptr.String("__ParentVolumeId__"),
+									SnapshotId:     ptr.String("__SnapshotId__"),
+								},
 							},
 							ResourceARN: ptr.String("__ResourceARN__"),
 							Tags: []types.Tag{
@@ -13951,6 +15736,10 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 							VolumeType: types.VolumeType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
@@ -14033,6 +15822,13 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 						RemainingTransferBytes: ptr.Int64(1),
 						Message:                ptr.String("__Message__"),
 					},
+				},
+				OntapConfiguration: &types.OntapSnapshotConfiguration{
+					SizeInMegabytes:    ptr.Int64(1),
+					SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+					ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					UUID:               ptr.String("__UUID__"),
 				},
 			},
 		},
@@ -14076,6 +15872,118 @@ func TestCheckResponseSnapshot_DescribeSnapshots(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeSnapshots.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeStorageVirtualMachinePeers(t *testing.T) {
+	want := &DescribeStorageVirtualMachinePeersOutput{
+		StorageVirtualMachinePeers: []types.StorageVirtualMachinePeer{
+			{
+				ResourceARN:                 ptr.String("__ResourceARN__"),
+				StorageVirtualMachinePeerId: ptr.String("__StorageVirtualMachinePeerId__"),
+				StorageVirtualMachineId:     ptr.String("__StorageVirtualMachineId__"),
+				FileSystemId:                ptr.String("__FileSystemId__"),
+				Lifecycle:                   types.StorageVirtualMachinePeerLifecycle("CREATING"),
+				LifecycleTransitionReason: &types.LifecycleTransitionReason{
+					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				PeerSvmName:     ptr.String("__PeerSvmName__"),
+				PeerSvmAlias:    ptr.String("__PeerSvmAlias__"),
+				PeerClusterName: ptr.String("__PeerClusterName__"),
+				Applications: []types.StorageVirtualMachinePeerApplication{
+					types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+					types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+				},
+				State: types.StorageVirtualMachinePeerState("PEERED"),
+				UUID:  ptr.String("__UUID__"),
+			},
+			{
+				ResourceARN:                 ptr.String("__ResourceARN__"),
+				StorageVirtualMachinePeerId: ptr.String("__StorageVirtualMachinePeerId__"),
+				StorageVirtualMachineId:     ptr.String("__StorageVirtualMachineId__"),
+				FileSystemId:                ptr.String("__FileSystemId__"),
+				Lifecycle:                   types.StorageVirtualMachinePeerLifecycle("CREATING"),
+				LifecycleTransitionReason: &types.LifecycleTransitionReason{
+					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
+				},
+				Tags: []types.Tag{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				PeerSvmName:     ptr.String("__PeerSvmName__"),
+				PeerSvmAlias:    ptr.String("__PeerSvmAlias__"),
+				PeerClusterName: ptr.String("__PeerClusterName__"),
+				Applications: []types.StorageVirtualMachinePeerApplication{
+					types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+					types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+				},
+				State: types.StorageVirtualMachinePeerState("PEERED"),
+				UUID:  ptr.String("__UUID__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeStorageVirtualMachinePeers.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeStorageVirtualMachinePeers(context.Background(), &DescribeStorageVirtualMachinePeersInput{
+		StorageVirtualMachinePeerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.StorageVirtualMachinePeerFilter{
+			{
+				Name: types.StorageVirtualMachinePeerFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.StorageVirtualMachinePeerFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeStorageVirtualMachinePeers.response", err)
 	}
 }
 
@@ -14163,6 +16071,10 @@ func TestCheckResponseSnapshot_DescribeStorageVirtualMachines(t *testing.T) {
 				},
 				LifecycleTransitionReason: &types.LifecycleTransitionReason{
 					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
 				},
 				RootVolumeSecurityStyle: types.StorageVirtualMachineRootVolumeSecurityStyle("UNIX"),
 			},
@@ -14247,6 +16159,10 @@ func TestCheckResponseSnapshot_DescribeStorageVirtualMachines(t *testing.T) {
 				},
 				LifecycleTransitionReason: &types.LifecycleTransitionReason{
 					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
 				},
 				RootVolumeSecurityStyle: types.StorageVirtualMachineRootVolumeSecurityStyle("UNIX"),
 			},
@@ -14350,6 +16266,10 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 						TotalConstituents: ptr.Int32(1),
 					},
 					SizeInBytes: ptr.Int64(1),
+					CloneConfiguration: &types.CloneConfiguration{
+						ParentVolumeId: ptr.String("__ParentVolumeId__"),
+						SnapshotId:     ptr.String("__SnapshotId__"),
+					},
 				},
 				ResourceARN: ptr.String("__ResourceARN__"),
 				Tags: []types.Tag{
@@ -14366,6 +16286,10 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 				VolumeType: types.VolumeType("ONTAP"),
 				LifecycleTransitionReason: &types.LifecycleTransitionReason{
 					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
 				},
 				AdministrativeActions: []types.AdministrativeAction{
 					{
@@ -14589,8 +16513,13 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -14605,6 +16534,13 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -14832,8 +16768,13 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -14848,6 +16789,13 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -14981,6 +16929,10 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 						TotalConstituents: ptr.Int32(1),
 					},
 					SizeInBytes: ptr.Int64(1),
+					CloneConfiguration: &types.CloneConfiguration{
+						ParentVolumeId: ptr.String("__ParentVolumeId__"),
+						SnapshotId:     ptr.String("__SnapshotId__"),
+					},
 				},
 				ResourceARN: ptr.String("__ResourceARN__"),
 				Tags: []types.Tag{
@@ -14997,6 +16949,10 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 				VolumeType: types.VolumeType("ONTAP"),
 				LifecycleTransitionReason: &types.LifecycleTransitionReason{
 					Message: ptr.String("__Message__"),
+					OntapError: &types.OntapError{
+						Message: ptr.String("__Message__"),
+						Code:    ptr.String("__Code__"),
+					},
 				},
 				AdministrativeActions: []types.AdministrativeAction{
 					{
@@ -15220,8 +17176,13 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -15236,6 +17197,13 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -15463,8 +17431,13 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 							VolumeId:     ptr.String("__VolumeId__"),
 							CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							Lifecycle:    types.SnapshotLifecycle("PENDING"),
+							SnapshotType: types.SnapshotType("ONTAP"),
 							LifecycleTransitionReason: &types.LifecycleTransitionReason{
 								Message: ptr.String("__Message__"),
+								OntapError: &types.OntapError{
+									Message: ptr.String("__Message__"),
+									Code:    ptr.String("__Code__"),
+								},
 							},
 							Tags: []types.Tag{
 								{
@@ -15479,6 +17452,13 @@ func TestCheckResponseSnapshot_DescribeVolumes(t *testing.T) {
 							AdministrativeActions: []types.AdministrativeAction{
 								{},
 								{},
+							},
+							OntapConfiguration: &types.OntapSnapshotConfiguration{
+								SizeInMegabytes:    ptr.Int64(1),
+								SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+								ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								UUID:               ptr.String("__UUID__"),
 							},
 						},
 						TotalTransferBytes:     ptr.Int64(1),
@@ -15890,6 +17870,10 @@ func TestCheckResponseSnapshot_ReleaseFileSystemNfsV3Locks(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -15906,6 +17890,10 @@ func TestCheckResponseSnapshot_ReleaseFileSystemNfsV3Locks(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -15990,8 +17978,13 @@ func TestCheckResponseSnapshot_ReleaseFileSystemNfsV3Locks(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -16006,6 +17999,13 @@ func TestCheckResponseSnapshot_ReleaseFileSystemNfsV3Locks(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -16075,6 +18075,10 @@ func TestCheckResponseSnapshot_ReleaseFileSystemNfsV3Locks(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -16091,6 +18095,10 @@ func TestCheckResponseSnapshot_ReleaseFileSystemNfsV3Locks(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -16175,8 +18183,13 @@ func TestCheckResponseSnapshot_ReleaseFileSystemNfsV3Locks(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -16191,6 +18204,13 @@ func TestCheckResponseSnapshot_ReleaseFileSystemNfsV3Locks(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -16566,6 +18586,10 @@ func TestCheckResponseSnapshot_RestoreVolumeFromSnapshot(t *testing.T) {
 							TotalConstituents: ptr.Int32(1),
 						},
 						SizeInBytes: ptr.Int64(1),
+						CloneConfiguration: &types.CloneConfiguration{
+							ParentVolumeId: ptr.String("__ParentVolumeId__"),
+							SnapshotId:     ptr.String("__SnapshotId__"),
+						},
 					},
 					ResourceARN: ptr.String("__ResourceARN__"),
 					Tags: []types.Tag{
@@ -16582,6 +18606,10 @@ func TestCheckResponseSnapshot_RestoreVolumeFromSnapshot(t *testing.T) {
 					VolumeType: types.VolumeType("ONTAP"),
 					LifecycleTransitionReason: &types.LifecycleTransitionReason{
 						Message: ptr.String("__Message__"),
+						OntapError: &types.OntapError{
+							Message: ptr.String("__Message__"),
+							Code:    ptr.String("__Code__"),
+						},
 					},
 					AdministrativeActions: []types.AdministrativeAction{
 						{},
@@ -16666,8 +18694,13 @@ func TestCheckResponseSnapshot_RestoreVolumeFromSnapshot(t *testing.T) {
 					VolumeId:     ptr.String("__VolumeId__"),
 					CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					Lifecycle:    types.SnapshotLifecycle("PENDING"),
+					SnapshotType: types.SnapshotType("ONTAP"),
 					LifecycleTransitionReason: &types.LifecycleTransitionReason{
 						Message: ptr.String("__Message__"),
+						OntapError: &types.OntapError{
+							Message: ptr.String("__Message__"),
+							Code:    ptr.String("__Code__"),
+						},
 					},
 					Tags: []types.Tag{
 						{
@@ -16682,6 +18715,13 @@ func TestCheckResponseSnapshot_RestoreVolumeFromSnapshot(t *testing.T) {
 					AdministrativeActions: []types.AdministrativeAction{
 						{},
 						{},
+					},
+					OntapConfiguration: &types.OntapSnapshotConfiguration{
+						SizeInMegabytes:    ptr.Int64(1),
+						SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+						ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						UUID:               ptr.String("__UUID__"),
 					},
 				},
 				TotalTransferBytes:     ptr.Int64(1),
@@ -16955,6 +18995,10 @@ func TestCheckResponseSnapshot_RestoreVolumeFromSnapshot(t *testing.T) {
 							TotalConstituents: ptr.Int32(1),
 						},
 						SizeInBytes: ptr.Int64(1),
+						CloneConfiguration: &types.CloneConfiguration{
+							ParentVolumeId: ptr.String("__ParentVolumeId__"),
+							SnapshotId:     ptr.String("__SnapshotId__"),
+						},
 					},
 					ResourceARN: ptr.String("__ResourceARN__"),
 					Tags: []types.Tag{
@@ -16971,6 +19015,10 @@ func TestCheckResponseSnapshot_RestoreVolumeFromSnapshot(t *testing.T) {
 					VolumeType: types.VolumeType("ONTAP"),
 					LifecycleTransitionReason: &types.LifecycleTransitionReason{
 						Message: ptr.String("__Message__"),
+						OntapError: &types.OntapError{
+							Message: ptr.String("__Message__"),
+							Code:    ptr.String("__Code__"),
+						},
 					},
 					AdministrativeActions: []types.AdministrativeAction{
 						{},
@@ -17055,8 +19103,13 @@ func TestCheckResponseSnapshot_RestoreVolumeFromSnapshot(t *testing.T) {
 					VolumeId:     ptr.String("__VolumeId__"),
 					CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					Lifecycle:    types.SnapshotLifecycle("PENDING"),
+					SnapshotType: types.SnapshotType("ONTAP"),
 					LifecycleTransitionReason: &types.LifecycleTransitionReason{
 						Message: ptr.String("__Message__"),
+						OntapError: &types.OntapError{
+							Message: ptr.String("__Message__"),
+							Code:    ptr.String("__Code__"),
+						},
 					},
 					Tags: []types.Tag{
 						{
@@ -17071,6 +19124,13 @@ func TestCheckResponseSnapshot_RestoreVolumeFromSnapshot(t *testing.T) {
 					AdministrativeActions: []types.AdministrativeAction{
 						{},
 						{},
+					},
+					OntapConfiguration: &types.OntapSnapshotConfiguration{
+						SizeInMegabytes:    ptr.Int64(1),
+						SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+						ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						UUID:               ptr.String("__UUID__"),
 					},
 				},
 				TotalTransferBytes:     ptr.Int64(1),
@@ -17296,6 +19356,10 @@ func TestCheckResponseSnapshot_StartMisconfiguredStateRecovery(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -17312,6 +19376,10 @@ func TestCheckResponseSnapshot_StartMisconfiguredStateRecovery(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -17396,8 +19464,13 @@ func TestCheckResponseSnapshot_StartMisconfiguredStateRecovery(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -17412,6 +19485,13 @@ func TestCheckResponseSnapshot_StartMisconfiguredStateRecovery(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -17481,6 +19561,10 @@ func TestCheckResponseSnapshot_StartMisconfiguredStateRecovery(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -17497,6 +19581,10 @@ func TestCheckResponseSnapshot_StartMisconfiguredStateRecovery(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -17581,8 +19669,13 @@ func TestCheckResponseSnapshot_StartMisconfiguredStateRecovery(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -17597,6 +19690,13 @@ func TestCheckResponseSnapshot_StartMisconfiguredStateRecovery(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -17753,6 +19853,74 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UntagResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateClusterPeer(t *testing.T) {
+	want := &UpdateClusterPeerOutput{
+		ClusterPeer: &types.ClusterPeer{
+			ResourceARN:   ptr.String("__ResourceARN__"),
+			ClusterPeerId: ptr.String("__ClusterPeerId__"),
+			FileSystemId:  ptr.String("__FileSystemId__"),
+			Lifecycle:     types.ClusterPeerLifecycle("CREATING"),
+			LifecycleTransitionReason: &types.LifecycleTransitionReason{
+				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			PeerAddresses: []string{
+				"__Member__",
+				"__Member__",
+			},
+			PeerClusterName:     ptr.String("__PeerClusterName__"),
+			PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+			AllowedSvmMode:      types.AllowedSvmMode("ALL"),
+			AllowedSvmIds: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Status: ptr.String("__Status__"),
+			UUID:   ptr.String("__UUID__"),
+			AuthenticationStatus: &types.ClusterPeerAuthenticationStatus{
+				State: ptr.String("__State__"),
+				InUse: ptr.String("__InUse__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateClusterPeer.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateClusterPeer(context.Background(), &UpdateClusterPeerInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ClusterPeerId:      ptr.String("__ClusterPeerId__"),
+		PeerClusterName:    ptr.String("__PeerClusterName__"),
+		PeerAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateClusterPeer.response", err)
 	}
 }
 
@@ -18110,6 +20278,10 @@ func TestCheckResponseSnapshot_UpdateFileSystem(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -18126,6 +20298,10 @@ func TestCheckResponseSnapshot_UpdateFileSystem(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -18210,8 +20386,13 @@ func TestCheckResponseSnapshot_UpdateFileSystem(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -18226,6 +20407,13 @@ func TestCheckResponseSnapshot_UpdateFileSystem(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -18295,6 +20483,10 @@ func TestCheckResponseSnapshot_UpdateFileSystem(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -18311,6 +20503,10 @@ func TestCheckResponseSnapshot_UpdateFileSystem(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -18395,8 +20591,13 @@ func TestCheckResponseSnapshot_UpdateFileSystem(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -18411,6 +20612,13 @@ func TestCheckResponseSnapshot_UpdateFileSystem(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -18648,6 +20856,166 @@ func TestCheckResponseSnapshot_UpdateSharedVpcConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateSnapmirrorPolicy(t *testing.T) {
+	want := &UpdateSnapmirrorPolicyOutput{
+		SnapmirrorPolicy: &types.SnapmirrorPolicy{
+			ResourceARN:             ptr.String("__ResourceARN__"),
+			SnapmirrorPolicyId:      ptr.String("__SnapmirrorPolicyId__"),
+			FileSystemId:            ptr.String("__FileSystemId__"),
+			StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+			Name:                    ptr.String("__Name__"),
+			SnapshotCopyMode:        types.SnapmirrorPolicySnapshotCopyMode("COPY_ALL_SOURCE_SNAPSHOTS"),
+			RetentionRules: []types.SnapmirrorPolicyRetentionRule{
+				{
+					Label:            ptr.String("__Label__"),
+					Count:            ptr.Int32(1),
+					CreationSchedule: ptr.String("__CreationSchedule__"),
+				},
+				{
+					Label:            ptr.String("__Label__"),
+					Count:            ptr.Int32(1),
+					CreationSchedule: ptr.String("__CreationSchedule__"),
+				},
+			},
+			TransferSchedule:          ptr.String("__TransferSchedule__"),
+			NetworkCompressionEnabled: ptr.Bool(true),
+			ThrottleInKbps:            ptr.Int64(1),
+			Scope:                     types.SnapmirrorPolicyScope("FILESYSTEM"),
+			Lifecycle:                 types.SnapmirrorPolicyLifecycle("CREATING"),
+			UUID:                      ptr.String("__UUID__"),
+			LifecycleTransitionReason: &types.LifecycleTransitionReason{
+				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateSnapmirrorPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateSnapmirrorPolicy(context.Background(), &UpdateSnapmirrorPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapmirrorPolicyId: ptr.String("__SnapmirrorPolicyId__"),
+		RetentionRules: []types.SnapmirrorPolicyRetentionRule{
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
+			},
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
+			},
+		},
+		TransferSchedule:          ptr.String("__TransferSchedule__"),
+		NetworkCompressionEnabled: ptr.Bool(true),
+		ThrottleInKbps:            ptr.Int64(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateSnapmirrorPolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateSnapmirrorRelationship(t *testing.T) {
+	want := &UpdateSnapmirrorRelationshipOutput{
+		SnapmirrorRelationship: &types.SnapmirrorRelationship{
+			ResourceARN:              ptr.String("__ResourceARN__"),
+			SnapmirrorRelationshipId: ptr.String("__SnapmirrorRelationshipId__"),
+			FileSystemId:             ptr.String("__FileSystemId__"),
+			Lifecycle:                types.SnapmirrorRelationshipLifecycle("CREATING"),
+			LifecycleTransitionReason: &types.LifecycleTransitionReason{
+				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			Source: &types.SnapmirrorSource{
+				Path: ptr.String("__Path__"),
+			},
+			Destination: &types.SnapmirrorDestination{
+				Path:     ptr.String("__Path__"),
+				VolumeId: ptr.String("__VolumeId__"),
+			},
+			SnapmirrorPolicy: &types.SnapmirrorRelationshipPolicy{
+				PolicyId:   ptr.String("__PolicyId__"),
+				PolicyName: ptr.String("__PolicyName__"),
+			},
+			TransferSchedule: ptr.String("__TransferSchedule__"),
+			ThrottleInKbps:   ptr.Int64(1),
+			State:            types.SnapmirrorRelationshipState("UNINITIALIZED"),
+			Healthy:          ptr.Bool(true),
+			UnhealthyReason:  ptr.String("__UnhealthyReason__"),
+			LagTimeInMinutes: ptr.Int64(1),
+			ExportedSnapshot: &types.SnapmirrorExportedSnapshot{
+				SnapshotId:   ptr.String("__SnapshotId__"),
+				SnapshotName: ptr.String("__SnapshotName__"),
+			},
+			TransferState: &types.SnapmirrorTransferState{
+				State:            ptr.String("__State__"),
+				Type:             ptr.String("__Type__"),
+				BytesTransferred: ptr.Int64(1),
+				Duration:         ptr.String("__Duration__"),
+				EndTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			UUID: ptr.String("__UUID__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateSnapmirrorRelationship.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateSnapmirrorRelationship(context.Background(), &UpdateSnapmirrorRelationshipInput{
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		SnapmirrorRelationshipId: ptr.String("__SnapmirrorRelationshipId__"),
+		PolicyId:                 ptr.String("__PolicyId__"),
+		TransferSchedule:         ptr.String("__TransferSchedule__"),
+		ThrottleInKbps:           ptr.Int64(1),
+		State:                    types.UpdatableSnapmirrorRelationshipState("SNAPMIRRORED"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateSnapmirrorRelationship.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateSnapshot(t *testing.T) {
 	want := &UpdateSnapshotOutput{
 		Snapshot: &types.Snapshot{
@@ -18657,8 +21025,13 @@ func TestCheckResponseSnapshot_UpdateSnapshot(t *testing.T) {
 			VolumeId:     ptr.String("__VolumeId__"),
 			CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			Lifecycle:    types.SnapshotLifecycle("PENDING"),
+			SnapshotType: types.SnapshotType("ONTAP"),
 			LifecycleTransitionReason: &types.LifecycleTransitionReason{
 				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
 			},
 			Tags: []types.Tag{
 				{
@@ -18938,6 +21311,10 @@ func TestCheckResponseSnapshot_UpdateSnapshot(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -18954,6 +21331,10 @@ func TestCheckResponseSnapshot_UpdateSnapshot(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -19303,6 +21684,10 @@ func TestCheckResponseSnapshot_UpdateSnapshot(t *testing.T) {
 								TotalConstituents: ptr.Int32(1),
 							},
 							SizeInBytes: ptr.Int64(1),
+							CloneConfiguration: &types.CloneConfiguration{
+								ParentVolumeId: ptr.String("__ParentVolumeId__"),
+								SnapshotId:     ptr.String("__SnapshotId__"),
+							},
 						},
 						ResourceARN: ptr.String("__ResourceARN__"),
 						Tags: []types.Tag{
@@ -19319,6 +21704,10 @@ func TestCheckResponseSnapshot_UpdateSnapshot(t *testing.T) {
 						VolumeType: types.VolumeType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
@@ -19402,6 +21791,13 @@ func TestCheckResponseSnapshot_UpdateSnapshot(t *testing.T) {
 					Message:                ptr.String("__Message__"),
 				},
 			},
+			OntapConfiguration: &types.OntapSnapshotConfiguration{
+				SizeInMegabytes:    ptr.Int64(1),
+				SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+				ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UUID:               ptr.String("__UUID__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateSnapshot.response")
@@ -19416,12 +21812,91 @@ func TestCheckResponseSnapshot_UpdateSnapshot(t *testing.T) {
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
 		Name:               ptr.String("__Name__"),
 		SnapshotId:         ptr.String("__SnapshotId__"),
+		OntapConfiguration: &types.UpdateOntapSnapshotConfiguration{
+			SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+			ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateSnapshot.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateSnapshotPolicy(t *testing.T) {
+	want := &UpdateSnapshotPolicyOutput{
+		SnapshotPolicy: &types.SnapshotPolicy{
+			ResourceARN:             ptr.String("__ResourceARN__"),
+			SnapshotPolicyId:        ptr.String("__SnapshotPolicyId__"),
+			FileSystemId:            ptr.String("__FileSystemId__"),
+			StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+			Name:                    ptr.String("__Name__"),
+			Enabled:                 ptr.Bool(true),
+			Schedules: []types.SnapshotPolicySchedule{
+				{
+					Name:            ptr.String("__Name__"),
+					Count:           ptr.Int32(1),
+					Prefix:          ptr.String("__Prefix__"),
+					SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+					RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+						Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+				},
+				{
+					Name:            ptr.String("__Name__"),
+					Count:           ptr.Int32(1),
+					Prefix:          ptr.String("__Prefix__"),
+					SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+					RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+						Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+						Value: ptr.Int32(1),
+					},
+				},
+			},
+			Scope:     types.SnapshotPolicyScope("FILESYSTEM"),
+			Lifecycle: types.SnapshotPolicyLifecycle("CREATING"),
+			UUID:      ptr.String("__UUID__"),
+			LifecycleTransitionReason: &types.LifecycleTransitionReason{
+				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateSnapshotPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateSnapshotPolicy(context.Background(), &UpdateSnapshotPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapshotPolicyId:   ptr.String("__SnapshotPolicyId__"),
+		Enabled:            ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateSnapshotPolicy.response", err)
 	}
 }
 
@@ -19508,6 +21983,10 @@ func TestCheckResponseSnapshot_UpdateStorageVirtualMachine(t *testing.T) {
 			},
 			LifecycleTransitionReason: &types.LifecycleTransitionReason{
 				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
 			},
 			RootVolumeSecurityStyle: types.StorageVirtualMachineRootVolumeSecurityStyle("UNIX"),
 		},
@@ -19545,6 +22024,68 @@ func TestCheckResponseSnapshot_UpdateStorageVirtualMachine(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateStorageVirtualMachine.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateStorageVirtualMachinePeer(t *testing.T) {
+	want := &UpdateStorageVirtualMachinePeerOutput{
+		StorageVirtualMachinePeer: &types.StorageVirtualMachinePeer{
+			ResourceARN:                 ptr.String("__ResourceARN__"),
+			StorageVirtualMachinePeerId: ptr.String("__StorageVirtualMachinePeerId__"),
+			StorageVirtualMachineId:     ptr.String("__StorageVirtualMachineId__"),
+			FileSystemId:                ptr.String("__FileSystemId__"),
+			Lifecycle:                   types.StorageVirtualMachinePeerLifecycle("CREATING"),
+			LifecycleTransitionReason: &types.LifecycleTransitionReason{
+				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
+			},
+			Tags: []types.Tag{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+				},
+			},
+			PeerSvmName:     ptr.String("__PeerSvmName__"),
+			PeerSvmAlias:    ptr.String("__PeerSvmAlias__"),
+			PeerClusterName: ptr.String("__PeerClusterName__"),
+			Applications: []types.StorageVirtualMachinePeerApplication{
+				types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+				types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+			},
+			State: types.StorageVirtualMachinePeerState("PEERED"),
+			UUID:  ptr.String("__UUID__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateStorageVirtualMachinePeer.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateStorageVirtualMachinePeer(context.Background(), &UpdateStorageVirtualMachinePeerInput{
+		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
+		StorageVirtualMachinePeerId: ptr.String("__StorageVirtualMachinePeerId__"),
+		Applications: []types.StorageVirtualMachinePeerApplication{
+			types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+			types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+		},
+		PeerSvmAlias: ptr.String("__PeerSvmAlias__"),
+		State:        types.StorageVirtualMachinePeerUpdateState("PEERED"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateStorageVirtualMachinePeer.response", err)
 	}
 }
 
@@ -19604,6 +22145,10 @@ func TestCheckResponseSnapshot_UpdateVolume(t *testing.T) {
 					TotalConstituents: ptr.Int32(1),
 				},
 				SizeInBytes: ptr.Int64(1),
+				CloneConfiguration: &types.CloneConfiguration{
+					ParentVolumeId: ptr.String("__ParentVolumeId__"),
+					SnapshotId:     ptr.String("__SnapshotId__"),
+				},
 			},
 			ResourceARN: ptr.String("__ResourceARN__"),
 			Tags: []types.Tag{
@@ -19620,6 +22165,10 @@ func TestCheckResponseSnapshot_UpdateVolume(t *testing.T) {
 			VolumeType: types.VolumeType("ONTAP"),
 			LifecycleTransitionReason: &types.LifecycleTransitionReason{
 				Message: ptr.String("__Message__"),
+				OntapError: &types.OntapError{
+					Message: ptr.String("__Message__"),
+					Code:    ptr.String("__Code__"),
+				},
 			},
 			AdministrativeActions: []types.AdministrativeAction{
 				{
@@ -19843,8 +22392,13 @@ func TestCheckResponseSnapshot_UpdateVolume(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -19859,6 +22413,13 @@ func TestCheckResponseSnapshot_UpdateVolume(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -20086,8 +22647,13 @@ func TestCheckResponseSnapshot_UpdateVolume(t *testing.T) {
 						VolumeId:     ptr.String("__VolumeId__"),
 						CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						Lifecycle:    types.SnapshotLifecycle("PENDING"),
+						SnapshotType: types.SnapshotType("ONTAP"),
 						LifecycleTransitionReason: &types.LifecycleTransitionReason{
 							Message: ptr.String("__Message__"),
+							OntapError: &types.OntapError{
+								Message: ptr.String("__Message__"),
+								Code:    ptr.String("__Code__"),
+							},
 						},
 						Tags: []types.Tag{
 							{
@@ -20102,6 +22668,13 @@ func TestCheckResponseSnapshot_UpdateVolume(t *testing.T) {
 						AdministrativeActions: []types.AdministrativeAction{
 							{},
 							{},
+						},
+						OntapConfiguration: &types.OntapSnapshotConfiguration{
+							SizeInMegabytes:    ptr.Int64(1),
+							SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+							ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+							UUID:               ptr.String("__UUID__"),
 						},
 					},
 					TotalTransferBytes:     ptr.Int64(1),
@@ -20228,6 +22801,9 @@ func TestCheckResponseSnapshot_UpdateVolume(t *testing.T) {
 				VolumeAppendModeEnabled: ptr.Bool(true),
 			},
 			SizeInBytes: ptr.Int64(1),
+			CloneConfiguration: &types.UpdateCloneConfiguration{
+				SplitAction: types.CloneSplitAction("START"),
+			},
 		},
 		Name: ptr.String("__Name__"),
 		OpenZFSConfiguration: &types.UpdateOpenZFSVolumeConfiguration{
@@ -20753,6 +23329,34 @@ func TestCheckResponseSnapshot_Error_BadRequest(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "BadRequest.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ClusterPeerNotFound(t *testing.T) {
+	want := &types.ClusterPeerNotFound{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ClusterPeerNotFound.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.DeleteClusterPeer(context.Background(), &DeleteClusterPeerInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ClusterPeerId:      ptr.String("__ClusterPeerId__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ClusterPeerNotFound
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ClusterPeerNotFound, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ClusterPeerNotFound.error", err)
 	}
 }
 
@@ -22378,6 +24982,10 @@ func TestCheckResponseSnapshot_Error_MissingVolumeConfiguration(t *testing.T) {
 				ConstituentsPerAggregate: ptr.Int32(1),
 			},
 			SizeInBytes: ptr.Int64(1),
+			CloneConfiguration: &types.CreateCloneConfiguration{
+				ParentVolumeId: ptr.String("__ParentVolumeId__"),
+				SnapshotId:     ptr.String("__SnapshotId__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -22645,6 +25253,62 @@ func TestCheckResponseSnapshot_Error_ServiceLimitExceeded(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_SnapmirrorPolicyNotFound(t *testing.T) {
+	want := &types.SnapmirrorPolicyNotFound{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SnapmirrorPolicyNotFound.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.DeleteSnapmirrorPolicy(context.Background(), &DeleteSnapmirrorPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapmirrorPolicyId: ptr.String("__SnapmirrorPolicyId__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.SnapmirrorPolicyNotFound
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.SnapmirrorPolicyNotFound, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "SnapmirrorPolicyNotFound.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_SnapmirrorRelationshipNotFound(t *testing.T) {
+	want := &types.SnapmirrorRelationshipNotFound{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SnapmirrorRelationshipNotFound.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.DeleteSnapmirrorRelationship(context.Background(), &DeleteSnapmirrorRelationshipInput{
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		SnapmirrorRelationshipId: ptr.String("__SnapmirrorRelationshipId__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.SnapmirrorRelationshipNotFound
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.SnapmirrorRelationshipNotFound, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "SnapmirrorRelationshipNotFound.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_SnapshotNotFound(t *testing.T) {
 	want := &types.SnapshotNotFound{
 		Message: ptr.String("__Message__"),
@@ -22670,6 +25334,34 @@ func TestCheckResponseSnapshot_Error_SnapshotNotFound(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "SnapshotNotFound.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_SnapshotPolicyNotFound(t *testing.T) {
+	want := &types.SnapshotPolicyNotFound{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SnapshotPolicyNotFound.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.DeleteSnapshotPolicy(context.Background(), &DeleteSnapshotPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapshotPolicyId:   ptr.String("__SnapshotPolicyId__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.SnapshotPolicyNotFound
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.SnapshotPolicyNotFound, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "SnapshotPolicyNotFound.error", err)
 	}
 }
 
@@ -22727,57 +25419,27 @@ func TestCheckResponseSnapshot_Error_StorageVirtualMachineNotFound(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateVolume(context.Background(), &CreateVolumeInput{
-		ClientRequestToken: ptr.String("__ClientRequestToken__"),
-		VolumeType:         types.VolumeType("ONTAP"),
-		Name:               ptr.String("__Name__"),
-		OntapConfiguration: &types.CreateOntapVolumeConfiguration{
-			JunctionPath:             ptr.String("__JunctionPath__"),
-			SecurityStyle:            types.SecurityStyle("UNIX"),
-			SizeInMegabytes:          ptr.Int32(1),
-			StorageEfficiencyEnabled: ptr.Bool(true),
-			StorageVirtualMachineId:  ptr.String("__StorageVirtualMachineId__"),
-			TieringPolicy: &types.TieringPolicy{
-				CoolingPeriod: ptr.Int32(1),
-				Name:          types.TieringPolicyName("SNAPSHOT_ONLY"),
+	_, opErr := svc.CreateSnapmirrorPolicy(context.Background(), &CreateSnapmirrorPolicyInput{
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		FileSystemId:            ptr.String("__FileSystemId__"),
+		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+		Name:                    ptr.String("__Name__"),
+		SnapshotCopyMode:        types.SnapmirrorPolicySnapshotCopyMode("COPY_ALL_SOURCE_SNAPSHOTS"),
+		RetentionRules: []types.SnapmirrorPolicyRetentionRule{
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
 			},
-			OntapVolumeType:   types.InputOntapVolumeType("RW"),
-			SnapshotPolicy:    ptr.String("__SnapshotPolicy__"),
-			CopyTagsToBackups: ptr.Bool(true),
-			SnaplockConfiguration: &types.CreateSnaplockConfiguration{
-				AuditLogVolume: ptr.Bool(true),
-				AutocommitPeriod: &types.AutocommitPeriod{
-					Type:  types.AutocommitPeriodType("MINUTES"),
-					Value: ptr.Int32(1),
-				},
-				PrivilegedDelete: types.PrivilegedDelete("DISABLED"),
-				RetentionPeriod: &types.SnaplockRetentionPeriod{
-					DefaultRetention: &types.RetentionPeriod{
-						Type:  types.RetentionPeriodType("SECONDS"),
-						Value: ptr.Int32(1),
-					},
-					MinimumRetention: &types.RetentionPeriod{
-						Type:  types.RetentionPeriodType("SECONDS"),
-						Value: ptr.Int32(1),
-					},
-					MaximumRetention: &types.RetentionPeriod{
-						Type:  types.RetentionPeriodType("SECONDS"),
-						Value: ptr.Int32(1),
-					},
-				},
-				SnaplockType:            types.SnaplockType("COMPLIANCE"),
-				VolumeAppendModeEnabled: ptr.Bool(true),
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
 			},
-			VolumeStyle: types.VolumeStyle("FLEXVOL"),
-			AggregateConfiguration: &types.CreateAggregateConfiguration{
-				Aggregates: []string{
-					"__Member__",
-					"__Member__",
-				},
-				ConstituentsPerAggregate: ptr.Int32(1),
-			},
-			SizeInBytes: ptr.Int64(1),
 		},
+		TransferSchedule:          ptr.String("__TransferSchedule__"),
+		NetworkCompressionEnabled: ptr.Bool(true),
+		ThrottleInKbps:            ptr.Int64(1),
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -22786,69 +25448,6 @@ func TestCheckResponseSnapshot_Error_StorageVirtualMachineNotFound(t *testing.T)
 			{
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
-			},
-		},
-		OpenZFSConfiguration: &types.CreateOpenZFSVolumeConfiguration{
-			ParentVolumeId:                ptr.String("__ParentVolumeId__"),
-			StorageCapacityReservationGiB: ptr.Int32(1),
-			StorageCapacityQuotaGiB:       ptr.Int32(1),
-			RecordSizeKiB:                 ptr.Int32(1),
-			DataCompressionType:           types.OpenZFSDataCompressionType("NONE"),
-			CopyTagsToSnapshots:           ptr.Bool(true),
-			OriginSnapshot: &types.CreateOpenZFSOriginSnapshotConfiguration{
-				SnapshotARN:  ptr.String("__SnapshotARN__"),
-				CopyStrategy: types.OpenZFSCopyStrategy("CLONE"),
-			},
-			ReadOnly: ptr.Bool(true),
-			NfsExports: []types.OpenZFSNfsExport{
-				{
-					ClientConfigurations: []types.OpenZFSClientConfiguration{
-						{
-							Clients: ptr.String("__Clients__"),
-							Options: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							Clients: ptr.String("__Clients__"),
-							Options: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-				{
-					ClientConfigurations: []types.OpenZFSClientConfiguration{
-						{
-							Clients: ptr.String("__Clients__"),
-							Options: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-						{
-							Clients: ptr.String("__Clients__"),
-							Options: []string{
-								"__Member__",
-								"__Member__",
-							},
-						},
-					},
-				},
-			},
-			UserAndGroupQuotas: []types.OpenZFSUserOrGroupQuota{
-				{
-					Type:                    types.OpenZFSQuotaType("USER"),
-					Id:                      ptr.Int32(1),
-					StorageCapacityQuotaGiB: ptr.Int32(1),
-				},
-				{
-					Type:                    types.OpenZFSQuotaType("USER"),
-					Id:                      ptr.Int32(1),
-					StorageCapacityQuotaGiB: ptr.Int32(1),
-				},
 			},
 		},
 	})
@@ -22861,6 +25460,34 @@ func TestCheckResponseSnapshot_Error_StorageVirtualMachineNotFound(t *testing.T)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "StorageVirtualMachineNotFound.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_StorageVirtualMachinePeerNotFound(t *testing.T) {
+	want := &types.StorageVirtualMachinePeerNotFound{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StorageVirtualMachinePeerNotFound.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.DeleteStorageVirtualMachinePeer(context.Background(), &DeleteStorageVirtualMachinePeerInput{
+		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
+		StorageVirtualMachinePeerId: ptr.String("__StorageVirtualMachinePeerId__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.StorageVirtualMachinePeerNotFound
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.StorageVirtualMachinePeerNotFound, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "StorageVirtualMachinePeerNotFound.error", err)
 	}
 }
 

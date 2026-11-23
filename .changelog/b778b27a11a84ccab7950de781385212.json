@@ -1,0 +1,8 @@
+{
+    "id": "b778b27a-11a8-4cca-b795-0de781385212",
+    "type": "feature",
+    "description": "Release of the new integration type in CreateIntegration API - Used to add Microsoft Azure resources to the Amazon CloudWatch Omni context graph through an AWS Config connector for your Azure tenant.",
+    "modules": [
+        "service/cloudwatchomni"
+    ]
+}

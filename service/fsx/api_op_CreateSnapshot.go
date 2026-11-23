@@ -11,9 +11,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a snapshot of an existing Amazon FSx for OpenZFS volume. With
-// snapshots, you can easily undo file changes and compare file versions by
-// restoring the volume to a previous version.
+// Creates a snapshot of an existing Amazon FSx for OpenZFS or Amazon FSx for
+// NetApp ONTAP volume. With snapshots, you can easily undo file changes and
+// compare file versions by restoring the volume to a previous version.
 //
 // If a snapshot with the specified client request token exists, and the
 // parameters match, this operation returns the description of the existing
@@ -22,8 +22,8 @@ import (
 // snapshot with the specified client request token doesn't exist, CreateSnapshot
 // does the following:
 //
-//   - Creates a new OpenZFS snapshot with an assigned ID, and an initial
-//     lifecycle state of CREATING .
+//   - Creates a new snapshot with an assigned ID, and an initial lifecycle state
+//     of CREATING .
 //
 //   - Returns the description of the snapshot.
 //
@@ -71,6 +71,9 @@ type CreateSnapshotInput struct {
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
+	// Specifies the configuration to use when creating the ONTAP snapshot.
+	OntapConfiguration *types.CreateOntapSnapshotConfiguration
+
 	// A list of Tag values, with a maximum of 50 elements.
 	Tags []types.Tag
 
@@ -89,6 +92,11 @@ func (v *CreateSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSnapshotRequest_Name, *v.Name)
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.CreateSnapshotRequest_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.Tags != nil {
 		serializeTags(s, schemas.CreateSnapshotRequest_Tags, v.Tags)

@@ -11,7 +11,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns a list of key value pairs.
+// Returns a list of key-value pairs.
 func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...func(*Options)) (*ListKeysOutput, error) {
 	if params == nil {
 		params = &ListKeysInput{}
@@ -29,7 +29,7 @@ func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...
 
 type ListKeysInput struct {
 
-	// The Amazon Resource Name (ARN) of the Key Value Store.
+	// The Amazon Resource Name (ARN) of the key value store.
 	//
 	// This member is required.
 	KvsARN *string
@@ -70,7 +70,7 @@ func (in *ListKeysInput) bindEndpointParams(p *EndpointParameters) {
 
 type ListKeysOutput struct {
 
-	// Key value pairs
+	// The key-value pairs.
 	Items []types.ListKeysResponseListItem
 
 	// If nextToken is returned in the response, there are more results available.

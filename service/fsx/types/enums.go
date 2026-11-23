@@ -46,6 +46,7 @@ const (
 	AdministrativeActionTypeVolumeUpdateWithSnapshot      AdministrativeActionType = "VOLUME_UPDATE_WITH_SNAPSHOT"
 	AdministrativeActionTypeVolumeInitializeWithSnapshot  AdministrativeActionType = "VOLUME_INITIALIZE_WITH_SNAPSHOT"
 	AdministrativeActionTypeDownloadDataFromBackup        AdministrativeActionType = "DOWNLOAD_DATA_FROM_BACKUP"
+	AdministrativeActionTypeVolumeCloneSplit              AdministrativeActionType = "VOLUME_CLONE_SPLIT"
 )
 
 // Values returns all known values for AdministrativeActionType. Note that this
@@ -69,6 +70,7 @@ func (AdministrativeActionType) Values() []AdministrativeActionType {
 		"VOLUME_UPDATE_WITH_SNAPSHOT",
 		"VOLUME_INITIALIZE_WITH_SNAPSHOT",
 		"DOWNLOAD_DATA_FROM_BACKUP",
+		"VOLUME_CLONE_SPLIT",
 	}
 }
 
@@ -94,6 +96,27 @@ func (AliasLifecycle) Values() []AliasLifecycle {
 		"DELETING",
 		"CREATE_FAILED",
 		"DELETE_FAILED",
+	}
+}
+
+type AllowedSvmMode string
+
+// Enum values for AllowedSvmMode
+const (
+	AllowedSvmModeAll       AllowedSvmMode = "ALL"
+	AllowedSvmModeNone      AllowedSvmMode = "NONE"
+	AllowedSvmModeSpecified AllowedSvmMode = "SPECIFIED"
+)
+
+// Values returns all known values for AllowedSvmMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AllowedSvmMode) Values() []AllowedSvmMode {
+	return []AllowedSvmMode{
+		"ALL",
+		"NONE",
+		"SPECIFIED",
 	}
 }
 
@@ -194,6 +217,63 @@ func (BackupType) Values() []BackupType {
 		"AUTOMATIC",
 		"USER_INITIATED",
 		"AWS_BACKUP",
+	}
+}
+
+type CloneSplitAction string
+
+// Enum values for CloneSplitAction
+const (
+	CloneSplitActionStart CloneSplitAction = "START"
+)
+
+// Values returns all known values for CloneSplitAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CloneSplitAction) Values() []CloneSplitAction {
+	return []CloneSplitAction{
+		"START",
+	}
+}
+
+type ClusterPeerFilterName string
+
+// Enum values for ClusterPeerFilterName
+const (
+	ClusterPeerFilterNameFileSystemId ClusterPeerFilterName = "file-system-id"
+)
+
+// Values returns all known values for ClusterPeerFilterName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterPeerFilterName) Values() []ClusterPeerFilterName {
+	return []ClusterPeerFilterName{
+		"file-system-id",
+	}
+}
+
+type ClusterPeerLifecycle string
+
+// Enum values for ClusterPeerLifecycle
+const (
+	ClusterPeerLifecycleCreating ClusterPeerLifecycle = "CREATING"
+	ClusterPeerLifecycleCreated  ClusterPeerLifecycle = "CREATED"
+	ClusterPeerLifecycleDeleting ClusterPeerLifecycle = "DELETING"
+	ClusterPeerLifecycleFailed   ClusterPeerLifecycle = "FAILED"
+)
+
+// Values returns all known values for ClusterPeerLifecycle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterPeerLifecycle) Values() []ClusterPeerLifecycle {
+	return []ClusterPeerLifecycle{
+		"CREATING",
+		"CREATED",
+		"DELETING",
+		"FAILED",
 	}
 }
 
@@ -1193,6 +1273,158 @@ func (SnaplockType) Values() []SnaplockType {
 	}
 }
 
+type SnapmirrorPolicyFilterName string
+
+// Enum values for SnapmirrorPolicyFilterName
+const (
+	SnapmirrorPolicyFilterNameFileSystemId            SnapmirrorPolicyFilterName = "file-system-id"
+	SnapmirrorPolicyFilterNameStorageVirtualMachineId SnapmirrorPolicyFilterName = "storage-virtual-machine-id"
+)
+
+// Values returns all known values for SnapmirrorPolicyFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapmirrorPolicyFilterName) Values() []SnapmirrorPolicyFilterName {
+	return []SnapmirrorPolicyFilterName{
+		"file-system-id",
+		"storage-virtual-machine-id",
+	}
+}
+
+type SnapmirrorPolicyLifecycle string
+
+// Enum values for SnapmirrorPolicyLifecycle
+const (
+	SnapmirrorPolicyLifecycleCreating SnapmirrorPolicyLifecycle = "CREATING"
+	SnapmirrorPolicyLifecycleCreated  SnapmirrorPolicyLifecycle = "CREATED"
+	SnapmirrorPolicyLifecycleDeleting SnapmirrorPolicyLifecycle = "DELETING"
+	SnapmirrorPolicyLifecycleFailed   SnapmirrorPolicyLifecycle = "FAILED"
+)
+
+// Values returns all known values for SnapmirrorPolicyLifecycle. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapmirrorPolicyLifecycle) Values() []SnapmirrorPolicyLifecycle {
+	return []SnapmirrorPolicyLifecycle{
+		"CREATING",
+		"CREATED",
+		"DELETING",
+		"FAILED",
+	}
+}
+
+type SnapmirrorPolicyScope string
+
+// Enum values for SnapmirrorPolicyScope
+const (
+	SnapmirrorPolicyScopeFilesystem SnapmirrorPolicyScope = "FILESYSTEM"
+	SnapmirrorPolicyScopeSvm        SnapmirrorPolicyScope = "SVM"
+)
+
+// Values returns all known values for SnapmirrorPolicyScope. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapmirrorPolicyScope) Values() []SnapmirrorPolicyScope {
+	return []SnapmirrorPolicyScope{
+		"FILESYSTEM",
+		"SVM",
+	}
+}
+
+type SnapmirrorPolicySnapshotCopyMode string
+
+// Enum values for SnapmirrorPolicySnapshotCopyMode
+const (
+	SnapmirrorPolicySnapshotCopyModeCopyAllSourceSnapshots   SnapmirrorPolicySnapshotCopyMode = "COPY_ALL_SOURCE_SNAPSHOTS"
+	SnapmirrorPolicySnapshotCopyModeCopyLatestSourceSnapshot SnapmirrorPolicySnapshotCopyMode = "COPY_LATEST_SOURCE_SNAPSHOT"
+	SnapmirrorPolicySnapshotCopyModeNoCreateSnapshotOnSource SnapmirrorPolicySnapshotCopyMode = "NO_CREATE_SNAPSHOT_ON_SOURCE"
+)
+
+// Values returns all known values for SnapmirrorPolicySnapshotCopyMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapmirrorPolicySnapshotCopyMode) Values() []SnapmirrorPolicySnapshotCopyMode {
+	return []SnapmirrorPolicySnapshotCopyMode{
+		"COPY_ALL_SOURCE_SNAPSHOTS",
+		"COPY_LATEST_SOURCE_SNAPSHOT",
+		"NO_CREATE_SNAPSHOT_ON_SOURCE",
+	}
+}
+
+type SnapmirrorRelationshipFilterName string
+
+// Enum values for SnapmirrorRelationshipFilterName
+const (
+	SnapmirrorRelationshipFilterNameFileSystemId        SnapmirrorRelationshipFilterName = "file-system-id"
+	SnapmirrorRelationshipFilterNameDestinationVolumeId SnapmirrorRelationshipFilterName = "destination-volume-id"
+)
+
+// Values returns all known values for SnapmirrorRelationshipFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapmirrorRelationshipFilterName) Values() []SnapmirrorRelationshipFilterName {
+	return []SnapmirrorRelationshipFilterName{
+		"file-system-id",
+		"destination-volume-id",
+	}
+}
+
+type SnapmirrorRelationshipLifecycle string
+
+// Enum values for SnapmirrorRelationshipLifecycle
+const (
+	SnapmirrorRelationshipLifecycleCreating SnapmirrorRelationshipLifecycle = "CREATING"
+	SnapmirrorRelationshipLifecycleCreated  SnapmirrorRelationshipLifecycle = "CREATED"
+	SnapmirrorRelationshipLifecycleDeleting SnapmirrorRelationshipLifecycle = "DELETING"
+	SnapmirrorRelationshipLifecycleFailed   SnapmirrorRelationshipLifecycle = "FAILED"
+)
+
+// Values returns all known values for SnapmirrorRelationshipLifecycle. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapmirrorRelationshipLifecycle) Values() []SnapmirrorRelationshipLifecycle {
+	return []SnapmirrorRelationshipLifecycle{
+		"CREATING",
+		"CREATED",
+		"DELETING",
+		"FAILED",
+	}
+}
+
+type SnapmirrorRelationshipState string
+
+// Enum values for SnapmirrorRelationshipState
+const (
+	SnapmirrorRelationshipStateUninitialized SnapmirrorRelationshipState = "UNINITIALIZED"
+	SnapmirrorRelationshipStateTransferring  SnapmirrorRelationshipState = "TRANSFERRING"
+	SnapmirrorRelationshipStateSnapmirrored  SnapmirrorRelationshipState = "SNAPMIRRORED"
+	SnapmirrorRelationshipStatePaused        SnapmirrorRelationshipState = "PAUSED"
+	SnapmirrorRelationshipStateBrokenOff     SnapmirrorRelationshipState = "BROKEN_OFF"
+)
+
+// Values returns all known values for SnapmirrorRelationshipState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapmirrorRelationshipState) Values() []SnapmirrorRelationshipState {
+	return []SnapmirrorRelationshipState{
+		"UNINITIALIZED",
+		"TRANSFERRING",
+		"SNAPMIRRORED",
+		"PAUSED",
+		"BROKEN_OFF",
+	}
+}
+
 type SnapshotFilterName string
 
 // Enum values for SnapshotFilterName
@@ -1220,6 +1452,7 @@ const (
 	SnapshotLifecycleCreating  SnapshotLifecycle = "CREATING"
 	SnapshotLifecycleDeleting  SnapshotLifecycle = "DELETING"
 	SnapshotLifecycleAvailable SnapshotLifecycle = "AVAILABLE"
+	SnapshotLifecycleFailed    SnapshotLifecycle = "FAILED"
 )
 
 // Values returns all known values for SnapshotLifecycle. Note that this can be
@@ -1232,6 +1465,117 @@ func (SnapshotLifecycle) Values() []SnapshotLifecycle {
 		"CREATING",
 		"DELETING",
 		"AVAILABLE",
+		"FAILED",
+	}
+}
+
+type SnapshotPolicyFilterName string
+
+// Enum values for SnapshotPolicyFilterName
+const (
+	SnapshotPolicyFilterNameFileSystemId            SnapshotPolicyFilterName = "file-system-id"
+	SnapshotPolicyFilterNameStorageVirtualMachineId SnapshotPolicyFilterName = "storage-virtual-machine-id"
+)
+
+// Values returns all known values for SnapshotPolicyFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotPolicyFilterName) Values() []SnapshotPolicyFilterName {
+	return []SnapshotPolicyFilterName{
+		"file-system-id",
+		"storage-virtual-machine-id",
+	}
+}
+
+type SnapshotPolicyLifecycle string
+
+// Enum values for SnapshotPolicyLifecycle
+const (
+	SnapshotPolicyLifecycleCreating SnapshotPolicyLifecycle = "CREATING"
+	SnapshotPolicyLifecycleCreated  SnapshotPolicyLifecycle = "CREATED"
+	SnapshotPolicyLifecycleDeleting SnapshotPolicyLifecycle = "DELETING"
+	SnapshotPolicyLifecycleFailed   SnapshotPolicyLifecycle = "FAILED"
+)
+
+// Values returns all known values for SnapshotPolicyLifecycle. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotPolicyLifecycle) Values() []SnapshotPolicyLifecycle {
+	return []SnapshotPolicyLifecycle{
+		"CREATING",
+		"CREATED",
+		"DELETING",
+		"FAILED",
+	}
+}
+
+type SnapshotPolicyRetentionPeriodType string
+
+// Enum values for SnapshotPolicyRetentionPeriodType
+const (
+	SnapshotPolicyRetentionPeriodTypeSeconds  SnapshotPolicyRetentionPeriodType = "SECONDS"
+	SnapshotPolicyRetentionPeriodTypeMinutes  SnapshotPolicyRetentionPeriodType = "MINUTES"
+	SnapshotPolicyRetentionPeriodTypeHours    SnapshotPolicyRetentionPeriodType = "HOURS"
+	SnapshotPolicyRetentionPeriodTypeDays     SnapshotPolicyRetentionPeriodType = "DAYS"
+	SnapshotPolicyRetentionPeriodTypeMonths   SnapshotPolicyRetentionPeriodType = "MONTHS"
+	SnapshotPolicyRetentionPeriodTypeYears    SnapshotPolicyRetentionPeriodType = "YEARS"
+	SnapshotPolicyRetentionPeriodTypeInfinite SnapshotPolicyRetentionPeriodType = "INFINITE"
+)
+
+// Values returns all known values for SnapshotPolicyRetentionPeriodType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotPolicyRetentionPeriodType) Values() []SnapshotPolicyRetentionPeriodType {
+	return []SnapshotPolicyRetentionPeriodType{
+		"SECONDS",
+		"MINUTES",
+		"HOURS",
+		"DAYS",
+		"MONTHS",
+		"YEARS",
+		"INFINITE",
+	}
+}
+
+type SnapshotPolicyScope string
+
+// Enum values for SnapshotPolicyScope
+const (
+	SnapshotPolicyScopeFilesystem SnapshotPolicyScope = "FILESYSTEM"
+	SnapshotPolicyScopeSvm        SnapshotPolicyScope = "SVM"
+)
+
+// Values returns all known values for SnapshotPolicyScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotPolicyScope) Values() []SnapshotPolicyScope {
+	return []SnapshotPolicyScope{
+		"FILESYSTEM",
+		"SVM",
+	}
+}
+
+type SnapshotType string
+
+// Enum values for SnapshotType
+const (
+	SnapshotTypeOntap   SnapshotType = "ONTAP"
+	SnapshotTypeOpenzfs SnapshotType = "OPENZFS"
+)
+
+// Values returns all known values for SnapshotType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SnapshotType) Values() []SnapshotType {
+	return []SnapshotType{
+		"ONTAP",
+		"OPENZFS",
 	}
 }
 
@@ -1333,6 +1677,124 @@ func (StorageVirtualMachineLifecycle) Values() []StorageVirtualMachineLifecycle 
 	}
 }
 
+type StorageVirtualMachinePeerApplication string
+
+// Enum values for StorageVirtualMachinePeerApplication
+const (
+	StorageVirtualMachinePeerApplicationSnapmirror StorageVirtualMachinePeerApplication = "SNAPMIRROR"
+	StorageVirtualMachinePeerApplicationFileCopy   StorageVirtualMachinePeerApplication = "FILE_COPY"
+	StorageVirtualMachinePeerApplicationLunCopy    StorageVirtualMachinePeerApplication = "LUN_COPY"
+	StorageVirtualMachinePeerApplicationFlexcache  StorageVirtualMachinePeerApplication = "FLEXCACHE"
+)
+
+// Values returns all known values for StorageVirtualMachinePeerApplication. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageVirtualMachinePeerApplication) Values() []StorageVirtualMachinePeerApplication {
+	return []StorageVirtualMachinePeerApplication{
+		"SNAPMIRROR",
+		"FILE_COPY",
+		"LUN_COPY",
+		"FLEXCACHE",
+	}
+}
+
+type StorageVirtualMachinePeerFilterName string
+
+// Enum values for StorageVirtualMachinePeerFilterName
+const (
+	StorageVirtualMachinePeerFilterNameFileSystemId            StorageVirtualMachinePeerFilterName = "file-system-id"
+	StorageVirtualMachinePeerFilterNameStorageVirtualMachineId StorageVirtualMachinePeerFilterName = "storage-virtual-machine-id"
+)
+
+// Values returns all known values for StorageVirtualMachinePeerFilterName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageVirtualMachinePeerFilterName) Values() []StorageVirtualMachinePeerFilterName {
+	return []StorageVirtualMachinePeerFilterName{
+		"file-system-id",
+		"storage-virtual-machine-id",
+	}
+}
+
+type StorageVirtualMachinePeerLifecycle string
+
+// Enum values for StorageVirtualMachinePeerLifecycle
+const (
+	StorageVirtualMachinePeerLifecycleCreating StorageVirtualMachinePeerLifecycle = "CREATING"
+	StorageVirtualMachinePeerLifecycleCreated  StorageVirtualMachinePeerLifecycle = "CREATED"
+	StorageVirtualMachinePeerLifecycleDeleting StorageVirtualMachinePeerLifecycle = "DELETING"
+	StorageVirtualMachinePeerLifecycleFailed   StorageVirtualMachinePeerLifecycle = "FAILED"
+)
+
+// Values returns all known values for StorageVirtualMachinePeerLifecycle. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageVirtualMachinePeerLifecycle) Values() []StorageVirtualMachinePeerLifecycle {
+	return []StorageVirtualMachinePeerLifecycle{
+		"CREATING",
+		"CREATED",
+		"DELETING",
+		"FAILED",
+	}
+}
+
+type StorageVirtualMachinePeerState string
+
+// Enum values for StorageVirtualMachinePeerState
+const (
+	StorageVirtualMachinePeerStatePeered       StorageVirtualMachinePeerState = "PEERED"
+	StorageVirtualMachinePeerStateRejected     StorageVirtualMachinePeerState = "REJECTED"
+	StorageVirtualMachinePeerStateSuspended    StorageVirtualMachinePeerState = "SUSPENDED"
+	StorageVirtualMachinePeerStateInitiated    StorageVirtualMachinePeerState = "INITIATED"
+	StorageVirtualMachinePeerStatePending      StorageVirtualMachinePeerState = "PENDING"
+	StorageVirtualMachinePeerStateInitializing StorageVirtualMachinePeerState = "INITIALIZING"
+)
+
+// Values returns all known values for StorageVirtualMachinePeerState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageVirtualMachinePeerState) Values() []StorageVirtualMachinePeerState {
+	return []StorageVirtualMachinePeerState{
+		"PEERED",
+		"REJECTED",
+		"SUSPENDED",
+		"INITIATED",
+		"PENDING",
+		"INITIALIZING",
+	}
+}
+
+type StorageVirtualMachinePeerUpdateState string
+
+// Enum values for StorageVirtualMachinePeerUpdateState
+const (
+	StorageVirtualMachinePeerUpdateStatePeered    StorageVirtualMachinePeerUpdateState = "PEERED"
+	StorageVirtualMachinePeerUpdateStateRejected  StorageVirtualMachinePeerUpdateState = "REJECTED"
+	StorageVirtualMachinePeerUpdateStateSuspended StorageVirtualMachinePeerUpdateState = "SUSPENDED"
+)
+
+// Values returns all known values for StorageVirtualMachinePeerUpdateState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageVirtualMachinePeerUpdateState) Values() []StorageVirtualMachinePeerUpdateState {
+	return []StorageVirtualMachinePeerUpdateState{
+		"PEERED",
+		"REJECTED",
+		"SUSPENDED",
+	}
+}
+
 type StorageVirtualMachineRootVolumeSecurityStyle string
 
 // Enum values for StorageVirtualMachineRootVolumeSecurityStyle
@@ -1416,6 +1878,28 @@ const (
 func (Unit) Values() []Unit {
 	return []Unit{
 		"DAYS",
+	}
+}
+
+type UpdatableSnapmirrorRelationshipState string
+
+// Enum values for UpdatableSnapmirrorRelationshipState
+const (
+	UpdatableSnapmirrorRelationshipStateSnapmirrored UpdatableSnapmirrorRelationshipState = "SNAPMIRRORED"
+	UpdatableSnapmirrorRelationshipStatePaused       UpdatableSnapmirrorRelationshipState = "PAUSED"
+	UpdatableSnapmirrorRelationshipStateBrokenOff    UpdatableSnapmirrorRelationshipState = "BROKEN_OFF"
+)
+
+// Values returns all known values for UpdatableSnapmirrorRelationshipState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdatableSnapmirrorRelationshipState) Values() []UpdatableSnapmirrorRelationshipState {
+	return []UpdatableSnapmirrorRelationshipState{
+		"SNAPMIRRORED",
+		"PAUSED",
+		"BROKEN_OFF",
 	}
 }
 

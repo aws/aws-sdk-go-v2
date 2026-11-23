@@ -363,10 +363,11 @@ type IntegrationType string
 
 // Enum values for IntegrationType
 const (
-	IntegrationTypeAwsConfigSlrec IntegrationType = "AWS_CONFIG_SLREC"
-	IntegrationTypeSlack          IntegrationType = "SLACK"
-	IntegrationTypeExternalAgent  IntegrationType = "EXTERNAL_AGENT"
-	IntegrationTypeAwsIntegration IntegrationType = "AWS_INTEGRATION"
+	IntegrationTypeAwsConfigSlrec      IntegrationType = "AWS_CONFIG_SLREC"
+	IntegrationTypeAwsConfigAzureSlrec IntegrationType = "AWS_CONFIG_AZURE_SLREC"
+	IntegrationTypeSlack               IntegrationType = "SLACK"
+	IntegrationTypeExternalAgent       IntegrationType = "EXTERNAL_AGENT"
+	IntegrationTypeAwsIntegration      IntegrationType = "AWS_INTEGRATION"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -376,6 +377,7 @@ const (
 func (IntegrationType) Values() []IntegrationType {
 	return []IntegrationType{
 		"AWS_CONFIG_SLREC",
+		"AWS_CONFIG_AZURE_SLREC",
 		"SLACK",
 		"EXTERNAL_AGENT",
 		"AWS_INTEGRATION",

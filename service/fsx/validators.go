@@ -130,6 +130,26 @@ func (m *validateOpCreateBackup) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateClusterPeer struct {
+}
+
+func (*validateOpCreateClusterPeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateClusterPeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateClusterPeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateClusterPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDataRepositoryAssociation struct {
 }
 
@@ -230,6 +250,46 @@ func (m *validateOpCreateFileSystem) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSnapmirrorPolicy struct {
+}
+
+func (*validateOpCreateSnapmirrorPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSnapmirrorPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSnapmirrorPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSnapmirrorPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSnapmirrorRelationship struct {
+}
+
+func (*validateOpCreateSnapmirrorRelationship) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSnapmirrorRelationship) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSnapmirrorRelationshipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSnapmirrorRelationshipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateSnapshot struct {
 }
 
@@ -250,6 +310,26 @@ func (m *validateOpCreateSnapshot) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSnapshotPolicy struct {
+}
+
+func (*validateOpCreateSnapshotPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSnapshotPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSnapshotPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSnapshotPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateStorageVirtualMachine struct {
 }
 
@@ -265,6 +345,26 @@ func (m *validateOpCreateStorageVirtualMachine) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateStorageVirtualMachineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateStorageVirtualMachinePeer struct {
+}
+
+func (*validateOpCreateStorageVirtualMachinePeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStorageVirtualMachinePeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStorageVirtualMachinePeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStorageVirtualMachinePeerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +430,26 @@ func (m *validateOpDeleteBackup) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteClusterPeer struct {
+}
+
+func (*validateOpDeleteClusterPeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteClusterPeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteClusterPeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteClusterPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDataRepositoryAssociation struct {
 }
 
@@ -390,6 +510,46 @@ func (m *validateOpDeleteFileSystem) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteSnapmirrorPolicy struct {
+}
+
+func (*validateOpDeleteSnapmirrorPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSnapmirrorPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSnapmirrorPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSnapmirrorPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSnapmirrorRelationship struct {
+}
+
+func (*validateOpDeleteSnapmirrorRelationship) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSnapmirrorRelationship) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSnapmirrorRelationshipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSnapmirrorRelationshipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteSnapshot struct {
 }
 
@@ -410,6 +570,26 @@ func (m *validateOpDeleteSnapshot) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteSnapshotPolicy struct {
+}
+
+func (*validateOpDeleteSnapshotPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSnapshotPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSnapshotPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSnapshotPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteStorageVirtualMachine struct {
 }
 
@@ -425,6 +605,26 @@ func (m *validateOpDeleteStorageVirtualMachine) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteStorageVirtualMachineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteStorageVirtualMachinePeer struct {
+}
+
+func (*validateOpDeleteStorageVirtualMachinePeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStorageVirtualMachinePeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStorageVirtualMachinePeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStorageVirtualMachinePeerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -630,6 +830,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateClusterPeer struct {
+}
+
+func (*validateOpUpdateClusterPeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateClusterPeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateClusterPeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateClusterPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDataRepositoryAssociation struct {
 }
 
@@ -690,6 +910,46 @@ func (m *validateOpUpdateFileSystem) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSnapmirrorPolicy struct {
+}
+
+func (*validateOpUpdateSnapmirrorPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSnapmirrorPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSnapmirrorPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSnapmirrorPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSnapmirrorRelationship struct {
+}
+
+func (*validateOpUpdateSnapmirrorRelationship) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSnapmirrorRelationship) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSnapmirrorRelationshipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSnapmirrorRelationshipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSnapshot struct {
 }
 
@@ -710,6 +970,26 @@ func (m *validateOpUpdateSnapshot) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSnapshotPolicy struct {
+}
+
+func (*validateOpUpdateSnapshotPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSnapshotPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSnapshotPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSnapshotPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateStorageVirtualMachine struct {
 }
 
@@ -725,6 +1005,26 @@ func (m *validateOpUpdateStorageVirtualMachine) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateStorageVirtualMachineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateStorageVirtualMachinePeer struct {
+}
+
+func (*validateOpUpdateStorageVirtualMachinePeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateStorageVirtualMachinePeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateStorageVirtualMachinePeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateStorageVirtualMachinePeerInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -774,6 +1074,10 @@ func addOpCreateBackupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBackup{}, middleware.After)
 }
 
+func addOpCreateClusterPeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateClusterPeer{}, middleware.After)
+}
+
 func addOpCreateDataRepositoryAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataRepositoryAssociation{}, middleware.After)
 }
@@ -794,12 +1098,28 @@ func addOpCreateFileSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFileSystem{}, middleware.After)
 }
 
+func addOpCreateSnapmirrorPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSnapmirrorPolicy{}, middleware.After)
+}
+
+func addOpCreateSnapmirrorRelationshipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSnapmirrorRelationship{}, middleware.After)
+}
+
 func addOpCreateSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSnapshot{}, middleware.After)
 }
 
+func addOpCreateSnapshotPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSnapshotPolicy{}, middleware.After)
+}
+
 func addOpCreateStorageVirtualMachineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStorageVirtualMachine{}, middleware.After)
+}
+
+func addOpCreateStorageVirtualMachinePeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStorageVirtualMachinePeer{}, middleware.After)
 }
 
 func addOpCreateVolumeFromBackupValidationMiddleware(stack *middleware.Stack) error {
@@ -814,6 +1134,10 @@ func addOpDeleteBackupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBackup{}, middleware.After)
 }
 
+func addOpDeleteClusterPeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteClusterPeer{}, middleware.After)
+}
+
 func addOpDeleteDataRepositoryAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataRepositoryAssociation{}, middleware.After)
 }
@@ -826,12 +1150,28 @@ func addOpDeleteFileSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFileSystem{}, middleware.After)
 }
 
+func addOpDeleteSnapmirrorPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSnapmirrorPolicy{}, middleware.After)
+}
+
+func addOpDeleteSnapmirrorRelationshipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSnapmirrorRelationship{}, middleware.After)
+}
+
 func addOpDeleteSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSnapshot{}, middleware.After)
 }
 
+func addOpDeleteSnapshotPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSnapshotPolicy{}, middleware.After)
+}
+
 func addOpDeleteStorageVirtualMachineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteStorageVirtualMachine{}, middleware.After)
+}
+
+func addOpDeleteStorageVirtualMachinePeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStorageVirtualMachinePeer{}, middleware.After)
 }
 
 func addOpDeleteVolumeValidationMiddleware(stack *middleware.Stack) error {
@@ -874,6 +1214,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateClusterPeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateClusterPeer{}, middleware.After)
+}
+
 func addOpUpdateDataRepositoryAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataRepositoryAssociation{}, middleware.After)
 }
@@ -886,12 +1230,28 @@ func addOpUpdateFileSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFileSystem{}, middleware.After)
 }
 
+func addOpUpdateSnapmirrorPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSnapmirrorPolicy{}, middleware.After)
+}
+
+func addOpUpdateSnapmirrorRelationshipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSnapmirrorRelationship{}, middleware.After)
+}
+
 func addOpUpdateSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSnapshot{}, middleware.After)
 }
 
+func addOpUpdateSnapshotPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSnapshotPolicy{}, middleware.After)
+}
+
 func addOpUpdateStorageVirtualMachineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStorageVirtualMachine{}, middleware.After)
+}
+
+func addOpUpdateStorageVirtualMachinePeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateStorageVirtualMachinePeer{}, middleware.After)
 }
 
 func addOpUpdateVolumeValidationMiddleware(stack *middleware.Stack) error {
@@ -964,6 +1324,21 @@ func validateCreateAndAttachS3AccessPointOpenZFSConfiguration(v *types.CreateAnd
 		if err := validateOpenZFSFileSystemIdentity(v.FileSystemIdentity); err != nil {
 			invalidParams.AddNested("FileSystemIdentity", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateCloneConfiguration(v *types.CreateCloneConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCloneConfiguration"}
+	if v.ParentVolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParentVolumeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1132,6 +1507,11 @@ func validateCreateOntapVolumeConfiguration(v *types.CreateOntapVolumeConfigurat
 			invalidParams.AddNested("SnaplockConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CloneConfiguration != nil {
+		if err := validateCreateCloneConfiguration(v.CloneConfiguration); err != nil {
+			invalidParams.AddNested("CloneConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1204,6 +1584,36 @@ func validateCreateSnaplockConfiguration(v *types.CreateSnaplockConfiguration) e
 	}
 	if len(v.SnaplockType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SnaplockType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateSnapmirrorDestination(v *types.CreateSnapmirrorDestination) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSnapmirrorDestination"}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateSnapmirrorSource(v *types.CreateSnapmirrorSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSnapmirrorSource"}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1658,6 +2068,96 @@ func validateSnaplockRetentionPeriod(v *types.SnaplockRetentionPeriod) error {
 	}
 }
 
+func validateSnapmirrorPolicyRetentionRule(v *types.SnapmirrorPolicyRetentionRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapmirrorPolicyRetentionRule"}
+	if v.Label == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Label"))
+	}
+	if v.Count == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Count"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapmirrorPolicyRetentionRules(v []types.SnapmirrorPolicyRetentionRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapmirrorPolicyRetentionRules"}
+	for i := range v {
+		if err := validateSnapmirrorPolicyRetentionRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotPolicyRetentionPeriod(v *types.SnapshotPolicyRetentionPeriod) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotPolicyRetentionPeriod"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotPolicySchedule(v *types.SnapshotPolicySchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotPolicySchedule"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Count == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Count"))
+	}
+	if v.RetentionPeriod != nil {
+		if err := validateSnapshotPolicyRetentionPeriod(v.RetentionPeriod); err != nil {
+			invalidParams.AddNested("RetentionPeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnapshotPolicyScheduleList(v []types.SnapshotPolicySchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnapshotPolicyScheduleList"}
+	for i := range v {
+		if err := validateSnapshotPolicySchedule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -1942,6 +2442,35 @@ func validateOpCreateBackupInput(v *CreateBackupInput) error {
 	}
 }
 
+func validateOpCreateClusterPeerInput(v *CreateClusterPeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateClusterPeerInput"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if v.PeerAddresses == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PeerAddresses"))
+	}
+	if v.PassphraseSecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PassphraseSecretArn"))
+	}
+	if len(v.AllowedSvmMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedSvmMode"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDataRepositoryAssociationInput(v *CreateDataRepositoryAssociationInput) error {
 	if v == nil {
 		return nil
@@ -2115,6 +2644,62 @@ func validateOpCreateFileSystemInput(v *CreateFileSystemInput) error {
 	}
 }
 
+func validateOpCreateSnapmirrorPolicyInput(v *CreateSnapmirrorPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSnapmirrorPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RetentionRules != nil {
+		if err := validateSnapmirrorPolicyRetentionRules(v.RetentionRules); err != nil {
+			invalidParams.AddNested("RetentionRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSnapmirrorRelationshipInput(v *CreateSnapmirrorRelationshipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSnapmirrorRelationshipInput"}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateCreateSnapmirrorSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	} else if v.Destination != nil {
+		if err := validateCreateSnapmirrorDestination(v.Destination); err != nil {
+			invalidParams.AddNested("Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateSnapshotInput(v *CreateSnapshotInput) error {
 	if v == nil {
 		return nil
@@ -2125,6 +2710,33 @@ func validateOpCreateSnapshotInput(v *CreateSnapshotInput) error {
 	}
 	if v.VolumeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSnapshotPolicyInput(v *CreateSnapshotPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSnapshotPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Schedules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Schedules"))
+	} else if v.Schedules != nil {
+		if err := validateSnapshotPolicyScheduleList(v.Schedules); err != nil {
+			invalidParams.AddNested("Schedules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
@@ -2153,6 +2765,32 @@ func validateOpCreateStorageVirtualMachineInput(v *CreateStorageVirtualMachineIn
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateStorageVirtualMachinePeerInput(v *CreateStorageVirtualMachinePeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStorageVirtualMachinePeerInput"}
+	if v.StorageVirtualMachineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageVirtualMachineId"))
+	}
+	if v.PeerSvmName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PeerSvmName"))
+	}
+	if v.Applications == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Applications"))
 	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
@@ -2242,6 +2880,21 @@ func validateOpDeleteBackupInput(v *DeleteBackupInput) error {
 	}
 }
 
+func validateOpDeleteClusterPeerInput(v *DeleteClusterPeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteClusterPeerInput"}
+	if v.ClusterPeerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterPeerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDataRepositoryAssociationInput(v *DeleteDataRepositoryAssociationInput) error {
 	if v == nil {
 		return nil
@@ -2302,6 +2955,36 @@ func validateOpDeleteFileSystemInput(v *DeleteFileSystemInput) error {
 	}
 }
 
+func validateOpDeleteSnapmirrorPolicyInput(v *DeleteSnapmirrorPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSnapmirrorPolicyInput"}
+	if v.SnapmirrorPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapmirrorPolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSnapmirrorRelationshipInput(v *DeleteSnapmirrorRelationshipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSnapmirrorRelationshipInput"}
+	if v.SnapmirrorRelationshipId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapmirrorRelationshipId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteSnapshotInput(v *DeleteSnapshotInput) error {
 	if v == nil {
 		return nil
@@ -2317,6 +3000,21 @@ func validateOpDeleteSnapshotInput(v *DeleteSnapshotInput) error {
 	}
 }
 
+func validateOpDeleteSnapshotPolicyInput(v *DeleteSnapshotPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSnapshotPolicyInput"}
+	if v.SnapshotPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotPolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteStorageVirtualMachineInput(v *DeleteStorageVirtualMachineInput) error {
 	if v == nil {
 		return nil
@@ -2324,6 +3022,21 @@ func validateOpDeleteStorageVirtualMachineInput(v *DeleteStorageVirtualMachineIn
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteStorageVirtualMachineInput"}
 	if v.StorageVirtualMachineId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StorageVirtualMachineId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteStorageVirtualMachinePeerInput(v *DeleteStorageVirtualMachinePeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStorageVirtualMachinePeerInput"}
+	if v.StorageVirtualMachinePeerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageVirtualMachinePeerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2503,6 +3216,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdateClusterPeerInput(v *UpdateClusterPeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterPeerInput"}
+	if v.ClusterPeerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterPeerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateDataRepositoryAssociationInput(v *UpdateDataRepositoryAssociationInput) error {
 	if v == nil {
 		return nil
@@ -2558,16 +3286,63 @@ func validateOpUpdateFileSystemInput(v *UpdateFileSystemInput) error {
 	}
 }
 
+func validateOpUpdateSnapmirrorPolicyInput(v *UpdateSnapmirrorPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSnapmirrorPolicyInput"}
+	if v.SnapmirrorPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapmirrorPolicyId"))
+	}
+	if v.RetentionRules != nil {
+		if err := validateSnapmirrorPolicyRetentionRules(v.RetentionRules); err != nil {
+			invalidParams.AddNested("RetentionRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSnapmirrorRelationshipInput(v *UpdateSnapmirrorRelationshipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSnapmirrorRelationshipInput"}
+	if v.SnapmirrorRelationshipId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapmirrorRelationshipId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateSnapshotInput(v *UpdateSnapshotInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSnapshotInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.SnapshotId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSnapshotPolicyInput(v *UpdateSnapshotPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSnapshotPolicyInput"}
+	if v.SnapshotPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotPolicyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2583,6 +3358,21 @@ func validateOpUpdateStorageVirtualMachineInput(v *UpdateStorageVirtualMachineIn
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStorageVirtualMachineInput"}
 	if v.StorageVirtualMachineId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StorageVirtualMachineId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateStorageVirtualMachinePeerInput(v *UpdateStorageVirtualMachinePeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateStorageVirtualMachinePeerInput"}
+	if v.StorageVirtualMachinePeerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageVirtualMachinePeerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

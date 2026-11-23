@@ -16,7 +16,7 @@ import (
 	"testing"
 )
 
-// FIPS should error
+// FIPS without a KVS ARN, should error on the missing ARN
 func TestEndpointCase0(t *testing.T) {
 	var params = EndpointParameters{
 		UseFIPS: ptr.Bool(true),
@@ -29,7 +29,7 @@ func TestEndpointCase0(t *testing.T) {
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
-	if e, a := "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore.", err.Error(); !strings.Contains(a, e) {
+	if e, a := "KVS ARN must be provided to use this service", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
@@ -281,7 +281,7 @@ func TestEndpointCase10(t *testing.T) {
 	}
 }
 
-// Valid account based endpoint with FIPS, should error
+// Valid account based endpoint with FIPS resolves to the same endpoint
 func TestEndpointCase11(t *testing.T) {
 	var params = EndpointParameters{
 		KvsARN:  ptr.String("arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
@@ -293,16 +293,161 @@ func TestEndpointCase11(t *testing.T) {
 	result, err := resolver.ResolveEndpoint(context.Background(), params)
 	_, _ = result, err
 
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.cloudfront-kvs.global.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
+						smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Valid account based endpoint with FIPS, without SDK region
+func TestEndpointCase12(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN:  ptr.String("arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+		UseFIPS: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.cloudfront-kvs.global.api.aws")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
+						smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// FIPS with a custom sdk endpoint override, should error
+func TestEndpointCase13(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN:   ptr.String("arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+		Region:   ptr.String("us-east-1"),
+		Endpoint: ptr.String("https://my-override.example.com"),
+		UseFIPS:  ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
 	if err == nil {
 		t.Fatalf("expect error, got none")
 	}
-	if e, a := "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore.", err.Error(); !strings.Contains(a, e) {
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// FIPS with a custom sdk endpoint override, without SDK region, should error
+func TestEndpointCase14(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN:   ptr.String("arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+		Endpoint: ptr.String("https://my-override.example.com"),
+		UseFIPS:  ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS and custom endpoint are not supported", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// FIPS in an unsupported partition reports the partition, not FIPS
+func TestEndpointCase15(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN:  ptr.String("arn:aws-cn:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+		UseFIPS: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "CloudFront-KeyValueStore is not supported in partition `aws-cn`", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }
 
 // Custom sdk endpoint override
-func TestEndpointCase12(t *testing.T) {
+func TestEndpointCase16(t *testing.T) {
 	var params = EndpointParameters{
 		KvsARN:   ptr.String("arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
 		Region:   ptr.String("us-east-1"),
@@ -355,7 +500,7 @@ func TestEndpointCase12(t *testing.T) {
 }
 
 // Custom sdk endpoint override with path and http
-func TestEndpointCase13(t *testing.T) {
+func TestEndpointCase17(t *testing.T) {
 	var params = EndpointParameters{
 		KvsARN:   ptr.String("arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
 		Endpoint: ptr.String("http://my-override.example.com/custom-path"),
@@ -407,7 +552,7 @@ func TestEndpointCase13(t *testing.T) {
 }
 
 // Custom override with different partition should error
-func TestEndpointCase14(t *testing.T) {
+func TestEndpointCase18(t *testing.T) {
 	var params = EndpointParameters{
 		KvsARN:   ptr.String("arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
 		Region:   ptr.String("us-gov-east-1"),
@@ -422,6 +567,332 @@ func TestEndpointCase14(t *testing.T) {
 		t.Fatalf("expect error, got none")
 	}
 	if e, a := "Client was configured for partition `aws-us-gov` but Kvs ARN has `aws`", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Valid aws ARN, aws-eusc SDK region, should error
+func TestEndpointCase19(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN: ptr.String("arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+		Region: ptr.String("eusc-de-east-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Client was configured for partition `aws-eusc` but Kvs ARN has `aws`", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Empty ARN resource type should error
+func TestEndpointCase20(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN: ptr.String("arn:aws:cloudfront::123456789012:/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "No resource type found in the KVS ARN. Resource type must be `key-value-store`.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Valid account based endpoint in aws-eusc
+func TestEndpointCase21(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN: ptr.String("arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.cloudfront-kvs.global.api.amazonwebservices.eu")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
+						smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Valid account based endpoint in aws-eusc, with SDK region
+func TestEndpointCase22(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN: ptr.String("arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+		Region: ptr.String("eusc-de-east-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.cloudfront-kvs.global.api.amazonwebservices.eu")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
+						smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Valid aws-eusc ARN, aws SDK region, should error
+func TestEndpointCase23(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN: ptr.String("arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+		Region: ptr.String("us-east-1"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Client was configured for partition `aws` but Kvs ARN has `aws-eusc`", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Valid account based endpoint in aws-eusc with FIPS, should error
+func TestEndpointCase24(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN:  ptr.String("arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+		Region:  ptr.String("eusc-de-east-1"),
+		UseFIPS: ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// aws-eusc with FIPS and a custom endpoint override reports the partition-level
+// FIPS error
+func TestEndpointCase25(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN:   ptr.String("arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+		Region:   ptr.String("eusc-de-east-1"),
+		Endpoint: ptr.String("https://my-override.example.com"),
+		UseFIPS:  ptr.Bool(true),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore.", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %v error in %v", e, a)
+	}
+}
+
+// Custom sdk endpoint override in aws-eusc
+func TestEndpointCase26(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN:   ptr.String("arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+		Region:   ptr.String("eusc-de-east-1"),
+		Endpoint: ptr.String("https://my-override.example.com"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://123456789012.my-override.example.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
+						smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Custom sdk endpoint override with path and http in aws-eusc
+func TestEndpointCase27(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN:   ptr.String("arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+		Endpoint: ptr.String("http://my-override.example.com/custom-path"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("http://123456789012.my-override.example.com/custom-path")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4a",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
+						smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
+
+						smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+						return sp
+					}(),
+				},
+			})
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Custom override in aws-eusc with different partition should error
+func TestEndpointCase28(t *testing.T) {
+	var params = EndpointParameters{
+		KvsARN:   ptr.String("arn:aws-eusc:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"),
+		Region:   ptr.String("us-east-1"),
+		Endpoint: ptr.String("https://my-override.example.com"),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err == nil {
+		t.Fatalf("expect error, got none")
+	}
+	if e, a := "Client was configured for partition `aws` but Kvs ARN has `aws-eusc`", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }

@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSSimbaAPIService_v20180301.UpdateSnapshot
 
-{"ClientRequestToken":"__ClientRequestToken__","Name":"__Name__","SnapshotId":"__SnapshotId__"}
+{"ClientRequestToken":"__ClientRequestToken__","Name":"__Name__","OntapConfiguration":{"ExpiryTime":946684800,"SnaplockExpiryTime":946684800,"SnapmirrorLabel":"__SnapmirrorLabel__"},"SnapshotId":"__SnapshotId__"}
