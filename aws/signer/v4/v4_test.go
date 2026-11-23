@@ -338,6 +338,84 @@ func TestSign_buildCanonicalHeaders(t *testing.T) {
 	}
 }
 
+func TestSignHTTP_IPv6DefaultPort(t *testing.T) {
+	cases := map[string]struct {
+		endpoint         string
+		portlessEndpoint string
+		expectHost       string
+	}{
+		"https ipv6 default port 443": {
+			endpoint:         "https://[2001:db8::1]:443/bucket/key",
+			portlessEndpoint: "https://[2001:db8::1]/bucket/key",
+			expectHost:       "[2001:db8::1]",
+		},
+		"http ipv6 loopback default port 80": {
+			endpoint:         "http://[::1]:80/bucket/key",
+			portlessEndpoint: "http://[::1]/bucket/key",
+			expectHost:       "[::1]",
+		},
+		"https ipv6 non-default port preserved": {
+			endpoint:   "https://[2001:db8::1]:8443/bucket/key",
+			expectHost: "[2001:db8::1]:8443",
+		},
+	}
+
+	signingTime := time.Date(2024, 1, 2, 3, 4, 5, 0, time.UTC)
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			req, err := http.NewRequest("GET", c.endpoint, nil)
+			if err != nil {
+				t.Fatalf("failed to create request: %v", err)
+			}
+
+			signer := NewSigner()
+			if err := signer.SignHTTP(context.Background(), testCredentials, req, v4Internal.EmptyStringSHA256, "s3", "us-east-1", signingTime); err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			if e, a := c.expectHost, req.Host; e != a {
+				t.Errorf("expect req.Host %q, got %q", e, a)
+			}
+
+			canonicalReq, err := http.NewRequest("GET", c.endpoint, nil)
+			if err != nil {
+				t.Fatalf("failed to create request: %v", err)
+			}
+			build, err := (&httpSigner{
+				Request:      canonicalReq,
+				PayloadHash:  v4Internal.EmptyStringSHA256,
+				ServiceName:  "s3",
+				Region:       "us-east-1",
+				Credentials:  testCredentials,
+				Time:         v4Internal.NewSigningTime(signingTime),
+				KeyDerivator: v4Internal.NewSigningKeyDeriver(),
+			}).Build()
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			wantHostLine := "host:" + c.expectHost + "\n"
+			if !strings.Contains(build.CanonicalString, wantHostLine) {
+				t.Errorf("canonical request missing %q:\n%s", wantHostLine, build.CanonicalString)
+			}
+
+			if c.portlessEndpoint != "" {
+				portlessReq, err := http.NewRequest("GET", c.portlessEndpoint, nil)
+				if err != nil {
+					t.Fatalf("failed to create portless request: %v", err)
+				}
+				if err := signer.SignHTTP(context.Background(), testCredentials, portlessReq, v4Internal.EmptyStringSHA256, "s3", "us-east-1", signingTime); err != nil {
+					t.Fatalf("expect no error signing portless request, got %v", err)
+				}
+				if e, a := portlessReq.Header.Get("Authorization"), req.Header.Get("Authorization"); e != a {
+					t.Errorf("Authorization mismatch with portless endpoint:\n  expect %s\n  actual %s", e, a)
+				}
+			}
+		})
+	}
+}
+
 func BenchmarkPresignRequest(b *testing.B) {
 	signer := NewSigner()
 	req, bodyHash := buildRequest("dynamodb", "us-east-1", "{}")
