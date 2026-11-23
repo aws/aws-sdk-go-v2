@@ -1,8 +1,0 @@
-{
-    "id": "38ee84ff-5eca-4478-b9d9-7146c22f9ff9",
-    "type": "feature",
-    "description": "Adds support for new FSx for NetApp ONTAP resources",
-    "modules": [
-        "service/fsx"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.76.0 (2026-11-23)
+
+* **Feature**: Adds support for new FSx for NetApp ONTAP resources
+
 # v1.75.0 (2026-11-20)
 
 * **Feature**: Adds support for FSx for NetApp ONTAP 3rd Generation file systems and API operations for new FSx for NetApp ONTAP resources

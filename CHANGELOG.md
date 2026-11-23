@@ -1,3 +1,15 @@
+# Release (2026-11-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.78.0](service/cloudfront/CHANGELOG.md#v1780-2026-11-23)
+  * **Feature**: Launch CloudFront in AWS European Sovereign Cloud.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore`: [v1.23.0](service/cloudfrontkeyvaluestore/CHANGELOG.md#v1230-2026-11-23)
+  * **Feature**: This release adds support for KVSHQ API in the AWS European Sovereign Cloud. Requests for key value stores in the aws-eusc partition are now routed to account-based endpoints under cloudfront-kvs.global.api.amazonwebservices.eu.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchomni`: [v1.5.0](service/cloudwatchomni/CHANGELOG.md#v150-2026-11-23)
+  * **Feature**: Release of the new integration type in CreateIntegration API - Used to add Microsoft Azure resources to the Amazon CloudWatch Omni context graph through an AWS Config connector for your Azure tenant.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.76.0](service/fsx/CHANGELOG.md#v1760-2026-11-23)
+  * **Feature**: Adds support for new FSx for NetApp ONTAP resources
+
 # Release (2026-11-21)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.23.0 (2026-11-23)
+
+* **Feature**: This release adds support for KVSHQ API in the AWS European Sovereign Cloud. Requests for key value stores in the aws-eusc partition are now routed to account-based endpoints under cloudfront-kvs.global.api.amazonwebservices.eu.
+
 # v1.22.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -1,3 +1,7 @@
+# v1.78.0 (2026-11-23)
+
+* **Feature**: Launch CloudFront in AWS European Sovereign Cloud.
+
 # v1.77.0 (2026-11-20)
 
 * **Feature**: Amazon CloudFront now supports HTTP2 connections to custom and VPC origins, so you can multiplex many requests over fewer origin connections, including WebSocket connections to HTTP2 origins that support extended CONNECT.

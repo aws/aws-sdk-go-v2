@@ -1,8 +1,0 @@
-{
-    "id": "03758673-cd4c-4c18-95cb-c30533f7d2fd",
-    "type": "feature",
-    "description": "Launch CloudFront in AWS European Sovereign Cloud.",
-    "modules": [
-        "service/cloudfront"
-    ]
-}
