@@ -1,0 +1,8 @@
+{
+    "id": "65deba7f-498a-43a9-b83b-b79a1d92cf1d",
+    "type": "bugfix",
+    "description": "Fix GetObject and DownloadObject failing or reporting an incorrect length when the requested byte range extends past the end of an S3 object.",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
