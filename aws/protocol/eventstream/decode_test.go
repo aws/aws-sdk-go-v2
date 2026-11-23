@@ -2,6 +2,7 @@ package eventstream
 
 import (
 	"bytes"
+	"encoding/binary"
 	"encoding/hex"
 	"errors"
 	"os"
@@ -142,10 +143,14 @@ func TestDecoder_DecodeMultipleMessages(t *testing.T) {
 }
 
 func TestDecodeLimits(t *testing.T) {
-	l := 25 * 1024 * 1024                    // Previously we failed if message was set to >16 MB
-	payload := bytes.Repeat([]byte{0x01}, l) // if set to just 0, message will be read as having 0 size.
-	buffer := bytes.NewBuffer(payload)
-	_, err := NewDecoder().Decode(buffer, nil)
+	l := 25 * 1024 * 1024 // Previously we failed if message was set to >16 MB
+	// Use a consistent prelude (total length l, no headers) so the length
+	// checks pass and decoding fails later, on the prelude checksum.
+	var buffer bytes.Buffer
+	binary.Write(&buffer, binary.BigEndian, uint32(l))
+	binary.Write(&buffer, binary.BigEndian, uint32(0))
+	buffer.Write(bytes.Repeat([]byte{0x01}, l-preludeLen))
+	_, err := NewDecoder().Decode(&buffer, nil)
 	if err == nil {
 		t.Fatalf("expect error since message is not properly encoded, got none")
 	}
