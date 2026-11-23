@@ -1806,6 +1806,7 @@ func TestUpdateResponseSnapshot_DescribeStackSet(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			StackSetOutputBucketPath: ptr.String("__StackSetOutputBucketPath__"),
 		},
 	}
 	proto := restxml.New(schemas.CloudFormation)

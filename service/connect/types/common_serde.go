@@ -354,6 +354,30 @@ func serializeReferenceSummary(s smithy.ShapeSerializer, schema *smithy.Schema, 
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *ReferenceSummaryMemberVoicemailAnalysis:
+		s.WriteUnion(schema, schemas.ReferenceSummary_VoicemailAnalysis)
+		s.WriteStruct(schemas.ReferenceSummary_VoicemailAnalysis)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ReferenceSummaryMemberVoicemailAnalysisRedacted:
+		s.WriteUnion(schema, schemas.ReferenceSummary_VoicemailAnalysisRedacted)
+		s.WriteStruct(schemas.ReferenceSummary_VoicemailAnalysisRedacted)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ReferenceSummaryMemberVoicemailRecording:
+		s.WriteUnion(schema, schemas.ReferenceSummary_VoicemailRecording)
+		s.WriteStruct(schemas.ReferenceSummary_VoicemailRecording)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ReferenceSummaryMemberVoicemailRecordingRedacted:
+		s.WriteUnion(schema, schemas.ReferenceSummary_VoicemailRecordingRedacted)
+		s.WriteStruct(schemas.ReferenceSummary_VoicemailRecordingRedacted)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	}
 }
 
@@ -706,6 +730,22 @@ func deserializeReferenceSummary(d smithy.ShapeDeserializer, s *smithy.Schema, v
 			return vv.Deserialize(d)
 		case schemas.ReferenceSummary_Url:
 			vv := &ReferenceSummaryMemberUrl{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ReferenceSummary_VoicemailAnalysis:
+			vv := &ReferenceSummaryMemberVoicemailAnalysis{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ReferenceSummary_VoicemailAnalysisRedacted:
+			vv := &ReferenceSummaryMemberVoicemailAnalysisRedacted{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ReferenceSummary_VoicemailRecording:
+			vv := &ReferenceSummaryMemberVoicemailRecording{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ReferenceSummary_VoicemailRecordingRedacted:
+			vv := &ReferenceSummaryMemberVoicemailRecordingRedacted{}
 			*v = vv
 			return vv.Deserialize(d)
 		}

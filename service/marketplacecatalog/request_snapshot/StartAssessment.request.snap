@@ -1,0 +1,5 @@
+POST /StartAssessment
+
+Content-Type: application/json
+
+{"Catalog":"__Catalog__","ClientToken":"__ClientToken__","Controls":[{"ControlId":"__ControlId__","Input":"__Document__"},{"ControlId":"__ControlId__","Input":"__Document__"}],"EntityId":"__EntityId__","FrameworkId":"__FrameworkId__","Tags":{"key0":"__Value__"}}

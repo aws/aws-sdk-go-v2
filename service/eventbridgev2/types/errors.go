@@ -399,8 +399,7 @@ func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The policy document is larger than the account's resource policy size quota, or
-// larger than the service maximum.
+// The policy document exceeds the maximum allowed size.
 type PolicyLengthExceededException struct {
 	Message *string
 

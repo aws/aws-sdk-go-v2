@@ -72,12 +72,11 @@ type StartTranscriptionJobInput struct {
 	// This member is required.
 	TranscriptionJobName *string
 
-	// Makes it possible to redact or flag specified personally identifiable
-	// information (PII) in your transcript. If you use ContentRedaction , you must
-	// also include the sub-parameters: RedactionOutput and RedactionType . You can
-	// optionally include PiiEntityTypes to choose which types of PII you want to
-	// redact. If you do not include PiiEntityTypes in your request, all PII is
-	// redacted.
+	// Makes it possible to redact specified personally identifiable information (PII)
+	// in your transcript. If you use ContentRedaction , you must also include the
+	// sub-parameters: RedactionOutput and RedactionType . You can optionally include
+	// PiiEntityTypes to choose which types of PII you want to redact. If you do not
+	// include PiiEntityTypes in your request, all PII is redacted.
 	ContentRedaction *types.ContentRedaction
 
 	// Enables automatic language identification in your transcription job request.

@@ -1834,6 +1834,35 @@ func TestCheckRequestSnapshot_ListAutonomousDatabasePeers(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListAutonomousDatabaseRefreshableClones(t *testing.T) {
+	input := &ListAutonomousDatabaseRefreshableClonesInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAutonomousDatabaseRefreshableClones(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAutonomousDatabaseRefreshableClones"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListAutonomousDatabases(t *testing.T) {
 	input := &ListAutonomousDatabasesInput{
 		MaxResults: ptr.Int32(1),
@@ -2494,6 +2523,34 @@ func TestCheckRequestSnapshot_StartAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAutonomousDatabase"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartAutonomousDatabaseRefresh(t *testing.T) {
+	input := &StartAutonomousDatabaseRefreshInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+		TimeOfRefreshCutoff:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartAutonomousDatabaseRefresh(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAutonomousDatabaseRefresh"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4853,6 +4910,35 @@ func TestUpdateRequestSnapshot_ListAutonomousDatabasePeers(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListAutonomousDatabaseRefreshableClones(t *testing.T) {
+	input := &ListAutonomousDatabaseRefreshableClonesInput{
+		MaxResults:           ptr.Int32(1),
+		NextToken:            ptr.String("__NextToken__"),
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListAutonomousDatabaseRefreshableClones(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAutonomousDatabaseRefreshableClones"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListAutonomousDatabases(t *testing.T) {
 	input := &ListAutonomousDatabasesInput{
 		MaxResults: ptr.Int32(1),
@@ -5513,6 +5599,34 @@ func TestUpdateRequestSnapshot_StartAutonomousDatabase(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAutonomousDatabase"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartAutonomousDatabaseRefresh(t *testing.T) {
+	input := &StartAutonomousDatabaseRefreshInput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+		TimeOfRefreshCutoff:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartAutonomousDatabaseRefresh(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAutonomousDatabaseRefresh"); err != nil {
 		t.Fatal(err)
 	}
 }

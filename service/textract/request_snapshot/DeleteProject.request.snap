@@ -1,0 +1,7 @@
+POST /service/Textract/operation/DeleteProject
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿jProjectArnn__ProjectArn__ÿ

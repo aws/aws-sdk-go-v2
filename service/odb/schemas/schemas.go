@@ -238,6 +238,11 @@ var ListAutonomousDatabasePeers = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListAutonomousDatabasePeers",
 }, smithy.ShapeTypeOperation, 0)
 
+var ListAutonomousDatabaseRefreshableClones = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseRefreshableClones",
+}, smithy.ShapeTypeOperation, 0)
+
 var ListAutonomousDatabases = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ListAutonomousDatabases",
@@ -351,6 +356,11 @@ var ShrinkAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
 var StartAutonomousDatabase = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "StartAutonomousDatabase",
+}, smithy.ShapeTypeOperation, 0)
+
+var StartAutonomousDatabaseRefresh = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "StartAutonomousDatabaseRefresh",
 }, smithy.ShapeTypeOperation, 0)
 
 var StartDbNode = smithy.NewSchema(smithy.ShapeID{
@@ -890,6 +900,24 @@ var AutonomousDatabasePeerSummary_autonomousDatabaseArn *smithy.Schema
 var AutonomousDatabasePeerSummary_ocid *smithy.Schema
 
 var AutonomousDatabasePeerSummary_region *smithy.Schema
+
+var _AutonomousDatabaseRefreshableCloneList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseRefreshableCloneList",
+}, smithy.ShapeTypeList, 1)
+var _AutonomousDatabaseRefreshableCloneList_member *smithy.Schema
+
+var AutonomousDatabaseRefreshableCloneSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "AutonomousDatabaseRefreshableCloneSummary",
+}, smithy.ShapeTypeStructure, 4)
+var AutonomousDatabaseRefreshableCloneSummary_autonomousDatabaseId *smithy.Schema
+
+var AutonomousDatabaseRefreshableCloneSummary_autonomousDatabaseArn *smithy.Schema
+
+var AutonomousDatabaseRefreshableCloneSummary_ocid *smithy.Schema
+
+var AutonomousDatabaseRefreshableCloneSummary_region *smithy.Schema
 
 var AutonomousDatabaseResourceStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -5169,6 +5197,24 @@ var ListAutonomousDatabasePeersOutput_nextToken *smithy.Schema
 
 var ListAutonomousDatabasePeersOutput_autonomousDatabasePeers *smithy.Schema
 
+var ListAutonomousDatabaseRefreshableClonesInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseRefreshableClonesInput",
+}, smithy.ShapeTypeStructure, 3)
+var ListAutonomousDatabaseRefreshableClonesInput_maxResults *smithy.Schema
+
+var ListAutonomousDatabaseRefreshableClonesInput_nextToken *smithy.Schema
+
+var ListAutonomousDatabaseRefreshableClonesInput_autonomousDatabaseId *smithy.Schema
+
+var ListAutonomousDatabaseRefreshableClonesOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "ListAutonomousDatabaseRefreshableClonesOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListAutonomousDatabaseRefreshableClonesOutput_nextToken *smithy.Schema
+
+var ListAutonomousDatabaseRefreshableClonesOutput_autonomousDatabaseRefreshableClones *smithy.Schema
+
 var ListAutonomousDatabasesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
 	Name:      "ListAutonomousDatabasesInput",
@@ -5592,6 +5638,28 @@ var StartAutonomousDatabaseOutput_displayName *smithy.Schema
 var StartAutonomousDatabaseOutput_status *smithy.Schema
 
 var StartAutonomousDatabaseOutput_statusReason *smithy.Schema
+
+var StartAutonomousDatabaseRefreshInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "StartAutonomousDatabaseRefreshInput",
+}, smithy.ShapeTypeStructure, 2)
+var StartAutonomousDatabaseRefreshInput_autonomousDatabaseId *smithy.Schema
+
+var StartAutonomousDatabaseRefreshInput_timeOfRefreshCutoff *smithy.Schema
+
+var StartAutonomousDatabaseRefreshOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.odb",
+	Name:      "StartAutonomousDatabaseRefreshOutput",
+}, smithy.ShapeTypeStructure, 5)
+var StartAutonomousDatabaseRefreshOutput_autonomousDatabaseId *smithy.Schema
+
+var StartAutonomousDatabaseRefreshOutput_displayName *smithy.Schema
+
+var StartAutonomousDatabaseRefreshOutput_status *smithy.Schema
+
+var StartAutonomousDatabaseRefreshOutput_statusReason *smithy.Schema
+
+var StartAutonomousDatabaseRefreshOutput_refreshableStatus *smithy.Schema
 
 var StartDbNodeInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.odb",
@@ -6983,6 +7051,16 @@ func init() {
 	AutonomousDatabasePeerSummary_region = AutonomousDatabasePeerSummary.AddMember("region", smithyprelude.String)
 
 	_AutonomousDatabasePeerList_member = _AutonomousDatabasePeerList.AddMember("member", AutonomousDatabasePeerSummary)
+
+	AutonomousDatabaseRefreshableCloneSummary_autonomousDatabaseId = AutonomousDatabaseRefreshableCloneSummary.AddMember("autonomousDatabaseId", _ResourceId)
+
+	AutonomousDatabaseRefreshableCloneSummary_autonomousDatabaseArn = AutonomousDatabaseRefreshableCloneSummary.AddMember("autonomousDatabaseArn", _ResourceArn)
+
+	AutonomousDatabaseRefreshableCloneSummary_ocid = AutonomousDatabaseRefreshableCloneSummary.AddMember("ocid", smithyprelude.String)
+
+	AutonomousDatabaseRefreshableCloneSummary_region = AutonomousDatabaseRefreshableCloneSummary.AddMember("region", smithyprelude.String)
+
+	_AutonomousDatabaseRefreshableCloneList_member = _AutonomousDatabaseRefreshableCloneList.AddMember("member", AutonomousDatabaseRefreshableCloneSummary)
 
 	AutonomousDatabaseVersionSummary_dbWorkload = AutonomousDatabaseVersionSummary.AddMember("dbWorkload", DbWorkload)
 
@@ -9506,6 +9584,16 @@ func init() {
 
 	ListAutonomousDatabasePeersOutput_autonomousDatabasePeers = ListAutonomousDatabasePeersOutput.AddMember("autonomousDatabasePeers", _AutonomousDatabasePeerList)
 
+	ListAutonomousDatabaseRefreshableClonesInput_maxResults = ListAutonomousDatabaseRefreshableClonesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListAutonomousDatabaseRefreshableClonesInput_nextToken = ListAutonomousDatabaseRefreshableClonesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListAutonomousDatabaseRefreshableClonesInput_autonomousDatabaseId = ListAutonomousDatabaseRefreshableClonesInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn, &smithytraits.HTTPLabel{})
+
+	ListAutonomousDatabaseRefreshableClonesOutput_nextToken = ListAutonomousDatabaseRefreshableClonesOutput.AddMember("nextToken", smithyprelude.String)
+
+	ListAutonomousDatabaseRefreshableClonesOutput_autonomousDatabaseRefreshableClones = ListAutonomousDatabaseRefreshableClonesOutput.AddMember("autonomousDatabaseRefreshableClones", _AutonomousDatabaseRefreshableCloneList)
+
 	ListAutonomousDatabasesInput_maxResults = ListAutonomousDatabasesInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListAutonomousDatabasesInput_nextToken = ListAutonomousDatabasesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
@@ -9745,6 +9833,20 @@ func init() {
 	StartAutonomousDatabaseOutput_status = StartAutonomousDatabaseOutput.AddMember("status", AutonomousDatabaseResourceStatus)
 
 	StartAutonomousDatabaseOutput_statusReason = StartAutonomousDatabaseOutput.AddMember("statusReason", smithyprelude.String)
+
+	StartAutonomousDatabaseRefreshInput_autonomousDatabaseId = StartAutonomousDatabaseRefreshInput.AddMember("autonomousDatabaseId", _ResourceIdOrArn)
+
+	StartAutonomousDatabaseRefreshInput_timeOfRefreshCutoff = StartAutonomousDatabaseRefreshInput.AddMember("timeOfRefreshCutoff", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	StartAutonomousDatabaseRefreshOutput_autonomousDatabaseId = StartAutonomousDatabaseRefreshOutput.AddMember("autonomousDatabaseId", smithyprelude.String)
+
+	StartAutonomousDatabaseRefreshOutput_displayName = StartAutonomousDatabaseRefreshOutput.AddMember("displayName", smithyprelude.String)
+
+	StartAutonomousDatabaseRefreshOutput_status = StartAutonomousDatabaseRefreshOutput.AddMember("status", AutonomousDatabaseResourceStatus)
+
+	StartAutonomousDatabaseRefreshOutput_statusReason = StartAutonomousDatabaseRefreshOutput.AddMember("statusReason", smithyprelude.String)
+
+	StartAutonomousDatabaseRefreshOutput_refreshableStatus = StartAutonomousDatabaseRefreshOutput.AddMember("refreshableStatus", RefreshableStatus)
 
 	StartDbNodeInput_cloudVmClusterId = StartDbNodeInput.AddMember("cloudVmClusterId", _ResourceId)
 

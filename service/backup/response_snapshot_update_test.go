@@ -1283,6 +1283,9 @@ func TestUpdateResponseSnapshot_DescribeRegionSettings(t *testing.T) {
 		ResourceTypeManagementPreference: map[string]bool{
 			"key0": true,
 		},
+		ResourceTypeOptInIncremental: map[string]bool{
+			"key0": true,
+		},
 	}
 	proto := restjson1.New(schemas.CryoControllerUserManager)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeRegionSettings, schemas.DescribeRegionSettingsOutput, schemas.DescribeRegionSettingsOutput)

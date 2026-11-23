@@ -1065,6 +1065,10 @@ func TestCheckRequestSnapshot_CreateDocument(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7222,6 +7226,10 @@ func TestCheckRequestSnapshot_UpdateDocument(t *testing.T) {
 		DocumentVersion: ptr.String("__DocumentVersion__"),
 		DocumentFormat:  types.DocumentFormat("YAML"),
 		TargetType:      ptr.String("__TargetType__"),
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8747,6 +8755,10 @@ func TestUpdateRequestSnapshot_CreateDocument(t *testing.T) {
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -14905,6 +14917,10 @@ func TestUpdateRequestSnapshot_UpdateDocument(t *testing.T) {
 		DocumentVersion: ptr.String("__DocumentVersion__"),
 		DocumentFormat:  types.DocumentFormat("YAML"),
 		TargetType:      ptr.String("__TargetType__"),
+		CloudProviders: []types.CloudProvider{
+			types.CloudProvider("AWS"),
+			types.CloudProvider("AWS"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

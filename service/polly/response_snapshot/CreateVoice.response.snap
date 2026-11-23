@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Voice":{"AdditionalLanguageCodes":["arb","arb"],"Arn":"__Arn__","CreationTime":946684800,"CustomerManagedEncryption":{"EncryptionContext":{"key0":"__Value__"},"KmsKeyArn":"__KmsKeyArn__"},"Gender":"Female","Id":"Aditi","LanguageCode":"arb","LanguageName":"__LanguageName__","Name":"__Name__","Origin":"aws","Status":"pending","StatusReason":"__StatusReason__","SupportedEngines":["standard","standard"],"VoiceCreationData":{"Recordings":[{"Data":{"Bytes":"YmxvYg==","S3Url":"__S3Url__"},"Format":"wav"},{"Data":{"Bytes":"YmxvYg==","S3Url":"__S3Url__"},"Format":"wav"}]}}}

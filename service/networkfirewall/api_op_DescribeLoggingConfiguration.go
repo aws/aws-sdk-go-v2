@@ -39,6 +39,19 @@ type DescribeLoggingConfigurationInput struct {
 	// You must specify the ARN or the name, and you can specify both.
 	FirewallName *string
 
+	// The type of firewall that the request targets. Network Firewall supports the
+	// following firewall types:
+	//
+	//   - IGW_FIREWALL - An internet gateway firewall, which Amazon Web Services
+	//   Network Security Manager creates and manages for a VPC.
+	//
+	//   - FIREWALL - A standard Network Firewall firewall.
+	//
+	// If you specify the firewall ARN, the type must match the resource type in the
+	// ARN. If you specify only the firewall name, Network Firewall uses this value to
+	// identify the firewall. If you don't specify a type, the default is FIREWALL .
+	FirewallType types.FirewallType
+
 	noSmithyDocumentSerde
 }
 
@@ -54,6 +67,9 @@ func (v *DescribeLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSeria
 	}
 	if v.FirewallName != nil {
 		s.WriteString(schemas.DescribeLoggingConfigurationRequest_FirewallName, *v.FirewallName)
+	}
+	if v.FirewallType != "" {
+		s.WriteString(schemas.DescribeLoggingConfigurationRequest_FirewallType, string(v.FirewallType))
 	}
 }
 

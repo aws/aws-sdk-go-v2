@@ -62,11 +62,35 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_CreateVoice(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVoice(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateVoice")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteLexicon(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteLexicon(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteLexicon")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteVoice(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVoice(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteVoice")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -103,6 +127,18 @@ func TestCheckSnapshot_GetSpeechSynthesisTask(t *testing.T) {
 	_, err := svc.GetSpeechSynthesisTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetSpeechSynthesisTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetVoice(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVoice(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetVoice")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -217,11 +253,35 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_CreateVoice(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateVoice(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateVoice")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteLexicon(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteLexicon(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteLexicon")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteVoice(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVoice(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteVoice")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -258,6 +318,18 @@ func TestUpdateSnapshot_GetSpeechSynthesisTask(t *testing.T) {
 	_, err := svc.GetSpeechSynthesisTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetSpeechSynthesisTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetVoice(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVoice(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetVoice")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

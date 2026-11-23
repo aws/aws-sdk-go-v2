@@ -63,12 +63,13 @@ type ProviderType string
 
 // Enum values for ProviderType
 const (
-	ProviderTypeBitbucket              ProviderType = "Bitbucket"
-	ProviderTypeGithub                 ProviderType = "GitHub"
-	ProviderTypeGithubEnterpriseServer ProviderType = "GitHubEnterpriseServer"
-	ProviderTypeGitlab                 ProviderType = "GitLab"
-	ProviderTypeGitlabSelfManaged      ProviderType = "GitLabSelfManaged"
-	ProviderTypeAzureDevOps            ProviderType = "AzureDevOps"
+	ProviderTypeBitbucket                          ProviderType = "Bitbucket"
+	ProviderTypeGithub                             ProviderType = "GitHub"
+	ProviderTypeGithubEnterpriseServer             ProviderType = "GitHubEnterpriseServer"
+	ProviderTypeGitlab                             ProviderType = "GitLab"
+	ProviderTypeGitlabSelfManaged                  ProviderType = "GitLabSelfManaged"
+	ProviderTypeAzureDevOps                        ProviderType = "AzureDevOps"
+	ProviderTypeGithubEnterpriseCloudDataResidency ProviderType = "GitHubEnterpriseCloudDataResidency"
 )
 
 // Values returns all known values for ProviderType. Note that this can be
@@ -83,6 +84,7 @@ func (ProviderType) Values() []ProviderType {
 		"GitLab",
 		"GitLabSelfManaged",
 		"AzureDevOps",
+		"GitHubEnterpriseCloudDataResidency",
 	}
 }
 

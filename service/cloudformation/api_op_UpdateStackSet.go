@@ -161,11 +161,17 @@ type UpdateStackSetInput struct {
 	//   StackSet directly, you must acknowledge this capability. For more information,
 	//   see [Perform custom processing on CloudFormation templates with template macros].
 	//
-	// StackSets with service-managed permissions do not currently support the use of
-	//   macros in templates. (This includes the [AWS::Include]and [AWS::Serverless]transforms, which are macros
-	//   hosted by CloudFormation.) Even if you specify this capability for a StackSet
-	//   with service-managed permissions, if you reference a macro in your template the
-	//   StackSet operation will fail.
+	// With service-managed permissions, CloudFormation can process macros, nested
+	//   stacks, and transforms in your StackSet template only when you provide a custom
+	//   execution role template. (Macros include the [AWS::Include]and [AWS::Serverless]transforms, which are macros
+	//   hosted by CloudFormation.) The default service-managed execution role can't
+	//   provision them: if you reference a macro in your template, the StackSet
+	//   operation fails even when you specify this capability.
+	//
+	// To use macros, nested stacks, or transforms with service-managed permissions,
+	//   specify a custom execution role template in ExecutionRoleTemplateBody or
+	//   ExecutionRoleTemplateUrl , and specify both CAPABILITY_NAMED_IAM and
+	//   CAPABILITY_AUTO_EXPAND .
 	//
 	// [AWS::IAM::AccessKey]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-iam-accesskey.html
 	// [AWS::Include]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-include.html
@@ -199,18 +205,47 @@ type UpdateStackSetInput struct {
 	// A brief description of updates that you are making.
 	Description *string
 
+	// The name of the IAM execution role that CloudFormation uses for StackSet
+	// operations in your target accounts.
+	//
 	// [Self-managed permissions] The name of the IAM execution role to use to update
 	// the stack set. If you do not specify an execution role, CloudFormation uses the
-	// AWSCloudFormationStackSetExecutionRole role for the StackSet operation.
-	//
-	// Specify an IAM role only if you are using customized execution roles to control
-	// which stack resources users and groups can include in their StackSets.
+	// AWSCloudFormationStackSetExecutionRole role for the StackSet operation. Specify
+	// an IAM role only if you are using customized execution roles to control which
+	// stack resources users and groups can include in their StackSets.
 	//
 	// If you specify a customized execution role, CloudFormation uses that role to
 	// update the stack. If you do not specify a customized execution role,
 	// CloudFormation performs the update using the role previously associated with the
 	// StackSet, so long as you have permissions to perform operations on the StackSet.
+	//
+	// [Service-managed permissions] Set this name when you use custom execution
+	// roles. The role that your custom execution role template provisions in your
+	// target accounts must have this same name, and the name must begin with
+	// stacksets-exec-custom- . You don't need to specify this parameter if an
+	// execution role name is already configured for the StackSet and you aren't
+	// changing it.
 	ExecutionRoleName *string
+
+	// The body of the template that creates or updates a custom execution role in
+	// target accounts. This parameter applies only when the permissions model is
+	// SERVICE_MANAGED .
+	//
+	// Conditional: Specify either ExecutionRoleTemplateBody or
+	// ExecutionRoleTemplateUrl , but not both. If you don't specify either,
+	// CloudFormation uses the default service-managed execution role in target
+	// accounts.
+	ExecutionRoleTemplateBody *string
+
+	// The URL of an Amazon S3 object that contains the template that creates or
+	// updates a custom execution role in target accounts. This parameter applies only
+	// when the permissions model is SERVICE_MANAGED .
+	//
+	// Conditional: Specify either ExecutionRoleTemplateBody or
+	// ExecutionRoleTemplateUrl , but not both. If you don't specify either,
+	// CloudFormation uses the default service-managed execution role in target
+	// accounts.
+	ExecutionRoleTemplateUrl *string
 
 	// Describes whether CloudFormation performs non-conflicting operations
 	// concurrently and queues conflicting operations.
@@ -269,6 +304,11 @@ type UpdateStackSetInput struct {
 	// instance status.
 	Regions []string
 
+	// The name of the Amazon S3 bucket that stores the execution role stack template
+	// body. CloudFormation uses this bucket only when you specify a custom execution
+	// role template.
+	StackSetOutputBucket *string
+
 	// The key-value pairs to associate with this StackSet and the stacks created from
 	// it. CloudFormation also propagates these tags to supported resources that are
 	// created in the stacks. You can specify a maximum number of 50 tags.
@@ -312,6 +352,12 @@ type UpdateStackSetInput struct {
 	// Conditional: You must specify only one of the following parameters: TemplateBody
 	// or TemplateURL —or set UsePreviousTemplate to true.
 	TemplateURL *string
+
+	// Specifies whether CloudFormation uses the default service-managed execution
+	// role instead of a custom execution role in target accounts. If you set this to
+	// true , CloudFormation ignores any custom execution role template specified in
+	// ExecutionRoleTemplateBody or ExecutionRoleTemplateUrl .
+	UseAdminExecutionRole *bool
 
 	// Use the existing template that's associated with the StackSet that you're
 	// updating.
@@ -358,6 +404,12 @@ func (v *UpdateStackSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionRoleName != nil {
 		s.WriteString(schemas.UpdateStackSetInput_ExecutionRoleName, *v.ExecutionRoleName)
 	}
+	if v.ExecutionRoleTemplateBody != nil {
+		s.WriteString(schemas.UpdateStackSetInput_ExecutionRoleTemplateBody, *v.ExecutionRoleTemplateBody)
+	}
+	if v.ExecutionRoleTemplateUrl != nil {
+		s.WriteString(schemas.UpdateStackSetInput_ExecutionRoleTemplateUrl, *v.ExecutionRoleTemplateUrl)
+	}
 	if v.ManagedExecution != nil {
 		s.WriteStruct(schemas.UpdateStackSetInput_ManagedExecution)
 		v.ManagedExecution.SerializeMembers(s)
@@ -383,6 +435,9 @@ func (v *UpdateStackSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StackSetName != nil {
 		s.WriteString(schemas.UpdateStackSetInput_StackSetName, *v.StackSetName)
 	}
+	if v.StackSetOutputBucket != nil {
+		s.WriteString(schemas.UpdateStackSetInput_StackSetOutputBucket, *v.StackSetOutputBucket)
+	}
 	if v.Tags != nil {
 		serializeTags(s, schemas.UpdateStackSetInput_Tags, v.Tags)
 	}
@@ -391,6 +446,9 @@ func (v *UpdateStackSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.TemplateURL != nil {
 		s.WriteString(schemas.UpdateStackSetInput_TemplateURL, *v.TemplateURL)
+	}
+	if v.UseAdminExecutionRole != nil {
+		s.WriteBool(schemas.UpdateStackSetInput_UseAdminExecutionRole, *v.UseAdminExecutionRole)
 	}
 	if v.UsePreviousTemplate != nil {
 		s.WriteBool(schemas.UpdateStackSetInput_UsePreviousTemplate, *v.UsePreviousTemplate)

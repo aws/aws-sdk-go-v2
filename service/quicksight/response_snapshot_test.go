@@ -3797,6 +3797,54 @@ func TestCheckResponseSnapshot_BatchDeleteKnowledgeBase(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_BatchDeletePolicyAssignmentByPolicy(t *testing.T) {
+	want := &BatchDeletePolicyAssignmentByPolicyOutput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+		Success: []types.BatchDeletePolicyAssignmentSuccess{
+			{
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+			},
+			{
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+			},
+		},
+		Errors: []types.BatchDeletePolicyAssignmentError{
+			{
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchDeletePolicyAssignmentByPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchDeletePolicyAssignmentByPolicy(context.Background(), &BatchDeletePolicyAssignmentByPolicyInput{
+		AccountId: ptr.String("__AccountId__"),
+		PolicyArn: ptr.String("__PolicyArn__"),
+		PrincipalArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchDeletePolicyAssignmentByPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_BatchDeleteTopicReviewedAnswer(t *testing.T) {
 	want := &BatchDeleteTopicReviewedAnswerOutput{
 		TopicId:  ptr.String("__TopicId__"),
@@ -3940,6 +3988,66 @@ func TestCheckResponseSnapshot_BatchDescribeUserLimits(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_BatchPutPolicyAssignmentByPolicy(t *testing.T) {
+	want := &BatchPutPolicyAssignmentByPolicyOutput{
+		PolicyArn: ptr.String("__PolicyArn__"),
+		Success: []types.BatchPutPolicyAssignmentSuccess{
+			{
+				PrincipalArn:      ptr.String("__PrincipalArn__"),
+				ReplacedPolicyArn: ptr.String("__ReplacedPolicyArn__"),
+				Revision:          ptr.Int64(1),
+			},
+			{
+				PrincipalArn:      ptr.String("__PrincipalArn__"),
+				ReplacedPolicyArn: ptr.String("__ReplacedPolicyArn__"),
+				Revision:          ptr.Int64(1),
+			},
+		},
+		Errors: []types.BatchPutPolicyAssignmentError{
+			{
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				PrincipalArn: ptr.String("__PrincipalArn__"),
+				ErrorCode:    ptr.String("__ErrorCode__"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("BatchPutPolicyAssignmentByPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.BatchPutPolicyAssignmentByPolicy(context.Background(), &BatchPutPolicyAssignmentByPolicyInput{
+		AccountId: ptr.String("__AccountId__"),
+		PolicyArn: ptr.String("__PolicyArn__"),
+		Assignments: []types.PutAssignmentEntry{
+			{
+				PrincipalArn:      ptr.String("__PrincipalArn__"),
+				ExistingPolicyArn: ptr.String("__ExistingPolicyArn__"),
+				Revision:          ptr.Int64(1),
+			},
+			{
+				PrincipalArn:      ptr.String("__PrincipalArn__"),
+				ExistingPolicyArn: ptr.String("__ExistingPolicyArn__"),
+				Revision:          ptr.Int64(1),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "BatchPutPolicyAssignmentByPolicy.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CancelIngestion(t *testing.T) {
 	want := &CancelIngestionOutput{
 		Arn:         ptr.String("__Arn__"),
@@ -3965,6 +4073,124 @@ func TestCheckResponseSnapshot_CancelIngestion(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CancelIngestion.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateAccessControlApplication(t *testing.T) {
+	want := &CreateAccessControlApplicationOutput{
+		Status:                         ptr.Int32(200),
+		RequestId:                      ptr.String("__RequestId__"),
+		ApplicationId:                  ptr.String("__ApplicationId__"),
+		Arn:                            ptr.String("__Arn__"),
+		AccessControlApplicationStatus: types.AccessControlApplicationStatus("ENABLED"),
+		CreatedTime:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		TenantUrl:                      ptr.String("__TenantUrl__"),
+		IdcApplicationArn:              ptr.String("__IdcApplicationArn__"),
+		QuickAuthenticationConfiguration: &types.QuickAuthenticationConfigCreateOutput{
+			QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+			QuickAuthenticationConfigurationDetailCreateOutput: &types.QuickAuthenticationConfigurationDetailCreateOutputMemberQuickManagedPublicAuthCode{
+				Value: types.QuickManagedPublicAuthCodeQuickAuthenticationConfig{
+					RedirectUris: []string{
+						"__Member__",
+						"__Member__",
+					},
+					ClientId: ptr.String("__ClientId__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateAccessControlApplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateAccessControlApplication(context.Background(), &CreateAccessControlApplicationInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		ApplicationId:      ptr.String("__ApplicationId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		Namespace:          ptr.String("__Namespace__"),
+		AuthenticationType: types.AccessControlApplicationAuthenticationType("OIDC"),
+		IdpAuthorizingConfiguration: &types.IdpAuthorizingConfigInput{
+			IdpAuthorizingType: types.IdpAuthorizingType("EXTERNAL_IDP_PUBLIC_AUTH_CODE"),
+			IdpAuthorizingConfigurationDetailInput: &types.IdpAuthorizingConfigurationDetailInputMemberExternalIdpPublicAuthCode{
+				Value: types.ExternalIdpPublicAuthCodeAuthorizingConfig{
+					ClientId:  ptr.String("__ClientId__"),
+					IssuerUrl: ptr.String("__IssuerUrl__"),
+				},
+			},
+			IdcTrustedTokenIssuerConfiguration: &types.IdcTrustedTokenIssuerConfig{
+				IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+			},
+		},
+		QuickAuthenticationConfiguration: &types.QuickAuthenticationConfigInput{
+			QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+			QuickAuthenticationConfigurationDetailInput: &types.QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode{
+				Value: types.QuickManagedAuthCodeQuickAuthenticationConfigInput{
+					RedirectUris: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateAccessControlApplication.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateAccessControlApplicationSecret(t *testing.T) {
+	want := &CreateAccessControlApplicationSecretOutput{
+		Status:         ptr.Int32(200),
+		RequestId:      ptr.String("__RequestId__"),
+		ClientSecretId: ptr.String("__ClientSecretId__"),
+		CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateAccessControlApplicationSecret.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateAccessControlApplicationSecret(context.Background(), &CreateAccessControlApplicationSecretInput{
+		AwsAccountId:  ptr.String("__AwsAccountId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Description:   ptr.String("__Description__"),
+		ClientSecretConfiguration: &types.ClientSecretConfiguration{
+			ClientSecretSourceType: types.ClientSecretSourceType("IDP_PROVIDED"),
+			ClientSecretConfigurationDetail: &types.ClientSecretConfigurationDetailMemberIdp{
+				Value: types.IdpClientSecretInput{
+					RegionalSecretManagerArns: map[string]string{
+						"key0": "__Value__",
+					},
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateAccessControlApplicationSecret.response", err)
 	}
 }
 
@@ -7131,6 +7357,9 @@ func TestCheckResponseSnapshot_CreateCustomPermissions(t *testing.T) {
 			CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
 			ShareMCPAction:                             types.CapabilityState("DENY"),
 			UseMCPAction:                               types.CapabilityState("DENY"),
+			LocalMCPAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateLocalMCPAction:              types.CapabilityState("DENY"),
+			UseLocalMCPAction:                          types.CapabilityState("DENY"),
 			OpenAPIAction:                              types.CapabilityState("DENY"),
 			CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
 			ShareOpenAPIAction:                         types.CapabilityState("DENY"),
@@ -10968,6 +11197,22 @@ func TestCheckResponseSnapshot_CreateDataSet(t *testing.T) {
 				},
 			},
 		},
+		UnmaterializedCalculatedColumns: []types.UnmaterializedCalculatedColumn{
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -11397,6 +11642,51 @@ func TestCheckResponseSnapshot_CreateIAMPolicyAssignment(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateInboundConnector(t *testing.T) {
+	want := &CreateInboundConnectorOutput{
+		Status:                 ptr.Int32(200),
+		RequestId:              ptr.String("__RequestId__"),
+		InboundConnectorId:     ptr.String("__InboundConnectorId__"),
+		Arn:                    ptr.String("__Arn__"),
+		TenantUrl:              ptr.String("__TenantUrl__"),
+		InboundConnectorStatus: types.InboundConnectorStatus("ENABLED"),
+		CreatedTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateInboundConnector.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateInboundConnector(context.Background(), &CreateInboundConnectorInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		InboundConnectorConfiguration: &types.InboundConnectorConfig{
+			InboundConnectorType: types.InboundConnectorType("QUICK_DESKTOP"),
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateInboundConnector.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateIngestion(t *testing.T) {
 	want := &CreateIngestionOutput{
 		Arn:             ptr.String("__Arn__"),
@@ -11502,6 +11792,43 @@ func TestCheckResponseSnapshot_CreateKnowledgeBase(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CreateKnowledgeBase.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreateKnowledgeBaseRefreshSchedule(t *testing.T) {
+	want := &CreateKnowledgeBaseRefreshScheduleOutput{
+		ScheduleId:       ptr.String("__ScheduleId__"),
+		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+		RequestId:        ptr.String("__RequestId__"),
+		Status:           ptr.Int32(200),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateKnowledgeBaseRefreshSchedule.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateKnowledgeBaseRefreshSchedule(context.Background(), &CreateKnowledgeBaseRefreshScheduleInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ScheduleId:      ptr.String("__ScheduleId__"),
+		ScheduleFrequency: &types.KnowledgeBaseRefreshFrequency{
+			Interval: types.KbRefreshInterval("DAILY"),
+			RefreshOnDay: &types.KnowledgeBaseScheduleRefreshOnEntity{
+				DayOfWeek:  types.KbDayOfWeek("SUNDAY"),
+				DayOfMonth: ptr.String("__DayOfMonth__"),
+			},
+		},
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		State:     types.ScheduleState("ENABLED"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateKnowledgeBaseRefreshSchedule.response", err)
 	}
 }
 
@@ -15965,6 +16292,59 @@ func TestCheckResponseSnapshot_CreateVPCConnection(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteAccessControlApplication(t *testing.T) {
+	want := &DeleteAccessControlApplicationOutput{
+		Status:        ptr.Int32(200),
+		RequestId:     ptr.String("__RequestId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteAccessControlApplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteAccessControlApplication(context.Background(), &DeleteAccessControlApplicationInput{
+		AwsAccountId:      ptr.String("__AwsAccountId__"),
+		ApplicationId:     ptr.String("__ApplicationId__"),
+		IdcApplicationArn: ptr.String("__IdcApplicationArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteAccessControlApplication.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteAccessControlApplicationSecret(t *testing.T) {
+	want := &DeleteAccessControlApplicationSecretOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteAccessControlApplicationSecret.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteAccessControlApplicationSecret(context.Background(), &DeleteAccessControlApplicationSecretInput{
+		AwsAccountId:   ptr.String("__AwsAccountId__"),
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		ClientSecretId: ptr.String("__ClientSecretId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteAccessControlApplicationSecret.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteAccountCustomPermission(t *testing.T) {
 	want := &DeleteAccountCustomPermissionOutput{
 		RequestId: ptr.String("__RequestId__"),
@@ -16579,6 +16959,32 @@ func TestCheckResponseSnapshot_DeleteIdentityPropagationConfig(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteInboundConnector(t *testing.T) {
+	want := &DeleteInboundConnectorOutput{
+		Status:             ptr.Int32(200),
+		RequestId:          ptr.String("__RequestId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteInboundConnector.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteInboundConnector(context.Background(), &DeleteInboundConnectorInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteInboundConnector.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	want := &DeleteKnowledgeBaseOutput{
 		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
@@ -16603,6 +17009,34 @@ func TestCheckResponseSnapshot_DeleteKnowledgeBase(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteKnowledgeBase.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteKnowledgeBaseRefreshSchedule(t *testing.T) {
+	want := &DeleteKnowledgeBaseRefreshScheduleOutput{
+		ScheduleId:       ptr.String("__ScheduleId__"),
+		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+		RequestId:        ptr.String("__RequestId__"),
+		Status:           ptr.Int32(200),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteKnowledgeBaseRefreshSchedule.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteKnowledgeBaseRefreshSchedule(context.Background(), &DeleteKnowledgeBaseRefreshScheduleInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ScheduleId:      ptr.String("__ScheduleId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteKnowledgeBaseRefreshSchedule.response", err)
 	}
 }
 
@@ -16679,6 +17113,30 @@ func TestCheckResponseSnapshot_DeleteOAuthClientApplication(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteOAuthClientApplication.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeletePolicyAssignment(t *testing.T) {
+	want := &DeletePolicyAssignmentOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeletePolicyAssignment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeletePolicyAssignment(context.Background(), &DeletePolicyAssignmentInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PolicyArn:    ptr.String("__PolicyArn__"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+		Revision:     ptr.Int64(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeletePolicyAssignment.response", err)
 	}
 }
 
@@ -17090,6 +17548,68 @@ func TestCheckResponseSnapshot_DeleteVPCConnection(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteVPCConnection.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeAccessControlApplication(t *testing.T) {
+	want := &DescribeAccessControlApplicationOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+		AccessControlApplication: &types.AccessControlApplication{
+			ApplicationId:      ptr.String("__ApplicationId__"),
+			Arn:                ptr.String("__Arn__"),
+			Name:               ptr.String("__Name__"),
+			Namespace:          ptr.String("__Namespace__"),
+			AuthenticationType: types.AccessControlApplicationAuthenticationType("OIDC"),
+			Status:             types.AccessControlApplicationStatus("ENABLED"),
+			CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			TenantUrl:          ptr.String("__TenantUrl__"),
+			Description:        ptr.String("__Description__"),
+			IdcApplicationArn:  ptr.String("__IdcApplicationArn__"),
+			IdpAuthorizingConfiguration: &types.IdpAuthorizingConfig{
+				IdpAuthorizingType: types.IdpAuthorizingType("EXTERNAL_IDP_PUBLIC_AUTH_CODE"),
+				IdpAuthorizingConfigurationDetail: &types.IdpAuthorizingConfigurationDetailMemberExternalIdpPublicAuthCode{
+					Value: types.ExternalIdpPublicAuthCodeAuthorizingConfig{
+						ClientId:  ptr.String("__ClientId__"),
+						IssuerUrl: ptr.String("__IssuerUrl__"),
+					},
+				},
+				IdcTrustedTokenIssuerConfiguration: &types.IdcTrustedTokenIssuerConfig{
+					IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+				},
+			},
+			QuickAuthenticationConfiguration: &types.QuickAuthenticationConfig{
+				QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+				QuickAuthenticationConfigurationDetail: &types.QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode{
+					Value: types.QuickManagedPublicAuthCodeQuickAuthenticationConfig{
+						RedirectUris: []string{
+							"__Member__",
+							"__Member__",
+						},
+						ClientId: ptr.String("__ClientId__"),
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeAccessControlApplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeAccessControlApplication(context.Background(), &DescribeAccessControlApplicationInput{
+		AwsAccountId:  ptr.String("__AwsAccountId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeAccessControlApplication.response", err)
 	}
 }
 
@@ -21636,6 +22156,9 @@ func TestCheckResponseSnapshot_DescribeCustomPermissions(t *testing.T) {
 				CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
 				ShareMCPAction:                             types.CapabilityState("DENY"),
 				UseMCPAction:                               types.CapabilityState("DENY"),
+				LocalMCPAction:                             types.CapabilityState("DENY"),
+				CreateAndUpdateLocalMCPAction:              types.CapabilityState("DENY"),
+				UseLocalMCPAction:                          types.CapabilityState("DENY"),
 				OpenAPIAction:                              types.CapabilityState("DENY"),
 				CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
 				ShareOpenAPIAction:                         types.CapabilityState("DENY"),
@@ -26533,6 +27056,22 @@ func TestCheckResponseSnapshot_DescribeDataSet(t *testing.T) {
 					},
 				},
 			},
+			UnmaterializedCalculatedColumns: []types.UnmaterializedCalculatedColumn{
+				{
+					ColumnId:   ptr.String("__ColumnId__"),
+					ColumnName: ptr.String("__ColumnName__"),
+					Expression: ptr.String("__Expression__"),
+					Type:       types.ColumnDataType("STRING"),
+					SubType:    types.ColumnDataSubType("FLOAT"),
+				},
+				{
+					ColumnId:   ptr.String("__ColumnId__"),
+					ColumnName: ptr.String("__ColumnName__"),
+					Expression: ptr.String("__Expression__"),
+					Type:       types.ColumnDataType("STRING"),
+					SubType:    types.ColumnDataSubType("FLOAT"),
+				},
+			},
 		},
 		RequestId: ptr.String("__RequestId__"),
 		Status:    200,
@@ -27110,6 +27649,44 @@ func TestCheckResponseSnapshot_DescribeIAMPolicyAssignment(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeInboundConnector(t *testing.T) {
+	want := &DescribeInboundConnectorOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+		InboundConnector: &types.InboundConnector{
+			InboundConnectorId: ptr.String("__InboundConnectorId__"),
+			Arn:                ptr.String("__Arn__"),
+			Name:               ptr.String("__Name__"),
+			Status:             types.InboundConnectorStatus("ENABLED"),
+			TenantUrl:          ptr.String("__TenantUrl__"),
+			CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			InboundConnectorConfiguration: &types.InboundConnectorConfig{
+				InboundConnectorType: types.InboundConnectorType("QUICK_DESKTOP"),
+			},
+			Description: ptr.String("__Description__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeInboundConnector.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeInboundConnector(context.Background(), &DescribeInboundConnectorInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeInboundConnector.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeIngestion(t *testing.T) {
 	want := &DescribeIngestionOutput{
 		Ingestion: &types.Ingestion{
@@ -27353,6 +27930,45 @@ func TestCheckResponseSnapshot_DescribeKnowledgeBasePermissions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeKnowledgeBasePermissions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeKnowledgeBaseRefreshSchedule(t *testing.T) {
+	want := &DescribeKnowledgeBaseRefreshScheduleOutput{
+		Schedule: &types.KnowledgeBaseRefreshScheduleSummary{
+			ScheduleId: ptr.String("__ScheduleId__"),
+			ScheduleFrequency: &types.KnowledgeBaseRefreshFrequency{
+				Interval: types.KbRefreshInterval("DAILY"),
+				RefreshOnDay: &types.KnowledgeBaseScheduleRefreshOnEntity{
+					DayOfWeek:  types.KbDayOfWeek("SUNDAY"),
+					DayOfMonth: ptr.String("__DayOfMonth__"),
+				},
+			},
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			State:     types.ScheduleState("ENABLED"),
+		},
+		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+		RequestId:        ptr.String("__RequestId__"),
+		Status:           ptr.Int32(200),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeKnowledgeBaseRefreshSchedule.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeKnowledgeBaseRefreshSchedule(context.Background(), &DescribeKnowledgeBaseRefreshScheduleInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ScheduleId:      ptr.String("__ScheduleId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeKnowledgeBaseRefreshSchedule.response", err)
 	}
 }
 
@@ -32935,6 +33551,34 @@ func TestCheckResponseSnapshot_GetIdentityContext(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetPolicyAssignment(t *testing.T) {
+	want := &GetPolicyAssignmentOutput{
+		PolicyArn:  ptr.String("__PolicyArn__"),
+		PolicyName: ptr.String("__PolicyName__"),
+		UpdatedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Revision:   ptr.Int64(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetPolicyAssignment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetPolicyAssignment(context.Background(), &GetPolicyAssignmentInput{
+		AccountId:    ptr.String("__AccountId__"),
+		PolicyType:   types.PolicyType("LIMITS_PROFILE"),
+		PrincipalArn: ptr.String("__PrincipalArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetPolicyAssignment.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetSessionEmbedUrl(t *testing.T) {
 	want := &GetSessionEmbedUrlOutput{
 		EmbedUrl:  ptr.String("__EmbedUrl__"),
@@ -32960,6 +33604,108 @@ func TestCheckResponseSnapshot_GetSessionEmbedUrl(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetSessionEmbedUrl.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListAccessControlApplications(t *testing.T) {
+	want := &ListAccessControlApplicationsOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+		AccessControlApplications: []types.AccessControlApplicationSummary{
+			{
+				ApplicationId:      ptr.String("__ApplicationId__"),
+				Arn:                ptr.String("__Arn__"),
+				Name:               ptr.String("__Name__"),
+				Namespace:          ptr.String("__Namespace__"),
+				AuthenticationType: types.AccessControlApplicationAuthenticationType("OIDC"),
+				Status:             types.AccessControlApplicationStatus("ENABLED"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TenantUrl:          ptr.String("__TenantUrl__"),
+				IdpAuthorizingConfiguration: &types.IdpAuthorizingConfigSummary{
+					IdpAuthorizingType: types.IdpAuthorizingType("EXTERNAL_IDP_PUBLIC_AUTH_CODE"),
+					IdpAuthorizingConfigurationSummaryDetail: &types.IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpPublicAuthCode{
+						Value: types.ExternalIdpPublicAuthCodeAuthorizingConfig{
+							ClientId:  ptr.String("__ClientId__"),
+							IssuerUrl: ptr.String("__IssuerUrl__"),
+						},
+					},
+					IdcTrustedTokenIssuerConfiguration: &types.IdcTrustedTokenIssuerConfig{
+						IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+					},
+				},
+				QuickAuthenticationConfiguration: &types.QuickAuthenticationConfig{
+					QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+					QuickAuthenticationConfigurationDetail: &types.QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode{
+						Value: types.QuickManagedPublicAuthCodeQuickAuthenticationConfig{
+							RedirectUris: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ClientId: ptr.String("__ClientId__"),
+						},
+					},
+				},
+				Description: ptr.String("__Description__"),
+			},
+			{
+				ApplicationId:      ptr.String("__ApplicationId__"),
+				Arn:                ptr.String("__Arn__"),
+				Name:               ptr.String("__Name__"),
+				Namespace:          ptr.String("__Namespace__"),
+				AuthenticationType: types.AccessControlApplicationAuthenticationType("OIDC"),
+				Status:             types.AccessControlApplicationStatus("ENABLED"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TenantUrl:          ptr.String("__TenantUrl__"),
+				IdpAuthorizingConfiguration: &types.IdpAuthorizingConfigSummary{
+					IdpAuthorizingType: types.IdpAuthorizingType("EXTERNAL_IDP_PUBLIC_AUTH_CODE"),
+					IdpAuthorizingConfigurationSummaryDetail: &types.IdpAuthorizingConfigurationSummaryDetailMemberExternalIdpPublicAuthCode{
+						Value: types.ExternalIdpPublicAuthCodeAuthorizingConfig{
+							ClientId:  ptr.String("__ClientId__"),
+							IssuerUrl: ptr.String("__IssuerUrl__"),
+						},
+					},
+					IdcTrustedTokenIssuerConfiguration: &types.IdcTrustedTokenIssuerConfig{
+						IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+					},
+				},
+				QuickAuthenticationConfiguration: &types.QuickAuthenticationConfig{
+					QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+					QuickAuthenticationConfigurationDetail: &types.QuickAuthenticationConfigurationDetailMemberQuickManagedPublicAuthCode{
+						Value: types.QuickManagedPublicAuthCodeQuickAuthenticationConfig{
+							RedirectUris: []string{
+								"__Member__",
+								"__Member__",
+							},
+							ClientId: ptr.String("__ClientId__"),
+						},
+					},
+				},
+				Description: ptr.String("__Description__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAccessControlApplications.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAccessControlApplications(context.Background(), &ListAccessControlApplicationsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		Namespace:    ptr.String("__Namespace__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAccessControlApplications.response", err)
 	}
 }
 
@@ -33575,6 +34321,9 @@ func TestCheckResponseSnapshot_ListCustomPermissions(t *testing.T) {
 					CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
 					ShareMCPAction:                             types.CapabilityState("DENY"),
 					UseMCPAction:                               types.CapabilityState("DENY"),
+					LocalMCPAction:                             types.CapabilityState("DENY"),
+					CreateAndUpdateLocalMCPAction:              types.CapabilityState("DENY"),
+					UseLocalMCPAction:                          types.CapabilityState("DENY"),
 					OpenAPIAction:                              types.CapabilityState("DENY"),
 					CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
 					ShareOpenAPIAction:                         types.CapabilityState("DENY"),
@@ -34161,6 +34910,9 @@ func TestCheckResponseSnapshot_ListCustomPermissions(t *testing.T) {
 					CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
 					ShareMCPAction:                             types.CapabilityState("DENY"),
 					UseMCPAction:                               types.CapabilityState("DENY"),
+					LocalMCPAction:                             types.CapabilityState("DENY"),
+					CreateAndUpdateLocalMCPAction:              types.CapabilityState("DENY"),
+					UseLocalMCPAction:                          types.CapabilityState("DENY"),
 					OpenAPIAction:                              types.CapabilityState("DENY"),
 					CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
 					ShareOpenAPIAction:                         types.CapabilityState("DENY"),
@@ -35278,6 +36030,103 @@ func TestCheckResponseSnapshot_ListIdentityPropagationConfigs(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListInboundConnectorApplicationAssociations(t *testing.T) {
+	want := &ListInboundConnectorApplicationAssociationsOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+		ApplicationAssociations: []types.InboundConnectorApplicationAssociationSummary{
+			{
+				AccessControlApplicationArn: ptr.String("__AccessControlApplicationArn__"),
+				CreatedTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				AccessControlApplicationArn: ptr.String("__AccessControlApplicationArn__"),
+				CreatedTime:                 ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListInboundConnectorApplicationAssociations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListInboundConnectorApplicationAssociations(context.Background(), &ListInboundConnectorApplicationAssociationsInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+		MaxResults:         ptr.Int32(1),
+		NextToken:          ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListInboundConnectorApplicationAssociations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListInboundConnectors(t *testing.T) {
+	want := &ListInboundConnectorsOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+		InboundConnectorSummaries: []types.InboundConnectorSummary{
+			{
+				InboundConnectorId: ptr.String("__InboundConnectorId__"),
+				Arn:                ptr.String("__Arn__"),
+				Name:               ptr.String("__Name__"),
+				Status:             types.InboundConnectorStatus("ENABLED"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TenantUrl:          ptr.String("__TenantUrl__"),
+				InboundConnectorConfiguration: &types.InboundConnectorConfig{
+					InboundConnectorType: types.InboundConnectorType("QUICK_DESKTOP"),
+				},
+				Description: ptr.String("__Description__"),
+			},
+			{
+				InboundConnectorId: ptr.String("__InboundConnectorId__"),
+				Arn:                ptr.String("__Arn__"),
+				Name:               ptr.String("__Name__"),
+				Status:             types.InboundConnectorStatus("ENABLED"),
+				CreatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				TenantUrl:          ptr.String("__TenantUrl__"),
+				InboundConnectorConfiguration: &types.InboundConnectorConfig{
+					InboundConnectorType: types.InboundConnectorType("QUICK_DESKTOP"),
+				},
+				Description: ptr.String("__Description__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListInboundConnectors.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListInboundConnectors(context.Background(), &ListInboundConnectorsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		Type: []types.InboundConnectorType{
+			types.InboundConnectorType("QUICK_DESKTOP"),
+			types.InboundConnectorType("QUICK_DESKTOP"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListInboundConnectors.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListIngestions(t *testing.T) {
 	want := &ListIngestionsOutput{
 		Ingestions: []types.Ingestion{
@@ -35351,6 +36200,61 @@ func TestCheckResponseSnapshot_ListIngestions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListIngestions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListKnowledgeBaseRefreshSchedules(t *testing.T) {
+	want := &ListKnowledgeBaseRefreshSchedulesOutput{
+		ScheduleSummaries: []types.KnowledgeBaseRefreshScheduleSummary{
+			{
+				ScheduleId: ptr.String("__ScheduleId__"),
+				ScheduleFrequency: &types.KnowledgeBaseRefreshFrequency{
+					Interval: types.KbRefreshInterval("DAILY"),
+					RefreshOnDay: &types.KnowledgeBaseScheduleRefreshOnEntity{
+						DayOfWeek:  types.KbDayOfWeek("SUNDAY"),
+						DayOfMonth: ptr.String("__DayOfMonth__"),
+					},
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				State:     types.ScheduleState("ENABLED"),
+			},
+			{
+				ScheduleId: ptr.String("__ScheduleId__"),
+				ScheduleFrequency: &types.KnowledgeBaseRefreshFrequency{
+					Interval: types.KbRefreshInterval("DAILY"),
+					RefreshOnDay: &types.KnowledgeBaseScheduleRefreshOnEntity{
+						DayOfWeek:  types.KbDayOfWeek("SUNDAY"),
+						DayOfMonth: ptr.String("__DayOfMonth__"),
+					},
+				},
+				StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				State:     types.ScheduleState("ENABLED"),
+			},
+		},
+		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+		NextToken:        ptr.String("__NextToken__"),
+		RequestId:        ptr.String("__RequestId__"),
+		Status:           ptr.Int32(200),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListKnowledgeBaseRefreshSchedules.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListKnowledgeBaseRefreshSchedules(context.Background(), &ListKnowledgeBaseRefreshSchedulesInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		NextToken:       ptr.String("__NextToken__"),
+		MaxResults:      ptr.Int32(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListKnowledgeBaseRefreshSchedules.response", err)
 	}
 }
 
@@ -35574,6 +36478,47 @@ func TestCheckResponseSnapshot_ListOAuthClientApplications(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListOAuthClientApplications.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListPrincipalsForPolicy(t *testing.T) {
+	want := &ListPrincipalsForPolicyOutput{
+		Principals: []types.PolicyPrincipal{
+			{
+				PrincipalArn:  ptr.String("__PrincipalArn__"),
+				PrincipalType: types.PrincipalType("USER"),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Revision:      ptr.Int64(1),
+			},
+			{
+				PrincipalArn:  ptr.String("__PrincipalArn__"),
+				PrincipalType: types.PrincipalType("USER"),
+				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Revision:      ptr.Int64(1),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListPrincipalsForPolicy.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListPrincipalsForPolicy(context.Background(), &ListPrincipalsForPolicyInput{
+		AccountId:     ptr.String("__AccountId__"),
+		PolicyArn:     ptr.String("__PolicyArn__"),
+		PrincipalType: types.PrincipalType("USER"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListPrincipalsForPolicy.response", err)
 	}
 }
 
@@ -40273,6 +41218,35 @@ func TestCheckResponseSnapshot_PutDataSetRefreshProperties(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_PutPolicyAssignment(t *testing.T) {
+	want := &PutPolicyAssignmentOutput{
+		PolicyArn:         ptr.String("__PolicyArn__"),
+		ReplacedPolicyArn: ptr.String("__ReplacedPolicyArn__"),
+		Revision:          ptr.Int64(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutPolicyAssignment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutPolicyAssignment(context.Background(), &PutPolicyAssignmentInput{
+		AccountId:         ptr.String("__AccountId__"),
+		PolicyArn:         ptr.String("__PolicyArn__"),
+		PrincipalArn:      ptr.String("__PrincipalArn__"),
+		ExistingPolicyArn: ptr.String("__ExistingPolicyArn__"),
+		Revision:          ptr.Int64(1),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutPolicyAssignment.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_RegisterUser(t *testing.T) {
 	want := &RegisterUserOutput{
 		User: &types.User{
@@ -42549,6 +43523,99 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UntagResource.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateAccessControlApplication(t *testing.T) {
+	want := &UpdateAccessControlApplicationOutput{
+		Status:                         ptr.Int32(200),
+		RequestId:                      ptr.String("__RequestId__"),
+		ApplicationId:                  ptr.String("__ApplicationId__"),
+		Arn:                            ptr.String("__Arn__"),
+		AccessControlApplicationStatus: types.AccessControlApplicationStatus("ENABLED"),
+		LastUpdatedTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateAccessControlApplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateAccessControlApplication(context.Background(), &UpdateAccessControlApplicationInput{
+		AwsAccountId:  ptr.String("__AwsAccountId__"),
+		ApplicationId: ptr.String("__ApplicationId__"),
+		Name:          ptr.String("__Name__"),
+		Description:   ptr.String("__Description__"),
+		IdpAuthorizingConfiguration: &types.IdpAuthorizingConfigUpdateInput{
+			IdpAuthorizingType: types.IdpAuthorizingType("EXTERNAL_IDP_PUBLIC_AUTH_CODE"),
+			IdpAuthorizingConfigurationDetailInput: &types.IdpAuthorizingConfigurationDetailUpdateInputMemberExternalIdpPublicAuthCode{
+				Value: types.ExternalIdpPublicAuthCodeAuthorizingConfig{
+					ClientId:  ptr.String("__ClientId__"),
+					IssuerUrl: ptr.String("__IssuerUrl__"),
+				},
+			},
+			IdcTrustedTokenIssuerConfiguration: &types.IdcTrustedTokenIssuerConfig{
+				IdcTrustedTokenIssuerArn: ptr.String("__IdcTrustedTokenIssuerArn__"),
+			},
+		},
+		QuickAuthenticationConfiguration: &types.QuickAuthenticationConfigInput{
+			QuickAuthenticationType: types.QuickAuthenticationType("QUICK_MANAGED_PUBLIC_AUTH_CODE"),
+			QuickAuthenticationConfigurationDetailInput: &types.QuickAuthenticationConfigurationDetailInputMemberQuickManagedPublicAuthCode{
+				Value: types.QuickManagedAuthCodeQuickAuthenticationConfigInput{
+					RedirectUris: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		Status: types.AccessControlApplicationStatus("ENABLED"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateAccessControlApplication.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateAccessControlApplicationSecret(t *testing.T) {
+	want := &UpdateAccessControlApplicationSecretOutput{
+		Status:         ptr.Int32(200),
+		RequestId:      ptr.String("__RequestId__"),
+		ClientSecretId: ptr.String("__ClientSecretId__"),
+		UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		RegionalSecretManagerArns: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateAccessControlApplicationSecret.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateAccessControlApplicationSecret(context.Background(), &UpdateAccessControlApplicationSecretInput{
+		AwsAccountId:   ptr.String("__AwsAccountId__"),
+		ApplicationId:  ptr.String("__ApplicationId__"),
+		ClientSecretId: ptr.String("__ClientSecretId__"),
+		UpdateRegionalSecretManagerArns: map[string]string{
+			"key0": "__Value__",
+		},
+		RemoveRegionalSecretManagerArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateAccessControlApplicationSecret.response", err)
 	}
 }
 
@@ -46054,6 +47121,9 @@ func TestCheckResponseSnapshot_UpdateCustomPermissions(t *testing.T) {
 			CreateAndUpdateMCPAction:                   types.CapabilityState("DENY"),
 			ShareMCPAction:                             types.CapabilityState("DENY"),
 			UseMCPAction:                               types.CapabilityState("DENY"),
+			LocalMCPAction:                             types.CapabilityState("DENY"),
+			CreateAndUpdateLocalMCPAction:              types.CapabilityState("DENY"),
+			UseLocalMCPAction:                          types.CapabilityState("DENY"),
 			OpenAPIAction:                              types.CapabilityState("DENY"),
 			CreateAndUpdateOpenAPIAction:               types.CapabilityState("DENY"),
 			ShareOpenAPIAction:                         types.CapabilityState("DENY"),
@@ -50028,6 +51098,22 @@ func TestCheckResponseSnapshot_UpdateDataSet(t *testing.T) {
 				},
 			},
 		},
+		UnmaterializedCalculatedColumns: []types.UnmaterializedCalculatedColumn{
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -50633,6 +51719,74 @@ func TestCheckResponseSnapshot_UpdateIdentityPropagationConfig(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateInboundConnector(t *testing.T) {
+	want := &UpdateInboundConnectorOutput{
+		Status:                 ptr.Int32(200),
+		RequestId:              ptr.String("__RequestId__"),
+		InboundConnectorId:     ptr.String("__InboundConnectorId__"),
+		Arn:                    ptr.String("__Arn__"),
+		InboundConnectorStatus: types.InboundConnectorStatus("ENABLED"),
+		LastUpdatedTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateInboundConnector.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateInboundConnector(context.Background(), &UpdateInboundConnectorInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+		Name:               ptr.String("__Name__"),
+		Description:        ptr.String("__Description__"),
+		InboundConnectorConfiguration: &types.InboundConnectorConfig{
+			InboundConnectorType: types.InboundConnectorType("QUICK_DESKTOP"),
+		},
+		InboundConnectorStatus: types.InboundConnectorStatus("ENABLED"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateInboundConnector.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateInboundConnectorApplicationAssociations(t *testing.T) {
+	want := &UpdateInboundConnectorApplicationAssociationsOutput{
+		Status:    ptr.Int32(200),
+		RequestId: ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateInboundConnectorApplicationAssociations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateInboundConnectorApplicationAssociations(context.Background(), &UpdateInboundConnectorApplicationAssociationsInput{
+		AwsAccountId:       ptr.String("__AwsAccountId__"),
+		InboundConnectorId: ptr.String("__InboundConnectorId__"),
+		AssociateAccessControlApplications: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DisassociateAccessControlApplications: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateInboundConnectorApplicationAssociations.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateIpRestriction(t *testing.T) {
 	want := &UpdateIpRestrictionOutput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
@@ -50847,6 +52001,43 @@ func TestCheckResponseSnapshot_UpdateKnowledgeBasePermissions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateKnowledgeBasePermissions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateKnowledgeBaseRefreshSchedule(t *testing.T) {
+	want := &UpdateKnowledgeBaseRefreshScheduleOutput{
+		ScheduleId:       ptr.String("__ScheduleId__"),
+		KnowledgeBaseArn: ptr.String("__KnowledgeBaseArn__"),
+		RequestId:        ptr.String("__RequestId__"),
+		Status:           ptr.Int32(200),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateKnowledgeBaseRefreshSchedule.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateKnowledgeBaseRefreshSchedule(context.Background(), &UpdateKnowledgeBaseRefreshScheduleInput{
+		AwsAccountId:    ptr.String("__AwsAccountId__"),
+		KnowledgeBaseId: ptr.String("__KnowledgeBaseId__"),
+		ScheduleId:      ptr.String("__ScheduleId__"),
+		ScheduleFrequency: &types.KnowledgeBaseRefreshFrequency{
+			Interval: types.KbRefreshInterval("DAILY"),
+			RefreshOnDay: &types.KnowledgeBaseScheduleRefreshOnEntity{
+				DayOfWeek:  types.KbDayOfWeek("SUNDAY"),
+				DayOfMonth: ptr.String("__DayOfMonth__"),
+			},
+		},
+		StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		State:     types.ScheduleState("ENABLED"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateKnowledgeBaseRefreshSchedule.response", err)
 	}
 }
 
@@ -64538,6 +65729,22 @@ func TestCheckResponseSnapshot_Error_InvalidDataSetParameterValueException(t *te
 						},
 					},
 				},
+			},
+		},
+		UnmaterializedCalculatedColumns: []types.UnmaterializedCalculatedColumn{
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
+			},
+			{
+				ColumnId:   ptr.String("__ColumnId__"),
+				ColumnName: ptr.String("__ColumnName__"),
+				Expression: ptr.String("__Expression__"),
+				Type:       types.ColumnDataType("STRING"),
+				SubType:    types.ColumnDataSubType("FLOAT"),
 			},
 		},
 	})
@@ -78290,5 +79497,48 @@ func TestCheckResponseSnapshot_Error_UnsupportedUserEditionException(t *testing.
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "UnsupportedUserEditionException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
+	want := &types.ValidationException{
+		Message:   ptr.String("__Message__"),
+		RequestId: ptr.String("__RequestId__"),
+		FieldList: []types.ValidationExceptionField{
+			{
+				Name:    ptr.String("__Name__"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Name:    ptr.String("__Name__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.BatchDeletePolicyAssignmentByPolicy(context.Background(), &BatchDeletePolicyAssignmentByPolicyInput{
+		AccountId: ptr.String("__AccountId__"),
+		PolicyArn: ptr.String("__PolicyArn__"),
+		PrincipalArns: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ValidationException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ValidationException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ValidationException.error", err)
 	}
 }

@@ -44,6 +44,66 @@ func (AgentCoreRuntimeServerProtocol) Values() []AgentCoreRuntimeServerProtocol 
 	}
 }
 
+type AgentSkillsRepositoryProvider string
+
+// Enum values for AgentSkillsRepositoryProvider
+const (
+	AgentSkillsRepositoryProviderGithub AgentSkillsRepositoryProvider = "GITHUB"
+)
+
+// Values returns all known values for AgentSkillsRepositoryProvider. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentSkillsRepositoryProvider) Values() []AgentSkillsRepositoryProvider {
+	return []AgentSkillsRepositoryProvider{
+		"GITHUB",
+	}
+}
+
+type AssociationApprovalStatus string
+
+// Enum values for AssociationApprovalStatus
+const (
+	AssociationApprovalStatusApproved AssociationApprovalStatus = "APPROVED"
+	AssociationApprovalStatusRejected AssociationApprovalStatus = "REJECTED"
+)
+
+// Values returns all known values for AssociationApprovalStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationApprovalStatus) Values() []AssociationApprovalStatus {
+	return []AssociationApprovalStatus{
+		"APPROVED",
+		"REJECTED",
+	}
+}
+
+type AssociationStatus string
+
+// Enum values for AssociationStatus
+const (
+	AssociationStatusPendingApproval AssociationStatus = "PENDING_APPROVAL"
+	AssociationStatusApproved        AssociationStatus = "APPROVED"
+	AssociationStatusRejected        AssociationStatus = "REJECTED"
+	AssociationStatusSuspended       AssociationStatus = "SUSPENDED"
+)
+
+// Values returns all known values for AssociationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssociationStatus) Values() []AssociationStatus {
+	return []AssociationStatus{
+		"PENDING_APPROVAL",
+		"APPROVED",
+		"REJECTED",
+		"SUSPENDED",
+	}
+}
+
 type AutoApprovalRule string
 
 // Enum values for AutoApprovalRule
@@ -94,6 +154,57 @@ func (AutoDetectionStatus) Values() []AutoDetectionStatus {
 	return []AutoDetectionStatus{
 		"ACTIVE",
 		"INACTIVE",
+	}
+}
+
+type BotCategory string
+
+// Enum values for BotCategory
+const (
+	BotCategoryAdvertising           BotCategory = "advertising"
+	BotCategoryArchiver              BotCategory = "archiver"
+	BotCategoryContentFetcher        BotCategory = "content_fetcher"
+	BotCategoryEmailClient           BotCategory = "email_client"
+	BotCategoryHttpLibrary           BotCategory = "http_library"
+	BotCategoryLinkChecker           BotCategory = "link_checker"
+	BotCategoryMiscellaneous         BotCategory = "miscellaneous"
+	BotCategoryMonitoring            BotCategory = "monitoring"
+	BotCategoryPagePreview           BotCategory = "page_preview"
+	BotCategoryScrapingFramework     BotCategory = "scraping_framework"
+	BotCategorySearchEngine          BotCategory = "search_engine"
+	BotCategorySecurity              BotCategory = "security"
+	BotCategorySeo                   BotCategory = "seo"
+	BotCategorySocialMedia           BotCategory = "social_media"
+	BotCategoryAiTraining            BotCategory = "ai_training"
+	BotCategoryAiSearch              BotCategory = "ai_search"
+	BotCategoryAiAssistant           BotCategory = "ai_assistant"
+	BotCategoryAiContentOptimization BotCategory = "ai_content_optimization"
+)
+
+// Values returns all known values for BotCategory. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BotCategory) Values() []BotCategory {
+	return []BotCategory{
+		"advertising",
+		"archiver",
+		"content_fetcher",
+		"email_client",
+		"http_library",
+		"link_checker",
+		"miscellaneous",
+		"monitoring",
+		"page_preview",
+		"scraping_framework",
+		"search_engine",
+		"security",
+		"seo",
+		"social_media",
+		"ai_training",
+		"ai_search",
+		"ai_assistant",
+		"ai_content_optimization",
 	}
 }
 
@@ -157,6 +268,23 @@ func (EndpointIpAddressType) Values() []EndpointIpAddressType {
 	}
 }
 
+type IdentifierType string
+
+// Enum values for IdentifierType
+const (
+	IdentifierTypeDomain IdentifierType = "DOMAIN"
+)
+
+// Values returns all known values for IdentifierType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdentifierType) Values() []IdentifierType {
+	return []IdentifierType{
+		"DOMAIN",
+	}
+}
+
 type InboundTokenClaimValueType string
 
 // Enum values for InboundTokenClaimValueType
@@ -202,6 +330,7 @@ const (
 	RecordTypeCustom  RecordType = "CUSTOM"
 	RecordTypeSkill   RecordType = "SKILL"
 	RecordTypeGateway RecordType = "GATEWAY"
+	RecordTypeWebBot  RecordType = "WEB_BOT"
 )
 
 // Values returns all known values for RecordType. Note that this can be expanded
@@ -215,6 +344,7 @@ func (RecordType) Values() []RecordType {
 		"CUSTOM",
 		"SKILL",
 		"GATEWAY",
+		"WEB_BOT",
 	}
 }
 
@@ -302,6 +432,7 @@ type RegistryRecordOAuthGrantType string
 // Enum values for RegistryRecordOAuthGrantType
 const (
 	RegistryRecordOAuthGrantTypeClientCredentials RegistryRecordOAuthGrantType = "CLIENT_CREDENTIALS"
+	RegistryRecordOAuthGrantTypeAuthorizationCode RegistryRecordOAuthGrantType = "AUTHORIZATION_CODE"
 )
 
 // Values returns all known values for RegistryRecordOAuthGrantType. Note that
@@ -312,6 +443,7 @@ const (
 func (RegistryRecordOAuthGrantType) Values() []RegistryRecordOAuthGrantType {
 	return []RegistryRecordOAuthGrantType{
 		"CLIENT_CREDENTIALS",
+		"AUTHORIZATION_CODE",
 	}
 }
 
@@ -319,15 +451,17 @@ type RegistryRecordStatus string
 
 // Enum values for RegistryRecordStatus
 const (
-	RegistryRecordStatusDraft           RegistryRecordStatus = "DRAFT"
-	RegistryRecordStatusPendingApproval RegistryRecordStatus = "PENDING_APPROVAL"
-	RegistryRecordStatusApproved        RegistryRecordStatus = "APPROVED"
-	RegistryRecordStatusRejected        RegistryRecordStatus = "REJECTED"
-	RegistryRecordStatusDeprecated      RegistryRecordStatus = "DEPRECATED"
-	RegistryRecordStatusCreating        RegistryRecordStatus = "CREATING"
-	RegistryRecordStatusUpdating        RegistryRecordStatus = "UPDATING"
-	RegistryRecordStatusCreateFailed    RegistryRecordStatus = "CREATE_FAILED"
-	RegistryRecordStatusUpdateFailed    RegistryRecordStatus = "UPDATE_FAILED"
+	RegistryRecordStatusDraft             RegistryRecordStatus = "DRAFT"
+	RegistryRecordStatusPendingApproval   RegistryRecordStatus = "PENDING_APPROVAL"
+	RegistryRecordStatusApproved          RegistryRecordStatus = "APPROVED"
+	RegistryRecordStatusRejected          RegistryRecordStatus = "REJECTED"
+	RegistryRecordStatusDeprecated        RegistryRecordStatus = "DEPRECATED"
+	RegistryRecordStatusCreating          RegistryRecordStatus = "CREATING"
+	RegistryRecordStatusUpdating          RegistryRecordStatus = "UPDATING"
+	RegistryRecordStatusCreateFailed      RegistryRecordStatus = "CREATE_FAILED"
+	RegistryRecordStatusUpdateFailed      RegistryRecordStatus = "UPDATE_FAILED"
+	RegistryRecordStatusCreatePendingAuth RegistryRecordStatus = "CREATE_PENDING_AUTH"
+	RegistryRecordStatusUpdatePendingAuth RegistryRecordStatus = "UPDATE_PENDING_AUTH"
 )
 
 // Values returns all known values for RegistryRecordStatus. Note that this can be
@@ -345,6 +479,8 @@ func (RegistryRecordStatus) Values() []RegistryRecordStatus {
 		"UPDATING",
 		"CREATE_FAILED",
 		"UPDATE_FAILED",
+		"CREATE_PENDING_AUTH",
+		"UPDATE_PENDING_AUTH",
 	}
 }
 
@@ -405,6 +541,7 @@ const (
 	ValidationExceptionReasonIdempotentParameterMismatchException ValidationExceptionReason = "IdempotentParameterMismatchException"
 	ValidationExceptionReasonRootEventInOtherSession              ValidationExceptionReason = "EventInOtherSession"
 	ValidationExceptionReasonResourceConflict                     ValidationExceptionReason = "ResourceConflict"
+	ValidationExceptionReasonUnsupportedInRegion                  ValidationExceptionReason = "UnsupportedInRegion"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -418,5 +555,32 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"IdempotentParameterMismatchException",
 		"EventInOtherSession",
 		"ResourceConflict",
+		"UnsupportedInRegion",
+	}
+}
+
+type VerificationStatus string
+
+// Enum values for VerificationStatus
+const (
+	VerificationStatusActionRequired VerificationStatus = "ACTION_REQUIRED"
+	VerificationStatusActive         VerificationStatus = "ACTIVE"
+	VerificationStatusFailed         VerificationStatus = "FAILED"
+	VerificationStatusSuspended      VerificationStatus = "SUSPENDED"
+	// A delete is in progress.
+	VerificationStatusDeleting VerificationStatus = "DELETING"
+)
+
+// Values returns all known values for VerificationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VerificationStatus) Values() []VerificationStatus {
+	return []VerificationStatus{
+		"ACTION_REQUIRED",
+		"ACTIVE",
+		"FAILED",
+		"SUSPENDED",
+		"DELETING",
 	}
 }

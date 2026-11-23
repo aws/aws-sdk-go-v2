@@ -8,6 +8,91 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// The configuration for an AutoAllowlist firewall rule, which observes the DNS
+// traffic of the VPCs that use the rule group, through a rule group association or
+// a Route 53 Profile. The rule allows the domains on its managed domain list. When
+// you create the rule, DNS Firewall seeds the observed domains from the look-back
+// window of each VPC. After that, a domain is listed as observed when any DNS
+// Firewall rule blocks a query for it from a VPC that uses the rule group,
+// including rules in other rule groups, so place a rule that blocks the domains
+// you haven't approved after the AutoAllowlist rule. To review the observed
+// domains, call ListFirewallRuleDomains. To approve or deny them, call UpdateFirewallDomains on the rule's managed domain
+// list.
+//
+// An AutoAllowlist rule uses the ALLOW action, applies to all query types, and
+// always inspects redirection domains. You can't set Qtype ,
+// FirewallDomainRedirectionAction , BlockResponse , or the DNS Firewall Advanced
+// settings on it. A rule group can contain one AutoAllowlist rule.
+//
+// A new AutoAllowlist rule has status CREATING while DNS Firewall reads the
+// look-back window of each VPC that uses the rule group, which can take hours for
+// a rule group that many VPCs use. Until the status is COMPLETE , the observed
+// domains and request counts are partial and UpdateFirewallRulerejects the rule. You can approve,
+// remove, and deny domains while the rule is CREATING .
+type AutoAllowlistConfig struct {
+
+	// The look-back window, in hours, of historical DNS traffic that DNS Firewall
+	// uses to seed the initial set of observed domains when you create the rule. Valid
+	// values are from 1 to 168 (7 days). You can't change this value after you create
+	// the rule.
+	//
+	// This member is required.
+	InitialDataTimeframeHours *int32
+
+	// The ID of the managed domain list that DNS Firewall creates and maintains for
+	// this AutoAllowlist rule. The list is named AutoAllowlist -  followed by the
+	// rule name, cut to 64 characters, and is renamed when you rename the rule. DNS
+	// Firewall returns this value in responses. You can't set it.
+	AutoAllowlistFirewallDomainListId *string
+
+	// The ID of a domain list whose domains DNS Firewall copies into the
+	// AutoAllowlist rule's managed domain list after you create the rule. You must own
+	// the source list, and it must be in COMPLETE status, in the same Region, and not
+	// a managed or AutoAllowlist list. DNS Firewall reads the source list while the
+	// copy runs, so don't change or delete it until the managed list's status is no
+	// longer IMPORTING . A change made to the source list during the copy can be
+	// reflected in the managed list, and deleting the source list fails the copy. The
+	// managed list then has status COMPLETE , or COMPLETE_IMPORT_FAILED if the copy
+	// failed. DNS Firewall uses this value only when you create the rule.
+	ImportFromFirewallDomainListId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutoAllowlistConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoAllowlistConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoAllowlistConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoAllowlistFirewallDomainListId != nil {
+		s.WriteString(schemas.AutoAllowlistConfig_AutoAllowlistFirewallDomainListId, *v.AutoAllowlistFirewallDomainListId)
+	}
+	if v.ImportFromFirewallDomainListId != nil {
+		s.WriteString(schemas.AutoAllowlistConfig_ImportFromFirewallDomainListId, *v.ImportFromFirewallDomainListId)
+	}
+	if v.InitialDataTimeframeHours != nil {
+		s.WriteInt32(schemas.AutoAllowlistConfig_InitialDataTimeframeHours, *v.InitialDataTimeframeHours)
+	}
+}
+func (v *AutoAllowlistConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoAllowlistConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoAllowlistConfig_AutoAllowlistFirewallDomainListId:
+			v.AutoAllowlistFirewallDomainListId = new(string)
+			return d.ReadString(schemas.AutoAllowlistConfig_AutoAllowlistFirewallDomainListId, v.AutoAllowlistFirewallDomainListId)
+		case schemas.AutoAllowlistConfig_ImportFromFirewallDomainListId:
+			v.ImportFromFirewallDomainListId = new(string)
+			return d.ReadString(schemas.AutoAllowlistConfig_ImportFromFirewallDomainListId, v.ImportFromFirewallDomainListId)
+		case schemas.AutoAllowlistConfig_InitialDataTimeframeHours:
+			v.InitialDataTimeframeHours = new(int32)
+			return d.ReadInt32(schemas.AutoAllowlistConfig_InitialDataTimeframeHours, v.InitialDataTimeframeHours)
+		}
+		return nil
+	})
+}
+
 // An error that occurred while creating a firewall rule in a batch operation.
 type BatchCreateFirewallRuleError struct {
 
@@ -294,7 +379,11 @@ type CreateFirewallRuleEntry struct {
 	//   Amazon Web Services Marketplace. The selected partner must be an active
 	//   subscription on the calling account.
 	//
-	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
+	//   - AutoAllowlist — automatically observe the domains that the VPCs associated
+	//   with the rule group resolve, and allow the ones that you approve. See AutoAllowlistConfig.
+	//
+	// To enumerate the values supported in your account, call ListFirewallRuleTypes. It doesn't return
+	// AutoAllowlist .
 	FirewallRuleType *FirewallRuleType
 
 	// The DNS query type you want the rule to evaluate. Allowed values are:
@@ -1119,6 +1208,18 @@ type FirewallDomainListMetadata struct {
 	// be any unique string, for example, a timestamp.
 	CreatorRequestId *string
 
+	// For an AutoAllowlist domain list, the ID of the firewall rule group that
+	// contains the auto-allowlist rule that owns this domain list. Use it to navigate
+	// to the rule group and its VPC associations. Present only when ManagedListType
+	// is AUTOALLOWLIST .
+	FirewallRuleGroupId *string
+
+	// For an AutoAllowlist domain list, the threat protection ID of the
+	// auto-allowlist rule that owns this domain list. Provide it to ListFirewallRuleDomainsto review the
+	// observed, allowed, and denied domains. Present only when ManagedListType is
+	// AUTOALLOWLIST .
+	FirewallThreatProtectionId *string
+
 	// The ID of the domain list.
 	Id *string
 
@@ -1132,6 +1233,15 @@ type FirewallDomainListMetadata struct {
 
 	// The name of the domain list.
 	Name *string
+
+	// For an AutoAllowlist domain list, the status of the list: IMPORTING while
+	// domains are being copied from the source domain list specified at rule creation,
+	// COMPLETE_IMPORT_FAILED if that copy failed, UPDATING while a change made with UpdateFirewallDomains
+	// is being applied, COMPLETE otherwise, and DELETING while the owning rule is
+	// being deleted. The first change that you make after a failed copy replaces
+	// COMPLETE_IMPORT_FAILED with UPDATING and then COMPLETE . Present only when
+	// ManagedListType is AUTOALLOWLIST . Use GetFirewallDomainList for the status of other domain lists.
+	Status FirewallDomainListStatus
 
 	noSmithyDocumentSerde
 }
@@ -1152,6 +1262,12 @@ func (v *FirewallDomainListMetadata) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CreatorRequestId != nil {
 		s.WriteString(schemas.FirewallDomainListMetadata_CreatorRequestId, *v.CreatorRequestId)
 	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.FirewallDomainListMetadata_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.FirewallThreatProtectionId != nil {
+		s.WriteString(schemas.FirewallDomainListMetadata_FirewallThreatProtectionId, *v.FirewallThreatProtectionId)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.FirewallDomainListMetadata_Id, *v.Id)
 	}
@@ -1163,6 +1279,9 @@ func (v *FirewallDomainListMetadata) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.FirewallDomainListMetadata_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FirewallDomainListMetadata_Status, string(v.Status))
 	}
 }
 func (v *FirewallDomainListMetadata) Deserialize(d smithy.ShapeDeserializer) error {
@@ -1177,6 +1296,12 @@ func (v *FirewallDomainListMetadata) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.FirewallDomainListMetadata_CreatorRequestId:
 			v.CreatorRequestId = new(string)
 			return d.ReadString(schemas.FirewallDomainListMetadata_CreatorRequestId, v.CreatorRequestId)
+		case schemas.FirewallDomainListMetadata_FirewallRuleGroupId:
+			v.FirewallRuleGroupId = new(string)
+			return d.ReadString(schemas.FirewallDomainListMetadata_FirewallRuleGroupId, v.FirewallRuleGroupId)
+		case schemas.FirewallDomainListMetadata_FirewallThreatProtectionId:
+			v.FirewallThreatProtectionId = new(string)
+			return d.ReadString(schemas.FirewallDomainListMetadata_FirewallThreatProtectionId, v.FirewallThreatProtectionId)
 		case schemas.FirewallDomainListMetadata_Id:
 			v.Id = new(string)
 			return d.ReadString(schemas.FirewallDomainListMetadata_Id, v.Id)
@@ -1193,6 +1318,13 @@ func (v *FirewallDomainListMetadata) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.FirewallDomainListMetadata_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.FirewallDomainListMetadata_Name, v.Name)
+		case schemas.FirewallDomainListMetadata_Status:
+			var ev string
+			if err := d.ReadString(schemas.FirewallDomainListMetadata_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = FirewallDomainListStatus(ev)
+			return nil
 		}
 		return nil
 	})
@@ -1310,7 +1442,11 @@ type FirewallRule struct {
 	//   - PartnerThreatProtection — a third-party threat feed delivered through Amazon
 	//   Web Services Marketplace.
 	//
-	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
+	//   - AutoAllowlist — an AutoAllowlist rule, which allows the domains on its
+	//   managed domain list. See AutoAllowlistConfig.
+	//
+	// To enumerate the values supported in your account, call ListFirewallRuleTypes. It doesn't return
+	// AutoAllowlist .
 	FirewallRuleType *FirewallRuleType
 
 	//  ID of the DNS Firewall Advanced rule.
@@ -1368,6 +1504,8 @@ type FirewallRule struct {
 	//   - CREATING — DNS Firewall is provisioning the rule. Rules created with the
 	//   PartnerThreatProtection rule type begin in this state while DNS Firewall
 	//   verifies the calling account's Amazon Web Services Marketplace entitlement.
+	//   Rules created with the AutoAllowlist rule type begin in this state while DNS
+	//   Firewall reads the look-back window of each VPC that uses the rule group.
 	//
 	//   - COMPLETE — The rule is provisioned and enforcing matches.
 	//
@@ -1543,6 +1681,103 @@ func (v *FirewallRule) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FirewallRule_StatusMessage:
 			v.StatusMessage = new(string)
 			return d.ReadString(schemas.FirewallRule_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
+// A domain that DNS Firewall observed for an AutoAllowlist rule, with its review
+// status and request volume. Counts are aggregated across all VPCs that use the
+// rule group, through a rule group association or through a Route 53 Profile that
+// includes the rule group, including VPCs in other accounts. The domain isn't
+// attributed to the VPC or account in which it was observed.
+type FirewallRuleDomain struct {
+
+	// The date and time when the domain was first observed and added, in RFC 3339
+	// format.
+	AddedTime *string
+
+	// The domain name.
+	DomainName *string
+
+	// The review status of the domain:
+	//
+	//   - OBSERVED - DNS Firewall saw the domain in the VPCs' DNS traffic and you
+	//   haven't allowed or denied it. The look-back window seeds the initial observed
+	//   domains. After that, a domain becomes observed when any DNS Firewall rule blocks
+	//   a query for it from a VPC that uses the rule group, including rules in other
+	//   rule groups, or when you remove it from the managed domain list with REMOVE .
+	//   To keep observing new domains, place a rule that blocks the domains you haven't
+	//   approved after the AutoAllowlist rule. Domains from the look-back period that
+	//   keep being queried and aren't blocked move to ALLOWED within about a day after
+	//   the rule is created. Observed domains aren't evaluated for safety, so review
+	//   them before you allow them.
+	//
+	//   - ALLOWED - DNS Firewall allowed queries for the domain, whether or not the
+	//   domain is in the rule's managed domain list. To get the domains in the managed
+	//   domain list (the allowlist that the rule enforces), call ListFirewallRuleDomainswith
+	//   FirewallDomainListId .
+	//
+	//   - DENIED - The domain was denied with the DENY operation of UpdateFirewallDomains, which also
+	//   removes it from the managed domain list if it was there. A denied domain that is
+	//   still queried and not blocked can move to ALLOWED .
+	DomainStatus FirewallDomainStatus
+
+	// The number of DNS requests observed for this domain in the last 24 hours.
+	Last24HourRequests *int64
+
+	// The total number of DNS requests observed for this domain since it was first
+	// added, including the requests in the look-back window that seeded the rule.
+	TotalRequests *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *FirewallRuleDomain) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallRuleDomain)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallRuleDomain) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddedTime != nil {
+		s.WriteString(schemas.FirewallRuleDomain_AddedTime, *v.AddedTime)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.FirewallRuleDomain_DomainName, *v.DomainName)
+	}
+	if v.DomainStatus != "" {
+		s.WriteString(schemas.FirewallRuleDomain_DomainStatus, string(v.DomainStatus))
+	}
+	if v.Last24HourRequests != nil {
+		s.WriteInt64(schemas.FirewallRuleDomain_Last24HourRequests, *v.Last24HourRequests)
+	}
+	if v.TotalRequests != nil {
+		s.WriteInt64(schemas.FirewallRuleDomain_TotalRequests, *v.TotalRequests)
+	}
+}
+func (v *FirewallRuleDomain) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallRuleDomain, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallRuleDomain_AddedTime:
+			v.AddedTime = new(string)
+			return d.ReadString(schemas.FirewallRuleDomain_AddedTime, v.AddedTime)
+		case schemas.FirewallRuleDomain_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.FirewallRuleDomain_DomainName, v.DomainName)
+		case schemas.FirewallRuleDomain_DomainStatus:
+			var ev string
+			if err := d.ReadString(schemas.FirewallRuleDomain_DomainStatus, &ev); err != nil {
+				return err
+			}
+			v.DomainStatus = FirewallDomainStatus(ev)
+			return nil
+		case schemas.FirewallRuleDomain_Last24HourRequests:
+			v.Last24HourRequests = new(int64)
+			return d.ReadInt64(schemas.FirewallRuleDomain_Last24HourRequests, v.Last24HourRequests)
+		case schemas.FirewallRuleDomain_TotalRequests:
+			v.TotalRequests = new(int64)
+			return d.ReadInt64(schemas.FirewallRuleDomain_TotalRequests, v.TotalRequests)
 		}
 		return nil
 	})
@@ -1939,8 +2174,14 @@ func (v *FirewallRuleGroupMetadata) Deserialize(d smithy.ShapeDeserializer) erro
 // the top-level FirewallDomainListId and DnsThreatProtection fields on CreateFirewallRule and UpdateFirewallRule.
 //
 // Call ListFirewallRuleTypes to discover which rule-type variants and which values within each variant
-// are available in your account and Region.
+// are available in your account and Region. It doesn't return the AutoAllowlist
+// variant.
 type FirewallRuleType struct {
+
+	// Configures the rule as an AutoAllowlist rule, which observes the DNS traffic of
+	// the VPCs that use the rule group, through a rule group association or a Route 53
+	// Profile, so that you can review the domains and allow them. See AutoAllowlistConfig.
+	AutoAllowlist *AutoAllowlistConfig
 
 	// Configures the rule to match a built-in DNS Firewall Advanced threat detector —
 	// DGA , DNS_TUNNELING , or DICTIONARY_DGA . See DnsThreatProtectionRuleTypeConfig.
@@ -1971,6 +2212,11 @@ func (v *FirewallRuleType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FirewallRuleType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoAllowlist != nil {
+		s.WriteStruct(schemas.FirewallRuleType_AutoAllowlist)
+		v.AutoAllowlist.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.DnsThreatProtection != nil {
 		s.WriteStruct(schemas.FirewallRuleType_DnsThreatProtection)
 		v.DnsThreatProtection.SerializeMembers(s)
@@ -1995,6 +2241,9 @@ func (v *FirewallRuleType) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *FirewallRuleType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FirewallRuleType, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.FirewallRuleType_AutoAllowlist:
+			v.AutoAllowlist = &AutoAllowlistConfig{}
+			return v.AutoAllowlist.Deserialize(d)
 		case schemas.FirewallRuleType_DnsThreatProtection:
 			v.DnsThreatProtection = &DnsThreatProtectionRuleTypeConfig{}
 			return v.DnsThreatProtection.Deserialize(d)
@@ -2327,6 +2576,101 @@ func (v *IpAddressUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.IpAddressUpdate_SubnetId:
 			v.SubnetId = new(string)
 			return d.ReadString(schemas.IpAddressUpdate_SubnetId, v.SubnetId)
+		}
+		return nil
+	})
+}
+
+// Optional filters and sort order for ListFirewallRuleDomains.
+type ListFirewallRuleDomainsQueryOptions struct {
+
+	// Returns only the domains whose name contains this substring.
+	DomainNameFilter *string
+
+	// Filters the returned domains by review status. Valid values:
+	//
+	//   - OBSERVED - Domains that DNS Firewall saw in the VPCs' DNS traffic and that
+	//   you haven't allowed or denied. After the look-back window, a domain is observed
+	//   when any DNS Firewall rule blocks a query for it from a VPC that uses the rule
+	//   group, including rules in other rule groups, or when you remove it from the
+	//   managed domain list. Domains from the look-back period that keep being queried
+	//   and aren't blocked move to ALLOWED within about a day after the rule is
+	//   created.
+	//
+	//   - ALLOWED - Domains that DNS Firewall allowed queries for, whether or not
+	//   they're in the rule's managed domain list.
+	//
+	//   - DENIED - Domains that were denied with the DENY operation. A denied domain
+	//   that is still queried and not blocked can move to ALLOWED .
+	//
+	// If you don't specify a value, the operation returns OBSERVED domains.
+	DomainStatus FirewallDomainStatusFilter
+
+	// The attribute to sort the returned domains by. Valid values:
+	//
+	//   - TIME_ADDED - The AddedTime of the domain.
+	//
+	//   - DAILY_TOTAL - The Last24HourRequests count.
+	//
+	//   - TOTAL_REQUESTS - The TotalRequests count.
+	//
+	// If you don't specify a value, the operation sorts by TIME_ADDED .
+	SortBy FirewallRuleDomainSortBy
+
+	// The sort direction: ASC for ascending or DESC for descending. If you don't
+	// specify a value, the operation sorts in descending order.
+	SortOrder FirewallRuleDomainSortOrder
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListFirewallRuleDomainsQueryOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFirewallRuleDomainsQueryOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFirewallRuleDomainsQueryOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainNameFilter != nil {
+		s.WriteString(schemas.ListFirewallRuleDomainsQueryOptions_DomainNameFilter, *v.DomainNameFilter)
+	}
+	if v.DomainStatus != "" {
+		s.WriteString(schemas.ListFirewallRuleDomainsQueryOptions_DomainStatus, string(v.DomainStatus))
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListFirewallRuleDomainsQueryOptions_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListFirewallRuleDomainsQueryOptions_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *ListFirewallRuleDomainsQueryOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFirewallRuleDomainsQueryOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFirewallRuleDomainsQueryOptions_DomainNameFilter:
+			v.DomainNameFilter = new(string)
+			return d.ReadString(schemas.ListFirewallRuleDomainsQueryOptions_DomainNameFilter, v.DomainNameFilter)
+		case schemas.ListFirewallRuleDomainsQueryOptions_DomainStatus:
+			var ev string
+			if err := d.ReadString(schemas.ListFirewallRuleDomainsQueryOptions_DomainStatus, &ev); err != nil {
+				return err
+			}
+			v.DomainStatus = FirewallDomainStatusFilter(ev)
+			return nil
+		case schemas.ListFirewallRuleDomainsQueryOptions_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.ListFirewallRuleDomainsQueryOptions_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = FirewallRuleDomainSortBy(ev)
+			return nil
+		case schemas.ListFirewallRuleDomainsQueryOptions_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.ListFirewallRuleDomainsQueryOptions_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = FirewallRuleDomainSortOrder(ev)
+			return nil
 		}
 		return nil
 	})
@@ -3872,7 +4216,14 @@ type UpdateFirewallRuleEntry struct {
 	//   Amazon Web Services Marketplace. The selected partner must be an active
 	//   subscription on the calling account.
 	//
-	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
+	// To enumerate the values supported in your account, call ListFirewallRuleTypes. It doesn't return
+	// AutoAllowlist .
+	//
+	// You can't specify FirewallRuleType when you update an AutoAllowlist rule, even
+	// with its current values. InitialDataTimeframeHours and
+	// ImportFromFirewallDomainListId can't be changed. To change them, delete the rule
+	// and create a new one. Deleting an AutoAllowlist rule also deletes its managed
+	// domain list and the domains that you allowed.
 	FirewallRuleType *FirewallRuleType
 
 	// The ID of the DNS Firewall Advanced rule.

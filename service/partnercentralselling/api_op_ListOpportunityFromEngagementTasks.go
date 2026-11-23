@@ -28,6 +28,8 @@ func (c *Client) ListOpportunityFromEngagementTasks(ctx context.Context, params 
 	return out, nil
 }
 
+// Contains the request parameters for the ListOpportunityFromEngagementTasks
+// operation.
 type ListOpportunityFromEngagementTasksInput struct {
 
 	// Specifies the catalog related to the request. Valid values are AWS for
@@ -63,8 +65,8 @@ type ListOpportunityFromEngagementTasksInput struct {
 	// processes.
 	OpportunityIdentifier []string
 
-	//  Defines the sorting parameters for listing tasks. This structure allows for
-	// specifying the field to sort by and the order of sorting.
+	// Specifies how to sort the returned tasks. You can sort by the time that the
+	// tasks started.
 	Sort *types.ListTasksSortBase
 
 	// Filters tasks by their unique identifiers. Use this when you want to retrieve
@@ -119,6 +121,8 @@ func (v *ListOpportunityFromEngagementTasksInput) SerializeMembers(s smithy.Shap
 	}
 }
 
+// Contains the response that the ListOpportunityFromEngagementTasks action
+// returns.
 type ListOpportunityFromEngagementTasksOutput struct {
 
 	// A token used for pagination to retrieve the next page of results. If there are

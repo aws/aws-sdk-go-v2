@@ -55,6 +55,8 @@ type ListDevicesInput struct {
 	//
 	//   - FORM_FACTOR: The device form factor. Valid values are PHONE or TABLET.
 	//
+	//   - DEVICE_TYPE: The device type. Valid values are PHYSICAL or VIRTUAL.
+	//
 	//   - MANUFACTURER: The device manufacturer (for example, Apple).
 	//
 	//   - REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.

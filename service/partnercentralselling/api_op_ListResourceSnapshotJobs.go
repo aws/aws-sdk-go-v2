@@ -11,8 +11,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-//	Lists resource snapshot jobs owned by the customer. This operation supports
-//
+// Lists resource snapshot jobs owned by the customer. This operation supports
 // various filtering scenarios, including listing all jobs owned by the caller,
 // jobs for a specific engagement, jobs with a specific status, or any combination
 // of these filters.
@@ -31,6 +30,7 @@ func (c *Client) ListResourceSnapshotJobs(ctx context.Context, params *ListResou
 	return out, nil
 }
 
+// Contains the request parameters for the ListResourceSnapshotJobs operation.
 type ListResourceSnapshotJobsInput struct {
 
 	//  Specifies the catalog related to the request.
@@ -38,17 +38,17 @@ type ListResourceSnapshotJobsInput struct {
 	// This member is required.
 	Catalog *string
 
-	//  The identifier of the engagement to filter the response.
+	// The identifier of the engagement to filter the response.
 	EngagementIdentifier *string
 
-	//  The maximum number of results to return in a single call. If omitted, defaults
+	// The maximum number of results to return in a single call. If omitted, defaults
 	// to 50.
 	MaxResults *int32
 
-	//  The token for the next set of results.
+	// The token for the next set of results.
 	NextToken *string
 
-	//  Configures the sorting of the response. If omitted, results are sorted by
+	// Configures the sorting of the response. If omitted, results are sorted by
 	// CreatedDate in descending order.
 	Sort *types.SortObject
 
@@ -87,6 +87,7 @@ func (v *ListResourceSnapshotJobsInput) SerializeMembers(s smithy.ShapeSerialize
 	}
 }
 
+// Contains the response that the ListResourceSnapshotJobs action returns.
 type ListResourceSnapshotJobsOutput struct {
 
 	//  An array of resource snapshot job summary objects.
@@ -94,7 +95,7 @@ type ListResourceSnapshotJobsOutput struct {
 	// This member is required.
 	ResourceSnapshotJobSummaries []types.ResourceSnapshotJobSummary
 
-	//  The token to retrieve the next set of results. If there are no additional
+	// The token to retrieve the next set of results. If there are no additional
 	// results, this value is null.
 	NextToken *string
 
@@ -174,7 +175,7 @@ func (c *Client) addOperationListResourceSnapshotJobsMiddlewares(stack *middlewa
 // ListResourceSnapshotJobsPaginatorOptions is the paginator options for
 // ListResourceSnapshotJobs
 type ListResourceSnapshotJobsPaginatorOptions struct {
-	//  The maximum number of results to return in a single call. If omitted, defaults
+	// The maximum number of results to return in a single call. If omitted, defaults
 	// to 50.
 	Limit int32
 

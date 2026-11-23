@@ -379,6 +379,9 @@ func ExampleCredentialsProviderConfiguration_outputUsage() {
 	var union types.CredentialsProviderConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.CredentialsProviderConfigurationMemberAwsBilling:
+		_ = v.Value // Value is types.AwsBillingConnectorConfiguration
+
 	case *types.CredentialsProviderConfigurationMemberCoinbaseCDP:
 		_ = v.Value // Value is types.PaymentCredentialProviderConfiguration
 
@@ -395,6 +398,7 @@ func ExampleCredentialsProviderConfiguration_outputUsage() {
 }
 
 var _ *types.PaymentCredentialProviderConfiguration
+var _ *types.AwsBillingConnectorConfiguration
 
 func ExampleCustomConfigurationInput_outputUsage() {
 	var union types.CustomConfigurationInput

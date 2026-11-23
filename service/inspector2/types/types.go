@@ -4649,6 +4649,88 @@ func (v *CodeSecurityIntegrationSummary) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
+// The VPC configuration that Amazon Inspector uses to connect to a source code
+// repository provider that is hosted in a private network.
+type CodeSecurityIntegrationVpcConfiguration struct {
+
+	// The ID of the VPC endpoint used for the connection.
+	//
+	// This member is required.
+	VpcEndpointId *string
+
+	// The ID of the VPC that Amazon Inspector connects through to reach the
+	// repository provider.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The Amazon Resource Name (ARN) of the AWS CodeConnections host used for the
+	// connection.
+	CodeConnectionsHostArn *string
+
+	// The IDs of the security groups used for the connection.
+	SecurityGroups []string
+
+	// The IDs of the subnets used for the connection.
+	SubnetIds []string
+
+	// The TLS certificate used to establish a trusted connection to the repository
+	// provider.
+	TlsCertificate *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CodeSecurityIntegrationVpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeSecurityIntegrationVpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeSecurityIntegrationVpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeConnectionsHostArn != nil {
+		s.WriteString(schemas.CodeSecurityIntegrationVpcConfiguration_codeConnectionsHostArn, *v.CodeConnectionsHostArn)
+	}
+	if v.SecurityGroups != nil {
+		serializeSecurityGroupIdList(s, schemas.CodeSecurityIntegrationVpcConfiguration_securityGroups, v.SecurityGroups)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.CodeSecurityIntegrationVpcConfiguration_subnetIds, v.SubnetIds)
+	}
+	if v.TlsCertificate != nil {
+		s.WriteString(schemas.CodeSecurityIntegrationVpcConfiguration_tlsCertificate, *v.TlsCertificate)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.CodeSecurityIntegrationVpcConfiguration_vpcEndpointId, *v.VpcEndpointId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.CodeSecurityIntegrationVpcConfiguration_vpcId, *v.VpcId)
+	}
+}
+func (v *CodeSecurityIntegrationVpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeSecurityIntegrationVpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeSecurityIntegrationVpcConfiguration_codeConnectionsHostArn:
+			v.CodeConnectionsHostArn = new(string)
+			return d.ReadString(schemas.CodeSecurityIntegrationVpcConfiguration_codeConnectionsHostArn, v.CodeConnectionsHostArn)
+		case schemas.CodeSecurityIntegrationVpcConfiguration_securityGroups:
+			return deserializeSecurityGroupIdList(d, schemas.CodeSecurityIntegrationVpcConfiguration_securityGroups, &v.SecurityGroups)
+		case schemas.CodeSecurityIntegrationVpcConfiguration_subnetIds:
+			return deserializeSubnetIdList(d, schemas.CodeSecurityIntegrationVpcConfiguration_subnetIds, &v.SubnetIds)
+		case schemas.CodeSecurityIntegrationVpcConfiguration_tlsCertificate:
+			v.TlsCertificate = new(string)
+			return d.ReadString(schemas.CodeSecurityIntegrationVpcConfiguration_tlsCertificate, v.TlsCertificate)
+		case schemas.CodeSecurityIntegrationVpcConfiguration_vpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.CodeSecurityIntegrationVpcConfiguration_vpcEndpointId, v.VpcEndpointId)
+		case schemas.CodeSecurityIntegrationVpcConfiguration_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.CodeSecurityIntegrationVpcConfiguration_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Identifies a specific resource in a code repository that will be scanned.
 //
 // The following types satisfy this interface:
@@ -7080,6 +7162,52 @@ func (v *CreateCisTargets) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains the details required to create an integration with a GitHub Enterprise
+// Server instance.
+type CreateGitHubEnterpriseIntegrationDetail struct {
+
+	// The URL of the GitHub Enterprise Server instance.
+	//
+	// This member is required.
+	InstanceUrl *string
+
+	// The VPC configuration used to connect to the GitHub Enterprise Server instance
+	// in a private network. For publicly accessible instances, omit this field.
+	VpcConfiguration *CodeSecurityIntegrationVpcConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *CreateGitHubEnterpriseIntegrationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGitHubEnterpriseIntegrationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGitHubEnterpriseIntegrationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceUrl != nil {
+		s.WriteString(schemas.CreateGitHubEnterpriseIntegrationDetail_instanceUrl, *v.InstanceUrl)
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.CreateGitHubEnterpriseIntegrationDetail_vpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateGitHubEnterpriseIntegrationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGitHubEnterpriseIntegrationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGitHubEnterpriseIntegrationDetail_instanceUrl:
+			v.InstanceUrl = new(string)
+			return d.ReadString(schemas.CreateGitHubEnterpriseIntegrationDetail_instanceUrl, v.InstanceUrl)
+		case schemas.CreateGitHubEnterpriseIntegrationDetail_vpcConfiguration:
+			v.VpcConfiguration = &CodeSecurityIntegrationVpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains details required to create an integration with a self-managed GitLab
 // instance.
 type CreateGitLabSelfManagedIntegrationDetail struct {
@@ -7094,6 +7222,10 @@ type CreateGitLabSelfManagedIntegrationDetail struct {
 	//
 	// This member is required.
 	InstanceUrl *string
+
+	// The VPC configuration used to connect to the self-managed GitLab instance in a
+	// private network. For publicly accessible instances, omit this field.
+	VpcConfiguration *CodeSecurityIntegrationVpcConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -7111,6 +7243,11 @@ func (v *CreateGitLabSelfManagedIntegrationDetail) SerializeMembers(s smithy.Sha
 	if v.InstanceUrl != nil {
 		s.WriteString(schemas.CreateGitLabSelfManagedIntegrationDetail_instanceUrl, *v.InstanceUrl)
 	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.CreateGitLabSelfManagedIntegrationDetail_vpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *CreateGitLabSelfManagedIntegrationDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateGitLabSelfManagedIntegrationDetail, func(s *smithy.Schema) error {
@@ -7121,6 +7258,9 @@ func (v *CreateGitLabSelfManagedIntegrationDetail) Deserialize(d smithy.ShapeDes
 		case schemas.CreateGitLabSelfManagedIntegrationDetail_instanceUrl:
 			v.InstanceUrl = new(string)
 			return d.ReadString(schemas.CreateGitLabSelfManagedIntegrationDetail_instanceUrl, v.InstanceUrl)
+		case schemas.CreateGitLabSelfManagedIntegrationDetail_vpcConfiguration:
+			v.VpcConfiguration = &CodeSecurityIntegrationVpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
 		}
 		return nil
 	})
@@ -7131,9 +7271,28 @@ func (v *CreateGitLabSelfManagedIntegrationDetail) Deserialize(d smithy.ShapeDes
 //
 // The following types satisfy this interface:
 //
+//	CreateIntegrationDetailMemberGithubEnterprise
 //	CreateIntegrationDetailMemberGitlabSelfManaged
 type CreateIntegrationDetail interface {
 	isCreateIntegrationDetail()
+}
+
+// Details specific to creating an integration with a GitHub Enterprise Server
+// instance.
+type CreateIntegrationDetailMemberGithubEnterprise struct {
+	Value CreateGitHubEnterpriseIntegrationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*CreateIntegrationDetailMemberGithubEnterprise) isCreateIntegrationDetail() {}
+func (v *CreateIntegrationDetailMemberGithubEnterprise) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntegrationDetail_githubEnterprise)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CreateIntegrationDetailMemberGithubEnterprise) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Details specific to creating an integration with a self-managed GitLab instance.
@@ -10729,6 +10888,41 @@ func (v *GcpScopeConfigurationInput) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// Contains the details required to register the GitHub App on the GitHub
+// Enterprise Server instance.
+type GitHubEnterpriseServerAppRegistrationDetail struct {
+
+	// The manifest code used to register the GitHub App on the GitHub Enterprise
+	// Server instance.
+	//
+	// This member is required.
+	ManifestCode *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *GitHubEnterpriseServerAppRegistrationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GitHubEnterpriseServerAppRegistrationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GitHubEnterpriseServerAppRegistrationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManifestCode != nil {
+		s.WriteString(schemas.GitHubEnterpriseServerAppRegistrationDetail_manifestCode, *v.ManifestCode)
+	}
+}
+func (v *GitHubEnterpriseServerAppRegistrationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GitHubEnterpriseServerAppRegistrationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GitHubEnterpriseServerAppRegistrationDetail_manifestCode:
+			v.ManifestCode = new(string)
+			return d.ReadString(schemas.GitHubEnterpriseServerAppRegistrationDetail_manifestCode, v.ManifestCode)
+		}
+		return nil
+	})
+}
+
 // Contains details about a container image involved in a finding.
 type Image struct {
 
@@ -11745,42 +11939,45 @@ func (v *ListCisScansFilterCriteria) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
-// Details about a machine image resource scanned directly by Inspector.
+// Contains details about an Amazon Machine Image (AMI) that Amazon Inspector
+// scanned directly.
 type MachineImageDetails struct {
 
-	// The machine image ID (e.g., ami-0abcdef1234567890)
+	// The ID of the machine image, for example ami-0abcdef1234567890 .
 	//
 	// This member is required.
 	MachineImageId *string
 
-	// CPU architecture (x86_64/arm64)
+	// The CPU architecture of the machine image, for example x86_64 or arm64 .
 	Architecture Architecture
 
-	// When the image was created
+	// The date and time that the machine image was created.
 	CreationDate *time.Time
 
-	// Whether the image is publicly shared
+	// Indicates whether the machine image is shared publicly.
 	IsPublic *bool
 
-	// Human-readable image name
+	// The name of the machine image.
 	Name *string
 
-	// Account ID that owns the image
+	// The ID of the account that owns the machine image.
 	OwnerAccountId *string
 
-	// OS platform (Linux/Windows)
+	// The operating system platform of the machine image.
 	Platform *string
 
-	// Root device type (ebs/instance-store) — AWS-specific
+	// The root device type of the machine image, either ebs or instance-store .
 	RootDeviceType *string
 
-	// Source resource the image was created from (nullable)
+	// The ID of the Amazon EC2 instance that the machine image was created from, if
+	// available.
 	SourceResourceId *string
 
-	// Image state (available/pending/deregistered)
+	// The state of the machine image, for example available , pending , or
+	// deregistered .
 	State *string
 
-	// Virtualization type (hvm/paravirtual) — AWS-specific
+	// The virtualization type of the machine image, either hvm or paravirtual .
 	VirtualizationType *string
 
 	noSmithyDocumentSerde
@@ -12577,8 +12774,26 @@ type PackageFilter struct {
 	// An object that contains details on the name of the package to filter on.
 	Name *StringFilter
 
+	// An object that contains details on the package URL (purl) qualifier to filter
+	// on.
+	PurlQualifier *PurlQualifierFilter
+
 	// An object that contains details on the package release to filter on.
 	Release *StringFilter
+
+	// An object that contains details on the runtime reachability status of the
+	// package to filter on. For more information, see [Understanding runtime reachability]in the Amazon Inspector user
+	// guide.
+	//
+	// [Understanding runtime reachability]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html
+	RuntimeReachability *RuntimeReachabilityFilter
+
+	// An object that contains details on the runtime reachability reason of the
+	// package to filter on. For more information, see [Understanding runtime reachability]in the Amazon Inspector user
+	// guide.
+	//
+	// [Understanding runtime reachability]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html
+	RuntimeReachabilityReason *RuntimeReachabilityReasonFilter
 
 	// An object that describes the details of a string filter.
 	SourceLambdaLayerArn *StringFilter
@@ -12619,9 +12834,24 @@ func (v *PackageFilter) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Name.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.PurlQualifier != nil {
+		s.WriteStruct(schemas.PackageFilter_purlQualifier)
+		v.PurlQualifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Release != nil {
 		s.WriteStruct(schemas.PackageFilter_release)
 		v.Release.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuntimeReachability != nil {
+		s.WriteStruct(schemas.PackageFilter_runtimeReachability)
+		v.RuntimeReachability.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuntimeReachabilityReason != nil {
+		s.WriteStruct(schemas.PackageFilter_runtimeReachabilityReason)
+		v.RuntimeReachabilityReason.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.SourceLambdaLayerArn != nil {
@@ -12655,9 +12885,18 @@ func (v *PackageFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.PackageFilter_name:
 			v.Name = &StringFilter{}
 			return v.Name.Deserialize(d)
+		case schemas.PackageFilter_purlQualifier:
+			v.PurlQualifier = &PurlQualifierFilter{}
+			return v.PurlQualifier.Deserialize(d)
 		case schemas.PackageFilter_release:
 			v.Release = &StringFilter{}
 			return v.Release.Deserialize(d)
+		case schemas.PackageFilter_runtimeReachability:
+			v.RuntimeReachability = &RuntimeReachabilityFilter{}
+			return v.RuntimeReachability.Deserialize(d)
+		case schemas.PackageFilter_runtimeReachabilityReason:
+			v.RuntimeReachabilityReason = &RuntimeReachabilityReasonFilter{}
+			return v.RuntimeReachabilityReason.Deserialize(d)
 		case schemas.PackageFilter_sourceLambdaLayerArn:
 			v.SourceLambdaLayerArn = &StringFilter{}
 			return v.SourceLambdaLayerArn.Deserialize(d)
@@ -13234,6 +13473,67 @@ func (v *ProviderFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// An object that describes the details of a package URL (purl) qualifier filter.
+type PurlQualifierFilter struct {
+
+	// The operator to use when comparing values in the filter.
+	//
+	// This member is required.
+	Comparison MapComparison
+
+	// The package URL (purl) qualifier key to filter on.
+	//
+	// This member is required.
+	Key PurlQualifierKey
+
+	// The package URL (purl) qualifier value to filter on.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PurlQualifierFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurlQualifierFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurlQualifierFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comparison != "" {
+		s.WriteString(schemas.PurlQualifierFilter_comparison, string(v.Comparison))
+	}
+	if v.Key != "" {
+		s.WriteString(schemas.PurlQualifierFilter_key, string(v.Key))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.PurlQualifierFilter_value, *v.Value)
+	}
+}
+func (v *PurlQualifierFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurlQualifierFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurlQualifierFilter_comparison:
+			var ev string
+			if err := d.ReadString(schemas.PurlQualifierFilter_comparison, &ev); err != nil {
+				return err
+			}
+			v.Comparison = MapComparison(ev)
+			return nil
+		case schemas.PurlQualifierFilter_key:
+			var ev string
+			if err := d.ReadString(schemas.PurlQualifierFilter_key, &ev); err != nil {
+				return err
+			}
+			v.Key = PurlQualifierKey(ev)
+			return nil
+		case schemas.PurlQualifierFilter_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.PurlQualifierFilter_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Details about the recommended course of action to remediate the finding.
 type Recommendation struct {
 
@@ -13657,7 +13957,8 @@ type ResourceDetails struct {
 	// An object that contains details about a container image involved in the finding.
 	Image *Image
 
-	// Details about a machine image resource scanned directly by Inspector.
+	// An object that contains details about the Amazon Machine Image (AMI) involved
+	// in the finding.
 	MachineImage *MachineImageDetails
 
 	// An object that contains details about a serverless function involved in the
@@ -14409,6 +14710,110 @@ func (v *ResourceStringFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceStringFilter_value:
 			v.Value = new(string)
 			return d.ReadString(schemas.ResourceStringFilter_value, v.Value)
+		}
+		return nil
+	})
+}
+
+// An object that describes the details of a runtime reachability filter.
+type RuntimeReachabilityFilter struct {
+
+	// The operator to use when comparing values in the filter.
+	//
+	// This member is required.
+	Comparison RuntimeReachabilityComparison
+
+	// The runtime reachability status to filter on.
+	//
+	// This member is required.
+	Value RuntimeReachability
+
+	noSmithyDocumentSerde
+}
+
+func (v *RuntimeReachabilityFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeReachabilityFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeReachabilityFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comparison != "" {
+		s.WriteString(schemas.RuntimeReachabilityFilter_comparison, string(v.Comparison))
+	}
+	if v.Value != "" {
+		s.WriteString(schemas.RuntimeReachabilityFilter_value, string(v.Value))
+	}
+}
+func (v *RuntimeReachabilityFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeReachabilityFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeReachabilityFilter_comparison:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeReachabilityFilter_comparison, &ev); err != nil {
+				return err
+			}
+			v.Comparison = RuntimeReachabilityComparison(ev)
+			return nil
+		case schemas.RuntimeReachabilityFilter_value:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeReachabilityFilter_value, &ev); err != nil {
+				return err
+			}
+			v.Value = RuntimeReachability(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// An object that describes the details of a runtime reachability reason filter.
+type RuntimeReachabilityReasonFilter struct {
+
+	// The operator to use when comparing values in the filter.
+	//
+	// This member is required.
+	Comparison RuntimeReachabilityComparison
+
+	// The runtime reachability reason to filter on.
+	//
+	// This member is required.
+	Value RuntimeReachabilityReason
+
+	noSmithyDocumentSerde
+}
+
+func (v *RuntimeReachabilityReasonFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeReachabilityReasonFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeReachabilityReasonFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comparison != "" {
+		s.WriteString(schemas.RuntimeReachabilityReasonFilter_comparison, string(v.Comparison))
+	}
+	if v.Value != "" {
+		s.WriteString(schemas.RuntimeReachabilityReasonFilter_value, string(v.Value))
+	}
+}
+func (v *RuntimeReachabilityReasonFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeReachabilityReasonFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeReachabilityReasonFilter_comparison:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeReachabilityReasonFilter_comparison, &ev); err != nil {
+				return err
+			}
+			v.Comparison = RuntimeReachabilityComparison(ev)
+			return nil
+		case schemas.RuntimeReachabilityReasonFilter_value:
+			var ev string
+			if err := d.ReadString(schemas.RuntimeReachabilityReasonFilter_value, &ev); err != nil {
+				return err
+			}
+			v.Value = RuntimeReachabilityReason(ev)
+			return nil
 		}
 		return nil
 	})
@@ -16359,6 +16764,110 @@ func (v *UpdateConfigurationInheritance) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
+// Contains the details required to complete the GitHub App installation for a
+// GitHub Enterprise Server integration.
+type UpdateGitHubEnterpriseServerAppInstallationDetail struct {
+
+	// The authorization code received from GitHub Enterprise Server.
+	//
+	// This member is required.
+	Code *string
+
+	// The installation ID of the GitHub App associated with the integration.
+	//
+	// This member is required.
+	InstallationId *string
+
+	// The PKCE state token used to validate the authorization request.
+	StateToken *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateGitHubEnterpriseServerAppInstallationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGitHubEnterpriseServerAppInstallationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGitHubEnterpriseServerAppInstallationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.UpdateGitHubEnterpriseServerAppInstallationDetail_code, *v.Code)
+	}
+	if v.InstallationId != nil {
+		s.WriteString(schemas.UpdateGitHubEnterpriseServerAppInstallationDetail_installationId, *v.InstallationId)
+	}
+	if v.StateToken != nil {
+		s.WriteString(schemas.UpdateGitHubEnterpriseServerAppInstallationDetail_stateToken, *v.StateToken)
+	}
+}
+func (v *UpdateGitHubEnterpriseServerAppInstallationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGitHubEnterpriseServerAppInstallationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGitHubEnterpriseServerAppInstallationDetail_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.UpdateGitHubEnterpriseServerAppInstallationDetail_code, v.Code)
+		case schemas.UpdateGitHubEnterpriseServerAppInstallationDetail_installationId:
+			v.InstallationId = new(string)
+			return d.ReadString(schemas.UpdateGitHubEnterpriseServerAppInstallationDetail_installationId, v.InstallationId)
+		case schemas.UpdateGitHubEnterpriseServerAppInstallationDetail_stateToken:
+			v.StateToken = new(string)
+			return d.ReadString(schemas.UpdateGitHubEnterpriseServerAppInstallationDetail_stateToken, v.StateToken)
+		}
+		return nil
+	})
+}
+
+// Contains the details required to update an integration with a GitHub Enterprise
+// Server instance. Provide one of the following, depending on the step of the
+// setup flow.
+//
+// The following types satisfy this interface:
+//
+//	UpdateGitHubEnterpriseServerIntegrationDetailMemberAppInstallation
+//	UpdateGitHubEnterpriseServerIntegrationDetailMemberAppRegistration
+type UpdateGitHubEnterpriseServerIntegrationDetail interface {
+	isUpdateGitHubEnterpriseServerIntegrationDetail()
+}
+
+// Details for completing the GitHub App installation step of the GitHub
+// Enterprise Server integration.
+type UpdateGitHubEnterpriseServerIntegrationDetailMemberAppInstallation struct {
+	Value UpdateGitHubEnterpriseServerAppInstallationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateGitHubEnterpriseServerIntegrationDetailMemberAppInstallation) isUpdateGitHubEnterpriseServerIntegrationDetail() {
+}
+func (v *UpdateGitHubEnterpriseServerIntegrationDetailMemberAppInstallation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGitHubEnterpriseServerIntegrationDetail_appInstallation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateGitHubEnterpriseServerIntegrationDetailMemberAppInstallation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Details for completing the GitHub App manifest registration step of the GitHub
+// Enterprise Server integration.
+type UpdateGitHubEnterpriseServerIntegrationDetailMemberAppRegistration struct {
+	Value GitHubEnterpriseServerAppRegistrationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateGitHubEnterpriseServerIntegrationDetailMemberAppRegistration) isUpdateGitHubEnterpriseServerIntegrationDetail() {
+}
+func (v *UpdateGitHubEnterpriseServerIntegrationDetailMemberAppRegistration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGitHubEnterpriseServerIntegrationDetail_appRegistration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *UpdateGitHubEnterpriseServerIntegrationDetailMemberAppRegistration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // Contains details required to update an integration with GitHub.
 type UpdateGitHubIntegrationDetail struct {
 
@@ -16371,6 +16880,9 @@ type UpdateGitHubIntegrationDetail struct {
 	//
 	// This member is required.
 	InstallationId *string
+
+	// The PKCE state token used to validate the authorization request.
+	StateToken *string
 
 	noSmithyDocumentSerde
 }
@@ -16388,6 +16900,9 @@ func (v *UpdateGitHubIntegrationDetail) SerializeMembers(s smithy.ShapeSerialize
 	if v.InstallationId != nil {
 		s.WriteString(schemas.UpdateGitHubIntegrationDetail_installationId, *v.InstallationId)
 	}
+	if v.StateToken != nil {
+		s.WriteString(schemas.UpdateGitHubIntegrationDetail_stateToken, *v.StateToken)
+	}
 }
 func (v *UpdateGitHubIntegrationDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateGitHubIntegrationDetail, func(s *smithy.Schema) error {
@@ -16398,6 +16913,9 @@ func (v *UpdateGitHubIntegrationDetail) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.UpdateGitHubIntegrationDetail_installationId:
 			v.InstallationId = new(string)
 			return d.ReadString(schemas.UpdateGitHubIntegrationDetail_installationId, v.InstallationId)
+		case schemas.UpdateGitHubIntegrationDetail_stateToken:
+			v.StateToken = new(string)
+			return d.ReadString(schemas.UpdateGitHubIntegrationDetail_stateToken, v.StateToken)
 		}
 		return nil
 	})
@@ -16413,6 +16931,9 @@ type UpdateGitLabSelfManagedIntegrationDetail struct {
 	// This member is required.
 	AuthCode *string
 
+	// The PKCE state token used to validate the authorization request.
+	StateToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -16426,6 +16947,9 @@ func (v *UpdateGitLabSelfManagedIntegrationDetail) SerializeMembers(s smithy.Sha
 	if v.AuthCode != nil {
 		s.WriteString(schemas.UpdateGitLabSelfManagedIntegrationDetail_authCode, *v.AuthCode)
 	}
+	if v.StateToken != nil {
+		s.WriteString(schemas.UpdateGitLabSelfManagedIntegrationDetail_stateToken, *v.StateToken)
+	}
 }
 func (v *UpdateGitLabSelfManagedIntegrationDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateGitLabSelfManagedIntegrationDetail, func(s *smithy.Schema) error {
@@ -16433,6 +16957,9 @@ func (v *UpdateGitLabSelfManagedIntegrationDetail) Deserialize(d smithy.ShapeDes
 		case schemas.UpdateGitLabSelfManagedIntegrationDetail_authCode:
 			v.AuthCode = new(string)
 			return d.ReadString(schemas.UpdateGitLabSelfManagedIntegrationDetail_authCode, v.AuthCode)
+		case schemas.UpdateGitLabSelfManagedIntegrationDetail_stateToken:
+			v.StateToken = new(string)
+			return d.ReadString(schemas.UpdateGitLabSelfManagedIntegrationDetail_stateToken, v.StateToken)
 		}
 		return nil
 	})
@@ -16444,6 +16971,7 @@ func (v *UpdateGitLabSelfManagedIntegrationDetail) Deserialize(d smithy.ShapeDes
 // The following types satisfy this interface:
 //
 //	UpdateIntegrationDetailsMemberGithub
+//	UpdateIntegrationDetailsMemberGithubEnterpriseServer
 //	UpdateIntegrationDetailsMemberGitlabSelfManaged
 type UpdateIntegrationDetails interface {
 	isUpdateIntegrationDetails()
@@ -16464,6 +16992,22 @@ func (v *UpdateIntegrationDetailsMemberGithub) Serialize(s smithy.ShapeSerialize
 }
 func (v *UpdateIntegrationDetailsMemberGithub) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// Details specific to updating an integration with a GitHub Enterprise Server
+// instance.
+type UpdateIntegrationDetailsMemberGithubEnterpriseServer struct {
+	Value UpdateGitHubEnterpriseServerIntegrationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateIntegrationDetailsMemberGithubEnterpriseServer) isUpdateIntegrationDetails() {}
+func (v *UpdateIntegrationDetailsMemberGithubEnterpriseServer) Serialize(s smithy.ShapeSerializer) {
+	serializeUpdateGitHubEnterpriseServerIntegrationDetail(s, schemas.UpdateIntegrationDetails_githubEnterpriseServer, v.Value)
+}
+func (v *UpdateIntegrationDetailsMemberGithubEnterpriseServer) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeUpdateGitHubEnterpriseServerIntegrationDetail(d, schemas.UpdateIntegrationDetails_githubEnterpriseServer, &v.Value)
 }
 
 // Details specific to updating an integration with a self-managed GitLab instance.
@@ -17461,11 +18005,26 @@ type VulnerablePackage struct {
 	// The package manager of the vulnerable package.
 	PackageManager PackageManager
 
+	// The package URL (purl) of the vulnerable package.
+	Purl *string
+
 	// The release of the vulnerable package.
 	Release *string
 
 	// The code to run in your environment to update packages with a fix available.
 	Remediation *string
+
+	// The runtime reachability status of the vulnerable package. For more
+	// information, see [Understanding runtime reachability]in the Amazon Inspector user guide.
+	//
+	// [Understanding runtime reachability]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html
+	RuntimeReachability RuntimeReachability
+
+	// The reason for the runtime reachability status of the vulnerable package. For
+	// more information, see [Understanding runtime reachability]in the Amazon Inspector user guide.
+	//
+	// [Understanding runtime reachability]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html
+	RuntimeReachabilityReason RuntimeReachabilityReason
 
 	// The Amazon Resource Number (ARN) of the Amazon Web Services Lambda function
 	// affected by a finding.
@@ -17502,11 +18061,20 @@ func (v *VulnerablePackage) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PackageManager != "" {
 		s.WriteString(schemas.VulnerablePackage_packageManager, string(v.PackageManager))
 	}
+	if v.Purl != nil {
+		s.WriteString(schemas.VulnerablePackage_purl, *v.Purl)
+	}
 	if v.Release != nil {
 		s.WriteString(schemas.VulnerablePackage_release, *v.Release)
 	}
 	if v.Remediation != nil {
 		s.WriteString(schemas.VulnerablePackage_remediation, *v.Remediation)
+	}
+	if v.RuntimeReachability != "" {
+		s.WriteString(schemas.VulnerablePackage_runtimeReachability, string(v.RuntimeReachability))
+	}
+	if v.RuntimeReachabilityReason != "" {
+		s.WriteString(schemas.VulnerablePackage_runtimeReachabilityReason, string(v.RuntimeReachabilityReason))
 	}
 	if v.SourceLambdaLayerArn != nil {
 		s.WriteString(schemas.VulnerablePackage_sourceLambdaLayerArn, *v.SourceLambdaLayerArn)
@@ -17542,12 +18110,29 @@ func (v *VulnerablePackage) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.PackageManager = PackageManager(ev)
 			return nil
+		case schemas.VulnerablePackage_purl:
+			v.Purl = new(string)
+			return d.ReadString(schemas.VulnerablePackage_purl, v.Purl)
 		case schemas.VulnerablePackage_release:
 			v.Release = new(string)
 			return d.ReadString(schemas.VulnerablePackage_release, v.Release)
 		case schemas.VulnerablePackage_remediation:
 			v.Remediation = new(string)
 			return d.ReadString(schemas.VulnerablePackage_remediation, v.Remediation)
+		case schemas.VulnerablePackage_runtimeReachability:
+			var ev string
+			if err := d.ReadString(schemas.VulnerablePackage_runtimeReachability, &ev); err != nil {
+				return err
+			}
+			v.RuntimeReachability = RuntimeReachability(ev)
+			return nil
+		case schemas.VulnerablePackage_runtimeReachabilityReason:
+			var ev string
+			if err := d.ReadString(schemas.VulnerablePackage_runtimeReachabilityReason, &ev); err != nil {
+				return err
+			}
+			v.RuntimeReachabilityReason = RuntimeReachabilityReason(ev)
+			return nil
 		case schemas.VulnerablePackage_sourceLambdaLayerArn:
 			v.SourceLambdaLayerArn = new(string)
 			return d.ReadString(schemas.VulnerablePackage_sourceLambdaLayerArn, v.SourceLambdaLayerArn)
@@ -17618,12 +18203,13 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAggregationRequest()       {}
-func (*UnknownUnionMember) isAggregationResponse()      {}
-func (*UnknownUnionMember) isClusterMetadata()          {}
-func (*UnknownUnionMember) isCodeSecurityResource()     {}
-func (*UnknownUnionMember) isCreateIntegrationDetail()  {}
-func (*UnknownUnionMember) isProviderDetailCreate()     {}
-func (*UnknownUnionMember) isProviderDetailUpdate()     {}
-func (*UnknownUnionMember) isSchedule()                 {}
-func (*UnknownUnionMember) isUpdateIntegrationDetails() {}
+func (*UnknownUnionMember) isAggregationRequest()                            {}
+func (*UnknownUnionMember) isAggregationResponse()                           {}
+func (*UnknownUnionMember) isClusterMetadata()                               {}
+func (*UnknownUnionMember) isCodeSecurityResource()                          {}
+func (*UnknownUnionMember) isCreateIntegrationDetail()                       {}
+func (*UnknownUnionMember) isProviderDetailCreate()                          {}
+func (*UnknownUnionMember) isProviderDetailUpdate()                          {}
+func (*UnknownUnionMember) isSchedule()                                      {}
+func (*UnknownUnionMember) isUpdateGitHubEnterpriseServerIntegrationDetail() {}
+func (*UnknownUnionMember) isUpdateIntegrationDetails()                      {}

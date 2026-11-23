@@ -207,6 +207,33 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_ArchiveProject(t *testing.T) {
+	input := &ArchiveProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ArchiveProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ArchiveProject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BatchDeleteAdvancedPromptOptimizationJob(t *testing.T) {
 	input := &BatchDeleteAdvancedPromptOptimizationJobInput{
 		JobIdentifiers: []string{
@@ -1445,6 +1472,46 @@ func TestCheckRequestSnapshot_CreateModelInvocationJob(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateProject(t *testing.T) {
+	input := &CreateProjectInput{
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreatePromptRouter(t *testing.T) {
 	input := &CreatePromptRouterInput{
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
@@ -1535,6 +1602,33 @@ func TestCheckRequestSnapshot_CreateProvisionedModelThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProvisionedModelThroughput"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteAccountDataRetentionStorage(t *testing.T) {
+	input := &DeleteAccountDataRetentionStorageInput{
+		ModelProvider: types.DataRetentionStorageModelProvider("anthropic"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAccountDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAccountDataRetentionStorage"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1867,6 +1961,61 @@ func TestCheckRequestSnapshot_DeleteModelInvocationLoggingConfiguration(t *testi
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteOrganizationDataRetentionStorage(t *testing.T) {
+	input := &DeleteOrganizationDataRetentionStorageInput{
+		ModelProvider: types.DataRetentionStorageModelProvider("anthropic"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteOrganizationDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteOrganizationDataRetentionStorage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteProjectDataRetentionStorage(t *testing.T) {
+	input := &DeleteProjectDataRetentionStorageInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		ModelProvider:     types.DataRetentionStorageModelProvider("anthropic"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteProjectDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteProjectDataRetentionStorage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeletePromptRouter(t *testing.T) {
 	input := &DeletePromptRouterInput{
 		PromptRouterArn: ptr.String("__PromptRouterArn__"),
@@ -2023,6 +2172,33 @@ func TestCheckRequestSnapshot_GetAccountDataRetention(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAccountDataRetention"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetAccountDataRetentionStorage(t *testing.T) {
+	input := &GetAccountDataRetentionStorageInput{
+		ModelProvider: types.DataRetentionStorageModelProvider("anthropic"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAccountDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAccountDataRetentionStorage"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2335,7 +2511,8 @@ func TestCheckRequestSnapshot_GetEvaluationJob(t *testing.T) {
 
 func TestCheckRequestSnapshot_GetFoundationModel(t *testing.T) {
 	input := &GetFoundationModelInput{
-		ModelIdentifier: ptr.String("__ModelIdentifier__"),
+		ModelIdentifier:   ptr.String("__ModelIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2445,6 +2622,7 @@ func TestCheckRequestSnapshot_GetImportedModel(t *testing.T) {
 func TestCheckRequestSnapshot_GetInferenceProfile(t *testing.T) {
 	input := &GetInferenceProfileInput{
 		InferenceProfileIdentifier: ptr.String("__InferenceProfileIdentifier__"),
+		ProjectIdentifier:          ptr.String("__ProjectIdentifier__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2629,6 +2807,88 @@ func TestCheckRequestSnapshot_GetModelInvocationLoggingConfiguration(t *testing.
 	}
 }
 
+func TestCheckRequestSnapshot_GetOrganizationDataRetentionStorage(t *testing.T) {
+	input := &GetOrganizationDataRetentionStorageInput{
+		ModelProvider: types.DataRetentionStorageModelProvider("anthropic"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetOrganizationDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOrganizationDataRetentionStorage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetProject(t *testing.T) {
+	input := &GetProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetProject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetProjectDataRetentionStorage(t *testing.T) {
+	input := &GetProjectDataRetentionStorageInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		ModelProvider:     types.DataRetentionStorageModelProvider("anthropic"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetProjectDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetProjectDataRetentionStorage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetPromptRouter(t *testing.T) {
 	input := &GetPromptRouterInput{
 		PromptRouterArn: ptr.String("__PromptRouterArn__"),
@@ -2706,6 +2966,116 @@ func TestCheckRequestSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetTrustedAccessProgram(t *testing.T) {
+	input := &GetTrustedAccessProgramInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTrustedAccessProgram(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTrustedAccessProgram"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetTrustedAccessProgramAccountEnrollment(t *testing.T) {
+	input := &GetTrustedAccessProgramAccountEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTrustedAccessProgramAccountEnrollment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTrustedAccessProgramAccountEnrollment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetTrustedAccessProgramOrganizationEnrollment(t *testing.T) {
+	input := &GetTrustedAccessProgramOrganizationEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTrustedAccessProgramOrganizationEnrollment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTrustedAccessProgramOrganizationEnrollment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetTrustedAccessProgramProjectEnrollment(t *testing.T) {
+	input := &GetTrustedAccessProgramProjectEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTrustedAccessProgramProjectEnrollment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTrustedAccessProgramProjectEnrollment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3050,6 +3420,7 @@ func TestCheckRequestSnapshot_ListFoundationModels(t *testing.T) {
 		ByCustomizationType: types.ModelCustomization("FINE_TUNING"),
 		ByOutputModality:    types.ModelModality("TEXT"),
 		ByInferenceType:     types.InferenceType("ON_DEMAND"),
+		ProjectIdentifier:   ptr.String("__ProjectIdentifier__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3138,9 +3509,10 @@ func TestCheckRequestSnapshot_ListImportedModels(t *testing.T) {
 
 func TestCheckRequestSnapshot_ListInferenceProfiles(t *testing.T) {
 	input := &ListInferenceProfilesInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
-		TypeEquals: types.InferenceProfileType("SYSTEM_DEFINED"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		TypeEquals:        types.InferenceProfileType("SYSTEM_DEFINED"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3332,6 +3704,35 @@ func TestCheckRequestSnapshot_ListModelInvocationJobs(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListProjects(t *testing.T) {
+	input := &ListProjectsInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		StatusFilter: types.ProjectStatus("active"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListProjects(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProjects"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListPromptRouters(t *testing.T) {
 	input := &ListPromptRoutersInput{
 		MaxResults: ptr.Int32(1),
@@ -3423,6 +3824,35 @@ func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListTrustedAccessPrograms(t *testing.T) {
+	input := &ListTrustedAccessProgramsInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTrustedAccessPrograms(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTrustedAccessPrograms"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_PutAccountDataRetention(t *testing.T) {
 	input := &PutAccountDataRetentionInput{
 		Mode: types.DataRetentionMode("default"),
@@ -3446,6 +3876,39 @@ func TestCheckRequestSnapshot_PutAccountDataRetention(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAccountDataRetention"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutAccountDataRetentionStorage(t *testing.T) {
+	input := &PutAccountDataRetentionStorageInput{
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutAccountDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAccountDataRetentionStorage"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3540,6 +4003,73 @@ func TestCheckRequestSnapshot_PutModelInvocationLoggingConfiguration(t *testing.
 	}
 }
 
+func TestCheckRequestSnapshot_PutOrganizationDataRetentionStorage(t *testing.T) {
+	input := &PutOrganizationDataRetentionStorageInput{
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutOrganizationDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutOrganizationDataRetentionStorage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutProjectDataRetentionStorage(t *testing.T) {
+	input := &PutProjectDataRetentionStorageInput{
+		ProjectIdentifier:  ptr.String("__ProjectIdentifier__"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutProjectDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutProjectDataRetentionStorage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_PutResourcePolicy(t *testing.T) {
 	input := &PutResourcePolicyInput{
 		ResourceArn:    ptr.String("__ResourceArn__"),
@@ -3564,6 +4094,91 @@ func TestCheckRequestSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutTrustedAccessProgramAccountEnrollment(t *testing.T) {
+	input := &PutTrustedAccessProgramAccountEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		OptIn:             types.TrustedAccessProgramOptIn("inherit"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutTrustedAccessProgramAccountEnrollment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutTrustedAccessProgramAccountEnrollment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutTrustedAccessProgramOrganizationEnrollment(t *testing.T) {
+	input := &PutTrustedAccessProgramOrganizationEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		OptIn:             types.TrustedAccessProgramOptIn("inherit"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutTrustedAccessProgramOrganizationEnrollment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutTrustedAccessProgramOrganizationEnrollment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutTrustedAccessProgramProjectEnrollment(t *testing.T) {
+	input := &PutTrustedAccessProgramProjectEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		OptIn:             types.TrustedAccessProgramOptIn("inherit"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutTrustedAccessProgramProjectEnrollment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutTrustedAccessProgramProjectEnrollment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3756,6 +4371,88 @@ func TestCheckRequestSnapshot_StartAutomatedReasoningPolicyTestWorkflow(t *testi
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAutomatedReasoningPolicyTestWorkflow"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartTrustedAccessProgramAccountApplication(t *testing.T) {
+	input := &StartTrustedAccessProgramAccountApplicationInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTrustedAccessProgramAccountApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTrustedAccessProgramAccountApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartTrustedAccessProgramOrganizationApplication(t *testing.T) {
+	input := &StartTrustedAccessProgramOrganizationApplicationInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTrustedAccessProgramOrganizationApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTrustedAccessProgramOrganizationApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartTrustedAccessProgramProjectApplication(t *testing.T) {
+	input := &StartTrustedAccessProgramProjectApplicationInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTrustedAccessProgramProjectApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTrustedAccessProgramProjectApplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4404,6 +5101,37 @@ func TestCheckRequestSnapshot_UpdateMarketplaceModelEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateProject(t *testing.T) {
+	input := &UpdateProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		Name:              ptr.String("__Name__"),
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateProvisionedModelThroughput(t *testing.T) {
 	input := &UpdateProvisionedModelThroughputInput{
 		ProvisionedModelId:          ptr.String("__ProvisionedModelId__"),
@@ -4432,6 +5160,33 @@ func TestCheckRequestSnapshot_UpdateProvisionedModelThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_ArchiveProject(t *testing.T) {
+	input := &ArchiveProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ArchiveProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ArchiveProject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_BatchDeleteAdvancedPromptOptimizationJob(t *testing.T) {
 	input := &BatchDeleteAdvancedPromptOptimizationJobInput{
 		JobIdentifiers: []string{
@@ -5670,6 +6425,46 @@ func TestUpdateRequestSnapshot_CreateModelInvocationJob(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateProject(t *testing.T) {
+	input := &CreateProjectInput{
+		Name: ptr.String("__Name__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreatePromptRouter(t *testing.T) {
 	input := &CreatePromptRouterInput{
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
@@ -5760,6 +6555,33 @@ func TestUpdateRequestSnapshot_CreateProvisionedModelThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateProvisionedModelThroughput"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteAccountDataRetentionStorage(t *testing.T) {
+	input := &DeleteAccountDataRetentionStorageInput{
+		ModelProvider: types.DataRetentionStorageModelProvider("anthropic"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteAccountDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAccountDataRetentionStorage"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6092,6 +6914,61 @@ func TestUpdateRequestSnapshot_DeleteModelInvocationLoggingConfiguration(t *test
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteOrganizationDataRetentionStorage(t *testing.T) {
+	input := &DeleteOrganizationDataRetentionStorageInput{
+		ModelProvider: types.DataRetentionStorageModelProvider("anthropic"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteOrganizationDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteOrganizationDataRetentionStorage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteProjectDataRetentionStorage(t *testing.T) {
+	input := &DeleteProjectDataRetentionStorageInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		ModelProvider:     types.DataRetentionStorageModelProvider("anthropic"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteProjectDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteProjectDataRetentionStorage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeletePromptRouter(t *testing.T) {
 	input := &DeletePromptRouterInput{
 		PromptRouterArn: ptr.String("__PromptRouterArn__"),
@@ -6248,6 +7125,33 @@ func TestUpdateRequestSnapshot_GetAccountDataRetention(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAccountDataRetention"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetAccountDataRetentionStorage(t *testing.T) {
+	input := &GetAccountDataRetentionStorageInput{
+		ModelProvider: types.DataRetentionStorageModelProvider("anthropic"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAccountDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAccountDataRetentionStorage"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6560,7 +7464,8 @@ func TestUpdateRequestSnapshot_GetEvaluationJob(t *testing.T) {
 
 func TestUpdateRequestSnapshot_GetFoundationModel(t *testing.T) {
 	input := &GetFoundationModelInput{
-		ModelIdentifier: ptr.String("__ModelIdentifier__"),
+		ModelIdentifier:   ptr.String("__ModelIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6670,6 +7575,7 @@ func TestUpdateRequestSnapshot_GetImportedModel(t *testing.T) {
 func TestUpdateRequestSnapshot_GetInferenceProfile(t *testing.T) {
 	input := &GetInferenceProfileInput{
 		InferenceProfileIdentifier: ptr.String("__InferenceProfileIdentifier__"),
+		ProjectIdentifier:          ptr.String("__ProjectIdentifier__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6854,6 +7760,88 @@ func TestUpdateRequestSnapshot_GetModelInvocationLoggingConfiguration(t *testing
 	}
 }
 
+func TestUpdateRequestSnapshot_GetOrganizationDataRetentionStorage(t *testing.T) {
+	input := &GetOrganizationDataRetentionStorageInput{
+		ModelProvider: types.DataRetentionStorageModelProvider("anthropic"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetOrganizationDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOrganizationDataRetentionStorage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetProject(t *testing.T) {
+	input := &GetProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetProject"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetProjectDataRetentionStorage(t *testing.T) {
+	input := &GetProjectDataRetentionStorageInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		ModelProvider:     types.DataRetentionStorageModelProvider("anthropic"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetProjectDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetProjectDataRetentionStorage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetPromptRouter(t *testing.T) {
 	input := &GetPromptRouterInput{
 		PromptRouterArn: ptr.String("__PromptRouterArn__"),
@@ -6931,6 +7919,116 @@ func TestUpdateRequestSnapshot_GetResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetTrustedAccessProgram(t *testing.T) {
+	input := &GetTrustedAccessProgramInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTrustedAccessProgram(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTrustedAccessProgram"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetTrustedAccessProgramAccountEnrollment(t *testing.T) {
+	input := &GetTrustedAccessProgramAccountEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTrustedAccessProgramAccountEnrollment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTrustedAccessProgramAccountEnrollment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetTrustedAccessProgramOrganizationEnrollment(t *testing.T) {
+	input := &GetTrustedAccessProgramOrganizationEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTrustedAccessProgramOrganizationEnrollment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTrustedAccessProgramOrganizationEnrollment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetTrustedAccessProgramProjectEnrollment(t *testing.T) {
+	input := &GetTrustedAccessProgramProjectEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetTrustedAccessProgramProjectEnrollment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetTrustedAccessProgramProjectEnrollment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7275,6 +8373,7 @@ func TestUpdateRequestSnapshot_ListFoundationModels(t *testing.T) {
 		ByCustomizationType: types.ModelCustomization("FINE_TUNING"),
 		ByOutputModality:    types.ModelModality("TEXT"),
 		ByInferenceType:     types.InferenceType("ON_DEMAND"),
+		ProjectIdentifier:   ptr.String("__ProjectIdentifier__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7363,9 +8462,10 @@ func TestUpdateRequestSnapshot_ListImportedModels(t *testing.T) {
 
 func TestUpdateRequestSnapshot_ListInferenceProfiles(t *testing.T) {
 	input := &ListInferenceProfilesInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
-		TypeEquals: types.InferenceProfileType("SYSTEM_DEFINED"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+		TypeEquals:        types.InferenceProfileType("SYSTEM_DEFINED"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7557,6 +8657,35 @@ func TestUpdateRequestSnapshot_ListModelInvocationJobs(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListProjects(t *testing.T) {
+	input := &ListProjectsInput{
+		NextToken:    ptr.String("__NextToken__"),
+		MaxResults:   ptr.Int32(1),
+		StatusFilter: types.ProjectStatus("active"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListProjects(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListProjects"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListPromptRouters(t *testing.T) {
 	input := &ListPromptRoutersInput{
 		MaxResults: ptr.Int32(1),
@@ -7648,6 +8777,35 @@ func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListTrustedAccessPrograms(t *testing.T) {
+	input := &ListTrustedAccessProgramsInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		MaxResults:        ptr.Int32(1),
+		NextToken:         ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListTrustedAccessPrograms(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListTrustedAccessPrograms"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_PutAccountDataRetention(t *testing.T) {
 	input := &PutAccountDataRetentionInput{
 		Mode: types.DataRetentionMode("default"),
@@ -7671,6 +8829,39 @@ func TestUpdateRequestSnapshot_PutAccountDataRetention(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAccountDataRetention"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutAccountDataRetentionStorage(t *testing.T) {
+	input := &PutAccountDataRetentionStorageInput{
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutAccountDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAccountDataRetentionStorage"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7765,6 +8956,73 @@ func TestUpdateRequestSnapshot_PutModelInvocationLoggingConfiguration(t *testing
 	}
 }
 
+func TestUpdateRequestSnapshot_PutOrganizationDataRetentionStorage(t *testing.T) {
+	input := &PutOrganizationDataRetentionStorageInput{
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutOrganizationDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutOrganizationDataRetentionStorage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutProjectDataRetentionStorage(t *testing.T) {
+	input := &PutProjectDataRetentionStorageInput{
+		ProjectIdentifier:  ptr.String("__ProjectIdentifier__"),
+		ModelProvider:      types.DataRetentionStorageModelProvider("anthropic"),
+		StorageDestination: types.DataRetentionStorageDestination("customer_managed"),
+		StorageConfiguration: &types.DataRetentionStorageConfiguration{
+			KmsKeyArn:     ptr.String("__KmsKeyArn__"),
+			S3BucketArn:   ptr.String("__S3BucketArn__"),
+			S3BucketOwner: ptr.String("__S3BucketOwner__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutProjectDataRetentionStorage(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutProjectDataRetentionStorage"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_PutResourcePolicy(t *testing.T) {
 	input := &PutResourcePolicyInput{
 		ResourceArn:    ptr.String("__ResourceArn__"),
@@ -7789,6 +9047,91 @@ func TestUpdateRequestSnapshot_PutResourcePolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutResourcePolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutTrustedAccessProgramAccountEnrollment(t *testing.T) {
+	input := &PutTrustedAccessProgramAccountEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		OptIn:             types.TrustedAccessProgramOptIn("inherit"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutTrustedAccessProgramAccountEnrollment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutTrustedAccessProgramAccountEnrollment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutTrustedAccessProgramOrganizationEnrollment(t *testing.T) {
+	input := &PutTrustedAccessProgramOrganizationEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		OptIn:             types.TrustedAccessProgramOptIn("inherit"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutTrustedAccessProgramOrganizationEnrollment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutTrustedAccessProgramOrganizationEnrollment"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutTrustedAccessProgramProjectEnrollment(t *testing.T) {
+	input := &PutTrustedAccessProgramProjectEnrollmentInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		OptIn:             types.TrustedAccessProgramOptIn("inherit"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutTrustedAccessProgramProjectEnrollment(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutTrustedAccessProgramProjectEnrollment"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7981,6 +9324,88 @@ func TestUpdateRequestSnapshot_StartAutomatedReasoningPolicyTestWorkflow(t *test
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartAutomatedReasoningPolicyTestWorkflow"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartTrustedAccessProgramAccountApplication(t *testing.T) {
+	input := &StartTrustedAccessProgramAccountApplicationInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTrustedAccessProgramAccountApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTrustedAccessProgramAccountApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartTrustedAccessProgramOrganizationApplication(t *testing.T) {
+	input := &StartTrustedAccessProgramOrganizationApplicationInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTrustedAccessProgramOrganizationApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTrustedAccessProgramOrganizationApplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartTrustedAccessProgramProjectApplication(t *testing.T) {
+	input := &StartTrustedAccessProgramProjectApplicationInput{
+		ProgramIdentifier: ptr.String("__ProgramIdentifier__"),
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartTrustedAccessProgramProjectApplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartTrustedAccessProgramProjectApplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -8625,6 +10050,37 @@ func TestUpdateRequestSnapshot_UpdateMarketplaceModelEndpoint(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMarketplaceModelEndpoint"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateProject(t *testing.T) {
+	input := &UpdateProjectInput{
+		ProjectIdentifier: ptr.String("__ProjectIdentifier__"),
+		Name:              ptr.String("__Name__"),
+		DataRetention: &types.ProjectDataRetention{
+			Mode: types.DataRetentionMode("default"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateProject(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateProject"); err != nil {
 		t.Fatal(err)
 	}
 }

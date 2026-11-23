@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateGlobalInferenceGateway
+
+{"ClientToken":"__ClientToken__","ExecutionRoleArn":"__ExecutionRoleArn__","Gateways":[{"ClusterArn":"__ClusterArn__","Name":"__Name__","Namespace":"__Namespace__"},{"ClusterArn":"__ClusterArn__","Name":"__Name__","Namespace":"__Namespace__"}],"Name":"__Name__","Routing":{"Weights":{"ErrorRate":1,"KVHeadroom":1,"QueueDepth":1,"RegionProximity":1}},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

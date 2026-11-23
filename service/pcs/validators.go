@@ -512,6 +512,11 @@ func validateClusterSlurmConfigurationRequest(v *types.ClusterSlurmConfiguration
 			invalidParams.AddNested("CgroupCustomSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.JobSubmitPlugins != nil {
+		if err := validateJobSubmitPluginList(v.JobSubmitPlugins); err != nil {
+			invalidParams.AddNested("JobSubmitPlugins", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Accounting != nil {
 		if err := validateAccountingRequest(v.Accounting); err != nil {
 			invalidParams.AddNested("Accounting", err.(smithy.InvalidParamsError))
@@ -556,6 +561,63 @@ func validateCustomLaunchTemplate(v *types.CustomLaunchTemplate) error {
 	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJobSubmitPlugin(v *types.JobSubmitPlugin) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobSubmitPlugin"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ScriptSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScriptSource"))
+	} else if v.ScriptSource != nil {
+		if err := validateJobSubmitScriptSource(v.ScriptSource); err != nil {
+			invalidParams.AddNested("ScriptSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJobSubmitPluginList(v []types.JobSubmitPlugin) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobSubmitPluginList"}
+	for i := range v {
+		if err := validateJobSubmitPlugin(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJobSubmitScriptSource(v *types.JobSubmitScriptSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobSubmitScriptSource"}
+	if v.ScriptLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScriptLocation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -809,6 +871,11 @@ func validateUpdateClusterSlurmConfigurationRequest(v *types.UpdateClusterSlurmC
 	if v.CgroupCustomSettings != nil {
 		if err := validateCgroupCustomSettings(v.CgroupCustomSettings); err != nil {
 			invalidParams.AddNested("CgroupCustomSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JobSubmitPlugins != nil {
+		if err := validateJobSubmitPluginList(v.JobSubmitPlugins); err != nil {
+			invalidParams.AddNested("JobSubmitPlugins", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -1,0 +1,5 @@
+PATCH /portals/__PortalId__
+
+Content-Type: application/json
+
+{"authorization":{"authorizationConfig":{"none":{}},"fineGrainedAccessControl":"ENABLED"},"endpointConfiguration":{"none":{}},"includedProductArns":["__Member__","__Member__"],"logoUri":"__LogoUri__","portalContent":{"description":"__Description__","displayName":"__DisplayName__","theme":{"customColors":{"accentColor":"__AccentColor__","backgroundColor":"__BackgroundColor__","errorValidationColor":"__ErrorValidationColor__","headerColor":"__HeaderColor__","navigationColor":"__NavigationColor__","textColor":"__TextColor__"},"logoUploadedAt":946684800}},"rumAppMonitorName":"__RumAppMonitorName__"}

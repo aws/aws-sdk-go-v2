@@ -977,6 +977,189 @@ func (v *ChallengeResponseType) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A summary of a Client ID Metadata Document (CIMD) policy, returned by .
+type CIMDPolicySummaryType struct {
+
+	// The ID of the CIMD policy.
+	//
+	// This member is required.
+	CIMDPolicyId *string
+
+	// The friendly name of the CIMD policy.
+	//
+	// This member is required.
+	PolicyName *string
+
+	// The length of time, in seconds, that Amazon Cognito caches a client metadata
+	// document that it retrieved from a URL that matches the policy.
+	CacheDuration *int32
+
+	// The ID of the app client that the CIMD policy is associated with. Amazon
+	// Cognito omits this value when the app client no longer exists.
+	ClientId *string
+
+	// The date and time when the CIMD policy was created.
+	CreationDate *time.Time
+
+	// The date and time when the CIMD policy was last modified.
+	LastModifiedDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *CIMDPolicySummaryType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CIMDPolicySummaryType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CIMDPolicySummaryType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CIMDPolicyId != nil {
+		s.WriteString(schemas.CIMDPolicySummaryType_CIMDPolicyId, *v.CIMDPolicyId)
+	}
+	if v.CacheDuration != nil {
+		s.WriteInt32(schemas.CIMDPolicySummaryType_CacheDuration, *v.CacheDuration)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.CIMDPolicySummaryType_ClientId, *v.ClientId)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.CIMDPolicySummaryType_CreationDate, *v.CreationDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.CIMDPolicySummaryType_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.CIMDPolicySummaryType_PolicyName, *v.PolicyName)
+	}
+}
+func (v *CIMDPolicySummaryType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CIMDPolicySummaryType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CIMDPolicySummaryType_CIMDPolicyId:
+			v.CIMDPolicyId = new(string)
+			return d.ReadString(schemas.CIMDPolicySummaryType_CIMDPolicyId, v.CIMDPolicyId)
+		case schemas.CIMDPolicySummaryType_CacheDuration:
+			v.CacheDuration = new(int32)
+			return d.ReadInt32(schemas.CIMDPolicySummaryType_CacheDuration, v.CacheDuration)
+		case schemas.CIMDPolicySummaryType_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.CIMDPolicySummaryType_ClientId, v.ClientId)
+		case schemas.CIMDPolicySummaryType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.CIMDPolicySummaryType_CreationDate, v.CreationDate)
+		case schemas.CIMDPolicySummaryType_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.CIMDPolicySummaryType_LastModifiedDate, v.LastModifiedDate)
+		case schemas.CIMDPolicySummaryType_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.CIMDPolicySummaryType_PolicyName, v.PolicyName)
+		}
+		return nil
+	})
+}
+
+// The configuration of a Client ID Metadata Document (CIMD) policy.
+type CIMDPolicyType struct {
+
+	// The ID of the CIMD policy.
+	//
+	// This member is required.
+	CIMDPolicyId *string
+
+	// The friendly name of the CIMD policy.
+	//
+	// This member is required.
+	PolicyName *string
+
+	// The ID of the user pool that contains the CIMD policy.
+	//
+	// This member is required.
+	UserPoolId *string
+
+	// The length of time, in seconds, that Amazon Cognito caches a client metadata
+	// document that it retrieved from a URL that matches the policy.
+	CacheDuration *int32
+
+	// The ID of the app client that the CIMD policy is associated with. Amazon
+	// Cognito omits this value when the app client no longer exists.
+	ClientId *string
+
+	// The date and time when the CIMD policy was created.
+	CreationDate *time.Time
+
+	// The date and time when the CIMD policy was last modified.
+	LastModifiedDate *time.Time
+
+	// The HTTPS URL patterns that a client ID metadata document URL must match.
+	URLPatterns []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CIMDPolicyType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CIMDPolicyType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CIMDPolicyType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CIMDPolicyId != nil {
+		s.WriteString(schemas.CIMDPolicyType_CIMDPolicyId, *v.CIMDPolicyId)
+	}
+	if v.CacheDuration != nil {
+		s.WriteInt32(schemas.CIMDPolicyType_CacheDuration, *v.CacheDuration)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.CIMDPolicyType_ClientId, *v.ClientId)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.CIMDPolicyType_CreationDate, *v.CreationDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.CIMDPolicyType_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.CIMDPolicyType_PolicyName, *v.PolicyName)
+	}
+	if v.URLPatterns != nil {
+		serializeURLPatternListType(s, schemas.CIMDPolicyType_URLPatterns, v.URLPatterns)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.CIMDPolicyType_UserPoolId, *v.UserPoolId)
+	}
+}
+func (v *CIMDPolicyType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CIMDPolicyType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CIMDPolicyType_CIMDPolicyId:
+			v.CIMDPolicyId = new(string)
+			return d.ReadString(schemas.CIMDPolicyType_CIMDPolicyId, v.CIMDPolicyId)
+		case schemas.CIMDPolicyType_CacheDuration:
+			v.CacheDuration = new(int32)
+			return d.ReadInt32(schemas.CIMDPolicyType_CacheDuration, v.CacheDuration)
+		case schemas.CIMDPolicyType_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.CIMDPolicyType_ClientId, v.ClientId)
+		case schemas.CIMDPolicyType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.CIMDPolicyType_CreationDate, v.CreationDate)
+		case schemas.CIMDPolicyType_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.CIMDPolicyType_LastModifiedDate, v.LastModifiedDate)
+		case schemas.CIMDPolicyType_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.CIMDPolicyType_PolicyName, v.PolicyName)
+		case schemas.CIMDPolicyType_URLPatterns:
+			return deserializeURLPatternListType(d, schemas.CIMDPolicyType_URLPatterns, &v.URLPatterns)
+		case schemas.CIMDPolicyType_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.CIMDPolicyType_UserPoolId, v.UserPoolId)
+		}
+		return nil
+	})
+}
+
 // The access token and its metadata from a machine-to-machine (M2M) client
 // credentials grant.
 type ClientAuthenticationResultType struct {
@@ -1022,6 +1205,59 @@ func (v *ClientAuthenticationResultType) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.ClientAuthenticationResultType_TokenType:
 			v.TokenType = new(string)
 			return d.ReadString(schemas.ClientAuthenticationResultType_TokenType, v.TokenType)
+		}
+		return nil
+	})
+}
+
+// A client metadata document URL that Amazon Cognito has received for a Client ID
+// Metadata Document (CIMD) policy, with its cache state.
+type ClientMetadataURLType struct {
+
+	// The client metadata document URL.
+	//
+	// This member is required.
+	URL *string
+
+	// The date and time when Amazon Cognito cached the client metadata document from
+	// this URL.
+	CachedDate *time.Time
+
+	// The date and time when the cached client metadata document expires.
+	ExpirationDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClientMetadataURLType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientMetadataURLType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientMetadataURLType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CachedDate != nil {
+		s.WriteTime(schemas.ClientMetadataURLType_CachedDate, *v.CachedDate)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.ClientMetadataURLType_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.URL != nil {
+		s.WriteString(schemas.ClientMetadataURLType_URL, *v.URL)
+	}
+}
+func (v *ClientMetadataURLType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientMetadataURLType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientMetadataURLType_CachedDate:
+			v.CachedDate = new(time.Time)
+			return d.ReadTime(schemas.ClientMetadataURLType_CachedDate, v.CachedDate)
+		case schemas.ClientMetadataURLType_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.ClientMetadataURLType_ExpirationDate, v.ExpirationDate)
+		case schemas.ClientMetadataURLType_URL:
+			v.URL = new(string)
+			return d.ReadString(schemas.ClientMetadataURLType_URL, v.URL)
 		}
 		return nil
 	})
@@ -4626,9 +4862,9 @@ type RestorationType struct {
 
 	// The status of the recovery. Can be one of the following values.
 	//
-	// PREVIEW_GENERATING Amazon Cognito is waiting for available capacity in the
-	// Amazon Web Services Region or is generating the recovery preview. Write
-	// operations in the user pool are paused.
+	// PREVIEW_GENERATING Amazon Cognito is generating the recovery preview, which
+	// might not be available immediately. Write operations in the user pool are
+	// paused.
 	//
 	// PREVIEW_GENERATED The recovery preview is ready for review. Write operations in
 	// the user pool are paused. Within 24 hours after you initiate the recovery, apply
@@ -6572,6 +6808,17 @@ type UserPoolClientType struct {
 	// The app client secret.
 	ClientSecret *string
 
+	// The Amazon Resource Name (ARN) of the [Amazon Web Services Secrets Manager] secret that stores this app client's
+	// secret, when Amazon Cognito manages the secret in Secrets Manager. Retrieve the
+	// secret from Secrets Manager by this ARN. The SecretString value is a JSON
+	// object with userPoolId , userPoolClientId , and clientSecretValue fields. Use
+	// clientSecretValue as the app client secret. Amazon Cognito returns this ARN
+	// instead of ClientSecret for app clients whose secret it manages in Secrets
+	// Manager.
+	//
+	// [Amazon Web Services Secrets Manager]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+	ClientSecretArn *string
+
 	// How the app client was created.
 	//
 	// REGULAR The app client wasn't created through dynamic client registration. For
@@ -6845,6 +7092,9 @@ func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientSecret != nil {
 		s.WriteString(schemas.UserPoolClientType_ClientSecret, *v.ClientSecret)
 	}
+	if v.ClientSecretArn != nil {
+		s.WriteString(schemas.UserPoolClientType_ClientSecretArn, *v.ClientSecretArn)
+	}
 	if v.ClientType != "" {
 		s.WriteString(schemas.UserPoolClientType_ClientType, string(v.ClientType))
 	}
@@ -6931,6 +7181,9 @@ func (v *UserPoolClientType) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UserPoolClientType_ClientSecret:
 			v.ClientSecret = new(string)
 			return d.ReadString(schemas.UserPoolClientType_ClientSecret, v.ClientSecret)
+		case schemas.UserPoolClientType_ClientSecretArn:
+			v.ClientSecretArn = new(string)
+			return d.ReadString(schemas.UserPoolClientType_ClientSecretArn, v.ClientSecretArn)
 		case schemas.UserPoolClientType_ClientType:
 			var ev string
 			if err := d.ReadString(schemas.UserPoolClientType_ClientType, &ev); err != nil {

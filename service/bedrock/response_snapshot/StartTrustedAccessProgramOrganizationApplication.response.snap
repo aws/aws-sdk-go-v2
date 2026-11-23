@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"result":{"providerHandoff":{"applicationToken":"__ApplicationToken__","applicationTokenExpiresAt":"2000-01-01T00:00:00Z","enrollmentUrl":"__EnrollmentUrl__"}}}

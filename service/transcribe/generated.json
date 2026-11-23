@@ -46,6 +46,7 @@
         "api_op_StartMedicalTranscriptionJob.go",
         "api_op_StartTranscriptionJob.go",
         "api_op_TagResource.go",
+        "api_op_TranscribeAudio.go",
         "api_op_UntagResource.go",
         "api_op_UpdateCallAnalyticsCategory.go",
         "api_op_UpdateLanguageModel.go",

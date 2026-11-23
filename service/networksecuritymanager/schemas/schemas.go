@@ -197,6 +197,13 @@ var ListDeploymentSnapshots = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/deployments/{deploymentIdentifier}/snapshots",
 	Code: 200})
 
+var ListEntityCoverages = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "ListEntityCoverages",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/resource-coverage/entities",
+	Code: 200})
+
 var ListPolicies = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "ListPolicies",
@@ -209,6 +216,13 @@ var ListPolicySnapshots = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListPolicySnapshots",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/policies/{policyIdentifier}/snapshots",
+	Code: 200})
+
+var ListProtectedResourceCoverages = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "ListProtectedResourceCoverages",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/resource-coverage/protected-resources",
 	Code: 200})
 
 var ListResourceAssociations = smithy.NewSchema(smithy.ShapeID{
@@ -588,15 +602,39 @@ var ConflictException_resourceId *smithy.Schema
 
 var ConflictException_resourceType *smithy.Schema
 
+var CoverageStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "CoverageStatus",
+}, smithy.ShapeTypeEnum, 2)
+var CoverageStatus_IN_EFFECT *smithy.Schema
+
+var CoverageStatus_SUPERSEDED *smithy.Schema
+
 var _DateTimestamp = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "DateTimestamp",
 }, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
 
+var DefaultSubnetConnectivity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "DefaultSubnetConnectivity",
+}, smithy.ShapeTypeEnum, 3)
+var DefaultSubnetConnectivity_FLEXIBLE *smithy.Schema
+
+var DefaultSubnetConnectivity_BIDIRECTIONAL *smithy.Schema
+
+var DefaultSubnetConnectivity_OUTBOUND_ONLY *smithy.Schema
+
 var _DeploymentArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "DeploymentArn",
 }, smithy.ShapeTypeString, 0)
+
+var _DeploymentArnSet = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "DeploymentArnSet",
+}, smithy.ShapeTypeList, 1)
+var _DeploymentArnSet_member *smithy.Schema
 
 var DeploymentConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
@@ -735,10 +773,12 @@ var ExistingCustomerWebACLResolution_NO_REMEDIATION *smithy.Schema
 var FirewallSyncReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "FirewallSyncReason",
-}, smithy.ShapeTypeUnion, 2)
+}, smithy.ShapeTypeUnion, 3)
 var FirewallSyncReason_missingFirewall *smithy.Schema
 
 var FirewallSyncReason_invalidFirewall *smithy.Schema
+
+var FirewallSyncReason_invalidResource *smithy.Schema
 
 var _FirewallTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
@@ -755,6 +795,14 @@ var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "IdempotencyToken",
 }, smithy.ShapeTypeString, 0)
+
+var IgwFirewallConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "IgwFirewallConfig",
+}, smithy.ShapeTypeStructure, 2)
+var IgwFirewallConfig_defaultSubnetConnectivity *smithy.Schema
+
+var IgwFirewallConfig_subnetConnectivityOverrides *smithy.Schema
 
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
@@ -778,6 +826,30 @@ var InvalidFirewallReasons_incorrectAppendableConfigurationOrder *smithy.Schema
 var InvalidFirewallReasons_missingMergeableConfigurationValues *smithy.Schema
 
 var InvalidFirewallReasons_unexpectedMergeableConfigurationValues *smithy.Schema
+
+var InvalidResourceIssue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "InvalidResourceIssue",
+}, smithy.ShapeTypeStructure, 3)
+var InvalidResourceIssue_resourceId *smithy.Schema
+
+var InvalidResourceIssue_expectedValue *smithy.Schema
+
+var InvalidResourceIssue_actualValue *smithy.Schema
+
+var _InvalidResourceIssueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "InvalidResourceIssueList",
+}, smithy.ShapeTypeList, 1)
+var _InvalidResourceIssueList_member *smithy.Schema
+
+var _InvalidResourcesByType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "InvalidResourcesByType",
+}, smithy.ShapeTypeMap, 2)
+var _InvalidResourcesByType_key *smithy.Schema
+
+var _InvalidResourcesByType_value *smithy.Schema
 
 var IpAddressType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
@@ -880,20 +952,24 @@ var _PolicyArn = smithy.NewSchema(smithy.ShapeID{
 var PolicyConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "PolicyConfiguration",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var PolicyConfiguration_remediationEnabled *smithy.Schema
 
 var PolicyConfiguration_resourcesCleanUp *smithy.Schema
 
 var PolicyConfiguration_wafConfig *smithy.Schema
 
+var PolicyConfiguration_igwFirewallConfig *smithy.Schema
+
 var PolicyFirewallType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "PolicyFirewallType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var PolicyFirewallType_WAF *smithy.Schema
 
 var PolicyFirewallType_SHIELD_ADVANCED *smithy.Schema
+
+var PolicyFirewallType_IGW_FIREWALL *smithy.Schema
 
 var _PolicyId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
@@ -1006,6 +1082,34 @@ var _ResourceAssociationList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _ResourceAssociationList_member *smithy.Schema
 
+var ResourceCoverageSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "ResourceCoverageSummary",
+}, smithy.ShapeTypeStructure, 9)
+var ResourceCoverageSummary_resourceArn *smithy.Schema
+
+var ResourceCoverageSummary_entityType *smithy.Schema
+
+var ResourceCoverageSummary_entityArn *smithy.Schema
+
+var ResourceCoverageSummary_resourceOwnerAccountId *smithy.Schema
+
+var ResourceCoverageSummary_resourceType *smithy.Schema
+
+var ResourceCoverageSummary_firewallType *smithy.Schema
+
+var ResourceCoverageSummary_coverageStatus *smithy.Schema
+
+var ResourceCoverageSummary_deploymentArns *smithy.Schema
+
+var ResourceCoverageSummary_updatedAt *smithy.Schema
+
+var _ResourceCoverageSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "ResourceCoverageSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _ResourceCoverageSummaryList_member *smithy.Schema
+
 var ResourceCriteria = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "ResourceCriteria",
@@ -1110,7 +1214,7 @@ var _ResourceSynchronizationStatusSummaryList_member *smithy.Schema
 var ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 8)
+}, smithy.ShapeTypeEnum, 9)
 var ResourceType_APIGW *smithy.Schema
 
 var ResourceType_CFD *smithy.Schema
@@ -1127,6 +1231,8 @@ var ResourceType_SHIELD_PROTECTION *smithy.Schema
 
 var ResourceType_SHIELDREGIONAL_PROTECTION *smithy.Schema
 
+var ResourceType_VPC *smithy.Schema
+
 var _RuleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "RuleArn",
@@ -1135,8 +1241,10 @@ var _RuleArn = smithy.NewSchema(smithy.ShapeID{
 var RuleFirewallType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "RuleFirewallType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var RuleFirewallType_WAF *smithy.Schema
+
+var RuleFirewallType_IGW_FIREWALL *smithy.Schema
 
 var _RuleId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
@@ -1252,7 +1360,7 @@ var _ScopeReferenceList_member *smithy.Schema
 var ScopeResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "ScopeResourceType",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 7)
 var ScopeResourceType_APIGW *smithy.Schema
 
 var ScopeResourceType_CFD *smithy.Schema
@@ -1263,15 +1371,21 @@ var ScopeResourceType_ALB *smithy.Schema
 
 var ScopeResourceType_CLB *smithy.Schema
 
+var ScopeResourceType_VPC *smithy.Schema
+
+var ScopeResourceType_SUBNET *smithy.Schema
+
 var ScopeSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "ScopeSummary",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var ScopeSummary_scopeId *smithy.Schema
 
 var ScopeSummary_scopeArn *smithy.Schema
 
 var ScopeSummary_scopeName *smithy.Schema
+
+var ScopeSummary_specializedScopeType *smithy.Schema
 
 var ScopeSummary_status *smithy.Schema
 
@@ -1350,6 +1464,12 @@ var ServiceUnavailableException_message *smithy.Schema
 
 var ServiceUnavailableException_retryAfterSeconds *smithy.Schema
 
+var SpecializedScopeType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "SpecializedScopeType",
+}, smithy.ShapeTypeEnum, 1)
+var SpecializedScopeType_IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE *smithy.Schema
+
 var _StringMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "StringMap",
@@ -1357,6 +1477,38 @@ var _StringMap = smithy.NewSchema(smithy.ShapeID{
 var _StringMap_key *smithy.Schema
 
 var _StringMap_value *smithy.Schema
+
+var SubnetConnectivity = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "SubnetConnectivity",
+}, smithy.ShapeTypeEnum, 4)
+var SubnetConnectivity_FLEXIBLE *smithy.Schema
+
+var SubnetConnectivity_BIDIRECTIONAL *smithy.Schema
+
+var SubnetConnectivity_OUTBOUND_ONLY *smithy.Schema
+
+var SubnetConnectivity_EXCLUDE *smithy.Schema
+
+var SubnetConnectivityOverride = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "SubnetConnectivityOverride",
+}, smithy.ShapeTypeStructure, 2)
+var SubnetConnectivityOverride_connectivityType *smithy.Schema
+
+var SubnetConnectivityOverride_scopes *smithy.Schema
+
+var _SubnetConnectivityOverrideList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "SubnetConnectivityOverrideList",
+}, smithy.ShapeTypeList, 1)
+var _SubnetConnectivityOverrideList_member *smithy.Schema
+
+var _SubnetConnectivityScopeArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "SubnetConnectivityScopeArnList",
+}, smithy.ShapeTypeList, 1)
+var _SubnetConnectivityScopeArnList_member *smithy.Schema
 
 var SynchronizationStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
@@ -1413,8 +1565,10 @@ var _TemplateArn = smithy.NewSchema(smithy.ShapeID{
 var TemplateFirewallType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "TemplateFirewallType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var TemplateFirewallType_WAF *smithy.Schema
+
+var TemplateFirewallType_IGW_FIREWALL *smithy.Schema
 
 var _TemplateId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
@@ -1439,15 +1593,25 @@ var TemplateOrRuleReference_templateIdentifier *smithy.Schema
 
 var TemplateOrRuleReference_ruleIdentifier *smithy.Schema
 
+var TemplateOwner = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "TemplateOwner",
+}, smithy.ShapeTypeEnum, 2)
+var TemplateOwner_CUSTOMER *smithy.Schema
+
+var TemplateOwner_AWS *smithy.Schema
+
 var TemplateSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "TemplateSummary",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var TemplateSummary_templateId *smithy.Schema
 
 var TemplateSummary_templateArn *smithy.Schema
 
 var TemplateSummary_templateName *smithy.Schema
+
+var TemplateSummary_templateOwner *smithy.Schema
 
 var TemplateSummary_status *smithy.Schema
 
@@ -1835,7 +1999,7 @@ var CreateRuleSnapshotOutput_updatedAt *smithy.Schema
 var CreateScopeInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "CreateScopeInput",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var CreateScopeInput_clientToken *smithy.Schema
 
 var CreateScopeInput_scopeName *smithy.Schema
@@ -1844,6 +2008,8 @@ var CreateScopeInput_scopeDescription *smithy.Schema
 
 var CreateScopeInput_scopeConfiguration *smithy.Schema
 
+var CreateScopeInput_specializedScopeType *smithy.Schema
+
 var CreateScopeInput_isPublished *smithy.Schema
 
 var CreateScopeInput_tags *smithy.Schema
@@ -1851,7 +2017,7 @@ var CreateScopeInput_tags *smithy.Schema
 var CreateScopeOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "CreateScopeOutput",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var CreateScopeOutput_scopeId *smithy.Schema
 
 var CreateScopeOutput_scopeArn *smithy.Schema
@@ -1861,6 +2027,8 @@ var CreateScopeOutput_scopeName *smithy.Schema
 var CreateScopeOutput_scopeDescription *smithy.Schema
 
 var CreateScopeOutput_scopeConfiguration *smithy.Schema
+
+var CreateScopeOutput_specializedScopeType *smithy.Schema
 
 var CreateScopeOutput_status *smithy.Schema
 
@@ -1887,7 +2055,7 @@ var CreateScopeSnapshotInput_tags *smithy.Schema
 var CreateScopeSnapshotOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "CreateScopeSnapshotOutput",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var CreateScopeSnapshotOutput_scopeId *smithy.Schema
 
 var CreateScopeSnapshotOutput_scopeArn *smithy.Schema
@@ -1897,6 +2065,8 @@ var CreateScopeSnapshotOutput_scopeName *smithy.Schema
 var CreateScopeSnapshotOutput_scopeDescription *smithy.Schema
 
 var CreateScopeSnapshotOutput_scopeConfiguration *smithy.Schema
+
+var CreateScopeSnapshotOutput_specializedScopeType *smithy.Schema
 
 var CreateScopeSnapshotOutput_status *smithy.Schema
 
@@ -2189,7 +2359,7 @@ var GetScopeInput_scopeIdentifier *smithy.Schema
 var GetScopeOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "GetScopeOutput",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var GetScopeOutput_scopeId *smithy.Schema
 
 var GetScopeOutput_scopeArn *smithy.Schema
@@ -2199,6 +2369,8 @@ var GetScopeOutput_scopeName *smithy.Schema
 var GetScopeOutput_scopeDescription *smithy.Schema
 
 var GetScopeOutput_scopeConfiguration *smithy.Schema
+
+var GetScopeOutput_specializedScopeType *smithy.Schema
 
 var GetScopeOutput_status *smithy.Schema
 
@@ -2316,6 +2488,26 @@ var ListDeploymentsOutput_nextToken *smithy.Schema
 
 var ListDeploymentsOutput_deployments *smithy.Schema
 
+var ListEntityCoveragesInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "ListEntityCoveragesInput",
+}, smithy.ShapeTypeStructure, 4)
+var ListEntityCoveragesInput_entityArn *smithy.Schema
+
+var ListEntityCoveragesInput_resourceOwnerAccountId *smithy.Schema
+
+var ListEntityCoveragesInput_maxResults *smithy.Schema
+
+var ListEntityCoveragesInput_nextToken *smithy.Schema
+
+var ListEntityCoveragesOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "ListEntityCoveragesOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListEntityCoveragesOutput_nextToken *smithy.Schema
+
+var ListEntityCoveragesOutput_resourceCoverages *smithy.Schema
+
 var ListPoliciesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "ListPoliciesInput",
@@ -2351,6 +2543,26 @@ var ListPolicySnapshotsOutput = smithy.NewSchema(smithy.ShapeID{
 var ListPolicySnapshotsOutput_nextToken *smithy.Schema
 
 var ListPolicySnapshotsOutput_snapshots *smithy.Schema
+
+var ListProtectedResourceCoveragesInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "ListProtectedResourceCoveragesInput",
+}, smithy.ShapeTypeStructure, 4)
+var ListProtectedResourceCoveragesInput_resourceArn *smithy.Schema
+
+var ListProtectedResourceCoveragesInput_entityType *smithy.Schema
+
+var ListProtectedResourceCoveragesInput_maxResults *smithy.Schema
+
+var ListProtectedResourceCoveragesInput_nextToken *smithy.Schema
+
+var ListProtectedResourceCoveragesOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.networksecuritymanager",
+	Name:      "ListProtectedResourceCoveragesOutput",
+}, smithy.ShapeTypeStructure, 2)
+var ListProtectedResourceCoveragesOutput_nextToken *smithy.Schema
+
+var ListProtectedResourceCoveragesOutput_resourceCoverages *smithy.Schema
 
 var ListResourceAssociationsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
@@ -2477,12 +2689,14 @@ var ListTagsForResourceOutput_tags *smithy.Schema
 var ListTemplatesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "ListTemplatesInput",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var ListTemplatesInput_maxResults *smithy.Schema
 
 var ListTemplatesInput_nextToken *smithy.Schema
 
 var ListTemplatesInput_status *smithy.Schema
+
+var ListTemplatesInput_templateOwner *smithy.Schema
 
 var ListTemplateSnapshotsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
@@ -2725,7 +2939,7 @@ var UpdateScopeInput_clientToken *smithy.Schema
 var UpdateScopeOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.networksecuritymanager",
 	Name:      "UpdateScopeOutput",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var UpdateScopeOutput_scopeId *smithy.Schema
 
 var UpdateScopeOutput_scopeArn *smithy.Schema
@@ -2735,6 +2949,8 @@ var UpdateScopeOutput_scopeName *smithy.Schema
 var UpdateScopeOutput_scopeDescription *smithy.Schema
 
 var UpdateScopeOutput_scopeConfiguration *smithy.Schema
+
+var UpdateScopeOutput_specializedScopeType *smithy.Schema
 
 var UpdateScopeOutput_status *smithy.Schema
 
@@ -2841,6 +3057,8 @@ func init() {
 
 	PolicyFirewallType_SHIELD_ADVANCED = PolicyFirewallType.AddMember("SHIELD_ADVANCED", smithyprelude.Unit)
 
+	PolicyFirewallType_IGW_FIREWALL = PolicyFirewallType.AddMember("IGW_FIREWALL", smithyprelude.Unit)
+
 	_FirewallTypeList_member = _FirewallTypeList.AddMember("member", PolicyFirewallType)
 
 	AdminFirewallTypeScope_allFirewallTypesEnabled = AdminFirewallTypeScope.AddMember("allFirewallTypesEnabled", smithyprelude.Boolean)
@@ -2935,6 +3153,18 @@ func init() {
 
 	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
 
+	CoverageStatus_IN_EFFECT = CoverageStatus.AddMember("IN_EFFECT", smithyprelude.Unit)
+
+	CoverageStatus_SUPERSEDED = CoverageStatus.AddMember("SUPERSEDED", smithyprelude.Unit)
+
+	DefaultSubnetConnectivity_FLEXIBLE = DefaultSubnetConnectivity.AddMember("FLEXIBLE", smithyprelude.Unit)
+
+	DefaultSubnetConnectivity_BIDIRECTIONAL = DefaultSubnetConnectivity.AddMember("BIDIRECTIONAL", smithyprelude.Unit)
+
+	DefaultSubnetConnectivity_OUTBOUND_ONLY = DefaultSubnetConnectivity.AddMember("OUTBOUND_ONLY", smithyprelude.Unit)
+
+	_DeploymentArnSet_member = _DeploymentArnSet.AddMember("member", _Arn)
+
 	DeploymentConfiguration_enableCrossAccountVisibility = DeploymentConfiguration.AddMember("enableCrossAccountVisibility", _EnableCrossAccountVisibility)
 
 	_DeploymentPolicyArnList_member = _DeploymentPolicyArnList.AddMember("member", _PolicyArn)
@@ -2948,6 +3178,10 @@ func init() {
 	ScopeResourceType_ALB = ScopeResourceType.AddMember("ALB", smithyprelude.Unit)
 
 	ScopeResourceType_CLB = ScopeResourceType.AddMember("CLB", smithyprelude.Unit)
+
+	ScopeResourceType_VPC = ScopeResourceType.AddMember("VPC", smithyprelude.Unit)
+
+	ScopeResourceType_SUBNET = ScopeResourceType.AddMember("SUBNET", smithyprelude.Unit)
 
 	_DeploymentResourceTypeList_member = _DeploymentResourceTypeList.AddMember("member", ScopeResourceType)
 
@@ -3013,9 +3247,43 @@ func init() {
 
 	InvalidFirewallReasons_unexpectedMergeableConfigurationValues = InvalidFirewallReasons.AddMember("unexpectedMergeableConfigurationValues", _ConfigurationIssueList)
 
+	InvalidResourceIssue_resourceId = InvalidResourceIssue.AddMember("resourceId", smithyprelude.String)
+
+	InvalidResourceIssue_expectedValue = InvalidResourceIssue.AddMember("expectedValue", smithyprelude.String)
+
+	InvalidResourceIssue_actualValue = InvalidResourceIssue.AddMember("actualValue", smithyprelude.String)
+
+	_InvalidResourceIssueList_member = _InvalidResourceIssueList.AddMember("member", InvalidResourceIssue)
+
+	_InvalidResourcesByType_key = _InvalidResourcesByType.AddMember("key", ScopeResourceType)
+
+	_InvalidResourcesByType_value = _InvalidResourcesByType.AddMember("value", _InvalidResourceIssueList)
+
 	FirewallSyncReason_missingFirewall = FirewallSyncReason.AddMember("missingFirewall", smithyprelude.String)
 
 	FirewallSyncReason_invalidFirewall = FirewallSyncReason.AddMember("invalidFirewall", InvalidFirewallReasons)
+
+	FirewallSyncReason_invalidResource = FirewallSyncReason.AddMember("invalidResource", _InvalidResourcesByType)
+
+	SubnetConnectivity_FLEXIBLE = SubnetConnectivity.AddMember("FLEXIBLE", smithyprelude.Unit)
+
+	SubnetConnectivity_BIDIRECTIONAL = SubnetConnectivity.AddMember("BIDIRECTIONAL", smithyprelude.Unit)
+
+	SubnetConnectivity_OUTBOUND_ONLY = SubnetConnectivity.AddMember("OUTBOUND_ONLY", smithyprelude.Unit)
+
+	SubnetConnectivity_EXCLUDE = SubnetConnectivity.AddMember("EXCLUDE", smithyprelude.Unit)
+
+	_SubnetConnectivityScopeArnList_member = _SubnetConnectivityScopeArnList.AddMember("member", _Arn)
+
+	SubnetConnectivityOverride_connectivityType = SubnetConnectivityOverride.AddMember("connectivityType", SubnetConnectivity)
+
+	SubnetConnectivityOverride_scopes = SubnetConnectivityOverride.AddMember("scopes", _SubnetConnectivityScopeArnList)
+
+	_SubnetConnectivityOverrideList_member = _SubnetConnectivityOverrideList.AddMember("member", SubnetConnectivityOverride)
+
+	IgwFirewallConfig_defaultSubnetConnectivity = IgwFirewallConfig.AddMember("defaultSubnetConnectivity", DefaultSubnetConnectivity)
+
+	IgwFirewallConfig_subnetConnectivityOverrides = IgwFirewallConfig.AddMember("subnetConnectivityOverrides", _SubnetConnectivityOverrideList)
 
 	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
 
@@ -3040,6 +3308,8 @@ func init() {
 	PolicyConfiguration_resourcesCleanUp = PolicyConfiguration.AddMember("resourcesCleanUp", _ResourcesCleanUp)
 
 	PolicyConfiguration_wafConfig = PolicyConfiguration.AddMember("wafConfig", WafConfig)
+
+	PolicyConfiguration_igwFirewallConfig = PolicyConfiguration.AddMember("igwFirewallConfig", IgwFirewallConfig)
 
 	PolicyReference_policyIdentifier = PolicyReference.AddMember("policyIdentifier", _PolicyIdentifier)
 
@@ -3096,6 +3366,26 @@ func init() {
 	ResourceAssociation_resourceType = ResourceAssociation.AddMember("resourceType", ServiceResourceType)
 
 	_ResourceAssociationList_member = _ResourceAssociationList.AddMember("member", ResourceAssociation)
+
+	ResourceCoverageSummary_resourceArn = ResourceCoverageSummary.AddMember("resourceArn", _Arn)
+
+	ResourceCoverageSummary_entityType = ResourceCoverageSummary.AddMember("entityType", ServiceResourceType)
+
+	ResourceCoverageSummary_entityArn = ResourceCoverageSummary.AddMember("entityArn", _Arn)
+
+	ResourceCoverageSummary_resourceOwnerAccountId = ResourceCoverageSummary.AddMember("resourceOwnerAccountId", _AccountId)
+
+	ResourceCoverageSummary_resourceType = ResourceCoverageSummary.AddMember("resourceType", ScopeResourceType)
+
+	ResourceCoverageSummary_firewallType = ResourceCoverageSummary.AddMember("firewallType", PolicyFirewallType)
+
+	ResourceCoverageSummary_coverageStatus = ResourceCoverageSummary.AddMember("coverageStatus", CoverageStatus)
+
+	ResourceCoverageSummary_deploymentArns = ResourceCoverageSummary.AddMember("deploymentArns", _DeploymentArnSet)
+
+	ResourceCoverageSummary_updatedAt = ResourceCoverageSummary.AddMember("updatedAt", _DateTimestamp)
+
+	_ResourceCoverageSummaryList_member = _ResourceCoverageSummaryList.AddMember("member", ResourceCoverageSummary)
 
 	_StringMap_key = _StringMap.AddMember("key", smithyprelude.String)
 
@@ -3157,6 +3447,8 @@ func init() {
 
 	ResourceType_SHIELDREGIONAL_PROTECTION = ResourceType.AddMember("SHIELDREGIONAL_PROTECTION", smithyprelude.Unit)
 
+	ResourceType_VPC = ResourceType.AddMember("VPC", smithyprelude.Unit)
+
 	ResourceSynchronizationStatusSummary_synchronizationStatus = ResourceSynchronizationStatusSummary.AddMember("synchronizationStatus", SynchronizationStatus)
 
 	ResourceSynchronizationStatusSummary_accountId = ResourceSynchronizationStatusSummary.AddMember("accountId", _AccountId)
@@ -3178,6 +3470,8 @@ func init() {
 	_ResourceSynchronizationStatusSummaryList_member = _ResourceSynchronizationStatusSummaryList.AddMember("member", ResourceSynchronizationStatusSummary)
 
 	RuleFirewallType_WAF = RuleFirewallType.AddMember("WAF", smithyprelude.Unit)
+
+	RuleFirewallType_IGW_FIREWALL = RuleFirewallType.AddMember("IGW_FIREWALL", smithyprelude.Unit)
 
 	RuleReference_ruleIdentifier = RuleReference.AddMember("ruleIdentifier", _RuleIdentifier)
 
@@ -3215,11 +3509,15 @@ func init() {
 
 	_ScopeReferenceList_member = _ScopeReferenceList.AddMember("member", ScopeReference)
 
+	SpecializedScopeType_IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE = SpecializedScopeType.AddMember("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE", smithyprelude.Unit)
+
 	ScopeSummary_scopeId = ScopeSummary.AddMember("scopeId", _ScopeId)
 
 	ScopeSummary_scopeArn = ScopeSummary.AddMember("scopeArn", _ScopeArn)
 
 	ScopeSummary_scopeName = ScopeSummary.AddMember("scopeName", _ScopeName)
+
+	ScopeSummary_specializedScopeType = ScopeSummary.AddMember("specializedScopeType", SpecializedScopeType)
 
 	ScopeSummary_status = ScopeSummary.AddMember("status", EntityStatus)
 
@@ -3261,11 +3559,19 @@ func init() {
 
 	TemplateFirewallType_WAF = TemplateFirewallType.AddMember("WAF", smithyprelude.Unit)
 
+	TemplateFirewallType_IGW_FIREWALL = TemplateFirewallType.AddMember("IGW_FIREWALL", smithyprelude.Unit)
+
+	TemplateOwner_CUSTOMER = TemplateOwner.AddMember("CUSTOMER", smithyprelude.Unit)
+
+	TemplateOwner_AWS = TemplateOwner.AddMember("AWS", smithyprelude.Unit)
+
 	TemplateSummary_templateId = TemplateSummary.AddMember("templateId", _TemplateId)
 
 	TemplateSummary_templateArn = TemplateSummary.AddMember("templateArn", _TemplateArn)
 
 	TemplateSummary_templateName = TemplateSummary.AddMember("templateName", _TemplateName)
+
+	TemplateSummary_templateOwner = TemplateSummary.AddMember("templateOwner", TemplateOwner)
 
 	TemplateSummary_status = TemplateSummary.AddMember("status", EntityStatus)
 
@@ -3561,6 +3867,8 @@ func init() {
 
 	CreateScopeInput_scopeConfiguration = CreateScopeInput.AddMember("scopeConfiguration", ScopeConfiguration)
 
+	CreateScopeInput_specializedScopeType = CreateScopeInput.AddMember("specializedScopeType", SpecializedScopeType)
+
 	CreateScopeInput_isPublished = CreateScopeInput.AddMember("isPublished", _IsPublished)
 
 	CreateScopeInput_tags = CreateScopeInput.AddMember("tags", _TagMap)
@@ -3574,6 +3882,8 @@ func init() {
 	CreateScopeOutput_scopeDescription = CreateScopeOutput.AddMember("scopeDescription", _Description)
 
 	CreateScopeOutput_scopeConfiguration = CreateScopeOutput.AddMember("scopeConfiguration", ScopeConfiguration)
+
+	CreateScopeOutput_specializedScopeType = CreateScopeOutput.AddMember("specializedScopeType", SpecializedScopeType)
 
 	CreateScopeOutput_status = CreateScopeOutput.AddMember("status", EntityStatus)
 
@@ -3602,6 +3912,8 @@ func init() {
 	CreateScopeSnapshotOutput_scopeDescription = CreateScopeSnapshotOutput.AddMember("scopeDescription", _Description)
 
 	CreateScopeSnapshotOutput_scopeConfiguration = CreateScopeSnapshotOutput.AddMember("scopeConfiguration", ScopeConfiguration)
+
+	CreateScopeSnapshotOutput_specializedScopeType = CreateScopeSnapshotOutput.AddMember("specializedScopeType", SpecializedScopeType)
 
 	CreateScopeSnapshotOutput_status = CreateScopeSnapshotOutput.AddMember("status", EntityStatus)
 
@@ -3817,6 +4129,8 @@ func init() {
 
 	GetScopeOutput_scopeConfiguration = GetScopeOutput.AddMember("scopeConfiguration", ScopeConfiguration)
 
+	GetScopeOutput_specializedScopeType = GetScopeOutput.AddMember("specializedScopeType", SpecializedScopeType)
+
 	GetScopeOutput_status = GetScopeOutput.AddMember("status", EntityStatus)
 
 	GetScopeOutput_version = GetScopeOutput.AddMember("version", _EntityVersion)
@@ -3893,6 +4207,18 @@ func init() {
 
 	ListDeploymentsOutput_deployments = ListDeploymentsOutput.AddMember("deployments", _DeploymentSummaryList)
 
+	ListEntityCoveragesInput_entityArn = ListEntityCoveragesInput.AddMember("entityArn", _Arn, &smithytraits.HTTPQuery{Name: "entityArn"})
+
+	ListEntityCoveragesInput_resourceOwnerAccountId = ListEntityCoveragesInput.AddMember("resourceOwnerAccountId", _AccountId, &smithytraits.HTTPQuery{Name: "resourceOwnerAccountId"})
+
+	ListEntityCoveragesInput_maxResults = ListEntityCoveragesInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListEntityCoveragesInput_nextToken = ListEntityCoveragesInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListEntityCoveragesOutput_nextToken = ListEntityCoveragesOutput.AddMember("nextToken", _NextToken)
+
+	ListEntityCoveragesOutput_resourceCoverages = ListEntityCoveragesOutput.AddMember("resourceCoverages", _ResourceCoverageSummaryList)
+
 	ListPoliciesInput_maxResults = ListPoliciesInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListPoliciesInput_nextToken = ListPoliciesInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
@@ -3912,6 +4238,18 @@ func init() {
 	ListPolicySnapshotsOutput_nextToken = ListPolicySnapshotsOutput.AddMember("nextToken", _NextToken)
 
 	ListPolicySnapshotsOutput_snapshots = ListPolicySnapshotsOutput.AddMember("snapshots", _PolicySummaryList)
+
+	ListProtectedResourceCoveragesInput_resourceArn = ListProtectedResourceCoveragesInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
+
+	ListProtectedResourceCoveragesInput_entityType = ListProtectedResourceCoveragesInput.AddMember("entityType", ServiceResourceType, &smithytraits.HTTPQuery{Name: "entityType"})
+
+	ListProtectedResourceCoveragesInput_maxResults = ListProtectedResourceCoveragesInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListProtectedResourceCoveragesInput_nextToken = ListProtectedResourceCoveragesInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListProtectedResourceCoveragesOutput_nextToken = ListProtectedResourceCoveragesOutput.AddMember("nextToken", _NextToken)
+
+	ListProtectedResourceCoveragesOutput_resourceCoverages = ListProtectedResourceCoveragesOutput.AddMember("resourceCoverages", _ResourceCoverageSummaryList)
 
 	ListResourceAssociationsInput_resourceIdentifier = ListResourceAssociationsInput.AddMember("resourceIdentifier", _ResourceIdentifier, &smithytraits.HTTPQuery{Name: "resourceIdentifier"})
 
@@ -3984,6 +4322,8 @@ func init() {
 	ListTemplatesInput_nextToken = ListTemplatesInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
 
 	ListTemplatesInput_status = ListTemplatesInput.AddMember("status", EntityStatusFilter, &smithytraits.HTTPQuery{Name: "status"})
+
+	ListTemplatesInput_templateOwner = ListTemplatesInput.AddMember("templateOwner", TemplateOwner, &smithytraits.HTTPQuery{Name: "templateOwner"})
 
 	ListTemplateSnapshotsInput_templateIdentifier = ListTemplateSnapshotsInput.AddMember("templateIdentifier", _TemplateIdentifier, &smithytraits.HTTPLabel{})
 
@@ -4166,6 +4506,8 @@ func init() {
 	UpdateScopeOutput_scopeDescription = UpdateScopeOutput.AddMember("scopeDescription", _Description)
 
 	UpdateScopeOutput_scopeConfiguration = UpdateScopeOutput.AddMember("scopeConfiguration", ScopeConfiguration)
+
+	UpdateScopeOutput_specializedScopeType = UpdateScopeOutput.AddMember("specializedScopeType", SpecializedScopeType)
 
 	UpdateScopeOutput_status = UpdateScopeOutput.AddMember("status", EntityStatus)
 

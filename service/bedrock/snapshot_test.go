@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_ArchiveProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ArchiveProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ArchiveProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchDeleteAdvancedPromptOptimizationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), nil, func(o *Options) {
@@ -290,6 +302,18 @@ func TestCheckSnapshot_CreateModelInvocationJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreatePromptRouter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreatePromptRouter(context.Background(), nil, func(o *Options) {
@@ -307,6 +331,18 @@ func TestCheckSnapshot_CreateProvisionedModelThroughput(t *testing.T) {
 	_, err := svc.CreateProvisionedModelThroughput(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateProvisionedModelThroughput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAccountDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccountDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAccountDataRetentionStorage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -458,6 +494,30 @@ func TestCheckSnapshot_DeleteModelInvocationLoggingConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteOrganizationDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteOrganizationDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteOrganizationDataRetentionStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteProjectDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProjectDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteProjectDataRetentionStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeletePromptRouter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeletePromptRouter(context.Background(), nil, func(o *Options) {
@@ -523,6 +583,18 @@ func TestCheckSnapshot_GetAccountDataRetention(t *testing.T) {
 	_, err := svc.GetAccountDataRetention(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetAccountDataRetention")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAccountDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAccountDataRetentionStorage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -794,6 +866,42 @@ func TestCheckSnapshot_GetModelInvocationLoggingConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetOrganizationDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOrganizationDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetOrganizationDataRetentionStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetProjectDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProjectDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProjectDataRetentionStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetPromptRouter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPromptRouter(context.Background(), nil, func(o *Options) {
@@ -823,6 +931,54 @@ func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTrustedAccessProgram(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrustedAccessProgram(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTrustedAccessProgram")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTrustedAccessProgramAccountEnrollment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrustedAccessProgramAccountEnrollment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTrustedAccessProgramAccountEnrollment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTrustedAccessProgramOrganizationEnrollment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrustedAccessProgramOrganizationEnrollment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTrustedAccessProgramOrganizationEnrollment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetTrustedAccessProgramProjectEnrollment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrustedAccessProgramProjectEnrollment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetTrustedAccessProgramProjectEnrollment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1070,6 +1226,18 @@ func TestCheckSnapshot_ListModelInvocationJobs(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListProjects(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProjects(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListProjects")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListPromptRouters(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPromptRouters(context.Background(), nil, func(o *Options) {
@@ -1106,11 +1274,35 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListTrustedAccessPrograms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTrustedAccessPrograms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListTrustedAccessPrograms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutAccountDataRetention(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutAccountDataRetention(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutAccountDataRetention")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAccountDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAccountDataRetentionStorage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1142,11 +1334,71 @@ func TestCheckSnapshot_PutModelInvocationLoggingConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutOrganizationDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutOrganizationDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutOrganizationDataRetentionStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutProjectDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutProjectDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutProjectDataRetentionStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutTrustedAccessProgramAccountEnrollment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTrustedAccessProgramAccountEnrollment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutTrustedAccessProgramAccountEnrollment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutTrustedAccessProgramOrganizationEnrollment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTrustedAccessProgramOrganizationEnrollment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutTrustedAccessProgramOrganizationEnrollment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutTrustedAccessProgramProjectEnrollment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTrustedAccessProgramProjectEnrollment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutTrustedAccessProgramProjectEnrollment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1195,6 +1447,42 @@ func TestCheckSnapshot_StartAutomatedReasoningPolicyTestWorkflow(t *testing.T) {
 	_, err := svc.StartAutomatedReasoningPolicyTestWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartAutomatedReasoningPolicyTestWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartTrustedAccessProgramAccountApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTrustedAccessProgramAccountApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartTrustedAccessProgramAccountApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartTrustedAccessProgramOrganizationApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTrustedAccessProgramOrganizationApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartTrustedAccessProgramOrganizationApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartTrustedAccessProgramProjectApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTrustedAccessProgramProjectApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartTrustedAccessProgramProjectApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1346,6 +1634,18 @@ func TestCheckSnapshot_UpdateMarketplaceModelEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateProvisionedModelThroughput(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateProvisionedModelThroughput(context.Background(), nil, func(o *Options) {
@@ -1357,6 +1657,18 @@ func TestCheckSnapshot_UpdateProvisionedModelThroughput(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_ArchiveProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ArchiveProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ArchiveProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchDeleteAdvancedPromptOptimizationJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteAdvancedPromptOptimizationJob(context.Background(), nil, func(o *Options) {
@@ -1585,6 +1897,18 @@ func TestUpdateSnapshot_CreateModelInvocationJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreatePromptRouter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreatePromptRouter(context.Background(), nil, func(o *Options) {
@@ -1602,6 +1926,18 @@ func TestUpdateSnapshot_CreateProvisionedModelThroughput(t *testing.T) {
 	_, err := svc.CreateProvisionedModelThroughput(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateProvisionedModelThroughput")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAccountDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAccountDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAccountDataRetentionStorage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1753,6 +2089,30 @@ func TestUpdateSnapshot_DeleteModelInvocationLoggingConfiguration(t *testing.T) 
 	}
 }
 
+func TestUpdateSnapshot_DeleteOrganizationDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteOrganizationDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteOrganizationDataRetentionStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteProjectDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteProjectDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteProjectDataRetentionStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeletePromptRouter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeletePromptRouter(context.Background(), nil, func(o *Options) {
@@ -1818,6 +2178,18 @@ func TestUpdateSnapshot_GetAccountDataRetention(t *testing.T) {
 	_, err := svc.GetAccountDataRetention(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAccountDataRetention")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAccountDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAccountDataRetentionStorage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2089,6 +2461,42 @@ func TestUpdateSnapshot_GetModelInvocationLoggingConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetOrganizationDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOrganizationDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetOrganizationDataRetentionStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetProjectDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProjectDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProjectDataRetentionStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetPromptRouter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPromptRouter(context.Background(), nil, func(o *Options) {
@@ -2118,6 +2526,54 @@ func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTrustedAccessProgram(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrustedAccessProgram(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTrustedAccessProgram")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTrustedAccessProgramAccountEnrollment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrustedAccessProgramAccountEnrollment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTrustedAccessProgramAccountEnrollment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTrustedAccessProgramOrganizationEnrollment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrustedAccessProgramOrganizationEnrollment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTrustedAccessProgramOrganizationEnrollment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetTrustedAccessProgramProjectEnrollment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetTrustedAccessProgramProjectEnrollment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetTrustedAccessProgramProjectEnrollment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2365,6 +2821,18 @@ func TestUpdateSnapshot_ListModelInvocationJobs(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListProjects(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProjects(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListProjects")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListPromptRouters(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPromptRouters(context.Background(), nil, func(o *Options) {
@@ -2401,11 +2869,35 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListTrustedAccessPrograms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListTrustedAccessPrograms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListTrustedAccessPrograms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutAccountDataRetention(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutAccountDataRetention(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutAccountDataRetention")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAccountDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAccountDataRetentionStorage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2437,11 +2929,71 @@ func TestUpdateSnapshot_PutModelInvocationLoggingConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutOrganizationDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutOrganizationDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutOrganizationDataRetentionStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutProjectDataRetentionStorage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutProjectDataRetentionStorage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutProjectDataRetentionStorage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutTrustedAccessProgramAccountEnrollment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTrustedAccessProgramAccountEnrollment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutTrustedAccessProgramAccountEnrollment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutTrustedAccessProgramOrganizationEnrollment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTrustedAccessProgramOrganizationEnrollment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutTrustedAccessProgramOrganizationEnrollment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutTrustedAccessProgramProjectEnrollment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTrustedAccessProgramProjectEnrollment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutTrustedAccessProgramProjectEnrollment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2490,6 +3042,42 @@ func TestUpdateSnapshot_StartAutomatedReasoningPolicyTestWorkflow(t *testing.T) 
 	_, err := svc.StartAutomatedReasoningPolicyTestWorkflow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartAutomatedReasoningPolicyTestWorkflow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartTrustedAccessProgramAccountApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTrustedAccessProgramAccountApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartTrustedAccessProgramAccountApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartTrustedAccessProgramOrganizationApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTrustedAccessProgramOrganizationApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartTrustedAccessProgramOrganizationApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartTrustedAccessProgramProjectApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartTrustedAccessProgramProjectApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartTrustedAccessProgramProjectApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2634,6 +3222,18 @@ func TestUpdateSnapshot_UpdateMarketplaceModelEndpoint(t *testing.T) {
 	_, err := svc.UpdateMarketplaceModelEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateMarketplaceModelEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateProject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateProject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateProject")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -15,8 +15,12 @@ import (
 
 // Creates a registry record within a registry. A registry record describes a
 // discoverable resource, such as an MCP server, an agent, an agent skill, or a
-// custom resource. Creation is asynchronous: the record is returned with the
-// CREATING status while it is processed.
+// custom resource. For an agent skill, you can upload a skill package in artifact
+// , or synchronize the skill from an Amazon S3 or GitHub source. Creation is
+// asynchronous: the operation returns the record with the CREATING status while
+// the registry processes it. If a GitHub user must first authorize access to the
+// source, the operation returns the record with the CREATE_PENDING_AUTH status
+// instead.
 func (c *Client) CreateRegistryRecord(ctx context.Context, params *CreateRegistryRecordInput, optFns ...func(*Options)) (*CreateRegistryRecordOutput, error) {
 	if params == nil {
 		params = &CreateRegistryRecordInput{}
@@ -54,6 +58,12 @@ type CreateRegistryRecordInput struct {
 	// This member is required.
 	RegistryId *string
 
+	// The skill package to store with the record, for a record of type SKILL with an
+	// agentSkillsDefinition descriptor. The registry validates the package after the
+	// operation returns and sets skillMd.data from the package's SKILL.md. A request
+	// that uploads a package can't also set a skill source or send new skillMd.data .
+	Artifact *types.RegistryRecordArtifactUpload
+
 	// Client token for idempotency
 	ClientToken *string
 
@@ -87,6 +97,11 @@ func (v *CreateRegistryRecordInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Artifact != nil {
+		s.WriteStruct(schemas.CreateRegistryRecordRequest_artifact)
+		v.Artifact.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRegistryRecordRequest_clientToken, *v.ClientToken)
 	}
@@ -132,11 +147,20 @@ type CreateRegistryRecordOutput struct {
 	// This member is required.
 	RecordArn *string
 
-	// The status of the registry record, set to CREATING while the asynchronous
-	// workflow is in progress
+	// The status of the registry record. CREATING means that the asynchronous
+	// workflow is in progress. CREATE_PENDING_AUTH means that the record waits for a
+	// GitHub user to authorize access before it synchronizes from its GitHub source.
+	// For the authorization link, see authorizationData .
 	//
 	// This member is required.
 	Status types.RegistryRecordStatus
+
+	// The authorization that a GitHub user must complete before the record's
+	// synchronization starts. Present only in this response, and only while the status
+	// is CREATE_PENDING_AUTH . If the status is CREATE_PENDING_AUTH but this member
+	// is absent, call UpdateRegistryRecord with triggerSynchronization to get a new
+	// authorization link.
+	AuthorizationData types.AuthorizationData
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -151,6 +175,9 @@ func (v *CreateRegistryRecordOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationData != nil {
+		serializeAuthorizationData(s, schemas.CreateRegistryRecordResponse_authorizationData, v.AuthorizationData)
+	}
 	if v.RecordArn != nil {
 		s.WriteString(schemas.CreateRegistryRecordResponse_recordArn, *v.RecordArn)
 	}
@@ -161,6 +188,8 @@ func (v *CreateRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) 
 func (v *CreateRegistryRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRegistryRecordResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.CreateRegistryRecordResponse_authorizationData:
+			return deserializeAuthorizationData(d, schemas.CreateRegistryRecordResponse_authorizationData, &v.AuthorizationData)
 		case schemas.CreateRegistryRecordResponse_recordArn:
 			v.RecordArn = new(string)
 			return d.ReadString(schemas.CreateRegistryRecordResponse_recordArn, v.RecordArn)

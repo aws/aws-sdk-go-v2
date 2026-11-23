@@ -2,6 +2,44 @@
 
 package types
 
+type AccessControlApplicationAuthenticationType string
+
+// Enum values for AccessControlApplicationAuthenticationType
+const (
+	AccessControlApplicationAuthenticationTypeOidc AccessControlApplicationAuthenticationType = "OIDC"
+)
+
+// Values returns all known values for AccessControlApplicationAuthenticationType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessControlApplicationAuthenticationType) Values() []AccessControlApplicationAuthenticationType {
+	return []AccessControlApplicationAuthenticationType{
+		"OIDC",
+	}
+}
+
+type AccessControlApplicationStatus string
+
+// Enum values for AccessControlApplicationStatus
+const (
+	AccessControlApplicationStatusEnabled  AccessControlApplicationStatus = "ENABLED"
+	AccessControlApplicationStatusDisabled AccessControlApplicationStatus = "DISABLED"
+)
+
+// Values returns all known values for AccessControlApplicationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessControlApplicationStatus) Values() []AccessControlApplicationStatus {
+	return []AccessControlApplicationStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ActionConnectorErrorType string
 
 // Enum values for ActionConnectorErrorType
@@ -757,6 +795,7 @@ const (
 	AssetTypeAgent         AssetType = "AGENT"
 	AssetTypeSpace         AssetType = "SPACE"
 	AssetTypeKnowledgeBase AssetType = "KNOWLEDGE_BASE"
+	AssetTypeFlow          AssetType = "FLOW"
 )
 
 // Values returns all known values for AssetType. Note that this can be expanded
@@ -768,6 +807,7 @@ func (AssetType) Values() []AssetType {
 		"AGENT",
 		"SPACE",
 		"KNOWLEDGE_BASE",
+		"FLOW",
 	}
 }
 
@@ -1245,6 +1285,23 @@ const (
 func (ClientCredentialsSource) Values() []ClientCredentialsSource {
 	return []ClientCredentialsSource{
 		"PLAIN_CREDENTIALS",
+	}
+}
+
+type ClientSecretSourceType string
+
+// Enum values for ClientSecretSourceType
+const (
+	ClientSecretSourceTypeIdpProvided ClientSecretSourceType = "IDP_PROVIDED"
+)
+
+// Values returns all known values for ClientSecretSourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientSecretSourceType) Values() []ClientSecretSourceType {
+	return []ClientSecretSourceType{
+		"IDP_PROVIDED",
 	}
 }
 
@@ -3172,7 +3229,8 @@ type GovernedAction string
 
 // Enum values for GovernedAction
 const (
-	GovernedActionShare GovernedAction = "SHARE"
+	GovernedActionShare   GovernedAction = "SHARE"
+	GovernedActionPublish GovernedAction = "PUBLISH"
 )
 
 // Values returns all known values for GovernedAction. Note that this can be
@@ -3182,6 +3240,7 @@ const (
 func (GovernedAction) Values() []GovernedAction {
 	return []GovernedAction{
 		"SHARE",
+		"PUBLISH",
 	}
 }
 
@@ -3386,6 +3445,29 @@ func (IdentityType) Values() []IdentityType {
 	}
 }
 
+type IdpAuthorizingType string
+
+// Enum values for IdpAuthorizingType
+const (
+	IdpAuthorizingTypeExternalIdpPublicAuthCode       IdpAuthorizingType = "EXTERNAL_IDP_PUBLIC_AUTH_CODE"
+	IdpAuthorizingTypeExternalIdpConfidentialAuthCode IdpAuthorizingType = "EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE"
+	IdpAuthorizingTypeQuickManagedAuthCode            IdpAuthorizingType = "QUICK_MANAGED_AUTH_CODE"
+	IdpAuthorizingTypeIdcAuthCode                     IdpAuthorizingType = "IDC_AUTH_CODE"
+)
+
+// Values returns all known values for IdpAuthorizingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdpAuthorizingType) Values() []IdpAuthorizingType {
+	return []IdpAuthorizingType{
+		"EXTERNAL_IDP_PUBLIC_AUTH_CODE",
+		"EXTERNAL_IDP_CONFIDENTIAL_AUTH_CODE",
+		"QUICK_MANAGED_AUTH_CODE",
+		"IDC_AUTH_CODE",
+	}
+}
+
 type ImageCustomActionTrigger string
 
 // Enum values for ImageCustomActionTrigger
@@ -3421,6 +3503,42 @@ func (ImageExtractionStatus) Values() []ImageExtractionStatus {
 	return []ImageExtractionStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type InboundConnectorStatus string
+
+// Enum values for InboundConnectorStatus
+const (
+	InboundConnectorStatusEnabled  InboundConnectorStatus = "ENABLED"
+	InboundConnectorStatusDisabled InboundConnectorStatus = "DISABLED"
+)
+
+// Values returns all known values for InboundConnectorStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InboundConnectorStatus) Values() []InboundConnectorStatus {
+	return []InboundConnectorStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type InboundConnectorType string
+
+// Enum values for InboundConnectorType
+const (
+	InboundConnectorTypeQuickDesktop InboundConnectorType = "QUICK_DESKTOP"
+)
+
+// Values returns all known values for InboundConnectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InboundConnectorType) Values() []InboundConnectorType {
+	return []InboundConnectorType{
+		"QUICK_DESKTOP",
 	}
 }
 
@@ -3753,6 +3871,35 @@ func (JoinType) Values() []JoinType {
 	}
 }
 
+type KbDayOfWeek string
+
+// Enum values for KbDayOfWeek
+const (
+	KbDayOfWeekSunday    KbDayOfWeek = "SUNDAY"
+	KbDayOfWeekMonday    KbDayOfWeek = "MONDAY"
+	KbDayOfWeekTuesday   KbDayOfWeek = "TUESDAY"
+	KbDayOfWeekWednesday KbDayOfWeek = "WEDNESDAY"
+	KbDayOfWeekThursday  KbDayOfWeek = "THURSDAY"
+	KbDayOfWeekFriday    KbDayOfWeek = "FRIDAY"
+	KbDayOfWeekSaturday  KbDayOfWeek = "SATURDAY"
+)
+
+// Values returns all known values for KbDayOfWeek. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KbDayOfWeek) Values() []KbDayOfWeek {
+	return []KbDayOfWeek{
+		"SUNDAY",
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
+	}
+}
+
 type KbIngestionStatus string
 
 // Enum values for KbIngestionStatus
@@ -3781,6 +3928,29 @@ func (KbIngestionStatus) Values() []KbIngestionStatus {
 		"CANCELLED",
 		"CANCELLING",
 		"TIMEOUT",
+	}
+}
+
+type KbRefreshInterval string
+
+// Enum values for KbRefreshInterval
+const (
+	KbRefreshIntervalDaily   KbRefreshInterval = "DAILY"
+	KbRefreshIntervalWeekly  KbRefreshInterval = "WEEKLY"
+	KbRefreshIntervalMonthly KbRefreshInterval = "MONTHLY"
+	KbRefreshIntervalHourly  KbRefreshInterval = "HOURLY"
+)
+
+// Values returns all known values for KbRefreshInterval. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KbRefreshInterval) Values() []KbRefreshInterval {
+	return []KbRefreshInterval{
+		"DAILY",
+		"WEEKLY",
+		"MONTHLY",
+		"HOURLY",
 	}
 }
 
@@ -4837,6 +5007,25 @@ func (PluginVisualAxisName) Values() []PluginVisualAxisName {
 	}
 }
 
+type PolicyType string
+
+// Enum values for PolicyType
+const (
+	PolicyTypeLimitsProfile     PolicyType = "LIMITS_PROFILE"
+	PolicyTypeCustomPermissions PolicyType = "CUSTOM_PERMISSIONS"
+)
+
+// Values returns all known values for PolicyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyType) Values() []PolicyType {
+	return []PolicyType{
+		"LIMITS_PROFILE",
+		"CUSTOM_PERMISSIONS",
+	}
+}
+
 type PrimaryValueDisplayType string
 
 // Enum values for PrimaryValueDisplayType
@@ -4855,6 +5044,27 @@ func (PrimaryValueDisplayType) Values() []PrimaryValueDisplayType {
 		"HIDDEN",
 		"COMPARISON",
 		"ACTUAL",
+	}
+}
+
+type PrincipalType string
+
+// Enum values for PrincipalType
+const (
+	PrincipalTypeUser    PrincipalType = "USER"
+	PrincipalTypeGroup   PrincipalType = "GROUP"
+	PrincipalTypeAccount PrincipalType = "ACCOUNT"
+)
+
+// Values returns all known values for PrincipalType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrincipalType) Values() []PrincipalType {
+	return []PrincipalType{
+		"USER",
+		"GROUP",
+		"ACCOUNT",
 	}
 }
 
@@ -5011,6 +5221,23 @@ func (QueryExecutionMode) Values() []QueryExecutionMode {
 	return []QueryExecutionMode{
 		"AUTO",
 		"MANUAL",
+	}
+}
+
+type QuickAuthenticationType string
+
+// Enum values for QuickAuthenticationType
+const (
+	QuickAuthenticationTypeQuickManagedPublicAuthCode QuickAuthenticationType = "QUICK_MANAGED_PUBLIC_AUTH_CODE"
+)
+
+// Values returns all known values for QuickAuthenticationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuickAuthenticationType) Values() []QuickAuthenticationType {
+	return []QuickAuthenticationType{
+		"QUICK_MANAGED_PUBLIC_AUTH_CODE",
 	}
 }
 
@@ -5411,6 +5638,25 @@ func (RowLevelPermissionPolicy) Values() []RowLevelPermissionPolicy {
 	return []RowLevelPermissionPolicy{
 		"GRANT_ACCESS",
 		"DENY_ACCESS",
+	}
+}
+
+type ScheduleState string
+
+// Enum values for ScheduleState
+const (
+	ScheduleStateEnabled  ScheduleState = "ENABLED"
+	ScheduleStateDisabled ScheduleState = "DISABLED"
+)
+
+// Values returns all known values for ScheduleState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduleState) Values() []ScheduleState {
+	return []ScheduleState{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

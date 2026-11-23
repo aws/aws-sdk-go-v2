@@ -1,3 +1,7 @@
+# v1.82.0 (2026-11-20)
+
+* **Feature**: Adds read-only support for internet gateway firewalls, which are created and managed by AWS Network Security Manager. Adds FirewallType to firewall operations and IgwFirewallConfiguration to Firewall.
+
 # v1.81.0 (2026-11-16)
 
 * **Feature**: Adds support for context-aware stateful rule groups, letting rules reference AWS resource IDs through ContextSets sourced from a Network Manager context store.

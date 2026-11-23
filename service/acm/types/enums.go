@@ -266,6 +266,25 @@ func (CertificateType) Values() []CertificateType {
 	}
 }
 
+type CertificateUsage string
+
+// Enum values for CertificateUsage
+const (
+	CertificateUsageClientAndServerAuth CertificateUsage = "CLIENT_AND_SERVER_AUTH"
+	CertificateUsageClientAuthOnly      CertificateUsage = "CLIENT_AUTH_ONLY"
+)
+
+// Values returns all known values for CertificateUsage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateUsage) Values() []CertificateUsage {
+	return []CertificateUsage{
+		"CLIENT_AND_SERVER_AUTH",
+		"CLIENT_AUTH_ONLY",
+	}
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -610,6 +629,25 @@ func (RevocationReason) Values() []RevocationReason {
 		"REMOVE_FROM_CRL",
 		"PRIVILEGE_WITHDRAWN",
 		"A_A_COMPROMISE",
+	}
+}
+
+type RootHierarchyType string
+
+// Enum values for RootHierarchyType
+const (
+	RootHierarchyTypeN2AmazonManaged     RootHierarchyType = "N2_AMAZON_MANAGED"
+	RootHierarchyTypeN2Sfg2AmazonManaged RootHierarchyType = "N2_SFG2_AMAZON_MANAGED"
+)
+
+// Values returns all known values for RootHierarchyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RootHierarchyType) Values() []RootHierarchyType {
+	return []RootHierarchyType{
+		"N2_AMAZON_MANAGED",
+		"N2_SFG2_AMAZON_MANAGED",
 	}
 }
 

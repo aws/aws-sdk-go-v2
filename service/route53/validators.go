@@ -150,6 +150,26 @@ func (m *validateOpCreateHealthCheck) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateHealthCheckSource struct {
+}
+
+func (*validateOpCreateHealthCheckSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateHealthCheckSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateHealthCheckSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateHealthCheckSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateHostedZone struct {
 }
 
@@ -385,6 +405,26 @@ func (m *validateOpDeleteHealthCheck) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteHealthCheckInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteHealthCheckSource struct {
+}
+
+func (*validateOpDeleteHealthCheckSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteHealthCheckSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteHealthCheckSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteHealthCheckSourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -710,6 +750,26 @@ func (m *validateOpGetHealthCheckLastFailureReason) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetHealthCheckSource struct {
+}
+
+func (*validateOpGetHealthCheckSource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetHealthCheckSource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetHealthCheckSourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetHealthCheckSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetHealthCheckStatus struct {
 }
 
@@ -725,6 +785,26 @@ func (m *validateOpGetHealthCheckStatus) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetHealthCheckStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetHostedZoneChangeBatch struct {
+}
+
+func (*validateOpGetHostedZoneChangeBatch) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetHostedZoneChangeBatch) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetHostedZoneChangeBatchInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetHostedZoneChangeBatchInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -910,6 +990,46 @@ func (m *validateOpListCidrLocations) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListHealthChecksBySource struct {
+}
+
+func (*validateOpListHealthChecksBySource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListHealthChecksBySource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListHealthChecksBySourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListHealthChecksBySourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListHostedZoneChangeBatches struct {
+}
+
+func (*validateOpListHostedZoneChangeBatches) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListHostedZoneChangeBatches) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListHostedZoneChangeBatchesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListHostedZoneChangeBatchesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListHostedZonesByVPC struct {
 }
 
@@ -925,6 +1045,26 @@ func (m *validateOpListHostedZonesByVPC) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListHostedZonesByVPCInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListResourceRecordSetChanges struct {
+}
+
+func (*validateOpListResourceRecordSetChanges) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResourceRecordSetChanges) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResourceRecordSetChangesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResourceRecordSetChangesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1170,6 +1310,26 @@ func (m *validateOpUpdateHostedZoneFeatures) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateHostedZoneTier struct {
+}
+
+func (*validateOpUpdateHostedZoneTier) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateHostedZoneTier) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateHostedZoneTierInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateHostedZoneTierInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateTrafficPolicyComment struct {
 }
 
@@ -1238,6 +1398,10 @@ func addOpCreateHealthCheckValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateHealthCheck{}, middleware.After)
 }
 
+func addOpCreateHealthCheckSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateHealthCheckSource{}, middleware.After)
+}
+
 func addOpCreateHostedZoneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateHostedZone{}, middleware.After)
 }
@@ -1284,6 +1448,10 @@ func addOpDeleteCidrCollectionValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDeleteHealthCheckValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteHealthCheck{}, middleware.After)
+}
+
+func addOpDeleteHealthCheckSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteHealthCheckSource{}, middleware.After)
 }
 
 func addOpDeleteHostedZoneValidationMiddleware(stack *middleware.Stack) error {
@@ -1350,8 +1518,16 @@ func addOpGetHealthCheckLastFailureReasonValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpGetHealthCheckLastFailureReason{}, middleware.After)
 }
 
+func addOpGetHealthCheckSourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetHealthCheckSource{}, middleware.After)
+}
+
 func addOpGetHealthCheckStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetHealthCheckStatus{}, middleware.After)
+}
+
+func addOpGetHostedZoneChangeBatchValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetHostedZoneChangeBatch{}, middleware.After)
 }
 
 func addOpGetHostedZoneValidationMiddleware(stack *middleware.Stack) error {
@@ -1390,8 +1566,20 @@ func addOpListCidrLocationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCidrLocations{}, middleware.After)
 }
 
+func addOpListHealthChecksBySourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListHealthChecksBySource{}, middleware.After)
+}
+
+func addOpListHostedZoneChangeBatchesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListHostedZoneChangeBatches{}, middleware.After)
+}
+
 func addOpListHostedZonesByVPCValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListHostedZonesByVPC{}, middleware.After)
+}
+
+func addOpListResourceRecordSetChangesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResourceRecordSetChanges{}, middleware.After)
 }
 
 func addOpListResourceRecordSetProtectionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1440,6 +1628,10 @@ func addOpUpdateHostedZoneCommentValidationMiddleware(stack *middleware.Stack) e
 
 func addOpUpdateHostedZoneFeaturesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateHostedZoneFeatures{}, middleware.After)
+}
+
+func addOpUpdateHostedZoneTierValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateHostedZoneTier{}, middleware.After)
 }
 
 func addOpUpdateTrafficPolicyCommentValidationMiddleware(stack *middleware.Stack) error {
@@ -1518,6 +1710,41 @@ func validateChangeBatch(v *types.ChangeBatch) error {
 	} else if v.Changes != nil {
 		if err := validateChanges(v.Changes); err != nil {
 			invalidParams.AddNested("Changes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChangeGuardrail(v *types.ChangeGuardrail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChangeGuardrail"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChangeGuardrails(v []types.ChangeGuardrail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChangeGuardrails"}
+	for i := range v {
+		if err := validateChangeGuardrail(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1646,6 +1873,28 @@ func validateHealthCheckConfig(v *types.HealthCheckConfig) error {
 	if v.AlarmIdentifier != nil {
 		if err := validateAlarmIdentifier(v.AlarmIdentifier); err != nil {
 			invalidParams.AddNested("AlarmIdentifier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHealthCheckSourceConfig(v *types.HealthCheckSourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HealthCheckSourceConfig"}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.SubnetConfigurationList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetConfigurationList"))
+	} else if v.SubnetConfigurationList != nil {
+		if err := validateSubnetConfigurationList(v.SubnetConfigurationList); err != nil {
+			invalidParams.AddNested("SubnetConfigurationList", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1795,6 +2044,44 @@ func validateResourceRecordSetProtectionKeyBatch(v []types.ResourceRecordSetProt
 	}
 }
 
+func validateSubnetConfiguration(v *types.SubnetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubnetConfiguration"}
+	if v.SubnetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
+	}
+	if v.AvailabilityZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZoneId"))
+	}
+	if v.SecurityGroupIdList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIdList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubnetConfigurationList(v []types.SubnetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubnetConfigurationList"}
+	for i := range v {
+		if err := validateSubnetConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpActivateKeySigningKeyInput(v *ActivateKeySigningKeyInput) error {
 	if v == nil {
 		return nil
@@ -1933,6 +2220,25 @@ func validateOpCreateHealthCheckInput(v *CreateHealthCheckInput) error {
 	}
 }
 
+func validateOpCreateHealthCheckSourceInput(v *CreateHealthCheckSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateHealthCheckSourceInput"}
+	if v.HealthCheckSourceConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckSourceConfig"))
+	} else if v.HealthCheckSourceConfig != nil {
+		if err := validateHealthCheckSourceConfig(v.HealthCheckSourceConfig); err != nil {
+			invalidParams.AddNested("HealthCheckSourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateHostedZoneInput(v *CreateHostedZoneInput) error {
 	if v == nil {
 		return nil
@@ -1943,6 +2249,11 @@ func validateOpCreateHostedZoneInput(v *CreateHostedZoneInput) error {
 	}
 	if v.CallerReference == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CallerReference"))
+	}
+	if v.ChangeGuardrails != nil {
+		if err := validateChangeGuardrails(v.ChangeGuardrails); err != nil {
+			invalidParams.AddNested("ChangeGuardrails", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2154,6 +2465,21 @@ func validateOpDeleteHealthCheckInput(v *DeleteHealthCheckInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteHealthCheckInput"}
 	if v.HealthCheckId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteHealthCheckSourceInput(v *DeleteHealthCheckSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteHealthCheckSourceInput"}
+	if v.HealthCheckSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckSourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2421,6 +2747,21 @@ func validateOpGetHealthCheckLastFailureReasonInput(v *GetHealthCheckLastFailure
 	}
 }
 
+func validateOpGetHealthCheckSourceInput(v *GetHealthCheckSourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetHealthCheckSourceInput"}
+	if v.HealthCheckSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckSourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetHealthCheckStatusInput(v *GetHealthCheckStatusInput) error {
 	if v == nil {
 		return nil
@@ -2428,6 +2769,24 @@ func validateOpGetHealthCheckStatusInput(v *GetHealthCheckStatusInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetHealthCheckStatusInput"}
 	if v.HealthCheckId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetHostedZoneChangeBatchInput(v *GetHostedZoneChangeBatchInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetHostedZoneChangeBatchInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if v.ChangeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChangeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2580,6 +2939,36 @@ func validateOpListCidrLocationsInput(v *ListCidrLocationsInput) error {
 	}
 }
 
+func validateOpListHealthChecksBySourceInput(v *ListHealthChecksBySourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListHealthChecksBySourceInput"}
+	if v.HealthCheckSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HealthCheckSourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListHostedZoneChangeBatchesInput(v *ListHostedZoneChangeBatchesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListHostedZoneChangeBatchesInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListHostedZonesByVPCInput(v *ListHostedZonesByVPCInput) error {
 	if v == nil {
 		return nil
@@ -2590,6 +2979,21 @@ func validateOpListHostedZonesByVPCInput(v *ListHostedZonesByVPCInput) error {
 	}
 	if len(v.VPCRegion) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("VPCRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListResourceRecordSetChangesInput(v *ListResourceRecordSetChangesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResourceRecordSetChangesInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2790,6 +3194,29 @@ func validateOpUpdateHostedZoneFeaturesInput(v *UpdateHostedZoneFeaturesInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateHostedZoneFeaturesInput"}
 	if v.HostedZoneId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if v.ChangeGuardrails != nil {
+		if err := validateChangeGuardrails(v.ChangeGuardrails); err != nil {
+			invalidParams.AddNested("ChangeGuardrails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateHostedZoneTierInput(v *UpdateHostedZoneTierInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateHostedZoneTierInput"}
+	if v.HostedZoneId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneId"))
+	}
+	if len(v.HostedZoneTier) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("HostedZoneTier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

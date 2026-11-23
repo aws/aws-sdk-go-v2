@@ -7,6 +7,40 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeContentAlternatives(s smithy.ShapeSerializer, schema *smithy.Schema, v ContentAlternatives) {
+	switch vv := v.(type) {
+	case *ContentAlternativesMemberAdditionalResources:
+		s.WriteUnion(schema, schemas.ContentAlternatives_AdditionalResources)
+		serializeAdditionalResourcesAlternativeList(s, schemas.ContentAlternatives_AdditionalResources, vv.Value)
+		s.CloseUnion()
+	case *ContentAlternativesMemberCaseStudies:
+		s.WriteUnion(schema, schemas.ContentAlternatives_CaseStudies)
+		serializeCaseStudiesAlternativeList(s, schemas.ContentAlternatives_CaseStudies, vv.Value)
+		s.CloseUnion()
+	case *ContentAlternativesMemberText:
+		s.WriteUnion(schema, schemas.ContentAlternatives_Text)
+		serializeTextAlternativeList(s, schemas.ContentAlternatives_Text, vv.Value)
+		s.CloseUnion()
+	case *ContentAlternativesMemberTextList:
+		s.WriteUnion(schema, schemas.ContentAlternatives_TextList)
+		serializeTextListAlternativeList(s, schemas.ContentAlternatives_TextList, vv.Value)
+		s.CloseUnion()
+	case *ContentAlternativesMemberUseCases:
+		s.WriteUnion(schema, schemas.ContentAlternatives_UseCases)
+		serializeUseCasesAlternativeList(s, schemas.ContentAlternatives_UseCases, vv.Value)
+		s.CloseUnion()
+	}
+}
+
+func serializeControlSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v ControlSummary) {
+	switch vv := v.(type) {
+	case *ControlSummaryMemberListingRecommendations:
+		s.WriteUnion(schema, schemas.ControlSummary_ListingRecommendations)
+		serializeListingRecommendations(s, schemas.ControlSummary_ListingRecommendations, vv.Value)
+		s.CloseUnion()
+	}
+}
+
 func serializeEntityTypeFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v EntityTypeFilters) {
 	switch vv := v.(type) {
 	case *EntityTypeFiltersMemberAmiProductFilters:
@@ -168,7 +202,82 @@ func serializeFrameworkSummary(s smithy.ShapeSerializer, schema *smithy.Schema, 
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *FrameworkSummaryMemberListingQualitySummary:
+		s.WriteUnion(schema, schemas.FrameworkSummary_ListingQualitySummary)
+		s.WriteStruct(schemas.FrameworkSummary_ListingQualitySummary)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *FrameworkSummaryMemberListingRecommendationsSummary:
+		s.WriteUnion(schema, schemas.FrameworkSummary_ListingRecommendationsSummary)
+		s.WriteStruct(schemas.FrameworkSummary_ListingRecommendationsSummary)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	}
+}
+
+func serializeListingRecommendations(s smithy.ShapeSerializer, schema *smithy.Schema, v ListingRecommendations) {
+	switch vv := v.(type) {
+	case *ListingRecommendationsMemberFeatureRecommendations:
+		s.WriteUnion(schema, schemas.ListingRecommendations_FeatureRecommendations)
+		s.WriteStruct(schemas.ListingRecommendations_FeatureRecommendations)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ListingRecommendationsMemberProductContentRecommendations:
+		s.WriteUnion(schema, schemas.ListingRecommendations_ProductContentRecommendations)
+		s.WriteStruct(schemas.ListingRecommendations_ProductContentRecommendations)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ListingRecommendationsMemberSolutionContentRecommendations:
+		s.WriteUnion(schema, schemas.ListingRecommendations_SolutionContentRecommendations)
+		s.WriteStruct(schemas.ListingRecommendations_SolutionContentRecommendations)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
+func deserializeContentAlternatives(d smithy.ShapeDeserializer, s *smithy.Schema, v *ContentAlternatives) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ContentAlternatives_AdditionalResources:
+			vv := &ContentAlternativesMemberAdditionalResources{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ContentAlternatives_CaseStudies:
+			vv := &ContentAlternativesMemberCaseStudies{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ContentAlternatives_Text:
+			vv := &ContentAlternativesMemberText{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ContentAlternatives_TextList:
+			vv := &ContentAlternativesMemberTextList{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ContentAlternatives_UseCases:
+			vv := &ContentAlternativesMemberUseCases{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeControlSummary(d smithy.ShapeDeserializer, s *smithy.Schema, v *ControlSummary) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ControlSummary_ListingRecommendations:
+			vv := &ControlSummaryMemberListingRecommendations{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 func deserializeEntityTypeFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *EntityTypeFilters) error {
@@ -294,9 +403,57 @@ func deserializeFrameworkSummary(d smithy.ShapeDeserializer, s *smithy.Schema, v
 			vv := &FrameworkSummaryMemberContainerSecuritySummary{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.FrameworkSummary_ListingQualitySummary:
+			vv := &FrameworkSummaryMemberListingQualitySummary{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.FrameworkSummary_ListingRecommendationsSummary:
+			vv := &FrameworkSummaryMemberListingRecommendationsSummary{}
+			*v = vv
+			return vv.Deserialize(d)
 		}
 		return nil
 	})
+}
+
+func deserializeListingRecommendations(d smithy.ShapeDeserializer, s *smithy.Schema, v *ListingRecommendations) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ListingRecommendations_FeatureRecommendations:
+			vv := &ListingRecommendationsMemberFeatureRecommendations{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ListingRecommendations_ProductContentRecommendations:
+			vv := &ListingRecommendationsMemberProductContentRecommendations{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ListingRecommendations_SolutionContentRecommendations:
+			vv := &ListingRecommendationsMemberSolutionContentRecommendations{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func serializeAdditionalResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AdditionalResource) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAdditionalResourcesAlternativeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AdditionalResourcesAlternative) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
 }
 
 func serializeAmiProductEntityIdFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
@@ -333,6 +490,26 @@ func serializeAssessmentSummaryList(s smithy.ShapeSerializer, schema *smithy.Sch
 	s.CloseList()
 }
 
+func serializeCaseStudiesAlternativeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CaseStudiesAlternative) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCaseStudyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ListingCaseStudy) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeChangeSetDescription(s smithy.ShapeSerializer, schema *smithy.Schema, v []ChangeSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -344,6 +521,16 @@ func serializeChangeSetDescription(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeChangeSetSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ChangeSetSummaryListItem) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeCitationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RecommendationCitation) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -397,6 +584,16 @@ func serializeControlErrorList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeControlInputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ControlInput) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDataProductEntityIdFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -414,6 +611,14 @@ func serializeDataProductTitleFilterValueList(s smithy.ShapeSerializer, schema *
 }
 
 func serializeDataProductVisibilityFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DataProductVisibilityString) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeEntityIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -485,7 +690,45 @@ func serializeExpressPrivateOfferConfigurationStateFilterValueList(s smithy.Shap
 	s.CloseList()
 }
 
+func serializeFeatureRecommendationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FeatureRecommendation) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeFieldTextList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Filter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeFindingList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ListingFinding) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeFollowUpQuestionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FollowUpQuestion) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -624,6 +867,14 @@ func serializeOfferSetStateFilterValueList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeOfferStateFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []OfferStateString) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeOfferSubsidiaryAuthorizationIdFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -891,6 +1142,46 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 	s.CloseList()
 }
 
+func serializeTextAlternativeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TextAlternative) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeTextListAlternativeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TextListAlternative) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeUseCaseList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ListingUseCase) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeUseCasesAlternativeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []UseCasesAlternative) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ValidationExceptionField) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -907,6 +1198,50 @@ func serializeValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []str
 		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
+}
+
+func deserializeAdditionalResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AdditionalResource) error {
+	*v = make([]AdditionalResource, 0)
+	var vv AdditionalResource
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AdditionalResource
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AdditionalResource{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAdditionalResourcesAlternativeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AdditionalResourcesAlternative) error {
+	*v = make([]AdditionalResourcesAlternative, 0)
+	var vv AdditionalResourcesAlternative
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AdditionalResourcesAlternative
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AdditionalResourcesAlternative{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
 }
 
 func deserializeAmiProductEntityIdFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
@@ -994,6 +1329,50 @@ func deserializeAssessmentSummaryList(d smithy.ShapeDeserializer, s *smithy.Sche
 	})
 }
 
+func deserializeCaseStudiesAlternativeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CaseStudiesAlternative) error {
+	*v = make([]CaseStudiesAlternative, 0)
+	var vv CaseStudiesAlternative
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero CaseStudiesAlternative
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = CaseStudiesAlternative{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCaseStudyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ListingCaseStudy) error {
+	*v = make([]ListingCaseStudy, 0)
+	var vv ListingCaseStudy
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ListingCaseStudy
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ListingCaseStudy{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeChangeSetDescription(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ChangeSummary) error {
 	*v = make([]ChangeSummary, 0)
 	var vv ChangeSummary
@@ -1029,6 +1408,28 @@ func deserializeChangeSetSummaryList(d smithy.ShapeDeserializer, s *smithy.Schem
 		}
 
 		vv = ChangeSetSummaryListItem{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCitationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RecommendationCitation) error {
+	*v = make([]RecommendationCitation, 0)
+	var vv RecommendationCitation
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RecommendationCitation
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = RecommendationCitation{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1145,6 +1546,28 @@ func deserializeControlErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	})
 }
 
+func deserializeControlInputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ControlInput) error {
+	*v = make([]ControlInput, 0)
+	var vv ControlInput
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ControlInput
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ControlInput{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeDataProductEntityIdFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
 	*v = make([]string, 0)
 	var vv string
@@ -1204,6 +1627,27 @@ func deserializeDataProductVisibilityFilterValueList(d smithy.ShapeDeserializer,
 		}
 
 		*v = append(*v, DataProductVisibilityString(vv))
+		return nil
+	})
+}
+
+func deserializeEntityIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }
@@ -1359,6 +1803,49 @@ func deserializeExpressPrivateOfferConfigurationStateFilterValueList(d smithy.Sh
 	})
 }
 
+func deserializeFeatureRecommendationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FeatureRecommendation) error {
+	*v = make([]FeatureRecommendation, 0)
+	var vv FeatureRecommendation
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FeatureRecommendation
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = FeatureRecommendation{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFieldTextList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Filter) error {
 	*v = make([]Filter, 0)
 	var vv Filter
@@ -1372,6 +1859,50 @@ func deserializeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Fi
 		}
 
 		vv = Filter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFindingList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ListingFinding) error {
+	*v = make([]ListingFinding, 0)
+	var vv ListingFinding
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ListingFinding
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ListingFinding{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFollowUpQuestionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FollowUpQuestion) error {
+	*v = make([]FollowUpQuestion, 0)
+	var vv FollowUpQuestion
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero FollowUpQuestion
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = FollowUpQuestion{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1734,6 +2265,27 @@ func deserializeOfferStateFilterValueList(d smithy.ShapeDeserializer, s *smithy.
 		}
 
 		*v = append(*v, OfferStateString(vv))
+		return nil
+	})
+}
+
+func deserializeOfferSubsidiaryAuthorizationIdFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }
@@ -2412,6 +2964,94 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 	})
 }
 
+func deserializeTextAlternativeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TextAlternative) error {
+	*v = make([]TextAlternative, 0)
+	var vv TextAlternative
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TextAlternative
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = TextAlternative{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeTextListAlternativeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TextListAlternative) error {
+	*v = make([]TextListAlternative, 0)
+	var vv TextListAlternative
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero TextListAlternative
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = TextListAlternative{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeUseCaseList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ListingUseCase) error {
+	*v = make([]ListingUseCase, 0)
+	var vv ListingUseCase
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ListingUseCase
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ListingUseCase{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeUseCasesAlternativeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UseCasesAlternative) error {
+	*v = make([]UseCasesAlternative, 0)
+	var vv UseCasesAlternative
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero UseCasesAlternative
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = UseCasesAlternative{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ValidationExceptionField) error {
 	*v = make([]ValidationExceptionField, 0)
 	var vv ValidationExceptionField
@@ -2477,6 +3117,15 @@ func serializeErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v map[stri
 	s.CloseMap()
 }
 
+func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func deserializeEntityDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]EntityDetail) error {
 	*v = make(map[string]EntityDetail)
 	var vv EntityDetail
@@ -2513,6 +3162,27 @@ func deserializeErrors(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[stri
 
 		vv = BatchDescribeErrorDetail{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeTagMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			(*v)[k] = zero
+			return nil
+		}
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
 		}
 

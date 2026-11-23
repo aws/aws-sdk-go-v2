@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"ruleId":"__RuleId__","status":"CREATION_IN_PROGRESS","updatedAt":946684800}
+{"ruleId":"__RuleId__","status":"CREATION_IN_PROGRESS","updateId":"__UpdateId__","updatedAt":946684800}

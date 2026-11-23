@@ -8,6 +8,27 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
+var GetDeploymentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "GetDeploymentConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/catalogs/{catalog}/products/{productId}/delivery-options/{deliveryOptionType}/deployment-configuration",
+	Code: 200})
+
+var GetDeploymentConfigurationJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "GetDeploymentConfigurationJob",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/catalogs/{catalog}/products/{productId}/delivery-options/{deliveryOptionType}/deployment-configuration/jobs/{jobId}",
+	Code: 200})
+
+var ListDeploymentConfigurationJobs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "ListDeploymentConfigurationJobs",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/catalogs/{catalog}/products/{productId}/delivery-options/{deliveryOptionType}/deployment-configuration/jobs",
+	Code: 200})
+
 var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacedeployment",
 	Name:      "ListTagsForResource",
@@ -20,6 +41,13 @@ var PutDeploymentParameter = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PutDeploymentParameter",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/catalogs/{catalog}/products/{productId}/deployment-parameters",
+	Code: 200})
+
+var StartDeploymentConfigurationJob = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "StartDeploymentConfigurationJob",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/catalogs/{catalog}/products/{productId}/delivery-options/{deliveryOptionType}/deployment-configuration/jobs",
 	Code: 200})
 
 var TagResource = smithy.NewSchema(smithy.ShapeID{
@@ -68,6 +96,82 @@ var ConflictException = smithy.NewSchema(smithy.ShapeID{
 var ConflictException_message *smithy.Schema
 
 var ConflictException_resourceId *smithy.Schema
+
+var DataAsAServiceConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "DataAsAServiceConfigurationDetail",
+}, smithy.ShapeTypeStructure, 1)
+var DataAsAServiceConfigurationDetail_fulfillmentUrl *smithy.Schema
+
+var DeliveryOptionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "DeliveryOptionType",
+}, smithy.ShapeTypeEnum, 1)
+var DeliveryOptionType_DATA_AS_A_SERVICE *smithy.Schema
+
+var DeploymentConfigurationDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "DeploymentConfigurationDetail",
+}, smithy.ShapeTypeUnion, 1)
+var DeploymentConfigurationDetail_dataAsAService *smithy.Schema
+
+var _DeploymentConfigurationFulfillmentUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "DeploymentConfigurationFulfillmentUrl",
+}, smithy.ShapeTypeString, 0)
+
+var DeploymentConfigurationJobErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "DeploymentConfigurationJobErrorCode",
+}, smithy.ShapeTypeEnum, 3)
+var DeploymentConfigurationJobErrorCode_FULFILLMENT_URL_UNREACHABLE *smithy.Schema
+
+var DeploymentConfigurationJobErrorCode_INTERNAL_ERROR *smithy.Schema
+
+var DeploymentConfigurationJobErrorCode_ENDPOINT_INVALID *smithy.Schema
+
+var _DeploymentConfigurationJobId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "DeploymentConfigurationJobId",
+}, smithy.ShapeTypeString, 0)
+
+var DeploymentConfigurationJobStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "DeploymentConfigurationJobStatus",
+}, smithy.ShapeTypeEnum, 3)
+var DeploymentConfigurationJobStatus_IN_PROGRESS *smithy.Schema
+
+var DeploymentConfigurationJobStatus_SUCCEEDED *smithy.Schema
+
+var DeploymentConfigurationJobStatus_FAILED *smithy.Schema
+
+var _DeploymentConfigurationJobSummaries = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "DeploymentConfigurationJobSummaries",
+}, smithy.ShapeTypeList, 1)
+var _DeploymentConfigurationJobSummaries_member *smithy.Schema
+
+var DeploymentConfigurationJobSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "DeploymentConfigurationJobSummary",
+}, smithy.ShapeTypeStructure, 4)
+var DeploymentConfigurationJobSummary_jobId *smithy.Schema
+
+var DeploymentConfigurationJobSummary_status *smithy.Schema
+
+var DeploymentConfigurationJobSummary_configuration *smithy.Schema
+
+var DeploymentConfigurationJobSummary_createdAt *smithy.Schema
+
+var _DeploymentConfigurationMaxResults = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "DeploymentConfigurationMaxResults",
+}, smithy.ShapeTypeInteger, 0)
+
+var _DeploymentConfigurationNextToken = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "DeploymentConfigurationNextToken",
+}, smithy.ShapeTypeString, 0)
 
 var DeploymentParameterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacedeployment",
@@ -171,6 +275,76 @@ var ValidationException_message *smithy.Schema
 
 var ValidationException_fieldName *smithy.Schema
 
+var GetDeploymentConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "GetDeploymentConfigurationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var GetDeploymentConfigurationRequest_catalog *smithy.Schema
+
+var GetDeploymentConfigurationRequest_productId *smithy.Schema
+
+var GetDeploymentConfigurationRequest_deliveryOptionType *smithy.Schema
+
+var GetDeploymentConfigurationJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "GetDeploymentConfigurationJobRequest",
+}, smithy.ShapeTypeStructure, 4)
+var GetDeploymentConfigurationJobRequest_catalog *smithy.Schema
+
+var GetDeploymentConfigurationJobRequest_productId *smithy.Schema
+
+var GetDeploymentConfigurationJobRequest_deliveryOptionType *smithy.Schema
+
+var GetDeploymentConfigurationJobRequest_jobId *smithy.Schema
+
+var GetDeploymentConfigurationJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "GetDeploymentConfigurationJobResponse",
+}, smithy.ShapeTypeStructure, 8)
+var GetDeploymentConfigurationJobResponse_jobId *smithy.Schema
+
+var GetDeploymentConfigurationJobResponse_configuration *smithy.Schema
+
+var GetDeploymentConfigurationJobResponse_status *smithy.Schema
+
+var GetDeploymentConfigurationJobResponse_createdAt *smithy.Schema
+
+var GetDeploymentConfigurationJobResponse_configurationArn *smithy.Schema
+
+var GetDeploymentConfigurationJobResponse_endedAt *smithy.Schema
+
+var GetDeploymentConfigurationJobResponse_errorCode *smithy.Schema
+
+var GetDeploymentConfigurationJobResponse_message *smithy.Schema
+
+var GetDeploymentConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "GetDeploymentConfigurationResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetDeploymentConfigurationResponse_configuration *smithy.Schema
+
+var ListDeploymentConfigurationJobsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "ListDeploymentConfigurationJobsRequest",
+}, smithy.ShapeTypeStructure, 5)
+var ListDeploymentConfigurationJobsRequest_catalog *smithy.Schema
+
+var ListDeploymentConfigurationJobsRequest_productId *smithy.Schema
+
+var ListDeploymentConfigurationJobsRequest_deliveryOptionType *smithy.Schema
+
+var ListDeploymentConfigurationJobsRequest_maxResults *smithy.Schema
+
+var ListDeploymentConfigurationJobsRequest_nextToken *smithy.Schema
+
+var ListDeploymentConfigurationJobsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "ListDeploymentConfigurationJobsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListDeploymentConfigurationJobsResponse_jobs *smithy.Schema
+
+var ListDeploymentConfigurationJobsResponse_nextToken *smithy.Schema
+
 var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacedeployment",
 	Name:      "ListTagsForResourceRequest",
@@ -213,6 +387,34 @@ var PutDeploymentParameterResponse_deploymentParameterId *smithy.Schema
 
 var PutDeploymentParameterResponse_tags *smithy.Schema
 
+var StartDeploymentConfigurationJobRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "StartDeploymentConfigurationJobRequest",
+}, smithy.ShapeTypeStructure, 6)
+var StartDeploymentConfigurationJobRequest_catalog *smithy.Schema
+
+var StartDeploymentConfigurationJobRequest_productId *smithy.Schema
+
+var StartDeploymentConfigurationJobRequest_deliveryOptionType *smithy.Schema
+
+var StartDeploymentConfigurationJobRequest_configuration *smithy.Schema
+
+var StartDeploymentConfigurationJobRequest_tags *smithy.Schema
+
+var StartDeploymentConfigurationJobRequest_clientToken *smithy.Schema
+
+var StartDeploymentConfigurationJobResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacedeployment",
+	Name:      "StartDeploymentConfigurationJobResponse",
+}, smithy.ShapeTypeStructure, 4)
+var StartDeploymentConfigurationJobResponse_jobId *smithy.Schema
+
+var StartDeploymentConfigurationJobResponse_configuration *smithy.Schema
+
+var StartDeploymentConfigurationJobResponse_status *smithy.Schema
+
+var StartDeploymentConfigurationJobResponse_createdAt *smithy.Schema
+
 var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacedeployment",
 	Name:      "TagResourceRequest",
@@ -248,6 +450,34 @@ func init() {
 
 	ConflictException_resourceId = ConflictException.AddMember("resourceId", _ResourceId)
 
+	DataAsAServiceConfigurationDetail_fulfillmentUrl = DataAsAServiceConfigurationDetail.AddMember("fulfillmentUrl", _DeploymentConfigurationFulfillmentUrl)
+
+	DeliveryOptionType_DATA_AS_A_SERVICE = DeliveryOptionType.AddMember("DATA_AS_A_SERVICE", smithyprelude.Unit)
+
+	DeploymentConfigurationDetail_dataAsAService = DeploymentConfigurationDetail.AddMember("dataAsAService", DataAsAServiceConfigurationDetail)
+
+	DeploymentConfigurationJobErrorCode_FULFILLMENT_URL_UNREACHABLE = DeploymentConfigurationJobErrorCode.AddMember("FULFILLMENT_URL_UNREACHABLE", smithyprelude.Unit)
+
+	DeploymentConfigurationJobErrorCode_INTERNAL_ERROR = DeploymentConfigurationJobErrorCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
+
+	DeploymentConfigurationJobErrorCode_ENDPOINT_INVALID = DeploymentConfigurationJobErrorCode.AddMember("ENDPOINT_INVALID", smithyprelude.Unit)
+
+	DeploymentConfigurationJobStatus_IN_PROGRESS = DeploymentConfigurationJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+
+	DeploymentConfigurationJobStatus_SUCCEEDED = DeploymentConfigurationJobStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
+
+	DeploymentConfigurationJobStatus_FAILED = DeploymentConfigurationJobStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	DeploymentConfigurationJobSummary_jobId = DeploymentConfigurationJobSummary.AddMember("jobId", _DeploymentConfigurationJobId)
+
+	DeploymentConfigurationJobSummary_status = DeploymentConfigurationJobSummary.AddMember("status", DeploymentConfigurationJobStatus)
+
+	DeploymentConfigurationJobSummary_configuration = DeploymentConfigurationJobSummary.AddMember("configuration", DeploymentConfigurationDetail)
+
+	DeploymentConfigurationJobSummary_createdAt = DeploymentConfigurationJobSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	_DeploymentConfigurationJobSummaries_member = _DeploymentConfigurationJobSummaries.AddMember("member", DeploymentConfigurationJobSummary)
+
 	DeploymentParameterInput_name = DeploymentParameterInput.AddMember("name", _DeploymentParameterName)
 
 	DeploymentParameterInput_secretString = DeploymentParameterInput.AddMember("secretString", _SecretString)
@@ -274,6 +504,52 @@ func init() {
 
 	ValidationException_fieldName = ValidationException.AddMember("fieldName", smithyprelude.String)
 
+	GetDeploymentConfigurationRequest_catalog = GetDeploymentConfigurationRequest.AddMember("catalog", _Catalog, &smithytraits.HTTPLabel{})
+
+	GetDeploymentConfigurationRequest_productId = GetDeploymentConfigurationRequest.AddMember("productId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	GetDeploymentConfigurationRequest_deliveryOptionType = GetDeploymentConfigurationRequest.AddMember("deliveryOptionType", DeliveryOptionType, &smithytraits.HTTPLabel{})
+
+	GetDeploymentConfigurationJobRequest_catalog = GetDeploymentConfigurationJobRequest.AddMember("catalog", _Catalog, &smithytraits.HTTPLabel{})
+
+	GetDeploymentConfigurationJobRequest_productId = GetDeploymentConfigurationJobRequest.AddMember("productId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	GetDeploymentConfigurationJobRequest_deliveryOptionType = GetDeploymentConfigurationJobRequest.AddMember("deliveryOptionType", DeliveryOptionType, &smithytraits.HTTPLabel{})
+
+	GetDeploymentConfigurationJobRequest_jobId = GetDeploymentConfigurationJobRequest.AddMember("jobId", _DeploymentConfigurationJobId, &smithytraits.HTTPLabel{})
+
+	GetDeploymentConfigurationJobResponse_jobId = GetDeploymentConfigurationJobResponse.AddMember("jobId", _DeploymentConfigurationJobId)
+
+	GetDeploymentConfigurationJobResponse_configuration = GetDeploymentConfigurationJobResponse.AddMember("configuration", DeploymentConfigurationDetail)
+
+	GetDeploymentConfigurationJobResponse_status = GetDeploymentConfigurationJobResponse.AddMember("status", DeploymentConfigurationJobStatus)
+
+	GetDeploymentConfigurationJobResponse_createdAt = GetDeploymentConfigurationJobResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetDeploymentConfigurationJobResponse_configurationArn = GetDeploymentConfigurationJobResponse.AddMember("configurationArn", _ResourceArn)
+
+	GetDeploymentConfigurationJobResponse_endedAt = GetDeploymentConfigurationJobResponse.AddMember("endedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetDeploymentConfigurationJobResponse_errorCode = GetDeploymentConfigurationJobResponse.AddMember("errorCode", DeploymentConfigurationJobErrorCode)
+
+	GetDeploymentConfigurationJobResponse_message = GetDeploymentConfigurationJobResponse.AddMember("message", smithyprelude.String)
+
+	GetDeploymentConfigurationResponse_configuration = GetDeploymentConfigurationResponse.AddMember("configuration", DeploymentConfigurationDetail)
+
+	ListDeploymentConfigurationJobsRequest_catalog = ListDeploymentConfigurationJobsRequest.AddMember("catalog", _Catalog, &smithytraits.HTTPLabel{})
+
+	ListDeploymentConfigurationJobsRequest_productId = ListDeploymentConfigurationJobsRequest.AddMember("productId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	ListDeploymentConfigurationJobsRequest_deliveryOptionType = ListDeploymentConfigurationJobsRequest.AddMember("deliveryOptionType", DeliveryOptionType, &smithytraits.HTTPLabel{})
+
+	ListDeploymentConfigurationJobsRequest_maxResults = ListDeploymentConfigurationJobsRequest.AddMember("maxResults", _DeploymentConfigurationMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListDeploymentConfigurationJobsRequest_nextToken = ListDeploymentConfigurationJobsRequest.AddMember("nextToken", _DeploymentConfigurationNextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListDeploymentConfigurationJobsResponse_jobs = ListDeploymentConfigurationJobsResponse.AddMember("jobs", _DeploymentConfigurationJobSummaries)
+
+	ListDeploymentConfigurationJobsResponse_nextToken = ListDeploymentConfigurationJobsResponse.AddMember("nextToken", _DeploymentConfigurationNextToken)
+
 	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
 
 	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
@@ -299,6 +575,26 @@ func init() {
 	PutDeploymentParameterResponse_deploymentParameterId = PutDeploymentParameterResponse.AddMember("deploymentParameterId", _DeploymentParameterResourceIdentifier)
 
 	PutDeploymentParameterResponse_tags = PutDeploymentParameterResponse.AddMember("tags", _TagsMap)
+
+	StartDeploymentConfigurationJobRequest_catalog = StartDeploymentConfigurationJobRequest.AddMember("catalog", _Catalog, &smithytraits.HTTPLabel{})
+
+	StartDeploymentConfigurationJobRequest_productId = StartDeploymentConfigurationJobRequest.AddMember("productId", _ResourceId, &smithytraits.HTTPLabel{})
+
+	StartDeploymentConfigurationJobRequest_deliveryOptionType = StartDeploymentConfigurationJobRequest.AddMember("deliveryOptionType", DeliveryOptionType, &smithytraits.HTTPLabel{})
+
+	StartDeploymentConfigurationJobRequest_configuration = StartDeploymentConfigurationJobRequest.AddMember("configuration", DeploymentConfigurationDetail)
+
+	StartDeploymentConfigurationJobRequest_tags = StartDeploymentConfigurationJobRequest.AddMember("tags", _TagsMap)
+
+	StartDeploymentConfigurationJobRequest_clientToken = StartDeploymentConfigurationJobRequest.AddMember("clientToken", _ClientToken)
+
+	StartDeploymentConfigurationJobResponse_jobId = StartDeploymentConfigurationJobResponse.AddMember("jobId", _DeploymentConfigurationJobId)
+
+	StartDeploymentConfigurationJobResponse_configuration = StartDeploymentConfigurationJobResponse.AddMember("configuration", DeploymentConfigurationDetail)
+
+	StartDeploymentConfigurationJobResponse_status = StartDeploymentConfigurationJobResponse.AddMember("status", DeploymentConfigurationJobStatus)
+
+	StartDeploymentConfigurationJobResponse_createdAt = StartDeploymentConfigurationJobResponse.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
 
 	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
 

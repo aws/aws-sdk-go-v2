@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListCustomerAccountBulkJobs
+
+{"Catalog":"__Catalog__","Filter":{"Identifier":"__Identifier__","Status":"SUBMITTED"},"MaxResults":1,"NextToken":"__NextToken__"}

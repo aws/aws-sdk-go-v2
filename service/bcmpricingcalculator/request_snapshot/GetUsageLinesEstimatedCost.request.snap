@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.GetUsageLinesEstimatedCost
+
+{"rateType":"BEFORE_DISCOUNTS","usage":[{"amount":1,"key":"__Key__","operation":"__Operation__","serviceCode":"__ServiceCode__","usageType":"__UsageType__"},{"amount":1,"key":"__Key__","operation":"__Operation__","serviceCode":"__ServiceCode__","usageType":"__UsageType__"}]}

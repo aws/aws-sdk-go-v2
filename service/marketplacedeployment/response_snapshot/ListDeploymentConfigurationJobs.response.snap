@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"jobs":[{"configuration":{"dataAsAService":{"fulfillmentUrl":"__FulfillmentUrl__"}},"createdAt":"2000-01-01T00:00:00Z","jobId":"__JobId__","status":"IN_PROGRESS"},{"configuration":{"dataAsAService":{"fulfillmentUrl":"__FulfillmentUrl__"}},"createdAt":"2000-01-01T00:00:00Z","jobId":"__JobId__","status":"IN_PROGRESS"}],"nextToken":"__NextToken__"}

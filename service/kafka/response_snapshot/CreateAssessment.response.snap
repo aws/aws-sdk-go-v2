@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assessmentArn":"__AssessmentArn__","assessmentType":"UPDATE_BROKER_TYPE","clusterArn":"__ClusterArn__","creationTime":"2000-01-01T00:00:00Z","status":"IN_PROGRESS"}

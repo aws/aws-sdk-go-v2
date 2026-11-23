@@ -74,11 +74,35 @@ func TestCheckSnapshot_AcceptChannelHandshake(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelChannelContract(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelChannelContract(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelChannelContract")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CancelChannelHandshake(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelChannelHandshake(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CancelChannelHandshake")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateChannelContract(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateChannelContract(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateChannelContract")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -146,11 +170,35 @@ func TestCheckSnapshot_DeleteRelationship(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetChannelContract(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetChannelContract(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetChannelContract")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRelationship(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRelationship(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetRelationship")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListChannelContracts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChannelContracts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListChannelContracts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -277,11 +325,35 @@ func TestUpdateSnapshot_AcceptChannelHandshake(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CancelChannelContract(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelChannelContract(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelChannelContract")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CancelChannelHandshake(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CancelChannelHandshake(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CancelChannelHandshake")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateChannelContract(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateChannelContract(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateChannelContract")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -349,11 +421,35 @@ func TestUpdateSnapshot_DeleteRelationship(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetChannelContract(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetChannelContract(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetChannelContract")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRelationship(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRelationship(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetRelationship")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListChannelContracts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListChannelContracts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListChannelContracts")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1192,7 +1192,7 @@ var _CreationType = smithy.NewSchema(smithy.ShapeID{
 var DefaultRunSetting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
 	Name:      "DefaultRunSetting",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var DefaultRunSetting_workflowId *smithy.Schema
 
 var DefaultRunSetting_workflowType *smithy.Schema
@@ -1238,6 +1238,8 @@ var DefaultRunSetting_sessionPolicy *smithy.Schema
 var DefaultRunSetting_engineSettings *smithy.Schema
 
 var DefaultRunSetting_scratchStorageMode *smithy.Schema
+
+var DefaultRunSetting_requesterPaysEnabled *smithy.Schema
 
 var DefinitionRepository = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
@@ -2524,6 +2526,16 @@ var _RunParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
 	Name:      "RunParameters",
 }, smithy.ShapeTypeDocument, 0)
+
+var _RunParametersUri = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.omics",
+	Name:      "RunParametersUri",
+}, smithy.ShapeTypeString, 0)
+
+var _RunParametersUriOrPresignedUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.omics",
+	Name:      "RunParametersUriOrPresignedUrl",
+}, smithy.ShapeTypeString, 0)
 
 var _RunRequestId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
@@ -4849,7 +4861,7 @@ var GetRunRequest_export *smithy.Schema
 var GetRunResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
 	Name:      "GetRunResponse",
-}, smithy.ShapeTypeStructure, 44)
+}, smithy.ShapeTypeStructure, 46)
 var GetRunResponse_arn *smithy.Schema
 
 var GetRunResponse_id *smithy.Schema
@@ -4937,6 +4949,10 @@ var GetRunResponse_engineSettings *smithy.Schema
 var GetRunResponse_sessionPolicy *smithy.Schema
 
 var GetRunResponse_outputUriPrefixMode *smithy.Schema
+
+var GetRunResponse_requesterPaysEnabled *smithy.Schema
+
+var GetRunResponse_parametersUri *smithy.Schema
 
 var GetRunTaskRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
@@ -5941,7 +5957,7 @@ var StartRunBatchResponse_tags *smithy.Schema
 var StartRunRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
 	Name:      "StartRunRequest",
-}, smithy.ShapeTypeStructure, 25)
+}, smithy.ShapeTypeStructure, 27)
 var StartRunRequest_workflowId *smithy.Schema
 
 var StartRunRequest_workflowType *smithy.Schema
@@ -5991,6 +6007,10 @@ var StartRunRequest_sessionPolicy *smithy.Schema
 var StartRunRequest_engineSettings *smithy.Schema
 
 var StartRunRequest_outputUriPrefixMode *smithy.Schema
+
+var StartRunRequest_requesterPaysEnabled *smithy.Schema
+
+var StartRunRequest_parametersUri *smithy.Schema
 
 var StartRunResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.omics",
@@ -6532,6 +6552,8 @@ func init() {
 	DefaultRunSetting_engineSettings = DefaultRunSetting.AddMember("engineSettings", _EngineSettings)
 
 	DefaultRunSetting_scratchStorageMode = DefaultRunSetting.AddMember("scratchStorageMode", _ScratchStorageMode)
+
+	DefaultRunSetting_requesterPaysEnabled = DefaultRunSetting.AddMember("requesterPaysEnabled", smithyprelude.Boolean)
 
 	SourceReference_type = SourceReference.AddMember("type", _SourceReferenceType)
 
@@ -8263,6 +8285,10 @@ func init() {
 
 	GetRunResponse_outputUriPrefixMode = GetRunResponse.AddMember("outputUriPrefixMode", _RunOutputUriPrefixMode)
 
+	GetRunResponse_requesterPaysEnabled = GetRunResponse.AddMember("requesterPaysEnabled", smithyprelude.Boolean)
+
+	GetRunResponse_parametersUri = GetRunResponse.AddMember("parametersUri", _RunParametersUriOrPresignedUrl)
+
 	GetRunTaskRequest_id = GetRunTaskRequest.AddMember("id", _RunId, &smithytraits.HTTPLabel{})
 
 	GetRunTaskRequest_taskId = GetRunTaskRequest.AddMember("taskId", _TaskId, &smithytraits.HTTPLabel{})
@@ -8984,6 +9010,10 @@ func init() {
 	StartRunRequest_engineSettings = StartRunRequest.AddMember("engineSettings", _EngineSettings)
 
 	StartRunRequest_outputUriPrefixMode = StartRunRequest.AddMember("outputUriPrefixMode", _RunOutputUriPrefixMode)
+
+	StartRunRequest_requesterPaysEnabled = StartRunRequest.AddMember("requesterPaysEnabled", smithyprelude.Boolean)
+
+	StartRunRequest_parametersUri = StartRunRequest.AddMember("parametersUri", _RunParametersUri)
 
 	StartRunResponse_arn = StartRunResponse.AddMember("arn", _RunArn)
 

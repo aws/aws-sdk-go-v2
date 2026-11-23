@@ -55,6 +55,16 @@ func serializeCiphers(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 	s.CloseList()
 }
 
+func serializeClientCertificateIdentityFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ClientCertificateIdentityFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeDescribeTrustStoreRevocationResponse(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DescribeTrustStoreRevocation) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -595,6 +605,28 @@ func deserializeCiphers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 		}
 
 		vv = types.Cipher{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeClientCertificateIdentityFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ClientCertificateIdentityFilter) error {
+	*v = make([]types.ClientCertificateIdentityFilter, 0)
+	var vv types.ClientCertificateIdentityFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ClientCertificateIdentityFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ClientCertificateIdentityFilter{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

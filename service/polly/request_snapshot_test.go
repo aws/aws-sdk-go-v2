@@ -205,6 +205,63 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_CreateVoice(t *testing.T) {
+	input := &CreateVoiceInput{
+		Name:          ptr.String("__Name__"),
+		LanguageCode:  types.CustomVoiceLanguageCode("de-DE"),
+		TermsAccepted: true,
+		VoiceCreationData: &types.VoiceCreationData{
+			Recordings: []types.Recording{
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+			},
+		},
+		CustomerManagedEncryption: &types.CustomerManagedEncryption{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateVoice(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateVoice"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteLexicon(t *testing.T) {
 	input := &DeleteLexiconInput{
 		Name: ptr.String("__Name__"),
@@ -228,6 +285,33 @@ func TestCheckRequestSnapshot_DeleteLexicon(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteLexicon"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteVoice(t *testing.T) {
+	input := &DeleteVoiceInput{
+		VoiceId: ptr.String("__VoiceId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteVoice(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteVoice"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -312,6 +396,33 @@ func TestCheckRequestSnapshot_GetSpeechSynthesisTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSpeechSynthesisTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetVoice(t *testing.T) {
+	input := &GetVoiceInput{
+		VoiceId: ptr.String("__VoiceId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetVoice(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetVoice"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -575,6 +686,63 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_CreateVoice(t *testing.T) {
+	input := &CreateVoiceInput{
+		Name:          ptr.String("__Name__"),
+		LanguageCode:  types.CustomVoiceLanguageCode("de-DE"),
+		TermsAccepted: true,
+		VoiceCreationData: &types.VoiceCreationData{
+			Recordings: []types.Recording{
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+				{
+					Format: types.AudioFormat("wav"),
+					Data: &types.RecordingData{
+						S3Url: ptr.String("__S3Url__"),
+						Bytes: []byte("blob"),
+					},
+				},
+			},
+		},
+		CustomerManagedEncryption: &types.CustomerManagedEncryption{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+			EncryptionContext: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateVoice(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateVoice"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteLexicon(t *testing.T) {
 	input := &DeleteLexiconInput{
 		Name: ptr.String("__Name__"),
@@ -598,6 +766,33 @@ func TestUpdateRequestSnapshot_DeleteLexicon(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteLexicon"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteVoice(t *testing.T) {
+	input := &DeleteVoiceInput{
+		VoiceId: ptr.String("__VoiceId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteVoice(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteVoice"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -682,6 +877,33 @@ func TestUpdateRequestSnapshot_GetSpeechSynthesisTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSpeechSynthesisTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetVoice(t *testing.T) {
+	input := &GetVoiceInput{
+		VoiceId: ptr.String("__VoiceId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetVoice(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetVoice"); err != nil {
 		t.Fatal(err)
 	}
 }

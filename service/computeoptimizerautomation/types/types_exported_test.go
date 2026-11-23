@@ -7,6 +7,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
 )
 
+func ExampleOrganizationTarget_outputUsage() {
+	var union types.OrganizationTarget
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OrganizationTargetMemberAccountId:
+		_ = v.Value // Value is string
+
+	case *types.OrganizationTargetMemberOrganizationalUnitId:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *string
+
 func ExampleResourceDetails_outputUsage() {
 	var union types.ResourceDetails
 	// type switches can be used to check the union value

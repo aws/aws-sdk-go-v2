@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccessControlApplication":{"ApplicationId":"__ApplicationId__","Arn":"__Arn__","AuthenticationType":"OIDC","CreatedTime":946684800,"Description":"__Description__","IdcApplicationArn":"__IdcApplicationArn__","IdpAuthorizingConfiguration":{"IdcTrustedTokenIssuerConfiguration":{"IdcTrustedTokenIssuerArn":"__IdcTrustedTokenIssuerArn__"},"IdpAuthorizingConfigurationDetail":{"ExternalIdpPublicAuthCode":{"ClientId":"__ClientId__","IssuerUrl":"__IssuerUrl__"}},"IdpAuthorizingType":"EXTERNAL_IDP_PUBLIC_AUTH_CODE"},"LastUpdatedTime":946684800,"Name":"__Name__","Namespace":"__Namespace__","QuickAuthenticationConfiguration":{"QuickAuthenticationConfigurationDetail":{"QuickManagedPublicAuthCode":{"ClientId":"__ClientId__","RedirectUris":["__Member__","__Member__"]}},"QuickAuthenticationType":"QUICK_MANAGED_PUBLIC_AUTH_CODE"},"Status":"ENABLED","TenantUrl":"__TenantUrl__"},"RequestId":"__RequestId__","Status":200}

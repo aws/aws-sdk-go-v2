@@ -55,9 +55,9 @@ type UpdateVocabularyFilterInput struct {
 	// [IAM ARNs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
 	DataAccessRoleArn *string
 
-	// Specifies the new encryption configuration for your custom vocabulary filter.
-	// The vocabulary filter artifacts are re-encrypted in place using the specified
-	// KMS key or with an AWS-owned key if a key is not supplied.
+	// Specifies the encryption configuration for your custom vocabulary filter. Your
+	// vocabulary filter artifacts are encrypted with the specified KMS key or with an
+	// Amazon Web Services owned key if a key is not supplied.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// The Amazon S3 location of the text file that contains your custom vocabulary

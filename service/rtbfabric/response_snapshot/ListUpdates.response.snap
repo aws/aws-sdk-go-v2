@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","updates":[{"createdAt":946684800,"status":"IN_PROGRESS","type":"GATEWAY_CONFIG_UPDATE","updateId":"__UpdateId__"},{"createdAt":946684800,"status":"IN_PROGRESS","type":"GATEWAY_CONFIG_UPDATE","updateId":"__UpdateId__"}]}

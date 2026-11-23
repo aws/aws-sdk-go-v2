@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"failedItems":[{"errorCode":"MANAGED_API_NOT_FOUND","errorMessage":"__ErrorMessage__","managedApiId":"__ManagedApiId__"},{"errorCode":"MANAGED_API_NOT_FOUND","errorMessage":"__ErrorMessage__","managedApiId":"__ManagedApiId__"}]}

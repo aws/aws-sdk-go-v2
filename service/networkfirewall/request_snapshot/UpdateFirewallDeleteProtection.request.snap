@@ -4,4 +4,4 @@ Accept: application/cbor
 Content-Type: application/cbor
 Smithy-Protocol: rpc-v2-cbor
 
-¿pDeleteProtectionõkFirewallArno__FirewallArn__lFirewallNamep__FirewallName__kUpdateTokeno__UpdateToken__ÿ
+¿pDeleteProtectionõkFirewallArno__FirewallArn__lFirewallNamep__FirewallName__lFirewallTypehFIREWALLkUpdateTokeno__UpdateToken__ÿ

@@ -167,6 +167,11 @@ type UpdateResponderGatewayOutput struct {
 	// This member is required.
 	Status types.ResponderGatewayStatus
 
+	// The ID of the update this call started.
+	//
+	// This member is required.
+	UpdateId *string
+
 	// The client routing policy of the gateway. If the operation changed this policy,
 	// the gateway uses the new policy after its status returns to ACTIVE . For more
 	// information, see [Configuring Availability Zone affinity]in the Amazon Web Services RTB Fabric User Guide.
@@ -196,6 +201,9 @@ func (v *UpdateResponderGatewayOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateResponderGatewayResponse_status, string(v.Status))
 	}
+	if v.UpdateId != nil {
+		s.WriteString(schemas.UpdateResponderGatewayResponse_updateId, *v.UpdateId)
+	}
 }
 func (v *UpdateResponderGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateResponderGatewayResponse, func(s *smithy.Schema) error {
@@ -217,6 +225,9 @@ func (v *UpdateResponderGatewayOutput) Deserialize(d smithy.ShapeDeserializer) e
 			}
 			v.Status = types.ResponderGatewayStatus(ev)
 			return nil
+		case schemas.UpdateResponderGatewayResponse_updateId:
+			v.UpdateId = new(string)
+			return d.ReadString(schemas.UpdateResponderGatewayResponse_updateId, v.UpdateId)
 		}
 		return nil
 	})

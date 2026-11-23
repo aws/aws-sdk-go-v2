@@ -1,3 +1,7 @@
+# v1.27.0 (2026-11-19)
+
+* **Feature**: Adds support for disassociating replica tables in S3 Tables replication with the new DisassociateTableReplication API, which promotes a read-only replica table to a standalone table.
+
 # v1.26.0 (2026-11-10)
 
 * **Feature**: Adds support for server access logging for Amazon S3 table buckets with the new PutTableBucketLogging and GetTableBucketLogging APIs.

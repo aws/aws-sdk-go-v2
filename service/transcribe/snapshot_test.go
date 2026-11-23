@@ -518,6 +518,18 @@ func TestCheckSnapshot_TagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_TranscribeAudio(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TranscribeAudio(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TranscribeAudio")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UntagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
@@ -1038,6 +1050,18 @@ func TestUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TranscribeAudio(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TranscribeAudio(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TranscribeAudio")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,3 +1,7 @@
+# v1.22.0 (2026-11-19)
+
+* **Feature**: Adding new API, GetUsageLinesEstimatedCost which can be used to estimate the cost of usage lines.
+
 # v1.21.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

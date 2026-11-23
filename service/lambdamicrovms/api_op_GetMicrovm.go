@@ -103,6 +103,11 @@ type GetMicrovmOutput struct {
 	// The list of ingress network connectors configured for the MicroVM.
 	IngressNetworkConnectors []string
 
+	// The customer managed Amazon Web Services Key Management Service (Amazon Web
+	// Services KMS) key that encrypts your MicroVM configuration at rest. If you don't
+	// specify a key, your MicroVM uses an Amazon Web Services owned key.
+	KmsKeyIdentifier *string
+
 	// The reason for why the MicroVM is in the current state.
 	StateReason *string
 
@@ -145,6 +150,9 @@ func (v *GetMicrovmOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IngressNetworkConnectors != nil {
 		serializeNetworkConnectorList(s, schemas.GetMicrovmResponse_ingressNetworkConnectors, v.IngressNetworkConnectors)
 	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.GetMicrovmResponse_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
 	if v.MaximumDurationInSeconds != nil {
 		s.WriteInt32(schemas.GetMicrovmResponse_maximumDurationInSeconds, *v.MaximumDurationInSeconds)
 	}
@@ -186,6 +194,9 @@ func (v *GetMicrovmOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.GetMicrovmResponse_imageVersion, v.ImageVersion)
 		case schemas.GetMicrovmResponse_ingressNetworkConnectors:
 			return deserializeNetworkConnectorList(d, schemas.GetMicrovmResponse_ingressNetworkConnectors, &v.IngressNetworkConnectors)
+		case schemas.GetMicrovmResponse_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.GetMicrovmResponse_kmsKeyIdentifier, v.KmsKeyIdentifier)
 		case schemas.GetMicrovmResponse_maximumDurationInSeconds:
 			v.MaximumDurationInSeconds = new(int32)
 			return d.ReadInt32(schemas.GetMicrovmResponse_maximumDurationInSeconds, v.MaximumDurationInSeconds)

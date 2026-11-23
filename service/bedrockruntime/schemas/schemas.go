@@ -2260,6 +2260,11 @@ var PerformanceConfiguration = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var PerformanceConfiguration_latency *smithy.Schema
 
+var _ProjectIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockruntime",
+	Name:      "ProjectIdentifier",
+}, smithy.ShapeTypeString, 0)
+
 var PromptRouterTrace = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockruntime",
 	Name:      "PromptRouterTrace",
@@ -2834,7 +2839,7 @@ var ApplyGuardrailResponse_guardrailCoverage *smithy.Schema
 var ConverseRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockruntime",
 	Name:      "ConverseRequest",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var ConverseRequest_modelId *smithy.Schema
 
 var ConverseRequest_messages *smithy.Schema
@@ -2846,6 +2851,8 @@ var ConverseRequest_inferenceConfig *smithy.Schema
 var ConverseRequest_toolConfig *smithy.Schema
 
 var ConverseRequest_guardrailConfig *smithy.Schema
+
+var ConverseRequest_projectIdentifier *smithy.Schema
 
 var ConverseRequest_additionalModelRequestFields *smithy.Schema
 
@@ -2884,7 +2891,7 @@ var ConverseResponse_serviceTier *smithy.Schema
 var ConverseStreamRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockruntime",
 	Name:      "ConverseStreamRequest",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var ConverseStreamRequest_modelId *smithy.Schema
 
 var ConverseStreamRequest_messages *smithy.Schema
@@ -2896,6 +2903,8 @@ var ConverseStreamRequest_inferenceConfig *smithy.Schema
 var ConverseStreamRequest_toolConfig *smithy.Schema
 
 var ConverseStreamRequest_guardrailConfig *smithy.Schema
+
+var ConverseStreamRequest_projectIdentifier *smithy.Schema
 
 var ConverseStreamRequest_additionalModelRequestFields *smithy.Schema
 
@@ -2978,7 +2987,7 @@ var InvokeGuardrailChecksResponse_usage *smithy.Schema
 var InvokeModelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockruntime",
 	Name:      "InvokeModelRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var InvokeModelRequest_body *smithy.Schema
 
 var InvokeModelRequest_contentType *smithy.Schema
@@ -2998,6 +3007,8 @@ var InvokeModelRequest_performanceConfigLatency *smithy.Schema
 var InvokeModelRequest_serviceTier *smithy.Schema
 
 var InvokeModelRequest_requestMetadata *smithy.Schema
+
+var InvokeModelRequest_projectIdentifier *smithy.Schema
 
 var InvokeModelResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockruntime",
@@ -3028,7 +3039,7 @@ var InvokeModelWithBidirectionalStreamResponse_body *smithy.Schema
 var InvokeModelWithResponseStreamRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockruntime",
 	Name:      "InvokeModelWithResponseStreamRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var InvokeModelWithResponseStreamRequest_body *smithy.Schema
 
 var InvokeModelWithResponseStreamRequest_contentType *smithy.Schema
@@ -3048,6 +3059,8 @@ var InvokeModelWithResponseStreamRequest_performanceConfigLatency *smithy.Schema
 var InvokeModelWithResponseStreamRequest_serviceTier *smithy.Schema
 
 var InvokeModelWithResponseStreamRequest_requestMetadata *smithy.Schema
+
+var InvokeModelWithResponseStreamRequest_projectIdentifier *smithy.Schema
 
 var InvokeModelWithResponseStreamResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockruntime",
@@ -4508,6 +4521,8 @@ func init() {
 
 	ConverseRequest_guardrailConfig = ConverseRequest.AddMember("guardrailConfig", GuardrailConfiguration)
 
+	ConverseRequest_projectIdentifier = ConverseRequest.AddMember("projectIdentifier", _ProjectIdentifier)
+
 	ConverseRequest_additionalModelRequestFields = ConverseRequest.AddMember("additionalModelRequestFields", smithyprelude.Document)
 
 	ConverseRequest_promptVariables = ConverseRequest.AddMember("promptVariables", _PromptVariableMap)
@@ -4549,6 +4564,8 @@ func init() {
 	ConverseStreamRequest_toolConfig = ConverseStreamRequest.AddMember("toolConfig", ToolConfiguration)
 
 	ConverseStreamRequest_guardrailConfig = ConverseStreamRequest.AddMember("guardrailConfig", GuardrailStreamConfiguration)
+
+	ConverseStreamRequest_projectIdentifier = ConverseStreamRequest.AddMember("projectIdentifier", _ProjectIdentifier)
 
 	ConverseStreamRequest_additionalModelRequestFields = ConverseStreamRequest.AddMember("additionalModelRequestFields", smithyprelude.Document)
 
@@ -4620,6 +4637,8 @@ func init() {
 
 	InvokeModelRequest_requestMetadata = InvokeModelRequest.AddMember("requestMetadata", _RequestMetadataJson, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Request-Metadata"})
 
+	InvokeModelRequest_projectIdentifier = InvokeModelRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-ProjectIdentifier"})
+
 	InvokeModelResponse_body = InvokeModelResponse.AddMember("body", _Body, &smithytraits.HTTPPayload{})
 
 	InvokeModelResponse_contentType = InvokeModelResponse.AddMember("contentType", _MimeType, &smithytraits.HTTPHeader{Name: "Content-Type"})
@@ -4653,6 +4672,8 @@ func init() {
 	InvokeModelWithResponseStreamRequest_serviceTier = InvokeModelWithResponseStreamRequest.AddMember("serviceTier", ServiceTierType, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Service-Tier"})
 
 	InvokeModelWithResponseStreamRequest_requestMetadata = InvokeModelWithResponseStreamRequest.AddMember("requestMetadata", _RequestMetadataJson, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-Request-Metadata"})
+
+	InvokeModelWithResponseStreamRequest_projectIdentifier = InvokeModelWithResponseStreamRequest.AddMember("projectIdentifier", _ProjectIdentifier, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-ProjectIdentifier"})
 
 	InvokeModelWithResponseStreamResponse_body = InvokeModelWithResponseStreamResponse.AddMember("body", ResponseStream, &smithytraits.HTTPPayload{})
 

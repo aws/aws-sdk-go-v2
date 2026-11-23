@@ -43,6 +43,20 @@ type ListInferenceProfilesInput struct {
 	// this field to return the next batch of results.
 	NextToken *string
 
+	// The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock uses the
+	// project's trusted access program participation when determining which
+	// system-defined inference profiles to return. The project must belong to your
+	// account in the same AWS Region and partition as the request.
+	//
+	// If you omit this parameter or specify default , Amazon Bedrock uses your
+	// account's participation, including organization inheritance.
+	//
+	// A project that doesn't exist or is archived causes a ValidationException .
+	// Specifying a project other than default with typeEquals set to APPLICATION also
+	// causes a ValidationException . Omit typeEquals or set it to SYSTEM_DEFINED to
+	// list system-defined inference profiles for the project.
+	ProjectIdentifier *string
+
 	// Filters for inference profiles that match the type you specify.
 	//
 	//   - SYSTEM_DEFINED – The inference profile is defined by Amazon Bedrock. You can
@@ -68,6 +82,9 @@ func (v *ListInferenceProfilesInput) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInferenceProfilesRequest_nextToken, *v.NextToken)
+	}
+	if v.ProjectIdentifier != nil {
+		s.WriteString(schemas.ListInferenceProfilesRequest_projectIdentifier, *v.ProjectIdentifier)
 	}
 	if v.TypeEquals != "" {
 		s.WriteString(schemas.ListInferenceProfilesRequest_typeEquals, string(v.TypeEquals))

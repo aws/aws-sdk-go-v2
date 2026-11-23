@@ -1,0 +1,3 @@
+GET /v1/accounts/__AwsAccountId__/knowledge-bases/__KnowledgeBaseId__/kb-refresh-schedules?max-results=1&next-token=__NextToken__
+
+

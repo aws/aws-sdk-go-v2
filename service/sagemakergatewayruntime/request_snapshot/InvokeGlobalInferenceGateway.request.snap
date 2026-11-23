@@ -1,0 +1,7 @@
+POST /global-inference-gateway/__GatewayId__/invocations
+
+Accept: __Accept__
+Content-Type: __ContentType__
+X-Amzn-Sagemaker-Customer-Identity-Token: __CustomerIdentityToken__
+
+blob

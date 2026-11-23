@@ -50,6 +50,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "organizationRuleModeSource": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationRuleModeSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the source of the account's effective organization rule mode. </p>"
+                    }
+                },
                 "statusReason": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -115,7 +121,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates one or more member accounts with your organization's management account, enabling centralized implementation of optimization actions across those accounts. Once associated, the management account (or a delegated administrator) can apply recommended actions to the member account. When you associate a member account, its organization rule mode is automatically set to \"Any allowed,\" which permits the management account to create Automation rules that automatically apply actions to that account. If the member account has not previously enabled the Automation feature, the association process automatically enables it.</p> <note> <p>Only the management account or a delegated administrator can perform this action.</p> </note>",
+                "smithy.api#documentation": "<p>Associates one or more member accounts with your organization's management account, enabling centralized implementation of optimization actions across those accounts. Once associated, the management account (or a delegated administrator) can apply recommended actions to the member account. When you associate a member account, its organization rule mode is automatically set to \"Any allowed,\" which permits the management account to create Automation rules that automatically apply actions to that account. If the member account has not previously enabled the Automation feature, the association process automatically enables it.</p> <p>Requests that include an account to which an organization enrollment configuration applies are rejected.</p> <note> <p>Only the management account or a delegated administrator can perform this action.</p> </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -132,7 +138,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.computeoptimizerautomation#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> A unique identifier to ensure idempotency of the request. Valid for 24 hours after creation. </p>",
+                        "smithy.api#documentation": "<p> A unique identifier to ensure idempotency of the request. Valid for 30 minutes after creation. </p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -159,6 +165,23 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#AutoEnrollMemberAccounts": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "All"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
+                    }
+                }
             }
         },
         "com.amazonaws.computeoptimizerautomation#AutomationEvent": {
@@ -272,7 +295,7 @@
                 "values": {
                     "target": "com.amazonaws.computeoptimizerautomation#FilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p> The values to use for the specified filter. </p>",
+                        "smithy.api#documentation": "<p> The values to use for the specified filter. For the <code>ResourceType</code>, <code>EventType</code>, and <code>EventStatus</code> filters, the value that you specify must exactly match the corresponding field of the automation event, including case. For example, specify <code>Complete</code>, not <code>complete</code>. Wildcards aren't supported. An asterisk (<code>*</code>) or a question mark (<code>?</code>) in a value matches only that literal character. </p> <p> Valid values for the <code>EventStatus</code> filter are <code>Ready</code>, <code>InProgress</code>, <code>Complete</code>, <code>Failed</code>, <code>Cancelled</code>, <code>RollbackReady</code>, <code>RollbackInProgress</code>, <code>RollbackComplete</code>, and <code>RollbackFailed</code>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -711,6 +734,9 @@
                     "target": "com.amazonaws.computeoptimizerautomation#DeleteAutomationRule"
                 },
                 {
+                    "target": "com.amazonaws.computeoptimizerautomation#DeleteOrganizationEnrollmentConfiguration"
+                },
+                {
                     "target": "com.amazonaws.computeoptimizerautomation#DisassociateAccounts"
                 },
                 {
@@ -744,6 +770,12 @@
                     "target": "com.amazonaws.computeoptimizerautomation#ListAutomationRules"
                 },
                 {
+                    "target": "com.amazonaws.computeoptimizerautomation#ListOrganizationalUnits"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ListOrganizationEnrollmentConfigurations"
+                },
+                {
                     "target": "com.amazonaws.computeoptimizerautomation#ListRecommendedActions"
                 },
                 {
@@ -751,6 +783,9 @@
                 },
                 {
                     "target": "com.amazonaws.computeoptimizerautomation#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#PutOrganizationEnrollmentConfiguration"
                 },
                 {
                     "target": "com.amazonaws.computeoptimizerautomation#RollbackAutomationEvent"
@@ -1594,6 +1629,19 @@
                 }
             }
         },
+        "com.amazonaws.computeoptimizerautomation#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The request conflicts with a concurrent change to the same resource. Retry the request. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.computeoptimizerautomation#CreateAutomationRule": {
             "type": "operation",
             "input": {
@@ -1859,7 +1907,7 @@
                 "restartNeeded": {
                     "target": "com.amazonaws.computeoptimizerautomation#StringCriteriaConditionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter criteria indicating whether the recommended action requires a resource restart.</p>"
+                        "smithy.api#documentation": "<p>Filter criteria indicating whether the recommended action requires a resource restart. Valid values are <code>true</code> and <code>false</code>. Values are case-sensitive unless you use an <code>IgnoreCase</code> comparison operator. For example, <code>StringEquals</code> with the value <code>False</code> matches no recommended actions.</p>"
                     }
                 }
             },
@@ -1948,6 +1996,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.computeoptimizerautomation#DeleteOrganizationEnrollmentConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizerautomation#DeleteOrganizationEnrollmentConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizerautomation#DeleteOrganizationEnrollmentConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#IdempotencyTokenInUseException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Deletes the specified configuration types from an organization enrollment configuration. After deletion, Automation stays enabled for affected accounts and earlier account associations aren't restored. Affected accounts inherit the organization rule mode from the closest parent that has an organization enrollment configuration, or get None allowed if no parent has one. </p> <note> <p>Only the management account or a delegated administrator can perform this action.</p> </note>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#DeleteOrganizationEnrollmentConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "target": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The account, organizational unit (OU), or organization root whose organization enrollment configuration you want to delete. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "configurationTypes": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationEnrollmentConfigurationTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The organization enrollment configuration types to delete from the target. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.computeoptimizerautomation#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique identifier to ensure idempotency of the request. </p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#DeleteOrganizationEnrollmentConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.computeoptimizerautomation#DisassociateAccounts": {
             "type": "operation",
             "input": {
@@ -1989,7 +2118,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Disassociates member accounts from your organization's management account, removing centralized automation capabilities. Once disassociated, organization rules no longer apply to the member account, and the management account (or delegated administrator) cannot create Automation rules for that account. </p> <note> <p>Only the management account or a delegated administrator can perform this action.</p> </note>",
+                "smithy.api#documentation": "<p> Disassociates member accounts from your organization's management account, removing centralized automation capabilities. Once disassociated, organization rules no longer apply to the member account, and the management account (or delegated administrator) can't create automation rules for that account. </p> <p>Requests that include an account to which an organization enrollment configuration applies are rejected.</p> <note> <p>Only the management account or a delegated administrator can perform this action.</p> </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2041,7 +2170,7 @@
                 "comparison": {
                     "target": "com.amazonaws.computeoptimizerautomation#ComparisonOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the attribute against the specified values.</p>"
+                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the attribute against the specified values. Only operators that begin with <code>Numeric</code> are valid. Any other operator returns an <code>InvalidParameterValueException</code>.</p>"
                     }
                 },
                 "values": {
@@ -2689,6 +2818,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The timestamp of the last update to the enrollment configuration. </p>"
                     }
+                },
+                "organizationEnrollmentConfigurationStatus": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationEnrollmentConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies whether an organization enrollment configuration on your account, or inherited from a parent OU or the organization root, enables Automation for your member account. Associations made using <code>AssociateAccounts</code> don't affect this status. This field is returned for organization member accounts, including delegated administrators. It's omitted for management accounts and accounts that aren't in an organization. </p>"
+                    }
                 }
             },
             "traits": {
@@ -2727,7 +2862,7 @@
                 "comparison": {
                     "target": "com.amazonaws.computeoptimizerautomation#ComparisonOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the attribute against the specified values.</p>"
+                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the attribute against the specified values. Only operators that begin with <code>Numeric</code> are valid. Any other operator returns an <code>InvalidParameterValueException</code>.</p>"
                     }
                 },
                 "values": {
@@ -2926,7 +3061,7 @@
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of automation event steps to return in a single response. Valid range is 1-1000.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of automation event steps to return in a single response. If you don't specify a value, the default is 100.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -3014,6 +3149,12 @@
                         "smithy.api#documentation": "<p> The filters to apply to the list of automation event summaries. </p>"
                     }
                 },
+                "organizationalUnitIds": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationalUnitIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The organizational unit (OU) or organization root IDs to use to filter the results. The response includes event summaries for accounts in the specified OUs and their child OUs. Only the management account or a delegated administrator can specify this parameter. </p>"
+                    }
+                },
                 "startDateInclusive": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -3029,7 +3170,7 @@
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of automation event summaries to return in a single response. Valid range is 1-1000.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of automation event summaries to return in a single response. If you don't specify a value, the default is 100.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -3117,6 +3258,12 @@
                         "smithy.api#documentation": "<p> The filters to apply to the list of automation events. </p>"
                     }
                 },
+                "organizationalUnitIds": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationalUnitIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The organizational unit (OU) or organization root IDs to use to filter the results. The response includes events for accounts in the specified OUs and their child OUs. Only the management account or a delegated administrator can specify this parameter. </p>"
+                    }
+                },
                 "startTimeInclusive": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -3132,7 +3279,7 @@
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p> The maximum number of results to return in a single call. </p>",
+                        "smithy.api#documentation": "<p> The maximum number of automation events to return in a single response. If you don't specify a value, the default is 100. </p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -3225,7 +3372,7 @@
                 "organizationScope": {
                     "target": "com.amazonaws.computeoptimizerautomation#OrganizationScope",
                     "traits": {
-                        "smithy.api#documentation": "<p> The organizational scope for the rule preview. </p>"
+                        "smithy.api#documentation": "<p> The organizational scope for the rule preview. This parameter is required when <code>ruleType</code> is <code>OrganizationRule</code>. Don't specify it when <code>ruleType</code> is <code>AccountRule</code>. </p>"
                     }
                 },
                 "recommendedActionTypes": {
@@ -3244,7 +3391,7 @@
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of automation rule preview results to return in a single response. Valid range is 1-1000.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of automation rule preview results to return in a single response. If you don't specify a value, the default is 100.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -3337,7 +3484,7 @@
                 "organizationScope": {
                     "target": "com.amazonaws.computeoptimizerautomation#OrganizationScope",
                     "traits": {
-                        "smithy.api#documentation": "<p>The organizational scope for the rule preview.</p>"
+                        "smithy.api#documentation": "<p>The organizational scope for the rule preview. This parameter is required when <code>ruleType</code> is <code>OrganizationRule</code>. Don't specify it when <code>ruleType</code> is <code>AccountRule</code>.</p>"
                     }
                 },
                 "recommendedActionTypes": {
@@ -3353,7 +3500,7 @@
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of automation rule preview summaries to return in a single response. Valid range is 1-1000.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of automation rule preview summaries to return in a single response. If you don't specify a value, the default is 100.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -3444,7 +3591,7 @@
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of automation rules to return in a single response. Valid range is 1-1000.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of automation rules to return in a single response. If you don't specify a value, the default is 100.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -3475,6 +3622,192 @@
                     "target": "com.amazonaws.computeoptimizerautomation#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token used for pagination. If present, indicates there are more results available and can be used in subsequent requests.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#ListOrganizationEnrollmentConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizerautomation#ListOrganizationEnrollmentConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizerautomation#ListOrganizationEnrollmentConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Lists the organization enrollment configurations that are stored directly on accounts, organizational units (OUs), and the organization root. </p> <note> <p>Only the management account or a delegated administrator can perform this action.</p> </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "organizationEnrollmentConfigurations"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#ListOrganizationEnrollmentConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "targetType": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationTargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The target type to use to filter the results. If you specify <code>OrganizationalUnit</code>, the results also include configurations stored on the organization root. If you don't specify a target type, the operation returns configurations for every target type. </p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of organization enrollment configurations to return in a single response. If you don't specify a value, the default is 1,000. </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizerautomation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token to use to retrieve the next page of results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#ListOrganizationEnrollmentConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "organizationEnrollmentConfigurations": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationEnrollmentConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The organization enrollment configurations stored on each target in this page of results. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizerautomation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token to use to retrieve the next page of results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#ListOrganizationalUnits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizerautomation#ListOrganizationalUnitsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizerautomation#ListOrganizationalUnitsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Lists the organization root and organizational units (OUs), including whether an applicable organization enrollment configuration enables Automation for member accounts and the effective organization rule mode for each root or OU. </p> <note> <p>Only the management account or a delegated administrator can perform this action.</p> </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "organizationalUnits"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#ListOrganizationalUnitsRequest": {
+            "type": "structure",
+            "members": {
+                "organizationalUnitIds": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationalUnitIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The organizational unit (OU) or organization root IDs to return. If you don't specify this parameter, the operation returns the organization root and every OU. </p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of organizational units to return in a single response. If you don't specify a value, the default is 1,000. </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizerautomation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token to use to retrieve the next page of results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#ListOrganizationalUnitsResponse": {
+            "type": "structure",
+            "members": {
+                "organizationalUnits": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationalUnitInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The organizational units and organization root returned in this page of results, including the organization rule mode that applies to each. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizerautomation#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token to use to retrieve the next page of results. </p>"
                     }
                 }
             },
@@ -3514,7 +3847,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Provides a summary of recommended actions based on specified filters. </p> <note> <p>Management accounts and delegated administrators can retrieve recommended actions that include associated member accounts. You can associate a member account using <code>AssociateAccounts</code>.</p> </note>",
+                "smithy.api#documentation": "<p> Provides a summary of recommended actions based on specified filters. </p> <note> <p>Management accounts and delegated administrators can retrieve recommended action summaries for member accounts that are associated using <code>AssociateAccounts</code> or have an applicable organization enrollment configuration with <code>organizationRuleMode</code> set to <code>AnyAllowed</code>.</p> </note>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -3532,10 +3865,16 @@
                         "smithy.api#documentation": "<p>A list of filters to apply when retrieving recommended action summaries. Filters can be based on resource type, action type, account ID, and other criteria.</p>"
                     }
                 },
+                "organizationalUnitIds": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationalUnitIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The organizational unit (OU) or organization root IDs to use to filter the results. The response includes recommended action summaries for accounts in the specified OUs and their child OUs. Only the management account or a delegated administrator can specify this parameter. </p>"
+                    }
+                },
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of recommended action summaries to return in a single response. Valid range is 1-1000.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of recommended action summaries to return in a single response. If you don't specify a value, the default is 100.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -3605,7 +3944,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists the recommended actions based that match specified filters. </p> <note> <p>Management accounts and delegated administrators can retrieve recommended actions that include associated member accounts. You can associate a member account using <code>AssociateAccounts</code>.</p> </note>",
+                "smithy.api#documentation": "<p> Lists the recommended actions that match the specified filters. </p> <note> <p>Management accounts and delegated administrators can retrieve recommended actions for member accounts that are associated using <code>AssociateAccounts</code> or have an applicable organization enrollment configuration with <code>organizationRuleMode</code> set to <code>AnyAllowed</code>.</p> </note>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -3623,10 +3962,16 @@
                         "smithy.api#documentation": "<p> The filters to apply to the list of recommended actions. </p>"
                     }
                 },
+                "organizationalUnitIds": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationalUnitIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The organizational unit (OU) or organization root IDs to use to filter the results. The response includes recommended actions for accounts in the specified OUs and their child OUs. Only the management account or a delegated administrator can specify this parameter. </p>"
+                    }
+                },
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of recommended actions to return in a single response. Valid range is 1-1000.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of recommended actions to return in a single response. If you don't specify a value, the default is 100.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -3746,7 +4091,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The operation can only be performed by a management account. </p>",
+                "smithy.api#documentation": "<p> The operation can only be performed by an organization's management account or a delegated administrator. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3776,12 +4121,30 @@
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizerautomation#OrganizationConfigurationAccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of specific Amazon Web Services account IDs where the organization rule should be applied.</p>"
+                        "smithy.api#documentation": "<p>The specific Amazon Web Services account IDs where the organization rule should be applied. You can specify up to 50 account IDs.</p>"
+                    }
+                },
+                "organizationalUnitIds": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationConfigurationOrganizationalUnitIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The organizational unit (OU) or organization root IDs to include in the organization rule scope. The rule applies to accounts in the specified OUs and their child OUs. You can specify up to 150 IDs.</p>"
+                    }
+                },
+                "excludedOrganizationalUnitIds": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationConfigurationOrganizationalUnitIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The organizational unit (OU) or organization root IDs to exclude from the organization rule scope. The rule doesn't apply to accounts in the specified OUs or their child OUs. You can specify up to 150 IDs.</p>"
+                    }
+                },
+                "excludedAccountIds": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationConfigurationAccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account IDs to exclude from the organization rule scope. You can specify up to 50 account IDs. An excluded account remains excluded even if it is in an included OU.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration settings for organization-wide automation rules.</p>"
+                "smithy.api#documentation": "<p>Configuration settings that define the scope of an organization-wide automation rule. Each organizational unit (OU) list can contain up to 150 OUs or organization roots, and each account list can contain up to 50 accounts. Each included OU or organization root must have an effective organization rule mode of <code>AnyAllowed</code>. Exclusions take precedence over inclusions. An account that is in an included OU and is also excluded is excluded. The rule doesn't apply to the management account when the account is reached through an OU or the organization root.</p>"
             }
         },
         "com.amazonaws.computeoptimizerautomation#OrganizationConfigurationAccountIds": {
@@ -3794,6 +4157,92 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationConfigurationOrganizationalUnitIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizerautomation#OrganizationalUnitId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 150
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationEnrollmentConfiguration": {
+            "type": "structure",
+            "members": {
+                "targetId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account, organizational unit (OU), or organization root on which the configuration is stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetType": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationTargetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of target on which the configuration is stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "organizationRuleMode": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationRuleMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The organization rule mode set on the target by the organization enrollment configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An organization enrollment configuration sets the organization rule mode on an account, organizational unit (OU), or the organization root and enables Automation for affected member accounts that have opted in to Compute Optimizer.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationEnrollmentConfigurationStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Inactive"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationEnrollmentConfigurationType": {
+            "type": "enum",
+            "members": {
+                "ORGANIZATION_RULE_MODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OrganizationRuleMode"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationEnrollmentConfigurationTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizerautomation#OrganizationEnrollmentConfigurationType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationEnrollmentConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizerautomation#OrganizationEnrollmentConfiguration"
             }
         },
         "com.amazonaws.computeoptimizerautomation#OrganizationRuleMode": {
@@ -3813,6 +4262,56 @@
                 }
             }
         },
+        "com.amazonaws.computeoptimizerautomation#OrganizationRuleModeSource": {
+            "type": "structure",
+            "members": {
+                "sourceType": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationRuleModeSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the effective organization rule mode is supplied.</p> <ul> <li> <p> <code>Applied</code> - An organization enrollment configuration is on this organizational unit or account.</p> </li> <li> <p> <code>Inherited</code> - The organization enrollment configuration is on the parent organizational unit or root.</p> </li> <li> <p> <code>Direct</code> - The organization rule mode is set on the account itself, with no organization enrollment configuration applied.</p> </li> <li> <p> <code>Default</code> - No organization enrollment configuration applies, so the organization rule mode is None allowed.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceTargetId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the account, organizational unit (OU), or organization root that has the organization enrollment configuration. This field is omitted when <code>sourceType</code> is <code>Direct</code> or <code>Default</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the source of an effective organization rule mode.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationRuleModeSourceType": {
+            "type": "enum",
+            "members": {
+                "APPLIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Applied"
+                    }
+                },
+                "INHERITED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Inherited"
+                    }
+                },
+                "DIRECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Direct"
+                    }
+                },
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Default"
+                    }
+                }
+            }
+        },
         "com.amazonaws.computeoptimizerautomation#OrganizationScope": {
             "type": "structure",
             "members": {
@@ -3821,10 +4320,129 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of Amazon Web Services account IDs to include in the organization scope.</p>"
                     }
+                },
+                "organizationalUnitIds": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationConfigurationOrganizationalUnitIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The organizational unit (OU) or organization root IDs to include in the preview scope. The preview includes accounts in the specified OUs and their child OUs.</p>"
+                    }
+                },
+                "excludedOrganizationalUnitIds": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationConfigurationOrganizationalUnitIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The organizational unit (OU) or organization root IDs to exclude from the preview scope. The preview doesn't include accounts in the specified OUs or their child OUs.</p>"
+                    }
+                },
+                "excludedAccountIds": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationConfigurationAccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account IDs to exclude from the preview scope.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p> Defines the scope for organization-level rules when previewing matching actions.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationTarget": {
+            "type": "union",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.computeoptimizerautomation#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the member account to target. You can't specify the management account.</p>"
+                    }
+                },
+                "organizationalUnitId": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationalUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the organizational unit (OU) or organization root to target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An account, organizational unit (OU), or organization root to which an organization enrollment configuration applies. The management account can't be specified as an account target.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationTargetType": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Account"
+                    }
+                },
+                "ORGANIZATIONAL_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OrganizationalUnit"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationalUnitId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 68
+                },
+                "smithy.api#pattern": "^(r-[0-9a-z]{4,32}|ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$"
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationalUnitIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizerautomation#OrganizationalUnitId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationalUnitInfo": {
+            "type": "structure",
+            "members": {
+                "organizationalUnitId": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationalUnitId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the organizational unit (OU) or organization root.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "autoEnrollMemberAccounts": {
+                    "target": "com.amazonaws.computeoptimizerautomation#AutoEnrollMemberAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether an applicable organization enrollment configuration enables Automation for eligible member accounts beneath the organizational unit (OU) or organization root.</p> <ul> <li> <p> <code>All</code> - An organization enrollment configuration applies and enables Automation for affected member accounts, including accounts that join later. This value applies to configurations with either <code>AnyAllowed</code> or <code>NoneAllowed</code>.</p> </li> <li> <p> <code>None</code> - No organization enrollment configuration applies, so Automation isn't enabled by an organization enrollment configuration.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "organizationRuleMode": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationRuleMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective organization rule mode for the organizational unit or organization root.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "organizationRuleModeSource": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationRuleModeSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the source of the effective organization rule mode.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an organizational unit (OU) or the organization root, including whether an applicable organization enrollment configuration enables Automation for member accounts and the effective organization rule mode.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#OrganizationalUnitInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizerautomation#OrganizationalUnitInfo"
             }
         },
         "com.amazonaws.computeoptimizerautomation#PreviewResult": {
@@ -3949,6 +4567,86 @@
                 "target": "com.amazonaws.computeoptimizerautomation#PreviewResult"
             }
         },
+        "com.amazonaws.computeoptimizerautomation#PutOrganizationEnrollmentConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizerautomation#PutOrganizationEnrollmentConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizerautomation#PutOrganizationEnrollmentConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#IdempotencyTokenInUseException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizerautomation#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Creates or updates an organization enrollment configuration. The organization enrollment configuration sets the organization rule mode on the specified account, organizational unit (OU), or organization root and enables Automation for affected member accounts that have opted in to Compute Optimizer, including accounts that join later. Changes on an OU or the organization root can take up to 5 minutes. Organization enrollment configurations take precedence over settings made by <code>AssociateAccounts</code> and <code>DisassociateAccounts</code>. You must specify at least one configuration in the request. </p> <note> <p>Only the management account or a delegated administrator can perform this action.</p> <p>Organization enrollment configurations can't be created for the management account.</p> </note>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#PutOrganizationEnrollmentConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "target": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The account, organizational unit (OU), or organization root on which to create or update the organization enrollment configuration. You can't specify the management account. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "organizationRuleMode": {
+                    "target": "com.amazonaws.computeoptimizerautomation#OrganizationRuleMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The organization rule mode to set on the target. An organization enrollment configuration with either <code>AnyAllowed</code> or <code>NoneAllowed</code> enables Automation for affected member accounts. <code>AnyAllowed</code> permits organization rules to apply to those accounts, while <code>NoneAllowed</code> doesn't. </p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.computeoptimizerautomation#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique identifier to ensure idempotency of the request. </p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.computeoptimizerautomation#PutOrganizationEnrollmentConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.computeoptimizerautomation#RecommendedAction": {
             "type": "structure",
             "members": {
@@ -4051,13 +4749,13 @@
                 "values": {
                     "target": "com.amazonaws.computeoptimizerautomation#FilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of filter values to match against the specified filter name. Used to narrow down recommended actions based on specific criteria.</p>",
+                        "smithy.api#documentation": "<p>The list of values to filter by for the specified filter name. Wildcards aren't supported. An asterisk (<code>*</code>) or a question mark (<code>?</code>) in a value matches only that literal character. How a value is matched depends on the filter name:</p> <dl> <dt>ResourceType, RecommendedActionType, ResourceId, and AccountId</dt> <dd> <p>The value that you specify must exactly match the corresponding field of the recommended action, including case. For example, specify <code>EbsVolume</code>, not <code>ebsvolume</code>.</p> </dd> <dt>CurrentResourceDetailsEbsVolumeType</dt> <dd> <p>Matches when the value appears anywhere in the current resource details of the recommended action, which include the volume type, size, IOPS, and throughput. Matching is case sensitive, and a partial value also matches. For example, <code>gp</code> matches both <code>gp2</code> and <code>gp3</code> volumes, and <code>100</code> matches any volume whose size, IOPS, or throughput contains 100. To filter by volume type, specify the complete volume type, such as <code>gp3</code> or <code>io2</code>.</p> </dd> <dt>ResourceTagsKey and ResourceTagsValue</dt> <dd> <p>Matches when the value appears anywhere in the tags of the resource. Both filter names search every tag key and tag value. Matching is case sensitive, and a partial value also matches. For example, a <code>ResourceTagsKey</code> value of <code>test</code> matches a resource that has a tag value of <code>test</code>.</p> </dd> <dt>LookBackPeriodInDays</dt> <dd> <p>Matches when the lookback period of the recommended action equals the value. Specify a number of days, such as <code>14</code>.</p> </dd> <dt>RestartNeeded</dt> <dd> <p>Matches recommended actions based on whether implementing them requires a resource restart. Specify <code>true</code> or <code>false</code>.</p> </dd> </dl>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter used to narrow down recommended action results based on specific criteria.</p>"
+                "smithy.api#documentation": "<p>A filter used to narrow down recommended action results based on specific criteria. If a filter has more than one value, a recommended action matches the filter when it matches any of the values. If you specify more than one filter, a recommended action must match all of the filters.</p>"
             }
         },
         "com.amazonaws.computeoptimizerautomation#RecommendedActionFilterList": {
@@ -4245,7 +4943,7 @@
                 "comparison": {
                     "target": "com.amazonaws.computeoptimizerautomation#ComparisonOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the attribute against the specified values.</p>"
+                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the attribute against the specified values. Only operators that begin with <code>String</code> are valid. Any other operator returns an <code>InvalidParameterValueException</code>.</p>"
                     }
                 },
                 "key": {
@@ -4323,7 +5021,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Initiates a rollback for a completed automation event. </p> <note> <p>Management accounts and delegated administrators can only initiate a rollback for events belonging to associated member accounts. You can associate a member account using <code>AssociateAccounts</code>.</p> </note>",
+                "smithy.api#documentation": "<p> Initiates a rollback for a completed automation event. </p> <note> <p>Management accounts and delegated administrators can initiate a rollback for events belonging to member accounts that are associated using <code>AssociateAccounts</code> or have an applicable organization enrollment configuration with <code>organizationRuleMode</code> set to <code>AnyAllowed</code>.</p> </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4590,7 +5288,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Initiates a one-time, on-demand automation for the specified recommended action. </p> <note> <p>Management accounts and delegated administrators can only initiate recommended actions for associated member accounts. You can associate a member account using <code>AssociateAccounts</code>.</p> </note>",
+                "smithy.api#documentation": "<p> Initiates a one-time, on-demand automation for the specified recommended action. </p> <note> <p>Management accounts and delegated administrators can initiate recommended actions for member accounts that are associated using <code>AssociateAccounts</code> or have an applicable organization enrollment configuration with <code>organizationRuleMode</code> set to <code>AnyAllowed</code>.</p> </note>",
                 "smithy.api#idempotent": {},
                 "smithy.test#smokeTests": [
                     {
@@ -4728,7 +5426,7 @@
                 "comparison": {
                     "target": "com.amazonaws.computeoptimizerautomation#ComparisonOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the attribute against the specified values.</p>"
+                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the attribute against the specified values. Only operators that begin with <code>String</code> are valid. Any other operator returns an <code>InvalidParameterValueException</code>.</p>"
                     }
                 },
                 "values": {
@@ -5355,7 +6053,7 @@
                 "status": {
                     "target": "com.amazonaws.computeoptimizerautomation#EnrollmentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The desired enrollment status. </p> <ul> <li> <p>Active - Enables the Automation feature for your account.</p> </li> <li> <p>Inactive - Disables the Automation feature for your account and stops all of your automation rules. If you opt in again later, all rules will be inactive, and you must enable the rules you want to run. You must wait at least 24 hours after opting out to opt in again.</p> </li> </ul> <note> <p>The <code>Pending</code> and <code>Failed</code> options cannot be used to update the enrollment status of an account. They are returned in the response of a request to update the enrollment status of an account.</p> <p>If you are a member account, your account must be disassociated from your organization’s management account before you can disable Automation. Contact your administrator to make this change.</p> </note>",
+                        "smithy.api#documentation": "<p>The desired enrollment status. </p> <ul> <li> <p>Active - Enables the Automation feature for your account.</p> </li> <li> <p>Inactive - Disables the Automation feature for your account and stops all of your automation rules. If you opt in again later, all rules will be inactive, and you must enable the rules you want to run. You must wait at least 24 hours after opting out to opt in again.</p> </li> </ul> <note> <p>The <code>Pending</code> and <code>Failed</code> options can't be used to update the enrollment status of an account. They are returned in the response of a request to update the enrollment status of an account.</p> <p>If you are a member account, you can't disable Automation while an organization enrollment configuration applies. If no organization enrollment configuration applies, you also can't disable Automation while your organization rule mode is <code>AnyAllowed</code>. Ask your administrator to delete the organization enrollment configuration or disassociate your account, as applicable.</p> </note>",
                         "smithy.api#required": {}
                     }
                 },

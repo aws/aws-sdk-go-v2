@@ -23,6 +23,9 @@ import (
 // also includes a SubscriptionInfoidentifying the Amazon Web Services Marketplace product that
 // backs it; absence of SubscriptionInfo means the variant is fully managed by
 // Amazon Web Services and requires no separate subscription.
+//
+// This operation doesn't return the AutoAllowlist variant. Configure an
+// AutoAllowlist rule with AutoAllowlistConfig.
 func (c *Client) ListFirewallRuleTypes(ctx context.Context, params *ListFirewallRuleTypesInput, optFns ...func(*Options)) (*ListFirewallRuleTypesOutput, error) {
 	if params == nil {
 		params = &ListFirewallRuleTypesInput{}

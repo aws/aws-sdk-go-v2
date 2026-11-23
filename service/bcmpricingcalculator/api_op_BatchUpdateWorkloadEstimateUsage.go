@@ -66,7 +66,7 @@ func (v *BatchUpdateWorkloadEstimateUsageInput) SerializeMembers(s smithy.ShapeS
 
 type BatchUpdateWorkloadEstimateUsageOutput struct {
 
-	//  Returns the list of error reasons and usage line item IDs that could not be
+	//  Returns the list of error reasons and usage line item IDs that couldn't be
 	// updated for the Workload estimate.
 	Errors []types.BatchUpdateWorkloadEstimateUsageError
 

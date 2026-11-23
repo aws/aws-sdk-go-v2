@@ -78,7 +78,12 @@
                     "name": "agent-registry"
                 },
                 "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4",
+                    "smithy.api#httpBearerAuth"
+                ],
                 "smithy.api#documentation": "Agent Registry lets callers discover, list, and retrieve approved records published to a registry.",
+                "smithy.api#httpBearerAuth": {},
                 "smithy.api#title": "Agent Registry",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -339,12 +344,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Retrieves multiple discoverable registry records by ID from a single registry. Records that cannot be retrieved are reported individually in the <code>errors</code> list rather than failing the entire request.</p>",
+                "smithy.api#documentation": "<p> Retrieves multiple discoverable registry records by ID from a single registry. Records that cannot be retrieved are reported individually in the <code>errors</code> list rather than failing the entire request. For each skill record that has a skill package, the operation also returns <code>artifact</code>. It contains a short-lived download URL and a SHA-256 checksum for the package of the record's latest approved revision. If the registry can't create a download URL for a package, the whole request fails.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/discoverable-records-batch",
                     "code": 200
                 },
+                "smithy.api#readonly": {},
                 "smithy.test#smokeTests": [
                     {
                         "id": "BatchGetDiscoverableRegistryRecordNonexistentFailure",
@@ -474,6 +480,122 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.agentregistry#BotCategory": {
+            "type": "enum",
+            "members": {
+                "ADVERTISING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "advertising"
+                    }
+                },
+                "ARCHIVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "archiver"
+                    }
+                },
+                "CONTENT_FETCHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "content_fetcher"
+                    }
+                },
+                "EMAIL_CLIENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "email_client"
+                    }
+                },
+                "HTTP_LIBRARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "http_library"
+                    }
+                },
+                "LINK_CHECKER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "link_checker"
+                    }
+                },
+                "MISCELLANEOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "miscellaneous"
+                    }
+                },
+                "MONITORING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "monitoring"
+                    }
+                },
+                "PAGE_PREVIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "page_preview"
+                    }
+                },
+                "SCRAPING_FRAMEWORK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scraping_framework"
+                    }
+                },
+                "SEARCH_ENGINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "search_engine"
+                    }
+                },
+                "SECURITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "security"
+                    }
+                },
+                "SEO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "seo"
+                    }
+                },
+                "SOCIAL_MEDIA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "social_media"
+                    }
+                },
+                "AI_TRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ai_training"
+                    }
+                },
+                "AI_SEARCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ai_search"
+                    }
+                },
+                "AI_ASSISTANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ai_assistant"
+                    }
+                },
+                "AI_CONTENT_OPTIMIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ai_content_optimization"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The category that describes a web bot's purpose. The categories follow AWS WAF Bot Control bot categories. Valid values:</p> <ul> <li> <p> <code>advertising</code> - Bots used for advertising, such as third-party ad services that access a website programmatically.</p> </li> <li> <p> <code>archiver</code> - Bots that crawl the web and capture content to create archives.</p> </li> <li> <p> <code>content_fetcher</code> - Bots that visit a website on behalf of a user to fetch content, such as RSS feeds, or to verify content.</p> </li> <li> <p> <code>email_client</code> - Bots that check links in emails, such as those run by email providers to flag suspicious emails.</p> </li> <li> <p> <code>http_library</code> - Requests generated by the HTTP libraries of programming languages, such as API clients.</p> </li> <li> <p> <code>link_checker</code> - Bots that check for broken links.</p> </li> <li> <p> <code>miscellaneous</code> - Bots that don't match another category.</p> </li> <li> <p> <code>monitoring</code> - Bots that periodically access a website to monitor performance and uptime.</p> </li> <li> <p> <code>page_preview</code> - Bots that generate page and link previews when content is shared on messaging, social media, or collaboration tools.</p> </li> <li> <p> <code>scraping_framework</code> - Bots from web scraping frameworks that automate crawling and extracting website content.</p> </li> <li> <p> <code>search_engine</code> - Bots that crawl websites to index content for search engine results.</p> </li> <li> <p> <code>security</code> - Bots that scan web applications for vulnerabilities or perform security audits.</p> </li> <li> <p> <code>seo</code> - Bots that crawl a website to help improve its search engine rankings.</p> </li> <li> <p> <code>social_media</code> - Bots that social media platforms use to provide content summaries when users share content.</p> </li> <li> <p> <code>ai_training</code> - AI bots that collect content to train AI models.</p> </li> <li> <p> <code>ai_search</code> - AI bots that retrieve content to answer AI search queries.</p> </li> <li> <p> <code>ai_assistant</code> - AI bots that access content on behalf of a user's AI assistant or agent.</p> </li> <li> <p> <code>ai_content_optimization</code> - AI bots that analyze content to optimize it for AI-generated results.</p> </li> </ul>"
+            }
+        },
         "com.amazonaws.agentregistry#CustomDescriptor": {
             "type": "structure",
             "members": {
@@ -554,7 +676,7 @@
                 "url": {
                     "target": "com.amazonaws.agentregistry#DescriptorSourceUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p> The URL from which the descriptor content is retrieved.</p>",
+                        "smithy.api#documentation": "<p> The URL from which the descriptor content is retrieved. For an agent skill that synchronizes its SKILL.md from GitHub, this is the GitHub folder URL. The data plane doesn't return Amazon S3 (<code>s3://</code>) source URLs.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -566,12 +688,12 @@
         "com.amazonaws.agentregistry#DescriptorSourceUrl": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>URL source for descriptor content</p>",
+                "smithy.api#documentation": "<p>The URL of a descriptor source, up to 2,048 characters, that starts with <code>https://</code> or <code>s3://</code>. The registry accepts <code>s3://</code> URLs only for agent skill sources, and its discovery operations never return them.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^https://.*$"
+                "smithy.api#pattern": "^(https|s3)://.*$"
             }
         },
         "com.amazonaws.agentregistry#DescriptorTypeList": {
@@ -622,6 +744,12 @@
                     "target": "com.amazonaws.agentregistry#AgUiDescriptor",
                     "traits": {
                         "smithy.api#documentation": "<p> The AG-UI descriptor, populated when the record exposes an AG-UI protocol endpoint.</p>"
+                    }
+                },
+                "signatureAgentCard": {
+                    "target": "com.amazonaws.agentregistry#SignatureAgentCardDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The signature agent card descriptor, populated when the record represents a web bot. It identifies the JSON Web Key Set (JWKS) used to verify the bot's HTTP message signatures.</p>"
                     }
                 }
             },
@@ -977,6 +1105,17 @@
                 "smithy.api#pattern": "^[\\s\\S]+$"
             }
         },
+        "com.amazonaws.agentregistry#PresignedDownloadUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A presigned URL that downloads a stored file until the URL expires. It's a bearer credential. Anyone who has the URL can download the file, so don't log, store, or share it.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.agentregistry#RecordIdentifier": {
             "type": "string",
             "traits": {
@@ -1019,6 +1158,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GATEWAY"
+                    }
+                },
+                "WEB_BOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEB_BOT"
                     }
                 }
             },
@@ -1066,6 +1211,26 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/[a-zA-Z0-9]{12,16}/record/[a-zA-Z0-9]{12}$"
+            }
+        },
+        "com.amazonaws.agentregistry#RegistryRecordArtifactDownload": {
+            "type": "structure",
+            "members": {
+                "sha256": {
+                    "target": "com.amazonaws.agentregistry#Sha256Hash",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA-256 checksum of the package, as 64 lowercase hexadecimal characters. The download response carries no signature that you can check, so compare the checksum of the file that you download with this value before you use the package.</p>"
+                    }
+                },
+                "downloadUrl": {
+                    "target": "com.amazonaws.agentregistry#PresignedDownloadUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A presigned Amazon S3 URL that downloads the package. The URL is valid for up to 5 minutes, and the response doesn't include its expiry time. To get a new URL, call the operation again. Anyone who has the URL can download the package until it expires, so don't log, store, or share it.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The skill package of a registry record, as a short-lived download URL and the package's SHA-256 checksum. Responses never include the package bytes.</p>"
             }
         },
         "com.amazonaws.agentregistry#RegistryRecordDisplayName": {
@@ -1217,10 +1382,22 @@
                     "traits": {
                         "smithy.api#enumValue": "UPDATE_FAILED"
                     }
+                },
+                "CREATE_PENDING_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_PENDING_AUTH"
+                    }
+                },
+                "UPDATE_PENDING_AUTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_PENDING_AUTH"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Registry record status</p>"
+                "smithy.api#documentation": "<p>The lifecycle status of a registry record. A record is <code>DRAFT</code> before it is submitted, <code>PENDING_APPROVAL</code> while it awaits curator review, and <code>APPROVED</code> after it is approved and discoverable. Rejecting a newer revision keeps the last approved revision discoverable. A <code>DEPRECATED</code> record isn't discoverable. <code>CREATING</code>, <code>UPDATING</code>, <code>CREATE_FAILED</code>, and <code>UPDATE_FAILED</code> reflect an asynchronous change that is in progress or has failed. <code>CREATE_PENDING_AUTH</code> and <code>UPDATE_PENDING_AUTH</code> mean that the record waits for a GitHub user to authorize access before it synchronizes from its GitHub source.</p>"
             }
         },
         "com.amazonaws.agentregistry#RegistryRecordSummary": {
@@ -1312,6 +1489,12 @@
                     "target": "com.amazonaws.agentregistry#CustomMetadataDocument",
                     "traits": {
                         "smithy.api#documentation": "<p> The custom metadata attached to this registry record. Values are strings (maximum 128 characters) or booleans. This field is only present if the registry has a custom metadata schema configured.</p>"
+                    }
+                },
+                "artifact": {
+                    "target": "com.amazonaws.agentregistry#RegistryRecordArtifactDownload",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The skill package of the record's latest approved revision, as the package's SHA-256 checksum and a download URL that is valid for up to 5 minutes. Only <code>BatchGetDiscoverableRegistryRecord</code> returns this member, not <code>SearchDiscoverableRegistryRecords</code>. Absent when the record has no skill package.</p>"
                     }
                 }
             },
@@ -1410,12 +1593,19 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Searches the discoverable registry records in a registry using a natural language query. Returns metadata for the matching records ordered by relevance.</p>",
+                "smithy.api#documentation": "<p> Searches the discoverable registry records in a registry using a natural language query. Returns metadata for the matching records ordered by relevance.</p> <p> Returns at most 1000 results across all pages when <code>searchType</code> is <code>KEYWORD</code>, and at most 20 results when it is <code>HYBRID</code> or <code>SEMANTIC</code>. To retrieve more records, refine the query or filters, or use <code>ListDiscoverableRegistryRecords</code> to list every record.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/discoverable-records-search",
                     "code": 200
                 },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "registryRecords"
+                },
+                "smithy.api#readonly": {},
                 "smithy.test#smokeTests": [
                     {
                         "id": "SearchDiscoverableRegistryRecordsNonexistentFailure",
@@ -1442,7 +1632,7 @@
                 "searchQuery": {
                     "target": "com.amazonaws.agentregistry#SearchQuery",
                     "traits": {
-                        "smithy.api#documentation": "<p> The natural language query to search for matching registry records.</p>",
+                        "smithy.api#documentation": "<p> The natural language query to search for matching registry records. If you specify an empty string, the operation returns the records that match the <code>filters</code>, most recently updated first, up to the result limit for the <code>searchType</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1461,10 +1651,10 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": 10,
-                        "smithy.api#documentation": "<p> The maximum number of results to return. Valid values are 1 through 20. The default value is 10.</p>",
+                        "smithy.api#documentation": "<p> The maximum number of results to return in one page. Valid values are 1 through 50 when <code>searchType</code> is <code>KEYWORD</code>, and 1 through 20 when it is <code>HYBRID</code> or <code>SEMANTIC</code>. The default value is 10.</p>",
                         "smithy.api#range": {
                             "min": 1,
-                            "max": 20
+                            "max": 50
                         }
                     }
                 },
@@ -1472,6 +1662,22 @@
                     "target": "com.amazonaws.agentregistry#MetadataFilterExpression",
                     "traits": {
                         "smithy.api#documentation": "<p> An optional structured JSON metadata filter that narrows the search results. Supports the field-level operators <code>$eq</code>, <code>$ne</code>, and <code>$in</code>, and the logical operators <code>$and</code> and <code>$or</code> on filterable fields.</p> <p> Specifies additional filtering on custom metadata fields using the <code>customMetadata.{key}</code> prefix. For example, to filter by a custom metadata field: <code>{\"customMetadata.environment\": {\"$eq\": \"production\"}}</code>. For a Boolean field, you can also use a native JSON boolean value, for example: <code>{\"customMetadata.requiresApproval\": {\"$eq\": true}}</code>.</p>"
+                    }
+                },
+                "searchType": {
+                    "target": "com.amazonaws.agentregistry#SearchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies how the service ranks registry records against the search query. If you omit this parameter, the service uses <code>HYBRID</code> in Amazon Web Services Regions that support semantic search and <code>KEYWORD</code> in Regions that do not. The response reports the search type that the service used. Valid values are the following:</p> <ul> <li> <p> <code>KEYWORD</code> – Ranks records by keyword match between the query terms and the record name, description, descriptors, and custom metadata text values. Available in every Amazon Web Services Region.</p> </li> <li> <p> <code>SEMANTIC</code> – Ranks records by semantic similarity to the query and returns the most similar records, up to <code>maxResults</code>, even when none of them closely matches the query.</p> </li> <li> <p> <code>HYBRID</code> – Combines keyword ranking and semantic ranking.</p> </li> </ul> <p> <code>HYBRID</code> and <code>SEMANTIC</code> are available in a limited number of Regions. If you specify either one in a Region that does not support semantic search, the request fails with a <code>ValidationException</code> that has the reason <code>UnsupportedInRegion</code>.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The pagination token from a previous response. Use it to retrieve the next page of results, and send the same <code>searchQuery</code>, <code>registryIds</code>, <code>filters</code>, and <code>searchType</code> that you used for the first page. If any of them differ, the request fails with a <code>ValidationException</code>. A pagination token expires 15 minutes after the service returns the first page.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 4096
+                        }
                     }
                 }
             },
@@ -1485,8 +1691,20 @@
                 "registryRecords": {
                     "target": "com.amazonaws.agentregistry#RegistryRecordSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The registry records that match the search query, ordered by relevance.</p>",
+                        "smithy.api#documentation": "<p> The registry records that match the search query, ordered by relevance. A page can contain fewer than <code>maxResults</code> records, or none, even when the response includes a <code>nextToken</code>. To retrieve every result, continue until the response has no <code>nextToken</code>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "searchType": {
+                    "target": "com.amazonaws.agentregistry#SearchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the search type that the service used to rank the returned records. If you omitted <code>searchType</code> in the request, this is the default for the Amazon Web Services Region: <code>HYBRID</code> where semantic search is supported, and <code>KEYWORD</code> elsewhere.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The pagination token to pass to a subsequent request to retrieve the next page of results. This field is absent when there are no more results, or when the search has returned the maximum number of results for its search type.</p>"
                     }
                 }
             },
@@ -1502,6 +1720,92 @@
                     "max": 256
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.agentregistry#SearchType": {
+            "type": "enum",
+            "members": {
+                "HYBRID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Combines keyword ranking and semantic ranking. Use this type when a query mixes specific terms with a natural language description.</p>",
+                        "smithy.api#enumValue": "HYBRID"
+                    }
+                },
+                "SEMANTIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Ranks records by semantic similarity to the query. Use this type for natural language descriptions of a task. Returns the most similar records even when none of them closely matches the query.</p>",
+                        "smithy.api#enumValue": "SEMANTIC"
+                    }
+                },
+                "KEYWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Ranks records by keyword match between the query terms and the record name, description, descriptors, and custom metadata text values. Use this type for queries built from specific terms, such as tool names or API names.</p>",
+                        "smithy.api#enumValue": "KEYWORD"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Specifies the ranking method for a search request.</p>"
+            }
+        },
+        "com.amazonaws.agentregistry#Sha256Hash": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A SHA-256 checksum, as 64 lowercase hexadecimal characters.</p>",
+                "smithy.api#length": {
+                    "min": 64,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[0-9a-f]{64}$"
+            }
+        },
+        "com.amazonaws.agentregistry#SignatureAgentCardAdditionalData": {
+            "type": "structure",
+            "members": {
+                "category": {
+                    "target": "com.amazonaws.agentregistry#BotCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot category that describes the purpose of the web bot identified by the signature agent card descriptor.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The additional data for a signature agent card descriptor, such as the bot category of the web bot.</p>"
+            }
+        },
+        "com.amazonaws.agentregistry#SignatureAgentCardDescriptor": {
+            "type": "structure",
+            "members": {
+                "data": {
+                    "target": "com.amazonaws.agentregistry#DescriptorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The signature agent card descriptor content, serialized as descriptor payload data.</p>"
+                    }
+                },
+                "dataSchemaVersion": {
+                    "target": "com.amazonaws.agentregistry#DataSchemaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The schema version of the descriptor payload.</p>"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.agentregistry#DescriptorSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The source location from which the signature agent card descriptor content was retrieved.</p>"
+                    }
+                },
+                "additionalData": {
+                    "target": "com.amazonaws.agentregistry#SignatureAgentCardAdditionalData",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Additional data for the signature agent card, such as its AWS WAF bot category.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Descriptor that defines the content of a signature agent card, which identifies a web bot and references the JSON Web Key Set (JWKS) used to verify its HTTP message signatures.</p>"
             }
         },
         "com.amazonaws.agentregistry#ThrottlingException": {
@@ -1620,6 +1924,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ResourceConflict"
+                    }
+                },
+                "UNSUPPORTED_IN_REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnsupportedInRegion"
                     }
                 }
             }

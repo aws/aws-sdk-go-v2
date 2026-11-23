@@ -27,6 +27,7 @@ func (c *Client) GetResourceSnapshot(ctx context.Context, params *GetResourceSna
 	return out, nil
 }
 
+// Contains the request parameters for the GetResourceSnapshot operation.
 type GetResourceSnapshotInput struct {
 
 	// Specifies the catalog related to the request. Valid values are:
@@ -101,6 +102,7 @@ func (v *GetResourceSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
+// Contains the response that the GetResourceSnapshot action returns.
 type GetResourceSnapshotOutput struct {
 
 	// The catalog in which the snapshot was created. Matches the Catalog specified in
@@ -125,9 +127,8 @@ type GetResourceSnapshotOutput struct {
 	// EngagementIdentifier specified in the request.
 	EngagementId *string
 
-	//  Represents the payload of a resource snapshot. This structure is designed to
-	// accommodate different types of resource snapshots, currently supporting
-	// opportunity summaries.
+	// Contains the data of the resource snapshot. The structure of this payload
+	// depends on the resource type and the snapshot template.
 	Payload types.ResourceSnapshotPayload
 
 	// The identifier of the specific resource that was snapshotted. Matches the

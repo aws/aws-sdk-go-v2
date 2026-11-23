@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Principals":[{"PrincipalArn":"__PrincipalArn__","PrincipalType":"USER","Revision":1,"UpdatedAt":946684800},{"PrincipalArn":"__PrincipalArn__","PrincipalType":"USER","Revision":1,"UpdatedAt":946684800}]}

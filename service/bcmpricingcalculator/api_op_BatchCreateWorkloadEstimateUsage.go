@@ -74,7 +74,7 @@ func (v *BatchCreateWorkloadEstimateUsageInput) SerializeMembers(s smithy.ShapeS
 
 type BatchCreateWorkloadEstimateUsageOutput struct {
 
-	//  Returns the list of errors reason and the usage item keys that cannot be
+	//  Returns the list of errors reason and the usage item keys that can't be
 	// created in the Workload estimate.
 	Errors []types.BatchCreateWorkloadEstimateUsageError
 

@@ -827,34 +827,159 @@ func (v *AssetFormEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// A reference to a form type that is included in an asset type.
-type AssetTypeFormReference struct {
+// A form to set on an asset, consisting of the form type identifier and its JSON
+// content.
+type AssetFormInput struct {
 
-	// The identifier of the referenced form type.
-	//
-	// This member is required.
+	// The JSON content of the form, conforming to the schema of the specified form
+	// type.
+	Content *string
+
+	// The identifier of the form type that defines this form's schema. This field is
+	// required.
 	FormTypeIdentifier *string
 
 	noSmithyDocumentSerde
 }
 
-func (v *AssetTypeFormReference) Serialize(s smithy.ShapeSerializer) {
-	s.WriteStruct(schemas.AssetTypeFormReference)
+func (v *AssetFormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetFormInput)
 	v.SerializeMembers(s)
 	s.CloseStruct()
 }
 
-func (v *AssetTypeFormReference) SerializeMembers(s smithy.ShapeSerializer) {
+func (v *AssetFormInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.AssetFormInput_Content, *v.Content)
+	}
 	if v.FormTypeIdentifier != nil {
-		s.WriteString(schemas.AssetTypeFormReference_FormTypeIdentifier, *v.FormTypeIdentifier)
+		s.WriteString(schemas.AssetFormInput_FormTypeIdentifier, *v.FormTypeIdentifier)
 	}
 }
-func (v *AssetTypeFormReference) Deserialize(d smithy.ShapeDeserializer) error {
-	return smithy.ReadStruct(d, schemas.AssetTypeFormReference, func(s *smithy.Schema) error {
+func (v *AssetFormInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetFormInput, func(s *smithy.Schema) error {
 		switch s {
-		case schemas.AssetTypeFormReference_FormTypeIdentifier:
+		case schemas.AssetFormInput_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.AssetFormInput_Content, v.Content)
+		case schemas.AssetFormInput_FormTypeIdentifier:
 			v.FormTypeIdentifier = new(string)
-			return d.ReadString(schemas.AssetTypeFormReference_FormTypeIdentifier, v.FormTypeIdentifier)
+			return d.ReadString(schemas.AssetFormInput_FormTypeIdentifier, v.FormTypeIdentifier)
+		}
+		return nil
+	})
+}
+
+// The export setting for asset metadata.
+type AssetsExport struct {
+
+	// Whether asset metadata is exported to S3 Tables. Valid values are ENABLED and
+	// DISABLED .
+	S3TablesExport ExportSetting
+
+	noSmithyDocumentSerde
+}
+
+func (v *AssetsExport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetsExport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetsExport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3TablesExport != "" {
+		s.WriteString(schemas.AssetsExport_S3TablesExport, string(v.S3TablesExport))
+	}
+}
+func (v *AssetsExport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetsExport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetsExport_S3TablesExport:
+			var ev string
+			if err := d.ReadString(schemas.AssetsExport_S3TablesExport, &ev); err != nil {
+				return err
+			}
+			v.S3TablesExport = ExportSetting(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The export setting and current export state for asset metadata.
+type AssetsExportResult struct {
+
+	// Whether asset metadata is exported to S3 Tables. Valid values are ENABLED and
+	// DISABLED .
+	S3TablesExport ExportSetting
+
+	// The current state of the asset metadata export to S3 Tables.
+	S3TablesExportState *S3TablesExportState
+
+	noSmithyDocumentSerde
+}
+
+func (v *AssetsExportResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetsExportResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetsExportResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3TablesExport != "" {
+		s.WriteString(schemas.AssetsExportResult_S3TablesExport, string(v.S3TablesExport))
+	}
+	if v.S3TablesExportState != nil {
+		s.WriteStruct(schemas.AssetsExportResult_S3TablesExportState)
+		v.S3TablesExportState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssetsExportResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetsExportResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetsExportResult_S3TablesExport:
+			var ev string
+			if err := d.ReadString(schemas.AssetsExportResult_S3TablesExport, &ev); err != nil {
+				return err
+			}
+			v.S3TablesExport = ExportSetting(ev)
+			return nil
+		case schemas.AssetsExportResult_S3TablesExportState:
+			v.S3TablesExportState = &S3TablesExportState{}
+			return v.S3TablesExportState.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A form that is included in an asset type, identified by the form type that
+// defines its schema.
+type AssetTypeFormOutput struct {
+
+	// The identifier of the form type that defines the form's schema.
+	FormTypeId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AssetTypeFormOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetTypeFormOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetTypeFormOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FormTypeId != nil {
+		s.WriteString(schemas.AssetTypeFormOutput_FormTypeId, *v.FormTypeId)
+	}
+}
+func (v *AssetTypeFormOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetTypeFormOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetTypeFormOutput_FormTypeId:
+			v.FormTypeId = new(string)
+			return d.ReadString(schemas.AssetTypeFormOutput_FormTypeId, v.FormTypeId)
 		}
 		return nil
 	})
@@ -19293,7 +19418,7 @@ func (v *IterableFormItem) SerializeMembers(s smithy.ShapeSerializer) {
 		serializeAssetFormMap(s, schemas.IterableFormItem_Forms, v.Forms)
 	}
 	if v.GlossaryTerms != nil {
-		serializeGlossaryTermIdList(s, schemas.IterableFormItem_GlossaryTerms, v.GlossaryTerms)
+		serializeGlossaryTermIdOutputList(s, schemas.IterableFormItem_GlossaryTerms, v.GlossaryTerms)
 	}
 	if v.ItemId != nil {
 		s.WriteString(schemas.IterableFormItem_ItemId, *v.ItemId)
@@ -19310,7 +19435,7 @@ func (v *IterableFormItem) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.IterableFormItem_Forms:
 			return deserializeAssetFormMap(d, schemas.IterableFormItem_Forms, &v.Forms)
 		case schemas.IterableFormItem_GlossaryTerms:
-			return deserializeGlossaryTermIdList(d, schemas.IterableFormItem_GlossaryTerms, &v.GlossaryTerms)
+			return deserializeGlossaryTermIdOutputList(d, schemas.IterableFormItem_GlossaryTerms, &v.GlossaryTerms)
 		case schemas.IterableFormItem_ItemId:
 			v.ItemId = new(string)
 			return d.ReadString(schemas.IterableFormItem_ItemId, v.ItemId)
@@ -19351,7 +19476,7 @@ func (v *IterableFormListItem) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.IterableFormListItem_Description, *v.Description)
 	}
 	if v.GlossaryTerms != nil {
-		serializeGlossaryTermIdList(s, schemas.IterableFormListItem_GlossaryTerms, v.GlossaryTerms)
+		serializeGlossaryTermIdOutputList(s, schemas.IterableFormListItem_GlossaryTerms, v.GlossaryTerms)
 	}
 	if v.ItemId != nil {
 		s.WriteString(schemas.IterableFormListItem_ItemId, *v.ItemId)
@@ -19367,7 +19492,7 @@ func (v *IterableFormListItem) Deserialize(d smithy.ShapeDeserializer) error {
 			v.Description = new(string)
 			return d.ReadString(schemas.IterableFormListItem_Description, v.Description)
 		case schemas.IterableFormListItem_GlossaryTerms:
-			return deserializeGlossaryTermIdList(d, schemas.IterableFormListItem_GlossaryTerms, &v.GlossaryTerms)
+			return deserializeGlossaryTermIdOutputList(d, schemas.IterableFormListItem_GlossaryTerms, &v.GlossaryTerms)
 		case schemas.IterableFormListItem_ItemId:
 			v.ItemId = new(string)
 			return d.ReadString(schemas.IterableFormListItem_ItemId, v.ItemId)
@@ -29427,6 +29552,120 @@ func (v *S3SourceAdditionalOptions) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// The S3 Tables configuration for a data catalog export.
+type S3TablesConfiguration struct {
+
+	// The encryption configuration for the table bucket that holds the exported
+	// catalog metadata. It applies only when Glue creates the table bucket.
+	EncryptionConfiguration *ExportEncryptionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3TablesConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3TablesConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3TablesConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.S3TablesConfiguration_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *S3TablesConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3TablesConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3TablesConfiguration_EncryptionConfiguration:
+			v.EncryptionConfiguration = &ExportEncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The S3 Tables configuration for a data catalog export, including the table
+// bucket that holds the exported catalog metadata.
+type S3TablesConfigurationResult struct {
+
+	// The encryption configuration for the table bucket that holds the exported
+	// catalog metadata.
+	EncryptionConfiguration *ExportEncryptionConfiguration
+
+	// The ARN of the S3 table bucket that holds the exported catalog metadata.
+	TableBucketArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3TablesConfigurationResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3TablesConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3TablesConfigurationResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.S3TablesConfigurationResult_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableBucketArn != nil {
+		s.WriteString(schemas.S3TablesConfigurationResult_TableBucketArn, *v.TableBucketArn)
+	}
+}
+func (v *S3TablesConfigurationResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3TablesConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3TablesConfigurationResult_EncryptionConfiguration:
+			v.EncryptionConfiguration = &ExportEncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.S3TablesConfigurationResult_TableBucketArn:
+			v.TableBucketArn = new(string)
+			return d.ReadString(schemas.S3TablesConfigurationResult_TableBucketArn, v.TableBucketArn)
+		}
+		return nil
+	})
+}
+
+// The state of an export to S3 Tables. Glue sets this state.
+type S3TablesExportState struct {
+
+	// The current status of the export. Valid values are ENABLING , ENABLED ,
+	// DISABLING , DISABLED , and FAILED .
+	Status ExportStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3TablesExportState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3TablesExportState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3TablesExportState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.S3TablesExportState_Status, string(v.Status))
+	}
+}
+func (v *S3TablesExportState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3TablesExportState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3TablesExportState_Status:
+			var ev string
+			if err := d.ReadString(schemas.S3TablesExportState_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ExportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies a data store in Amazon Simple Storage Service (Amazon S3).
 type S3Target struct {
 
@@ -29998,11 +30237,10 @@ type SearchAttributeFilter struct {
 	// This member is required.
 	Attribute *string
 
-	// The comparison operator. Valid values are equals , greaterThan ,
-	// greaterThanOrEquals , lessThan , lessThanOrEquals , and notExists .
-	//
-	// This member is required.
-	Operator SearchFilterOperator
+	// The comparison operator. Valid values are EQUALS , GREATER_THAN ,
+	// GREATER_THAN_OR_EQUALS , LESS_THAN , LESS_THAN_OR_EQUALS , and NOT_EXISTS . This
+	// field is required.
+	Comparator SearchFilterComparator
 
 	// The value to compare against.
 	Value SearchFilterValue
@@ -30020,8 +30258,8 @@ func (v *SearchAttributeFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Attribute != nil {
 		s.WriteString(schemas.SearchAttributeFilter_Attribute, *v.Attribute)
 	}
-	if v.Operator != "" {
-		s.WriteString(schemas.SearchAttributeFilter_Operator, string(v.Operator))
+	if v.Comparator != "" {
+		s.WriteString(schemas.SearchAttributeFilter_Comparator, string(v.Comparator))
 	}
 	if v.Value != nil {
 		serializeSearchFilterValue(s, schemas.SearchAttributeFilter_Value, v.Value)
@@ -30033,12 +30271,12 @@ func (v *SearchAttributeFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SearchAttributeFilter_Attribute:
 			v.Attribute = new(string)
 			return d.ReadString(schemas.SearchAttributeFilter_Attribute, v.Attribute)
-		case schemas.SearchAttributeFilter_Operator:
+		case schemas.SearchAttributeFilter_Comparator:
 			var ev string
-			if err := d.ReadString(schemas.SearchAttributeFilter_Operator, &ev); err != nil {
+			if err := d.ReadString(schemas.SearchAttributeFilter_Comparator, &ev); err != nil {
 				return err
 			}
-			v.Operator = SearchFilterOperator(ev)
+			v.Comparator = SearchFilterComparator(ev)
 			return nil
 		case schemas.SearchAttributeFilter_Value:
 			return deserializeSearchFilterValue(d, schemas.SearchAttributeFilter_Value, &v.Value)
@@ -30245,17 +30483,20 @@ func (v *SearchMapFilterValueMemberStringValue) Deserialize(d smithy.ShapeDeseri
 // A single search result item representing a matched asset.
 type SearchResultItem struct {
 
-	// The description of the matched asset.
-	AssetDescription *string
-
-	// The name of the matched asset.
-	AssetName *string
-
 	// The identifier of the asset type for the matched asset.
 	AssetTypeId *string
 
+	// The timestamp at which the matched asset was created.
+	CreatedAt *time.Time
+
+	// The description of the matched asset.
+	Description *string
+
 	// The unique identifier of the matched asset.
 	Id *string
+
+	// The name of the matched asset.
+	Name *string
 
 	// The timestamp at which the matched asset was last updated.
 	UpdatedAt *time.Time
@@ -30270,17 +30511,20 @@ func (v *SearchResultItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchResultItem) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AssetDescription != nil {
-		s.WriteString(schemas.SearchResultItem_AssetDescription, *v.AssetDescription)
-	}
-	if v.AssetName != nil {
-		s.WriteString(schemas.SearchResultItem_AssetName, *v.AssetName)
-	}
 	if v.AssetTypeId != nil {
 		s.WriteString(schemas.SearchResultItem_AssetTypeId, *v.AssetTypeId)
 	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SearchResultItem_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SearchResultItem_Description, *v.Description)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.SearchResultItem_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SearchResultItem_Name, *v.Name)
 	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.SearchResultItem_UpdatedAt, *v.UpdatedAt)
@@ -30289,18 +30533,21 @@ func (v *SearchResultItem) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *SearchResultItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchResultItem, func(s *smithy.Schema) error {
 		switch s {
-		case schemas.SearchResultItem_AssetDescription:
-			v.AssetDescription = new(string)
-			return d.ReadString(schemas.SearchResultItem_AssetDescription, v.AssetDescription)
-		case schemas.SearchResultItem_AssetName:
-			v.AssetName = new(string)
-			return d.ReadString(schemas.SearchResultItem_AssetName, v.AssetName)
 		case schemas.SearchResultItem_AssetTypeId:
 			v.AssetTypeId = new(string)
 			return d.ReadString(schemas.SearchResultItem_AssetTypeId, v.AssetTypeId)
+		case schemas.SearchResultItem_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SearchResultItem_CreatedAt, v.CreatedAt)
+		case schemas.SearchResultItem_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SearchResultItem_Description, v.Description)
 		case schemas.SearchResultItem_Id:
 			v.Id = new(string)
 			return d.ReadString(schemas.SearchResultItem_Id, v.Id)
+		case schemas.SearchResultItem_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SearchResultItem_Name, v.Name)
 		case schemas.SearchResultItem_UpdatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.SearchResultItem_UpdatedAt, v.UpdatedAt)

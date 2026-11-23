@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.0
 X-Amz-Target: PartnerCentralChannel.CreateProgramManagementAccount
 
-{"accountId":"__AccountId__","catalog":"__Catalog__","clientToken":"__ClientToken__","displayName":"__DisplayName__","program":"SOLUTION_PROVIDER","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}
+{"accountId":"__AccountId__","catalog":"__Catalog__","clientToken":"__ClientToken__","displayName":"__DisplayName__","program":"SOLUTION_PROVIDER","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"type":"RESALE_BILLING_TRANSFER"}

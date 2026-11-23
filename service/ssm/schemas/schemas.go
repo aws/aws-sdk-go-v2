@@ -2224,6 +2224,22 @@ var _CloudConnectorSummaryList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _CloudConnectorSummaryList_member *smithy.Schema
 
+var CloudProvider = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssm",
+	Name:      "CloudProvider",
+}, smithy.ShapeTypeEnum, 3)
+var CloudProvider_AWS *smithy.Schema
+
+var CloudProvider_AZURE *smithy.Schema
+
+var CloudProvider_GCP *smithy.Schema
+
+var _CloudProviderList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ssm",
+	Name:      "CloudProviderList",
+}, smithy.ShapeTypeList, 1)
+var _CloudProviderList_member *smithy.Schema
+
 var _CloudWatchLogGroupName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
 	Name:      "CloudWatchLogGroupName",
@@ -2958,7 +2974,7 @@ var DocumentDefaultVersionDescription_DefaultVersionName *smithy.Schema
 var DocumentDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
 	Name:      "DocumentDescription",
-}, smithy.ShapeTypeStructure, 30)
+}, smithy.ShapeTypeStructure, 31)
 var DocumentDescription_Sha1 *smithy.Schema
 
 var DocumentDescription_Hash *smithy.Schema
@@ -3018,6 +3034,8 @@ var DocumentDescription_ReviewStatus *smithy.Schema
 var DocumentDescription_Category *smithy.Schema
 
 var DocumentDescription_CategoryEnum *smithy.Schema
+
+var DocumentDescription_CloudProviders *smithy.Schema
 
 var _DocumentDisplayName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
@@ -3081,7 +3099,7 @@ var DocumentHashType_SHA1 *smithy.Schema
 var DocumentIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
 	Name:      "DocumentIdentifier",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var DocumentIdentifier_Name *smithy.Schema
 
 var DocumentIdentifier_CreatedDate *smithy.Schema
@@ -3111,6 +3129,8 @@ var DocumentIdentifier_Requires *smithy.Schema
 var DocumentIdentifier_ReviewStatus *smithy.Schema
 
 var DocumentIdentifier_Author *smithy.Schema
+
+var DocumentIdentifier_CloudProviders *smithy.Schema
 
 var _DocumentIdentifierList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
@@ -3396,7 +3416,7 @@ var _DocumentVersion = smithy.NewSchema(smithy.ShapeID{
 var DocumentVersionInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
 	Name:      "DocumentVersionInfo",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var DocumentVersionInfo_Name *smithy.Schema
 
 var DocumentVersionInfo_DisplayName *smithy.Schema
@@ -3416,6 +3436,8 @@ var DocumentVersionInfo_Status *smithy.Schema
 var DocumentVersionInfo_StatusInformation *smithy.Schema
 
 var DocumentVersionInfo_ReviewStatus *smithy.Schema
+
+var DocumentVersionInfo_CloudProviders *smithy.Schema
 
 var DocumentVersionLimitExceeded = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
@@ -9773,7 +9795,7 @@ var CreateCloudConnectorResult_CloudConnectorId *smithy.Schema
 var CreateDocumentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
 	Name:      "CreateDocumentRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var CreateDocumentRequest_Content *smithy.Schema
 
 var CreateDocumentRequest_Requires *smithy.Schema
@@ -9793,6 +9815,8 @@ var CreateDocumentRequest_DocumentFormat *smithy.Schema
 var CreateDocumentRequest_TargetType *smithy.Schema
 
 var CreateDocumentRequest_Tags *smithy.Schema
+
+var CreateDocumentRequest_CloudProviders *smithy.Schema
 
 var CreateDocumentResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
@@ -12566,7 +12590,7 @@ var UpdateDocumentDefaultVersionResult_Description *smithy.Schema
 var UpdateDocumentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
 	Name:      "UpdateDocumentRequest",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateDocumentRequest_Content *smithy.Schema
 
 var UpdateDocumentRequest_Attachments *smithy.Schema
@@ -12582,6 +12606,8 @@ var UpdateDocumentRequest_DocumentVersion *smithy.Schema
 var UpdateDocumentRequest_DocumentFormat *smithy.Schema
 
 var UpdateDocumentRequest_TargetType *smithy.Schema
+
+var UpdateDocumentRequest_CloudProviders *smithy.Schema
 
 var UpdateDocumentMetadataRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ssm",
@@ -14027,6 +14053,14 @@ func init() {
 
 	_CloudConnectorSummaryList_member = _CloudConnectorSummaryList.AddMember("member", CloudConnectorSummary)
 
+	CloudProvider_AWS = CloudProvider.AddMember("AWS", smithyprelude.Unit)
+
+	CloudProvider_AZURE = CloudProvider.AddMember("AZURE", smithyprelude.Unit)
+
+	CloudProvider_GCP = CloudProvider.AddMember("GCP", smithyprelude.Unit)
+
+	_CloudProviderList_member = _CloudProviderList.AddMember("member", CloudProvider, &smithytraits.XMLName{Name: "CloudProvider"})
+
 	CloudWatchOutputConfig_CloudWatchLogGroupName = CloudWatchOutputConfig.AddMember("CloudWatchLogGroupName", _CloudWatchLogGroupName)
 
 	CloudWatchOutputConfig_CloudWatchOutputEnabled = CloudWatchOutputConfig.AddMember("CloudWatchOutputEnabled", _CloudWatchOutputEnabled)
@@ -14595,6 +14629,8 @@ func init() {
 
 	DocumentDescription_CategoryEnum = DocumentDescription.AddMember("CategoryEnum", _CategoryEnumList)
 
+	DocumentDescription_CloudProviders = DocumentDescription.AddMember("CloudProviders", _CloudProviderList)
+
 	DocumentFilterKey_Name = DocumentFilterKey.AddMember("Name", smithyprelude.Unit)
 
 	DocumentFilterKey_Owner = DocumentFilterKey.AddMember("Owner", smithyprelude.Unit)
@@ -14638,6 +14674,8 @@ func init() {
 	DocumentIdentifier_ReviewStatus = DocumentIdentifier.AddMember("ReviewStatus", ReviewStatus)
 
 	DocumentIdentifier_Author = DocumentIdentifier.AddMember("Author", _DocumentAuthor)
+
+	DocumentIdentifier_CloudProviders = DocumentIdentifier.AddMember("CloudProviders", _CloudProviderList)
 
 	_DocumentIdentifierList_member = _DocumentIdentifierList.AddMember("member", DocumentIdentifier, &smithytraits.XMLName{Name: "DocumentIdentifier"})
 
@@ -14710,6 +14748,8 @@ func init() {
 	DocumentVersionInfo_StatusInformation = DocumentVersionInfo.AddMember("StatusInformation", _DocumentStatusInformation)
 
 	DocumentVersionInfo_ReviewStatus = DocumentVersionInfo.AddMember("ReviewStatus", ReviewStatus)
+
+	DocumentVersionInfo_CloudProviders = DocumentVersionInfo.AddMember("CloudProviders", _CloudProviderList)
 
 	DocumentVersionLimitExceeded_Message = DocumentVersionLimitExceeded.AddMember("Message", _String)
 
@@ -16985,6 +17025,8 @@ func init() {
 
 	CreateDocumentRequest_Tags = CreateDocumentRequest.AddMember("Tags", _TagList)
 
+	CreateDocumentRequest_CloudProviders = CreateDocumentRequest.AddMember("CloudProviders", _CloudProviderList)
+
 	CreateDocumentResult_DocumentDescription = CreateDocumentResult.AddMember("DocumentDescription", DocumentDescription)
 
 	CreateMaintenanceWindowRequest_Name = CreateMaintenanceWindowRequest.AddMember("Name", _MaintenanceWindowName)
@@ -18682,6 +18724,8 @@ func init() {
 	UpdateDocumentRequest_DocumentFormat = UpdateDocumentRequest.AddMember("DocumentFormat", DocumentFormat)
 
 	UpdateDocumentRequest_TargetType = UpdateDocumentRequest.AddMember("TargetType", _TargetType)
+
+	UpdateDocumentRequest_CloudProviders = UpdateDocumentRequest.AddMember("CloudProviders", _CloudProviderList)
 
 	UpdateDocumentMetadataRequest_Name = UpdateDocumentMetadataRequest.AddMember("Name", _DocumentName)
 

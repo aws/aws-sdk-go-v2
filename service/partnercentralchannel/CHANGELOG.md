@@ -1,3 +1,7 @@
+# v1.12.0 (2026-11-20)
+
+* **Feature**: Adds MSP program relationships support in AWS Partner Central. Partners can now create, update, list, and delete MSP relationships using the new MSP program type on the CreateProgramManagementAccount, CreateRelationship, UpdateRelationship, and ListRelationships operations.
+
 # v1.11.6 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

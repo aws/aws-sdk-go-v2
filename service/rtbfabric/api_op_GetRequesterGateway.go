@@ -94,6 +94,10 @@ type GetRequesterGatewayOutput struct {
 	// The description of the requester gateway.
 	Description *string
 
+	// The causes of the failure, such as a deleted subnet. Present only when the
+	// resource has failed.
+	ErrorDetails []types.ErrorDetail
+
 	// A map of the key-value pairs for the tag or tags assigned to the specified
 	// resource.
 	Tags map[string]string
@@ -128,6 +132,9 @@ func (v *GetRequesterGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.GetRequesterGatewayResponse_domainName, *v.DomainName)
+	}
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.GetRequesterGatewayResponse_errorDetails, v.ErrorDetails)
 	}
 	if v.GatewayId != nil {
 		s.WriteString(schemas.GetRequesterGatewayResponse_gatewayId, *v.GatewayId)
@@ -169,6 +176,8 @@ func (v *GetRequesterGatewayOutput) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.GetRequesterGatewayResponse_domainName:
 			v.DomainName = new(string)
 			return d.ReadString(schemas.GetRequesterGatewayResponse_domainName, v.DomainName)
+		case schemas.GetRequesterGatewayResponse_errorDetails:
+			return deserializeErrorDetails(d, schemas.GetRequesterGatewayResponse_errorDetails, &v.ErrorDetails)
 		case schemas.GetRequesterGatewayResponse_gatewayId:
 			v.GatewayId = new(string)
 			return d.ReadString(schemas.GetRequesterGatewayResponse_gatewayId, v.GatewayId)
@@ -402,6 +411,16 @@ func requesterGatewayActiveStateRetryable(ctx context.Context, input *GetRequest
 
 	if err == nil {
 		v1 := output.Status
+		expectedValue := "CREATE_FAILED"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	if err == nil {
+		v1 := output.Status
 		expectedValue := "ACTIVE"
 		var pathValue string
 		pathValue = string(v1)
@@ -596,6 +615,16 @@ func (w *RequesterGatewayDeletedWaiter) WaitForOutput(ctx context.Context, param
 }
 
 func requesterGatewayDeletedStateRetryable(ctx context.Context, input *GetRequesterGatewayInput, output *GetRequesterGatewayOutput, err error) (bool, error) {
+
+	if err == nil {
+		v1 := output.Status
+		expectedValue := "DELETE_FAILED"
+		var pathValue string
+		pathValue = string(v1)
+		if pathValue == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
 
 	if err == nil {
 		v1 := output.Status

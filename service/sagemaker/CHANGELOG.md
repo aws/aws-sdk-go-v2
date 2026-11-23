@@ -1,3 +1,11 @@
+# v1.293.0 (2026-11-21)
+
+* **Feature**: Amazon SageMaker AI adds APIs to view capacity reservations and their usage.
+
+# v1.292.0 (2026-11-20)
+
+* **Feature**: Adds HyperPod Global Inference Gateway APIs to route inference across HyperPod clusters in multiple Regions. Adds the MoveClusterNodes API, which moves running nodes between instance groups, within a cluster or between clusters in the same region, account and subnet, without releasing the instances.
+
 # v1.291.0 (2026-11-16)
 
 * **Feature**: Amazon SageMaker adds Synthetic Data Generation, Auto-labeling, Data Quality Evaluation, and Data Transformation capabilities, Cross-Region Inference Routing, KV Aware routing for realtime inference endpoints.

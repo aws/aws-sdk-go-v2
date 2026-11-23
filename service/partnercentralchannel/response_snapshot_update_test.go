@@ -169,6 +169,35 @@ func TestUpdateResponseSnapshot_AcceptChannelHandshake(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CancelChannelContract(t *testing.T) {
+	want := &CancelChannelContractOutput{
+		ChannelContractDetail: &types.CancelChannelContractDetail{
+			Id:                 ptr.String("__Id__"),
+			Arn:                ptr.String("__Arn__"),
+			Status:             types.ChannelContractStatus("PENDING"),
+			CancellationReason: ptr.String("__CancellationReason__"),
+		},
+	}
+	proto := awsjson.New10(schemas.PartnerCentralChannel)
+	opSchema := smithy.NewOperationSchema(schemas.CancelChannelContract, schemas.CancelChannelContractResponse, schemas.CancelChannelContractResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CancelChannelContract.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CancelChannelHandshake(t *testing.T) {
 	want := &CancelChannelHandshakeOutput{
 		ChannelHandshakeDetail: &types.CancelChannelHandshakeDetail{
@@ -193,6 +222,33 @@ func TestUpdateResponseSnapshot_CancelChannelHandshake(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CancelChannelHandshake.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CreateChannelContract(t *testing.T) {
+	want := &CreateChannelContractOutput{
+		ChannelContractDetail: &types.CreateChannelContractDetail{
+			Id:  ptr.String("__Id__"),
+			Arn: ptr.String("__Arn__"),
+		},
+	}
+	proto := awsjson.New10(schemas.PartnerCentralChannel)
+	opSchema := smithy.NewOperationSchema(schemas.CreateChannelContract, schemas.CreateChannelContractResponse, schemas.CreateChannelContractResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateChannelContract.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -322,6 +378,66 @@ func TestUpdateResponseSnapshot_DeleteRelationship(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetChannelContract(t *testing.T) {
+	want := &GetChannelContractOutput{
+		ChannelContractDetail: &types.ChannelContractDetail{
+			Id:                 ptr.String("__Id__"),
+			Arn:                ptr.String("__Arn__"),
+			Catalog:            ptr.String("__Catalog__"),
+			ContractType:       types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+			Status:             types.ChannelContractStatus("PENDING"),
+			CreatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			RespondedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			CancellationReason: ptr.String("__CancellationReason__"),
+			Details: &types.ChannelContractDetailsMemberManagedServicesAttestationDetails{
+				Value: types.ManagedServicesAttestationDetails{
+					LegalEntityName:                    ptr.String("__LegalEntityName__"),
+					RelationshipIdentifier:             ptr.String("__RelationshipIdentifier__"),
+					ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+					MemberAccountIds: []string{
+						"__Member__",
+						"__Member__",
+					},
+					EndDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					SupportedServices: []types.ManagedServicesSupportedService{
+						types.ManagedServicesSupportedService("MONITORING"),
+						types.ManagedServicesSupportedService("MONITORING"),
+					},
+					SignatoryName:  ptr.String("__SignatoryName__"),
+					SignatoryEmail: ptr.String("__SignatoryEmail__"),
+					LegalEntityAddress: &types.Address{
+						City:          ptr.String("__City__"),
+						StateOrRegion: ptr.String("__StateOrRegion__"),
+						PostalCode:    ptr.String("__PostalCode__"),
+						CountryCode:   ptr.String("__CountryCode__"),
+						AddressLine:   ptr.String("__AddressLine__"),
+						AddressLine2:  ptr.String("__AddressLine2__"),
+					},
+				},
+			},
+		},
+	}
+	proto := awsjson.New10(schemas.PartnerCentralChannel)
+	opSchema := smithy.NewOperationSchema(schemas.GetChannelContract, schemas.GetChannelContractResponse, schemas.GetChannelContractResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetChannelContract.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetRelationship(t *testing.T) {
 	want := &GetRelationshipOutput{
 		RelationshipDetail: &types.RelationshipDetail{
@@ -335,9 +451,12 @@ func TestUpdateResponseSnapshot_GetRelationship(t *testing.T) {
 			DisplayName:                ptr.String("__DisplayName__"),
 			ResaleAccountModel:         types.ResaleAccountModel("DISTRIBUTOR"),
 			Sector:                     types.Sector("COMMERCIAL"),
+			AccountScope:               types.AccountScope("ENTIRE_ORGANIZATION"),
+			ChannelContractId:          ptr.String("__ChannelContractId__"),
 			CreatedAt:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			UpdatedAt:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			StartDate:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndDate:                    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	proto := awsjson.New10(schemas.PartnerCentralChannel)
@@ -356,6 +475,84 @@ func TestUpdateResponseSnapshot_GetRelationship(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetRelationship.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListChannelContracts(t *testing.T) {
+	want := &ListChannelContractsOutput{
+		Items: []types.ChannelContractSummary{
+			{
+				Id:           ptr.String("__Id__"),
+				Arn:          ptr.String("__Arn__"),
+				Catalog:      ptr.String("__Catalog__"),
+				ContractType: types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+				Status:       types.ChannelContractStatus("PENDING"),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RespondedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Details: &types.ChannelContractSummaryDetailsMemberManagedServicesAttestationDetails{
+					Value: types.ManagedServicesAttestationSummaryDetails{
+						LegalEntityName:                    ptr.String("__LegalEntityName__"),
+						RelationshipIdentifier:             ptr.String("__RelationshipIdentifier__"),
+						ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+						MemberAccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						SupportedServices: []types.ManagedServicesSupportedService{
+							types.ManagedServicesSupportedService("MONITORING"),
+							types.ManagedServicesSupportedService("MONITORING"),
+						},
+					},
+				},
+			},
+			{
+				Id:           ptr.String("__Id__"),
+				Arn:          ptr.String("__Arn__"),
+				Catalog:      ptr.String("__Catalog__"),
+				ContractType: types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+				Status:       types.ChannelContractStatus("PENDING"),
+				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RespondedAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Details: &types.ChannelContractSummaryDetailsMemberManagedServicesAttestationDetails{
+					Value: types.ManagedServicesAttestationSummaryDetails{
+						LegalEntityName:                    ptr.String("__LegalEntityName__"),
+						RelationshipIdentifier:             ptr.String("__RelationshipIdentifier__"),
+						ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+						MemberAccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+						EndDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						SupportedServices: []types.ManagedServicesSupportedService{
+							types.ManagedServicesSupportedService("MONITORING"),
+							types.ManagedServicesSupportedService("MONITORING"),
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.PartnerCentralChannel)
+	opSchema := smithy.NewOperationSchema(schemas.ListChannelContracts, schemas.ListChannelContractsResponse, schemas.ListChannelContractsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListChannelContracts.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -447,6 +644,7 @@ func TestUpdateResponseSnapshot_ListProgramManagementAccounts(t *testing.T) {
 				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StartDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Status:      types.ProgramManagementAccountStatus("PENDING"),
+				Type:        types.ProgramManagementAccountType("RESALE_BILLING_TRANSFER"),
 			},
 			{
 				Id:          ptr.String("__Id__"),
@@ -460,6 +658,7 @@ func TestUpdateResponseSnapshot_ListProgramManagementAccounts(t *testing.T) {
 				UpdatedAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				StartDate:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				Status:      types.ProgramManagementAccountStatus("PENDING"),
+				Type:        types.ProgramManagementAccountType("RESALE_BILLING_TRANSFER"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -734,7 +933,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		ResourceType: ptr.String("__ResourceType__"),
 	}
 	proto := awsjson.New10(schemas.PartnerCentralChannel)
-	opSchema := smithy.NewOperationSchema(schemas.CreateChannelHandshake, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.CancelChannelContract, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -814,7 +1013,7 @@ func TestUpdateResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T
 		QuotaCode:    ptr.String("__QuotaCode__"),
 	}
 	proto := awsjson.New10(schemas.PartnerCentralChannel)
-	opSchema := smithy.NewOperationSchema(schemas.CreateChannelHandshake, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
+	opSchema := smithy.NewOperationSchema(schemas.CreateChannelContract, schemas.ServiceQuotaExceededException, schemas.ServiceQuotaExceededException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

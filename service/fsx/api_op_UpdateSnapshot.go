@@ -11,7 +11,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates the name of an Amazon FSx for OpenZFS snapshot.
+// Updates an Amazon FSx for OpenZFS or Amazon FSx for NetApp ONTAP snapshot.
+//
+// For Amazon FSx for OpenZFS snapshots, you can update only the name. For Amazon
+// FSx for NetApp ONTAP snapshots, you can update the name and the properties in
+// OntapConfiguration .
 func (c *Client) UpdateSnapshot(ctx context.Context, params *UpdateSnapshotInput, optFns ...func(*Options)) (*UpdateSnapshotOutput, error) {
 	if params == nil {
 		params = &UpdateSnapshotInput{}
@@ -29,11 +33,6 @@ func (c *Client) UpdateSnapshot(ctx context.Context, params *UpdateSnapshotInput
 
 type UpdateSnapshotInput struct {
 
-	// The name of the snapshot to update.
-	//
-	// This member is required.
-	Name *string
-
 	// The ID of the snapshot that you want to update, in the format
 	// fsvolsnap-0123456789abcdef0 .
 	//
@@ -44,6 +43,12 @@ type UpdateSnapshotInput struct {
 	// ASCII characters. This token is automatically filled on your behalf when you use
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
+
+	// The name of the snapshot to update.
+	Name *string
+
+	// The configuration of the ONTAP snapshot that you are updating.
+	OntapConfiguration *types.UpdateOntapSnapshotConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -60,6 +65,11 @@ func (v *UpdateSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateSnapshotRequest_Name, *v.Name)
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.UpdateSnapshotRequest_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.SnapshotId != nil {
 		s.WriteString(schemas.UpdateSnapshotRequest_SnapshotId, *v.SnapshotId)

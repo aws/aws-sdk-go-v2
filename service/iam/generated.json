@@ -176,6 +176,7 @@
         "api_op_UpdateDelegationRequest.go",
         "api_op_UpdateGroup.go",
         "api_op_UpdateLoginProfile.go",
+        "api_op_UpdateOpenIDConnectProvider.go",
         "api_op_UpdateOpenIDConnectProviderThumbprint.go",
         "api_op_UpdateRole.go",
         "api_op_UpdateRoleDescription.go",

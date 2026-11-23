@@ -1,3 +1,7 @@
+# v1.22.0 (2026-11-19)
+
+* **Feature**: AWS CodeConnections now supports GitHub Enterprise Cloud with data residency (GHEC-DR) via the new GitHubEnterpriseCloudDataResidency provider type and ProviderEndpoint parameter in CreateConnection. This release also tightens connection ARN validation to enforce the expected ARN format.
+
 # v1.21.7 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

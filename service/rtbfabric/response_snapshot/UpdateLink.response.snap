@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"linkId":"__LinkId__","status":"PENDING_CREATION"}
+{"linkId":"__LinkId__","status":"PENDING_CREATION","updateId":"__UpdateId__"}

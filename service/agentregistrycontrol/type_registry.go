@@ -19,6 +19,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.ConflictException,
 			New:    func() any { return &types.ConflictException{} },
 		},
+		"com.amazonaws.agentregistrycontrol#DependencyException": {
+			Schema: schemas.DependencyException,
+			New:    func() any { return &types.DependencyException{} },
+		},
 		"com.amazonaws.agentregistrycontrol#InternalServerException": {
 			Schema: schemas.InternalServerException,
 			New:    func() any { return &types.InternalServerException{} },

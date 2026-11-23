@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"modules":[{"marketplaceProductId":"__MarketplaceProductId__","moduleArn":"__ModuleArn__","moduleId":"__ModuleId__","moduleName":"__ModuleName__","subscriptionStatus":"ACTIVE","subscriptionType":"MARKETPLACE"},{"marketplaceProductId":"__MarketplaceProductId__","moduleArn":"__ModuleArn__","moduleId":"__ModuleId__","moduleName":"__ModuleName__","subscriptionStatus":"ACTIVE","subscriptionType":"MARKETPLACE"}],"nextToken":"__NextToken__"}

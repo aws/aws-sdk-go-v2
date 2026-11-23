@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPayments.GetAccountBalance
+
+{"accountBalances":[{"amount":{"currency":"__Currency__","value":"__Value__"},"merchantOfRecord":"__MerchantOfRecord__"},{"amount":{"currency":"__Currency__","value":"__Value__"},"merchantOfRecord":"__MerchantOfRecord__"}],"nextToken":"__NextToken__"}

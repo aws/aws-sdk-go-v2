@@ -350,6 +350,26 @@ func (m *validateOpGetBillScenario) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetUsageLinesEstimatedCost struct {
+}
+
+func (*validateOpGetUsageLinesEstimatedCost) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetUsageLinesEstimatedCost) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetUsageLinesEstimatedCostInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetUsageLinesEstimatedCostInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetWorkloadEstimate struct {
 }
 
@@ -758,6 +778,10 @@ func addOpGetBillScenarioValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBillScenario{}, middleware.After)
 }
 
+func addOpGetUsageLinesEstimatedCostValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetUsageLinesEstimatedCost{}, middleware.After)
+}
+
 func addOpGetWorkloadEstimateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkloadEstimate{}, middleware.After)
 }
@@ -1063,6 +1087,50 @@ func validateBatchUpdateWorkloadEstimateUsageEntry(v *types.BatchUpdateWorkloadE
 	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateWorkloadEstimateUsageEntry"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGetUsageLinesEstimatedCostInput(v *types.GetUsageLinesEstimatedCostInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUsageLinesEstimatedCostInput"}
+	if v.ServiceCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
+	}
+	if v.UsageType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UsageType"))
+	}
+	if v.Operation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Amount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Amount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGetUsageLinesEstimatedCostInputList(v []types.GetUsageLinesEstimatedCostInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUsageLinesEstimatedCostInputList"}
+	for i := range v {
+		if err := validateGetUsageLinesEstimatedCostInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1612,6 +1680,28 @@ func validateOpGetBillScenarioInput(v *GetBillScenarioInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetBillScenarioInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetUsageLinesEstimatedCostInput(v *GetUsageLinesEstimatedCostInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetUsageLinesEstimatedCostInput"}
+	if v.Usage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Usage"))
+	} else if v.Usage != nil {
+		if err := validateGetUsageLinesEstimatedCostInputList(v.Usage); err != nil {
+			invalidParams.AddNested("Usage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.RateType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("RateType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -62,6 +62,11 @@ type DescribeFirewallMetadataOutput struct {
 	// of the Availability Zones where you have it configured. This setting is READY
 	// only when the ConfigurationSyncStateSummary value is IN_SYNC and the Attachment
 	// Status values for all of the configured subnets are READY .
+	//
+	// For an internet gateway firewall, this setting is STANDBY while no Availability
+	// Zone in the VPC has resources that need the firewall. Network Firewall
+	// provisions the firewall in an Availability Zone when the first resource is
+	// launched there.
 	Status types.FirewallStatusValue
 
 	// The Availability Zones that the firewall currently supports. This includes all

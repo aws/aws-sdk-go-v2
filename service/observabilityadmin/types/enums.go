@@ -90,6 +90,26 @@ func (CentralizationFailureReason) Values() []CentralizationFailureReason {
 	}
 }
 
+type CentralizeWithDataProtection string
+
+// Enum values for CentralizeWithDataProtection
+const (
+	CentralizeWithDataProtectionEnabled  CentralizeWithDataProtection = "ENABLED"
+	CentralizeWithDataProtectionDisabled CentralizeWithDataProtection = "DISABLED"
+)
+
+// Values returns all known values for CentralizeWithDataProtection. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CentralizeWithDataProtection) Values() []CentralizeWithDataProtection {
+	return []CentralizeWithDataProtection{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type ConnectorProvider string
 
 // Enum values for ConnectorProvider
@@ -314,6 +334,9 @@ const (
 	LogTypeAlbAccess       LogType = "ALB_ACCESS_LOGS"
 	LogTypeAlbConnection   LogType = "ALB_CONNECTION_LOGS"
 	LogTypeAlbHealthCheck  LogType = "ALB_HEALTH_CHECK_LOGS"
+	LogTypeFlow            LogType = "FLOW_LOGS"
+	LogTypeAlert           LogType = "ALERT_LOGS"
+	LogTypeTls             LogType = "TLS_LOGS"
 )
 
 // Values returns all known values for LogType. Note that this can be expanded in
@@ -331,6 +354,9 @@ func (LogType) Values() []LogType {
 		"ALB_ACCESS_LOGS",
 		"ALB_CONNECTION_LOGS",
 		"ALB_HEALTH_CHECK_LOGS",
+		"FLOW_LOGS",
+		"ALERT_LOGS",
+		"TLS_LOGS",
 	}
 }
 
@@ -422,6 +448,8 @@ const (
 	ResourceTypeAwsS3Bucket                         ResourceType = "AWS::S3::Bucket"
 	ResourceTypeAwsBedrockKnowledgebase             ResourceType = "AWS::Bedrock::KnowledgeBase"
 	ResourceTypeAwsXrayTransactionSearchConfig      ResourceType = "AWS::XRay::TransactionSearchConfig"
+	ResourceTypeAwsCloudwatchOmni                   ResourceType = "AWS::CloudWatchOmni"
+	ResourceTypeAwsNetworkFirewallFirewall          ResourceType = "AWS::NetworkFirewall::Firewall"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -453,6 +481,8 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::S3::Bucket",
 		"AWS::Bedrock::KnowledgeBase",
 		"AWS::XRay::TransactionSearchConfig",
+		"AWS::CloudWatchOmni",
+		"AWS::NetworkFirewall::Firewall",
 	}
 }
 

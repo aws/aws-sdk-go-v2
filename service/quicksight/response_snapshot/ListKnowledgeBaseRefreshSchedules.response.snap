@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"KnowledgeBaseArn":"__KnowledgeBaseArn__","NextToken":"__NextToken__","RequestId":"__RequestId__","ScheduleSummaries":[{"ScheduleFrequency":{"Interval":"DAILY","RefreshOnDay":{"DayOfMonth":"__DayOfMonth__","DayOfWeek":"SUNDAY"}},"ScheduleId":"__ScheduleId__","StartTime":946684800,"State":"ENABLED"},{"ScheduleFrequency":{"Interval":"DAILY","RefreshOnDay":{"DayOfMonth":"__DayOfMonth__","DayOfWeek":"SUNDAY"}},"ScheduleId":"__ScheduleId__","StartTime":946684800,"State":"ENABLED"}],"Status":200}

@@ -85,6 +85,16 @@ func serializeInstanceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 	s.CloseList()
 }
 
+func serializeJobSubmitPluginList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.JobSubmitPlugin) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeNodeLifecycleScriptArguments(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -350,6 +360,28 @@ func deserializeInstanceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 		}
 
 		vv = types.InstanceConfig{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeJobSubmitPluginList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.JobSubmitPlugin) error {
+	*v = make([]types.JobSubmitPlugin, 0)
+	var vv types.JobSubmitPlugin
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.JobSubmitPlugin
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.JobSubmitPlugin{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

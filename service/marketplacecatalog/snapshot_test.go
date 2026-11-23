@@ -206,6 +206,18 @@ func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAssessment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartChangeSet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartChangeSet(context.Background(), nil, func(o *Options) {
@@ -378,6 +390,18 @@ func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
 	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartAssessment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAssessment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAssessment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

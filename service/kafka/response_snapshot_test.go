@@ -185,6 +185,40 @@ func TestCheckResponseSnapshot_BatchDisassociateScramSecret(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateAssessment(t *testing.T) {
+	want := &CreateAssessmentOutput{
+		AssessmentArn:  ptr.String("__AssessmentArn__"),
+		AssessmentType: types.AssessmentType("UPDATE_BROKER_TYPE"),
+		ClusterArn:     ptr.String("__ClusterArn__"),
+		CreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:         types.AssessmentStatus("IN_PROGRESS"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateAssessment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateAssessment(context.Background(), &CreateAssessmentInput{
+		AssessmentParameters: &types.AssessmentParameters{
+			TargetInstanceType: ptr.String("__TargetInstanceType__"),
+		},
+		AssessmentType: types.AssessmentType("UPDATE_BROKER_TYPE"),
+		ClusterArn:     ptr.String("__ClusterArn__"),
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateAssessment.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
 	want := &CreateChannelOutput{
 		ChannelArn:          ptr.String("__ChannelArn__"),
@@ -1015,6 +1049,31 @@ func TestCheckResponseSnapshot_CreateVpcConnection(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteAssessment(t *testing.T) {
+	want := &DeleteAssessmentOutput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		Status:        types.AssessmentStatus("IN_PROGRESS"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteAssessment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteAssessment(context.Background(), &DeleteAssessmentInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		ClusterArn:    ptr.String("__ClusterArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteAssessment.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
 	want := &DeleteChannelOutput{
 		ChannelArn:          ptr.String("__ChannelArn__"),
@@ -1182,6 +1241,53 @@ func TestCheckResponseSnapshot_DeleteVpcConnection(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteVpcConnection.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeAssessment(t *testing.T) {
+	want := &DescribeAssessmentOutput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		AssessmentParameters: &types.AssessmentParameters{
+			TargetInstanceType: ptr.String("__TargetInstanceType__"),
+		},
+		AssessmentType: types.AssessmentType("UPDATE_BROKER_TYPE"),
+		ClusterArn:     ptr.String("__ClusterArn__"),
+		CompletionTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:         types.AssessmentStatus("IN_PROGRESS"),
+		StatusMessage:  ptr.String("__StatusMessage__"),
+		Summary: &types.AssessmentSummary{
+			ByCategory: map[string]int32{
+				"key0": 1,
+			},
+			BySeverity: map[string]int32{
+				"key0": 1,
+			},
+			FindingsCapped:      ptr.Bool(true),
+			HasBlockingFindings: ptr.Bool(true),
+			TotalFindings:       ptr.Int32(1),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeAssessment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeAssessment(context.Background(), &DescribeAssessmentInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		ClusterArn:    ptr.String("__ClusterArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeAssessment.response", err)
 	}
 }
 
@@ -1500,6 +1606,10 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 func TestCheckResponseSnapshot_DescribeClusterOperation(t *testing.T) {
 	want := &DescribeClusterOperationOutput{
 		ClusterOperationInfo: &types.ClusterOperationInfo{
+			BrokerTypeUpgradeInfo: &types.BrokerTypeUpgradeInfo{
+				TopicReassignmentMode:         types.TopicReassignmentMode("AUTO"),
+				TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+			},
 			ClientRequestId: ptr.String("__ClientRequestId__"),
 			ClusterArn:      ptr.String("__ClusterArn__"),
 			CreationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -1844,6 +1954,10 @@ func TestCheckResponseSnapshot_DescribeClusterOperationV2(t *testing.T) {
 			OperationState: ptr.String("__OperationState__"),
 			OperationType:  ptr.String("__OperationType__"),
 			Provisioned: &types.ClusterOperationV2Provisioned{
+				BrokerTypeUpgradeInfo: &types.BrokerTypeUpgradeInfo{
+					TopicReassignmentMode:         types.TopicReassignmentMode("AUTO"),
+					TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+				},
 				OperationSteps: []types.ClusterOperationStep{
 					{
 						StepInfo: &types.ClusterOperationStepInfo{
@@ -2694,6 +2808,10 @@ func TestCheckResponseSnapshot_DescribeTopic(t *testing.T) {
 		PartitionCount:    ptr.Int32(1),
 		Configs:           ptr.String("__Configs__"),
 		Status:            types.TopicState("CREATING"),
+		ReplicaIds: []int32{
+			1,
+			1,
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeTopic.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2764,6 +2882,51 @@ func TestCheckResponseSnapshot_DescribeTopicPartitions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTopicPartitions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeTopicReassignment(t *testing.T) {
+	want := &DescribeTopicReassignmentOutput{
+		ClusterArn:      ptr.String("__ClusterArn__"),
+		CompletedTopics: ptr.Int32(1),
+		CreationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ErrorInfo: &types.ErrorInfo{
+			ErrorCode:   ptr.String("__ErrorCode__"),
+			ErrorString: ptr.String("__ErrorString__"),
+		},
+		LastUpdateTime:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		MigratedPartitions:            ptr.Int32(1),
+		Status:                        types.TopicReassignmentStatus("PENDING"),
+		TargetInstanceType:            ptr.String("__TargetInstanceType__"),
+		TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+		TopicsToExclude: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TopicsToInclude: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TotalPartitions: ptr.Int32(1),
+		TotalTopics:     ptr.Int32(1),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeTopicReassignment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeTopicReassignment(context.Background(), &DescribeTopicReassignmentInput{
+		ClusterArn:                    ptr.String("__ClusterArn__"),
+		TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTopicReassignment.response", err)
 	}
 }
 
@@ -2904,6 +3067,106 @@ func TestCheckResponseSnapshot_GetCompatibleKafkaVersions(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListAssessmentFindings(t *testing.T) {
+	want := &ListAssessmentFindingsOutput{
+		Findings: []types.AssessmentFinding{
+			{
+				Category:  types.FindingCategory("INFRASTRUCTURE"),
+				FindingId: ptr.String("__FindingId__"),
+				Message:   ptr.String("__Message__"),
+				Remediation: &types.FindingRemediation{
+					Action:           ptr.String("__Action__"),
+					DocumentationUrl: ptr.String("__DocumentationUrl__"),
+				},
+				Resource: ptr.String("__Resource__"),
+				Severity: types.FindingSeverity("ERROR"),
+			},
+			{
+				Category:  types.FindingCategory("INFRASTRUCTURE"),
+				FindingId: ptr.String("__FindingId__"),
+				Message:   ptr.String("__Message__"),
+				Remediation: &types.FindingRemediation{
+					Action:           ptr.String("__Action__"),
+					DocumentationUrl: ptr.String("__DocumentationUrl__"),
+				},
+				Resource: ptr.String("__Resource__"),
+				Severity: types.FindingSeverity("ERROR"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAssessmentFindings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAssessmentFindings(context.Background(), &ListAssessmentFindingsInput{
+		AssessmentArn: ptr.String("__AssessmentArn__"),
+		Category:      ptr.String("__Category__"),
+		ClusterArn:    ptr.String("__ClusterArn__"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Severity:      ptr.String("__Severity__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAssessmentFindings.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListAssessments(t *testing.T) {
+	want := &ListAssessmentsOutput{
+		Assessments: []types.AssessmentInfo{
+			{
+				AssessmentArn:  ptr.String("__AssessmentArn__"),
+				AssessmentType: types.AssessmentType("UPDATE_BROKER_TYPE"),
+				ClusterArn:     ptr.String("__ClusterArn__"),
+				CreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Status:         types.AssessmentStatus("IN_PROGRESS"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+			{
+				AssessmentArn:  ptr.String("__AssessmentArn__"),
+				AssessmentType: types.AssessmentType("UPDATE_BROKER_TYPE"),
+				ClusterArn:     ptr.String("__ClusterArn__"),
+				CreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Status:         types.AssessmentStatus("IN_PROGRESS"),
+				Tags: map[string]string{
+					"key0": "__Value__",
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListAssessments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListAssessments(context.Background(), &ListAssessmentsInput{
+		AssessmentType: ptr.String("__AssessmentType__"),
+		ClusterArn:     ptr.String("__ClusterArn__"),
+		MaxResults:     ptr.Int32(1),
+		NextToken:      ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListAssessments.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
 	want := &ListChannelsOutput{
 		Channels: []types.ChannelInfo{
@@ -2993,6 +3256,10 @@ func TestCheckResponseSnapshot_ListClusterOperations(t *testing.T) {
 	want := &ListClusterOperationsOutput{
 		ClusterOperationInfoList: []types.ClusterOperationInfo{
 			{
+				BrokerTypeUpgradeInfo: &types.BrokerTypeUpgradeInfo{
+					TopicReassignmentMode:         types.TopicReassignmentMode("AUTO"),
+					TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+				},
 				ClientRequestId: ptr.String("__ClientRequestId__"),
 				ClusterArn:      ptr.String("__ClusterArn__"),
 				CreationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -3303,6 +3570,10 @@ func TestCheckResponseSnapshot_ListClusterOperations(t *testing.T) {
 				},
 			},
 			{
+				BrokerTypeUpgradeInfo: &types.BrokerTypeUpgradeInfo{
+					TopicReassignmentMode:         types.TopicReassignmentMode("AUTO"),
+					TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+				},
 				ClientRequestId: ptr.String("__ClientRequestId__"),
 				ClusterArn:      ptr.String("__ClusterArn__"),
 				CreationTime:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -4532,6 +4803,7 @@ func TestCheckResponseSnapshot_ListNodes(t *testing.T) {
 				BrokerNodeInfo: &types.BrokerNodeInfo{
 					AttachedENIId:      ptr.String("__AttachedENIId__"),
 					BrokerId:           ptr.Float64(1.0),
+					BrokerNodeType:     types.BrokerNodeType("STANDARD"),
 					ClientSubnet:       ptr.String("__ClientSubnet__"),
 					ClientVpcIpAddress: ptr.String("__ClientVpcIpAddress__"),
 					CurrentBrokerSoftwareInfo: &types.BrokerSoftwareInfo{
@@ -4569,6 +4841,7 @@ func TestCheckResponseSnapshot_ListNodes(t *testing.T) {
 				BrokerNodeInfo: &types.BrokerNodeInfo{
 					AttachedENIId:      ptr.String("__AttachedENIId__"),
 					BrokerId:           ptr.Float64(1.0),
+					BrokerNodeType:     types.BrokerNodeType("STANDARD"),
 					ClientSubnet:       ptr.String("__ClientSubnet__"),
 					ClientVpcIpAddress: ptr.String("__ClientVpcIpAddress__"),
 					CurrentBrokerSoftwareInfo: &types.BrokerSoftwareInfo{
@@ -4787,6 +5060,50 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListTopicReassignments(t *testing.T) {
+	want := &ListTopicReassignmentsOutput{
+		NextToken: ptr.String("__NextToken__"),
+		Reassignments: []types.TopicReassignmentInfo{
+			{
+				CompletedTopics:               ptr.Int32(1),
+				CreationTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Status:                        types.TopicReassignmentStatus("PENDING"),
+				TargetInstanceType:            ptr.String("__TargetInstanceType__"),
+				TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+				TotalTopics:                   ptr.Int32(1),
+			},
+			{
+				CompletedTopics:               ptr.Int32(1),
+				CreationTime:                  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Status:                        types.TopicReassignmentStatus("PENDING"),
+				TargetInstanceType:            ptr.String("__TargetInstanceType__"),
+				TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+				TotalTopics:                   ptr.Int32(1),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListTopicReassignments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListTopicReassignments(context.Background(), &ListTopicReassignmentsInput{
+		ClusterArn:   ptr.String("__ClusterArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+		StatusFilter: ptr.String("__StatusFilter__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListTopicReassignments.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListTopics(t *testing.T) {
 	want := &ListTopicsOutput{
 		Topics: []types.TopicInfo{
@@ -4796,6 +5113,10 @@ func TestCheckResponseSnapshot_ListTopics(t *testing.T) {
 				ReplicationFactor:     ptr.Int32(1),
 				PartitionCount:        ptr.Int32(1),
 				OutOfSyncReplicaCount: ptr.Int32(1),
+				ReplicaIds: []int32{
+					1,
+					1,
+				},
 			},
 			{
 				TopicArn:              ptr.String("__TopicArn__"),
@@ -4803,6 +5124,10 @@ func TestCheckResponseSnapshot_ListTopics(t *testing.T) {
 				ReplicationFactor:     ptr.Int32(1),
 				PartitionCount:        ptr.Int32(1),
 				OutOfSyncReplicaCount: ptr.Int32(1),
+				ReplicaIds: []int32{
+					1,
+					1,
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4946,6 +5271,66 @@ func TestCheckResponseSnapshot_RejectClientVpcConnection(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartTopicReassignment(t *testing.T) {
+	want := &StartTopicReassignmentOutput{
+		ClusterArn:                    ptr.String("__ClusterArn__"),
+		Status:                        types.TopicReassignmentStatus("PENDING"),
+		TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartTopicReassignment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartTopicReassignment(context.Background(), &StartTopicReassignmentInput{
+		ClientToken:        ptr.String("__ClientToken__"),
+		ClusterArn:         ptr.String("__ClusterArn__"),
+		TargetInstanceType: ptr.String("__TargetInstanceType__"),
+		TopicsToExclude: []string{
+			"__Member__",
+			"__Member__",
+		},
+		TopicsToInclude: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartTopicReassignment.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_StopTopicReassignment(t *testing.T) {
+	want := &StopTopicReassignmentOutput{
+		Status:                        types.TopicReassignmentStatus("PENDING"),
+		TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StopTopicReassignment.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StopTopicReassignment(context.Background(), &StopTopicReassignmentInput{
+		ClusterArn:                    ptr.String("__ClusterArn__"),
+		TopicReassignmentOperationArn: ptr.String("__TopicReassignmentOperationArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StopTopicReassignment.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TagResource.response")
@@ -5081,6 +5466,7 @@ func TestCheckResponseSnapshot_UpdateBrokerType(t *testing.T) {
 		ClusterArn:         ptr.String("__ClusterArn__"),
 		CurrentVersion:     ptr.String("__CurrentVersion__"),
 		TargetInstanceType: ptr.String("__TargetInstanceType__"),
+		TopicReassignment:  types.TopicReassignment("AUTO"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5616,119 +6002,14 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
-		ChannelName: ptr.String("__ChannelName__"),
-		ClusterArn:  ptr.String("__ClusterArn__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+	_, opErr := svc.CreateAssessment(context.Background(), &CreateAssessmentInput{
+		AssessmentParameters: &types.AssessmentParameters{
+			TargetInstanceType: ptr.String("__TargetInstanceType__"),
 		},
-		IcebergDestinationConfiguration: &types.IcebergDestinationConfiguration{
-			AppendOnly: ptr.Bool(true),
-			Catalog: &types.Catalog{
-				CatalogArn:        ptr.String("__CatalogArn__"),
-				WarehouseLocation: ptr.String("__WarehouseLocation__"),
-			},
-			DataFreshnessInSeconds: ptr.Int32(1),
-			DeadLetterQueueS3: &types.DeadLetterQueueS3{
-				BucketArn:           ptr.String("__BucketArn__"),
-				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
-				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
-			},
-			DestinationTableList: []types.DestinationTable{
-				{
-					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
-					DestinationTableName:    ptr.String("__DestinationTableName__"),
-					PartitionSpec: &types.PartitionSpec{
-						PartitionStrategy: types.PartitionStrategy("TIME_HOUR"),
-						SourceList: []types.PartitionSource{
-							{
-								SourceName: ptr.String("__SourceName__"),
-							},
-							{
-								SourceName: ptr.String("__SourceName__"),
-							},
-						},
-					},
-				},
-				{
-					DestinationDatabaseName: ptr.String("__DestinationDatabaseName__"),
-					DestinationTableName:    ptr.String("__DestinationTableName__"),
-					PartitionSpec: &types.PartitionSpec{
-						PartitionStrategy: types.PartitionStrategy("TIME_HOUR"),
-						SourceList: []types.PartitionSource{
-							{
-								SourceName: ptr.String("__SourceName__"),
-							},
-							{
-								SourceName: ptr.String("__SourceName__"),
-							},
-						},
-					},
-				},
-			},
-			SchemaEvolution: &types.SchemaEvolution{
-				EnableSchemaEvolution: ptr.Bool(true),
-			},
-			ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
-			TableCreation: &types.TableCreation{
-				EnableTableCreation: ptr.Bool(true),
-			},
-			CompressionType: types.IcebergCompressionType("ZSTD"),
-		},
-		S3DestinationConfiguration: &types.S3DestinationConfiguration{
-			DataFreshnessInSeconds: ptr.Int32(1),
-			DeadLetterQueueS3: &types.DeadLetterQueueS3{
-				BucketArn:           ptr.String("__BucketArn__"),
-				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
-				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
-			},
-			ServiceExecutionRoleArn: ptr.String("__ServiceExecutionRoleArn__"),
-			Storage: &types.S3Storage{
-				BucketArn:           ptr.String("__BucketArn__"),
-				CompressionType:     types.S3CompressionType("NONE"),
-				OutputPrefix:        ptr.String("__OutputPrefix__"),
-				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
-				StorageClass:        types.S3StorageClass("STANDARD"),
-				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
-			},
-		},
+		AssessmentType: types.AssessmentType("UPDATE_BROKER_TYPE"),
+		ClusterArn:     ptr.String("__ClusterArn__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
-		},
-		TopicConfigurationList: []types.TopicConfiguration{
-			{
-				RecordConverter: &types.RecordConverter{
-					ValueConverter: types.ValueConverter("BYTE_ARRAY"),
-				},
-				RecordSchema: &types.RecordSchema{
-					GsrArn: ptr.String("__GsrArn__"),
-				},
-				TopicArn: ptr.String("__TopicArn__"),
-			},
-			{
-				RecordConverter: &types.RecordConverter{
-					ValueConverter: types.ValueConverter("BYTE_ARRAY"),
-				},
-				RecordSchema: &types.RecordSchema{
-					GsrArn: ptr.String("__GsrArn__"),
-				},
-				TopicArn: ptr.String("__TopicArn__"),
-			},
-		},
-		LoggingInfo: &types.ChannelLoggingInfo{
-			CloudWatchLogs: &types.CloudWatchLogs{
-				Enabled:  ptr.Bool(true),
-				LogGroup: ptr.String("__LogGroup__"),
-			},
-			Firehose: &types.Firehose{
-				DeliveryStream: ptr.String("__DeliveryStream__"),
-				Enabled:        ptr.Bool(true),
-			},
-			S3: &types.S3{
-				Bucket:  ptr.String("__Bucket__"),
-				Enabled: ptr.Bool(true),
-				Prefix:  ptr.String("__Prefix__"),
-			},
 		},
 	})
 	if opErr == nil {

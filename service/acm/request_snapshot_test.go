@@ -936,6 +936,10 @@ func TestCheckRequestSnapshot_ListCertificates(t *testing.T) {
 			types.CertificateKeyPairOrigin("AWS_MANAGED"),
 			types.CertificateKeyPairOrigin("AWS_MANAGED"),
 		},
+		RootHierarchyTypes: []types.RootHierarchyType{
+			types.RootHierarchyType("N2_AMAZON_MANAGED"),
+			types.RootHierarchyType("N2_AMAZON_MANAGED"),
+		},
 		Includes: &types.Filters{
 			ExtendedKeyUsage: []types.ExtendedKeyUsageName{
 				types.ExtendedKeyUsageName("TLS_WEB_SERVER_AUTHENTICATION"),
@@ -1163,8 +1167,10 @@ func TestCheckRequestSnapshot_RequestCertificate(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		KeyAlgorithm: types.KeyAlgorithm("RSA_1024"),
-		ManagedBy:    types.CertificateManagedBy("CLOUDFRONT"),
+		KeyAlgorithm:      types.KeyAlgorithm("RSA_1024"),
+		ManagedBy:         types.CertificateManagedBy("CLOUDFRONT"),
+		CertificateUsage:  types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+		RootHierarchyType: types.RootHierarchyType("N2_AMAZON_MANAGED"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2249,6 +2255,10 @@ func TestUpdateRequestSnapshot_ListCertificates(t *testing.T) {
 			types.CertificateKeyPairOrigin("AWS_MANAGED"),
 			types.CertificateKeyPairOrigin("AWS_MANAGED"),
 		},
+		RootHierarchyTypes: []types.RootHierarchyType{
+			types.RootHierarchyType("N2_AMAZON_MANAGED"),
+			types.RootHierarchyType("N2_AMAZON_MANAGED"),
+		},
 		Includes: &types.Filters{
 			ExtendedKeyUsage: []types.ExtendedKeyUsageName{
 				types.ExtendedKeyUsageName("TLS_WEB_SERVER_AUTHENTICATION"),
@@ -2476,8 +2486,10 @@ func TestUpdateRequestSnapshot_RequestCertificate(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
-		KeyAlgorithm: types.KeyAlgorithm("RSA_1024"),
-		ManagedBy:    types.CertificateManagedBy("CLOUDFRONT"),
+		KeyAlgorithm:      types.KeyAlgorithm("RSA_1024"),
+		ManagedBy:         types.CertificateManagedBy("CLOUDFRONT"),
+		CertificateUsage:  types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+		RootHierarchyType: types.RootHierarchyType("N2_AMAZON_MANAGED"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

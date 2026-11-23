@@ -303,6 +303,25 @@ func TestCheckResponseSnapshot_CreatePolicy(t *testing.T) {
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
 			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
 		},
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
@@ -334,6 +353,25 @@ func TestCheckResponseSnapshot_CreatePolicy(t *testing.T) {
 			WafConfig: &types.WafConfig{
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
+			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		IsPublished: ptr.Bool(true),
@@ -376,6 +414,25 @@ func TestCheckResponseSnapshot_CreatePolicySnapshot(t *testing.T) {
 			WafConfig: &types.WafConfig{
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
+			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -528,12 +585,13 @@ func TestCheckResponseSnapshot_CreateScope(t *testing.T) {
 				},
 			},
 		},
-		Status:              types.EntityStatus("DRAFT"),
-		Version:             ptr.String("__Version__"),
-		UpdateToken:         ptr.String("__UpdateToken__"),
-		IsSnapshot:          ptr.Bool(true),
-		HasPublishedVersion: ptr.Bool(true),
-		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+		Status:               types.EntityStatus("DRAFT"),
+		Version:              ptr.String("__Version__"),
+		UpdateToken:          ptr.String("__UpdateToken__"),
+		IsSnapshot:           ptr.Bool(true),
+		HasPublishedVersion:  ptr.Bool(true),
+		UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateScope.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -583,7 +641,8 @@ func TestCheckResponseSnapshot_CreateScope(t *testing.T) {
 				},
 			},
 		},
-		IsPublished: ptr.Bool(true),
+		SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+		IsPublished:          ptr.Bool(true),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -638,12 +697,13 @@ func TestCheckResponseSnapshot_CreateScopeSnapshot(t *testing.T) {
 				},
 			},
 		},
-		Status:              types.EntityStatus("DRAFT"),
-		Version:             ptr.String("__Version__"),
-		UpdateToken:         ptr.String("__UpdateToken__"),
-		IsSnapshot:          ptr.Bool(true),
-		HasPublishedVersion: ptr.Bool(true),
-		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+		Status:               types.EntityStatus("DRAFT"),
+		Version:              ptr.String("__Version__"),
+		UpdateToken:          ptr.String("__UpdateToken__"),
+		IsSnapshot:           ptr.Bool(true),
+		HasPublishedVersion:  ptr.Bool(true),
+		UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateScopeSnapshot.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1078,6 +1138,25 @@ func TestCheckResponseSnapshot_GetPolicy(t *testing.T) {
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
 			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
 		},
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
@@ -1177,12 +1256,13 @@ func TestCheckResponseSnapshot_GetScope(t *testing.T) {
 				},
 			},
 		},
-		Status:              types.EntityStatus("DRAFT"),
-		Version:             ptr.String("__Version__"),
-		UpdateToken:         ptr.String("__UpdateToken__"),
-		IsSnapshot:          ptr.Bool(true),
-		HasPublishedVersion: ptr.Bool(true),
-		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+		Status:               types.EntityStatus("DRAFT"),
+		Version:              ptr.String("__Version__"),
+		UpdateToken:          ptr.String("__UpdateToken__"),
+		IsSnapshot:           ptr.Bool(true),
+		HasPublishedVersion:  ptr.Bool(true),
+		UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetScope.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1449,6 +1529,62 @@ func TestCheckResponseSnapshot_ListDeployments(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListEntityCoverages(t *testing.T) {
+	want := &ListEntityCoveragesOutput{
+		NextToken: ptr.String("__NextToken__"),
+		ResourceCoverages: []types.ResourceCoverageSummary{
+			{
+				ResourceArn:            ptr.String("__ResourceArn__"),
+				EntityType:             types.ServiceResourceType("Rule"),
+				EntityArn:              ptr.String("__EntityArn__"),
+				ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+				ResourceType:           types.ScopeResourceType("AWS::ApiGateway::Stage"),
+				FirewallType:           types.PolicyFirewallType("WAF"),
+				CoverageStatus:         types.CoverageStatus("IN_EFFECT"),
+				DeploymentArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ResourceArn:            ptr.String("__ResourceArn__"),
+				EntityType:             types.ServiceResourceType("Rule"),
+				EntityArn:              ptr.String("__EntityArn__"),
+				ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+				ResourceType:           types.ScopeResourceType("AWS::ApiGateway::Stage"),
+				FirewallType:           types.PolicyFirewallType("WAF"),
+				CoverageStatus:         types.CoverageStatus("IN_EFFECT"),
+				DeploymentArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListEntityCoverages.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListEntityCoverages(context.Background(), &ListEntityCoveragesInput{
+		EntityArn:              ptr.String("__EntityArn__"),
+		ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+		MaxResults:             ptr.Int32(1),
+		NextToken:              ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListEntityCoverages.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListPolicies(t *testing.T) {
 	want := &ListPoliciesOutput{
 		NextToken: ptr.String("__NextToken__"),
@@ -1544,6 +1680,62 @@ func TestCheckResponseSnapshot_ListPolicySnapshots(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListPolicySnapshots.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListProtectedResourceCoverages(t *testing.T) {
+	want := &ListProtectedResourceCoveragesOutput{
+		NextToken: ptr.String("__NextToken__"),
+		ResourceCoverages: []types.ResourceCoverageSummary{
+			{
+				ResourceArn:            ptr.String("__ResourceArn__"),
+				EntityType:             types.ServiceResourceType("Rule"),
+				EntityArn:              ptr.String("__EntityArn__"),
+				ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+				ResourceType:           types.ScopeResourceType("AWS::ApiGateway::Stage"),
+				FirewallType:           types.PolicyFirewallType("WAF"),
+				CoverageStatus:         types.CoverageStatus("IN_EFFECT"),
+				DeploymentArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ResourceArn:            ptr.String("__ResourceArn__"),
+				EntityType:             types.ServiceResourceType("Rule"),
+				EntityArn:              ptr.String("__EntityArn__"),
+				ResourceOwnerAccountId: ptr.String("__ResourceOwnerAccountId__"),
+				ResourceType:           types.ScopeResourceType("AWS::ApiGateway::Stage"),
+				FirewallType:           types.PolicyFirewallType("WAF"),
+				CoverageStatus:         types.CoverageStatus("IN_EFFECT"),
+				DeploymentArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListProtectedResourceCoverages.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListProtectedResourceCoverages(context.Background(), &ListProtectedResourceCoveragesInput{
+		ResourceArn: ptr.String("__ResourceArn__"),
+		EntityType:  types.ServiceResourceType("Rule"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListProtectedResourceCoverages.response", err)
 	}
 }
 
@@ -1763,22 +1955,24 @@ func TestCheckResponseSnapshot_ListScopeSnapshots(t *testing.T) {
 		NextToken: ptr.String("__NextToken__"),
 		Snapshots: []types.ScopeSummary{
 			{
-				ScopeId:             ptr.String("__ScopeId__"),
-				ScopeArn:            ptr.String("__ScopeArn__"),
-				ScopeName:           ptr.String("__ScopeName__"),
-				Status:              types.EntityStatus("DRAFT"),
-				Version:             ptr.String("__Version__"),
-				HasPublishedVersion: ptr.Bool(true),
-				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ScopeId:              ptr.String("__ScopeId__"),
+				ScopeArn:             ptr.String("__ScopeArn__"),
+				ScopeName:            ptr.String("__ScopeName__"),
+				SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+				Status:               types.EntityStatus("DRAFT"),
+				Version:              ptr.String("__Version__"),
+				HasPublishedVersion:  ptr.Bool(true),
+				UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
-				ScopeId:             ptr.String("__ScopeId__"),
-				ScopeArn:            ptr.String("__ScopeArn__"),
-				ScopeName:           ptr.String("__ScopeName__"),
-				Status:              types.EntityStatus("DRAFT"),
-				Version:             ptr.String("__Version__"),
-				HasPublishedVersion: ptr.Bool(true),
-				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ScopeId:              ptr.String("__ScopeId__"),
+				ScopeArn:             ptr.String("__ScopeArn__"),
+				ScopeName:            ptr.String("__ScopeName__"),
+				SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+				Status:               types.EntityStatus("DRAFT"),
+				Version:              ptr.String("__Version__"),
+				HasPublishedVersion:  ptr.Bool(true),
+				UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 	}
@@ -1808,22 +2002,24 @@ func TestCheckResponseSnapshot_ListScopes(t *testing.T) {
 		NextToken: ptr.String("__NextToken__"),
 		Scopes: []types.ScopeSummary{
 			{
-				ScopeId:             ptr.String("__ScopeId__"),
-				ScopeArn:            ptr.String("__ScopeArn__"),
-				ScopeName:           ptr.String("__ScopeName__"),
-				Status:              types.EntityStatus("DRAFT"),
-				Version:             ptr.String("__Version__"),
-				HasPublishedVersion: ptr.Bool(true),
-				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ScopeId:              ptr.String("__ScopeId__"),
+				ScopeArn:             ptr.String("__ScopeArn__"),
+				ScopeName:            ptr.String("__ScopeName__"),
+				SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+				Status:               types.EntityStatus("DRAFT"),
+				Version:              ptr.String("__Version__"),
+				HasPublishedVersion:  ptr.Bool(true),
+				UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
-				ScopeId:             ptr.String("__ScopeId__"),
-				ScopeArn:            ptr.String("__ScopeArn__"),
-				ScopeName:           ptr.String("__ScopeName__"),
-				Status:              types.EntityStatus("DRAFT"),
-				Version:             ptr.String("__Version__"),
-				HasPublishedVersion: ptr.Bool(true),
-				UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ScopeId:              ptr.String("__ScopeId__"),
+				ScopeArn:             ptr.String("__ScopeArn__"),
+				ScopeName:            ptr.String("__ScopeName__"),
+				SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+				Status:               types.EntityStatus("DRAFT"),
+				Version:              ptr.String("__Version__"),
+				HasPublishedVersion:  ptr.Bool(true),
+				UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 	}
@@ -1881,6 +2077,7 @@ func TestCheckResponseSnapshot_ListTemplateSnapshots(t *testing.T) {
 				TemplateId:          ptr.String("__TemplateId__"),
 				TemplateArn:         ptr.String("__TemplateArn__"),
 				TemplateName:        ptr.String("__TemplateName__"),
+				TemplateOwner:       types.TemplateOwner("CUSTOMER"),
 				Status:              types.EntityStatus("DRAFT"),
 				Version:             ptr.String("__Version__"),
 				HasPublishedVersion: ptr.Bool(true),
@@ -1891,6 +2088,7 @@ func TestCheckResponseSnapshot_ListTemplateSnapshots(t *testing.T) {
 				TemplateId:          ptr.String("__TemplateId__"),
 				TemplateArn:         ptr.String("__TemplateArn__"),
 				TemplateName:        ptr.String("__TemplateName__"),
+				TemplateOwner:       types.TemplateOwner("CUSTOMER"),
 				Status:              types.EntityStatus("DRAFT"),
 				Version:             ptr.String("__Version__"),
 				HasPublishedVersion: ptr.Bool(true),
@@ -1928,6 +2126,7 @@ func TestCheckResponseSnapshot_ListTemplates(t *testing.T) {
 				TemplateId:          ptr.String("__TemplateId__"),
 				TemplateArn:         ptr.String("__TemplateArn__"),
 				TemplateName:        ptr.String("__TemplateName__"),
+				TemplateOwner:       types.TemplateOwner("CUSTOMER"),
 				Status:              types.EntityStatus("DRAFT"),
 				Version:             ptr.String("__Version__"),
 				HasPublishedVersion: ptr.Bool(true),
@@ -1938,6 +2137,7 @@ func TestCheckResponseSnapshot_ListTemplates(t *testing.T) {
 				TemplateId:          ptr.String("__TemplateId__"),
 				TemplateArn:         ptr.String("__TemplateArn__"),
 				TemplateName:        ptr.String("__TemplateName__"),
+				TemplateOwner:       types.TemplateOwner("CUSTOMER"),
 				Status:              types.EntityStatus("DRAFT"),
 				Version:             ptr.String("__Version__"),
 				HasPublishedVersion: ptr.Bool(true),
@@ -1955,9 +2155,10 @@ func TestCheckResponseSnapshot_ListTemplates(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ListTemplates(context.Background(), &ListTemplatesInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
-		Status:     types.EntityStatusFilter("ACTIVE"),
+		MaxResults:    ptr.Int32(1),
+		NextToken:     ptr.String("__NextToken__"),
+		Status:        types.EntityStatusFilter("ACTIVE"),
+		TemplateOwner: types.TemplateOwner("CUSTOMER"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2206,6 +2407,25 @@ func TestCheckResponseSnapshot_UpdatePolicy(t *testing.T) {
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
 			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
 		},
 		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
@@ -2236,6 +2456,25 @@ func TestCheckResponseSnapshot_UpdatePolicy(t *testing.T) {
 			WafConfig: &types.WafConfig{
 				ExistingCustomerWebACLResolution: types.ExistingCustomerWebACLResolution("RETROFIT"),
 				ConflictResolution:               types.WAFConflictResolutionOptions("MERGE_WHERE_APPLICABLE"),
+			},
+			IgwFirewallConfig: &types.IgwFirewallConfig{
+				DefaultSubnetConnectivity: types.DefaultSubnetConnectivity("flexible"),
+				SubnetConnectivityOverrides: []types.SubnetConnectivityOverride{
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						ConnectivityType: types.SubnetConnectivity("flexible"),
+						Scopes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 		},
 		IsPublished: ptr.Bool(true),
@@ -2332,12 +2571,13 @@ func TestCheckResponseSnapshot_UpdateScope(t *testing.T) {
 				},
 			},
 		},
-		Status:              types.EntityStatus("DRAFT"),
-		Version:             ptr.String("__Version__"),
-		UpdateToken:         ptr.String("__UpdateToken__"),
-		IsSnapshot:          ptr.Bool(true),
-		HasPublishedVersion: ptr.Bool(true),
-		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SpecializedScopeType: types.SpecializedScopeType("IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"),
+		Status:               types.EntityStatus("DRAFT"),
+		Version:              ptr.String("__Version__"),
+		UpdateToken:          ptr.String("__UpdateToken__"),
+		IsSnapshot:           ptr.Bool(true),
+		HasPublishedVersion:  ptr.Bool(true),
+		UpdatedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateScope.response")
 	if errors.Is(err, fs.ErrNotExist) {

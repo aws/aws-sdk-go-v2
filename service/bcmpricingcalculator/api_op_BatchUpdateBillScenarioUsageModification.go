@@ -66,7 +66,7 @@ func (v *BatchUpdateBillScenarioUsageModificationInput) SerializeMembers(s smith
 
 type BatchUpdateBillScenarioUsageModificationOutput struct {
 
-	//  Returns the list of error reasons and usage line item IDs that could not be
+	//  Returns the list of error reasons and usage line item IDs that couldn't be
 	// updated for the Bill Scenario.
 	Errors []types.BatchUpdateBillScenarioUsageModificationError
 

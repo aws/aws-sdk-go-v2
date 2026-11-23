@@ -1,0 +1,5 @@
+POST /products/__ProductId__/disassociate
+
+Content-Type: application/json
+
+{"managedApiIds":["__Member__","__Member__"]}

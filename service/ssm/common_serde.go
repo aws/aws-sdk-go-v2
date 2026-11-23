@@ -442,6 +442,14 @@ func serializeCloudConnectorSummaryList(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
+func serializeCloudProviderList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CloudProvider) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeCommandFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CommandFilter) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -2530,6 +2538,27 @@ func deserializeCloudConnectorSummaryList(d smithy.ShapeDeserializer, s *smithy.
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCloudProviderList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CloudProvider) error {
+	*v = make([]types.CloudProvider, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CloudProvider
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.CloudProvider(vv))
 		return nil
 	})
 }

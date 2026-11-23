@@ -1,3 +1,7 @@
+# v1.64.0 (2026-11-20)
+
+* **Feature**: Amazon Bedrock Runtime adds an optional projectIdentifier parameter to InvokeModel, InvokeModelWithResponseStream, Converse, and ConverseStream, allowing requests to specify a project by ID or ARN.
+
 # v1.63.13 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

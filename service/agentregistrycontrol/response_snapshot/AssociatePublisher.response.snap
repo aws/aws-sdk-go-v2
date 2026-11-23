@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"publicIdentifier":"__PublicIdentifier__","publisher":"__Publisher__","recordArn":"__RecordArn__","status":"PENDING_APPROVAL","statusReason":"__StatusReason__"}

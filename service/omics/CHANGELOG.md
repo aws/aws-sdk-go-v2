@@ -1,3 +1,7 @@
+# v1.60.0 (2026-11-20)
+
+* **Feature**: Adds the parametersUri field to StartRun, which lets you provide run parameters in a JSON file in Amazon S3 instead of inline. GetRun returns parametersUri for runs started this way.
+
 # v1.59.4 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

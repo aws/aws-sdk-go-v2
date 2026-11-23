@@ -1255,6 +1255,17 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -1419,6 +1430,17 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -2827,6 +2849,17 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -2991,6 +3024,17 @@ func TestCheckRequestSnapshot_CheckCapacity(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -4553,6 +4597,17 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -4717,6 +4772,17 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -6125,6 +6191,17 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -6289,6 +6366,17 @@ func TestCheckRequestSnapshot_CreateRuleGroup(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -7880,6 +7968,17 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -8044,6 +8143,17 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -9452,6 +9562,17 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -9616,6 +9737,17 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -10074,7 +10206,7 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 		AssociationConfig: &types.AssociationConfig{
 			RequestBody: map[string]types.RequestBodyAssociatedResourceTypeConfig{
 				"key0": {
-					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
+					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_8"),
 				},
 			},
 			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
@@ -10624,6 +10756,63 @@ func TestCheckRequestSnapshot_GetDecryptedAPIKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDecryptedAPIKey"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetEvent(t *testing.T) {
+	input := &GetEventInput{
+		Scope:     types.Scope("CLOUDFRONT"),
+		EventId:   ptr.String("__EventId__"),
+		WebAclArn: ptr.String("__WebAclArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetEvent(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEvent"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetEventActor(t *testing.T) {
+	input := &GetEventActorInput{
+		Scope:        types.Scope("CLOUDFRONT"),
+		EventActorId: ptr.String("__EventActorId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetEventActor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEventActor"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -11230,6 +11419,191 @@ func TestCheckRequestSnapshot_ListAvailableManagedRuleGroupVersions(t *testing.T
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAvailableManagedRuleGroupVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListEventActors(t *testing.T) {
+	input := &ListEventActorsInput{
+		Scope: types.Scope("CLOUDFRONT"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SortBy:     types.EventActorSortBy("EVENT_COUNT"),
+		Limit:      ptr.Int32(1),
+		NextMarker: ptr.String("__NextMarker__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEventActors(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEventActors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListEvents(t *testing.T) {
+	input := &ListEventsInput{
+		Scope: types.Scope("CLOUDFRONT"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Filters: []types.EventFilter{
+			{
+				Name: types.EventFilterKey("EVENT_CATEGORY"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.EventFilterKey("EVENT_CATEGORY"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ApiPatternFilters: []types.ApiPatternFilter{
+			{
+				Method:      ptr.String("__Method__"),
+				PathPattern: ptr.String("__PathPattern__"),
+				Port:        1,
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Method:      ptr.String("__Method__"),
+				PathPattern: ptr.String("__PathPattern__"),
+				Port:        1,
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Limit:      ptr.Int32(1),
+		NextMarker: ptr.String("__NextMarker__"),
+		SortOrder:  types.SortOrder("ASC"),
+		SortBy:     types.EventSortBy("START_TIME"),
+		Include: []types.EventIncludeField{
+			types.EventIncludeField("TIMELINE"),
+			types.EventIncludeField("TIMELINE"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEvents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEvents"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListEventsByWebACL(t *testing.T) {
+	input := &ListEventsByWebACLInput{
+		Scope:     types.Scope("CLOUDFRONT"),
+		WebAclArn: ptr.String("__WebAclArn__"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Filters: []types.EventFilter{
+			{
+				Name: types.EventFilterKey("EVENT_CATEGORY"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.EventFilterKey("EVENT_CATEGORY"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ApiPatternFilters: []types.ApiPatternFilter{
+			{
+				Method:      ptr.String("__Method__"),
+				PathPattern: ptr.String("__PathPattern__"),
+				Port:        1,
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Method:      ptr.String("__Method__"),
+				PathPattern: ptr.String("__PathPattern__"),
+				Port:        1,
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Limit:      ptr.Int32(1),
+		NextMarker: ptr.String("__NextMarker__"),
+		SortOrder:  types.SortOrder("ASC"),
+		SortBy:     types.EventSortBy("START_TIME"),
+		Include: []types.EventIncludeField{
+			types.EventIncludeField("TIMELINE"),
+			types.EventIncludeField("TIMELINE"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEventsByWebACL(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEventsByWebACL"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -13035,6 +13409,17 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -13199,6 +13584,17 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -14607,6 +15003,17 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -14771,6 +15178,17 @@ func TestCheckRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -16354,6 +16772,17 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -16518,6 +16947,17 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -17926,6 +18366,17 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -18090,6 +18541,17 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -18539,7 +19001,7 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 		AssociationConfig: &types.AssociationConfig{
 			RequestBody: map[string]types.RequestBodyAssociatedResourceTypeConfig{
 				"key0": {
-					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
+					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_8"),
 				},
 			},
 			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
@@ -19741,6 +20203,17 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -19905,6 +20378,17 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -21313,6 +21797,17 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -21477,6 +21972,17 @@ func TestUpdateRequestSnapshot_CheckCapacity(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -23039,6 +23545,17 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -23203,6 +23720,17 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -24611,6 +25139,17 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -24775,6 +25314,17 @@ func TestUpdateRequestSnapshot_CreateRuleGroup(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -26366,6 +26916,17 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -26530,6 +27091,17 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -27938,6 +28510,17 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -28102,6 +28685,17 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -28560,7 +29154,7 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 		AssociationConfig: &types.AssociationConfig{
 			RequestBody: map[string]types.RequestBodyAssociatedResourceTypeConfig{
 				"key0": {
-					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
+					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_8"),
 				},
 			},
 			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
@@ -29110,6 +29704,63 @@ func TestUpdateRequestSnapshot_GetDecryptedAPIKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetDecryptedAPIKey"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetEvent(t *testing.T) {
+	input := &GetEventInput{
+		Scope:     types.Scope("CLOUDFRONT"),
+		EventId:   ptr.String("__EventId__"),
+		WebAclArn: ptr.String("__WebAclArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetEvent(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEvent"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetEventActor(t *testing.T) {
+	input := &GetEventActorInput{
+		Scope:        types.Scope("CLOUDFRONT"),
+		EventActorId: ptr.String("__EventActorId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetEventActor(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetEventActor"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -29716,6 +30367,191 @@ func TestUpdateRequestSnapshot_ListAvailableManagedRuleGroupVersions(t *testing.
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListAvailableManagedRuleGroupVersions"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListEventActors(t *testing.T) {
+	input := &ListEventActorsInput{
+		Scope: types.Scope("CLOUDFRONT"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		SortBy:     types.EventActorSortBy("EVENT_COUNT"),
+		Limit:      ptr.Int32(1),
+		NextMarker: ptr.String("__NextMarker__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEventActors(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEventActors"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListEvents(t *testing.T) {
+	input := &ListEventsInput{
+		Scope: types.Scope("CLOUDFRONT"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Filters: []types.EventFilter{
+			{
+				Name: types.EventFilterKey("EVENT_CATEGORY"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.EventFilterKey("EVENT_CATEGORY"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ApiPatternFilters: []types.ApiPatternFilter{
+			{
+				Method:      ptr.String("__Method__"),
+				PathPattern: ptr.String("__PathPattern__"),
+				Port:        1,
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Method:      ptr.String("__Method__"),
+				PathPattern: ptr.String("__PathPattern__"),
+				Port:        1,
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Limit:      ptr.Int32(1),
+		NextMarker: ptr.String("__NextMarker__"),
+		SortOrder:  types.SortOrder("ASC"),
+		SortBy:     types.EventSortBy("START_TIME"),
+		Include: []types.EventIncludeField{
+			types.EventIncludeField("TIMELINE"),
+			types.EventIncludeField("TIMELINE"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEvents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEvents"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListEventsByWebACL(t *testing.T) {
+	input := &ListEventsByWebACLInput{
+		Scope:     types.Scope("CLOUDFRONT"),
+		WebAclArn: ptr.String("__WebAclArn__"),
+		TimeWindow: &types.TimeWindow{
+			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		Filters: []types.EventFilter{
+			{
+				Name: types.EventFilterKey("EVENT_CATEGORY"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.EventFilterKey("EVENT_CATEGORY"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ApiPatternFilters: []types.ApiPatternFilter{
+			{
+				Method:      ptr.String("__Method__"),
+				PathPattern: ptr.String("__PathPattern__"),
+				Port:        1,
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Method:      ptr.String("__Method__"),
+				PathPattern: ptr.String("__PathPattern__"),
+				Port:        1,
+				Domains: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Limit:      ptr.Int32(1),
+		NextMarker: ptr.String("__NextMarker__"),
+		SortOrder:  types.SortOrder("ASC"),
+		SortBy:     types.EventSortBy("START_TIME"),
+		Include: []types.EventIncludeField{
+			types.EventIncludeField("TIMELINE"),
+			types.EventIncludeField("TIMELINE"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEventsByWebACL(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEventsByWebACL"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -31521,6 +32357,17 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -31685,6 +32532,17 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -33093,6 +33951,17 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -33257,6 +34126,17 @@ func TestUpdateRequestSnapshot_UpdateRuleGroup(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -34840,6 +35720,17 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -35004,6 +35895,17 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -36412,6 +37314,17 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
 								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
+								},
 							},
 							{
 								LoginPath:   ptr.String("__LoginPath__"),
@@ -36576,6 +37489,17 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 										},
 									},
 									SensitivityToBlock: types.SensitivityToAct("LOW"),
+								},
+								AWSManagedRulesAISecurityRuleSet: &types.AWSManagedRulesAISecurityRuleSet{
+									BedrockGuardrails: &types.BedrockGuardrails{
+										Disable: &types.DisableBedrockGuardrails{},
+										ProtectRequestOnly: &types.BedrockGuardrailsRequestOnly{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+										ProtectRequestAndResponse: &types.BedrockGuardrailsRequestAndResponse{
+											RoleArn: ptr.String("__RoleArn__"),
+										},
+									},
 								},
 							},
 						},
@@ -37025,7 +37949,7 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 		AssociationConfig: &types.AssociationConfig{
 			RequestBody: map[string]types.RequestBodyAssociatedResourceTypeConfig{
 				"key0": {
-					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
+					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_8"),
 				},
 			},
 			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{

@@ -30,6 +30,7 @@ func (c *Client) GetOpportunity(ctx context.Context, params *GetOpportunityInput
 	return out, nil
 }
 
+// Contains the request parameters for the GetOpportunity operation.
 type GetOpportunityInput struct {
 
 	// Specifies the catalog associated with the request. This field takes a string
@@ -64,6 +65,7 @@ func (v *GetOpportunityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
+// Contains the response that the GetOpportunity action returns.
 type GetOpportunityOutput struct {
 
 	// Specifies the catalog associated with the request. This field takes a string

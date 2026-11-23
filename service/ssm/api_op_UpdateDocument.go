@@ -41,6 +41,19 @@ type UpdateDocumentInput struct {
 	// A list of key-value pairs that describe attachments to a version of a document.
 	Attachments []types.AttachmentsSource
 
+	// The cloud providers that the new document version can run against. Valid values
+	// include the following:
+	//
+	//   - AWS - The document runs against Amazon Web Services resources.
+	//
+	//   - Azure - The document runs against Microsoft Azure resources.
+	//
+	//   - GCP - The document runs against Google Cloud resources.
+	//
+	// If you don't specify a value, the new version uses the cloud providers of the
+	// latest version.
+	CloudProviders []types.CloudProvider
+
 	// The friendly name of the SSM document that you want to update. This value can
 	// differ for each version of the document. If you don't specify a value for this
 	// parameter in your request, the existing value is applied to the new document
@@ -80,6 +93,9 @@ func (v *UpdateDocumentInput) Serialize(s smithy.ShapeSerializer) {
 func (v *UpdateDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Attachments != nil {
 		serializeAttachmentsSourceList(s, schemas.UpdateDocumentRequest_Attachments, v.Attachments)
+	}
+	if v.CloudProviders != nil {
+		serializeCloudProviderList(s, schemas.UpdateDocumentRequest_CloudProviders, v.CloudProviders)
 	}
 	if v.Content != nil {
 		s.WriteString(schemas.UpdateDocumentRequest_Content, *v.Content)

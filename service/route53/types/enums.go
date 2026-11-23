@@ -42,6 +42,7 @@ const (
 	AccountLimitTypeMaxTrafficPolicyInstancesByOwner AccountLimitType = "MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER"
 	AccountLimitTypeMaxReusableDelegationSetsByOwner AccountLimitType = "MAX_REUSABLE_DELEGATION_SETS_BY_OWNER"
 	AccountLimitTypeMaxTrafficPoliciesByOwner        AccountLimitType = "MAX_TRAFFIC_POLICIES_BY_OWNER"
+	AccountLimitTypeMaxHealthCheckSourcesByOwner     AccountLimitType = "MAX_HEALTH_CHECK_SOURCES_BY_OWNER"
 )
 
 // Values returns all known values for AccountLimitType. Note that this can be
@@ -55,6 +56,32 @@ func (AccountLimitType) Values() []AccountLimitType {
 		"MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER",
 		"MAX_REUSABLE_DELEGATION_SETS_BY_OWNER",
 		"MAX_TRAFFIC_POLICIES_BY_OWNER",
+		"MAX_HEALTH_CHECK_SOURCES_BY_OWNER",
+	}
+}
+
+type AZAffinityLocationType string
+
+// Enum values for AZAffinityLocationType
+const (
+	AZAffinityLocationTypeAvailabilityZone      AZAffinityLocationType = "AvailabilityZone"
+	AZAffinityLocationTypeAvailabilityZoneGroup AZAffinityLocationType = "AvailabilityZoneGroup"
+	AZAffinityLocationTypeRegion                AZAffinityLocationType = "Region"
+	AZAffinityLocationTypePartition             AZAffinityLocationType = "Partition"
+	AZAffinityLocationTypeGlobal                AZAffinityLocationType = "Global"
+)
+
+// Values returns all known values for AZAffinityLocationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AZAffinityLocationType) Values() []AZAffinityLocationType {
+	return []AZAffinityLocationType{
+		"AvailabilityZone",
+		"AvailabilityZoneGroup",
+		"Region",
+		"Partition",
+		"Global",
 	}
 }
 
@@ -76,6 +103,92 @@ func (ChangeAction) Values() []ChangeAction {
 		"CREATE",
 		"DELETE",
 		"UPSERT",
+	}
+}
+
+type ChangeGuardrailName string
+
+// Enum values for ChangeGuardrailName
+const (
+	ChangeGuardrailNameNsFormatCheck              ChangeGuardrailName = "NS_FORMAT_CHECK"
+	ChangeGuardrailNameNsDelegationAuthorityCheck ChangeGuardrailName = "NS_DELEGATION_AUTHORITY_CHECK"
+	ChangeGuardrailNameNsOcclusionCheck           ChangeGuardrailName = "NS_OCCLUSION_CHECK"
+	ChangeGuardrailNameAliasTargetCheck           ChangeGuardrailName = "ALIAS_TARGET_CHECK"
+	ChangeGuardrailNameActiveRecordCheck          ChangeGuardrailName = "ACTIVE_RECORD_CHECK"
+	ChangeGuardrailNameActiveDelegationCheck      ChangeGuardrailName = "ACTIVE_DELEGATION_CHECK"
+)
+
+// Values returns all known values for ChangeGuardrailName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeGuardrailName) Values() []ChangeGuardrailName {
+	return []ChangeGuardrailName{
+		"NS_FORMAT_CHECK",
+		"NS_DELEGATION_AUTHORITY_CHECK",
+		"NS_OCCLUSION_CHECK",
+		"ALIAS_TARGET_CHECK",
+		"ACTIVE_RECORD_CHECK",
+		"ACTIVE_DELEGATION_CHECK",
+	}
+}
+
+type ChangeGuardrailStatus string
+
+// Enum values for ChangeGuardrailStatus
+const (
+	ChangeGuardrailStatusEnabled  ChangeGuardrailStatus = "ENABLED"
+	ChangeGuardrailStatusDisabled ChangeGuardrailStatus = "DISABLED"
+)
+
+// Values returns all known values for ChangeGuardrailStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeGuardrailStatus) Values() []ChangeGuardrailStatus {
+	return []ChangeGuardrailStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type ChangeHistoryOperation string
+
+// Enum values for ChangeHistoryOperation
+const (
+	ChangeHistoryOperationCreateHostedZone         ChangeHistoryOperation = "CreateHostedZone"
+	ChangeHistoryOperationDeleteHostedZone         ChangeHistoryOperation = "DeleteHostedZone"
+	ChangeHistoryOperationChangeResourceRecordSets ChangeHistoryOperation = "ChangeResourceRecordSets"
+)
+
+// Values returns all known values for ChangeHistoryOperation. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeHistoryOperation) Values() []ChangeHistoryOperation {
+	return []ChangeHistoryOperation{
+		"CreateHostedZone",
+		"DeleteHostedZone",
+		"ChangeResourceRecordSets",
+	}
+}
+
+type ChangeHistorySortOrder string
+
+// Enum values for ChangeHistorySortOrder
+const (
+	ChangeHistorySortOrderAscending  ChangeHistorySortOrder = "ASCENDING"
+	ChangeHistorySortOrderDescending ChangeHistorySortOrder = "DESCENDING"
+)
+
+// Values returns all known values for ChangeHistorySortOrder. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChangeHistorySortOrder) Values() []ChangeHistorySortOrder {
+	return []ChangeHistorySortOrder{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 
@@ -247,6 +360,67 @@ func (ComparisonOperator) Values() []ComparisonOperator {
 	}
 }
 
+type EndpointType string
+
+// Enum values for EndpointType
+const (
+	EndpointTypePublic  EndpointType = "PUBLIC"
+	EndpointTypePrivate EndpointType = "PRIVATE"
+)
+
+// Values returns all known values for EndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointType) Values() []EndpointType {
+	return []EndpointType{
+		"PUBLIC",
+		"PRIVATE",
+	}
+}
+
+type FeatureEnablement string
+
+// Enum values for FeatureEnablement
+const (
+	FeatureEnablementEnabled  FeatureEnablement = "ENABLED"
+	FeatureEnablementDisabled FeatureEnablement = "DISABLED"
+)
+
+// Values returns all known values for FeatureEnablement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureEnablement) Values() []FeatureEnablement {
+	return []FeatureEnablement{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type FeatureStatus string
+
+// Enum values for FeatureStatus
+const (
+	FeatureStatusEnabled   FeatureStatus = "ENABLED"
+	FeatureStatusDisabled  FeatureStatus = "DISABLED"
+	FeatureStatusEnabling  FeatureStatus = "ENABLING"
+	FeatureStatusDisabling FeatureStatus = "DISABLING"
+)
+
+// Values returns all known values for FeatureStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FeatureStatus) Values() []FeatureStatus {
+	return []FeatureStatus{
+		"ENABLED",
+		"DISABLED",
+		"ENABLING",
+		"DISABLING",
+	}
+}
+
 type HealthCheckRegion string
 
 // Enum values for HealthCheckRegion
@@ -275,6 +449,67 @@ func (HealthCheckRegion) Values() []HealthCheckRegion {
 		"ap-southeast-2",
 		"ap-northeast-1",
 		"sa-east-1",
+	}
+}
+
+type HealthCheckSourceStatus string
+
+// Enum values for HealthCheckSourceStatus
+const (
+	HealthCheckSourceStatusCreatePending    HealthCheckSourceStatus = "CREATE_PENDING"
+	HealthCheckSourceStatusCreateInProgress HealthCheckSourceStatus = "CREATE_IN_PROGRESS"
+	HealthCheckSourceStatusCreateCompleted  HealthCheckSourceStatus = "CREATE_COMPLETED"
+	HealthCheckSourceStatusCreateFailed     HealthCheckSourceStatus = "CREATE_FAILED"
+	HealthCheckSourceStatusDeletePending    HealthCheckSourceStatus = "DELETE_PENDING"
+	HealthCheckSourceStatusDeleteInProgress HealthCheckSourceStatus = "DELETE_IN_PROGRESS"
+	HealthCheckSourceStatusDeleteCompleted  HealthCheckSourceStatus = "DELETE_COMPLETED"
+	HealthCheckSourceStatusDeleteFailed     HealthCheckSourceStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for HealthCheckSourceStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HealthCheckSourceStatus) Values() []HealthCheckSourceStatus {
+	return []HealthCheckSourceStatus{
+		"CREATE_PENDING",
+		"CREATE_IN_PROGRESS",
+		"CREATE_COMPLETED",
+		"CREATE_FAILED",
+		"DELETE_PENDING",
+		"DELETE_IN_PROGRESS",
+		"DELETE_COMPLETED",
+		"DELETE_FAILED",
+	}
+}
+
+type HealthCheckSourceStatusReasonCode string
+
+// Enum values for HealthCheckSourceStatusReasonCode
+const (
+	HealthCheckSourceStatusReasonCodeInsufficientSubnetIps    HealthCheckSourceStatusReasonCode = "INSUFFICIENT_SUBNET_IPS"
+	HealthCheckSourceStatusReasonCodeEc2LimitExceeded         HealthCheckSourceStatusReasonCode = "EC2_LIMIT_EXCEEDED"
+	HealthCheckSourceStatusReasonCodeInvalidSubnet            HealthCheckSourceStatusReasonCode = "INVALID_SUBNET"
+	HealthCheckSourceStatusReasonCodeInvalidSecurityGroup     HealthCheckSourceStatusReasonCode = "INVALID_SECURITY_GROUP"
+	HealthCheckSourceStatusReasonCodeInvalidConfiguration     HealthCheckSourceStatusReasonCode = "INVALID_CONFIGURATION"
+	HealthCheckSourceStatusReasonCodeSlrMissingOrNotAssumable HealthCheckSourceStatusReasonCode = "SLR_MISSING_OR_NOT_ASSUMABLE"
+	HealthCheckSourceStatusReasonCodeInternalError            HealthCheckSourceStatusReasonCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for HealthCheckSourceStatusReasonCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HealthCheckSourceStatusReasonCode) Values() []HealthCheckSourceStatusReasonCode {
+	return []HealthCheckSourceStatusReasonCode{
+		"INSUFFICIENT_SUBNET_IPS",
+		"EC2_LIMIT_EXCEEDED",
+		"INVALID_SUBNET",
+		"INVALID_SECURITY_GROUP",
+		"INVALID_CONFIGURATION",
+		"SLR_MISSING_OR_NOT_ASSUMABLE",
+		"INTERNAL_ERROR",
 	}
 }
 
@@ -325,6 +560,25 @@ func (HostedZoneLimitType) Values() []HostedZoneLimitType {
 	return []HostedZoneLimitType{
 		"MAX_RRSETS_BY_ZONE",
 		"MAX_VPCS_ASSOCIATED_BY_ZONE",
+	}
+}
+
+type HostedZoneTier string
+
+// Enum values for HostedZoneTier
+const (
+	HostedZoneTierStandard HostedZoneTier = "STANDARD"
+	HostedZoneTierAdvanced HostedZoneTier = "ADVANCED"
+)
+
+// Values returns all known values for HostedZoneTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HostedZoneTier) Values() []HostedZoneTier {
+	return []HostedZoneTier{
+		"STANDARD",
+		"ADVANCED",
 	}
 }
 
@@ -598,8 +852,9 @@ type TagResourceType string
 
 // Enum values for TagResourceType
 const (
-	TagResourceTypeHealthcheck TagResourceType = "healthcheck"
-	TagResourceTypeHostedzone  TagResourceType = "hostedzone"
+	TagResourceTypeHealthcheck       TagResourceType = "healthcheck"
+	TagResourceTypeHostedzone        TagResourceType = "hostedzone"
+	TagResourceTypeHealthchecksource TagResourceType = "healthchecksource"
 )
 
 // Values returns all known values for TagResourceType. Note that this can be
@@ -610,6 +865,7 @@ func (TagResourceType) Values() []TagResourceType {
 	return []TagResourceType{
 		"healthcheck",
 		"hostedzone",
+		"healthchecksource",
 	}
 }
 

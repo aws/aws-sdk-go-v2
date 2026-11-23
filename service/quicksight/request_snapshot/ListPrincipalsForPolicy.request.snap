@@ -1,0 +1,3 @@
+GET /governance-policy-mgmt/accounts/__AccountId__/policy-assignments/by-policy?MaxResults=1&NextToken=__NextToken__&PolicyArn=__PolicyArn__&PrincipalType=USER
+
+

@@ -62,6 +62,154 @@ func (v *AcceptChannelHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) e
 	})
 }
 
+// The postal address of a legal entity.
+type Address struct {
+
+	// The first line of the street address.
+	//
+	// This member is required.
+	AddressLine *string
+
+	// The city or locality.
+	//
+	// This member is required.
+	City *string
+
+	// The two-letter ISO 3166-1 country code.
+	//
+	// This member is required.
+	CountryCode *string
+
+	// The postal code.
+	//
+	// This member is required.
+	PostalCode *string
+
+	// The state, province, or prefecture.
+	//
+	// This member is required.
+	StateOrRegion *string
+
+	// The second line of the street address.
+	AddressLine2 *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Address) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Address)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Address) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressLine != nil {
+		s.WriteString(schemas.Address_addressLine, *v.AddressLine)
+	}
+	if v.AddressLine2 != nil {
+		s.WriteString(schemas.Address_addressLine2, *v.AddressLine2)
+	}
+	if v.City != nil {
+		s.WriteString(schemas.Address_city, *v.City)
+	}
+	if v.CountryCode != nil {
+		s.WriteString(schemas.Address_countryCode, *v.CountryCode)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.Address_postalCode, *v.PostalCode)
+	}
+	if v.StateOrRegion != nil {
+		s.WriteString(schemas.Address_stateOrRegion, *v.StateOrRegion)
+	}
+}
+func (v *Address) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Address, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Address_addressLine:
+			v.AddressLine = new(string)
+			return d.ReadString(schemas.Address_addressLine, v.AddressLine)
+		case schemas.Address_addressLine2:
+			v.AddressLine2 = new(string)
+			return d.ReadString(schemas.Address_addressLine2, v.AddressLine2)
+		case schemas.Address_city:
+			v.City = new(string)
+			return d.ReadString(schemas.Address_city, v.City)
+		case schemas.Address_countryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.Address_countryCode, v.CountryCode)
+		case schemas.Address_postalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.Address_postalCode, v.PostalCode)
+		case schemas.Address_stateOrRegion:
+			v.StateOrRegion = new(string)
+			return d.ReadString(schemas.Address_stateOrRegion, v.StateOrRegion)
+		}
+		return nil
+	})
+}
+
+// Contains details about a canceled channel contract.
+type CancelChannelContractDetail struct {
+
+	// The Amazon Resource Name (ARN) of the canceled channel contract.
+	Arn *string
+
+	// The reason the channel contract was canceled, if one was provided.
+	CancellationReason *string
+
+	// The unique identifier of the canceled channel contract.
+	Id *string
+
+	// The current status of the canceled channel contract.
+	Status ChannelContractStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *CancelChannelContractDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelChannelContractDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelChannelContractDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CancelChannelContractDetail_arn, *v.Arn)
+	}
+	if v.CancellationReason != nil {
+		s.WriteString(schemas.CancelChannelContractDetail_cancellationReason, *v.CancellationReason)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CancelChannelContractDetail_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CancelChannelContractDetail_status, string(v.Status))
+	}
+}
+func (v *CancelChannelContractDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelChannelContractDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelChannelContractDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CancelChannelContractDetail_arn, v.Arn)
+		case schemas.CancelChannelContractDetail_cancellationReason:
+			v.CancellationReason = new(string)
+			return d.ReadString(schemas.CancelChannelContractDetail_cancellationReason, v.CancellationReason)
+		case schemas.CancelChannelContractDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CancelChannelContractDetail_id, v.Id)
+		case schemas.CancelChannelContractDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.CancelChannelContractDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ChannelContractStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains details about a canceled channel handshake.
 type CancelChannelHandshakeDetail struct {
 
@@ -113,6 +261,349 @@ func (v *CancelChannelHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) e
 		}
 		return nil
 	})
+}
+
+// Detailed information about a channel contract.
+type ChannelContractDetail struct {
+
+	// The Amazon Resource Name (ARN) of the channel contract.
+	//
+	// This member is required.
+	Arn *string
+
+	// The catalog identifier associated with the channel contract.
+	//
+	// This member is required.
+	Catalog *string
+
+	// The type of the channel contract.
+	//
+	// This member is required.
+	ContractType ChannelContractType
+
+	// The timestamp when the channel contract was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Type-specific details of the channel contract.
+	//
+	// This member is required.
+	Details ChannelContractDetails
+
+	// The unique identifier of the channel contract.
+	//
+	// This member is required.
+	Id *string
+
+	// The current status of the channel contract.
+	//
+	// This member is required.
+	Status ChannelContractStatus
+
+	// The timestamp when the channel contract was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The reason the channel contract was canceled, if one was provided.
+	CancellationReason *string
+
+	// The timestamp when the channel contract was accepted, if applicable.
+	RespondedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ChannelContractDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelContractDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelContractDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ChannelContractDetail_arn, *v.Arn)
+	}
+	if v.CancellationReason != nil {
+		s.WriteString(schemas.ChannelContractDetail_cancellationReason, *v.CancellationReason)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.ChannelContractDetail_catalog, *v.Catalog)
+	}
+	if v.ContractType != "" {
+		s.WriteString(schemas.ChannelContractDetail_contractType, string(v.ContractType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ChannelContractDetail_createdAt, *v.CreatedAt)
+	}
+	if v.Details != nil {
+		serializeChannelContractDetails(s, schemas.ChannelContractDetail_details, v.Details)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ChannelContractDetail_id, *v.Id)
+	}
+	if v.RespondedAt != nil {
+		s.WriteTime(schemas.ChannelContractDetail_respondedAt, *v.RespondedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ChannelContractDetail_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ChannelContractDetail_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ChannelContractDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelContractDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelContractDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ChannelContractDetail_arn, v.Arn)
+		case schemas.ChannelContractDetail_cancellationReason:
+			v.CancellationReason = new(string)
+			return d.ReadString(schemas.ChannelContractDetail_cancellationReason, v.CancellationReason)
+		case schemas.ChannelContractDetail_catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.ChannelContractDetail_catalog, v.Catalog)
+		case schemas.ChannelContractDetail_contractType:
+			var ev string
+			if err := d.ReadString(schemas.ChannelContractDetail_contractType, &ev); err != nil {
+				return err
+			}
+			v.ContractType = ChannelContractType(ev)
+			return nil
+		case schemas.ChannelContractDetail_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ChannelContractDetail_createdAt, v.CreatedAt)
+		case schemas.ChannelContractDetail_details:
+			return deserializeChannelContractDetails(d, schemas.ChannelContractDetail_details, &v.Details)
+		case schemas.ChannelContractDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ChannelContractDetail_id, v.Id)
+		case schemas.ChannelContractDetail_respondedAt:
+			v.RespondedAt = new(time.Time)
+			return d.ReadTime(schemas.ChannelContractDetail_respondedAt, v.RespondedAt)
+		case schemas.ChannelContractDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.ChannelContractDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ChannelContractStatus(ev)
+			return nil
+		case schemas.ChannelContractDetail_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ChannelContractDetail_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains detailed information about different types of channel contracts.
+//
+// The following types satisfy this interface:
+//
+//	ChannelContractDetailsMemberManagedServicesAttestationDetails
+type ChannelContractDetails interface {
+	isChannelContractDetails()
+}
+
+// Details specific to managed services attestation channel contracts. Applies
+// only to managed services attestation channel contracts.
+type ChannelContractDetailsMemberManagedServicesAttestationDetails struct {
+	Value ManagedServicesAttestationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ChannelContractDetailsMemberManagedServicesAttestationDetails) isChannelContractDetails() {}
+func (v *ChannelContractDetailsMemberManagedServicesAttestationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelContractDetails_managedServicesAttestationDetails)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ChannelContractDetailsMemberManagedServicesAttestationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Contains the payload data for different types of channel contracts.
+//
+// The following types satisfy this interface:
+//
+//	ChannelContractPayloadMemberManagedServicesAttestationPayload
+type ChannelContractPayload interface {
+	isChannelContractPayload()
+}
+
+// Payload for creating a managed services attestation channel contract. Applies
+// only to managed services attestation channel contracts.
+type ChannelContractPayloadMemberManagedServicesAttestationPayload struct {
+	Value ManagedServicesAttestationPayload
+
+	noSmithyDocumentSerde
+}
+
+func (*ChannelContractPayloadMemberManagedServicesAttestationPayload) isChannelContractPayload() {}
+func (v *ChannelContractPayloadMemberManagedServicesAttestationPayload) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelContractPayload_managedServicesAttestationPayload)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ChannelContractPayloadMemberManagedServicesAttestationPayload) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Summary information about a channel contract.
+type ChannelContractSummary struct {
+
+	// The Amazon Resource Name (ARN) of the channel contract.
+	//
+	// This member is required.
+	Arn *string
+
+	// The catalog identifier associated with the channel contract.
+	//
+	// This member is required.
+	Catalog *string
+
+	// The type of the channel contract.
+	//
+	// This member is required.
+	ContractType ChannelContractType
+
+	// The timestamp when the channel contract was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Type-specific summary details of the channel contract.
+	//
+	// This member is required.
+	Details ChannelContractSummaryDetails
+
+	// The unique identifier of the channel contract.
+	//
+	// This member is required.
+	Id *string
+
+	// The current status of the channel contract.
+	//
+	// This member is required.
+	Status ChannelContractStatus
+
+	// The timestamp when the channel contract was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The timestamp when the channel contract was accepted, if applicable.
+	RespondedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *ChannelContractSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelContractSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelContractSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ChannelContractSummary_arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.ChannelContractSummary_catalog, *v.Catalog)
+	}
+	if v.ContractType != "" {
+		s.WriteString(schemas.ChannelContractSummary_contractType, string(v.ContractType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ChannelContractSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Details != nil {
+		serializeChannelContractSummaryDetails(s, schemas.ChannelContractSummary_details, v.Details)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ChannelContractSummary_id, *v.Id)
+	}
+	if v.RespondedAt != nil {
+		s.WriteTime(schemas.ChannelContractSummary_respondedAt, *v.RespondedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ChannelContractSummary_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ChannelContractSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ChannelContractSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelContractSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelContractSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ChannelContractSummary_arn, v.Arn)
+		case schemas.ChannelContractSummary_catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.ChannelContractSummary_catalog, v.Catalog)
+		case schemas.ChannelContractSummary_contractType:
+			var ev string
+			if err := d.ReadString(schemas.ChannelContractSummary_contractType, &ev); err != nil {
+				return err
+			}
+			v.ContractType = ChannelContractType(ev)
+			return nil
+		case schemas.ChannelContractSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ChannelContractSummary_createdAt, v.CreatedAt)
+		case schemas.ChannelContractSummary_details:
+			return deserializeChannelContractSummaryDetails(d, schemas.ChannelContractSummary_details, &v.Details)
+		case schemas.ChannelContractSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ChannelContractSummary_id, v.Id)
+		case schemas.ChannelContractSummary_respondedAt:
+			v.RespondedAt = new(time.Time)
+			return d.ReadTime(schemas.ChannelContractSummary_respondedAt, v.RespondedAt)
+		case schemas.ChannelContractSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ChannelContractSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ChannelContractStatus(ev)
+			return nil
+		case schemas.ChannelContractSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ChannelContractSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about different types of channel contracts.
+//
+// The following types satisfy this interface:
+//
+//	ChannelContractSummaryDetailsMemberManagedServicesAttestationDetails
+type ChannelContractSummaryDetails interface {
+	isChannelContractSummaryDetails()
+}
+
+// Summary details specific to managed services attestation channel contracts.
+// Applies only to managed services attestation channel contracts.
+type ChannelContractSummaryDetailsMemberManagedServicesAttestationDetails struct {
+	Value ManagedServicesAttestationSummaryDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ChannelContractSummaryDetailsMemberManagedServicesAttestationDetails) isChannelContractSummaryDetails() {
+}
+func (v *ChannelContractSummaryDetailsMemberManagedServicesAttestationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelContractSummaryDetails_managedServicesAttestationDetails)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ChannelContractSummaryDetailsMemberManagedServicesAttestationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Contains the payload data for different types of channel handshakes.
@@ -305,6 +796,46 @@ func (v *ChannelHandshakeSummary) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// Contains details about a newly created channel contract.
+type CreateChannelContractDetail struct {
+
+	// The Amazon Resource Name (ARN) of the created channel contract.
+	Arn *string
+
+	// The unique identifier of the created channel contract.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CreateChannelContractDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelContractDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelContractDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateChannelContractDetail_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateChannelContractDetail_id, *v.Id)
+	}
+}
+func (v *CreateChannelContractDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChannelContractDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChannelContractDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateChannelContractDetail_arn, v.Arn)
+		case schemas.CreateChannelContractDetail_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateChannelContractDetail_id, v.Id)
+		}
+		return nil
+	})
+}
+
 // Contains details about a newly created channel handshake.
 type CreateChannelHandshakeDetail struct {
 
@@ -484,6 +1015,62 @@ func (v *HandshakeDetailMemberStartServicePeriodHandshakeDetail) Serialize(s smi
 	s.CloseStruct()
 }
 func (v *HandshakeDetailMemberStartServicePeriodHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Type-specific filters for listing channel contracts.
+//
+// The following types satisfy this interface:
+//
+//	ListChannelContractsTypeFiltersMemberManagedServicesAttestationTypeFilters
+type ListChannelContractsTypeFilters interface {
+	isListChannelContractsTypeFilters()
+}
+
+// Filters specific to managed services attestation channel contracts. Applies
+// only to managed services attestation channel contracts.
+type ListChannelContractsTypeFiltersMemberManagedServicesAttestationTypeFilters struct {
+	Value ManagedServicesAttestationTypeFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*ListChannelContractsTypeFiltersMemberManagedServicesAttestationTypeFilters) isListChannelContractsTypeFilters() {
+}
+func (v *ListChannelContractsTypeFiltersMemberManagedServicesAttestationTypeFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelContractsTypeFilters_managedServicesAttestationTypeFilters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListChannelContractsTypeFiltersMemberManagedServicesAttestationTypeFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Type-specific sorting options for listing channel contracts.
+//
+// The following types satisfy this interface:
+//
+//	ListChannelContractsTypeSortMemberManagedServicesAttestationTypeSort
+type ListChannelContractsTypeSort interface {
+	isListChannelContractsTypeSort()
+}
+
+// Sorting options specific to managed services attestation channel contracts.
+// Applies only to managed services attestation channel contracts.
+type ListChannelContractsTypeSortMemberManagedServicesAttestationTypeSort struct {
+	Value ManagedServicesAttestationTypeSort
+
+	noSmithyDocumentSerde
+}
+
+func (*ListChannelContractsTypeSortMemberManagedServicesAttestationTypeSort) isListChannelContractsTypeSort() {
+}
+func (v *ListChannelContractsTypeSortMemberManagedServicesAttestationTypeSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelContractsTypeSort_managedServicesAttestationTypeSort)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ListChannelContractsTypeSortMemberManagedServicesAttestationTypeSort) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -721,6 +1308,426 @@ func (v *ListRelationshipsSortBase) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// Details specific to managed services attestation channel contracts. Applies
+// only to managed services attestation channel contracts.
+type ManagedServicesAttestationDetails struct {
+
+	// The end date of the managed services attestation.
+	//
+	// This member is required.
+	EndDate *time.Time
+
+	// The legal name of the end customer's legal entity.
+	//
+	// This member is required.
+	LegalEntityName *string
+
+	// The identifier of the program management account.
+	//
+	// This member is required.
+	ProgramManagementAccountIdentifier *string
+
+	// The identifier of the relationship covered by the attestation.
+	//
+	// This member is required.
+	RelationshipIdentifier *string
+
+	// The email address of the signatory.
+	//
+	// This member is required.
+	SignatoryEmail *string
+
+	// The name of the person who signs the attestation for the end customer.
+	//
+	// This member is required.
+	SignatoryName *string
+
+	// The managed services that the partner provides to the end customer.
+	//
+	// This member is required.
+	SupportedServices []ManagedServicesSupportedService
+
+	// The address of the end customer's legal entity, if available.
+	LegalEntityAddress *Address
+
+	// The AWS account IDs of the end customer's member accounts covered by the
+	// managed services.
+	MemberAccountIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ManagedServicesAttestationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedServicesAttestationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedServicesAttestationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteTime(schemas.ManagedServicesAttestationDetails_endDate, *v.EndDate)
+	}
+	if v.LegalEntityAddress != nil {
+		s.WriteStruct(schemas.ManagedServicesAttestationDetails_legalEntityAddress)
+		v.LegalEntityAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LegalEntityName != nil {
+		s.WriteString(schemas.ManagedServicesAttestationDetails_legalEntityName, *v.LegalEntityName)
+	}
+	if v.MemberAccountIds != nil {
+		serializeMemberAccountIdList(s, schemas.ManagedServicesAttestationDetails_memberAccountIds, v.MemberAccountIds)
+	}
+	if v.ProgramManagementAccountIdentifier != nil {
+		s.WriteString(schemas.ManagedServicesAttestationDetails_programManagementAccountIdentifier, *v.ProgramManagementAccountIdentifier)
+	}
+	if v.RelationshipIdentifier != nil {
+		s.WriteString(schemas.ManagedServicesAttestationDetails_relationshipIdentifier, *v.RelationshipIdentifier)
+	}
+	if v.SignatoryEmail != nil {
+		s.WriteString(schemas.ManagedServicesAttestationDetails_signatoryEmail, *v.SignatoryEmail)
+	}
+	if v.SignatoryName != nil {
+		s.WriteString(schemas.ManagedServicesAttestationDetails_signatoryName, *v.SignatoryName)
+	}
+	if v.SupportedServices != nil {
+		serializeManagedServicesSupportedServiceList(s, schemas.ManagedServicesAttestationDetails_supportedServices, v.SupportedServices)
+	}
+}
+func (v *ManagedServicesAttestationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedServicesAttestationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedServicesAttestationDetails_endDate:
+			v.EndDate = new(time.Time)
+			return d.ReadTime(schemas.ManagedServicesAttestationDetails_endDate, v.EndDate)
+		case schemas.ManagedServicesAttestationDetails_legalEntityAddress:
+			v.LegalEntityAddress = &Address{}
+			return v.LegalEntityAddress.Deserialize(d)
+		case schemas.ManagedServicesAttestationDetails_legalEntityName:
+			v.LegalEntityName = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationDetails_legalEntityName, v.LegalEntityName)
+		case schemas.ManagedServicesAttestationDetails_memberAccountIds:
+			return deserializeMemberAccountIdList(d, schemas.ManagedServicesAttestationDetails_memberAccountIds, &v.MemberAccountIds)
+		case schemas.ManagedServicesAttestationDetails_programManagementAccountIdentifier:
+			v.ProgramManagementAccountIdentifier = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationDetails_programManagementAccountIdentifier, v.ProgramManagementAccountIdentifier)
+		case schemas.ManagedServicesAttestationDetails_relationshipIdentifier:
+			v.RelationshipIdentifier = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationDetails_relationshipIdentifier, v.RelationshipIdentifier)
+		case schemas.ManagedServicesAttestationDetails_signatoryEmail:
+			v.SignatoryEmail = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationDetails_signatoryEmail, v.SignatoryEmail)
+		case schemas.ManagedServicesAttestationDetails_signatoryName:
+			v.SignatoryName = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationDetails_signatoryName, v.SignatoryName)
+		case schemas.ManagedServicesAttestationDetails_supportedServices:
+			return deserializeManagedServicesSupportedServiceList(d, schemas.ManagedServicesAttestationDetails_supportedServices, &v.SupportedServices)
+		}
+		return nil
+	})
+}
+
+// Payload for managed services attestation channel contract requests. Applies
+// only to managed services attestation channel contracts.
+type ManagedServicesAttestationPayload struct {
+
+	// The end date of the attestation, which must be after the start date of the
+	// relationship.
+	//
+	// This member is required.
+	EndDate *time.Time
+
+	// The address of the end customer's legal entity.
+	//
+	// This member is required.
+	LegalEntityAddress *Address
+
+	// The legal name of the end customer's legal entity.
+	//
+	// This member is required.
+	LegalEntityName *string
+
+	// The identifier of the program management account for the relationship.
+	//
+	// This member is required.
+	ProgramManagementAccountIdentifier *string
+
+	// The identifier of the managed services relationship to cover with the
+	// attestation.
+	//
+	// This member is required.
+	RelationshipIdentifier *string
+
+	// The email address to which the attestation is sent for signature.
+	//
+	// This member is required.
+	SignatoryEmail *string
+
+	// The name of the person who signs the attestation for the end customer.
+	//
+	// This member is required.
+	SignatoryName *string
+
+	// The managed services that the partner provides to the end customer.
+	//
+	// This member is required.
+	SupportedServices []ManagedServicesSupportedService
+
+	// The AWS account IDs of the end customer's member accounts to cover, not allowed
+	// when the account scope is the entire organization.
+	MemberAccountIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ManagedServicesAttestationPayload) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedServicesAttestationPayload)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedServicesAttestationPayload) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteTime(schemas.ManagedServicesAttestationPayload_endDate, *v.EndDate)
+	}
+	if v.LegalEntityAddress != nil {
+		s.WriteStruct(schemas.ManagedServicesAttestationPayload_legalEntityAddress)
+		v.LegalEntityAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LegalEntityName != nil {
+		s.WriteString(schemas.ManagedServicesAttestationPayload_legalEntityName, *v.LegalEntityName)
+	}
+	if v.MemberAccountIds != nil {
+		serializeMemberAccountIdList(s, schemas.ManagedServicesAttestationPayload_memberAccountIds, v.MemberAccountIds)
+	}
+	if v.ProgramManagementAccountIdentifier != nil {
+		s.WriteString(schemas.ManagedServicesAttestationPayload_programManagementAccountIdentifier, *v.ProgramManagementAccountIdentifier)
+	}
+	if v.RelationshipIdentifier != nil {
+		s.WriteString(schemas.ManagedServicesAttestationPayload_relationshipIdentifier, *v.RelationshipIdentifier)
+	}
+	if v.SignatoryEmail != nil {
+		s.WriteString(schemas.ManagedServicesAttestationPayload_signatoryEmail, *v.SignatoryEmail)
+	}
+	if v.SignatoryName != nil {
+		s.WriteString(schemas.ManagedServicesAttestationPayload_signatoryName, *v.SignatoryName)
+	}
+	if v.SupportedServices != nil {
+		serializeManagedServicesSupportedServiceList(s, schemas.ManagedServicesAttestationPayload_supportedServices, v.SupportedServices)
+	}
+}
+func (v *ManagedServicesAttestationPayload) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedServicesAttestationPayload, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedServicesAttestationPayload_endDate:
+			v.EndDate = new(time.Time)
+			return d.ReadTime(schemas.ManagedServicesAttestationPayload_endDate, v.EndDate)
+		case schemas.ManagedServicesAttestationPayload_legalEntityAddress:
+			v.LegalEntityAddress = &Address{}
+			return v.LegalEntityAddress.Deserialize(d)
+		case schemas.ManagedServicesAttestationPayload_legalEntityName:
+			v.LegalEntityName = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationPayload_legalEntityName, v.LegalEntityName)
+		case schemas.ManagedServicesAttestationPayload_memberAccountIds:
+			return deserializeMemberAccountIdList(d, schemas.ManagedServicesAttestationPayload_memberAccountIds, &v.MemberAccountIds)
+		case schemas.ManagedServicesAttestationPayload_programManagementAccountIdentifier:
+			v.ProgramManagementAccountIdentifier = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationPayload_programManagementAccountIdentifier, v.ProgramManagementAccountIdentifier)
+		case schemas.ManagedServicesAttestationPayload_relationshipIdentifier:
+			v.RelationshipIdentifier = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationPayload_relationshipIdentifier, v.RelationshipIdentifier)
+		case schemas.ManagedServicesAttestationPayload_signatoryEmail:
+			v.SignatoryEmail = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationPayload_signatoryEmail, v.SignatoryEmail)
+		case schemas.ManagedServicesAttestationPayload_signatoryName:
+			v.SignatoryName = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationPayload_signatoryName, v.SignatoryName)
+		case schemas.ManagedServicesAttestationPayload_supportedServices:
+			return deserializeManagedServicesSupportedServiceList(d, schemas.ManagedServicesAttestationPayload_supportedServices, &v.SupportedServices)
+		}
+		return nil
+	})
+}
+
+// Summary information about a managed services attestation channel contract.
+// Applies only to managed services attestation channel contracts.
+type ManagedServicesAttestationSummaryDetails struct {
+
+	// The end date of the managed services attestation.
+	//
+	// This member is required.
+	EndDate *time.Time
+
+	// The legal name of the end customer's legal entity.
+	//
+	// This member is required.
+	LegalEntityName *string
+
+	// The identifier of the program management account.
+	//
+	// This member is required.
+	ProgramManagementAccountIdentifier *string
+
+	// The identifier of the relationship covered by the attestation.
+	//
+	// This member is required.
+	RelationshipIdentifier *string
+
+	// The managed services that the partner provides to the end customer.
+	//
+	// This member is required.
+	SupportedServices []ManagedServicesSupportedService
+
+	// The AWS account IDs of the end customer's member accounts covered by the
+	// managed services.
+	MemberAccountIds []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ManagedServicesAttestationSummaryDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedServicesAttestationSummaryDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedServicesAttestationSummaryDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteTime(schemas.ManagedServicesAttestationSummaryDetails_endDate, *v.EndDate)
+	}
+	if v.LegalEntityName != nil {
+		s.WriteString(schemas.ManagedServicesAttestationSummaryDetails_legalEntityName, *v.LegalEntityName)
+	}
+	if v.MemberAccountIds != nil {
+		serializeMemberAccountIdList(s, schemas.ManagedServicesAttestationSummaryDetails_memberAccountIds, v.MemberAccountIds)
+	}
+	if v.ProgramManagementAccountIdentifier != nil {
+		s.WriteString(schemas.ManagedServicesAttestationSummaryDetails_programManagementAccountIdentifier, *v.ProgramManagementAccountIdentifier)
+	}
+	if v.RelationshipIdentifier != nil {
+		s.WriteString(schemas.ManagedServicesAttestationSummaryDetails_relationshipIdentifier, *v.RelationshipIdentifier)
+	}
+	if v.SupportedServices != nil {
+		serializeManagedServicesSupportedServiceList(s, schemas.ManagedServicesAttestationSummaryDetails_supportedServices, v.SupportedServices)
+	}
+}
+func (v *ManagedServicesAttestationSummaryDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedServicesAttestationSummaryDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedServicesAttestationSummaryDetails_endDate:
+			v.EndDate = new(time.Time)
+			return d.ReadTime(schemas.ManagedServicesAttestationSummaryDetails_endDate, v.EndDate)
+		case schemas.ManagedServicesAttestationSummaryDetails_legalEntityName:
+			v.LegalEntityName = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationSummaryDetails_legalEntityName, v.LegalEntityName)
+		case schemas.ManagedServicesAttestationSummaryDetails_memberAccountIds:
+			return deserializeMemberAccountIdList(d, schemas.ManagedServicesAttestationSummaryDetails_memberAccountIds, &v.MemberAccountIds)
+		case schemas.ManagedServicesAttestationSummaryDetails_programManagementAccountIdentifier:
+			v.ProgramManagementAccountIdentifier = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationSummaryDetails_programManagementAccountIdentifier, v.ProgramManagementAccountIdentifier)
+		case schemas.ManagedServicesAttestationSummaryDetails_relationshipIdentifier:
+			v.RelationshipIdentifier = new(string)
+			return d.ReadString(schemas.ManagedServicesAttestationSummaryDetails_relationshipIdentifier, v.RelationshipIdentifier)
+		case schemas.ManagedServicesAttestationSummaryDetails_supportedServices:
+			return deserializeManagedServicesSupportedServiceList(d, schemas.ManagedServicesAttestationSummaryDetails_supportedServices, &v.SupportedServices)
+		}
+		return nil
+	})
+}
+
+// Filters specific to managed services attestation channel contracts. Applies
+// only to managed services attestation channel contracts.
+type ManagedServicesAttestationTypeFilters struct {
+
+	// Filter by legal entity names.
+	LegalEntityNames []string
+
+	// Filter by relationship identifiers.
+	RelationshipIdentifiers []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ManagedServicesAttestationTypeFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedServicesAttestationTypeFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedServicesAttestationTypeFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LegalEntityNames != nil {
+		serializeChannelContractLegalEntityNameFilterList(s, schemas.ManagedServicesAttestationTypeFilters_legalEntityNames, v.LegalEntityNames)
+	}
+	if v.RelationshipIdentifiers != nil {
+		serializeRelationshipIdentifierFilterList(s, schemas.ManagedServicesAttestationTypeFilters_relationshipIdentifiers, v.RelationshipIdentifiers)
+	}
+}
+func (v *ManagedServicesAttestationTypeFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedServicesAttestationTypeFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedServicesAttestationTypeFilters_legalEntityNames:
+			return deserializeChannelContractLegalEntityNameFilterList(d, schemas.ManagedServicesAttestationTypeFilters_legalEntityNames, &v.LegalEntityNames)
+		case schemas.ManagedServicesAttestationTypeFilters_relationshipIdentifiers:
+			return deserializeRelationshipIdentifierFilterList(d, schemas.ManagedServicesAttestationTypeFilters_relationshipIdentifiers, &v.RelationshipIdentifiers)
+		}
+		return nil
+	})
+}
+
+// Sorting options specific to managed services attestation channel contracts.
+// Applies only to managed services attestation channel contracts.
+type ManagedServicesAttestationTypeSort struct {
+
+	// The field to sort by.
+	//
+	// This member is required.
+	SortBy ManagedServicesAttestationTypeSortName
+
+	// The sort order (ascending or descending).
+	//
+	// This member is required.
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+func (v *ManagedServicesAttestationTypeSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedServicesAttestationTypeSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedServicesAttestationTypeSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.ManagedServicesAttestationTypeSort_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ManagedServicesAttestationTypeSort_sortOrder, string(v.SortOrder))
+	}
+}
+func (v *ManagedServicesAttestationTypeSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedServicesAttestationTypeSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedServicesAttestationTypeSort_sortBy:
+			var ev string
+			if err := d.ReadString(schemas.ManagedServicesAttestationTypeSort_sortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = ManagedServicesAttestationTypeSortName(ev)
+			return nil
+		case schemas.ManagedServicesAttestationTypeSort_sortOrder:
+			var ev string
+			if err := d.ReadString(schemas.ManagedServicesAttestationTypeSort_sortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configuration for partner-led support plans.
 type PartnerLedSupport struct {
 
@@ -850,6 +1857,9 @@ type ProgramManagementAccountSummary struct {
 	// The current status of the program management account.
 	Status ProgramManagementAccountStatus
 
+	// The type of the program management account.
+	Type ProgramManagementAccountType
+
 	// The timestamp when the account was last updated.
 	UpdatedAt *time.Time
 
@@ -892,6 +1902,9 @@ func (v *ProgramManagementAccountSummary) SerializeMembers(s smithy.ShapeSeriali
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.ProgramManagementAccountSummary_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ProgramManagementAccountSummary_type, string(v.Type))
 	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.ProgramManagementAccountSummary_updatedAt, *v.UpdatedAt)
@@ -937,6 +1950,13 @@ func (v *ProgramManagementAccountSummary) Deserialize(d smithy.ShapeDeserializer
 				return err
 			}
 			v.Status = ProgramManagementAccountStatus(ev)
+			return nil
+		case schemas.ProgramManagementAccountSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.ProgramManagementAccountSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = ProgramManagementAccountType(ev)
 			return nil
 		case schemas.ProgramManagementAccountSummary_updatedAt:
 			v.UpdatedAt = new(time.Time)
@@ -1084,6 +2104,10 @@ func (v *RejectChannelHandshakeDetail) Deserialize(d smithy.ShapeDeserializer) e
 // Detailed information about a partner relationship.
 type RelationshipDetail struct {
 
+	// The account scope of the managed services relationship. Applies only to managed
+	// services relationships.
+	AccountScope AccountScope
+
 	// The Amazon Resource Name (ARN) of the relationship.
 	Arn *string
 
@@ -1096,11 +2120,18 @@ type RelationshipDetail struct {
 	// The catalog identifier associated with the relationship.
 	Catalog *string
 
+	// The identifier of the channel contract currently in effect for the
+	// relationship. Applies only to managed services relationships.
+	ChannelContractId *string
+
 	// The timestamp when the relationship was created.
 	CreatedAt *time.Time
 
 	// The display name of the relationship.
 	DisplayName *string
+
+	// The end date of the relationship.
+	EndDate *time.Time
 
 	// The unique identifier of the relationship.
 	Id *string
@@ -1108,7 +2139,8 @@ type RelationshipDetail struct {
 	// The identifier of the program management account.
 	ProgramManagementAccountId *string
 
-	// The resale account model for the relationship.
+	// The resale account model for the relationship. Applies only to billing transfer
+	// relationships.
 	ResaleAccountModel ResaleAccountModel
 
 	// The current revision number of the relationship.
@@ -1133,6 +2165,9 @@ func (v *RelationshipDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RelationshipDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountScope != "" {
+		s.WriteString(schemas.RelationshipDetail_accountScope, string(v.AccountScope))
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.RelationshipDetail_arn, *v.Arn)
 	}
@@ -1145,11 +2180,17 @@ func (v *RelationshipDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != nil {
 		s.WriteString(schemas.RelationshipDetail_catalog, *v.Catalog)
 	}
+	if v.ChannelContractId != nil {
+		s.WriteString(schemas.RelationshipDetail_channelContractId, *v.ChannelContractId)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.RelationshipDetail_createdAt, *v.CreatedAt)
 	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.RelationshipDetail_displayName, *v.DisplayName)
+	}
+	if v.EndDate != nil {
+		s.WriteTime(schemas.RelationshipDetail_endDate, *v.EndDate)
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.RelationshipDetail_id, *v.Id)
@@ -1176,6 +2217,13 @@ func (v *RelationshipDetail) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *RelationshipDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RelationshipDetail, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.RelationshipDetail_accountScope:
+			var ev string
+			if err := d.ReadString(schemas.RelationshipDetail_accountScope, &ev); err != nil {
+				return err
+			}
+			v.AccountScope = AccountScope(ev)
+			return nil
 		case schemas.RelationshipDetail_arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.RelationshipDetail_arn, v.Arn)
@@ -1192,12 +2240,18 @@ func (v *RelationshipDetail) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RelationshipDetail_catalog:
 			v.Catalog = new(string)
 			return d.ReadString(schemas.RelationshipDetail_catalog, v.Catalog)
+		case schemas.RelationshipDetail_channelContractId:
+			v.ChannelContractId = new(string)
+			return d.ReadString(schemas.RelationshipDetail_channelContractId, v.ChannelContractId)
 		case schemas.RelationshipDetail_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.RelationshipDetail_createdAt, v.CreatedAt)
 		case schemas.RelationshipDetail_displayName:
 			v.DisplayName = new(string)
 			return d.ReadString(schemas.RelationshipDetail_displayName, v.DisplayName)
+		case schemas.RelationshipDetail_endDate:
+			v.EndDate = new(time.Time)
+			return d.ReadTime(schemas.RelationshipDetail_endDate, v.EndDate)
 		case schemas.RelationshipDetail_id:
 			v.Id = new(string)
 			return d.ReadString(schemas.RelationshipDetail_id, v.Id)
@@ -2195,8 +3249,13 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isChannelContractDetails()           {}
+func (*UnknownUnionMember) isChannelContractPayload()           {}
+func (*UnknownUnionMember) isChannelContractSummaryDetails()    {}
 func (*UnknownUnionMember) isChannelHandshakePayload()          {}
 func (*UnknownUnionMember) isHandshakeDetail()                  {}
+func (*UnknownUnionMember) isListChannelContractsTypeFilters()  {}
+func (*UnknownUnionMember) isListChannelContractsTypeSort()     {}
 func (*UnknownUnionMember) isListChannelHandshakesTypeFilters() {}
 func (*UnknownUnionMember) isListChannelHandshakesTypeSort()    {}
 func (*UnknownUnionMember) isSupportPlan()                      {}

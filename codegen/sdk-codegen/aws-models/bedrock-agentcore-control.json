@@ -2547,6 +2547,21 @@
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#AwsBillingConnectorConfiguration": {
+            "type": "structure",
+            "members": {
+                "iamRoleArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Marketplace service-linked role in the account that owns the payment manager. The service sets this value when it creates the connector.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for an AWS Billing payment connector. Payments made through an AWS Billing payment connector are charged to the AWS account that owns the payment manager, and appear on that account's AWS bill as AWS Marketplace charges.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#BatchPutGatewayRateLimits": {
             "type": "operation",
             "input": {
@@ -5241,6 +5256,20 @@
                         "smithy.api#enumValue": "MEMORY_RECORDS"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CpuOptions": {
+            "type": "structure",
+            "members": {
+                "nestedVirtualization": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#NestedVirtualization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether your agents can use hardware virtualization on their instances. The following values are possible:</p> <ul> <li> <p> <code>ENABLED</code> – Your agents can use hardware virtualization on their instances. To use this value, choose the <code>LINUX_X86_64</code> operating system and instance types that support nested virtualization.</p> </li> <li> <p> <code>DISABLED</code> – Your agents can't use hardware virtualization on their instances. This is the default.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CPU configuration for capacity provider instances, including nested virtualization.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CreateAgentRuntime": {
@@ -8588,8 +8617,9 @@
                 "credentialProviderConfigurations": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#CredentialsProviderConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>The credential provider configurations for the payment connector. These configurations specify how the connector authenticates with the payment provider.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "<p>The credential provider configurations for the payment connector. These configurations specify how the connector authenticates with the payment provider.</p> <p>For an <code>AwsBilling</code> payment connector, omit this parameter or specify an empty list. The service uses the AWS Marketplace service-linked role in your account, which must exist before you create the connector, and you must have permission to call <code>iam:GetRole</code> on it.</p>"
                     }
                 },
                 "provisionMode": {
@@ -9943,10 +9973,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The credential provider configuration for a Stripe Privy payment connector.</p>"
                     }
+                },
+                "awsBilling": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AwsBillingConnectorConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for an AWS Billing payment connector. The service sets this configuration when it creates the connector and returns it in responses. Don't specify it when you create an AWS Billing payment connector.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The credential provider configuration for a payment connector. Specifies the payment provider type and its associated credential provider.</p>"
+                "smithy.api#documentation": "<p>The configuration for a payment connector. Specifies the payment provider type and either its associated credential provider or, for an AWS Billing payment connector, its billing configuration.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#CredentialsProviderConfigurations": {
@@ -15744,6 +15780,18 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#InterceptorInputConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for the input of the interceptor. This field specifies how the input to the interceptor is constructed</p>"
+                    }
+                },
+                "responseInterceptionMode": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResponseInterceptionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how the interceptor processes streamed target responses. You can set this field only on an interceptor that includes the <code>RESPONSE</code> interception point. Valid values include:</p> <ul> <li> <p> <code>BUFFERED</code> - The gateway collects the complete target response and then invokes the interceptor once. This is the default.</p> </li> <li> <p> <code>STREAM</code> - The gateway sends a streamed target response to the interceptor in batches of events and returns each processed batch to the client as soon as it's ready. Non-streamed responses still use <code>BUFFERED</code> processing. If you specify <code>STREAM</code>, you must also specify <code>responseStreamingConfiguration</code>, and the input configuration can't exclude the response body.</p> </li> </ul>"
+                    }
+                },
+                "responseStreamingConfiguration": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResponseStreamingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the batching settings for a streamed response. Specify this field only when <code>responseInterceptionMode</code> is <code>STREAM</code>. You must specify it for <code>STREAM</code>.</p>"
                     }
                 }
             },
@@ -24795,6 +24843,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to propagate to all Amazon EC2 resources (instances, volumes, and network interfaces) that the capacity provider creates.</p>"
                     }
+                },
+                "cpuOptions": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CpuOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The central processing unit (CPU) options for the instances that the capacity provider launches.</p>"
+                    }
                 }
             },
             "traits": {
@@ -29210,6 +29264,15 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#MaxEventsPerInvocation": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 8192
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#MaxResults": {
             "type": "integer",
             "traits": {
@@ -30524,6 +30587,23 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#NestedVirtualization": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#NetworkConfiguration": {
             "type": "structure",
             "members": {
@@ -31829,6 +31909,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "StripePrivy"
+                    }
+                },
+                "AWS_BILLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AwsBilling"
                     }
                 }
             }
@@ -34595,10 +34681,41 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#ResponseInterceptionMode": {
+            "type": "enum",
+            "members": {
+                "BUFFERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUFFERED"
+                    }
+                },
+                "STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STREAM"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#ResponseListType": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.bedrockagentcorecontrol#ResponseType"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ResponseStreamingConfiguration": {
+            "type": "structure",
+            "members": {
+                "maxEventsPerInvocation": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MaxEventsPerInvocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of response events that the gateway sends to the interceptor in one invocation. The interceptor's output for the first batch determines the status code and headers of the response. The gateway ignores the status code and headers that the interceptor returns for later batches.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the settings that the gateway uses to send a streamed target response to the interceptor in batches.</p>"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ResponseType": {

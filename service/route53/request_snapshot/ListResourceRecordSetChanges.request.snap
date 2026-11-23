@@ -1,0 +1,3 @@
+GET /2013-04-01/hostedzone/__HostedZoneId__/rrsetchanges?maxresults=1&nexttoken=__NextToken__&recordname=__RecordName__&recordtype=SOA&sortorder=ASCENDING&submittedafter=__SubmittedAfter__&submittedbefore=__SubmittedBefore__
+
+

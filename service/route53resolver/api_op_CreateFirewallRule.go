@@ -21,18 +21,21 @@ import (
 //   - DnsThreatProtection — match a built-in DNS Firewall Advanced threat detector
 //     ( DGA , DNS_TUNNELING , or DICTIONARY_DGA ).
 //
-//   - FirewallRuleType — match one of the rule-type variants returned by ListFirewallRuleTypes:
+//   - FirewallRuleType — match one of the rule-type variants:
 //     FirewallAdvancedContentCategory , FirewallAdvancedThreatCategory ,
-//     DnsThreatProtection , or PartnerThreatProtection . The PartnerThreatProtection
-//     variant requires an active Amazon Web Services Marketplace subscription to the
-//     named partner product.
+//     DnsThreatProtection , PartnerThreatProtection , or AutoAllowlist . ListFirewallRuleTypesreturns
+//     the first four. The PartnerThreatProtection variant requires an active Amazon
+//     Web Services Marketplace subscription to the named partner product.
 //
-// For rules that require asynchronous provisioning (today, the
-// PartnerThreatProtection rule type), the rule's Status begins at CREATING and
-// transitions to COMPLETE once the rule is provisioned and the marketplace
-// entitlement is verified. If provisioning fails, Status becomes CREATION_FAILED
-// and StatusMessage contains a human-readable reason; the rule is then immutable
-// and must be removed with DeleteFirewallRule.
+// For rules that require asynchronous provisioning (the PartnerThreatProtection
+// and AutoAllowlist rule types), the rule's Status begins at CREATING and
+// transitions to COMPLETE once the rule is provisioned: for
+// PartnerThreatProtection , when the marketplace entitlement is verified, and for
+// AutoAllowlist , when DNS Firewall has read the look-back window of every VPC
+// that uses the rule group, which can take hours for a rule group that many VPCs
+// use. If provisioning fails, Status becomes CREATION_FAILED and StatusMessage
+// contains a human-readable reason; the rule is then immutable and must be removed
+// with DeleteFirewallRule.
 func (c *Client) CreateFirewallRule(ctx context.Context, params *CreateFirewallRuleInput, optFns ...func(*Options)) (*CreateFirewallRuleOutput, error) {
 	if params == nil {
 		params = &CreateFirewallRuleInput{}
@@ -172,6 +175,9 @@ type CreateFirewallRuleInput struct {
 	// TRUST_REDIRECTION_DOMAIN : Inspects only the first domain in the redirection
 	// chain. You don't need to add the subsequent domains in the domain in the
 	// redirection list to the domain list.
+	//
+	// You can't set this value on an AutoAllowlist rule, which always inspects the
+	// redirection chain.
 	FirewallDomainRedirectionAction types.FirewallDomainRedirectionAction
 
 	// The rule type configuration for the firewall rule. This is a tagged union — set
@@ -191,7 +197,11 @@ type CreateFirewallRuleInput struct {
 	//   Amazon Web Services Marketplace. The selected partner must be an active
 	//   subscription on the calling account.
 	//
-	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
+	//   - AutoAllowlist — automatically observe the domains that the VPCs associated
+	//   with the rule group resolve, and allow the ones that you approve. See AutoAllowlistConfig.
+	//
+	// To enumerate the values supported in your account, call ListFirewallRuleTypes. It doesn't return
+	// AutoAllowlist .
 	FirewallRuleType *types.FirewallRuleType
 
 	//  The DNS query type you want the rule to evaluate. Allowed values are;
@@ -225,6 +235,9 @@ type CreateFirewallRuleInput struct {
 	//   - A query type you define by using the DNS type ID, for example 28 for AAAA.
 	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65534, for
 	//   example, TYPE28. For more information, see [List of DNS record types].
+	//
+	// You can't set Qtype on an AutoAllowlist rule, because the rule applies to all
+	// query types.
 	//
 	// [List of DNS record types]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
 	Qtype *string

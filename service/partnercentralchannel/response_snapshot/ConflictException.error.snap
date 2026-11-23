@@ -1,5 +1,5 @@
 409
 Content-Type: application/x-amz-json-1.0
-X-Amz-Target: PartnerCentralChannel.CreateChannelHandshake
+X-Amz-Target: PartnerCentralChannel.CancelChannelContract
 
 {"__type":"ConflictException","message":"__Message__","resourceId":"__ResourceId__","resourceType":"__ResourceType__"}

@@ -69,7 +69,7 @@ type ModifyListenerInput struct {
 	// The actions for the default rule.
 	DefaultActions []types.Action
 
-	// [HTTPS listeners] The mutual authentication configuration information.
+	// [HTTPS and TLS listeners] The mutual authentication configuration information.
 	MutualAuthentication *types.MutualAuthenticationAttributes
 
 	// The port for connections from clients to the load balancer. You can't specify a

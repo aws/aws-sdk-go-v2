@@ -1,0 +1,3 @@
+GET /managedapis/__ManagedApiId__/events?maxResults=1&nextToken=__NextToken__&startedAfter=2000-01-01T00%3A00%3A00Z&startedBefore=2000-01-01T00%3A00%3A00Z
+
+

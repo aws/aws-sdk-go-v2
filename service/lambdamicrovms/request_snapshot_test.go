@@ -299,7 +299,8 @@ func TestCheckRequestSnapshot_CreateMicrovmImage(t *testing.T) {
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
 		},
-		Name: ptr.String("__Name__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		Name:             ptr.String("__Name__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -775,6 +776,7 @@ func TestCheckRequestSnapshot_RunMicrovm(t *testing.T) {
 		Logging: &types.LoggingMemberDisabled{
 			Value: types.LoggingDisabled{},
 		},
+		KmsKeyIdentifier:         ptr.String("__KmsKeyIdentifier__"),
 		RunHookPayload:           ptr.String("__RunHookPayload__"),
 		MaximumDurationInSeconds: ptr.Int32(1),
 		ClientToken:              ptr.String("__ClientToken__"),
@@ -975,8 +977,9 @@ func TestCheckRequestSnapshot_UpdateMicrovmImage(t *testing.T) {
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
 		},
-		ImageIdentifier: ptr.String("__ImageIdentifier__"),
-		ClientToken:     ptr.String("__ClientToken__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		ImageIdentifier:  ptr.String("__ImageIdentifier__"),
+		ClientToken:      ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1123,7 +1126,8 @@ func TestUpdateRequestSnapshot_CreateMicrovmImage(t *testing.T) {
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
 		},
-		Name: ptr.String("__Name__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		Name:             ptr.String("__Name__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
@@ -1599,6 +1603,7 @@ func TestUpdateRequestSnapshot_RunMicrovm(t *testing.T) {
 		Logging: &types.LoggingMemberDisabled{
 			Value: types.LoggingDisabled{},
 		},
+		KmsKeyIdentifier:         ptr.String("__KmsKeyIdentifier__"),
 		RunHookPayload:           ptr.String("__RunHookPayload__"),
 		MaximumDurationInSeconds: ptr.Int32(1),
 		ClientToken:              ptr.String("__ClientToken__"),
@@ -1799,8 +1804,9 @@ func TestUpdateRequestSnapshot_UpdateMicrovmImage(t *testing.T) {
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
 		},
-		ImageIdentifier: ptr.String("__ImageIdentifier__"),
-		ClientToken:     ptr.String("__ClientToken__"),
+		KmsKeyIdentifier: ptr.String("__KmsKeyIdentifier__"),
+		ImageIdentifier:  ptr.String("__ImageIdentifier__"),
+		ClientToken:      ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

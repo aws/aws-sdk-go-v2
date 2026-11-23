@@ -101,6 +101,10 @@ type RejectLinkOutput struct {
 	// The direction of the link.
 	Direction types.LinkDirection
 
+	// The causes of the failure, such as a deleted subnet. Present only when the
+	// resource has failed.
+	ErrorDetails []types.ErrorDetail
+
 	// The configuration of flow modules.
 	FlowModules []types.ModuleConfiguration
 
@@ -136,6 +140,9 @@ func (v *RejectLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Direction != "" {
 		s.WriteString(schemas.RejectLinkResponse_direction, string(v.Direction))
+	}
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.RejectLinkResponse_errorDetails, v.ErrorDetails)
 	}
 	if v.FlowModules != nil {
 		serializeModuleConfigurationList(s, schemas.RejectLinkResponse_flowModules, v.FlowModules)
@@ -187,6 +194,8 @@ func (v *RejectLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Direction = types.LinkDirection(ev)
 			return nil
+		case schemas.RejectLinkResponse_errorDetails:
+			return deserializeErrorDetails(d, schemas.RejectLinkResponse_errorDetails, &v.ErrorDetails)
 		case schemas.RejectLinkResponse_flowModules:
 			return deserializeModuleConfigurationList(d, schemas.RejectLinkResponse_flowModules, &v.FlowModules)
 		case schemas.RejectLinkResponse_gatewayId:

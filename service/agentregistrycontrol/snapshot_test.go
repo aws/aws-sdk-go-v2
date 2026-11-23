@@ -62,6 +62,30 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociatePublisher(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociatePublisher(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociatePublisher")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreatePublisher(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePublisher(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePublisher")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateRegistry(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRegistry(context.Background(), nil, func(o *Options) {
@@ -79,6 +103,18 @@ func TestCheckSnapshot_CreateRegistryRecord(t *testing.T) {
 	_, err := svc.CreateRegistryRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateRegistryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeletePublisher(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePublisher(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePublisher")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -110,6 +146,30 @@ func TestCheckSnapshot_DeleteRegistryRecord(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociatePublisher(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociatePublisher(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociatePublisher")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetPublisher(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPublisher(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPublisher")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRegistry(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRegistry(context.Background(), nil, func(o *Options) {
@@ -127,6 +187,30 @@ func TestCheckSnapshot_GetRegistryRecord(t *testing.T) {
 	_, err := svc.GetRegistryRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetRegistryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPublisherAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPublisherAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPublisherAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListPublishers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPublishers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPublishers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -206,6 +290,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdatePublisherAssociationApprovalStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePublisherAssociationApprovalStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePublisherAssociationApprovalStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateRegistry(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateRegistry(context.Background(), nil, func(o *Options) {
@@ -241,6 +337,42 @@ func TestCheckSnapshot_UpdateRegistryRecordStatus(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_ValidatePublisher(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ValidatePublisher(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ValidatePublisher")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+func TestUpdateSnapshot_AssociatePublisher(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociatePublisher(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociatePublisher")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreatePublisher(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePublisher(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePublisher")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateRegistry(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRegistry(context.Background(), nil, func(o *Options) {
@@ -258,6 +390,18 @@ func TestUpdateSnapshot_CreateRegistryRecord(t *testing.T) {
 	_, err := svc.CreateRegistryRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateRegistryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeletePublisher(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePublisher(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePublisher")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -289,6 +433,30 @@ func TestUpdateSnapshot_DeleteRegistryRecord(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociatePublisher(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociatePublisher(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociatePublisher")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPublisher(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPublisher(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPublisher")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRegistry(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRegistry(context.Background(), nil, func(o *Options) {
@@ -306,6 +474,30 @@ func TestUpdateSnapshot_GetRegistryRecord(t *testing.T) {
 	_, err := svc.GetRegistryRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetRegistryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPublisherAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPublisherAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPublisherAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPublishers(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPublishers(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPublishers")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -385,6 +577,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdatePublisherAssociationApprovalStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePublisherAssociationApprovalStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePublisherAssociationApprovalStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateRegistry(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateRegistry(context.Background(), nil, func(o *Options) {
@@ -414,6 +618,18 @@ func TestUpdateSnapshot_UpdateRegistryRecordStatus(t *testing.T) {
 	_, err := svc.UpdateRegistryRecordStatus(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateRegistryRecordStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ValidatePublisher(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ValidatePublisher(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ValidatePublisher")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

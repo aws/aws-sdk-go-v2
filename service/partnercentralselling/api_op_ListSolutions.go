@@ -29,6 +29,7 @@ func (c *Client) ListSolutions(ctx context.Context, params *ListSolutionsInput, 
 	return out, nil
 }
 
+// Contains the request parameters for the ListSolutions operation.
 type ListSolutionsInput struct {
 
 	// Specifies the catalog associated with the request. This field takes a string
@@ -110,6 +111,7 @@ func (v *ListSolutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
+// Contains the response that the ListSolutions action returns.
 type ListSolutionsOutput struct {
 
 	// An array with minimal details for solutions matching the request criteria.

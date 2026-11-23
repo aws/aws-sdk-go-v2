@@ -2150,6 +2150,133 @@ func TestUpdateResponseSnapshot_TagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_TranscribeAudio(t *testing.T) {
+	want := &TranscribeAudioOutput{
+		OutputConfiguration: &types.SyncOutputConfiguration{
+			OutputMediaFileUri: ptr.String("__OutputMediaFileUri__"),
+		},
+		TranscriptResponse: &types.TranscriptResponse{
+			Metadata: &types.TranscribeAudioMetadata{
+				LanguageCode: types.SyncLanguageCode("en-US"),
+				LanguageCodes: []types.SyncLanguageCodeItem{
+					{
+						LanguageCode:      types.SyncLanguageCode("en-US"),
+						DurationInSeconds: ptr.Float32(1.0),
+					},
+					{
+						LanguageCode:      types.SyncLanguageCode("en-US"),
+						DurationInSeconds: ptr.Float32(1.0),
+					},
+				},
+				MediaFormat:          types.MediaFormat("mp3"),
+				MediaSampleRateHertz: ptr.Int32(1),
+				SpeakersCount:        ptr.Int32(1),
+				NumberOfChannels:     ptr.Int32(1),
+			},
+			Results: &types.TranscribeAudioResults{
+				Transcript: ptr.String("__Transcript__"),
+				Items: []types.SyncItem{
+					{
+						Id:                    ptr.Int32(1),
+						Content:               ptr.String("__Content__"),
+						StartTime:             ptr.Float64(1.0),
+						EndTime:               ptr.Float64(1.0),
+						LanguageCode:          types.SyncLanguageCode("en-US"),
+						ChannelLabel:          ptr.String("__ChannelLabel__"),
+						SpeakerLabel:          ptr.String("__SpeakerLabel__"),
+						VocabularyFilterMatch: ptr.Bool(true),
+						Redactions: []types.SyncRedaction{
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+						},
+					},
+					{
+						Id:                    ptr.Int32(1),
+						Content:               ptr.String("__Content__"),
+						StartTime:             ptr.Float64(1.0),
+						EndTime:               ptr.Float64(1.0),
+						LanguageCode:          types.SyncLanguageCode("en-US"),
+						ChannelLabel:          ptr.String("__ChannelLabel__"),
+						SpeakerLabel:          ptr.String("__SpeakerLabel__"),
+						VocabularyFilterMatch: ptr.Bool(true),
+						Redactions: []types.SyncRedaction{
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+						},
+					},
+				},
+			},
+			RedactedResults: &types.TranscribeAudioResults{
+				Transcript: ptr.String("__Transcript__"),
+				Items: []types.SyncItem{
+					{
+						Id:                    ptr.Int32(1),
+						Content:               ptr.String("__Content__"),
+						StartTime:             ptr.Float64(1.0),
+						EndTime:               ptr.Float64(1.0),
+						LanguageCode:          types.SyncLanguageCode("en-US"),
+						ChannelLabel:          ptr.String("__ChannelLabel__"),
+						SpeakerLabel:          ptr.String("__SpeakerLabel__"),
+						VocabularyFilterMatch: ptr.Bool(true),
+						Redactions: []types.SyncRedaction{
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+						},
+					},
+					{
+						Id:                    ptr.Int32(1),
+						Content:               ptr.String("__Content__"),
+						StartTime:             ptr.Float64(1.0),
+						EndTime:               ptr.Float64(1.0),
+						LanguageCode:          types.SyncLanguageCode("en-US"),
+						ChannelLabel:          ptr.String("__ChannelLabel__"),
+						SpeakerLabel:          ptr.String("__SpeakerLabel__"),
+						VocabularyFilterMatch: ptr.Bool(true),
+						Redactions: []types.SyncRedaction{
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	proto := rpcv2.NewCBOR(schemas.Transcribe)
+	opSchema := smithy.NewOperationSchema(schemas.TranscribeAudio, schemas.TranscribeAudioResponse, schemas.TranscribeAudioResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("TranscribeAudio.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	want := &UntagResourceOutput{}
 	proto := rpcv2.NewCBOR(schemas.Transcribe)
@@ -2358,6 +2485,7 @@ func TestUpdateResponseSnapshot_UpdateVocabularyFilter(t *testing.T) {
 func TestUpdateResponseSnapshot_Error_BadRequestException(t *testing.T) {
 	want := &types.BadRequestException{
 		Message: ptr.String("__Message__"),
+		Reason:  types.BadRequestExceptionReason("audioTooLong"),
 	}
 	proto := rpcv2.NewCBOR(schemas.Transcribe)
 	opSchema := smithy.NewOperationSchema(schemas.CreateCallAnalyticsCategory, schemas.BadRequestException, schemas.BadRequestException)

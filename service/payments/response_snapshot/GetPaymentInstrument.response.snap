@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPayments.GetPaymentInstrument
+
+{"paymentInstrument":{"arn":"__Arn__","createdAt":946684800,"details":{"card":{"brand":"VISA","cardType":"CREDIT","expirationMonth":1,"expirationYear":1,"issuerCountry":"__IssuerCountry__","issuingBank":"__IssuingBank__","last4":"__Last4__"}},"paymentMethod":"CARD","status":"ACTIVE","updatedAt":946684800}}

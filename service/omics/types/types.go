@@ -1104,7 +1104,7 @@ type DefaultRunSetting struct {
 
 	// Engine-specific settings for the workflow run. Use this field to specify
 	// configuration options that are specific to the workflow engine (for example,
-	// Nextflow profiles).
+	// Nextflow profiles, Nextflow runtime configuration).
 	EngineSettings document.Interface
 
 	// The verbosity level for CloudWatch Logs emitted during each run.
@@ -1135,6 +1135,12 @@ type DefaultRunSetting struct {
 	// priority. A value of 0 corresponds to the lowest priority. Can be overridden per
 	// run.
 	Priority *int32
+
+	// Specifies whether each workflow run in the batch can read inputs from Amazon
+	// Simple Storage Service (Amazon S3) buckets that use Requester Pays. Your account
+	// pays the request and data transfer charges for those reads. The default is false
+	// .
+	RequesterPaysEnabled *bool
 
 	// The retention behavior for runs after completion.
 	RetentionMode RunRetentionMode
@@ -1215,6 +1221,9 @@ func (v *DefaultRunSetting) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.DefaultRunSetting_priority, *v.Priority)
+	}
+	if v.RequesterPaysEnabled != nil {
+		s.WriteBool(schemas.DefaultRunSetting_requesterPaysEnabled, *v.RequesterPaysEnabled)
 	}
 	if v.RetentionMode != "" {
 		s.WriteString(schemas.DefaultRunSetting_retentionMode, string(v.RetentionMode))
@@ -1313,6 +1322,9 @@ func (v *DefaultRunSetting) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DefaultRunSetting_priority:
 			v.Priority = new(int32)
 			return d.ReadInt32(schemas.DefaultRunSetting_priority, v.Priority)
+		case schemas.DefaultRunSetting_requesterPaysEnabled:
+			v.RequesterPaysEnabled = new(bool)
+			return d.ReadBool(schemas.DefaultRunSetting_requesterPaysEnabled, v.RequesterPaysEnabled)
 		case schemas.DefaultRunSetting_retentionMode:
 			var ev string
 			if err := d.ReadString(schemas.DefaultRunSetting_retentionMode, &ev); err != nil {
@@ -2582,7 +2594,8 @@ type InlineSetting struct {
 
 	// Per-run engine-specific settings. Use this field to specify configuration
 	// options that are specific to the workflow engine (for example, Nextflow
-	// profiles). Overrides defaultRunSetting.engineSettings for this run.
+	// profiles, Nextflow runtime configuration). Overrides
+	// defaultRunSetting.engineSettings for this run.
 	EngineSettings document.Interface
 
 	// An optional user-friendly name for this run.

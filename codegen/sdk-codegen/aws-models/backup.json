@@ -6796,6 +6796,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Returns whether Backup fully manages the backups for a resource type.</p>\n         <p>For the benefits of full Backup management, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#full-management\">Full Backup \n         management</a>.</p>\n         <p>For a list of resource types and whether each supports full Backup management, \n         see the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource\">Feature availability by resource</a> table.</p>\n         <p>If <code>\"DynamoDB\":false</code>, you can enable full Backup management for\n         DynamoDB backup by enabling <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli\">\n            Backup's advanced DynamoDB backup features</a>.</p>"
                     }
+                },
+                "ResourceTypeOptInIncremental": {
+                    "target": "com.amazonaws.backup#ResourceTypeOptInIncremental",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether you have opted in to incremental backups for each resource type in\n         the Region. When you opt in, each backup captures only the changes made since your\n         previous backup. Incremental backup opt-in is currently available for\n         Amazon DynamoDB.</p>\n         <p>Consider opting in if your resources are large and change infrequently, because\n         incremental backups can reduce your backup storage and backup time. To opt in, use the\n         <code>UpdateRegionSettings</code> API. For a list of the Backup features that\n         each resource type supports, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource\">Feature availability by resource</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14071,6 +14077,15 @@
                 "target": "com.amazonaws.backup#IsEnabled"
             }
         },
+        "com.amazonaws.backup#ResourceTypeOptInIncremental": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.backup#ResourceType"
+            },
+            "value": {
+                "target": "com.amazonaws.backup#IsEnabled"
+            }
+        },
         "com.amazonaws.backup#ResourceTypeOptInPreference": {
             "type": "map",
             "key": {
@@ -17217,6 +17232,12 @@
                     "target": "com.amazonaws.backup#ResourceTypeManagementPreference",
                     "traits": {
                         "smithy.api#documentation": "<p>Enables or disables full Backup management of backups for a resource type.\n         To enable full Backup management for DynamoDB along with <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html\">\n            Backup's advanced DynamoDB backup features</a>, follow the\n         procedure to <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli\"> enable advanced DynamoDB backup programmatically</a>.</p>"
+                    }
+                },
+                "ResourceTypeOptInIncremental": {
+                    "target": "com.amazonaws.backup#ResourceTypeOptInIncremental",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether you opt in to incremental backups for each resource type in the\n         Region. Opt in when you want to reduce backup storage and backup time for large resources\n         that change infrequently. Incremental backup opt-in is currently available for\n         Amazon DynamoDB.</p>\n         <p>To view your current incremental backup settings, use the\n         <code>DescribeRegionSettings</code> API. For the resource types that each\n         Backup feature supports, see the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource\">Feature availability by resource</a> table.</p>"
                     }
                 }
             },

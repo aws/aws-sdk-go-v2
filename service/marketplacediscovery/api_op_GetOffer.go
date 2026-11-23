@@ -35,10 +35,10 @@ type GetOfferInput struct {
 	// This member is required.
 	OfferId *string
 
-	// A BCP 47 language tag or comma-separated priority list specifying the preferred
-	// locale for response content. See Locale for supported values, constraints,
-	// fallback behavior, and the default locale. If omitted, the service returns
-	// content in the default locale.
+	// The preferred locale for response content, as a Best Current Practice 47 (BCP
+	// 47) language tag or a comma-separated priority list of language tags. See Locale
+	// for supported values, constraints, fallback behavior, and the default locale. If
+	// you omit this field, the service returns content in the default locale.
 	Locale *string
 
 	noSmithyDocumentSerde
@@ -61,7 +61,7 @@ func (v *GetOfferInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type GetOfferOutput struct {
 
-	// An encoded string to be passed by the acceptor of the terms when creating an
+	// An encoded string that you pass when you accept the terms and create an
 	// agreement.
 	//
 	// This member is required.
@@ -73,7 +73,7 @@ type GetOfferOutput struct {
 	AssociatedEntities []types.OfferAssociatedEntity
 
 	// Badges indicating special attributes of the offer, such as private pricing,
-	// future dated, or replacement offer.
+	// future-dated, or replacement offer.
 	//
 	// This member is required.
 	Badges []types.PurchaseOptionBadge
@@ -88,8 +88,8 @@ type GetOfferOutput struct {
 	// This member is required.
 	OfferId *string
 
-	// The pricing model that determines how buyers are charged, such as usage-based,
-	// contract, BYOL, or free.
+	// The pricing model that determines how you are charged, such as usage-based,
+	// contract, Bring Your Own License (BYOL), or free.
 	//
 	// This member is required.
 	PricingModel *types.PricingModel
@@ -99,23 +99,22 @@ type GetOfferOutput struct {
 	// This member is required.
 	SellerOfRecord *types.SellerInformation
 
-	// The date and time when the offer became available to the buyer.
+	// The date and time when the offer became available to you.
 	AvailableFromTime *time.Time
 
-	// The date and time until when the offer can be procured. This value is null for
+	// The date and time until which you can procure the offer. This value is null for
 	// offers that never expire.
 	ExpirationTime *time.Time
 
-	// The locale of the returned content. Indicates whether the response contains
-	// content in the requested locale, or fell back to the default locale. See Locale
-	// for details.
+	// The locale of the returned content. This value indicates whether the response
+	// contains content in the requested locale or fell back to the default locale. See
+	// Locale for details.
 	Locale *string
 
-	// The display name of the offer. This is free-form text provided by the seller.
+	// The display name of the offer. The seller provides this free-form text.
 	OfferName *string
 
-	// The identifier of the existing agreement that this offer would replace. Enables
-	// agreement-based offer functionality.
+	// The identifier of the existing agreement that this offer would replace.
 	ReplacementAgreementId *string
 
 	// Metadata pertaining to the operation's result.

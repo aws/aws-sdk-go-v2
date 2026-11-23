@@ -139,7 +139,7 @@ type CreateBillEstimateOutput struct {
 	//  This attribute provides the reason if a Bill estimate result generation fails.
 	FailureMessage *string
 
-	// The setting for the reserved instance and savings plan group sharing used in
+	// The setting for the reserved instance and savings plans group sharing used in
 	// this estimate.
 	GroupSharingPreference types.GroupSharingPreferenceEnum
 

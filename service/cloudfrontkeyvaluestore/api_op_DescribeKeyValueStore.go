@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-// Returns metadata information about Key Value Store.
+// Returns metadata information about the key value store.
 func (c *Client) DescribeKeyValueStore(ctx context.Context, params *DescribeKeyValueStoreInput, optFns ...func(*Options)) (*DescribeKeyValueStoreOutput, error) {
 	if params == nil {
 		params = &DescribeKeyValueStoreInput{}
@@ -28,7 +28,7 @@ func (c *Client) DescribeKeyValueStore(ctx context.Context, params *DescribeKeyV
 
 type DescribeKeyValueStoreInput struct {
 
-	// The Amazon Resource Name (ARN) of the Key Value Store.
+	// The Amazon Resource Name (ARN) of the key value store.
 	//
 	// This member is required.
 	KvsARN *string
@@ -53,41 +53,41 @@ func (in *DescribeKeyValueStoreInput) bindEndpointParams(p *EndpointParameters) 
 
 }
 
-// Metadata information about a Key Value Store.
+// Metadata information about a key value store.
 type DescribeKeyValueStoreOutput struct {
 
-	// Date and time when the Key Value Store was created.
+	// Date and time when the key value store was created.
 	//
 	// This member is required.
 	Created *time.Time
 
-	// The version identifier for the current version of the Key Value Store.
+	// The version identifier for the current version of the key value store.
 	//
 	// This member is required.
 	ETag *string
 
-	// Number of key value pairs in the Key Value Store.
+	// Number of key-value pairs in the key value store.
 	//
 	// This member is required.
 	ItemCount *int32
 
-	// The Amazon Resource Name (ARN) of the Key Value Store.
+	// The Amazon Resource Name (ARN) of the key value store.
 	//
 	// This member is required.
 	KvsARN *string
 
-	// Total size of the Key Value Store in bytes.
+	// Total size of the key value store in bytes.
 	//
 	// This member is required.
 	TotalSizeInBytes *int64
 
-	// The reason for Key Value Store creation failure.
+	// The reason why the key value store wasn't created.
 	FailureReason *string
 
-	// Date and time when the key value pairs in the Key Value Store was last modified.
+	// Date and time when the key-value pairs in the key value store was last modified.
 	LastModified *time.Time
 
-	// The current status of the Key Value Store.
+	// The current status of the key value store.
 	Status *string
 
 	// Metadata pertaining to the operation's result.

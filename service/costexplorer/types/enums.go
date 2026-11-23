@@ -618,13 +618,18 @@ type Metric string
 
 // Enum values for Metric
 const (
-	MetricBlendedCost           Metric = "BLENDED_COST"
-	MetricUnblendedCost         Metric = "UNBLENDED_COST"
-	MetricAmortizedCost         Metric = "AMORTIZED_COST"
-	MetricNetUnblendedCost      Metric = "NET_UNBLENDED_COST"
-	MetricNetAmortizedCost      Metric = "NET_AMORTIZED_COST"
-	MetricUsageQuantity         Metric = "USAGE_QUANTITY"
-	MetricNormalizedUsageAmount Metric = "NORMALIZED_USAGE_AMOUNT"
+	MetricBlendedCost                Metric = "BLENDED_COST"
+	MetricUnblendedCost              Metric = "UNBLENDED_COST"
+	MetricAmortizedCost              Metric = "AMORTIZED_COST"
+	MetricNetUnblendedCost           Metric = "NET_UNBLENDED_COST"
+	MetricNetAmortizedCost           Metric = "NET_AMORTIZED_COST"
+	MetricUsageQuantity              Metric = "USAGE_QUANTITY"
+	MetricNormalizedUsageAmount      Metric = "NORMALIZED_USAGE_AMOUNT"
+	MetricListCost                   Metric = "LIST_COST"
+	MetricContractedCost             Metric = "CONTRACTED_COST"
+	MetricBilledCost                 Metric = "BILLED_COST"
+	MetricPublicEquivalentBilledCost Metric = "PUBLIC_EQUIVALENT_BILLED_COST"
+	MetricPublicOnDemandCost         Metric = "PUBLIC_ON_DEMAND_COST"
 )
 
 // Values returns all known values for Metric. Note that this can be expanded in
@@ -640,6 +645,11 @@ func (Metric) Values() []Metric {
 		"NET_AMORTIZED_COST",
 		"USAGE_QUANTITY",
 		"NORMALIZED_USAGE_AMOUNT",
+		"LIST_COST",
+		"CONTRACTED_COST",
+		"BILLED_COST",
+		"PUBLIC_EQUIVALENT_BILLED_COST",
+		"PUBLIC_ON_DEMAND_COST",
 	}
 }
 

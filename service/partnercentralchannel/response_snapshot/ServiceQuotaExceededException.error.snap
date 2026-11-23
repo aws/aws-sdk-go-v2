@@ -1,5 +1,5 @@
 402
 Content-Type: application/x-amz-json-1.0
-X-Amz-Target: PartnerCentralChannel.CreateChannelHandshake
+X-Amz-Target: PartnerCentralChannel.CreateChannelContract
 
 {"__type":"ServiceQuotaExceededException","message":"__Message__","quotaCode":"__QuotaCode__","resourceId":"__ResourceId__","resourceType":"__ResourceType__"}

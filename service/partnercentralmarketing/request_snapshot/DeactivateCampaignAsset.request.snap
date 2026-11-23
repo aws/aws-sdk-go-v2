@@ -1,0 +1,7 @@
+POST /service/AWSPartnerDemandGenerator/operation/DeactivateCampaignAsset
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿wCampaignAssetIdentifierx__CampaignAssetIdentifier__rCampaignIdentifierv__CampaignIdentifier__gCatalogcAWSÿ

@@ -13,6 +13,9 @@ import (
 // Imports domain names from a file into a domain list, for use in a DNS firewall
 // rule group.
 //
+// You can't import into an AutoAllowlist rule's managed domain list. To seed such
+// a list, specify ImportFromFirewallDomainListId when you create the rule.
+//
 // Each domain specification in your domain list must satisfy the following
 // requirements:
 //

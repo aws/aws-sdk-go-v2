@@ -25,8 +25,10 @@ import (
 // For example code, see Invoke model with streaming code example in the Amazon
 // Bedrock User Guide.
 //
-// This operation requires permissions to perform the
-// bedrock:InvokeModelWithResponseStream action.
+// This operation requires permission for the bedrock:InvokeModelWithResponseStream
+// action on both the inference target and the project. If you omit
+// projectIdentifier or specify default , this includes permission on the default
+// project for your account.
 //
 // To deny all inference access to resources that you specify in the modelId
 // field, you need to deny access to the bedrock:InvokeModel and
@@ -127,6 +129,16 @@ type InvokeModelWithResponseStreamInput struct {
 	// Model performance settings for the request.
 	PerformanceConfigLatency types.PerformanceConfigLatency
 
+	// The ID or Amazon Resource Name (ARN) of the project to use for this invocation.
+	// The project must be active and belong to your AWS account and the AWS Region to
+	// which you send the request. Specify default or omit this field to use the
+	// default project for your account.
+	//
+	// For a non-default project, the inference target must resolve to a foundation
+	// model or system-defined inference profile. Application inference profiles don't
+	// support non-default projects.
+	ProjectIdentifier *string
+
 	// Key-value pairs that you can use to filter invocation logs.
 	RequestMetadata *string
 
@@ -167,6 +179,9 @@ func (v *InvokeModelWithResponseStreamInput) SerializeMembers(s smithy.ShapeSeri
 	}
 	if v.PerformanceConfigLatency != "" {
 		s.WriteString(schemas.InvokeModelWithResponseStreamRequest_performanceConfigLatency, string(v.PerformanceConfigLatency))
+	}
+	if v.ProjectIdentifier != nil {
+		s.WriteString(schemas.InvokeModelWithResponseStreamRequest_projectIdentifier, *v.ProjectIdentifier)
 	}
 	if v.RequestMetadata != nil {
 		s.WriteString(schemas.InvokeModelWithResponseStreamRequest_requestMetadata, *v.RequestMetadata)

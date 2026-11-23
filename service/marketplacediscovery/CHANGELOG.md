@@ -1,3 +1,7 @@
+# v1.14.0 (2026-11-20)
+
+* **Feature**: AWS Marketplace Discovery adds ListListingAttributes, an API for trust center, case study, and specialization details. SearchListings adds summaries, seller engagements and filters. GetListing and GetProduct return purchase indicators when products cannot be subscribed to or require no subscription.
+
 # v1.13.3 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

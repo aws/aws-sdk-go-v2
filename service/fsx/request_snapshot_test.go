@@ -23,6 +23,7 @@ import (
 	"slices"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeSSPrefix = "request_snapshot"
@@ -435,6 +436,55 @@ func TestCheckRequestSnapshot_CreateBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBackup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateClusterPeer(t *testing.T) {
+	input := &CreateClusterPeerInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		PeerAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+		PeerClusterName:     ptr.String("__PeerClusterName__"),
+		AllowedSvmMode:      types.AllowedSvmMode("ALL"),
+		AllowedSvmIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateClusterPeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateClusterPeer"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1072,6 +1122,108 @@ func TestCheckRequestSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateSnapmirrorPolicy(t *testing.T) {
+	input := &CreateSnapmirrorPolicyInput{
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		FileSystemId:            ptr.String("__FileSystemId__"),
+		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+		Name:                    ptr.String("__Name__"),
+		SnapshotCopyMode:        types.SnapmirrorPolicySnapshotCopyMode("COPY_ALL_SOURCE_SNAPSHOTS"),
+		RetentionRules: []types.SnapmirrorPolicyRetentionRule{
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
+			},
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
+			},
+		},
+		TransferSchedule:          ptr.String("__TransferSchedule__"),
+		NetworkCompressionEnabled: ptr.Bool(true),
+		ThrottleInKbps:            ptr.Int64(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateSnapmirrorPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSnapmirrorPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateSnapmirrorRelationship(t *testing.T) {
+	input := &CreateSnapmirrorRelationshipInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Source: &types.CreateSnapmirrorSource{
+			Path: ptr.String("__Path__"),
+		},
+		Destination: &types.CreateSnapmirrorDestination{
+			VolumeId: ptr.String("__VolumeId__"),
+		},
+		PolicyId:         ptr.String("__PolicyId__"),
+		TransferSchedule: ptr.String("__TransferSchedule__"),
+		ThrottleInKbps:   ptr.Int64(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateSnapmirrorRelationship(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSnapmirrorRelationship"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateSnapshot(t *testing.T) {
 	input := &CreateSnapshotInput{
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
@@ -1086,6 +1238,11 @@ func TestCheckRequestSnapshot_CreateSnapshot(t *testing.T) {
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		OntapConfiguration: &types.CreateOntapSnapshotConfiguration{
+			SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+			ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1107,6 +1264,69 @@ func TestCheckRequestSnapshot_CreateSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateSnapshotPolicy(t *testing.T) {
+	input := &CreateSnapshotPolicyInput{
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		FileSystemId:            ptr.String("__FileSystemId__"),
+		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+		Name:                    ptr.String("__Name__"),
+		Enabled:                 ptr.Bool(true),
+		Schedules: []types.SnapshotPolicySchedule{
+			{
+				Name:            ptr.String("__Name__"),
+				Count:           ptr.Int32(1),
+				Prefix:          ptr.String("__Prefix__"),
+				SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+				RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+					Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+					Value: ptr.Int32(1),
+				},
+			},
+			{
+				Name:            ptr.String("__Name__"),
+				Count:           ptr.Int32(1),
+				Prefix:          ptr.String("__Prefix__"),
+				SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+				RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+					Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+					Value: ptr.Int32(1),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateSnapshotPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSnapshotPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1167,6 +1387,51 @@ func TestCheckRequestSnapshot_CreateStorageVirtualMachine(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateStorageVirtualMachinePeer(t *testing.T) {
+	input := &CreateStorageVirtualMachinePeerInput{
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+		PeerSvmName:             ptr.String("__PeerSvmName__"),
+		PeerClusterName:         ptr.String("__PeerClusterName__"),
+		Applications: []types.StorageVirtualMachinePeerApplication{
+			types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+			types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+		},
+		PeerSvmAlias: ptr.String("__PeerSvmAlias__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateStorageVirtualMachinePeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateStorageVirtualMachinePeer"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateVolume(t *testing.T) {
 	input := &CreateVolumeInput{
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
@@ -1218,6 +1483,10 @@ func TestCheckRequestSnapshot_CreateVolume(t *testing.T) {
 				ConstituentsPerAggregate: ptr.Int32(1),
 			},
 			SizeInBytes: ptr.Int64(1),
+			CloneConfiguration: &types.CreateCloneConfiguration{
+				ParentVolumeId: ptr.String("__ParentVolumeId__"),
+				SnapshotId:     ptr.String("__SnapshotId__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -1367,6 +1636,10 @@ func TestCheckRequestSnapshot_CreateVolumeFromBackup(t *testing.T) {
 				ConstituentsPerAggregate: ptr.Int32(1),
 			},
 			SizeInBytes: ptr.Int64(1),
+			CloneConfiguration: &types.CreateCloneConfiguration{
+				ParentVolumeId: ptr.String("__ParentVolumeId__"),
+				SnapshotId:     ptr.String("__SnapshotId__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -1426,6 +1699,34 @@ func TestCheckRequestSnapshot_DeleteBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBackup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteClusterPeer(t *testing.T) {
+	input := &DeleteClusterPeerInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ClusterPeerId:      ptr.String("__ClusterPeerId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteClusterPeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteClusterPeer"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1558,6 +1859,62 @@ func TestCheckRequestSnapshot_DeleteFileSystem(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteSnapmirrorPolicy(t *testing.T) {
+	input := &DeleteSnapmirrorPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapmirrorPolicyId: ptr.String("__SnapmirrorPolicyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSnapmirrorPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSnapmirrorPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteSnapmirrorRelationship(t *testing.T) {
+	input := &DeleteSnapmirrorRelationshipInput{
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		SnapmirrorRelationshipId: ptr.String("__SnapmirrorRelationshipId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSnapmirrorRelationship(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSnapmirrorRelationship"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteSnapshot(t *testing.T) {
 	input := &DeleteSnapshotInput{
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
@@ -1586,6 +1943,34 @@ func TestCheckRequestSnapshot_DeleteSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteSnapshotPolicy(t *testing.T) {
+	input := &DeleteSnapshotPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapshotPolicyId:   ptr.String("__SnapshotPolicyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSnapshotPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSnapshotPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteStorageVirtualMachine(t *testing.T) {
 	input := &DeleteStorageVirtualMachineInput{
 		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
@@ -1610,6 +1995,34 @@ func TestCheckRequestSnapshot_DeleteStorageVirtualMachine(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteStorageVirtualMachine"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteStorageVirtualMachinePeer(t *testing.T) {
+	input := &DeleteStorageVirtualMachinePeerInput{
+		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
+		StorageVirtualMachinePeerId: ptr.String("__StorageVirtualMachinePeerId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteStorageVirtualMachinePeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteStorageVirtualMachinePeer"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1706,6 +2119,54 @@ func TestCheckRequestSnapshot_DescribeBackups(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeBackups"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeClusterPeers(t *testing.T) {
+	input := &DescribeClusterPeersInput{
+		ClusterPeerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.ClusterPeerFilter{
+			{
+				Name: types.ClusterPeerFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.ClusterPeerFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeClusterPeers(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeClusterPeers"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1973,6 +2434,150 @@ func TestCheckRequestSnapshot_DescribeSharedVpcConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeSnapmirrorPolicies(t *testing.T) {
+	input := &DescribeSnapmirrorPoliciesInput{
+		SnapmirrorPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.SnapmirrorPolicyFilter{
+			{
+				Name: types.SnapmirrorPolicyFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SnapmirrorPolicyFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeSnapmirrorPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSnapmirrorPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeSnapmirrorRelationships(t *testing.T) {
+	input := &DescribeSnapmirrorRelationshipsInput{
+		SnapmirrorRelationshipIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.SnapmirrorRelationshipFilter{
+			{
+				Name: types.SnapmirrorRelationshipFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SnapmirrorRelationshipFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeSnapmirrorRelationships(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSnapmirrorRelationships"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeSnapshotPolicies(t *testing.T) {
+	input := &DescribeSnapshotPoliciesInput{
+		SnapshotPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.SnapshotPolicyFilter{
+			{
+				Name: types.SnapshotPolicyFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SnapshotPolicyFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeSnapshotPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSnapshotPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeSnapshots(t *testing.T) {
 	input := &DescribeSnapshotsInput{
 		SnapshotIds: []string{
@@ -2018,6 +2623,54 @@ func TestCheckRequestSnapshot_DescribeSnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSnapshots"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeStorageVirtualMachinePeers(t *testing.T) {
+	input := &DescribeStorageVirtualMachinePeersInput{
+		StorageVirtualMachinePeerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.StorageVirtualMachinePeerFilter{
+			{
+				Name: types.StorageVirtualMachinePeerFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.StorageVirtualMachinePeerFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeStorageVirtualMachinePeers(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeStorageVirtualMachinePeers"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2364,6 +3017,39 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateClusterPeer(t *testing.T) {
+	input := &UpdateClusterPeerInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ClusterPeerId:      ptr.String("__ClusterPeerId__"),
+		PeerClusterName:    ptr.String("__PeerClusterName__"),
+		PeerAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateClusterPeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateClusterPeer"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateDataRepositoryAssociation(t *testing.T) {
 	input := &UpdateDataRepositoryAssociationInput{
 		AssociationId:         ptr.String("__AssociationId__"),
@@ -2604,11 +3290,91 @@ func TestCheckRequestSnapshot_UpdateSharedVpcConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateSnapmirrorPolicy(t *testing.T) {
+	input := &UpdateSnapmirrorPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapmirrorPolicyId: ptr.String("__SnapmirrorPolicyId__"),
+		RetentionRules: []types.SnapmirrorPolicyRetentionRule{
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
+			},
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
+			},
+		},
+		TransferSchedule:          ptr.String("__TransferSchedule__"),
+		NetworkCompressionEnabled: ptr.Bool(true),
+		ThrottleInKbps:            ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateSnapmirrorPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSnapmirrorPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateSnapmirrorRelationship(t *testing.T) {
+	input := &UpdateSnapmirrorRelationshipInput{
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		SnapmirrorRelationshipId: ptr.String("__SnapmirrorRelationshipId__"),
+		PolicyId:                 ptr.String("__PolicyId__"),
+		TransferSchedule:         ptr.String("__TransferSchedule__"),
+		ThrottleInKbps:           ptr.Int64(1),
+		State:                    types.UpdatableSnapmirrorRelationshipState("SNAPMIRRORED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateSnapmirrorRelationship(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSnapmirrorRelationship"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateSnapshot(t *testing.T) {
 	input := &UpdateSnapshotInput{
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
 		Name:               ptr.String("__Name__"),
 		SnapshotId:         ptr.String("__SnapshotId__"),
+		OntapConfiguration: &types.UpdateOntapSnapshotConfiguration{
+			SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+			ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2629,6 +3395,35 @@ func TestCheckRequestSnapshot_UpdateSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateSnapshotPolicy(t *testing.T) {
+	input := &UpdateSnapshotPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapshotPolicyId:   ptr.String("__SnapshotPolicyId__"),
+		Enabled:            ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateSnapshotPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSnapshotPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2677,6 +3472,40 @@ func TestCheckRequestSnapshot_UpdateStorageVirtualMachine(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateStorageVirtualMachinePeer(t *testing.T) {
+	input := &UpdateStorageVirtualMachinePeerInput{
+		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
+		StorageVirtualMachinePeerId: ptr.String("__StorageVirtualMachinePeerId__"),
+		Applications: []types.StorageVirtualMachinePeerApplication{
+			types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+			types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+		},
+		PeerSvmAlias: ptr.String("__PeerSvmAlias__"),
+		State:        types.StorageVirtualMachinePeerUpdateState("PEERED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateStorageVirtualMachinePeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateStorageVirtualMachinePeer"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateVolume(t *testing.T) {
 	input := &UpdateVolumeInput{
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
@@ -2716,6 +3545,9 @@ func TestCheckRequestSnapshot_UpdateVolume(t *testing.T) {
 				VolumeAppendModeEnabled: ptr.Bool(true),
 			},
 			SizeInBytes: ptr.Int64(1),
+			CloneConfiguration: &types.UpdateCloneConfiguration{
+				SplitAction: types.CloneSplitAction("START"),
+			},
 		},
 		Name: ptr.String("__Name__"),
 		OpenZFSConfiguration: &types.UpdateOpenZFSVolumeConfiguration{
@@ -3028,6 +3860,55 @@ func TestUpdateRequestSnapshot_CreateBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateBackup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateClusterPeer(t *testing.T) {
+	input := &CreateClusterPeerInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		FileSystemId:       ptr.String("__FileSystemId__"),
+		PeerAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+		PassphraseSecretArn: ptr.String("__PassphraseSecretArn__"),
+		PeerClusterName:     ptr.String("__PeerClusterName__"),
+		AllowedSvmMode:      types.AllowedSvmMode("ALL"),
+		AllowedSvmIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateClusterPeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateClusterPeer"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3665,6 +4546,108 @@ func TestUpdateRequestSnapshot_CreateFileSystemFromBackup(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateSnapmirrorPolicy(t *testing.T) {
+	input := &CreateSnapmirrorPolicyInput{
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		FileSystemId:            ptr.String("__FileSystemId__"),
+		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+		Name:                    ptr.String("__Name__"),
+		SnapshotCopyMode:        types.SnapmirrorPolicySnapshotCopyMode("COPY_ALL_SOURCE_SNAPSHOTS"),
+		RetentionRules: []types.SnapmirrorPolicyRetentionRule{
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
+			},
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
+			},
+		},
+		TransferSchedule:          ptr.String("__TransferSchedule__"),
+		NetworkCompressionEnabled: ptr.Bool(true),
+		ThrottleInKbps:            ptr.Int64(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateSnapmirrorPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSnapmirrorPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateSnapmirrorRelationship(t *testing.T) {
+	input := &CreateSnapmirrorRelationshipInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		Source: &types.CreateSnapmirrorSource{
+			Path: ptr.String("__Path__"),
+		},
+		Destination: &types.CreateSnapmirrorDestination{
+			VolumeId: ptr.String("__VolumeId__"),
+		},
+		PolicyId:         ptr.String("__PolicyId__"),
+		TransferSchedule: ptr.String("__TransferSchedule__"),
+		ThrottleInKbps:   ptr.Int64(1),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateSnapmirrorRelationship(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSnapmirrorRelationship"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateSnapshot(t *testing.T) {
 	input := &CreateSnapshotInput{
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
@@ -3679,6 +4662,11 @@ func TestUpdateRequestSnapshot_CreateSnapshot(t *testing.T) {
 				Key:   ptr.String("__Key__"),
 				Value: ptr.String("__Value__"),
 			},
+		},
+		OntapConfiguration: &types.CreateOntapSnapshotConfiguration{
+			SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+			ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -3700,6 +4688,69 @@ func TestUpdateRequestSnapshot_CreateSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateSnapshotPolicy(t *testing.T) {
+	input := &CreateSnapshotPolicyInput{
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		FileSystemId:            ptr.String("__FileSystemId__"),
+		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+		Name:                    ptr.String("__Name__"),
+		Enabled:                 ptr.Bool(true),
+		Schedules: []types.SnapshotPolicySchedule{
+			{
+				Name:            ptr.String("__Name__"),
+				Count:           ptr.Int32(1),
+				Prefix:          ptr.String("__Prefix__"),
+				SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+				RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+					Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+					Value: ptr.Int32(1),
+				},
+			},
+			{
+				Name:            ptr.String("__Name__"),
+				Count:           ptr.Int32(1),
+				Prefix:          ptr.String("__Prefix__"),
+				SnapmirrorLabel: ptr.String("__SnapmirrorLabel__"),
+				RetentionPeriod: &types.SnapshotPolicyRetentionPeriod{
+					Type:  types.SnapshotPolicyRetentionPeriodType("SECONDS"),
+					Value: ptr.Int32(1),
+				},
+			},
+		},
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateSnapshotPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateSnapshotPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3760,6 +4811,51 @@ func TestUpdateRequestSnapshot_CreateStorageVirtualMachine(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateStorageVirtualMachinePeer(t *testing.T) {
+	input := &CreateStorageVirtualMachinePeerInput{
+		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
+		StorageVirtualMachineId: ptr.String("__StorageVirtualMachineId__"),
+		PeerSvmName:             ptr.String("__PeerSvmName__"),
+		PeerClusterName:         ptr.String("__PeerClusterName__"),
+		Applications: []types.StorageVirtualMachinePeerApplication{
+			types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+			types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+		},
+		PeerSvmAlias: ptr.String("__PeerSvmAlias__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateStorageVirtualMachinePeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateStorageVirtualMachinePeer"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateVolume(t *testing.T) {
 	input := &CreateVolumeInput{
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
@@ -3811,6 +4907,10 @@ func TestUpdateRequestSnapshot_CreateVolume(t *testing.T) {
 				ConstituentsPerAggregate: ptr.Int32(1),
 			},
 			SizeInBytes: ptr.Int64(1),
+			CloneConfiguration: &types.CreateCloneConfiguration{
+				ParentVolumeId: ptr.String("__ParentVolumeId__"),
+				SnapshotId:     ptr.String("__SnapshotId__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -3960,6 +5060,10 @@ func TestUpdateRequestSnapshot_CreateVolumeFromBackup(t *testing.T) {
 				ConstituentsPerAggregate: ptr.Int32(1),
 			},
 			SizeInBytes: ptr.Int64(1),
+			CloneConfiguration: &types.CreateCloneConfiguration{
+				ParentVolumeId: ptr.String("__ParentVolumeId__"),
+				SnapshotId:     ptr.String("__SnapshotId__"),
+			},
 		},
 		Tags: []types.Tag{
 			{
@@ -4019,6 +5123,34 @@ func TestUpdateRequestSnapshot_DeleteBackup(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBackup"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteClusterPeer(t *testing.T) {
+	input := &DeleteClusterPeerInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ClusterPeerId:      ptr.String("__ClusterPeerId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteClusterPeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteClusterPeer"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4151,6 +5283,62 @@ func TestUpdateRequestSnapshot_DeleteFileSystem(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteSnapmirrorPolicy(t *testing.T) {
+	input := &DeleteSnapmirrorPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapmirrorPolicyId: ptr.String("__SnapmirrorPolicyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSnapmirrorPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSnapmirrorPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteSnapmirrorRelationship(t *testing.T) {
+	input := &DeleteSnapmirrorRelationshipInput{
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		SnapmirrorRelationshipId: ptr.String("__SnapmirrorRelationshipId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSnapmirrorRelationship(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSnapmirrorRelationship"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteSnapshot(t *testing.T) {
 	input := &DeleteSnapshotInput{
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
@@ -4179,6 +5367,34 @@ func TestUpdateRequestSnapshot_DeleteSnapshot(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteSnapshotPolicy(t *testing.T) {
+	input := &DeleteSnapshotPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapshotPolicyId:   ptr.String("__SnapshotPolicyId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSnapshotPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSnapshotPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteStorageVirtualMachine(t *testing.T) {
 	input := &DeleteStorageVirtualMachineInput{
 		ClientRequestToken:      ptr.String("__ClientRequestToken__"),
@@ -4203,6 +5419,34 @@ func TestUpdateRequestSnapshot_DeleteStorageVirtualMachine(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteStorageVirtualMachine"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteStorageVirtualMachinePeer(t *testing.T) {
+	input := &DeleteStorageVirtualMachinePeerInput{
+		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
+		StorageVirtualMachinePeerId: ptr.String("__StorageVirtualMachinePeerId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteStorageVirtualMachinePeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteStorageVirtualMachinePeer"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4299,6 +5543,54 @@ func TestUpdateRequestSnapshot_DescribeBackups(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeBackups"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeClusterPeers(t *testing.T) {
+	input := &DescribeClusterPeersInput{
+		ClusterPeerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.ClusterPeerFilter{
+			{
+				Name: types.ClusterPeerFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.ClusterPeerFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeClusterPeers(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeClusterPeers"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4566,6 +5858,150 @@ func TestUpdateRequestSnapshot_DescribeSharedVpcConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeSnapmirrorPolicies(t *testing.T) {
+	input := &DescribeSnapmirrorPoliciesInput{
+		SnapmirrorPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.SnapmirrorPolicyFilter{
+			{
+				Name: types.SnapmirrorPolicyFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SnapmirrorPolicyFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeSnapmirrorPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSnapmirrorPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeSnapmirrorRelationships(t *testing.T) {
+	input := &DescribeSnapmirrorRelationshipsInput{
+		SnapmirrorRelationshipIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.SnapmirrorRelationshipFilter{
+			{
+				Name: types.SnapmirrorRelationshipFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SnapmirrorRelationshipFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeSnapmirrorRelationships(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSnapmirrorRelationships"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeSnapshotPolicies(t *testing.T) {
+	input := &DescribeSnapshotPoliciesInput{
+		SnapshotPolicyIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.SnapshotPolicyFilter{
+			{
+				Name: types.SnapshotPolicyFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.SnapshotPolicyFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeSnapshotPolicies(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSnapshotPolicies"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeSnapshots(t *testing.T) {
 	input := &DescribeSnapshotsInput{
 		SnapshotIds: []string{
@@ -4611,6 +6047,54 @@ func TestUpdateRequestSnapshot_DescribeSnapshots(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeSnapshots"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeStorageVirtualMachinePeers(t *testing.T) {
+	input := &DescribeStorageVirtualMachinePeersInput{
+		StorageVirtualMachinePeerIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		Filters: []types.StorageVirtualMachinePeerFilter{
+			{
+				Name: types.StorageVirtualMachinePeerFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Name: types.StorageVirtualMachinePeerFilterName("file-system-id"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeStorageVirtualMachinePeers(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeStorageVirtualMachinePeers"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4957,6 +6441,39 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateClusterPeer(t *testing.T) {
+	input := &UpdateClusterPeerInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		ClusterPeerId:      ptr.String("__ClusterPeerId__"),
+		PeerClusterName:    ptr.String("__PeerClusterName__"),
+		PeerAddresses: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateClusterPeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateClusterPeer"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateDataRepositoryAssociation(t *testing.T) {
 	input := &UpdateDataRepositoryAssociationInput{
 		AssociationId:         ptr.String("__AssociationId__"),
@@ -5197,11 +6714,91 @@ func TestUpdateRequestSnapshot_UpdateSharedVpcConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateSnapmirrorPolicy(t *testing.T) {
+	input := &UpdateSnapmirrorPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapmirrorPolicyId: ptr.String("__SnapmirrorPolicyId__"),
+		RetentionRules: []types.SnapmirrorPolicyRetentionRule{
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
+			},
+			{
+				Label:            ptr.String("__Label__"),
+				Count:            ptr.Int32(1),
+				CreationSchedule: ptr.String("__CreationSchedule__"),
+			},
+		},
+		TransferSchedule:          ptr.String("__TransferSchedule__"),
+		NetworkCompressionEnabled: ptr.Bool(true),
+		ThrottleInKbps:            ptr.Int64(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateSnapmirrorPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSnapmirrorPolicy"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateSnapmirrorRelationship(t *testing.T) {
+	input := &UpdateSnapmirrorRelationshipInput{
+		ClientRequestToken:       ptr.String("__ClientRequestToken__"),
+		SnapmirrorRelationshipId: ptr.String("__SnapmirrorRelationshipId__"),
+		PolicyId:                 ptr.String("__PolicyId__"),
+		TransferSchedule:         ptr.String("__TransferSchedule__"),
+		ThrottleInKbps:           ptr.Int64(1),
+		State:                    types.UpdatableSnapmirrorRelationshipState("SNAPMIRRORED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateSnapmirrorRelationship(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSnapmirrorRelationship"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateSnapshot(t *testing.T) {
 	input := &UpdateSnapshotInput{
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
 		Name:               ptr.String("__Name__"),
 		SnapshotId:         ptr.String("__SnapshotId__"),
+		OntapConfiguration: &types.UpdateOntapSnapshotConfiguration{
+			SnapmirrorLabel:    ptr.String("__SnapmirrorLabel__"),
+			ExpiryTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			SnaplockExpiryTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5222,6 +6819,35 @@ func TestUpdateRequestSnapshot_UpdateSnapshot(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSnapshot"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateSnapshotPolicy(t *testing.T) {
+	input := &UpdateSnapshotPolicyInput{
+		ClientRequestToken: ptr.String("__ClientRequestToken__"),
+		SnapshotPolicyId:   ptr.String("__SnapshotPolicyId__"),
+		Enabled:            ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateSnapshotPolicy(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateSnapshotPolicy"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5270,6 +6896,40 @@ func TestUpdateRequestSnapshot_UpdateStorageVirtualMachine(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateStorageVirtualMachinePeer(t *testing.T) {
+	input := &UpdateStorageVirtualMachinePeerInput{
+		ClientRequestToken:          ptr.String("__ClientRequestToken__"),
+		StorageVirtualMachinePeerId: ptr.String("__StorageVirtualMachinePeerId__"),
+		Applications: []types.StorageVirtualMachinePeerApplication{
+			types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+			types.StorageVirtualMachinePeerApplication("SNAPMIRROR"),
+		},
+		PeerSvmAlias: ptr.String("__PeerSvmAlias__"),
+		State:        types.StorageVirtualMachinePeerUpdateState("PEERED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateStorageVirtualMachinePeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateStorageVirtualMachinePeer"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateVolume(t *testing.T) {
 	input := &UpdateVolumeInput{
 		ClientRequestToken: ptr.String("__ClientRequestToken__"),
@@ -5309,6 +6969,9 @@ func TestUpdateRequestSnapshot_UpdateVolume(t *testing.T) {
 				VolumeAppendModeEnabled: ptr.Bool(true),
 			},
 			SizeInBytes: ptr.Int64(1),
+			CloneConfiguration: &types.UpdateCloneConfiguration{
+				SplitAction: types.CloneSplitAction("START"),
+			},
 		},
 		Name: ptr.String("__Name__"),
 		OpenZFSConfiguration: &types.UpdateOpenZFSVolumeConfiguration{

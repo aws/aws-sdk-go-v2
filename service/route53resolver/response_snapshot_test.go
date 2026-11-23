@@ -313,6 +313,11 @@ func TestCheckResponseSnapshot_BatchCreateFirewallRule(t *testing.T) {
 						Value:               ptr.String("__Value__"),
 						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
 					},
+					AutoAllowlist: &types.AutoAllowlistConfig{
+						InitialDataTimeframeHours:         ptr.Int32(1),
+						ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+						AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
+					},
 				},
 				Status:        ptr.String("__Status__"),
 				StatusMessage: ptr.String("__StatusMessage__"),
@@ -348,6 +353,11 @@ func TestCheckResponseSnapshot_BatchCreateFirewallRule(t *testing.T) {
 					DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
 						Value:               ptr.String("__Value__"),
 						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+					},
+					AutoAllowlist: &types.AutoAllowlistConfig{
+						InitialDataTimeframeHours:         ptr.Int32(1),
+						ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+						AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
 					},
 				},
 				Status:        ptr.String("__Status__"),
@@ -385,6 +395,11 @@ func TestCheckResponseSnapshot_BatchCreateFirewallRule(t *testing.T) {
 							Value:               ptr.String("__Value__"),
 							ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
 						},
+						AutoAllowlist: &types.AutoAllowlistConfig{
+							InitialDataTimeframeHours:         ptr.Int32(1),
+							ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+							AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
+						},
 					},
 				},
 				Code:    ptr.String("__Code__"),
@@ -419,6 +434,11 @@ func TestCheckResponseSnapshot_BatchCreateFirewallRule(t *testing.T) {
 						DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
 							Value:               ptr.String("__Value__"),
 							ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+						},
+						AutoAllowlist: &types.AutoAllowlistConfig{
+							InitialDataTimeframeHours:         ptr.Int32(1),
+							ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+							AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
 						},
 					},
 				},
@@ -466,6 +486,11 @@ func TestCheckResponseSnapshot_BatchCreateFirewallRule(t *testing.T) {
 						Value:               ptr.String("__Value__"),
 						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
 					},
+					AutoAllowlist: &types.AutoAllowlistConfig{
+						InitialDataTimeframeHours:         ptr.Int32(1),
+						ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+						AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
+					},
 				},
 			},
 			{
@@ -496,6 +521,11 @@ func TestCheckResponseSnapshot_BatchCreateFirewallRule(t *testing.T) {
 					DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
 						Value:               ptr.String("__Value__"),
 						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+					},
+					AutoAllowlist: &types.AutoAllowlistConfig{
+						InitialDataTimeframeHours:         ptr.Int32(1),
+						ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+						AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
 					},
 				},
 			},
@@ -544,6 +574,11 @@ func TestCheckResponseSnapshot_BatchDeleteFirewallRule(t *testing.T) {
 						Value:               ptr.String("__Value__"),
 						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
 					},
+					AutoAllowlist: &types.AutoAllowlistConfig{
+						InitialDataTimeframeHours:         ptr.Int32(1),
+						ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+						AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
+					},
 				},
 				Status:        ptr.String("__Status__"),
 				StatusMessage: ptr.String("__StatusMessage__"),
@@ -579,6 +614,11 @@ func TestCheckResponseSnapshot_BatchDeleteFirewallRule(t *testing.T) {
 					DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
 						Value:               ptr.String("__Value__"),
 						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+					},
+					AutoAllowlist: &types.AutoAllowlistConfig{
+						InitialDataTimeframeHours:         ptr.Int32(1),
+						ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+						AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
 					},
 				},
 				Status:        ptr.String("__Status__"),
@@ -675,6 +715,11 @@ func TestCheckResponseSnapshot_BatchUpdateFirewallRule(t *testing.T) {
 						Value:               ptr.String("__Value__"),
 						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
 					},
+					AutoAllowlist: &types.AutoAllowlistConfig{
+						InitialDataTimeframeHours:         ptr.Int32(1),
+						ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+						AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
+					},
 				},
 				Status:        ptr.String("__Status__"),
 				StatusMessage: ptr.String("__StatusMessage__"),
@@ -710,6 +755,11 @@ func TestCheckResponseSnapshot_BatchUpdateFirewallRule(t *testing.T) {
 					DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
 						Value:               ptr.String("__Value__"),
 						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+					},
+					AutoAllowlist: &types.AutoAllowlistConfig{
+						InitialDataTimeframeHours:         ptr.Int32(1),
+						ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+						AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
 					},
 				},
 				Status:        ptr.String("__Status__"),
@@ -747,6 +797,11 @@ func TestCheckResponseSnapshot_BatchUpdateFirewallRule(t *testing.T) {
 							Value:               ptr.String("__Value__"),
 							ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
 						},
+						AutoAllowlist: &types.AutoAllowlistConfig{
+							InitialDataTimeframeHours:         ptr.Int32(1),
+							ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+							AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
+						},
 					},
 				},
 				Code:    ptr.String("__Code__"),
@@ -781,6 +836,11 @@ func TestCheckResponseSnapshot_BatchUpdateFirewallRule(t *testing.T) {
 						DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
 							Value:               ptr.String("__Value__"),
 							ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+						},
+						AutoAllowlist: &types.AutoAllowlistConfig{
+							InitialDataTimeframeHours:         ptr.Int32(1),
+							ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+							AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
 						},
 					},
 				},
@@ -828,6 +888,11 @@ func TestCheckResponseSnapshot_BatchUpdateFirewallRule(t *testing.T) {
 						Value:               ptr.String("__Value__"),
 						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
 					},
+					AutoAllowlist: &types.AutoAllowlistConfig{
+						InitialDataTimeframeHours:         ptr.Int32(1),
+						ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+						AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
+					},
 				},
 			},
 			{
@@ -858,6 +923,11 @@ func TestCheckResponseSnapshot_BatchUpdateFirewallRule(t *testing.T) {
 					DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
 						Value:               ptr.String("__Value__"),
 						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+					},
+					AutoAllowlist: &types.AutoAllowlistConfig{
+						InitialDataTimeframeHours:         ptr.Int32(1),
+						ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+						AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
 					},
 				},
 			},
@@ -952,6 +1022,11 @@ func TestCheckResponseSnapshot_CreateFirewallRule(t *testing.T) {
 					Value:               ptr.String("__Value__"),
 					ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
 				},
+				AutoAllowlist: &types.AutoAllowlistConfig{
+					InitialDataTimeframeHours:         ptr.Int32(1),
+					ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+					AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
+				},
 			},
 			Status:        ptr.String("__Status__"),
 			StatusMessage: ptr.String("__StatusMessage__"),
@@ -993,6 +1068,11 @@ func TestCheckResponseSnapshot_CreateFirewallRule(t *testing.T) {
 			DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
 				Value:               ptr.String("__Value__"),
 				ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+			},
+			AutoAllowlist: &types.AutoAllowlistConfig{
+				InitialDataTimeframeHours:         ptr.Int32(1),
+				ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+				AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
 			},
 		},
 	})
@@ -1388,6 +1468,11 @@ func TestCheckResponseSnapshot_DeleteFirewallRule(t *testing.T) {
 				DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
 					Value:               ptr.String("__Value__"),
 					ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+				},
+				AutoAllowlist: &types.AutoAllowlistConfig{
+					InitialDataTimeframeHours:         ptr.Int32(1),
+					ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+					AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
 				},
 			},
 			Status:        ptr.String("__Status__"),
@@ -1824,6 +1909,8 @@ func TestCheckResponseSnapshot_GetFirewallDomainList(t *testing.T) {
 			Category:         ptr.String("__Category__"),
 			ManagedListType:  types.DomainListType("THREAT"),
 		},
+		FirewallRuleGroupId:        ptr.String("__FirewallRuleGroupId__"),
+		FirewallThreatProtectionId: ptr.String("__FirewallThreatProtectionId__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetFirewallDomainList.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2346,22 +2433,28 @@ func TestCheckResponseSnapshot_ListFirewallDomainLists(t *testing.T) {
 		NextToken: ptr.String("__NextToken__"),
 		FirewallDomainLists: []types.FirewallDomainListMetadata{
 			{
-				Id:               ptr.String("__Id__"),
-				Arn:              ptr.String("__Arn__"),
-				Name:             ptr.String("__Name__"),
-				CreatorRequestId: ptr.String("__CreatorRequestId__"),
-				ManagedOwnerName: ptr.String("__ManagedOwnerName__"),
-				ManagedListType:  types.DomainListType("THREAT"),
-				Category:         ptr.String("__Category__"),
+				Id:                         ptr.String("__Id__"),
+				Arn:                        ptr.String("__Arn__"),
+				Name:                       ptr.String("__Name__"),
+				CreatorRequestId:           ptr.String("__CreatorRequestId__"),
+				ManagedOwnerName:           ptr.String("__ManagedOwnerName__"),
+				ManagedListType:            types.DomainListType("THREAT"),
+				Category:                   ptr.String("__Category__"),
+				FirewallRuleGroupId:        ptr.String("__FirewallRuleGroupId__"),
+				FirewallThreatProtectionId: ptr.String("__FirewallThreatProtectionId__"),
+				Status:                     types.FirewallDomainListStatus("COMPLETE"),
 			},
 			{
-				Id:               ptr.String("__Id__"),
-				Arn:              ptr.String("__Arn__"),
-				Name:             ptr.String("__Name__"),
-				CreatorRequestId: ptr.String("__CreatorRequestId__"),
-				ManagedOwnerName: ptr.String("__ManagedOwnerName__"),
-				ManagedListType:  types.DomainListType("THREAT"),
-				Category:         ptr.String("__Category__"),
+				Id:                         ptr.String("__Id__"),
+				Arn:                        ptr.String("__Arn__"),
+				Name:                       ptr.String("__Name__"),
+				CreatorRequestId:           ptr.String("__CreatorRequestId__"),
+				ManagedOwnerName:           ptr.String("__ManagedOwnerName__"),
+				ManagedListType:            types.DomainListType("THREAT"),
+				Category:                   ptr.String("__Category__"),
+				FirewallRuleGroupId:        ptr.String("__FirewallRuleGroupId__"),
+				FirewallThreatProtectionId: ptr.String("__FirewallThreatProtectionId__"),
+				Status:                     types.FirewallDomainListStatus("COMPLETE"),
 			},
 		},
 	}
@@ -2411,6 +2504,55 @@ func TestCheckResponseSnapshot_ListFirewallDomains(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListFirewallDomains.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListFirewallRuleDomains(t *testing.T) {
+	want := &ListFirewallRuleDomainsOutput{
+		Domains: []types.FirewallRuleDomain{
+			{
+				DomainName:         ptr.String("__DomainName__"),
+				DomainStatus:       types.FirewallDomainStatus("OBSERVED"),
+				Last24HourRequests: ptr.Int64(1),
+				TotalRequests:      ptr.Int64(1),
+				AddedTime:          ptr.String("__AddedTime__"),
+			},
+			{
+				DomainName:         ptr.String("__DomainName__"),
+				DomainStatus:       types.FirewallDomainStatus("OBSERVED"),
+				Last24HourRequests: ptr.Int64(1),
+				TotalRequests:      ptr.Int64(1),
+				AddedTime:          ptr.String("__AddedTime__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListFirewallRuleDomains.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListFirewallRuleDomains(context.Background(), &ListFirewallRuleDomainsInput{
+		FirewallRuleGroupId:        ptr.String("__FirewallRuleGroupId__"),
+		FirewallThreatProtectionId: ptr.String("__FirewallThreatProtectionId__"),
+		FirewallDomainListId:       ptr.String("__FirewallDomainListId__"),
+		QueryOptions: &types.ListFirewallRuleDomainsQueryOptions{
+			DomainStatus:     types.FirewallDomainStatusFilter("OBSERVED"),
+			SortBy:           types.FirewallRuleDomainSortBy("TIME_ADDED"),
+			SortOrder:        types.FirewallRuleDomainSortOrder("ASC"),
+			DomainNameFilter: ptr.String("__DomainNameFilter__"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListFirewallRuleDomains.response", err)
 	}
 }
 
@@ -2599,6 +2741,11 @@ func TestCheckResponseSnapshot_ListFirewallRules(t *testing.T) {
 						Value:               ptr.String("__Value__"),
 						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
 					},
+					AutoAllowlist: &types.AutoAllowlistConfig{
+						InitialDataTimeframeHours:         ptr.Int32(1),
+						ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+						AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
+					},
 				},
 				Status:        ptr.String("__Status__"),
 				StatusMessage: ptr.String("__StatusMessage__"),
@@ -2634,6 +2781,11 @@ func TestCheckResponseSnapshot_ListFirewallRules(t *testing.T) {
 					DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
 						Value:               ptr.String("__Value__"),
 						ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+					},
+					AutoAllowlist: &types.AutoAllowlistConfig{
+						InitialDataTimeframeHours:         ptr.Int32(1),
+						ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+						AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
 					},
 				},
 				Status:        ptr.String("__Status__"),
@@ -3513,6 +3665,11 @@ func TestCheckResponseSnapshot_UpdateFirewallRule(t *testing.T) {
 					Value:               ptr.String("__Value__"),
 					ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
 				},
+				AutoAllowlist: &types.AutoAllowlistConfig{
+					InitialDataTimeframeHours:         ptr.Int32(1),
+					ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+					AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
+				},
 			},
 			Status:        ptr.String("__Status__"),
 			StatusMessage: ptr.String("__StatusMessage__"),
@@ -3554,6 +3711,11 @@ func TestCheckResponseSnapshot_UpdateFirewallRule(t *testing.T) {
 			DnsThreatProtection: &types.DnsThreatProtectionRuleTypeConfig{
 				Value:               ptr.String("__Value__"),
 				ConfidenceThreshold: types.ConfidenceThreshold("LOW"),
+			},
+			AutoAllowlist: &types.AutoAllowlistConfig{
+				InitialDataTimeframeHours:         ptr.Int32(1),
+				ImportFromFirewallDomainListId:    ptr.String("__ImportFromFirewallDomainListId__"),
+				AutoAllowlistFirewallDomainListId: ptr.String("__AutoAllowlistFirewallDomainListId__"),
 			},
 		},
 	})

@@ -234,6 +234,36 @@ func TestCheckRequestSnapshot_AcceptChannelHandshake(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CancelChannelContract(t *testing.T) {
+	input := &CancelChannelContractInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		Reason:      ptr.String("__Reason__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelChannelContract(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelChannelContract"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CancelChannelHandshake(t *testing.T) {
 	input := &CancelChannelHandshakeInput{
 		Catalog:    ptr.String("__Catalog__"),
@@ -258,6 +288,71 @@ func TestCheckRequestSnapshot_CancelChannelHandshake(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelChannelHandshake"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CreateChannelContract(t *testing.T) {
+	input := &CreateChannelContractInput{
+		ContractType: types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+		Catalog:      ptr.String("__Catalog__"),
+		Payload: &types.ChannelContractPayloadMemberManagedServicesAttestationPayload{
+			Value: types.ManagedServicesAttestationPayload{
+				LegalEntityName:                    ptr.String("__LegalEntityName__"),
+				RelationshipIdentifier:             ptr.String("__RelationshipIdentifier__"),
+				ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+				MemberAccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EndDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SupportedServices: []types.ManagedServicesSupportedService{
+					types.ManagedServicesSupportedService("MONITORING"),
+					types.ManagedServicesSupportedService("MONITORING"),
+				},
+				LegalEntityAddress: &types.Address{
+					City:          ptr.String("__City__"),
+					StateOrRegion: ptr.String("__StateOrRegion__"),
+					PostalCode:    ptr.String("__PostalCode__"),
+					CountryCode:   ptr.String("__CountryCode__"),
+					AddressLine:   ptr.String("__AddressLine__"),
+					AddressLine2:  ptr.String("__AddressLine2__"),
+				},
+				SignatoryName:  ptr.String("__SignatoryName__"),
+				SignatoryEmail: ptr.String("__SignatoryEmail__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateChannelContract(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateChannelContract"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -328,6 +423,7 @@ func TestCheckRequestSnapshot_CreateProgramManagementAccount(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Type: types.ProgramManagementAccountType("RESALE_BILLING_TRANSFER"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -379,6 +475,8 @@ func TestCheckRequestSnapshot_CreateRelationship(t *testing.T) {
 				ChargeAccountId: ptr.String("__ChargeAccountId__"),
 			},
 		},
+		AccountScope: types.AccountScope("ENTIRE_ORGANIZATION"),
+		StartDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -462,6 +560,34 @@ func TestCheckRequestSnapshot_DeleteRelationship(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetChannelContract(t *testing.T) {
+	input := &GetChannelContractInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetChannelContract(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetChannelContract"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetRelationship(t *testing.T) {
 	input := &GetRelationshipInput{
 		Catalog:                            ptr.String("__Catalog__"),
@@ -487,6 +613,58 @@ func TestCheckRequestSnapshot_GetRelationship(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRelationship"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListChannelContracts(t *testing.T) {
+	input := &ListChannelContractsInput{
+		Catalog:      ptr.String("__Catalog__"),
+		ContractType: types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+		Statuses: []types.ChannelContractStatus{
+			types.ChannelContractStatus("PENDING"),
+			types.ChannelContractStatus("PENDING"),
+		},
+		ContractTypeFilters: &types.ListChannelContractsTypeFiltersMemberManagedServicesAttestationTypeFilters{
+			Value: types.ManagedServicesAttestationTypeFilters{
+				RelationshipIdentifiers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LegalEntityNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ContractTypeSort: &types.ListChannelContractsTypeSortMemberManagedServicesAttestationTypeSort{
+			Value: types.ManagedServicesAttestationTypeSort{
+				SortOrder: types.SortOrder("Ascending"),
+				SortBy:    types.ManagedServicesAttestationTypeSortName("UpdatedAt"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListChannelContracts(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListChannelContracts"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -569,6 +747,7 @@ func TestCheckRequestSnapshot_ListProgramManagementAccounts(t *testing.T) {
 			SortBy:    types.ListProgramManagementAccountsSortName("UpdatedAt"),
 		},
 		NextToken: ptr.String("__NextToken__"),
+		Type:      types.ProgramManagementAccountType("RESALE_BILLING_TRANSFER"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -860,6 +1039,36 @@ func TestUpdateRequestSnapshot_AcceptChannelHandshake(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CancelChannelContract(t *testing.T) {
+	input := &CancelChannelContractInput{
+		Catalog:     ptr.String("__Catalog__"),
+		Identifier:  ptr.String("__Identifier__"),
+		Reason:      ptr.String("__Reason__"),
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelChannelContract(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelChannelContract"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CancelChannelHandshake(t *testing.T) {
 	input := &CancelChannelHandshakeInput{
 		Catalog:    ptr.String("__Catalog__"),
@@ -884,6 +1093,71 @@ func TestUpdateRequestSnapshot_CancelChannelHandshake(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelChannelHandshake"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CreateChannelContract(t *testing.T) {
+	input := &CreateChannelContractInput{
+		ContractType: types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+		Catalog:      ptr.String("__Catalog__"),
+		Payload: &types.ChannelContractPayloadMemberManagedServicesAttestationPayload{
+			Value: types.ManagedServicesAttestationPayload{
+				LegalEntityName:                    ptr.String("__LegalEntityName__"),
+				RelationshipIdentifier:             ptr.String("__RelationshipIdentifier__"),
+				ProgramManagementAccountIdentifier: ptr.String("__ProgramManagementAccountIdentifier__"),
+				MemberAccountIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				EndDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				SupportedServices: []types.ManagedServicesSupportedService{
+					types.ManagedServicesSupportedService("MONITORING"),
+					types.ManagedServicesSupportedService("MONITORING"),
+				},
+				LegalEntityAddress: &types.Address{
+					City:          ptr.String("__City__"),
+					StateOrRegion: ptr.String("__StateOrRegion__"),
+					PostalCode:    ptr.String("__PostalCode__"),
+					CountryCode:   ptr.String("__CountryCode__"),
+					AddressLine:   ptr.String("__AddressLine__"),
+					AddressLine2:  ptr.String("__AddressLine2__"),
+				},
+				SignatoryName:  ptr.String("__SignatoryName__"),
+				SignatoryEmail: ptr.String("__SignatoryEmail__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateChannelContract(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateChannelContract"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -954,6 +1228,7 @@ func TestUpdateRequestSnapshot_CreateProgramManagementAccount(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Type: types.ProgramManagementAccountType("RESALE_BILLING_TRANSFER"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1005,6 +1280,8 @@ func TestUpdateRequestSnapshot_CreateRelationship(t *testing.T) {
 				ChargeAccountId: ptr.String("__ChargeAccountId__"),
 			},
 		},
+		AccountScope: types.AccountScope("ENTIRE_ORGANIZATION"),
+		StartDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1088,6 +1365,34 @@ func TestUpdateRequestSnapshot_DeleteRelationship(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetChannelContract(t *testing.T) {
+	input := &GetChannelContractInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetChannelContract(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetChannelContract"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetRelationship(t *testing.T) {
 	input := &GetRelationshipInput{
 		Catalog:                            ptr.String("__Catalog__"),
@@ -1113,6 +1418,58 @@ func TestUpdateRequestSnapshot_GetRelationship(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetRelationship"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListChannelContracts(t *testing.T) {
+	input := &ListChannelContractsInput{
+		Catalog:      ptr.String("__Catalog__"),
+		ContractType: types.ChannelContractType("MANAGED_SERVICES_ATTESTATION"),
+		Statuses: []types.ChannelContractStatus{
+			types.ChannelContractStatus("PENDING"),
+			types.ChannelContractStatus("PENDING"),
+		},
+		ContractTypeFilters: &types.ListChannelContractsTypeFiltersMemberManagedServicesAttestationTypeFilters{
+			Value: types.ManagedServicesAttestationTypeFilters{
+				RelationshipIdentifiers: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LegalEntityNames: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		ContractTypeSort: &types.ListChannelContractsTypeSortMemberManagedServicesAttestationTypeSort{
+			Value: types.ManagedServicesAttestationTypeSort{
+				SortOrder: types.SortOrder("Ascending"),
+				SortBy:    types.ManagedServicesAttestationTypeSortName("UpdatedAt"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListChannelContracts(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListChannelContracts"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1195,6 +1552,7 @@ func TestUpdateRequestSnapshot_ListProgramManagementAccounts(t *testing.T) {
 			SortBy:    types.ListProgramManagementAccountsSortName("UpdatedAt"),
 		},
 		NextToken: ptr.String("__NextToken__"),
+		Type:      types.ProgramManagementAccountType("RESALE_BILLING_TRANSFER"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

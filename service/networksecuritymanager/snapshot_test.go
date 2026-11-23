@@ -386,6 +386,18 @@ func TestCheckSnapshot_ListDeploymentSnapshots(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListEntityCoverages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEntityCoverages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEntityCoverages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPolicies(context.Background(), nil, func(o *Options) {
@@ -403,6 +415,18 @@ func TestCheckSnapshot_ListPolicySnapshots(t *testing.T) {
 	_, err := svc.ListPolicySnapshots(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListPolicySnapshots")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListProtectedResourceCoverages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProtectedResourceCoverages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListProtectedResourceCoverages")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -937,6 +961,18 @@ func TestUpdateSnapshot_ListDeploymentSnapshots(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListEntityCoverages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEntityCoverages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEntityCoverages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListPolicies(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPolicies(context.Background(), nil, func(o *Options) {
@@ -954,6 +990,18 @@ func TestUpdateSnapshot_ListPolicySnapshots(t *testing.T) {
 	_, err := svc.ListPolicySnapshots(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListPolicySnapshots")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListProtectedResourceCoverages(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListProtectedResourceCoverages(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListProtectedResourceCoverages")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

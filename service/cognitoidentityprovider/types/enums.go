@@ -322,6 +322,25 @@ func (ChallengeResponse) Values() []ChallengeResponse {
 	}
 }
 
+type CIMDCacheActionType string
+
+// Enum values for CIMDCacheActionType
+const (
+	CIMDCacheActionTypeRefresh    CIMDCacheActionType = "REFRESH"
+	CIMDCacheActionTypeInvalidate CIMDCacheActionType = "INVALIDATE"
+)
+
+// Values returns all known values for CIMDCacheActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CIMDCacheActionType) Values() []CIMDCacheActionType {
+	return []CIMDCacheActionType{
+		"REFRESH",
+		"INVALIDATE",
+	}
+}
+
 type ClientTypeType string
 
 // Enum values for ClientTypeType

@@ -2851,7 +2851,7 @@ func (v *IntegrationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 type LabelNameCondition struct {
 
 	//  The label name to match, supporting alphanumeric characters, underscores,
-	// hyphens, and colons.
+	// hyphens, colons, and periods.
 	LabelName *string
 
 	noSmithyDocumentSerde
@@ -2881,8 +2881,9 @@ func (v *LabelNameCondition) Deserialize(d smithy.ShapeDeserializer) error {
 
 // The configuration parameters for log delivery, including logType settings.
 // Applies to resource types that support configurable log delivery, such as Amazon
-// Bedrock Knowledge Bases, Amazon Bedrock AgentCore payment managers, and Elastic
-// Load Balancing Application Load Balancers.
+// Bedrock Knowledge Bases, Amazon Bedrock AgentCore payment managers, Amazon Web
+// Services Network Firewall firewalls, and Elastic Load Balancing Application Load
+// Balancers.
 type LogDeliveryParameters struct {
 
 	// The types of logs to collect from the resource.
@@ -3619,6 +3620,21 @@ type SourceLogsConfiguration struct {
 	// This member is required.
 	EncryptedLogGroupStrategy EncryptedLogGroupStrategy
 
+	// Specifies whether this centralization rule centralizes log events with data
+	// protection applied. If you don't specify this setting, or you set it to DISABLED
+	// , the rule centralizes the original log events, including any sensitive data
+	// that a data protection policy on the source log group masks.
+	//
+	// When you set this to ENABLED , the rule centralizes the same masked data that
+	// anyone in the source account without the logs:Unmask permission sees. The rule
+	// doesn't copy the original values to the destination, so you can't unmask them in
+	// the destination account. The rule centralizes log events from source log groups
+	// that don't have a data protection policy without changes.
+	//
+	// The setting applies only to log events that the rule centralizes after you
+	// enable it. It doesn't change log events that the rule already centralized.
+	CentralizeWithDataProtection CentralizeWithDataProtection
+
 	// The selection criteria that specifies which data sources to centralize. The
 	// selection criteria uses the same filter expression format as
 	// LogGroupSelectionCriteria , but operates on DataSourceName and DataSourceType
@@ -3640,6 +3656,9 @@ func (v *SourceLogsConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SourceLogsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CentralizeWithDataProtection != "" {
+		s.WriteString(schemas.SourceLogsConfiguration_CentralizeWithDataProtection, string(v.CentralizeWithDataProtection))
+	}
 	if v.DataSourceSelectionCriteria != nil {
 		s.WriteString(schemas.SourceLogsConfiguration_DataSourceSelectionCriteria, *v.DataSourceSelectionCriteria)
 	}
@@ -3653,6 +3672,13 @@ func (v *SourceLogsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *SourceLogsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SourceLogsConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.SourceLogsConfiguration_CentralizeWithDataProtection:
+			var ev string
+			if err := d.ReadString(schemas.SourceLogsConfiguration_CentralizeWithDataProtection, &ev); err != nil {
+				return err
+			}
+			v.CentralizeWithDataProtection = CentralizeWithDataProtection(ev)
+			return nil
 		case schemas.SourceLogsConfiguration_DataSourceSelectionCriteria:
 			v.DataSourceSelectionCriteria = new(string)
 			return d.ReadString(schemas.SourceLogsConfiguration_DataSourceSelectionCriteria, v.DataSourceSelectionCriteria)
@@ -4011,8 +4037,8 @@ type TelemetryDestinationConfiguration struct {
 
 	// The configuration parameters for log delivery when the resource type supports
 	// configurable log types, such as Amazon Bedrock Knowledge Bases, Amazon Bedrock
-	// AgentCore payment managers, or Elastic Load Balancing Application Load
-	// Balancers.
+	// AgentCore payment managers, Amazon Web Services Network Firewall firewalls, or
+	// Elastic Load Balancing Application Load Balancers.
 	LogDeliveryParameters *LogDeliveryParameters
 
 	//  Configuration parameters specific to MSK monitoring when MSK is the resource
@@ -4579,7 +4605,8 @@ type TelemetryRule struct {
 	//  The type of Amazon Web Services resource to configure telemetry for (for
 	// example, AWS::EC2::VPC , AWS::EKS::Cluster ,
 	// AWS::ElasticLoadBalancingV2::LoadBalancer , AWS::Bedrock::KnowledgeBase ,
-	// AWS::BedrockAgentCore::PaymentManager , or AWS::XRay::TransactionSearchConfig ).
+	// AWS::BedrockAgentCore::PaymentManager , AWS::XRay::TransactionSearchConfig ,
+	// AWS::CloudWatchOmni , or AWS::NetworkFirewall::Firewall ).
 	ResourceType ResourceType
 
 	//  The organizational scope to which the rule applies, specified using accounts

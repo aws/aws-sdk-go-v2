@@ -1857,6 +1857,8 @@ func TestUpdateResponseSnapshot_GetRLSPolicy(t *testing.T) {
 				},
 			},
 			FilterExpression: ptr.String("__FilterExpression__"),
+			Status:           types.RLSPolicyStatus("VALID"),
+			StatusReason:     types.RLSPolicyStatusReason("REFERENCED_UDF_DELETED"),
 		},
 	}
 	proto := restjson1.New(schemas.AWSLakeFormation)
@@ -2909,6 +2911,8 @@ func TestUpdateResponseSnapshot_ListRLSPolicies(t *testing.T) {
 					},
 				},
 				FilterExpression: ptr.String("__FilterExpression__"),
+				Status:           types.RLSPolicyStatus("VALID"),
+				StatusReason:     types.RLSPolicyStatusReason("REFERENCED_UDF_DELETED"),
 			},
 			{
 				CatalogId: ptr.String("__CatalogId__"),
@@ -2924,6 +2928,8 @@ func TestUpdateResponseSnapshot_ListRLSPolicies(t *testing.T) {
 					},
 				},
 				FilterExpression: ptr.String("__FilterExpression__"),
+				Status:           types.RLSPolicyStatus("VALID"),
+				StatusReason:     types.RLSPolicyStatusReason("REFERENCED_UDF_DELETED"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

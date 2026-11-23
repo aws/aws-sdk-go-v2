@@ -73,9 +73,9 @@ type UpdateVocabularyInput struct {
 	// [IAM ARNs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
 	DataAccessRoleArn *string
 
-	// Specifies the new encryption configuration for your custom vocabulary. The
-	// vocabulary artifacts are re-encrypted in place using the specified KMS key or
-	// with an AWS-owned key if a key is not supplied.
+	// Specifies the encryption configuration for your custom vocabulary. Your
+	// vocabulary artifacts are encrypted with the specified KMS key or with an Amazon
+	// Web Services owned key if a key is not supplied.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// Use this parameter if you want to update your custom vocabulary by including

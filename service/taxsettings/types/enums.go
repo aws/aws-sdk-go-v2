@@ -216,6 +216,28 @@ func (MalaysiaServiceTaxCode) Values() []MalaysiaServiceTaxCode {
 	}
 }
 
+type NorwayTaxRegistrationNumberType string
+
+// Enum values for NorwayTaxRegistrationNumberType
+const (
+	// VAT registration number (MVA).
+	NorwayTaxRegistrationNumberTypeTaxRegistrationNumber NorwayTaxRegistrationNumberType = "TaxRegistrationNumber"
+	// Norwegian Organisation Number of a non-VAT registered business.
+	NorwayTaxRegistrationNumberTypeLocalRegistrationNumber NorwayTaxRegistrationNumberType = "LocalRegistrationNumber"
+)
+
+// Values returns all known values for NorwayTaxRegistrationNumberType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NorwayTaxRegistrationNumberType) Values() []NorwayTaxRegistrationNumberType {
+	return []NorwayTaxRegistrationNumberType{
+		"TaxRegistrationNumber",
+		"LocalRegistrationNumber",
+	}
+}
+
 type PersonType string
 
 // Enum values for PersonType
@@ -421,6 +443,27 @@ func (TaxRegistrationType) Values() []TaxRegistrationType {
 		"RUT",
 		"NIE",
 		"CI",
+	}
+}
+
+type UaeTaxRegistrationNumberType string
+
+// Enum values for UaeTaxRegistrationNumberType
+const (
+	UaeTaxRegistrationNumberTypeVatTaxRegistrationNumber UaeTaxRegistrationNumberType = "VATTaxRegistrationNumber"
+	// Corporate Income Tax (CIT).
+	UaeTaxRegistrationNumberTypeLocalTaxRegistrationNumber UaeTaxRegistrationNumberType = "LocalTaxRegistrationNumber"
+)
+
+// Values returns all known values for UaeTaxRegistrationNumberType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UaeTaxRegistrationNumberType) Values() []UaeTaxRegistrationNumberType {
+	return []UaeTaxRegistrationNumberType{
+		"VATTaxRegistrationNumber",
+		"LocalTaxRegistrationNumber",
 	}
 }
 

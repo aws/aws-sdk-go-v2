@@ -1875,7 +1875,7 @@
                     "target": "com.amazonaws.ec2#ServiceManaged",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ServiceManaged",
-                        "smithy.api#documentation": "<p>The service that manages the elastic IP address.</p>\n         <note>\n            <p>The only option supported today is <code>alb</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The service that manages the elastic IP address.</p>",
                         "smithy.api#xmlName": "serviceManaged"
                     }
                 },
@@ -67290,6 +67290,49 @@
                 }
             }
         },
+        "com.amazonaws.ec2#FirewallArn": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#FirewallMode": {
+            "type": "enum",
+            "members": {
+                "monitor": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "monitor"
+                    }
+                },
+                "enforce": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enforce"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#FirewallOnboardingStatus": {
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
+                    }
+                },
+                "active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "active"
+                    }
+                },
+                "disabling": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabling"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#FirewallStatefulRule": {
             "type": "structure",
             "members": {
@@ -73037,7 +73080,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.ec2#IpamPolicyResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type for which to get the allocation rules.</p>\n         <p>The Amazon Web Services service or resource type that can use IP addresses through IPAM policies. Supported services and resource types include:</p>\n         <ul>\n            <li>\n               <p>Elastic IP addresses</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The resource type for which to get the allocation rules.</p>\n         <p>The Amazon Web Services service or resource type that can use IP addresses through IPAM policies. Supported services and resource types include:</p>\n         <ul>\n            <li>\n               <p>Elastic IP addresses</p>\n            </li>\n            <li>\n               <p>Application Load Balancers</p>\n            </li>\n            <li>\n               <p>Amazon RDS</p>\n            </li>\n            <li>\n               <p>NAT gateways in regional availability mode</p>\n            </li>\n            <li>\n               <p>Lambda Network Connector</p>\n            </li>\n            <li>\n               <p>Automated Internet Firewall</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxResults": {
@@ -78169,6 +78212,30 @@
                         "smithy.api#enumValue": "disable"
                     }
                 }
+            }
+        },
+        "com.amazonaws.ec2#IgwFirewall": {
+            "type": "structure",
+            "members": {
+                "FirewallArn": {
+                    "target": "com.amazonaws.ec2#FirewallArn",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FirewallArn",
+                        "smithy.api#documentation": "<p>The ARN of the firewall that inspects traffic for this route.</p>",
+                        "smithy.api#xmlName": "firewallArn"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ec2#FirewallOnboardingStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The status of the firewall that inspects traffic for this route. Uses the same values as <code>NetworkFirewallAssociation$firewallOnboardingStatus</code>: <code>active</code>, <code>disabling</code>, or <code>pending</code>.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Automated Internet Firewall that inspects traffic for an internet gateway or egress-only internet gateway route.</p>"
             }
         },
         "com.amazonaws.ec2#Image": {
@@ -96859,7 +96926,7 @@
                     "target": "com.amazonaws.ec2#IpamPolicyResourceType",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ResourceType",
-                        "smithy.api#documentation": "<p>The resource type of the IPAM policy document.</p>\n         <p>The Amazon Web Services service or resource type that can use IP addresses through IPAM policies. Supported services and resource types include:</p>\n         <ul>\n            <li>\n               <p>Elastic IP addresses</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The resource type of the IPAM policy document.</p>\n         <p>The Amazon Web Services service or resource type that can use IP addresses through IPAM policies. Supported services and resource types include:</p>\n         <ul>\n            <li>\n               <p>Elastic IP addresses</p>\n            </li>\n            <li>\n               <p>Application Load Balancers</p>\n            </li>\n            <li>\n               <p>Amazon RDS</p>\n            </li>\n            <li>\n               <p>NAT gateways in regional availability mode</p>\n            </li>\n            <li>\n               <p>Lambda Network Connector</p>\n            </li>\n            <li>\n               <p>Automated Internet Firewall</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "resourceType"
                     }
                 },
@@ -96955,6 +97022,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "rnat"
+                    }
+                },
+                "lambda_network_connector": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lambda-network-connector"
+                    }
+                },
+                "igw_firewall": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "igw-firewall"
                     }
                 }
             }
@@ -99810,6 +99889,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "delete-complete"
+                    }
+                },
+                "disable_complete": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disable-complete"
                     }
                 }
             },
@@ -108950,7 +109035,7 @@
                     "target": "com.amazonaws.ec2#IpamPolicyResourceType",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The resource type for which to modify the allocation rules.</p>\n         <p>The Amazon Web Services service or resource type that can use IP addresses through IPAM policies. Supported services and resource types include:</p>\n         <ul>\n            <li>\n               <p>Elastic IP addresses</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The resource type for which to modify the allocation rules.</p>\n         <p>The Amazon Web Services service or resource type that can use IP addresses through IPAM policies. Supported services and resource types include:</p>\n         <ul>\n            <li>\n               <p>Elastic IP addresses</p>\n            </li>\n            <li>\n               <p>Application Load Balancers</p>\n            </li>\n            <li>\n               <p>Amazon RDS</p>\n            </li>\n            <li>\n               <p>NAT gateways in regional availability mode</p>\n            </li>\n            <li>\n               <p>Lambda Network Connector</p>\n            </li>\n            <li>\n               <p>Automated Internet Firewall</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -115720,6 +115805,82 @@
                 "target": "com.amazonaws.ec2#NetworkCardInterfaceType",
                 "traits": {
                     "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#NetworkFirewallAssociation": {
+            "type": "structure",
+            "members": {
+                "FirewallArn": {
+                    "target": "com.amazonaws.ec2#FirewallArn",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FirewallArn",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the firewall.</p>",
+                        "smithy.api#xmlName": "firewallArn"
+                    }
+                },
+                "FirewallOnboardingStatus": {
+                    "target": "com.amazonaws.ec2#FirewallOnboardingStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FirewallOnboardingStatus",
+                        "smithy.api#documentation": "<p>The status of the firewall for the VPC. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>active</code>: The firewall inspects traffic for the VPC.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabling</code>: AWS is removing the firewall from the VPC.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending</code>: AWS is setting up the firewall for the VPC. The firewall might not inspect traffic yet.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "firewallOnboardingStatus"
+                    }
+                },
+                "FirewallMode": {
+                    "target": "com.amazonaws.ec2#FirewallMode",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FirewallMode",
+                        "smithy.api#documentation": "<p>The mode of the firewall. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>enforce</code>: The firewall applies its policy to traffic.</p>\n            </li>\n            <li>\n               <p>\n                  <code>monitor</code>: The firewall logs traffic that its policy would act on, but doesn't block it.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "firewallMode"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Automated Internet Firewall that inspects traffic between a VPC and its internet gateway or egress-only internet gateway.</p>"
+            }
+        },
+        "com.amazonaws.ec2#NetworkFirewallAssociationSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#NetworkFirewallAssociation",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#NetworkFirewallConnectivityType": {
+            "type": "enum",
+            "members": {
+                "flexible": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "flexible"
+                    }
+                },
+                "outbound_only": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "outbound-only"
+                    }
+                },
+                "bidirectional": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "bidirectional"
+                    }
+                },
+                "exclude": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "exclude"
+                    }
+                },
+                "az_unsupported": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "az-unsupported"
+                    }
                 }
             }
         },
@@ -128966,6 +129127,14 @@
                         "smithy.api#documentation": "<p>The next hop IP address for routes propagated by VPC Route \n            Server into VPC route tables.</p>",
                         "smithy.api#xmlName": "ipAddress"
                     }
+                },
+                "IgwFirewall": {
+                    "target": "com.amazonaws.ec2#IgwFirewall",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "IgwFirewall",
+                        "smithy.api#documentation": "<p>Information about the Automated Internet Firewall that inspects traffic for this route. The response includes this value only for routes that target an internet gateway or egress-only internet gateway in a VPC that has a firewall. The route target remains the internet gateway or egress-only internet gateway.</p>",
+                        "smithy.api#xmlName": "igwFirewall"
+                    }
                 }
             },
             "traits": {
@@ -134162,6 +134331,18 @@
                     "traits": {
                         "smithy.api#enumValue": "rds"
                     }
+                },
+                "lambda_network_connector": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lambda-network-connector"
+                    }
+                },
+                "igw_firewall": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "igw-firewall"
+                    }
                 }
             }
         },
@@ -137554,6 +137735,14 @@
                         "aws.protocols#ec2QueryName": "Type",
                         "smithy.api#documentation": "<p>Indicates if this is a subnet used with Amazon Elastic VMware Service (EVS).\n            Possible values are <code>Elastic VMware Service</code> or no value. For more\n            information about Amazon EVS, see <a href=\"https://docs.aws.amazon.com/evs/latest/APIReference/Welcome.html\">\n               <i>Amazon Elastic VMware Service\n                    API Reference</i>\n            </a>.</p>",
                         "smithy.api#xmlName": "type"
+                    }
+                },
+                "NetworkFirewallConnectivityType": {
+                    "target": "com.amazonaws.ec2#NetworkFirewallConnectivityType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NetworkFirewallConnectivityType",
+                        "smithy.api#documentation": "<p>The internet connectivity treatment that the Automated Internet Firewall applies to the subnet. The response includes this value only if the subnet is in a VPC that has a firewall. Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>az-unsupported</code>: The firewall doesn't support the subnet's Availability Zone, so it doesn't inspect traffic for the subnet.</p>\n            </li>\n            <li>\n               <p>\n                  <code>bidirectional</code>: Provides bidirectional internet connectivity to every network interface that has a public IP association. Any network interface without a public IP cannot communicate with the internet unless a NAT device is explicitly inserted in the path. All inbound and outbound traffic is inspected against your firewall rules.</p>\n            </li>\n            <li>\n               <p>\n                  <code>exclude</code>: The firewall doesn't inspect traffic for the subnet. The subnet bypasses the firewall, and its traffic passes directly through the internet gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>flexible</code>: Sets the connectivity for each network interface in the subnet based on whether it is associated with a public IP address. A network interface with a public IP address gets bidirectional internet connectivity. A network interface without a public IP address gets outbound-only connectivity. All traffic is inspected against your firewall rules.</p>\n            </li>\n            <li>\n               <p>\n                  <code>outbound-only</code>: Provides egress-only connectivity for all network interfaces in the subnet. All outbound traffic and inbound responses are inspected against your firewall rules. Unsolicited inbound connections are dropped. For IPv4 traffic, the firewall performs NAT.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "networkFirewallConnectivityType"
                     }
                 },
                 "SubnetId": {
@@ -144536,6 +144725,12 @@
                     "traits": {
                         "smithy.api#enumValue": "t8i"
                     }
+                },
+                "t9g": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "t9g"
+                    }
                 }
             }
         },
@@ -148648,6 +148843,14 @@
                         "aws.protocols#ec2QueryName": "BlockPublicAccessStates",
                         "smithy.api#documentation": "<p>The state of VPC Block Public Access (BPA).</p>",
                         "smithy.api#xmlName": "blockPublicAccessStates"
+                    }
+                },
+                "NetworkFirewallAssociations": {
+                    "target": "com.amazonaws.ec2#NetworkFirewallAssociationSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NetworkFirewallAssociationSet",
+                        "smithy.api#documentation": "<p>Information about the firewall associations for the VPC. Automated Internet Firewall, a feature of Amazon Virtual Private Cloud (Amazon VPC), inspects traffic between the VPC and its internet gateway or egress-only internet gateway. This list is empty if the VPC doesn't have a firewall.</p>",
+                        "smithy.api#xmlName": "networkFirewallAssociationSet"
                     }
                 },
                 "VpcId": {

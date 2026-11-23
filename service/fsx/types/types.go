@@ -141,9 +141,9 @@ type AdministrativeAction struct {
 	//   locks on an Amazon FSx for OpenZFS file system.
 	//
 	//   - DOWNLOAD_DATA_FROM_BACKUP - An FSx for ONTAP backup is being restored to a
-	//   new volume on a second-generation file system. Once the all the file metadata is
-	//   loaded onto the volume, you can mount the volume with read-only access. during
-	//   this process.
+	//   new volume on a second-generation or third-generation file system. Once the all
+	//   the file metadata is loaded onto the volume, you can mount the volume with
+	//   read-only access. during this process.
 	//
 	//   - VOLUME_INITIALIZE_WITH_SNAPSHOT - A volume is being created from a snapshot
 	//   on a different FSx for OpenZFS file system. You can initiate this from the
@@ -154,6 +154,11 @@ type AdministrativeAction struct {
 	//   different FSx for OpenZFS file system. You can initiate this from the Amazon FSx
 	//   console, API ( CopySnapshotAndUpdateVolume ), or CLI (
 	//   copy-snapshot-and-update-volume ).
+	//
+	//   - VOLUME_CLONE_SPLIT - An FSx for ONTAP volume clone is being split from its
+	//   parent volume. You can initiate this from the Amazon FSx console, Amazon FSx API
+	//   ( UpdateVolume ) or CLI ( update-volume ) by setting SplitAction to START in
+	//   the volume's CloneConfiguration .
 	//
 	// [Managing storage capacity]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
 	// [AssociateFileSystemAliases]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_AssociateFileSystemAliases.html
@@ -169,9 +174,9 @@ type AdministrativeAction struct {
 	// A detailed error message.
 	Message *string
 
-	// The percentage-complete status of a STORAGE_OPTIMIZATION or
-	// DOWNLOAD_DATA_FROM_BACKUP administrative action. Does not apply to any other
-	// administrative action type.
+	// The percentage-complete status of a STORAGE_OPTIMIZATION ,
+	// DOWNLOAD_DATA_FROM_BACKUP , or VOLUME_CLONE_SPLIT administrative action. Does
+	// not apply to any other administrative action type.
 	ProgressPercent *int32
 
 	// The remaining bytes to transfer for the FSx for OpenZFS snapshot that you're
@@ -191,30 +196,30 @@ type AdministrativeAction struct {
 	//
 	//   - COMPLETED - Amazon FSx has finished processing the administrative task.
 	//
-	// For a backup restore to a second-generation FSx for ONTAP file system,
-	//   indicates that all data has been downloaded to the volume, and clients now have
-	//   read-write access to volume.
+	// For a backup restore to a second-generation or third-generation FSx for ONTAP
+	//   file system, indicates that all data has been downloaded to the volume, and
+	//   clients now have read-write access to volume.
 	//
 	//   - UPDATED_OPTIMIZING - For a storage-capacity increase update, Amazon FSx has
 	//   updated the file system with the new storage capacity, and is now performing the
 	//   storage-optimization process.
 	//
-	//   - PENDING - For a backup restore to a second-generation FSx for ONTAP file
-	//   system, indicates that the file metadata is being downloaded onto the volume.
-	//   The volume's Lifecycle state is CREATING.
+	//   - PENDING - For a backup restore to a second-generation or third-generation
+	//   FSx for ONTAP file system, indicates that the file metadata is being downloaded
+	//   onto the volume. The volume's Lifecycle state is CREATING.
 	//
-	//   - IN_PROGRESS - For a backup restore to a second-generation FSx for ONTAP file
-	//   system, indicates that all metadata has been downloaded to the new volume and
-	//   client can access data with read-only access while Amazon FSx downloads the file
-	//   data to the volume. Track the progress of this process with the
-	//   ProgressPercent element.
+	//   - IN_PROGRESS - For a backup restore to a second-generation or
+	//   third-generation FSx for ONTAP file system, indicates that all metadata has been
+	//   downloaded to the new volume and client can access data with read-only access
+	//   while Amazon FSx downloads the file data to the volume. Track the progress of
+	//   this process with the ProgressPercent element.
 	Status Status
 
 	// The target value for the administration action, provided in the UpdateFileSystem
 	// operation. Returned for FILE_SYSTEM_UPDATE administrative actions.
 	TargetFileSystemValues *FileSystem
 
-	// A snapshot of an Amazon FSx for OpenZFS volume.
+	// A snapshot of an Amazon FSx for OpenZFS or Amazon FSx for NetApp ONTAP volume.
 	TargetSnapshotValues *Snapshot
 
 	// Describes an Amazon FSx volume.
@@ -908,6 +913,308 @@ func (v *BackupFailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Describes the parent volume, and the snapshot if one was specified, that an FSx
+// for ONTAP volume clone was created from.
+type CloneConfiguration struct {
+
+	// The ID of the parent volume that the clone was created from.
+	ParentVolumeId *string
+
+	// The ID of the snapshot of the parent volume that the clone was created from, if
+	// you specified one when you created the clone.
+	SnapshotId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CloneConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloneConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloneConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParentVolumeId != nil {
+		s.WriteString(schemas.CloneConfiguration_ParentVolumeId, *v.ParentVolumeId)
+	}
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.CloneConfiguration_SnapshotId, *v.SnapshotId)
+	}
+}
+func (v *CloneConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloneConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloneConfiguration_ParentVolumeId:
+			v.ParentVolumeId = new(string)
+			return d.ReadString(schemas.CloneConfiguration_ParentVolumeId, v.ParentVolumeId)
+		case schemas.CloneConfiguration_SnapshotId:
+			v.SnapshotId = new(string)
+			return d.ReadString(schemas.CloneConfiguration_SnapshotId, v.SnapshotId)
+		}
+		return nil
+	})
+}
+
+// Describes an Amazon FSx for NetApp ONTAP cluster peer relationship.
+type ClusterPeer struct {
+
+	// The IDs of the SVMs on the file system that are preauthorized for SVM peering
+	// with the peer cluster, if AllowedSvmMode is SPECIFIED .
+	AllowedSvmIds []string
+
+	// Indicates which SVMs on the file system are preauthorized for SVM peering with
+	// the peer cluster.
+	AllowedSvmMode AllowedSvmMode
+
+	// The authentication status of the cluster peer relationship.
+	AuthenticationStatus *ClusterPeerAuthenticationStatus
+
+	// The system-generated, unique ID of the cluster peer.
+	ClusterPeerId *string
+
+	// The globally unique ID of the file system, assigned by Amazon FSx.
+	FileSystemId *string
+
+	// The lifecycle status of the cluster peer can be one of the following:
+	//
+	//   - CREATED – The cluster peer is fully available for use.
+	//
+	//   - CREATING – Amazon FSx is creating the cluster peer.
+	//
+	//   - DELETING – Amazon FSx is deleting the cluster peer.
+	//
+	//   - FAILED – Amazon FSx was unable to create the cluster peer.
+	Lifecycle ClusterPeerLifecycle
+
+	// The reason why the cluster peer lifecycle status changed.
+	LifecycleTransitionReason *LifecycleTransitionReason
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret containing the cluster peering passphrase.
+	PassphraseSecretArn *string
+
+	// The IP addresses of the intercluster logical interfaces (LIFs) on the peer
+	// cluster.
+	PeerAddresses []string
+
+	// The name that the file system uses to identify the peer cluster.
+	PeerClusterName *string
+
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
+	// Amazon Web Services resources. We require an ARN when you need to specify a
+	// resource unambiguously across all of Amazon Web Services. For more information,
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	ResourceARN *string
+
+	// The status of the connection to the peer cluster.
+	Status *string
+
+	// A list of Tag values, with a maximum of 50 elements.
+	Tags []Tag
+
+	// The cluster peer's universally unique identifier (UUID).
+	UUID *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClusterPeer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterPeer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterPeer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedSvmIds != nil {
+		serializeAllowedSvmIds(s, schemas.ClusterPeer_AllowedSvmIds, v.AllowedSvmIds)
+	}
+	if v.AllowedSvmMode != "" {
+		s.WriteString(schemas.ClusterPeer_AllowedSvmMode, string(v.AllowedSvmMode))
+	}
+	if v.AuthenticationStatus != nil {
+		s.WriteStruct(schemas.ClusterPeer_AuthenticationStatus)
+		v.AuthenticationStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterPeerId != nil {
+		s.WriteString(schemas.ClusterPeer_ClusterPeerId, *v.ClusterPeerId)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.ClusterPeer_FileSystemId, *v.FileSystemId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.ClusterPeer_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LifecycleTransitionReason != nil {
+		s.WriteStruct(schemas.ClusterPeer_LifecycleTransitionReason)
+		v.LifecycleTransitionReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PassphraseSecretArn != nil {
+		s.WriteString(schemas.ClusterPeer_PassphraseSecretArn, *v.PassphraseSecretArn)
+	}
+	if v.PeerAddresses != nil {
+		serializePeerAddresses(s, schemas.ClusterPeer_PeerAddresses, v.PeerAddresses)
+	}
+	if v.PeerClusterName != nil {
+		s.WriteString(schemas.ClusterPeer_PeerClusterName, *v.PeerClusterName)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.ClusterPeer_ResourceARN, *v.ResourceARN)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ClusterPeer_Status, *v.Status)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.ClusterPeer_Tags, v.Tags)
+	}
+	if v.UUID != nil {
+		s.WriteString(schemas.ClusterPeer_UUID, *v.UUID)
+	}
+}
+func (v *ClusterPeer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterPeer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterPeer_AllowedSvmIds:
+			return deserializeAllowedSvmIds(d, schemas.ClusterPeer_AllowedSvmIds, &v.AllowedSvmIds)
+		case schemas.ClusterPeer_AllowedSvmMode:
+			var ev string
+			if err := d.ReadString(schemas.ClusterPeer_AllowedSvmMode, &ev); err != nil {
+				return err
+			}
+			v.AllowedSvmMode = AllowedSvmMode(ev)
+			return nil
+		case schemas.ClusterPeer_AuthenticationStatus:
+			v.AuthenticationStatus = &ClusterPeerAuthenticationStatus{}
+			return v.AuthenticationStatus.Deserialize(d)
+		case schemas.ClusterPeer_ClusterPeerId:
+			v.ClusterPeerId = new(string)
+			return d.ReadString(schemas.ClusterPeer_ClusterPeerId, v.ClusterPeerId)
+		case schemas.ClusterPeer_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.ClusterPeer_FileSystemId, v.FileSystemId)
+		case schemas.ClusterPeer_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.ClusterPeer_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = ClusterPeerLifecycle(ev)
+			return nil
+		case schemas.ClusterPeer_LifecycleTransitionReason:
+			v.LifecycleTransitionReason = &LifecycleTransitionReason{}
+			return v.LifecycleTransitionReason.Deserialize(d)
+		case schemas.ClusterPeer_PassphraseSecretArn:
+			v.PassphraseSecretArn = new(string)
+			return d.ReadString(schemas.ClusterPeer_PassphraseSecretArn, v.PassphraseSecretArn)
+		case schemas.ClusterPeer_PeerAddresses:
+			return deserializePeerAddresses(d, schemas.ClusterPeer_PeerAddresses, &v.PeerAddresses)
+		case schemas.ClusterPeer_PeerClusterName:
+			v.PeerClusterName = new(string)
+			return d.ReadString(schemas.ClusterPeer_PeerClusterName, v.PeerClusterName)
+		case schemas.ClusterPeer_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.ClusterPeer_ResourceARN, v.ResourceARN)
+		case schemas.ClusterPeer_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ClusterPeer_Status, v.Status)
+		case schemas.ClusterPeer_Tags:
+			return deserializeTags(d, schemas.ClusterPeer_Tags, &v.Tags)
+		case schemas.ClusterPeer_UUID:
+			v.UUID = new(string)
+			return d.ReadString(schemas.ClusterPeer_UUID, v.UUID)
+		}
+		return nil
+	})
+}
+
+// Describes the authentication status of an Amazon FSx for NetApp ONTAP cluster
+// peer relationship.
+type ClusterPeerAuthenticationStatus struct {
+
+	// The status of the authentication that the cluster peer relationship is using.
+	InUse *string
+
+	// The authentication state of the cluster peer relationship.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClusterPeerAuthenticationStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterPeerAuthenticationStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterPeerAuthenticationStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InUse != nil {
+		s.WriteString(schemas.ClusterPeerAuthenticationStatus_InUse, *v.InUse)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.ClusterPeerAuthenticationStatus_State, *v.State)
+	}
+}
+func (v *ClusterPeerAuthenticationStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterPeerAuthenticationStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterPeerAuthenticationStatus_InUse:
+			v.InUse = new(string)
+			return d.ReadString(schemas.ClusterPeerAuthenticationStatus_InUse, v.InUse)
+		case schemas.ClusterPeerAuthenticationStatus_State:
+			v.State = new(string)
+			return d.ReadString(schemas.ClusterPeerAuthenticationStatus_State, v.State)
+		}
+		return nil
+	})
+}
+
+// A filter used to restrict the results of describe calls for Amazon FSx for
+// NetApp ONTAP cluster peers.
+type ClusterPeerFilter struct {
+
+	// The name for this filter.
+	Name ClusterPeerFilterName
+
+	// The values of the filter. These are all the values for any of the applied
+	// filters.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClusterPeerFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterPeerFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterPeerFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ClusterPeerFilter_Name, string(v.Name))
+	}
+	if v.Values != nil {
+		serializeClusterPeerFilterValues(s, schemas.ClusterPeerFilter_Values, v.Values)
+	}
+}
+func (v *ClusterPeerFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterPeerFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterPeerFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.ClusterPeerFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ClusterPeerFilterName(ev)
+			return nil
+		case schemas.ClusterPeerFilter_Values:
+			return deserializeClusterPeerFilterValues(d, schemas.ClusterPeerFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Provides a report detailing the data repository task results of the files
 // processed that match the criteria specified in the report Scope parameter. FSx
 // delivers the report to the file system's linked data repository in Amazon S3,
@@ -932,10 +1239,21 @@ type CompletionReport struct {
 	// Required if Enabled is set to true . Specifies the location of the report on the
 	// file system's linked S3 data repository. An absolute path that defines where the
 	// completion report will be stored in the destination location. The Path you
-	// provide must be located within the file system’s ExportPath. An example Path
-	// value is "s3://amzn-s3-demo-bucket/myExportPath/optionalPrefix". The report
-	// provides the following information for each file in the report: FilePath,
-	// FileStatus, and ErrorCode.
+	// provide must be within the Amazon S3 location that the file system is linked to.
+	// That location depends on how the file system is configured:
+	//
+	//   - The DataRepositoryPath of one of the associations, if the file system has
+	//   data repository associations
+	//
+	//   - The ExportPath , if the file system was created with an ImportPath and an
+	//   ExportPath
+	//
+	// For example, if an association links to s3://amzn-s3-demo-bucket/myPrefix , then
+	// s3://amzn-s3-demo-bucket/myPrefix/reports is valid. The path
+	// s3://amzn-s3-demo-bucket/reports is not.
+	//
+	// The report provides the following information for each file in the report:
+	// FilePath, FileStatus, and ErrorCode.
 	Path *string
 
 	// Required if Enabled is set to true . Specifies the scope of the CompletionReport
@@ -1183,6 +1501,52 @@ func (v *CreateAndAttachS3AccessPointS3Configuration) Deserialize(d smithy.Shape
 	})
 }
 
+// Specifies the parent volume, and optionally the snapshot, that an FSx for ONTAP
+// volume clone is created from.
+type CreateCloneConfiguration struct {
+
+	// Specifies the ID of the volume to clone.
+	//
+	// This member is required.
+	ParentVolumeId *string
+
+	// Specifies the ID of a snapshot of the parent volume to create the clone from.
+	// The snapshot's lifecycle state must be AVAILABLE . If you don't specify a
+	// snapshot, ONTAP creates a new snapshot of the parent volume and creates the
+	// clone from it.
+	SnapshotId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CreateCloneConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCloneConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCloneConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParentVolumeId != nil {
+		s.WriteString(schemas.CreateCloneConfiguration_ParentVolumeId, *v.ParentVolumeId)
+	}
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.CreateCloneConfiguration_SnapshotId, *v.SnapshotId)
+	}
+}
+func (v *CreateCloneConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCloneConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCloneConfiguration_ParentVolumeId:
+			v.ParentVolumeId = new(string)
+			return d.ReadString(schemas.CreateCloneConfiguration_ParentVolumeId, v.ParentVolumeId)
+		case schemas.CreateCloneConfiguration_SnapshotId:
+			v.SnapshotId = new(string)
+			return d.ReadString(schemas.CreateCloneConfiguration_SnapshotId, v.SnapshotId)
+		}
+		return nil
+	})
+}
+
 // The Amazon File Cache configuration for the cache that you are creating.
 type CreateFileCacheLustreConfiguration struct {
 
@@ -1393,6 +1757,9 @@ type CreateFileSystemLustreConfiguration struct {
 	// (Optional) Specifies whether Elastic Fabric Adapter (EFA) and GPUDirect Storage
 	// (GDS) support is enabled for the Amazon FSx for Lustre file system.
 	//
+	// On file systems that use the Intelligent-Tiering storage class, you can enable
+	// EFA only when ThroughputCapacity is 4000 MBps or a multiple of 4000 MBps.
+	//
 	// (Default = false )
 	EfaEnabled *bool
 
@@ -1472,8 +1839,9 @@ type CreateFileSystemLustreConfiguration struct {
 
 	// Specifies the throughput of an FSx for Lustre file system using the
 	// Intelligent-Tiering storage class, measured in megabytes per second (MBps).
-	// Valid values are 4000 MBps or multiples of 4000 MBps. You pay for the amount of
-	// throughput that you provision.
+	// Valid values are 1000 MBps, 2000 MBps, and multiples of 4000 MBps, up to a
+	// maximum of 2000000 MBps. You pay for the amount of throughput that you
+	// provision.
 	ThroughputCapacity *int32
 
 	// (Optional) The preferred start time to perform weekly maintenance, formatted
@@ -1646,9 +2014,9 @@ type CreateFileSystemLustreMetadataConfiguration struct {
 	// The metadata configuration mode for provisioning Metadata IOPS for an FSx for
 	// Lustre file system using a PERSISTENT_2 deployment type.
 	//
-	//   - In AUTOMATIC mode (supported only on SSD file systems), FSx for Lustre
-	//   automatically provisions and scales the number of Metadata IOPS for your file
-	//   system based on your file system storage capacity.
+	//   - In AUTOMATIC mode, FSx for Lustre provisions and scales Metadata IOPS for
+	//   you. For SSD file systems, the number is based on storage capacity. For
+	//   Intelligent-Tiering file systems, it is based on throughput capacity.
 	//
 	//   - In USER_PROVISIONED mode, you specify the number of Metadata IOPS to
 	//   provision for your file system.
@@ -1663,12 +2031,17 @@ type CreateFileSystemLustreMetadataConfiguration struct {
 	//   - For SSD file systems, valid values are 1500 , 3000 , 6000 , 12000 , and
 	//   multiples of 12000 up to a maximum of 192000 .
 	//
-	//   - For Intelligent-Tiering file systems, valid values are 6000 and 12000 .
+	//   - For Intelligent-Tiering file systems, valid values are 1500 , 3000 , 6000 ,
+	//   12000 , and multiples of 12000 up to a maximum of 192000 .
+	//
+	// You can't provision fewer Metadata IOPS than AUTOMATIC mode provisions for your
+	// file system.
 	//
 	// Iops doesn’t have a default value. If you're using USER_PROVISIONED mode, you
 	// can choose to specify a valid value. If you're using AUTOMATIC mode, you cannot
 	// specify a value because FSx for Lustre automatically sets the value based on
-	// your file system storage capacity.
+	// your file system's storage capacity for SSD file systems, and on throughput
+	// capacity for Intelligent-Tiering file systems.
 	Iops *int32
 
 	noSmithyDocumentSerde
@@ -1728,6 +2101,14 @@ type CreateFileSystemOntapConfiguration struct {
 	//   pairs for Single-AZ redundancy. This is a second-generation FSx for ONTAP file
 	//   system.
 	//
+	//   - MULTI_AZ_3 - A high availability file system configured for Multi-AZ
+	//   redundancy to tolerate temporary AZ unavailability. This is a third-generation
+	//   FSx for ONTAP file system.
+	//
+	//   - SINGLE_AZ_3 - A file system configured with multiple high-availability (HA)
+	//   pairs for Single-AZ redundancy. This is a third-generation FSx for ONTAP file
+	//   system.
+	//
 	// For information about the use cases for Multi-AZ and Single-AZ deployments,
 	// refer to [Choosing a file system deployment type].
 	//
@@ -1737,7 +2118,8 @@ type CreateFileSystemOntapConfiguration struct {
 	DeploymentType OntapDeploymentType
 
 	// The number of days to retain automatic backups. Setting this property to 0
-	// disables automatic backups. You can retain automatic backups for a maximum of 90
+	// disables automatic backups and deletes all existing automatic backups for the
+	// file system's volumes. You can retain automatic backups for a maximum of 90
 	// days. The default is 30 .
 	AutomaticBackupRetentionDays *int32
 
@@ -1773,12 +2155,13 @@ type CreateFileSystemOntapConfiguration struct {
 
 	// Specifies how many high-availability (HA) pairs of file servers will power your
 	// file system. First-generation file systems are powered by 1 HA pair.
-	// Second-generation multi-AZ file systems are powered by 1 HA pair. Second
-	// generation single-AZ file systems are powered by up to 12 HA pairs. The default
-	// value is 1. The value of this property affects the values of StorageCapacity ,
-	// Iops , and ThroughputCapacity . For more information, see [High-availability (HA) pairs] in the FSx for ONTAP
-	// user guide. Block storage protocol support (iSCSI and NVMe over TCP) is disabled
-	// on file systems with more than 6 HA pairs. For more information, see [Using block storage protocols].
+	// Second-generation and third-generation multi-AZ file systems are powered by 1 HA
+	// pair. Second-generation and third-generation single-AZ file systems are powered
+	// by up to 12 HA pairs. The default value is 1. The value of this property affects
+	// the values of StorageCapacity , Iops , and ThroughputCapacity . For more
+	// information, see [High-availability (HA) pairs]in the FSx for ONTAP user guide. Block storage protocol
+	// support (iSCSI and NVMe over TCP) is disabled on file systems with more than 6
+	// HA pairs. For more information, see [Using block storage protocols].
 	//
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
@@ -1786,14 +2169,15 @@ type CreateFileSystemOntapConfiguration struct {
 	//   - The value of HAPairs is less than 1 or greater than 12.
 	//
 	//   - The value of HAPairs is greater than 1 and the value of DeploymentType is
-	//   SINGLE_AZ_1 , MULTI_AZ_1 , or MULTI_AZ_2 .
+	//   SINGLE_AZ_1 , MULTI_AZ_1 , MULTI_AZ_2 , or MULTI_AZ_3 .
 	//
 	// [Using block storage protocols]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/supported-fsx-clients.html#using-block-storage
 	// [High-availability (HA) pairs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/administering-file-systems.html#HA-pairs
 	HAPairs *int32
 
-	// Required when DeploymentType is set to MULTI_AZ_1 or MULTI_AZ_2 . This specifies
-	// the subnet in which you want the preferred file server to be located.
+	// Required when DeploymentType is set to MULTI_AZ_1 , MULTI_AZ_2 , or MULTI_AZ_3 .
+	// This specifies the subnet in which you want the preferred file server to be
+	// located.
 	PreferredSubnetId *string
 
 	// (Multi-AZ only) Specifies the route tables in which Amazon FSx creates the
@@ -1841,14 +2225,20 @@ type CreateFileSystemOntapConfiguration struct {
 	//
 	//   - For MULTI_AZ_2 , valid values are 384, 768, 1536, 3072, or 6144 MBps.
 	//
+	//   - For SINGLE_AZ_3 , valid values are 1536, 3072, 6144, 12288, or 18432 MBps.
+	//
+	//   - For MULTI_AZ_3 , valid values are 384, 768, 1536, 3072, 6144, 12288, or
+	//   18432 MBps.
+	//
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
 	//
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value for file systems with one HA pair.
 	//
-	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
-	//   ThroughputCapacityPerHAPair is not a valid HA pair (a value between 1 and 12).
+	//   - The value of deployment type is SINGLE_AZ_2 or SINGLE_AZ_3 and
+	//   ThroughputCapacity / ThroughputCapacityPerHAPair is not a valid HA pair (a
+	//   value between 1 and 12).
 	//
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
@@ -2426,6 +2816,60 @@ func (v *CreateFileSystemWindowsConfiguration) Deserialize(d smithy.ShapeDeseria
 	})
 }
 
+// Specifies the configuration of the ONTAP snapshot that you are creating.
+type CreateOntapSnapshotConfiguration struct {
+
+	// Specifies the date and time when the snapshot expires. You can't delete the
+	// snapshot before this time.
+	ExpiryTime *time.Time
+
+	// Specifies the date and time until which the snapshot is locked. This setting
+	// takes effect only if snapshot locking is enabled on the volume. Snapshot locking
+	// is separate from SnapLock, and enabling SnapLock on a volume doesn't enable
+	// snapshot locking. You can't delete the snapshot before this time.
+	SnaplockExpiryTime *time.Time
+
+	// Specifies the SnapMirror label to assign to the snapshot. SnapMirror policies
+	// use labels to select which snapshots to replicate to a destination volume.
+	SnapmirrorLabel *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CreateOntapSnapshotConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOntapSnapshotConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOntapSnapshotConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiryTime != nil {
+		s.WriteTime(schemas.CreateOntapSnapshotConfiguration_ExpiryTime, *v.ExpiryTime)
+	}
+	if v.SnaplockExpiryTime != nil {
+		s.WriteTime(schemas.CreateOntapSnapshotConfiguration_SnaplockExpiryTime, *v.SnaplockExpiryTime)
+	}
+	if v.SnapmirrorLabel != nil {
+		s.WriteString(schemas.CreateOntapSnapshotConfiguration_SnapmirrorLabel, *v.SnapmirrorLabel)
+	}
+}
+func (v *CreateOntapSnapshotConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOntapSnapshotConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOntapSnapshotConfiguration_ExpiryTime:
+			v.ExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.CreateOntapSnapshotConfiguration_ExpiryTime, v.ExpiryTime)
+		case schemas.CreateOntapSnapshotConfiguration_SnaplockExpiryTime:
+			v.SnaplockExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.CreateOntapSnapshotConfiguration_SnaplockExpiryTime, v.SnaplockExpiryTime)
+		case schemas.CreateOntapSnapshotConfiguration_SnapmirrorLabel:
+			v.SnapmirrorLabel = new(string)
+			return d.ReadString(schemas.CreateOntapSnapshotConfiguration_SnapmirrorLabel, v.SnapmirrorLabel)
+		}
+		return nil
+	})
+}
+
 // Specifies the configuration of the ONTAP volume that you are creating.
 type CreateOntapVolumeConfiguration struct {
 
@@ -2437,6 +2881,11 @@ type CreateOntapVolumeConfiguration struct {
 	// Use to specify configuration options for a volume’s storage aggregate or
 	// aggregates.
 	AggregateConfiguration *CreateAggregateConfiguration
+
+	// Specifies the configuration to use when creating the volume as a clone of
+	// another FSx for ONTAP volume. A clone is a writable, point-in-time copy of its
+	// parent volume.
+	CloneConfiguration *CreateCloneConfiguration
 
 	// A boolean flag indicating whether tags for the volume should be copied to
 	// backups. This value defaults to false. If it's set to true, all tags for the
@@ -2569,6 +3018,11 @@ func (v *CreateOntapVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializ
 		v.AggregateConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.CloneConfiguration != nil {
+		s.WriteStruct(schemas.CreateOntapVolumeConfiguration_CloneConfiguration)
+		v.CloneConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CopyTagsToBackups != nil {
 		s.WriteBool(schemas.CreateOntapVolumeConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
 	}
@@ -2616,6 +3070,9 @@ func (v *CreateOntapVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.CreateOntapVolumeConfiguration_AggregateConfiguration:
 			v.AggregateConfiguration = &CreateAggregateConfiguration{}
 			return v.AggregateConfiguration.Deserialize(d)
+		case schemas.CreateOntapVolumeConfiguration_CloneConfiguration:
+			v.CloneConfiguration = &CreateCloneConfiguration{}
+			return v.CloneConfiguration.Deserialize(d)
 		case schemas.CreateOntapVolumeConfiguration_CopyTagsToBackups:
 			v.CopyTagsToBackups = new(bool)
 			return d.ReadBool(schemas.CreateOntapVolumeConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)
@@ -3034,6 +3491,74 @@ func (v *CreateSnaplockConfiguration) Deserialize(d smithy.ShapeDeserializer) er
 		case schemas.CreateSnaplockConfiguration_VolumeAppendModeEnabled:
 			v.VolumeAppendModeEnabled = new(bool)
 			return d.ReadBool(schemas.CreateSnaplockConfiguration_VolumeAppendModeEnabled, v.VolumeAppendModeEnabled)
+		}
+		return nil
+	})
+}
+
+// Specifies the destination endpoint of the Amazon FSx for NetApp ONTAP
+// SnapMirror relationship that you are creating.
+type CreateSnapmirrorDestination struct {
+
+	// Specifies the ID of the destination volume.
+	//
+	// This member is required.
+	VolumeId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CreateSnapmirrorDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSnapmirrorDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSnapmirrorDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VolumeId != nil {
+		s.WriteString(schemas.CreateSnapmirrorDestination_VolumeId, *v.VolumeId)
+	}
+}
+func (v *CreateSnapmirrorDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSnapmirrorDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSnapmirrorDestination_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.CreateSnapmirrorDestination_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
+
+// Specifies the source endpoint of the Amazon FSx for NetApp ONTAP SnapMirror
+// relationship that you are creating.
+type CreateSnapmirrorSource struct {
+
+	// Specifies the path of the source volume, in the format svm_name:volume_name .
+	//
+	// This member is required.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *CreateSnapmirrorSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSnapmirrorSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSnapmirrorSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.CreateSnapmirrorSource_Path, *v.Path)
+	}
+}
+func (v *CreateSnapmirrorSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSnapmirrorSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSnapmirrorSource_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.CreateSnapmirrorSource_Path, v.Path)
 		}
 		return nil
 	})
@@ -5666,9 +6191,9 @@ type FileSystemLustreMetadataConfiguration struct {
 	// The metadata configuration mode for provisioning Metadata IOPS for the file
 	// system.
 	//
-	//   - In AUTOMATIC mode (supported only on SSD file systems), FSx for Lustre
-	//   automatically provisions and scales the number of Metadata IOPS on your file
-	//   system based on your file system storage capacity.
+	//   - In AUTOMATIC mode, FSx for Lustre provisions and scales Metadata IOPS for
+	//   you. For SSD file systems, the number is based on storage capacity. For
+	//   Intelligent-Tiering file systems, it is based on throughput capacity.
 	//
 	//   - In USER_PROVISIONED mode, you can choose to specify the number of Metadata
 	//   IOPS to provision for your file system.
@@ -5681,7 +6206,8 @@ type FileSystemLustreMetadataConfiguration struct {
 	//   - For SSD file systems, valid values are 1500 , 3000 , 6000 , 12000 , and
 	//   multiples of 12000 up to a maximum of 192000 .
 	//
-	//   - For Intelligent-Tiering file systems, valid values are 6000 and 12000 .
+	//   - For Intelligent-Tiering file systems, valid values are 1500 , 3000 , 6000 ,
+	//   12000 , and multiples of 12000 up to a maximum of 192000 .
 	Iops *int32
 
 	noSmithyDocumentSerde
@@ -5770,6 +6296,10 @@ type LifecycleTransitionReason struct {
 	// A detailed error message.
 	Message *string
 
+	// The error returned by ONTAP when an operation on the resource fails. Returned
+	// only for certain FSx for ONTAP resources.
+	OntapError *OntapError
+
 	noSmithyDocumentSerde
 }
 
@@ -5783,6 +6313,11 @@ func (v *LifecycleTransitionReason) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.LifecycleTransitionReason_Message, *v.Message)
 	}
+	if v.OntapError != nil {
+		s.WriteStruct(schemas.LifecycleTransitionReason_OntapError)
+		v.OntapError.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *LifecycleTransitionReason) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LifecycleTransitionReason, func(s *smithy.Schema) error {
@@ -5790,6 +6325,9 @@ func (v *LifecycleTransitionReason) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.LifecycleTransitionReason_Message:
 			v.Message = new(string)
 			return d.ReadString(schemas.LifecycleTransitionReason_Message, v.Message)
+		case schemas.LifecycleTransitionReason_OntapError:
+			v.OntapError = &OntapError{}
+			return v.OntapError.Deserialize(d)
 		}
 		return nil
 	})
@@ -6204,8 +6742,8 @@ type LustreReadCacheConfiguration struct {
 	// file system's SSD read cache, in gibibytes (GiB).
 	//
 	// The SSD read cache size is distributed across provisioned file servers in your
-	// file system. Intelligent-Tiering file systems support a minimum of 32 GiB and
-	// maximum of 131072 GiB for SSD read cache size for every 4,000 MB/s of throughput
+	// file system. Intelligent-Tiering file systems support a minimum of 8 GiB and
+	// maximum of 32768 GiB for SSD read cache size for every 1000 MBps of throughput
 	// capacity provisioned.
 	SizeGiB *int32
 
@@ -6386,11 +6924,53 @@ func (v *NFSDataRepositoryConfiguration) Deserialize(d smithy.ShapeDeserializer)
 	})
 }
 
+// An error returned by ONTAP for an operation on an Amazon FSx for NetApp ONTAP
+// resource.
+type OntapError struct {
+
+	// The error code returned by ONTAP.
+	Code *string
+
+	// The error message returned by ONTAP.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OntapError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OntapError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OntapError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.OntapError_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.OntapError_Message, *v.Message)
+	}
+}
+func (v *OntapError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OntapError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OntapError_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.OntapError_Code, v.Code)
+		case schemas.OntapError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OntapError_Message, v.Message)
+		}
+		return nil
+	})
+}
+
 // Configuration for the FSx for NetApp ONTAP file system.
 type OntapFileSystemConfiguration struct {
 
 	// The number of days to retain automatic backups. Setting this property to 0
-	// disables automatic backups. You can retain automatic backups for a maximum of 90
+	// disables automatic backups and deletes all existing automatic backups for the
+	// file system's volumes. You can retain automatic backups for a maximum of 90
 	// days. The default is 30 .
 	AutomaticBackupRetentionDays *int32
 
@@ -6415,6 +6995,14 @@ type OntapFileSystemConfiguration struct {
 	//
 	//   - SINGLE_AZ_2 - A file system configured with multiple high-availability (HA)
 	//   pairs for Single-AZ redundancy. This is a second-generation FSx for ONTAP file
+	//   system.
+	//
+	//   - MULTI_AZ_3 - A high availability file system configured for Multi-AZ
+	//   redundancy to tolerate temporary AZ unavailability. This is a third-generation
+	//   FSx for ONTAP file system.
+	//
+	//   - SINGLE_AZ_3 - A file system configured with multiple high-availability (HA)
+	//   pairs for Single-AZ redundancy. This is a third-generation FSx for ONTAP file
 	//   system.
 	//
 	// For information about the use cases for Multi-AZ and Single-AZ deployments,
@@ -6464,7 +7052,7 @@ type OntapFileSystemConfiguration struct {
 	//   - The value of HAPairs is less than 1 or greater than 12.
 	//
 	//   - The value of HAPairs is greater than 1 and the value of DeploymentType is
-	//   SINGLE_AZ_1 , MULTI_AZ_1 , or MULTI_AZ_2 .
+	//   SINGLE_AZ_1 , MULTI_AZ_1 , MULTI_AZ_2 , or MULTI_AZ_3 .
 	//
 	// [High-availability (HA) pairs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html
 	HAPairs *int32
@@ -6500,14 +7088,20 @@ type OntapFileSystemConfiguration struct {
 	//
 	//   - For MULTI_AZ_2 , valid values are 384, 768, 1536, 3072, or 6144 MBps.
 	//
+	//   - For SINGLE_AZ_3 , valid values are 1536, 3072, 6144, 12288, or 18432 MBps.
+	//
+	//   - For MULTI_AZ_3 , valid values are 384, 768, 1536, 3072, 6144, 12288, or
+	//   18432 MBps.
+	//
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
 	//
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value.
 	//
-	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
-	//   ThroughputCapacityPerHAPair is not a valid HA pair (a value between 1 and 12).
+	//   - The value of deployment type is SINGLE_AZ_2 or SINGLE_AZ_3 and
+	//   ThroughputCapacity / ThroughputCapacityPerHAPair is not a valid HA pair (a
+	//   value between 1 and 12).
 	//
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
@@ -6691,6 +7285,78 @@ func (v *OntapFileSystemIdentity) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// The configuration of an Amazon FSx for NetApp ONTAP snapshot.
+type OntapSnapshotConfiguration struct {
+
+	// The date and time when the snapshot expires. You can't delete the snapshot
+	// before this time.
+	ExpiryTime *time.Time
+
+	// The configured size of the snapshot, in megabytes (MBs).
+	SizeInMegabytes *int64
+
+	// The date and time until which the snapshot is locked. This setting takes effect
+	// only if snapshot locking is enabled on the volume. Snapshot locking is separate
+	// from SnapLock, and enabling SnapLock on a volume doesn't enable snapshot
+	// locking. You can't delete the snapshot before this time.
+	SnaplockExpiryTime *time.Time
+
+	// The SnapMirror label of the snapshot. SnapMirror policies use labels to select
+	// which snapshots to replicate to a destination volume.
+	SnapmirrorLabel *string
+
+	// The snapshot's universally unique identifier (UUID).
+	UUID *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *OntapSnapshotConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OntapSnapshotConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OntapSnapshotConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiryTime != nil {
+		s.WriteTime(schemas.OntapSnapshotConfiguration_ExpiryTime, *v.ExpiryTime)
+	}
+	if v.SizeInMegabytes != nil {
+		s.WriteInt64(schemas.OntapSnapshotConfiguration_SizeInMegabytes, *v.SizeInMegabytes)
+	}
+	if v.SnaplockExpiryTime != nil {
+		s.WriteTime(schemas.OntapSnapshotConfiguration_SnaplockExpiryTime, *v.SnaplockExpiryTime)
+	}
+	if v.SnapmirrorLabel != nil {
+		s.WriteString(schemas.OntapSnapshotConfiguration_SnapmirrorLabel, *v.SnapmirrorLabel)
+	}
+	if v.UUID != nil {
+		s.WriteString(schemas.OntapSnapshotConfiguration_UUID, *v.UUID)
+	}
+}
+func (v *OntapSnapshotConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OntapSnapshotConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OntapSnapshotConfiguration_ExpiryTime:
+			v.ExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.OntapSnapshotConfiguration_ExpiryTime, v.ExpiryTime)
+		case schemas.OntapSnapshotConfiguration_SizeInMegabytes:
+			v.SizeInMegabytes = new(int64)
+			return d.ReadInt64(schemas.OntapSnapshotConfiguration_SizeInMegabytes, v.SizeInMegabytes)
+		case schemas.OntapSnapshotConfiguration_SnaplockExpiryTime:
+			v.SnaplockExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.OntapSnapshotConfiguration_SnaplockExpiryTime, v.SnaplockExpiryTime)
+		case schemas.OntapSnapshotConfiguration_SnapmirrorLabel:
+			v.SnapmirrorLabel = new(string)
+			return d.ReadString(schemas.OntapSnapshotConfiguration_SnapmirrorLabel, v.SnapmirrorLabel)
+		case schemas.OntapSnapshotConfiguration_UUID:
+			v.UUID = new(string)
+			return d.ReadString(schemas.OntapSnapshotConfiguration_UUID, v.UUID)
+		}
+		return nil
+	})
+}
+
 // The FSx for ONTAP UNIX file system user that is used for authorizing all file
 // access requests that are made using the S3 access point.
 type OntapUnixFileSystemUser struct {
@@ -6731,6 +7397,11 @@ type OntapVolumeConfiguration struct {
 	// This structure specifies configuration options for a volume’s storage aggregate
 	// or aggregates.
 	AggregateConfiguration *AggregateConfiguration
+
+	// The clone configuration of the volume, if the volume is a clone. This property
+	// doesn't appear for a volume that isn't a clone, or for a clone that has been
+	// split from its parent volume.
+	CloneConfiguration *CloneConfiguration
 
 	// A boolean flag indicating whether tags for the volume should be copied to
 	// backups. This value defaults to false. If it's set to true, all tags for the
@@ -6850,6 +7521,11 @@ func (v *OntapVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AggregateConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.CloneConfiguration != nil {
+		s.WriteStruct(schemas.OntapVolumeConfiguration_CloneConfiguration)
+		v.CloneConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CopyTagsToBackups != nil {
 		s.WriteBool(schemas.OntapVolumeConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
 	}
@@ -6906,6 +7582,9 @@ func (v *OntapVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.OntapVolumeConfiguration_AggregateConfiguration:
 			v.AggregateConfiguration = &AggregateConfiguration{}
 			return v.AggregateConfiguration.Deserialize(d)
+		case schemas.OntapVolumeConfiguration_CloneConfiguration:
+			v.CloneConfiguration = &CloneConfiguration{}
+			return v.CloneConfiguration.Deserialize(d)
 		case schemas.OntapVolumeConfiguration_CopyTagsToBackups:
 			v.CopyTagsToBackups = new(bool)
 			return d.ReadBool(schemas.OntapVolumeConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)
@@ -8131,6 +8810,11 @@ type S3AccessPointAttachment struct {
 	//   - FAILED - The S3 access point attachment is in a failed state. Delete and
 	//   detach the S3 access point attachment, and create a new one.
 	//
+	//   - MISCONFIGURED - The S3 access point attachment has a configuration issue
+	//   that prevents it from serving requests. Amazon FSx periodically checks for this
+	//   condition and automatically returns the access point to AVAILABLE when the issue
+	//   is resolved.
+	//
 	//   - UPDATING - Amazon FSx is updating the S3 access point attachment
 	Lifecycle S3AccessPointAttachmentLifecycle
 
@@ -8462,8 +9146,9 @@ func (v *S3DataRepositoryConfiguration) Deserialize(d smithy.ShapeDeserializer) 
 // is joined.
 type SelfManagedActiveDirectoryAttributes struct {
 
-	// A list of up to three IP addresses of DNS servers or domain controllers in the
-	// self-managed AD directory.
+	// A list of IP addresses of DNS servers or domain controllers in the self-managed
+	// AD directory. FSx for ONTAP SVMs support up to three IP addresses, FSx for
+	// Windows supports up to two.
 	DnsIps []string
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
@@ -8550,8 +9235,9 @@ func (v *SelfManagedActiveDirectoryAttributes) Deserialize(d smithy.ShapeDeseria
 // [Managing FSx for ONTAP SVMs]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html
 type SelfManagedActiveDirectoryConfiguration struct {
 
-	// A list of up to three IP addresses of DNS servers or domain controllers in the
-	// self-managed AD directory.
+	// A list of IP addresses of DNS servers or domain controllers in the self-managed
+	// AD directory. FSx for ONTAP SVMs support up to three IP addresses, FSx for
+	// Windows supports up to two.
 	//
 	// This member is required.
 	DnsIps []string
@@ -8677,8 +9363,9 @@ func (v *SelfManagedActiveDirectoryConfiguration) Deserialize(d smithy.ShapeDese
 // ONTAP SVM is joined.
 type SelfManagedActiveDirectoryConfigurationUpdates struct {
 
-	// A list of up to three DNS server or domain controller IP addresses in your
-	// self-managed Active Directory domain.
+	// A list of IP addresses of DNS servers or domain controllers in the self-managed
+	// AD directory. FSx for ONTAP SVMs support up to three IP addresses, FSx for
+	// Windows supports up to two.
 	DnsIps []string
 
 	// Specifies the updated Amazon Resource Name (ARN) of the Amazon Web Services
@@ -8969,7 +9656,806 @@ func (v *SnaplockRetentionPeriod) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// A snapshot of an Amazon FSx for OpenZFS volume.
+// Describes the destination endpoint of an Amazon FSx for NetApp ONTAP SnapMirror
+// relationship. The destination volume is always an Amazon FSx for NetApp ONTAP
+// volume.
+type SnapmirrorDestination struct {
+
+	// The path of the destination volume, in the format svm_name:volume_name .
+	Path *string
+
+	// The ID of the destination volume.
+	VolumeId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapmirrorDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapmirrorDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapmirrorDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.SnapmirrorDestination_Path, *v.Path)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.SnapmirrorDestination_VolumeId, *v.VolumeId)
+	}
+}
+func (v *SnapmirrorDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapmirrorDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapmirrorDestination_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.SnapmirrorDestination_Path, v.Path)
+		case schemas.SnapmirrorDestination_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.SnapmirrorDestination_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
+
+// Describes the latest snapshot that SnapMirror transferred to the destination
+// volume of an Amazon FSx for NetApp ONTAP SnapMirror relationship.
+type SnapmirrorExportedSnapshot struct {
+
+	// The ID of the snapshot, if Amazon FSx manages the snapshot.
+	SnapshotId *string
+
+	// The name of the snapshot in ONTAP.
+	SnapshotName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapmirrorExportedSnapshot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapmirrorExportedSnapshot)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapmirrorExportedSnapshot) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.SnapmirrorExportedSnapshot_SnapshotId, *v.SnapshotId)
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.SnapmirrorExportedSnapshot_SnapshotName, *v.SnapshotName)
+	}
+}
+func (v *SnapmirrorExportedSnapshot) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapmirrorExportedSnapshot, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapmirrorExportedSnapshot_SnapshotId:
+			v.SnapshotId = new(string)
+			return d.ReadString(schemas.SnapmirrorExportedSnapshot_SnapshotId, v.SnapshotId)
+		case schemas.SnapmirrorExportedSnapshot_SnapshotName:
+			v.SnapshotName = new(string)
+			return d.ReadString(schemas.SnapmirrorExportedSnapshot_SnapshotName, v.SnapshotName)
+		}
+		return nil
+	})
+}
+
+// Describes an Amazon FSx for NetApp ONTAP SnapMirror policy.
+type SnapmirrorPolicy struct {
+
+	// The globally unique ID of the file system, assigned by Amazon FSx.
+	FileSystemId *string
+
+	// The lifecycle status of the SnapMirror policy can be one of the following:
+	//
+	//   - CREATED – The SnapMirror policy is fully available for use.
+	//
+	//   - CREATING – Amazon FSx is creating the SnapMirror policy.
+	//
+	//   - DELETING – Amazon FSx is deleting the SnapMirror policy.
+	//
+	//   - FAILED – Amazon FSx was unable to create the SnapMirror policy.
+	Lifecycle SnapmirrorPolicyLifecycle
+
+	// The reason why the SnapMirror policy lifecycle status changed.
+	LifecycleTransitionReason *LifecycleTransitionReason
+
+	// The name of the SnapMirror policy.
+	Name *string
+
+	// Specifies whether SnapMirror compresses data when it transfers the data over
+	// the network. This value defaults to false .
+	NetworkCompressionEnabled *bool
+
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
+	// Amazon Web Services resources. We require an ARN when you need to specify a
+	// resource unambiguously across all of Amazon Web Services. For more information,
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	ResourceARN *string
+
+	// The rules that determine which snapshots SnapMirror retains on the destination
+	// volume.
+	RetentionRules []SnapmirrorPolicyRetentionRule
+
+	// The scope of the SnapMirror policy can be one of the following:
+	//
+	//   - FILESYSTEM – The SnapMirror policy was created on the file system.
+	//
+	//   - SVM – The SnapMirror policy was created on an SVM.
+	Scope SnapmirrorPolicyScope
+
+	// The system-generated, unique ID of the SnapMirror policy.
+	SnapmirrorPolicyId *string
+
+	// The snapshot copy mode of the SnapMirror policy, which determines which
+	// snapshots SnapMirror transfers to the destination volume.
+	SnapshotCopyMode SnapmirrorPolicySnapshotCopyMode
+
+	// The ID of the SnapMirror policy's storage virtual machine, if you created the
+	// SnapMirror policy on a storage virtual machine.
+	StorageVirtualMachineId *string
+
+	// A list of Tag values, with a maximum of 50 elements.
+	Tags []Tag
+
+	// The maximum bandwidth, in kilobytes per second (KBps), that SnapMirror uses to
+	// transfer data. A value of 0 means that the bandwidth is unlimited.
+	ThrottleInKbps *int64
+
+	// The name of the ONTAP schedule that determines when SnapMirror transfers data.
+	TransferSchedule *string
+
+	// The SnapMirror policy's universally unique identifier (UUID).
+	UUID *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapmirrorPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapmirrorPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapmirrorPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.SnapmirrorPolicy_FileSystemId, *v.FileSystemId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.SnapmirrorPolicy_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LifecycleTransitionReason != nil {
+		s.WriteStruct(schemas.SnapmirrorPolicy_LifecycleTransitionReason)
+		v.LifecycleTransitionReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SnapmirrorPolicy_Name, *v.Name)
+	}
+	if v.NetworkCompressionEnabled != nil {
+		s.WriteBool(schemas.SnapmirrorPolicy_NetworkCompressionEnabled, *v.NetworkCompressionEnabled)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.SnapmirrorPolicy_ResourceARN, *v.ResourceARN)
+	}
+	if v.RetentionRules != nil {
+		serializeSnapmirrorPolicyRetentionRules(s, schemas.SnapmirrorPolicy_RetentionRules, v.RetentionRules)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.SnapmirrorPolicy_Scope, string(v.Scope))
+	}
+	if v.SnapmirrorPolicyId != nil {
+		s.WriteString(schemas.SnapmirrorPolicy_SnapmirrorPolicyId, *v.SnapmirrorPolicyId)
+	}
+	if v.SnapshotCopyMode != "" {
+		s.WriteString(schemas.SnapmirrorPolicy_SnapshotCopyMode, string(v.SnapshotCopyMode))
+	}
+	if v.StorageVirtualMachineId != nil {
+		s.WriteString(schemas.SnapmirrorPolicy_StorageVirtualMachineId, *v.StorageVirtualMachineId)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.SnapmirrorPolicy_Tags, v.Tags)
+	}
+	if v.ThrottleInKbps != nil {
+		s.WriteInt64(schemas.SnapmirrorPolicy_ThrottleInKbps, *v.ThrottleInKbps)
+	}
+	if v.TransferSchedule != nil {
+		s.WriteString(schemas.SnapmirrorPolicy_TransferSchedule, *v.TransferSchedule)
+	}
+	if v.UUID != nil {
+		s.WriteString(schemas.SnapmirrorPolicy_UUID, *v.UUID)
+	}
+}
+func (v *SnapmirrorPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapmirrorPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapmirrorPolicy_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.SnapmirrorPolicy_FileSystemId, v.FileSystemId)
+		case schemas.SnapmirrorPolicy_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.SnapmirrorPolicy_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = SnapmirrorPolicyLifecycle(ev)
+			return nil
+		case schemas.SnapmirrorPolicy_LifecycleTransitionReason:
+			v.LifecycleTransitionReason = &LifecycleTransitionReason{}
+			return v.LifecycleTransitionReason.Deserialize(d)
+		case schemas.SnapmirrorPolicy_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SnapmirrorPolicy_Name, v.Name)
+		case schemas.SnapmirrorPolicy_NetworkCompressionEnabled:
+			v.NetworkCompressionEnabled = new(bool)
+			return d.ReadBool(schemas.SnapmirrorPolicy_NetworkCompressionEnabled, v.NetworkCompressionEnabled)
+		case schemas.SnapmirrorPolicy_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.SnapmirrorPolicy_ResourceARN, v.ResourceARN)
+		case schemas.SnapmirrorPolicy_RetentionRules:
+			return deserializeSnapmirrorPolicyRetentionRules(d, schemas.SnapmirrorPolicy_RetentionRules, &v.RetentionRules)
+		case schemas.SnapmirrorPolicy_Scope:
+			var ev string
+			if err := d.ReadString(schemas.SnapmirrorPolicy_Scope, &ev); err != nil {
+				return err
+			}
+			v.Scope = SnapmirrorPolicyScope(ev)
+			return nil
+		case schemas.SnapmirrorPolicy_SnapmirrorPolicyId:
+			v.SnapmirrorPolicyId = new(string)
+			return d.ReadString(schemas.SnapmirrorPolicy_SnapmirrorPolicyId, v.SnapmirrorPolicyId)
+		case schemas.SnapmirrorPolicy_SnapshotCopyMode:
+			var ev string
+			if err := d.ReadString(schemas.SnapmirrorPolicy_SnapshotCopyMode, &ev); err != nil {
+				return err
+			}
+			v.SnapshotCopyMode = SnapmirrorPolicySnapshotCopyMode(ev)
+			return nil
+		case schemas.SnapmirrorPolicy_StorageVirtualMachineId:
+			v.StorageVirtualMachineId = new(string)
+			return d.ReadString(schemas.SnapmirrorPolicy_StorageVirtualMachineId, v.StorageVirtualMachineId)
+		case schemas.SnapmirrorPolicy_Tags:
+			return deserializeTags(d, schemas.SnapmirrorPolicy_Tags, &v.Tags)
+		case schemas.SnapmirrorPolicy_ThrottleInKbps:
+			v.ThrottleInKbps = new(int64)
+			return d.ReadInt64(schemas.SnapmirrorPolicy_ThrottleInKbps, v.ThrottleInKbps)
+		case schemas.SnapmirrorPolicy_TransferSchedule:
+			v.TransferSchedule = new(string)
+			return d.ReadString(schemas.SnapmirrorPolicy_TransferSchedule, v.TransferSchedule)
+		case schemas.SnapmirrorPolicy_UUID:
+			v.UUID = new(string)
+			return d.ReadString(schemas.SnapmirrorPolicy_UUID, v.UUID)
+		}
+		return nil
+	})
+}
+
+// A filter used to restrict the results of describe calls for Amazon FSx for
+// NetApp ONTAP SnapMirror policies.
+type SnapmirrorPolicyFilter struct {
+
+	// The name for this filter.
+	Name SnapmirrorPolicyFilterName
+
+	// The values of the filter. These are all the values for any of the applied
+	// filters.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapmirrorPolicyFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapmirrorPolicyFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapmirrorPolicyFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.SnapmirrorPolicyFilter_Name, string(v.Name))
+	}
+	if v.Values != nil {
+		serializeSnapmirrorPolicyFilterValues(s, schemas.SnapmirrorPolicyFilter_Values, v.Values)
+	}
+}
+func (v *SnapmirrorPolicyFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapmirrorPolicyFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapmirrorPolicyFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.SnapmirrorPolicyFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = SnapmirrorPolicyFilterName(ev)
+			return nil
+		case schemas.SnapmirrorPolicyFilter_Values:
+			return deserializeSnapmirrorPolicyFilterValues(d, schemas.SnapmirrorPolicyFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// Specifies a snapshot retention rule for an Amazon FSx for NetApp ONTAP
+// SnapMirror policy.
+type SnapmirrorPolicyRetentionRule struct {
+
+	// The number of snapshots with the label to retain on the destination volume.
+	//
+	// This member is required.
+	Count *int32
+
+	// The SnapMirror label of the snapshots that the rule applies to.
+	//
+	// This member is required.
+	Label *string
+
+	// The name of the ONTAP schedule on which SnapMirror creates snapshots with the
+	// label directly on the destination volume.
+	CreationSchedule *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapmirrorPolicyRetentionRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapmirrorPolicyRetentionRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapmirrorPolicyRetentionRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.SnapmirrorPolicyRetentionRule_Count, *v.Count)
+	}
+	if v.CreationSchedule != nil {
+		s.WriteString(schemas.SnapmirrorPolicyRetentionRule_CreationSchedule, *v.CreationSchedule)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.SnapmirrorPolicyRetentionRule_Label, *v.Label)
+	}
+}
+func (v *SnapmirrorPolicyRetentionRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapmirrorPolicyRetentionRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapmirrorPolicyRetentionRule_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.SnapmirrorPolicyRetentionRule_Count, v.Count)
+		case schemas.SnapmirrorPolicyRetentionRule_CreationSchedule:
+			v.CreationSchedule = new(string)
+			return d.ReadString(schemas.SnapmirrorPolicyRetentionRule_CreationSchedule, v.CreationSchedule)
+		case schemas.SnapmirrorPolicyRetentionRule_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.SnapmirrorPolicyRetentionRule_Label, v.Label)
+		}
+		return nil
+	})
+}
+
+// Describes an Amazon FSx for NetApp ONTAP SnapMirror relationship.
+type SnapmirrorRelationship struct {
+
+	// The destination endpoint of the SnapMirror relationship.
+	Destination *SnapmirrorDestination
+
+	// The latest snapshot that SnapMirror transferred to the destination volume.
+	ExportedSnapshot *SnapmirrorExportedSnapshot
+
+	// The globally unique ID of the file system that the destination volume is on,
+	// assigned by Amazon FSx.
+	FileSystemId *string
+
+	// Indicates whether ONTAP reports the SnapMirror relationship as healthy.
+	Healthy *bool
+
+	// The time, in minutes, since ONTAP created the latest snapshot that SnapMirror
+	// transferred to the destination volume.
+	LagTimeInMinutes *int64
+
+	// The lifecycle status of the SnapMirror relationship can be one of the following:
+	//
+	//   - CREATED – The SnapMirror relationship is fully available for use.
+	//
+	//   - CREATING – Amazon FSx is creating the SnapMirror relationship.
+	//
+	//   - DELETING – Amazon FSx is deleting the SnapMirror relationship.
+	//
+	//   - FAILED – Amazon FSx was unable to create the SnapMirror relationship.
+	Lifecycle SnapmirrorRelationshipLifecycle
+
+	// The reason why the SnapMirror relationship lifecycle status changed.
+	LifecycleTransitionReason *LifecycleTransitionReason
+
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
+	// Amazon Web Services resources. We require an ARN when you need to specify a
+	// resource unambiguously across all of Amazon Web Services. For more information,
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	ResourceARN *string
+
+	// The SnapMirror policy that the SnapMirror relationship uses.
+	SnapmirrorPolicy *SnapmirrorRelationshipPolicy
+
+	// The system-generated, unique ID of the SnapMirror relationship.
+	SnapmirrorRelationshipId *string
+
+	// The source endpoint of the SnapMirror relationship.
+	Source *SnapmirrorSource
+
+	// The state of the SnapMirror relationship in ONTAP can be one of the following:
+	//
+	//   - UNINITIALIZED – SnapMirror hasn't transferred the baseline copy of the
+	//   source volume to the destination volume.
+	//
+	//   - TRANSFERRING – SnapMirror is transferring data to the destination volume.
+	//
+	//   - SNAPMIRRORED – SnapMirror transferred the baseline copy, and the destination
+	//   volume receives updates from the source volume.
+	//
+	//   - PAUSED – SnapMirror transfers for the relationship are paused.
+	//
+	//   - BROKEN_OFF – The relationship is broken off, and the destination volume is
+	//   writable. SnapMirror doesn't transfer data to the destination volume.
+	State SnapmirrorRelationshipState
+
+	// A list of Tag values, with a maximum of 50 elements.
+	Tags []Tag
+
+	// The maximum bandwidth, in kilobytes per second (KBps), that SnapMirror uses to
+	// transfer data for the relationship. A value of 0 means that the bandwidth is
+	// unlimited. This value overrides the throttle of the SnapMirror policy.
+	ThrottleInKbps *int64
+
+	// The name of the ONTAP schedule that determines when SnapMirror transfers data
+	// for the relationship. This schedule overrides the transfer schedule of the
+	// SnapMirror policy.
+	TransferSchedule *string
+
+	// The latest SnapMirror transfer for the relationship. If a transfer is in
+	// progress, this is the in-progress transfer. Otherwise, it's the most recently
+	// completed transfer.
+	TransferState *SnapmirrorTransferState
+
+	// The SnapMirror relationship's universally unique identifier (UUID).
+	UUID *string
+
+	// The reason that ONTAP reports for why the SnapMirror relationship is unhealthy,
+	// if Healthy is false .
+	UnhealthyReason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapmirrorRelationship) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapmirrorRelationship)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapmirrorRelationship) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteStruct(schemas.SnapmirrorRelationship_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportedSnapshot != nil {
+		s.WriteStruct(schemas.SnapmirrorRelationship_ExportedSnapshot)
+		v.ExportedSnapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.SnapmirrorRelationship_FileSystemId, *v.FileSystemId)
+	}
+	if v.Healthy != nil {
+		s.WriteBool(schemas.SnapmirrorRelationship_Healthy, *v.Healthy)
+	}
+	if v.LagTimeInMinutes != nil {
+		s.WriteInt64(schemas.SnapmirrorRelationship_LagTimeInMinutes, *v.LagTimeInMinutes)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.SnapmirrorRelationship_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LifecycleTransitionReason != nil {
+		s.WriteStruct(schemas.SnapmirrorRelationship_LifecycleTransitionReason)
+		v.LifecycleTransitionReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.SnapmirrorRelationship_ResourceARN, *v.ResourceARN)
+	}
+	if v.SnapmirrorPolicy != nil {
+		s.WriteStruct(schemas.SnapmirrorRelationship_SnapmirrorPolicy)
+		v.SnapmirrorPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapmirrorRelationshipId != nil {
+		s.WriteString(schemas.SnapmirrorRelationship_SnapmirrorRelationshipId, *v.SnapmirrorRelationshipId)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.SnapmirrorRelationship_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.SnapmirrorRelationship_State, string(v.State))
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.SnapmirrorRelationship_Tags, v.Tags)
+	}
+	if v.ThrottleInKbps != nil {
+		s.WriteInt64(schemas.SnapmirrorRelationship_ThrottleInKbps, *v.ThrottleInKbps)
+	}
+	if v.TransferSchedule != nil {
+		s.WriteString(schemas.SnapmirrorRelationship_TransferSchedule, *v.TransferSchedule)
+	}
+	if v.TransferState != nil {
+		s.WriteStruct(schemas.SnapmirrorRelationship_TransferState)
+		v.TransferState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UUID != nil {
+		s.WriteString(schemas.SnapmirrorRelationship_UUID, *v.UUID)
+	}
+	if v.UnhealthyReason != nil {
+		s.WriteString(schemas.SnapmirrorRelationship_UnhealthyReason, *v.UnhealthyReason)
+	}
+}
+func (v *SnapmirrorRelationship) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapmirrorRelationship, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapmirrorRelationship_Destination:
+			v.Destination = &SnapmirrorDestination{}
+			return v.Destination.Deserialize(d)
+		case schemas.SnapmirrorRelationship_ExportedSnapshot:
+			v.ExportedSnapshot = &SnapmirrorExportedSnapshot{}
+			return v.ExportedSnapshot.Deserialize(d)
+		case schemas.SnapmirrorRelationship_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.SnapmirrorRelationship_FileSystemId, v.FileSystemId)
+		case schemas.SnapmirrorRelationship_Healthy:
+			v.Healthy = new(bool)
+			return d.ReadBool(schemas.SnapmirrorRelationship_Healthy, v.Healthy)
+		case schemas.SnapmirrorRelationship_LagTimeInMinutes:
+			v.LagTimeInMinutes = new(int64)
+			return d.ReadInt64(schemas.SnapmirrorRelationship_LagTimeInMinutes, v.LagTimeInMinutes)
+		case schemas.SnapmirrorRelationship_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.SnapmirrorRelationship_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = SnapmirrorRelationshipLifecycle(ev)
+			return nil
+		case schemas.SnapmirrorRelationship_LifecycleTransitionReason:
+			v.LifecycleTransitionReason = &LifecycleTransitionReason{}
+			return v.LifecycleTransitionReason.Deserialize(d)
+		case schemas.SnapmirrorRelationship_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.SnapmirrorRelationship_ResourceARN, v.ResourceARN)
+		case schemas.SnapmirrorRelationship_SnapmirrorPolicy:
+			v.SnapmirrorPolicy = &SnapmirrorRelationshipPolicy{}
+			return v.SnapmirrorPolicy.Deserialize(d)
+		case schemas.SnapmirrorRelationship_SnapmirrorRelationshipId:
+			v.SnapmirrorRelationshipId = new(string)
+			return d.ReadString(schemas.SnapmirrorRelationship_SnapmirrorRelationshipId, v.SnapmirrorRelationshipId)
+		case schemas.SnapmirrorRelationship_Source:
+			v.Source = &SnapmirrorSource{}
+			return v.Source.Deserialize(d)
+		case schemas.SnapmirrorRelationship_State:
+			var ev string
+			if err := d.ReadString(schemas.SnapmirrorRelationship_State, &ev); err != nil {
+				return err
+			}
+			v.State = SnapmirrorRelationshipState(ev)
+			return nil
+		case schemas.SnapmirrorRelationship_Tags:
+			return deserializeTags(d, schemas.SnapmirrorRelationship_Tags, &v.Tags)
+		case schemas.SnapmirrorRelationship_ThrottleInKbps:
+			v.ThrottleInKbps = new(int64)
+			return d.ReadInt64(schemas.SnapmirrorRelationship_ThrottleInKbps, v.ThrottleInKbps)
+		case schemas.SnapmirrorRelationship_TransferSchedule:
+			v.TransferSchedule = new(string)
+			return d.ReadString(schemas.SnapmirrorRelationship_TransferSchedule, v.TransferSchedule)
+		case schemas.SnapmirrorRelationship_TransferState:
+			v.TransferState = &SnapmirrorTransferState{}
+			return v.TransferState.Deserialize(d)
+		case schemas.SnapmirrorRelationship_UUID:
+			v.UUID = new(string)
+			return d.ReadString(schemas.SnapmirrorRelationship_UUID, v.UUID)
+		case schemas.SnapmirrorRelationship_UnhealthyReason:
+			v.UnhealthyReason = new(string)
+			return d.ReadString(schemas.SnapmirrorRelationship_UnhealthyReason, v.UnhealthyReason)
+		}
+		return nil
+	})
+}
+
+// A filter used to restrict the results of describe calls for Amazon FSx for
+// NetApp ONTAP SnapMirror relationships.
+type SnapmirrorRelationshipFilter struct {
+
+	// The name for this filter.
+	Name SnapmirrorRelationshipFilterName
+
+	// The values of the filter. These are all the values for any of the applied
+	// filters.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapmirrorRelationshipFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapmirrorRelationshipFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapmirrorRelationshipFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.SnapmirrorRelationshipFilter_Name, string(v.Name))
+	}
+	if v.Values != nil {
+		serializeSnapmirrorRelationshipFilterValues(s, schemas.SnapmirrorRelationshipFilter_Values, v.Values)
+	}
+}
+func (v *SnapmirrorRelationshipFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapmirrorRelationshipFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapmirrorRelationshipFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.SnapmirrorRelationshipFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = SnapmirrorRelationshipFilterName(ev)
+			return nil
+		case schemas.SnapmirrorRelationshipFilter_Values:
+			return deserializeSnapmirrorRelationshipFilterValues(d, schemas.SnapmirrorRelationshipFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// Describes the SnapMirror policy that an Amazon FSx for NetApp ONTAP SnapMirror
+// relationship uses.
+type SnapmirrorRelationshipPolicy struct {
+
+	// The ID of the SnapMirror policy.
+	PolicyId *string
+
+	// The name of the SnapMirror policy in ONTAP.
+	PolicyName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapmirrorRelationshipPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapmirrorRelationshipPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapmirrorRelationshipPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyId != nil {
+		s.WriteString(schemas.SnapmirrorRelationshipPolicy_PolicyId, *v.PolicyId)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.SnapmirrorRelationshipPolicy_PolicyName, *v.PolicyName)
+	}
+}
+func (v *SnapmirrorRelationshipPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapmirrorRelationshipPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapmirrorRelationshipPolicy_PolicyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.SnapmirrorRelationshipPolicy_PolicyId, v.PolicyId)
+		case schemas.SnapmirrorRelationshipPolicy_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.SnapmirrorRelationshipPolicy_PolicyName, v.PolicyName)
+		}
+		return nil
+	})
+}
+
+// Describes the source endpoint of an Amazon FSx for NetApp ONTAP SnapMirror
+// relationship. The source volume can be on an Amazon FSx for NetApp ONTAP file
+// system or on another ONTAP cluster.
+type SnapmirrorSource struct {
+
+	// The path of the source volume, in the format svm_name:volume_name .
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapmirrorSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapmirrorSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapmirrorSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.SnapmirrorSource_Path, *v.Path)
+	}
+}
+func (v *SnapmirrorSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapmirrorSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapmirrorSource_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.SnapmirrorSource_Path, v.Path)
+		}
+		return nil
+	})
+}
+
+// Describes the latest transfer of an Amazon FSx for NetApp ONTAP SnapMirror
+// relationship.
+type SnapmirrorTransferState struct {
+
+	// The number of bytes that the transfer transferred.
+	BytesTransferred *int64
+
+	// The duration of the transfer, in ISO 8601 duration format.
+	Duration *string
+
+	// The time that the transfer ended.
+	EndTime *time.Time
+
+	// The state of the transfer that ONTAP reports.
+	State *string
+
+	// The type of the transfer that ONTAP reports.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapmirrorTransferState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapmirrorTransferState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapmirrorTransferState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BytesTransferred != nil {
+		s.WriteInt64(schemas.SnapmirrorTransferState_BytesTransferred, *v.BytesTransferred)
+	}
+	if v.Duration != nil {
+		s.WriteString(schemas.SnapmirrorTransferState_Duration, *v.Duration)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.SnapmirrorTransferState_EndTime, *v.EndTime)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.SnapmirrorTransferState_State, *v.State)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.SnapmirrorTransferState_Type, *v.Type)
+	}
+}
+func (v *SnapmirrorTransferState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapmirrorTransferState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapmirrorTransferState_BytesTransferred:
+			v.BytesTransferred = new(int64)
+			return d.ReadInt64(schemas.SnapmirrorTransferState_BytesTransferred, v.BytesTransferred)
+		case schemas.SnapmirrorTransferState_Duration:
+			v.Duration = new(string)
+			return d.ReadString(schemas.SnapmirrorTransferState_Duration, v.Duration)
+		case schemas.SnapmirrorTransferState_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.SnapmirrorTransferState_EndTime, v.EndTime)
+		case schemas.SnapmirrorTransferState_State:
+			v.State = new(string)
+			return d.ReadString(schemas.SnapmirrorTransferState_State, v.State)
+		case schemas.SnapmirrorTransferState_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.SnapmirrorTransferState_Type, v.Type)
+		}
+		return nil
+	})
+}
+
+// A snapshot of an Amazon FSx for OpenZFS or Amazon FSx for NetApp ONTAP volume.
 type Snapshot struct {
 
 	// A list of administrative actions for the file system that are in process or
@@ -8990,13 +10476,18 @@ type Snapshot struct {
 	//   - DELETING - Amazon FSx is deleting the snapshot.
 	//
 	//   - AVAILABLE - The snapshot is fully available.
+	//
+	//   - FAILED - Amazon FSx was unable to create the snapshot.
 	Lifecycle SnapshotLifecycle
 
-	// Describes why a resource lifecycle state changed.
+	// The reason why the snapshot lifecycle status changed.
 	LifecycleTransitionReason *LifecycleTransitionReason
 
 	// The name of the snapshot.
 	Name *string
+
+	// The configuration of an Amazon FSx for NetApp ONTAP snapshot.
+	OntapConfiguration *OntapSnapshotConfiguration
 
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
@@ -9008,6 +10499,9 @@ type Snapshot struct {
 
 	// The ID of the snapshot.
 	SnapshotId *string
+
+	// The type of the snapshot.
+	SnapshotType SnapshotType
 
 	// A list of Tag values, with a maximum of 50 elements.
 	Tags []Tag
@@ -9042,11 +10536,19 @@ func (v *Snapshot) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Snapshot_Name, *v.Name)
 	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.Snapshot_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ResourceARN != nil {
 		s.WriteString(schemas.Snapshot_ResourceARN, *v.ResourceARN)
 	}
 	if v.SnapshotId != nil {
 		s.WriteString(schemas.Snapshot_SnapshotId, *v.SnapshotId)
+	}
+	if v.SnapshotType != "" {
+		s.WriteString(schemas.Snapshot_SnapshotType, string(v.SnapshotType))
 	}
 	if v.Tags != nil {
 		serializeTags(s, schemas.Snapshot_Tags, v.Tags)
@@ -9076,12 +10578,22 @@ func (v *Snapshot) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Snapshot_Name:
 			v.Name = new(string)
 			return d.ReadString(schemas.Snapshot_Name, v.Name)
+		case schemas.Snapshot_OntapConfiguration:
+			v.OntapConfiguration = &OntapSnapshotConfiguration{}
+			return v.OntapConfiguration.Deserialize(d)
 		case schemas.Snapshot_ResourceARN:
 			v.ResourceARN = new(string)
 			return d.ReadString(schemas.Snapshot_ResourceARN, v.ResourceARN)
 		case schemas.Snapshot_SnapshotId:
 			v.SnapshotId = new(string)
 			return d.ReadString(schemas.Snapshot_SnapshotId, v.SnapshotId)
+		case schemas.Snapshot_SnapshotType:
+			var ev string
+			if err := d.ReadString(schemas.Snapshot_SnapshotType, &ev); err != nil {
+				return err
+			}
+			v.SnapshotType = SnapshotType(ev)
+			return nil
 		case schemas.Snapshot_Tags:
 			return deserializeTags(d, schemas.Snapshot_Tags, &v.Tags)
 		case schemas.Snapshot_VolumeId:
@@ -9132,6 +10644,332 @@ func (v *SnapshotFilter) Deserialize(d smithy.ShapeDeserializer) error {
 			return nil
 		case schemas.SnapshotFilter_Values:
 			return deserializeSnapshotFilterValues(d, schemas.SnapshotFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// Describes an Amazon FSx for NetApp ONTAP snapshot policy.
+type SnapshotPolicy struct {
+
+	// Specifies whether the snapshot policy is enabled. This value defaults to true .
+	Enabled *bool
+
+	// The globally unique ID of the file system, assigned by Amazon FSx.
+	FileSystemId *string
+
+	// The lifecycle status of the snapshot policy can be one of the following:
+	//
+	//   - CREATED – The snapshot policy is fully available for use.
+	//
+	//   - CREATING – Amazon FSx is creating the snapshot policy.
+	//
+	//   - DELETING – Amazon FSx is deleting the snapshot policy.
+	//
+	//   - FAILED – Amazon FSx was unable to create the snapshot policy.
+	Lifecycle SnapshotPolicyLifecycle
+
+	// The reason why the snapshot policy lifecycle status changed.
+	LifecycleTransitionReason *LifecycleTransitionReason
+
+	// The name of the snapshot policy.
+	Name *string
+
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
+	// Amazon Web Services resources. We require an ARN when you need to specify a
+	// resource unambiguously across all of Amazon Web Services. For more information,
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	ResourceARN *string
+
+	// The schedules on which ONTAP creates snapshots for the snapshot policy.
+	Schedules []SnapshotPolicySchedule
+
+	// The scope of the snapshot policy can be one of the following:
+	//
+	//   - FILESYSTEM – The snapshot policy was created on the file system.
+	//
+	//   - SVM – The snapshot policy was created on an SVM.
+	Scope SnapshotPolicyScope
+
+	// The system-generated, unique ID of the snapshot policy.
+	SnapshotPolicyId *string
+
+	// The ID of the snapshot policy's storage virtual machine, if you created the
+	// snapshot policy on a storage virtual machine.
+	StorageVirtualMachineId *string
+
+	// A list of Tag values, with a maximum of 50 elements.
+	Tags []Tag
+
+	// The snapshot policy's universally unique identifier (UUID).
+	UUID *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SnapshotPolicy_Enabled, *v.Enabled)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.SnapshotPolicy_FileSystemId, *v.FileSystemId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.SnapshotPolicy_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LifecycleTransitionReason != nil {
+		s.WriteStruct(schemas.SnapshotPolicy_LifecycleTransitionReason)
+		v.LifecycleTransitionReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SnapshotPolicy_Name, *v.Name)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.SnapshotPolicy_ResourceARN, *v.ResourceARN)
+	}
+	if v.Schedules != nil {
+		serializeSnapshotPolicyScheduleList(s, schemas.SnapshotPolicy_Schedules, v.Schedules)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.SnapshotPolicy_Scope, string(v.Scope))
+	}
+	if v.SnapshotPolicyId != nil {
+		s.WriteString(schemas.SnapshotPolicy_SnapshotPolicyId, *v.SnapshotPolicyId)
+	}
+	if v.StorageVirtualMachineId != nil {
+		s.WriteString(schemas.SnapshotPolicy_StorageVirtualMachineId, *v.StorageVirtualMachineId)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.SnapshotPolicy_Tags, v.Tags)
+	}
+	if v.UUID != nil {
+		s.WriteString(schemas.SnapshotPolicy_UUID, *v.UUID)
+	}
+}
+func (v *SnapshotPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotPolicy_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SnapshotPolicy_Enabled, v.Enabled)
+		case schemas.SnapshotPolicy_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.SnapshotPolicy_FileSystemId, v.FileSystemId)
+		case schemas.SnapshotPolicy_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotPolicy_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = SnapshotPolicyLifecycle(ev)
+			return nil
+		case schemas.SnapshotPolicy_LifecycleTransitionReason:
+			v.LifecycleTransitionReason = &LifecycleTransitionReason{}
+			return v.LifecycleTransitionReason.Deserialize(d)
+		case schemas.SnapshotPolicy_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SnapshotPolicy_Name, v.Name)
+		case schemas.SnapshotPolicy_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.SnapshotPolicy_ResourceARN, v.ResourceARN)
+		case schemas.SnapshotPolicy_Schedules:
+			return deserializeSnapshotPolicyScheduleList(d, schemas.SnapshotPolicy_Schedules, &v.Schedules)
+		case schemas.SnapshotPolicy_Scope:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotPolicy_Scope, &ev); err != nil {
+				return err
+			}
+			v.Scope = SnapshotPolicyScope(ev)
+			return nil
+		case schemas.SnapshotPolicy_SnapshotPolicyId:
+			v.SnapshotPolicyId = new(string)
+			return d.ReadString(schemas.SnapshotPolicy_SnapshotPolicyId, v.SnapshotPolicyId)
+		case schemas.SnapshotPolicy_StorageVirtualMachineId:
+			v.StorageVirtualMachineId = new(string)
+			return d.ReadString(schemas.SnapshotPolicy_StorageVirtualMachineId, v.StorageVirtualMachineId)
+		case schemas.SnapshotPolicy_Tags:
+			return deserializeTags(d, schemas.SnapshotPolicy_Tags, &v.Tags)
+		case schemas.SnapshotPolicy_UUID:
+			v.UUID = new(string)
+			return d.ReadString(schemas.SnapshotPolicy_UUID, v.UUID)
+		}
+		return nil
+	})
+}
+
+// A filter used to restrict the results of describe calls for Amazon FSx for
+// NetApp ONTAP snapshot policies.
+type SnapshotPolicyFilter struct {
+
+	// The name for this filter.
+	Name SnapshotPolicyFilterName
+
+	// The values of the filter. These are all the values for any of the applied
+	// filters.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotPolicyFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotPolicyFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotPolicyFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.SnapshotPolicyFilter_Name, string(v.Name))
+	}
+	if v.Values != nil {
+		serializeSnapshotPolicyFilterValues(s, schemas.SnapshotPolicyFilter_Values, v.Values)
+	}
+}
+func (v *SnapshotPolicyFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotPolicyFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotPolicyFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotPolicyFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = SnapshotPolicyFilterName(ev)
+			return nil
+		case schemas.SnapshotPolicyFilter_Values:
+			return deserializeSnapshotPolicyFilterValues(d, schemas.SnapshotPolicyFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// The length of time that snapshots created by this schedule are locked. This
+// setting applies only to volumes that have snapshot locking enabled.
+type SnapshotPolicyRetentionPeriod struct {
+
+	// The unit of time for the retention period. If you set it to INFINITE , the
+	// snapshots are retained forever.
+	//
+	// This member is required.
+	Type SnapshotPolicyRetentionPeriodType
+
+	// Defines the amount of time for the retention period. You can't set a value for
+	// INFINITE .
+	Value *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotPolicyRetentionPeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotPolicyRetentionPeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotPolicyRetentionPeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.SnapshotPolicyRetentionPeriod_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteInt32(schemas.SnapshotPolicyRetentionPeriod_Value, *v.Value)
+	}
+}
+func (v *SnapshotPolicyRetentionPeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotPolicyRetentionPeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotPolicyRetentionPeriod_Type:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotPolicyRetentionPeriod_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SnapshotPolicyRetentionPeriodType(ev)
+			return nil
+		case schemas.SnapshotPolicyRetentionPeriod_Value:
+			v.Value = new(int32)
+			return d.ReadInt32(schemas.SnapshotPolicyRetentionPeriod_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// Specifies a schedule for an Amazon FSx for NetApp ONTAP snapshot policy.
+type SnapshotPolicySchedule struct {
+
+	// The number of snapshots to retain for the schedule.
+	//
+	// This member is required.
+	Count *int32
+
+	// The name of the ONTAP schedule that determines when snapshots are created.
+	//
+	// This member is required.
+	Name *string
+
+	// The prefix for the schedule to use when creating snapshots.
+	Prefix *string
+
+	// The length of time that the snapshots that the schedule creates are locked.
+	// This setting applies only to volumes that have snapshot locking enabled.
+	RetentionPeriod *SnapshotPolicyRetentionPeriod
+
+	// The SnapMirror label to assign to the snapshots that the schedule creates.
+	// SnapMirror policies use labels to select which snapshots to replicate to a
+	// destination volume.
+	SnapmirrorLabel *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SnapshotPolicySchedule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotPolicySchedule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotPolicySchedule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.SnapshotPolicySchedule_Count, *v.Count)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SnapshotPolicySchedule_Name, *v.Name)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.SnapshotPolicySchedule_Prefix, *v.Prefix)
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteStruct(schemas.SnapshotPolicySchedule_RetentionPeriod)
+		v.RetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapmirrorLabel != nil {
+		s.WriteString(schemas.SnapshotPolicySchedule_SnapmirrorLabel, *v.SnapmirrorLabel)
+	}
+}
+func (v *SnapshotPolicySchedule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotPolicySchedule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotPolicySchedule_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.SnapshotPolicySchedule_Count, v.Count)
+		case schemas.SnapshotPolicySchedule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SnapshotPolicySchedule_Name, v.Name)
+		case schemas.SnapshotPolicySchedule_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.SnapshotPolicySchedule_Prefix, v.Prefix)
+		case schemas.SnapshotPolicySchedule_RetentionPeriod:
+			v.RetentionPeriod = &SnapshotPolicyRetentionPeriod{}
+			return v.RetentionPeriod.Deserialize(d)
+		case schemas.SnapshotPolicySchedule_SnapmirrorLabel:
+			v.SnapmirrorLabel = new(string)
+			return d.ReadString(schemas.SnapshotPolicySchedule_SnapmirrorLabel, v.SnapmirrorLabel)
 		}
 		return nil
 	})
@@ -9356,6 +11194,233 @@ func (v *StorageVirtualMachineFilter) Deserialize(d smithy.ShapeDeserializer) er
 			return nil
 		case schemas.StorageVirtualMachineFilter_Values:
 			return deserializeStorageVirtualMachineFilterValues(d, schemas.StorageVirtualMachineFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// Describes an Amazon FSx for NetApp ONTAP storage virtual machine (SVM) peer
+// relationship.
+type StorageVirtualMachinePeer struct {
+
+	// The applications that the SVM peer relationship authorizes. The applications
+	// can be one or more of the following:
+	//
+	//   - SNAPMIRROR – SnapMirror replication.
+	//
+	//   - FILE_COPY – File copy.
+	//
+	//   - LUN_COPY – LUN copy.
+	//
+	//   - FLEXCACHE – FlexCache.
+	Applications []StorageVirtualMachinePeerApplication
+
+	// The globally unique ID of the file system, assigned by Amazon FSx.
+	FileSystemId *string
+
+	// The lifecycle status of the SVM peer can be one of the following:
+	//
+	//   - CREATED – The SVM peer is fully available for use.
+	//
+	//   - CREATING – Amazon FSx is creating the SVM peer.
+	//
+	//   - DELETING – Amazon FSx is deleting the SVM peer.
+	//
+	//   - FAILED – Amazon FSx was unable to create the SVM peer.
+	Lifecycle StorageVirtualMachinePeerLifecycle
+
+	// The reason why the SVM peer lifecycle status changed.
+	LifecycleTransitionReason *LifecycleTransitionReason
+
+	// The name of the peer cluster that the peer SVM is on.
+	PeerClusterName *string
+
+	// The name that the local cluster uses to identify the peer SVM.
+	PeerSvmAlias *string
+
+	// The name of the SVM on the peer cluster.
+	PeerSvmName *string
+
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
+	// Amazon Web Services resources. We require an ARN when you need to specify a
+	// resource unambiguously across all of Amazon Web Services. For more information,
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	ResourceARN *string
+
+	// The state of the SVM peer relationship in ONTAP can be one of the following:
+	//
+	//   - PEERED – The SVM peer relationship is established.
+	//
+	//   - INITIATED – The local cluster sent a peering request to the peer SVM.
+	//
+	//   - PENDING – A peering request from the peer SVM is waiting for acceptance.
+	//
+	//   - INITIALIZING – ONTAP is setting up the SVM peer relationship.
+	//
+	//   - SUSPENDED – The SVM peer relationship is suspended.
+	//
+	//   - REJECTED – The peering request was rejected.
+	State StorageVirtualMachinePeerState
+
+	// The ID of the SVM on the file system that the SVM peer relationship belongs to.
+	StorageVirtualMachineId *string
+
+	// The system-generated, unique ID of the SVM peer.
+	StorageVirtualMachinePeerId *string
+
+	// A list of Tag values, with a maximum of 50 elements.
+	Tags []Tag
+
+	// The SVM peer's universally unique identifier (UUID).
+	UUID *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *StorageVirtualMachinePeer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorageVirtualMachinePeer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorageVirtualMachinePeer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Applications != nil {
+		serializeStorageVirtualMachinePeerApplications(s, schemas.StorageVirtualMachinePeer_Applications, v.Applications)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.StorageVirtualMachinePeer_FileSystemId, *v.FileSystemId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.StorageVirtualMachinePeer_Lifecycle, string(v.Lifecycle))
+	}
+	if v.LifecycleTransitionReason != nil {
+		s.WriteStruct(schemas.StorageVirtualMachinePeer_LifecycleTransitionReason)
+		v.LifecycleTransitionReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PeerClusterName != nil {
+		s.WriteString(schemas.StorageVirtualMachinePeer_PeerClusterName, *v.PeerClusterName)
+	}
+	if v.PeerSvmAlias != nil {
+		s.WriteString(schemas.StorageVirtualMachinePeer_PeerSvmAlias, *v.PeerSvmAlias)
+	}
+	if v.PeerSvmName != nil {
+		s.WriteString(schemas.StorageVirtualMachinePeer_PeerSvmName, *v.PeerSvmName)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.StorageVirtualMachinePeer_ResourceARN, *v.ResourceARN)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StorageVirtualMachinePeer_State, string(v.State))
+	}
+	if v.StorageVirtualMachineId != nil {
+		s.WriteString(schemas.StorageVirtualMachinePeer_StorageVirtualMachineId, *v.StorageVirtualMachineId)
+	}
+	if v.StorageVirtualMachinePeerId != nil {
+		s.WriteString(schemas.StorageVirtualMachinePeer_StorageVirtualMachinePeerId, *v.StorageVirtualMachinePeerId)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.StorageVirtualMachinePeer_Tags, v.Tags)
+	}
+	if v.UUID != nil {
+		s.WriteString(schemas.StorageVirtualMachinePeer_UUID, *v.UUID)
+	}
+}
+func (v *StorageVirtualMachinePeer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorageVirtualMachinePeer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorageVirtualMachinePeer_Applications:
+			return deserializeStorageVirtualMachinePeerApplications(d, schemas.StorageVirtualMachinePeer_Applications, &v.Applications)
+		case schemas.StorageVirtualMachinePeer_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.StorageVirtualMachinePeer_FileSystemId, v.FileSystemId)
+		case schemas.StorageVirtualMachinePeer_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.StorageVirtualMachinePeer_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = StorageVirtualMachinePeerLifecycle(ev)
+			return nil
+		case schemas.StorageVirtualMachinePeer_LifecycleTransitionReason:
+			v.LifecycleTransitionReason = &LifecycleTransitionReason{}
+			return v.LifecycleTransitionReason.Deserialize(d)
+		case schemas.StorageVirtualMachinePeer_PeerClusterName:
+			v.PeerClusterName = new(string)
+			return d.ReadString(schemas.StorageVirtualMachinePeer_PeerClusterName, v.PeerClusterName)
+		case schemas.StorageVirtualMachinePeer_PeerSvmAlias:
+			v.PeerSvmAlias = new(string)
+			return d.ReadString(schemas.StorageVirtualMachinePeer_PeerSvmAlias, v.PeerSvmAlias)
+		case schemas.StorageVirtualMachinePeer_PeerSvmName:
+			v.PeerSvmName = new(string)
+			return d.ReadString(schemas.StorageVirtualMachinePeer_PeerSvmName, v.PeerSvmName)
+		case schemas.StorageVirtualMachinePeer_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.StorageVirtualMachinePeer_ResourceARN, v.ResourceARN)
+		case schemas.StorageVirtualMachinePeer_State:
+			var ev string
+			if err := d.ReadString(schemas.StorageVirtualMachinePeer_State, &ev); err != nil {
+				return err
+			}
+			v.State = StorageVirtualMachinePeerState(ev)
+			return nil
+		case schemas.StorageVirtualMachinePeer_StorageVirtualMachineId:
+			v.StorageVirtualMachineId = new(string)
+			return d.ReadString(schemas.StorageVirtualMachinePeer_StorageVirtualMachineId, v.StorageVirtualMachineId)
+		case schemas.StorageVirtualMachinePeer_StorageVirtualMachinePeerId:
+			v.StorageVirtualMachinePeerId = new(string)
+			return d.ReadString(schemas.StorageVirtualMachinePeer_StorageVirtualMachinePeerId, v.StorageVirtualMachinePeerId)
+		case schemas.StorageVirtualMachinePeer_Tags:
+			return deserializeTags(d, schemas.StorageVirtualMachinePeer_Tags, &v.Tags)
+		case schemas.StorageVirtualMachinePeer_UUID:
+			v.UUID = new(string)
+			return d.ReadString(schemas.StorageVirtualMachinePeer_UUID, v.UUID)
+		}
+		return nil
+	})
+}
+
+// A filter used to restrict the results of describe calls for Amazon FSx for
+// NetApp ONTAP storage virtual machine (SVM) peers.
+type StorageVirtualMachinePeerFilter struct {
+
+	// The name for this filter.
+	Name StorageVirtualMachinePeerFilterName
+
+	// The values of the filter. These are all the values for any of the applied
+	// filters.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *StorageVirtualMachinePeerFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorageVirtualMachinePeerFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorageVirtualMachinePeerFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.StorageVirtualMachinePeerFilter_Name, string(v.Name))
+	}
+	if v.Values != nil {
+		serializeStorageVirtualMachinePeerFilterValues(s, schemas.StorageVirtualMachinePeerFilter_Values, v.Values)
+	}
+}
+func (v *StorageVirtualMachinePeerFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorageVirtualMachinePeerFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorageVirtualMachinePeerFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.StorageVirtualMachinePeerFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = StorageVirtualMachinePeerFilterName(ev)
+			return nil
+		case schemas.StorageVirtualMachinePeerFilter_Values:
+			return deserializeStorageVirtualMachinePeerFilterValues(d, schemas.StorageVirtualMachinePeerFilter_Values, &v.Values)
 		}
 		return nil
 	})
@@ -9651,6 +11716,61 @@ func (v *TieringPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Specifies changes to the clone configuration of an FSx for ONTAP volume.
+type UpdateCloneConfiguration struct {
+
+	// Set to START to split the clone from its parent volume. Splitting copies the
+	// data that the clone shares with the parent volume, so that the clone becomes an
+	// independent volume that no longer depends on the parent. After the split, the
+	// volume uses storage for all of its data.
+	//
+	// When you split a clone, keep the following in mind:
+	//
+	//   - SplitAction must be the only property that you change in the UpdateVolume
+	//   request.
+	//
+	//   - You can't split a data protection ( DP ) clone.
+	//
+	//   - The split fails if the clone has locked snapshots, such as snapshots that a
+	//   SnapMirror relationship uses or that a retention period protects, or if a backup
+	//   of the clone is in progress. To allow the split, Amazon FSx deletes the
+	//   snapshots that it created for backups of the clone, so the next backup transfers
+	//   more data. Amazon FSx doesn't delete snapshots that you created.
+	//
+	// The split runs in the background. To monitor its progress, use the
+	// VOLUME_CLONE_SPLIT administrative action in the volume's AdministrativeActions .
+	// When the split completes, the volume no longer has a CloneConfiguration .
+	SplitAction CloneSplitAction
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateCloneConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCloneConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCloneConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SplitAction != "" {
+		s.WriteString(schemas.UpdateCloneConfiguration_SplitAction, string(v.SplitAction))
+	}
+}
+func (v *UpdateCloneConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCloneConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCloneConfiguration_SplitAction:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCloneConfiguration_SplitAction, &ev); err != nil {
+				return err
+			}
+			v.SplitAction = CloneSplitAction(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration update for an Amazon File Cache resource.
 type UpdateFileCacheLustreConfiguration struct {
 
@@ -9777,10 +11897,10 @@ type UpdateFileSystemLustreConfiguration struct {
 	// clients that try to access your file system as a root user.
 	RootSquashConfiguration *LustreRootSquashConfiguration
 
-	// The throughput of an Amazon FSx for Lustre file system using an
-	// Intelligent-Tiering storage class, measured in megabytes per second (MBps). You
-	// can only increase your file system's throughput. Valid values are 4000 MBps or
-	// multiples of 4000 MBps.
+	// The throughput of an FSx for Lustre file system using the Intelligent-Tiering
+	// storage class, measured in megabytes per second (MBps). You can only increase
+	// your file system's throughput capacity. Valid values are 1000 MBps, 2000 MBps,
+	// and multiples of 4000 MBps, up to a maximum of 2000000 MBps.
 	ThroughputCapacity *int32
 
 	// (Optional) The preferred start time to perform weekly maintenance, formatted
@@ -9904,29 +12024,31 @@ type UpdateFileSystemLustreMetadataConfiguration struct {
 	//   - For SSD file systems, valid values are 1500 , 3000 , 6000 , 12000 , and
 	//   multiples of 12000 up to a maximum of 192000 .
 	//
-	//   - For Intelligent-Tiering file systems, valid values are 6000 and 12000 .
+	//   - For Intelligent-Tiering file systems, valid values are 1500 , 3000 , 6000 ,
+	//   12000 , and multiples of 12000 up to a maximum of 192000 .
 	//
 	// The value you provide must be greater than or equal to the current number of
-	// Metadata IOPS provisioned for the file system.
+	// Metadata IOPS provisioned for the file system. You can't provision fewer
+	// Metadata IOPS than AUTOMATIC mode provisions for your file system.
 	Iops *int32
 
 	// The metadata configuration mode for provisioning Metadata IOPS for an FSx for
 	// Lustre file system using a PERSISTENT_2 deployment type.
 	//
-	//   - To increase the Metadata IOPS or to switch an SSD file system from
-	//   AUTOMATIC, specify USER_PROVISIONED as the value for this parameter. Then use
-	//   the Iops parameter to provide a Metadata IOPS value that is greater than or
-	//   equal to the current number of Metadata IOPS provisioned for the file system.
+	//   - To increase the Metadata IOPS or to switch from AUTOMATIC mode, specify
+	//   USER_PROVISIONED as the value for this parameter. Then use the Iops parameter
+	//   to provide a Metadata IOPS value that is greater than or equal to the current
+	//   number of Metadata IOPS provisioned for the file system.
 	//
-	//   - To switch from USER_PROVISIONED mode on an SSD file system, specify
-	//   AUTOMATIC as the value for this parameter, but do not input a value for Iops.
+	//   - To switch from USER_PROVISIONED mode, specify AUTOMATIC as the value for
+	//   this parameter, but do not input a value for Iops.
 	//
-	//   - If you request to switch from USER_PROVISIONED to AUTOMATIC mode and the
-	//   current Metadata IOPS value is greater than the automated default, FSx for
-	//   Lustre rejects the request because downscaling Metadata IOPS is not supported.
-	//
-	//   - AUTOMATIC mode is not supported on Intelligent-Tiering file systems. For
-	//   Intelligent-Tiering file systems, use USER_PROVISIONED mode.
+	//   - FSx for Lustre rejects a switch to AUTOMATIC mode when your current
+	//   Metadata IOPS value is greater than what AUTOMATIC mode provisions, because
+	//   decreasing Metadata IOPS is not supported. To unblock the switch, increase
+	//   storage capacity for SSD file systems, or throughput capacity for
+	//   Intelligent-Tiering file systems, until AUTOMATIC mode provisions at least your
+	//   current Metadata IOPS.
 	Mode MetadataConfigurationMode
 
 	noSmithyDocumentSerde
@@ -9972,7 +12094,8 @@ type UpdateFileSystemOntapConfiguration struct {
 	AddRouteTableIds []string
 
 	// The number of days to retain automatic backups. Setting this property to 0
-	// disables automatic backups. You can retain automatic backups for a maximum of 90
+	// disables automatic backups and deletes all existing automatic backups for the
+	// file system's volumes. You can retain automatic backups for a maximum of 90
 	// days. The default is 30 .
 	AutomaticBackupRetentionDays *int32
 
@@ -10007,10 +12130,10 @@ type UpdateFileSystemOntapConfiguration struct {
 	FsxAdminPassword *string
 
 	// Use to update the number of high-availability (HA) pairs for a
-	// second-generation single-AZ file system. If you increase the number of HA pairs
-	// for your file system, you must specify proportional increases for
-	// StorageCapacity , Iops , and ThroughputCapacity . For more information, see [High-availability (HA) pairs] in
-	// the FSx for ONTAP user guide. Block storage protocol support (iSCSI and NVMe
+	// second-generation or third-generation single-AZ file system. If you increase the
+	// number of HA pairs for your file system, you must specify proportional increases
+	// for StorageCapacity , Iops , and ThroughputCapacity . For more information, see [High-availability (HA) pairs]
+	// in the FSx for ONTAP user guide. Block storage protocol support (iSCSI and NVMe
 	// over TCP) is disabled on file systems with more than 6 HA pairs. For more
 	// information, see [Using block storage protocols].
 	//
@@ -10056,14 +12179,20 @@ type UpdateFileSystemOntapConfiguration struct {
 	//
 	//   - For MULTI_AZ_2 , valid values are 384, 768, 1536, 3072, or 6144 MBps.
 	//
+	//   - For SINGLE_AZ_3 , valid values are 1536, 3072, 6144, 12288, or 18432 MBps.
+	//
+	//   - For MULTI_AZ_3 , valid values are 384, 768, 1536, 3072, 6144, 12288, or
+	//   18432 MBps.
+	//
 	// Amazon FSx responds with an HTTP status code 400 (Bad Request) for the
 	// following conditions:
 	//
 	//   - The value of ThroughputCapacity and ThroughputCapacityPerHAPair are not the
 	//   same value for file systems with one HA pair.
 	//
-	//   - The value of deployment type is SINGLE_AZ_2 and ThroughputCapacity /
-	//   ThroughputCapacityPerHAPair is not a valid HA pair (a value between 1 and 12).
+	//   - The value of deployment type is SINGLE_AZ_2 or SINGLE_AZ_3 and
+	//   ThroughputCapacity / ThroughputCapacityPerHAPair is not a valid HA pair (a
+	//   value between 1 and 12).
 	//
 	//   - The value of ThroughputCapacityPerHAPair is not a valid value.
 	ThroughputCapacityPerHAPair *int32
@@ -10452,9 +12581,68 @@ func (v *UpdateFileSystemWindowsConfiguration) Deserialize(d smithy.ShapeDeseria
 	})
 }
 
+// Used to specify changes to the ONTAP configuration for the snapshot you are
+// updating.
+type UpdateOntapSnapshotConfiguration struct {
+
+	// Specifies the date and time when the snapshot expires. You can't delete the
+	// snapshot before this time.
+	ExpiryTime *time.Time
+
+	// Specifies the date and time until which the snapshot is locked. This setting
+	// takes effect only if snapshot locking is enabled on the volume. Snapshot locking
+	// is separate from SnapLock, and enabling SnapLock on a volume doesn't enable
+	// snapshot locking. You can't delete the snapshot before this time.
+	SnaplockExpiryTime *time.Time
+
+	// Specifies the SnapMirror label for the snapshot. SnapMirror policies use labels
+	// to select which snapshots to replicate to a destination volume.
+	SnapmirrorLabel *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdateOntapSnapshotConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOntapSnapshotConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOntapSnapshotConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiryTime != nil {
+		s.WriteTime(schemas.UpdateOntapSnapshotConfiguration_ExpiryTime, *v.ExpiryTime)
+	}
+	if v.SnaplockExpiryTime != nil {
+		s.WriteTime(schemas.UpdateOntapSnapshotConfiguration_SnaplockExpiryTime, *v.SnaplockExpiryTime)
+	}
+	if v.SnapmirrorLabel != nil {
+		s.WriteString(schemas.UpdateOntapSnapshotConfiguration_SnapmirrorLabel, *v.SnapmirrorLabel)
+	}
+}
+func (v *UpdateOntapSnapshotConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOntapSnapshotConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOntapSnapshotConfiguration_ExpiryTime:
+			v.ExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateOntapSnapshotConfiguration_ExpiryTime, v.ExpiryTime)
+		case schemas.UpdateOntapSnapshotConfiguration_SnaplockExpiryTime:
+			v.SnaplockExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateOntapSnapshotConfiguration_SnaplockExpiryTime, v.SnaplockExpiryTime)
+		case schemas.UpdateOntapSnapshotConfiguration_SnapmirrorLabel:
+			v.SnapmirrorLabel = new(string)
+			return d.ReadString(schemas.UpdateOntapSnapshotConfiguration_SnapmirrorLabel, v.SnapmirrorLabel)
+		}
+		return nil
+	})
+}
+
 // Used to specify changes to the ONTAP configuration for the volume you are
 // updating.
 type UpdateOntapVolumeConfiguration struct {
+
+	// Specifies the clone configuration changes to make to the volume. Use this
+	// property to split a clone from its parent volume.
+	CloneConfiguration *UpdateCloneConfiguration
 
 	// A boolean flag indicating whether tags for the volume should be copied to
 	// backups. This value defaults to false. If it's set to true, all tags for the
@@ -10521,6 +12709,11 @@ func (v *UpdateOntapVolumeConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateOntapVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloneConfiguration != nil {
+		s.WriteStruct(schemas.UpdateOntapVolumeConfiguration_CloneConfiguration)
+		v.CloneConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CopyTagsToBackups != nil {
 		s.WriteBool(schemas.UpdateOntapVolumeConfiguration_CopyTagsToBackups, *v.CopyTagsToBackups)
 	}
@@ -10556,6 +12749,9 @@ func (v *UpdateOntapVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializ
 func (v *UpdateOntapVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateOntapVolumeConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UpdateOntapVolumeConfiguration_CloneConfiguration:
+			v.CloneConfiguration = &UpdateCloneConfiguration{}
+			return v.CloneConfiguration.Deserialize(d)
 		case schemas.UpdateOntapVolumeConfiguration_CopyTagsToBackups:
 			v.CopyTagsToBackups = new(bool)
 			return d.ReadBool(schemas.UpdateOntapVolumeConfiguration_CopyTagsToBackups, v.CopyTagsToBackups)

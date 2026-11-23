@@ -2607,7 +2607,8 @@ func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
 		ProjectProfileId: ptr.String("__ProjectProfileId__"),
 		UserParameters: []types.EnvironmentConfigurationUserParameter{
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -2626,7 +2627,8 @@ func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
 				},
 			},
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -2685,7 +2687,8 @@ func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
 		ProjectProfileId: ptr.String("__ProjectProfileId__"),
 		UserParameters: []types.EnvironmentConfigurationUserParameter{
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -2704,7 +2707,8 @@ func TestCheckResponseSnapshot_CreateProject(t *testing.T) {
 				},
 			},
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -4610,6 +4614,13 @@ func TestCheckResponseSnapshot_GetAsset(t *testing.T) {
 				Id:             ptr.String("__Id__"),
 			},
 		},
+		OwnershipTransfer: &types.AssetOwnershipTransfer{
+			Status:          types.AssetOwnershipTransferStatus("IN_PROGRESS"),
+			SourceProjectId: ptr.String("__SourceProjectId__"),
+			TargetProjectId: ptr.String("__TargetProjectId__"),
+			StartedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAsset.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -6456,7 +6467,8 @@ func TestCheckResponseSnapshot_GetProject(t *testing.T) {
 		ProjectProfileId: ptr.String("__ProjectProfileId__"),
 		UserParameters: []types.EnvironmentConfigurationUserParameter{
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -6475,7 +6487,8 @@ func TestCheckResponseSnapshot_GetProject(t *testing.T) {
 				},
 			},
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -12332,6 +12345,40 @@ func TestCheckResponseSnapshot_UpdateAssetFilter(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateAssetOwner(t *testing.T) {
+	want := &UpdateAssetOwnerOutput{
+		Id:       ptr.String("__Id__"),
+		Revision: ptr.String("__Revision__"),
+		OwnershipTransfer: &types.AssetOwnershipTransfer{
+			Status:          types.AssetOwnershipTransferStatus("IN_PROGRESS"),
+			SourceProjectId: ptr.String("__SourceProjectId__"),
+			TargetProjectId: ptr.String("__TargetProjectId__"),
+			StartedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateAssetOwner.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateAssetOwner(context.Background(), &UpdateAssetOwnerInput{
+		DomainIdentifier:        ptr.String("__DomainIdentifier__"),
+		Identifier:              ptr.String("__Identifier__"),
+		TargetProjectIdentifier: ptr.String("__TargetProjectIdentifier__"),
+		ClientToken:             ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateAssetOwner.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateConnection(t *testing.T) {
 	want := &UpdateConnectionOutput{
 		Configurations: []types.Configuration{
@@ -13502,7 +13549,8 @@ func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
 		ProjectProfileId: ptr.String("__ProjectProfileId__"),
 		UserParameters: []types.EnvironmentConfigurationUserParameter{
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -13521,7 +13569,8 @@ func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
 				},
 			},
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -13595,7 +13644,8 @@ func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
 		},
 		UserParameters: []types.EnvironmentConfigurationUserParameter{
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -13614,7 +13664,8 @@ func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
 				},
 			},
 			{
-				EnvironmentId: ptr.String("__EnvironmentId__"),
+				EnvironmentId:          ptr.String("__EnvironmentId__"),
+				EnvironmentBlueprintId: ptr.String("__EnvironmentBlueprintId__"),
 				EnvironmentResolvedAccount: &types.EnvironmentResolvedAccount{
 					AwsAccountId:        ptr.String("__AwsAccountId__"),
 					RegionName:          ptr.String("__RegionName__"),
@@ -13634,6 +13685,7 @@ func TestCheckResponseSnapshot_UpdateProject(t *testing.T) {
 			},
 		},
 		ProjectProfileVersion: ptr.String("__ProjectProfileVersion__"),
+		ProjectProfileAction:  types.ProjectProfileAction("DISASSOCIATE"),
 	})
 	if err != nil {
 		t.Fatal(err)

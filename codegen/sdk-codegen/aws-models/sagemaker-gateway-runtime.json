@@ -1,0 +1,1396 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.sagemakergatewayruntime#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A description of the error. It starts with a prefix such as\n`Global Inference Gateway: ` or `inference gateway: ` that says where the\nerror came from.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The caller is not authorized to invoke this gateway. Invoking requires the\n`sagemaker:InvokeGlobalInferenceGateway` permission, or\n`sagemaker:InvokeGlobalInferenceGatewayWithResponseStream` for the streaming\noperation, on the gateway ARN. A message starting `inference gateway` means\nthe inference gateway serving the model refused the request with a 401 or\n403, for example for its customer identity token. Its status code is in the\nmessage (the response status is 403), and up to 256 bytes of its error\nmessage are quoted.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#BadGatewayException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A description of the error. It starts with a prefix such as\n`Global Inference Gateway: ` or `inference gateway: ` that says where the\nerror came from.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "502 -- The gateway could not get a usable response from the inference\ngateway. The `Message` prefix says why:\n\n* `Global Inference Gateway: could not reach the inference gateway: <reason>`\n  -- the request could not be sent, or the connection closed before a\n  response arrived (for example, the connection failed, or the inference\n  gateway closed it after reading the request).\n* `Global Inference Gateway: timed out waiting for the inference gateway`\n  -- on the buffered operation, the inference gateway stopped sending\n  partway through the response body and the gateway's read timeout expired.\n  (The same text on a GatewayTimeoutException means no response arrived.)\n* Any other `Global Inference Gateway: ` message -- the gateway ended a\n  response before it was complete, for example because it exceeded the\n  10 MiB limit of the buffered operation, the request exceeded its maximum\n  duration, or the inference gateway was taken out of service.\n* `inference gateway: <status> <message>` -- the inference gateway serving\n  the model returned a 502, 500, 503 or another 5xx error. Its status code\n  is in the message (the response status is 502), and up to 256 bytes of its\n  error message are quoted.\n* `inference gateway: response ended unexpectedly` -- the inference\n  gateway's connection failed while it was sending the response.\n\nThe inference gateway names a component in the prefix when it reports one:\n`inference gateway (<component>): `, where the component is `config` (the\ninference gateway's configuration and proxy layer), `scheduler` (its request\nscheduler), `model selector` (its model selector) or `model server` (the\nmodel server).\n\nNot modeled as retryable: a 502 can mean the inference already ran, and the\ngateway may already have tried another inference gateway. Standard SDK retry\nmodes may still retry a 5xx status, which would run (and bill) the inference\nagain; set max attempts to 1 if a repeated inference is unacceptable.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 502
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#CustomerIdentityToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Per-caller customer identity token (a JWT), forwarded unchanged to the\ninference gateway. Redacted from logs, metrics and traces.",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#GatewayId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The ID of a Global Inference Gateway: 1 to 64 lowercase letters and digits.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9]+$"
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#GatewayTimeoutException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A description of the error. It starts with a prefix such as\n`Global Inference Gateway: ` or `inference gateway: ` that says where the\nerror came from.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "504 -- The inference gateway did not respond in time. The `Message` prefix\nsays whose time limit expired:\n\n* `Global Inference Gateway: timed out waiting for the inference gateway`\n  -- the gateway's limit on the wait for the first part of the response.\n* `inference gateway: <status> <message>` -- the inference gateway serving\n  the model returned a 504, or a 408 because it timed out waiting for the\n  request to arrive. Its status code is\n  in the message (the response status is 504), and up to 256 bytes of its\n  error message are quoted.\n\nThe inference gateway names a component in the prefix when it reports one:\n`inference gateway (<component>): `, where the component is `config` (the\ninference gateway's configuration and proxy layer), `scheduler` (its request\nscheduler), `model selector` (its model selector) or `model server` (the\nmodel server).\n\nNot modeled as retryable: a timeout does not prove the inference did not\nrun, and the gateway may already have tried another inference gateway.\nStandard SDK retry modes may still retry a 5xx status, which could run (and\nbill) the inference again; set max attempts to 1 if a repeated inference is\nunacceptable.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 504
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#GlobalInferenceGatewayRuntime": {
+            "type": "service",
+            "version": "2026-10-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#InvokeGlobalInferenceGateway"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#InvokeGlobalInferenceGatewayWithResponseStream"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SageMaker Gateway Runtime",
+                    "arnNamespace": "sagemaker",
+                    "endpointPrefix": "gateway-runtime.sagemaker"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sagemaker"
+                },
+                "aws.protocols#restJson1": {
+                    "http": [
+                        "http/1.1"
+                    ],
+                    "eventStreamHttp": [
+                        "http/1.1"
+                    ]
+                },
+                "smithy.api#documentation": "Use the Amazon SageMaker Gateway Runtime API to run inference through a\nGlobal Inference Gateway. A Global Inference Gateway routes each request to\nan inference gateway that serves the model named in the request.\n\nThe request body is an OpenAI-compatible JSON object, sent with\n`Content-Type: application/json`, and the model is selected by the `model`\nkey in that body. The content of the body is passed to the model server\nunchanged, except for the `stream` flag, which each operation sets.\n\nRequests are signed with Signature Version 4 under the `sagemaker` signing\nname. IAM actions are in the `sagemaker` namespace, for example\n`sagemaker:InvokeGlobalInferenceGateway`. The default regional endpoint is\n`gateway-runtime.sagemaker.{region}.amazonaws.com`.",
+                "smithy.api#title": "Amazon SageMaker Gateway Runtime",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://gateway-runtime.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://gateway-runtime.sagemaker-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://gateway-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://gateway-runtime.sagemaker.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://gateway-runtime.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://gateway-runtime.sagemaker-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://gateway-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://gateway-runtime.sagemaker.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://gateway-runtime.sagemaker.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A description of the error. It starts with `Global Inference Gateway: `,\nbecause the Global Inference Gateway returns this error itself.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An unexpected internal failure occurred.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#InternalStreamFailure": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A description of the failure. It starts with `Global Inference Gateway: `\nor `inference gateway: `, which says where the failure came from.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A failure after the stream started. The `Message` says where it came from:\n`Global Inference Gateway: ` when a gateway time limit expired or the\ninference gateway was taken out of service, or\n`inference gateway: response ended unexpectedly` when the inference\ngateway's connection failed while it was sending the response. The stream\nends after this event.",
+                "smithy.api#error": "server"
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#InvokeGlobalInferenceGateway": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakergatewayruntime#InvokeGlobalInferenceGatewayInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakergatewayruntime#InvokeGlobalInferenceGatewayOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#PayloadTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Buffered (non-streaming) inference. Returns the full OpenAI completion body.\n\nErrors carry their origin in the `Message` prefix. Every typed error's text\nis in the `Message` member (JSON key `Message`), and starts with one of these\nprefixes:\n\n* `Global Inference Gateway: ` -- the gateway rejected or failed the request\n  itself: validation, authorization, throttling, routing (the gateway or\n  model was not found, or no capacity is available), a gateway limit or time\n  limit, or failing to reach the inference gateway\n  (`Global Inference Gateway: could not reach the inference gateway: <reason>`,\n  or `Global Inference Gateway: timed out waiting for the inference gateway`).\n  This includes the 400 for an invalid request and the 413 for a request\n  body that is too large.\n* `inference gateway: ` -- the inference gateway serving the model returned\n  an error status. The message gives that status code and up to 256 bytes of\n  its error message, for example `inference gateway: 503 <message>`. A\n  BadGatewayException can instead read\n  `inference gateway: response ended unexpectedly`, with no status, when the\n  inference gateway's connection failed while it was sending the response.\n* `inference gateway (<component>): ` -- the same, when the inference\n  gateway reports which of its components produced the error, for example\n  `inference gateway (model server): 502 <message>`. The component is one of:\n  * `config` -- the inference gateway's configuration and proxy layer.\n  * `scheduler` -- the inference gateway's request scheduler.\n  * `model selector` -- the inference gateway's model selector.\n  * `model server` -- the model server.\n\nEvery error status the inference gateway returns is a typed error, chosen\nby that status:\n\n* 400 and any other 4xx not listed here -- a 400 validation error.\n* 401 and 403 -- AccessDeniedException (403).\n* 404 -- ResourceNotFoundException.\n* 408 -- GatewayTimeoutException (504).\n* 429 -- ThrottlingException, with the `Retry-After` header.\n* 502, and 500, 503 or any other 5xx not listed here -- BadGatewayException\n  (502). A 500 or 503 from the inference gateway comes after the request was\n  dispatched, so it is not modeled as retryable, and the gateway may already\n  have tried another inference gateway. Standard SDK retry modes may still\n  retry a 5xx status; set max attempts to 1 if a repeated inference is\n  unacceptable.\n* 504 -- GatewayTimeoutException.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/global-inference-gateway/{GatewayId}/invocations",
+                    "code": 200
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "InvokeGlobalInferenceGatewayUnknownGatewayNotFound",
+                        "params": {
+                            "GatewayId": "smoketestnonexistentgateway",
+                            "ContentType": "application/json",
+                            "Body": "{\"model\":\"smoke-test\",\"messages\":[]}"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.sagemakergatewayruntime#ResourceNotFoundException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#InvokeGlobalInferenceGatewayInput": {
+            "type": "structure",
+            "members": {
+                "GatewayId": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Global Inference Gateway to invoke. IAM policies refer to the\ngateway by its ARN,\n`arn:<partition>:sagemaker:<region>:<account>:global-inference-gateway/<id>`.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Accept": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The MIME type you want for the response. It is passed to the model server.",
+                        "smithy.api#httpHeader": "Accept"
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#RequestContentType",
+                    "traits": {
+                        "smithy.api#documentation": "The MIME type of the request body. Pass `application/json` (parameters\nsuch as `charset=utf-8` are allowed): the body is one OpenAI JSON object.\nThe Global Inference Gateway rejects other content types with a 415 error.",
+                        "smithy.api#httpHeader": "Content-Type",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomerIdentityToken": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#CustomerIdentityToken",
+                    "traits": {
+                        "smithy.api#documentation": "Per-caller customer identity token (a JWT), forwarded unchanged to the\ninference gateway, which validates it. The gateway does not use it to\nauthorize the request. Include it in the SigV4 signed headers so it\ncannot be altered in transit. Redacted from logs, metrics and traces.",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Customer-Identity-Token"
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#RequestPayloadBlob",
+                    "traits": {
+                        "smithy.api#documentation": "The inference request body: one OpenAI JSON object, at most 10 MiB. Its\ncontent is passed to the model server unchanged, except that the request\nis always sent with `\"stream\": false`: this operation returns one JSON\ndocument, so a `\"stream\": true` in the body is overridden (use\nInvokeGlobalInferenceGatewayWithResponseStream to stream). A body that is\nnot one JSON object, or that repeats the top-level `model` key with\ndifferent values, is rejected with a 400 validation error. A body larger\nthan 10 MiB is rejected with PayloadTooLargeException (413). The gateway\nreads only `model` and `stream`, and does not store the body.",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for InvokeGlobalInferenceGateway.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#InvokeGlobalInferenceGatewayOutput": {
+            "type": "structure",
+            "members": {
+                "Body": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#ResponsePayloadBlob",
+                    "traits": {
+                        "smithy.api#documentation": "The model server's OpenAI completion JSON, returned unchanged. A response\nlarger than 10 MiB fails with BadGatewayException (502).",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The response from InvokeGlobalInferenceGateway.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#InvokeGlobalInferenceGatewayWithResponseStream": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakergatewayruntime#InvokeGlobalInferenceGatewayWithResponseStreamInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakergatewayruntime#InvokeGlobalInferenceGatewayWithResponseStreamOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#InternalStreamFailure"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#ModelStreamError"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#PayloadTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakergatewayruntime#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Streaming inference. Returns an AWS event stream of PayloadPart events that\ncarry the model server's server-sent event (SSE) bytes, so SDKs decode the\nstream into events for you.\n\nThe errors listed for this operation, other than ModelStreamError and\nInternalStreamFailure, are returned before the response starts (before the\n200 status), so they end the request, not the stream. None of them can\noccur after the 200. ModelStreamError and InternalStreamFailure appear only\nas events in the stream, after the 200. Once the 200 is sent, the stream\ncarries the response as PayloadPart events. If reading the inference\ngateway's response fails, the stream carries one InternalStreamFailure\nevent and then ends. ModelStreamError is reserved and is not currently sent.\n\nErrors carry their origin in the `Message` prefix. Every typed error's text\nis in the `Message` member (JSON key `Message`), and starts with one of these\nprefixes:\n\n* `Global Inference Gateway: ` -- the gateway rejected or failed the request\n  itself: validation, authorization, throttling, routing (the gateway or\n  model was not found, or no capacity is available), a gateway limit or time\n  limit, or failing to reach the inference gateway\n  (`Global Inference Gateway: could not reach the inference gateway: <reason>`,\n  or `Global Inference Gateway: timed out waiting for the inference gateway`).\n  This includes the 400 for an invalid request and the 413 for a request\n  body that is too large.\n* `inference gateway: ` -- the inference gateway serving the model returned\n  an error status. The message gives that status code and up to 256 bytes of\n  its error message, for example `inference gateway: 503 <message>`.\n* `inference gateway (<component>): ` -- the same, when the inference\n  gateway reports which of its components produced the error, for example\n  `inference gateway (model server): 502 <message>`. The component is one of:\n  * `config` -- the inference gateway's configuration and proxy layer.\n  * `scheduler` -- the inference gateway's request scheduler.\n  * `model selector` -- the inference gateway's model selector.\n  * `model server` -- the model server.\n\nAn InternalStreamFailure event's `Message` uses the same prefixes, with the\nsame text the buffered operation uses for the same failure. Its\n`inference gateway: ` message carries no status:\n`inference gateway: response ended unexpectedly` when the inference\ngateway's connection failed while it was sending the response.\n\nEvery error status the inference gateway returns before the 200 is a typed\nerror, chosen by that status as for InvokeGlobalInferenceGateway:\n\n* 400 and any other 4xx not listed here -- a 400 validation error.\n* 401 and 403 -- AccessDeniedException (403).\n* 404 -- ResourceNotFoundException.\n* 408 -- GatewayTimeoutException (504).\n* 429 -- ThrottlingException, with the `Retry-After` header.\n* 502, and 500, 503 or any other 5xx not listed here -- BadGatewayException\n  (502). A 500 or 503 from the inference gateway comes after the request was\n  dispatched, so it is not modeled as retryable, and the gateway may already\n  have tried another inference gateway. Standard SDK retry modes may still\n  retry a 5xx status; set max attempts to 1 if a repeated inference is\n  unacceptable.\n* 504 -- GatewayTimeoutException.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/global-inference-gateway/{GatewayId}/invocations-response-stream",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#InvokeGlobalInferenceGatewayWithResponseStreamInput": {
+            "type": "structure",
+            "members": {
+                "GatewayId": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#GatewayId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Global Inference Gateway to invoke, as for\nInvokeGlobalInferenceGateway.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Accept": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The MIME type you want for the response. It is passed to the model server.",
+                        "smithy.api#httpHeader": "Accept"
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#RequestContentType",
+                    "traits": {
+                        "smithy.api#documentation": "The MIME type of the request body, as for InvokeGlobalInferenceGateway.\nPass `application/json`.",
+                        "smithy.api#httpHeader": "Content-Type",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomerIdentityToken": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#CustomerIdentityToken",
+                    "traits": {
+                        "smithy.api#documentation": "The customer identity token (a JWT), as for InvokeGlobalInferenceGateway.\nIt is passed unchanged to the inference gateway, which validates it.",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Customer-Identity-Token"
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#RequestPayloadBlob",
+                    "traits": {
+                        "smithy.api#documentation": "The inference request body, as for InvokeGlobalInferenceGateway, except\nthat the request is always sent with `\"stream\": true`: this operation\nreturns an event stream, so a `\"stream\": false` in the body (or no\n`stream` key) is overridden. A body larger than 10 MiB is rejected with\nPayloadTooLargeException (413).",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for InvokeGlobalInferenceGatewayWithResponseStream. It has the\nsame members as the InvokeGlobalInferenceGateway request.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#InvokeGlobalInferenceGatewayWithResponseStreamOutput": {
+            "type": "structure",
+            "members": {
+                "Body": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#ResponseStream",
+                    "traits": {
+                        "smithy.api#documentation": "The response as an AWS event stream (application/vnd.amazon.eventstream).",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The response from InvokeGlobalInferenceGatewayWithResponseStream.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#ModelStreamError": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A description of the error.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#StreamErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "The error code: `StreamBroken` if the model server's stream broke before\nit completed, or `ModelInvocationTimeExceeded` if the model exceeded its\nallowed invocation time."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Reserved for a model error during the stream. Not currently sent; a failure\nafter the stream starts is reported as InternalStreamFailure.",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#PayloadPart": {
+            "type": "structure",
+            "members": {
+                "Bytes": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#StreamChunkBlob",
+                    "traits": {
+                        "smithy.api#documentation": "The bytes of this part: a chunk of the model server's server-sent event\n(SSE) stream.",
+                        "smithy.api#eventPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A part of the streamed response."
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#PayloadTooLargeException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A description of the error. It starts with `Global Inference Gateway: `,\nbecause the Global Inference Gateway returns this error itself.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request body exceeds the 10 MiB limit. Reduce the size of the payload\nand send the request again.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 413
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#RequestContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The MIME type of an Invoke request body. Pass `application/json`;\nparameters such as `charset=utf-8` are allowed.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#RequestPayloadBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#documentation": "Inference request payload, at most 10 MiB. A larger request is rejected\nwith PayloadTooLargeException (413). Redacted from logs, metrics and traces.",
+                "smithy.api#length": {
+                    "max": 10485760
+                },
+                "smithy.api#mediaType": "application/json",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A description of the error. It starts with a prefix such as\n`Global Inference Gateway: ` or `inference gateway: ` that says where the\nerror came from.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the resource that was not found: the gateway ID, or the model\nname."
+                    }
+                },
+                "ResourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The kind of resource that was not found: the gateway, or the model."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "No gateway with this ID exists in this account and Region, or no target of\nthe gateway serves the model named in the request body. A model that is\nserved but has no available target right now returns\nServiceUnavailableException instead. A message starting `inference gateway`\nmeans the inference gateway serving the model returned a 404; up to 256\nbytes of its error message are quoted.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#ResponsePayloadBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#documentation": "Buffered inference response payload, at most 10 MiB. A larger response\nfails with BadGatewayException (502); use\nInvokeGlobalInferenceGatewayWithResponseStream for larger output. Redacted\nfrom logs, metrics and traces.",
+                "smithy.api#length": {
+                    "max": 10485760
+                },
+                "smithy.api#mediaType": "application/json",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#ResponseStream": {
+            "type": "union",
+            "members": {
+                "PayloadPart": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#PayloadPart",
+                    "traits": {
+                        "smithy.api#documentation": "A part of the model server's response."
+                    }
+                },
+                "ModelStreamError": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#ModelStreamError",
+                    "traits": {
+                        "smithy.api#documentation": "Reserved for a model error during the stream. Not currently sent."
+                    }
+                },
+                "InternalStreamFailure": {
+                    "target": "com.amazonaws.sagemakergatewayruntime#InternalStreamFailure",
+                    "traits": {
+                        "smithy.api#documentation": "A failure after the stream started. The stream ends after this event."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The events in the response stream. The response arrives as PayloadPart\nevents. A failure after the stream starts arrives as one\nInternalStreamFailure event, and then the stream ends.",
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A description of the error. It starts with `Global Inference Gateway: `,\nbecause the Global Inference Gateway returns this error itself.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The service is temporarily unable to serve the request, for example because\nno capacity is available for the requested model. The request was not\ndispatched for inference. A 503 returned by the inference gateway serving\nthe model after dispatch is reported as BadGatewayException, with the 503\nin its `Message`, not as this error.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503,
+                "smithy.api#retryable": {
+                    "throttling": false
+                }
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#StreamChunkBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#documentation": "One chunk of the streaming response, carried in a PayloadPart event. A\nstreaming response has no total size limit. Redacted from logs, metrics and\ntraces.",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#StreamErrorCode": {
+            "type": "enum",
+            "members": {
+                "STREAM_BROKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The model server's stream broke before it completed.",
+                        "smithy.api#enumValue": "StreamBroken"
+                    }
+                },
+                "MODEL_INVOCATION_TIME_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "The model exceeded its allowed invocation time mid-stream.",
+                        "smithy.api#enumValue": "ModelInvocationTimeExceeded"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The error codes a ModelStreamError can carry."
+            }
+        },
+        "com.amazonaws.sagemakergatewayruntime#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A description of the error. It starts with a prefix such as\n`Global Inference Gateway: ` or `inference gateway: ` that says where the\nerror came from.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request was throttled before it was dispatched for inference. Retry the\nrequest with backoff, after the `Retry-After` seconds when the response\ncarries one. A message starting `inference gateway` means the last\ninference gateway tried for the model returned a 429. The gateway may have\ntried others first, and they may have failed for other reasons. Up to 256\nbytes of its error message are quoted.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        }
+    }
+}

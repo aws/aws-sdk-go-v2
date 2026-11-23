@@ -26,6 +26,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	return out, nil
 }
 
+// Contains the request parameters for the TagResource operation.
 type TagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource that you want to tag.
@@ -56,6 +57,7 @@ func (v *TagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
+// Contains the response of the TagResource operation. The response has no members.
 type TagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

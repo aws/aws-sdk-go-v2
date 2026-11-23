@@ -1767,6 +1767,91 @@ func TestCheckResponseSnapshot_GetPreferences(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetUsageLinesEstimatedCost(t *testing.T) {
+	want := &GetUsageLinesEstimatedCostOutput{
+		RateType:  types.RateType("BEFORE_DISCOUNTS"),
+		TotalCost: ptr.Float64(1.0),
+		Currency:  types.CurrencyCode("USD"),
+		LineItems: []types.GetUsageLinesEstimatedCostLineItem{
+			{
+				Key:         ptr.String("__Key__"),
+				ServiceCode: ptr.String("__ServiceCode__"),
+				UsageType:   ptr.String("__UsageType__"),
+				Operation:   ptr.String("__Operation__"),
+				EstimatedCost: &types.GetUsageLinesEstimatedCostEstimatedCost{
+					UsageAmount: ptr.Float64(1.0),
+					UsageUnit:   ptr.String("__UsageUnit__"),
+					Cost:        ptr.Float64(1.0),
+					Currency:    types.CurrencyCode("USD"),
+				},
+			},
+			{
+				Key:         ptr.String("__Key__"),
+				ServiceCode: ptr.String("__ServiceCode__"),
+				UsageType:   ptr.String("__UsageType__"),
+				Operation:   ptr.String("__Operation__"),
+				EstimatedCost: &types.GetUsageLinesEstimatedCostEstimatedCost{
+					UsageAmount: ptr.Float64(1.0),
+					UsageUnit:   ptr.String("__UsageUnit__"),
+					Cost:        ptr.Float64(1.0),
+					Currency:    types.CurrencyCode("USD"),
+				},
+			},
+		},
+		Errors: []types.GetUsageLinesEstimatedCostError{
+			{
+				Key:          ptr.String("__Key__"),
+				ServiceCode:  ptr.String("__ServiceCode__"),
+				UsageType:    ptr.String("__UsageType__"),
+				Operation:    ptr.String("__Operation__"),
+				ErrorCode:    types.GetUsageLinesEstimatedCostErrorCode("BAD_REQUEST"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+			{
+				Key:          ptr.String("__Key__"),
+				ServiceCode:  ptr.String("__ServiceCode__"),
+				UsageType:    ptr.String("__UsageType__"),
+				Operation:    ptr.String("__Operation__"),
+				ErrorCode:    types.GetUsageLinesEstimatedCostErrorCode("BAD_REQUEST"),
+				ErrorMessage: ptr.String("__ErrorMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetUsageLinesEstimatedCost.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetUsageLinesEstimatedCost(context.Background(), &GetUsageLinesEstimatedCostInput{
+		Usage: []types.GetUsageLinesEstimatedCostInput{
+			{
+				ServiceCode: ptr.String("__ServiceCode__"),
+				UsageType:   ptr.String("__UsageType__"),
+				Operation:   ptr.String("__Operation__"),
+				Key:         ptr.String("__Key__"),
+				Amount:      ptr.Float64(1.0),
+			},
+			{
+				ServiceCode: ptr.String("__ServiceCode__"),
+				UsageType:   ptr.String("__UsageType__"),
+				Operation:   ptr.String("__Operation__"),
+				Key:         ptr.String("__Key__"),
+				Amount:      ptr.Float64(1.0),
+			},
+		},
+		RateType: types.RateType("BEFORE_DISCOUNTS"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetUsageLinesEstimatedCost.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetWorkloadEstimate(t *testing.T) {
 	want := &GetWorkloadEstimateOutput{
 		Id:             ptr.String("__Id__"),

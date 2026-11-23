@@ -141,6 +141,25 @@ func (ContainerProductVisibilityString) Values() []ContainerProductVisibilityStr
 	}
 }
 
+type ContentRecommendationStatus string
+
+// Enum values for ContentRecommendationStatus
+const (
+	ContentRecommendationStatusGenerated           ContentRecommendationStatus = "GENERATED"
+	ContentRecommendationStatusInsufficientContext ContentRecommendationStatus = "INSUFFICIENT_CONTEXT"
+)
+
+// Values returns all known values for ContentRecommendationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContentRecommendationStatus) Values() []ContentRecommendationStatus {
+	return []ContentRecommendationStatus{
+		"GENERATED",
+		"INSUFFICIENT_CONTEXT",
+	}
+}
+
 type ControlAssessmentResult string
 
 // Enum values for ControlAssessmentResult
@@ -294,6 +313,48 @@ func (Intent) Values() []Intent {
 	}
 }
 
+type ListingFindingStatus string
+
+// Enum values for ListingFindingStatus
+const (
+	ListingFindingStatusPass ListingFindingStatus = "PASS"
+	ListingFindingStatusFail ListingFindingStatus = "FAIL"
+)
+
+// Values returns all known values for ListingFindingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListingFindingStatus) Values() []ListingFindingStatus {
+	return []ListingFindingStatus{
+		"PASS",
+		"FAIL",
+	}
+}
+
+type ListingQualityTier string
+
+// Enum values for ListingQualityTier
+const (
+	ListingQualityTierNeedsImprovement ListingQualityTier = "NEEDS_IMPROVEMENT"
+	ListingQualityTierBasic            ListingQualityTier = "BASIC"
+	ListingQualityTierStrong           ListingQualityTier = "STRONG"
+	ListingQualityTierExcellent        ListingQualityTier = "EXCELLENT"
+)
+
+// Values returns all known values for ListingQualityTier. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListingQualityTier) Values() []ListingQualityTier {
+	return []ListingQualityTier{
+		"NEEDS_IMPROVEMENT",
+		"BASIC",
+		"STRONG",
+		"EXCELLENT",
+	}
+}
+
 type MachineLearningProductSortBy string
 
 // Enum values for MachineLearningProductSortBy
@@ -411,20 +472,21 @@ type OfferSortBy string
 
 // Enum values for OfferSortBy
 const (
-	OfferSortByEntityId              OfferSortBy = "EntityId"
-	OfferSortByName                  OfferSortBy = "Name"
-	OfferSortByProductId             OfferSortBy = "ProductId"
-	OfferSortByResaleAuthorizationId OfferSortBy = "ResaleAuthorizationId"
-	OfferSortByReleaseDate           OfferSortBy = "ReleaseDate"
-	OfferSortByAvailabilityEndDate   OfferSortBy = "AvailabilityEndDate"
-	OfferSortByBuyerAccounts         OfferSortBy = "BuyerAccounts"
-	OfferSortByState                 OfferSortBy = "State"
-	OfferSortByTargeting             OfferSortBy = "Targeting"
-	OfferSortByLastModifiedDate      OfferSortBy = "LastModifiedDate"
-	OfferSortByOfferSetId            OfferSortBy = "OfferSetId"
-	OfferSortByTargetAgreementId     OfferSortBy = "TargetAgreementId"
-	OfferSortByTargetAgreementIntent OfferSortBy = "TargetAgreementIntent"
-	OfferSortByCreatedBySource       OfferSortBy = "CreatedBySource"
+	OfferSortByEntityId                  OfferSortBy = "EntityId"
+	OfferSortByName                      OfferSortBy = "Name"
+	OfferSortByProductId                 OfferSortBy = "ProductId"
+	OfferSortByResaleAuthorizationId     OfferSortBy = "ResaleAuthorizationId"
+	OfferSortBySubsidiaryAuthorizationId OfferSortBy = "SubsidiaryAuthorizationId"
+	OfferSortByReleaseDate               OfferSortBy = "ReleaseDate"
+	OfferSortByAvailabilityEndDate       OfferSortBy = "AvailabilityEndDate"
+	OfferSortByBuyerAccounts             OfferSortBy = "BuyerAccounts"
+	OfferSortByState                     OfferSortBy = "State"
+	OfferSortByTargeting                 OfferSortBy = "Targeting"
+	OfferSortByLastModifiedDate          OfferSortBy = "LastModifiedDate"
+	OfferSortByOfferSetId                OfferSortBy = "OfferSetId"
+	OfferSortByTargetAgreementId         OfferSortBy = "TargetAgreementId"
+	OfferSortByTargetAgreementIntent     OfferSortBy = "TargetAgreementIntent"
+	OfferSortByCreatedBySource           OfferSortBy = "CreatedBySource"
 )
 
 // Values returns all known values for OfferSortBy. Note that this can be expanded
@@ -437,6 +499,7 @@ func (OfferSortBy) Values() []OfferSortBy {
 		"Name",
 		"ProductId",
 		"ResaleAuthorizationId",
+		"SubsidiaryAuthorizationId",
 		"ReleaseDate",
 		"AvailabilityEndDate",
 		"BuyerAccounts",
@@ -526,6 +589,69 @@ func (OwnershipType) Values() []OwnershipType {
 	return []OwnershipType{
 		"SELF",
 		"SHARED",
+	}
+}
+
+type RecommendationSeverity string
+
+// Enum values for RecommendationSeverity
+const (
+	RecommendationSeverityBlocking RecommendationSeverity = "BLOCKING"
+	RecommendationSeverityAdvisory RecommendationSeverity = "ADVISORY"
+)
+
+// Values returns all known values for RecommendationSeverity. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationSeverity) Values() []RecommendationSeverity {
+	return []RecommendationSeverity{
+		"BLOCKING",
+		"ADVISORY",
+	}
+}
+
+type RecommendedFeatureId string
+
+// Enum values for RecommendedFeatureId
+const (
+	RecommendedFeatureIdRequestPrivateOffer RecommendedFeatureId = "REQUEST_PRIVATE_OFFER"
+	RecommendedFeatureIdRequestADemo        RecommendedFeatureId = "REQUEST_A_DEMO"
+	RecommendedFeatureIdPromotionalMedia    RecommendedFeatureId = "PROMOTIONAL_MEDIA"
+	RecommendedFeatureIdFreeTrial           RecommendedFeatureId = "FREE_TRIAL"
+	RecommendedFeatureIdQuickLaunch         RecommendedFeatureId = "QUICK_LAUNCH"
+)
+
+// Values returns all known values for RecommendedFeatureId. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendedFeatureId) Values() []RecommendedFeatureId {
+	return []RecommendedFeatureId{
+		"REQUEST_PRIVATE_OFFER",
+		"REQUEST_A_DEMO",
+		"PROMOTIONAL_MEDIA",
+		"FREE_TRIAL",
+		"QUICK_LAUNCH",
+	}
+}
+
+type RecommendedFeatureStatus string
+
+// Enum values for RecommendedFeatureStatus
+const (
+	RecommendedFeatureStatusPass RecommendedFeatureStatus = "PASS"
+	RecommendedFeatureStatusFail RecommendedFeatureStatus = "FAIL"
+)
+
+// Values returns all known values for RecommendedFeatureStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendedFeatureStatus) Values() []RecommendedFeatureStatus {
+	return []RecommendedFeatureStatus{
+		"PASS",
+		"FAIL",
 	}
 }
 
@@ -755,5 +881,24 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"CannotParse",
 		"FieldValidationFailed",
 		"Other",
+	}
+}
+
+type VerificationSource string
+
+// Enum values for VerificationSource
+const (
+	VerificationSourceAwsVerified  VerificationSource = "AWS_VERIFIED"
+	VerificationSourceSelfAttested VerificationSource = "SELF_ATTESTED"
+)
+
+// Values returns all known values for VerificationSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VerificationSource) Values() []VerificationSource {
+	return []VerificationSource{
+		"AWS_VERIFIED",
+		"SELF_ATTESTED",
 	}
 }

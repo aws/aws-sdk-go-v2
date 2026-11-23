@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"gatewayId":"__GatewayId__","linkId":"__LinkId__","status":"PENDING_CREATION"}
+{"gatewayId":"__GatewayId__","linkId":"__LinkId__","status":"PENDING_CREATION","updateId":"__UpdateId__"}

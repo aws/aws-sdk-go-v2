@@ -11,9 +11,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Returns the terms attached to an offer, such as pricing terms (usage-based,
-// contract, BYOL, free trial), legal terms, payment schedules, validity terms,
-// support terms, and renewal terms.
+// Retrieves the terms attached to an offer, such as pricing terms (usage-based,
+// contract, Bring Your Own License (BYOL), free trial), legal terms, payment
+// schedules, validity terms, support terms, and renewal terms. The operation
+// returns results in pages. Use nextToken to retrieve the next page.
 func (c *Client) GetOfferTerms(ctx context.Context, params *GetOfferTermsInput, optFns ...func(*Options)) (*GetOfferTermsOutput, error) {
 	if params == nil {
 		params = &GetOfferTermsInput{}
@@ -36,18 +37,21 @@ type GetOfferTermsInput struct {
 	// This member is required.
 	OfferId *string
 
-	// A BCP 47 language tag or comma-separated priority list specifying the preferred
-	// locale for response content. See Locale for supported values, constraints,
-	// fallback behavior, and the default locale. If omitted, the service returns
-	// content in the default locale.
+	// The preferred locale for response content, as a Best Current Practice 47 (BCP
+	// 47) language tag or a comma-separated priority list of language tags. See Locale
+	// for supported values, constraints, fallback behavior, and the default locale. If
+	// you omit this field, the service returns content in the default locale.
 	Locale *string
 
-	// The maximum number of results that are returned per call. You can use nextToken
-	// to get more results.
+	// The maximum number of terms to return in each call. If you omit this field, the
+	// default is 10. Use nextToken to retrieve the next page.
 	MaxResults *int32
 
-	// If nextToken is returned, there are more results available. Make the call again
-	// using the returned token to retrieve the next page.
+	// If the service returns nextToken , more results are available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again with
+	// the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 24 hours. An expired pagination
+	// token returns a ValidationException .
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -81,13 +85,16 @@ type GetOfferTermsOutput struct {
 	// This member is required.
 	OfferTerms []types.OfferTerm
 
-	// The locale of the returned content. Indicates whether the response contains
-	// content in the requested locale, or fell back to the default locale. See Locale
-	// for details.
+	// The locale of the returned content. This value indicates whether the response
+	// contains content in the requested locale or fell back to the default locale. See
+	// Locale for details.
 	Locale *string
 
-	// If nextToken is returned, there are more results available. Make the call again
-	// using the returned token to retrieve the next page.
+	// If the service returns nextToken , more results are available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again with
+	// the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 24 hours. An expired pagination
+	// token returns a ValidationException .
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -171,8 +178,8 @@ func (c *Client) addOperationGetOfferTermsMiddlewares(stack *middleware.Stack, o
 
 // GetOfferTermsPaginatorOptions is the paginator options for GetOfferTerms
 type GetOfferTermsPaginatorOptions struct {
-	// The maximum number of results that are returned per call. You can use nextToken
-	// to get more results.
+	// The maximum number of terms to return in each call. If you omit this field, the
+	// default is 10. Use nextToken to retrieve the next page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

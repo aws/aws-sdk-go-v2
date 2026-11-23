@@ -279,6 +279,16 @@ func serializeAutonomousDatabasePeerList(s smithy.ShapeSerializer, schema *smith
 	s.CloseList()
 }
 
+func serializeAutonomousDatabaseRefreshableCloneList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AutonomousDatabaseRefreshableCloneSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeAutonomousDatabaseVersionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AutonomousDatabaseVersionSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -756,6 +766,28 @@ func deserializeAutonomousDatabasePeerList(d smithy.ShapeDeserializer, s *smithy
 		}
 
 		vv = types.AutonomousDatabasePeerSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAutonomousDatabaseRefreshableCloneList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AutonomousDatabaseRefreshableCloneSummary) error {
+	*v = make([]types.AutonomousDatabaseRefreshableCloneSummary, 0)
+	var vv types.AutonomousDatabaseRefreshableCloneSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.AutonomousDatabaseRefreshableCloneSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.AutonomousDatabaseRefreshableCloneSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

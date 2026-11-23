@@ -254,6 +254,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateMarketplaceRevenueShare(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMarketplaceRevenueShare(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateMarketplaceRevenueShare")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateMarketplaceRevenueShareAllocation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateMarketplaceRevenueShareAllocation(context.Background(), nil, func(o *Options) {
@@ -462,6 +474,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateMarketplaceRevenueShare(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMarketplaceRevenueShare(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateMarketplaceRevenueShare")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

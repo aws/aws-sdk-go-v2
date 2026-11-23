@@ -6435,33 +6435,6 @@ func TestCheckRequestSnapshot_DeleteAsset(t *testing.T) {
 	}
 }
 
-func TestCheckRequestSnapshot_DeleteAssetType(t *testing.T) {
-	input := &DeleteAssetTypeInput{
-		Identifier: ptr.String("__Identifier__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DeleteAssetType(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAssetType"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckRequestSnapshot_DeleteAttachment(t *testing.T) {
 	input := &DeleteAttachmentInput{
 		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
@@ -12276,14 +12249,14 @@ func TestCheckRequestSnapshot_PublishDataQualityResultV2(t *testing.T) {
 
 func TestCheckRequestSnapshot_PutAsset(t *testing.T) {
 	input := &PutAssetInput{
-		AssetTypeId: ptr.String("__AssetTypeId__"),
-		Identifier:  ptr.String("__Identifier__"),
-		Name:        ptr.String("__Name__"),
-		Description: ptr.String("__Description__"),
-		Forms: map[string]types.AssetFormEntry{
+		AssetTypeIdentifier: ptr.String("__AssetTypeIdentifier__"),
+		Identifier:          ptr.String("__Identifier__"),
+		Name:                ptr.String("__Name__"),
+		Description:         ptr.String("__Description__"),
+		Forms: map[string]types.AssetFormInput{
 			"key0": {
-				FormTypeId: ptr.String("__FormTypeId__"),
-				Content:    ptr.String("__Content__"),
+				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
+				Content:            ptr.String("__Content__"),
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
@@ -12311,48 +12284,15 @@ func TestCheckRequestSnapshot_PutAsset(t *testing.T) {
 	}
 }
 
-func TestCheckRequestSnapshot_PutAssetType(t *testing.T) {
-	input := &PutAssetTypeInput{
-		Name: ptr.String("__Name__"),
-		Forms: map[string]types.AssetTypeFormReference{
-			"key0": {
-				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
-			},
-		},
-		ClientToken: ptr.String("__ClientToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.PutAssetType(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAssetType"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckRequestSnapshot_PutAttachment(t *testing.T) {
 	input := &PutAttachmentInput{
-		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
-		IterableFormName: ptr.String("__IterableFormName__"),
-		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
-		AttachmentName:   ptr.String("__AttachmentName__"),
-		Content:          ptr.String("__Content__"),
-		FormTypeId:       ptr.String("__FormTypeId__"),
-		ClientToken:      ptr.String("__ClientToken__"),
+		AssetIdentifier:    ptr.String("__AssetIdentifier__"),
+		IterableFormName:   ptr.String("__IterableFormName__"),
+		ItemIdentifier:     ptr.String("__ItemIdentifier__"),
+		AttachmentName:     ptr.String("__AttachmentName__"),
+		Content:            ptr.String("__Content__"),
+		FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
+		ClientToken:        ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -12417,12 +12357,16 @@ func TestCheckRequestSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 
 func TestCheckRequestSnapshot_PutDataCatalogExportConfiguration(t *testing.T) {
 	input := &PutDataCatalogExportConfigurationInput{
-		ExportSetting: types.ExportSetting("ENABLED"),
-		EncryptionConfiguration: &types.ExportEncryptionConfiguration{
-			SseAlgorithm: ptr.String("__SseAlgorithm__"),
-			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
-		},
 		ClientToken: ptr.String("__ClientToken__"),
+		S3TablesConfiguration: &types.S3TablesConfiguration{
+			EncryptionConfiguration: &types.ExportEncryptionConfiguration{
+				SseAlgorithm: ptr.String("__SseAlgorithm__"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			},
+		},
+		Assets: &types.AssetsExport{
+			S3TablesExport: types.ExportSetting("ENABLED"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -13565,8 +13509,8 @@ func TestCheckRequestSnapshot_SearchAssets(t *testing.T) {
 			Value: []types.SearchFilterClause{
 				&types.SearchFilterClauseMemberAttributeFilter{
 					Value: types.SearchAttributeFilter{
-						Attribute: ptr.String("__Attribute__"),
-						Operator:  types.SearchFilterOperator("equals"),
+						Attribute:  ptr.String("__Attribute__"),
+						Comparator: types.SearchFilterComparator("EQUALS"),
 						Value: &types.SearchFilterValueMemberStringValue{
 							Value: "__SearchFilterValueMemberStringValue__",
 						},
@@ -13574,8 +13518,8 @@ func TestCheckRequestSnapshot_SearchAssets(t *testing.T) {
 				},
 				&types.SearchFilterClauseMemberAttributeFilter{
 					Value: types.SearchAttributeFilter{
-						Attribute: ptr.String("__Attribute__"),
-						Operator:  types.SearchFilterOperator("equals"),
+						Attribute:  ptr.String("__Attribute__"),
+						Comparator: types.SearchFilterComparator("EQUALS"),
 						Value: &types.SearchFilterValueMemberStringValue{
 							Value: "__SearchFilterValueMemberStringValue__",
 						},
@@ -25943,33 +25887,6 @@ func TestUpdateRequestSnapshot_DeleteAsset(t *testing.T) {
 	}
 }
 
-func TestUpdateRequestSnapshot_DeleteAssetType(t *testing.T) {
-	input := &DeleteAssetTypeInput{
-		Identifier: ptr.String("__Identifier__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.DeleteAssetType(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteAssetType"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateRequestSnapshot_DeleteAttachment(t *testing.T) {
 	input := &DeleteAttachmentInput{
 		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
@@ -31784,14 +31701,14 @@ func TestUpdateRequestSnapshot_PublishDataQualityResultV2(t *testing.T) {
 
 func TestUpdateRequestSnapshot_PutAsset(t *testing.T) {
 	input := &PutAssetInput{
-		AssetTypeId: ptr.String("__AssetTypeId__"),
-		Identifier:  ptr.String("__Identifier__"),
-		Name:        ptr.String("__Name__"),
-		Description: ptr.String("__Description__"),
-		Forms: map[string]types.AssetFormEntry{
+		AssetTypeIdentifier: ptr.String("__AssetTypeIdentifier__"),
+		Identifier:          ptr.String("__Identifier__"),
+		Name:                ptr.String("__Name__"),
+		Description:         ptr.String("__Description__"),
+		Forms: map[string]types.AssetFormInput{
 			"key0": {
-				FormTypeId: ptr.String("__FormTypeId__"),
-				Content:    ptr.String("__Content__"),
+				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
+				Content:            ptr.String("__Content__"),
 			},
 		},
 		ClientToken: ptr.String("__ClientToken__"),
@@ -31819,48 +31736,15 @@ func TestUpdateRequestSnapshot_PutAsset(t *testing.T) {
 	}
 }
 
-func TestUpdateRequestSnapshot_PutAssetType(t *testing.T) {
-	input := &PutAssetTypeInput{
-		Name: ptr.String("__Name__"),
-		Forms: map[string]types.AssetTypeFormReference{
-			"key0": {
-				FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
-			},
-		},
-		ClientToken: ptr.String("__ClientToken__"),
-	}
-	body := &bytes.Buffer{}
-	method := ""
-	rawPath := ""
-	rawQuery := ""
-	header := map[string][]string{}
-	svc := serdeNewClient()
-	_, err := svc.PutAssetType(context.Background(), input, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			stack.Initialize.Remove("OperationInputValidation")
-			stack.Serialize.Remove("RequestCompression")
-			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
-				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
-			}, middleware.Before)
-		})
-	})
-	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
-		t.Fatal(err)
-	}
-	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutAssetType"); err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateRequestSnapshot_PutAttachment(t *testing.T) {
 	input := &PutAttachmentInput{
-		AssetIdentifier:  ptr.String("__AssetIdentifier__"),
-		IterableFormName: ptr.String("__IterableFormName__"),
-		ItemIdentifier:   ptr.String("__ItemIdentifier__"),
-		AttachmentName:   ptr.String("__AttachmentName__"),
-		Content:          ptr.String("__Content__"),
-		FormTypeId:       ptr.String("__FormTypeId__"),
-		ClientToken:      ptr.String("__ClientToken__"),
+		AssetIdentifier:    ptr.String("__AssetIdentifier__"),
+		IterableFormName:   ptr.String("__IterableFormName__"),
+		ItemIdentifier:     ptr.String("__ItemIdentifier__"),
+		AttachmentName:     ptr.String("__AttachmentName__"),
+		Content:            ptr.String("__Content__"),
+		FormTypeIdentifier: ptr.String("__FormTypeIdentifier__"),
+		ClientToken:        ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -31925,12 +31809,16 @@ func TestUpdateRequestSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 
 func TestUpdateRequestSnapshot_PutDataCatalogExportConfiguration(t *testing.T) {
 	input := &PutDataCatalogExportConfigurationInput{
-		ExportSetting: types.ExportSetting("ENABLED"),
-		EncryptionConfiguration: &types.ExportEncryptionConfiguration{
-			SseAlgorithm: ptr.String("__SseAlgorithm__"),
-			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
-		},
 		ClientToken: ptr.String("__ClientToken__"),
+		S3TablesConfiguration: &types.S3TablesConfiguration{
+			EncryptionConfiguration: &types.ExportEncryptionConfiguration{
+				SseAlgorithm: ptr.String("__SseAlgorithm__"),
+				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
+			},
+		},
+		Assets: &types.AssetsExport{
+			S3TablesExport: types.ExportSetting("ENABLED"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -33073,8 +32961,8 @@ func TestUpdateRequestSnapshot_SearchAssets(t *testing.T) {
 			Value: []types.SearchFilterClause{
 				&types.SearchFilterClauseMemberAttributeFilter{
 					Value: types.SearchAttributeFilter{
-						Attribute: ptr.String("__Attribute__"),
-						Operator:  types.SearchFilterOperator("equals"),
+						Attribute:  ptr.String("__Attribute__"),
+						Comparator: types.SearchFilterComparator("EQUALS"),
 						Value: &types.SearchFilterValueMemberStringValue{
 							Value: "__SearchFilterValueMemberStringValue__",
 						},
@@ -33082,8 +32970,8 @@ func TestUpdateRequestSnapshot_SearchAssets(t *testing.T) {
 				},
 				&types.SearchFilterClauseMemberAttributeFilter{
 					Value: types.SearchAttributeFilter{
-						Attribute: ptr.String("__Attribute__"),
-						Operator:  types.SearchFilterOperator("equals"),
+						Attribute:  ptr.String("__Attribute__"),
+						Comparator: types.SearchFilterComparator("EQUALS"),
 						Value: &types.SearchFilterValueMemberStringValue{
 							Value: "__SearchFilterValueMemberStringValue__",
 						},

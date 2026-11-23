@@ -1,0 +1,5 @@
+PUT /trusted-access-programs/__ProgramIdentifier__/project-enrollment/__ProjectIdentifier__
+
+Content-Type: application/json
+
+{"optIn":"inherit"}

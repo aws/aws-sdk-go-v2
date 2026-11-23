@@ -72,7 +72,14 @@ type GetAutomationRuleOutput struct {
 	// The name of the automation rule.
 	Name *string
 
-	// Configuration settings for organization-wide automation rules.
+	// Configuration settings that define the scope of an organization-wide automation
+	// rule. Each organizational unit (OU) list can contain up to 150 OUs or
+	// organization roots, and each account list can contain up to 50 accounts. Each
+	// included OU or organization root must have an effective organization rule mode
+	// of AnyAllowed . Exclusions take precedence over inclusions. An account that is
+	// in an included OU and is also excluded is excluded. The rule doesn't apply to
+	// the management account when the account is reached through an OU or the
+	// organization root.
 	OrganizationConfiguration *types.OrganizationConfiguration
 
 	// A string representation of a decimal number between 0 and 1 (having up to 30

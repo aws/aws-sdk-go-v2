@@ -66,7 +66,7 @@ func (v *BatchUpdateBillScenarioCommitmentModificationInput) SerializeMembers(s 
 
 type BatchUpdateBillScenarioCommitmentModificationOutput struct {
 
-	//  Returns the list of error reasons and commitment line item IDs that could not
+	//  Returns the list of error reasons and commitment line item IDs that couldn't
 	// be updated for the Bill Scenario.
 	Errors []types.BatchUpdateBillScenarioCommitmentModificationError
 

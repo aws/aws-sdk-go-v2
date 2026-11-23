@@ -516,6 +516,7 @@ func TestUpdateResponseSnapshot_GetTaxRegistration(t *testing.T) {
 					ElectronicTransactionCodeNumber: ptr.String("__ElectronicTransactionCodeNumber__"),
 					PaymentVoucherNumber:            ptr.String("__PaymentVoucherNumber__"),
 					PaymentVoucherNumberDate:        ptr.String("__PaymentVoucherNumberDate__"),
+					VatCreditMethod:                 ptr.Bool(true),
 				},
 				EgyptAdditionalInfo: &types.EgyptAdditionalInfo{
 					UniqueIdentificationNumber:               ptr.String("__UniqueIdentificationNumber__"),
@@ -562,6 +563,19 @@ func TestUpdateResponseSnapshot_GetTaxRegistration(t *testing.T) {
 					},
 					TaxpayerTypeCode: ptr.String("__TaxpayerTypeCode__"),
 					IssueDate:        ptr.String("__IssueDate__"),
+				},
+				UnitedArabEmiratesAdditionalInfo: &types.UnitedArabEmiratesAdditionalInfo{
+					TaxRegistrationNumberType: types.UaeTaxRegistrationNumberType("VATTaxRegistrationNumber"),
+					PeppolId:                  ptr.String("__PeppolId__"),
+					TradeLicenseNumber:        ptr.String("__TradeLicenseNumber__"),
+					EmiratesId:                ptr.String("__EmiratesId__"),
+				},
+				NorwayAdditionalInfo: &types.NorwayAdditionalInfo{
+					TaxRegistrationNumberType: types.NorwayTaxRegistrationNumberType("TaxRegistrationNumber"),
+					PeppolId:                  ptr.String("__PeppolId__"),
+				},
+				NewZealandAdditionalInfo: &types.NewZealandAdditionalInfo{
+					PeppolId: ptr.String("__PeppolId__"),
 				},
 			},
 			StatusReason: &types.TaxRegistrationStatusReason{
@@ -868,6 +882,7 @@ func TestUpdateResponseSnapshot_ListTaxRegistrations(t *testing.T) {
 							ElectronicTransactionCodeNumber: ptr.String("__ElectronicTransactionCodeNumber__"),
 							PaymentVoucherNumber:            ptr.String("__PaymentVoucherNumber__"),
 							PaymentVoucherNumberDate:        ptr.String("__PaymentVoucherNumberDate__"),
+							VatCreditMethod:                 ptr.Bool(true),
 						},
 						EgyptAdditionalInfo: &types.EgyptAdditionalInfo{
 							UniqueIdentificationNumber:               ptr.String("__UniqueIdentificationNumber__"),
@@ -914,6 +929,19 @@ func TestUpdateResponseSnapshot_ListTaxRegistrations(t *testing.T) {
 							},
 							TaxpayerTypeCode: ptr.String("__TaxpayerTypeCode__"),
 							IssueDate:        ptr.String("__IssueDate__"),
+						},
+						UnitedArabEmiratesAdditionalInfo: &types.UnitedArabEmiratesAdditionalInfo{
+							TaxRegistrationNumberType: types.UaeTaxRegistrationNumberType("VATTaxRegistrationNumber"),
+							PeppolId:                  ptr.String("__PeppolId__"),
+							TradeLicenseNumber:        ptr.String("__TradeLicenseNumber__"),
+							EmiratesId:                ptr.String("__EmiratesId__"),
+						},
+						NorwayAdditionalInfo: &types.NorwayAdditionalInfo{
+							TaxRegistrationNumberType: types.NorwayTaxRegistrationNumberType("TaxRegistrationNumber"),
+							PeppolId:                  ptr.String("__PeppolId__"),
+						},
+						NewZealandAdditionalInfo: &types.NewZealandAdditionalInfo{
+							PeppolId: ptr.String("__PeppolId__"),
 						},
 					},
 					StatusReason: &types.TaxRegistrationStatusReason{
@@ -1050,6 +1078,7 @@ func TestUpdateResponseSnapshot_ListTaxRegistrations(t *testing.T) {
 							ElectronicTransactionCodeNumber: ptr.String("__ElectronicTransactionCodeNumber__"),
 							PaymentVoucherNumber:            ptr.String("__PaymentVoucherNumber__"),
 							PaymentVoucherNumberDate:        ptr.String("__PaymentVoucherNumberDate__"),
+							VatCreditMethod:                 ptr.Bool(true),
 						},
 						EgyptAdditionalInfo: &types.EgyptAdditionalInfo{
 							UniqueIdentificationNumber:               ptr.String("__UniqueIdentificationNumber__"),
@@ -1096,6 +1125,19 @@ func TestUpdateResponseSnapshot_ListTaxRegistrations(t *testing.T) {
 							},
 							TaxpayerTypeCode: ptr.String("__TaxpayerTypeCode__"),
 							IssueDate:        ptr.String("__IssueDate__"),
+						},
+						UnitedArabEmiratesAdditionalInfo: &types.UnitedArabEmiratesAdditionalInfo{
+							TaxRegistrationNumberType: types.UaeTaxRegistrationNumberType("VATTaxRegistrationNumber"),
+							PeppolId:                  ptr.String("__PeppolId__"),
+							TradeLicenseNumber:        ptr.String("__TradeLicenseNumber__"),
+							EmiratesId:                ptr.String("__EmiratesId__"),
+						},
+						NorwayAdditionalInfo: &types.NorwayAdditionalInfo{
+							TaxRegistrationNumberType: types.NorwayTaxRegistrationNumberType("TaxRegistrationNumber"),
+							PeppolId:                  ptr.String("__PeppolId__"),
+						},
+						NewZealandAdditionalInfo: &types.NewZealandAdditionalInfo{
+							PeppolId: ptr.String("__PeppolId__"),
 						},
 					},
 					StatusReason: &types.TaxRegistrationStatusReason{

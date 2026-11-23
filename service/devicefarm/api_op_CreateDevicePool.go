@@ -41,6 +41,11 @@ type CreateDevicePoolInput struct {
 
 	// The device pool's rules.
 	//
+	// A device pool contains either physical devices or virtual devices, but not
+	// both. If you define the pool with attribute rules and those rules do not include
+	// a DEVICE_TYPE rule, the pool contains only physical devices. If you define the
+	// pool by listing device ARNs, the pool contains the devices you list.
+	//
 	// This member is required.
 	Rules []types.Rule
 

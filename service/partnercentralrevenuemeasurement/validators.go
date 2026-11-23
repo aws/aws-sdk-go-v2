@@ -350,6 +350,26 @@ func (m *validateOpUpdateMarketplaceRevenueShareAllocation) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMarketplaceRevenueShare struct {
+}
+
+func (*validateOpUpdateMarketplaceRevenueShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMarketplaceRevenueShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMarketplaceRevenueShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMarketplaceRevenueShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRevenueAttribution struct {
 }
 
@@ -438,17 +458,73 @@ func addOpUpdateMarketplaceRevenueShareAllocationValidationMiddleware(stack *mid
 	return stack.Initialize.Add(&validateOpUpdateMarketplaceRevenueShareAllocation{}, middleware.After)
 }
 
+func addOpUpdateMarketplaceRevenueShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMarketplaceRevenueShare{}, middleware.After)
+}
+
 func addOpUpdateRevenueAttributionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRevenueAttribution{}, middleware.After)
 }
 
-func validateMarketplaceRevenueShareTagList(v []types.Tag) error {
+func validateContextFilter(v *types.ContextFilter) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "MarketplaceRevenueShareTagList"}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextFilter"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContextFilterList(v []types.ContextFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextFilterList"}
 	for i := range v {
-		if err := validateTag(&v[i]); err != nil {
+		if err := validateContextFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMarketplaceRevenueShareProductEntry(v *types.MarketplaceRevenueShareProductEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MarketplaceRevenueShareProductEntry"}
+	if v.ProductId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	}
+	if v.Accounts != nil {
+		if err := validateRevenueShareProductAccountEntryList(v.Accounts); err != nil {
+			invalidParams.AddNested("Accounts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMarketplaceRevenueShareProductEntryList(v []types.MarketplaceRevenueShareProductEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MarketplaceRevenueShareProductEntryList"}
+	for i := range v {
+		if err := validateMarketplaceRevenueShareProductEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -509,6 +585,41 @@ func validateRevenueShareAllocationChangeList(v []types.RevenueShareAllocation) 
 	}
 }
 
+func validateRevenueShareProductAccountEntry(v *types.RevenueShareProductAccountEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevenueShareProductAccountEntry"}
+	if len(v.AccountType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountType"))
+	}
+	if v.AccountIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRevenueShareProductAccountEntryList(v []types.RevenueShareProductAccountEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RevenueShareProductAccountEntryList"}
+	for i := range v {
+		if err := validateRevenueShareProductAccountEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -552,11 +663,17 @@ func validateOpCreateMarketplaceRevenueShareAllocationInput(v *CreateMarketplace
 	if len(v.Catalog) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
 	}
-	if v.ProductId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	if v.MarketplaceRevenueShareIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MarketplaceRevenueShareIdentifier"))
+	}
+	if v.MarketplaceRevenueShareRevision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MarketplaceRevenueShareRevision"))
 	}
 	if v.EffectiveFrom == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EffectiveFrom"))
+	}
+	if v.EffectiveUntil == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EffectiveUntil"))
 	}
 	if v.RevenueSharePercent == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RevenueSharePercent"))
@@ -576,11 +693,15 @@ func validateOpCreateMarketplaceRevenueShareInput(v *CreateMarketplaceRevenueSha
 	if len(v.Catalog) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
 	}
-	if v.ProductId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	if v.Products == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Products"))
+	} else if v.Products != nil {
+		if err := validateMarketplaceRevenueShareProductEntryList(v.Products); err != nil {
+			invalidParams.AddNested("Products", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Tags != nil {
-		if err := validateMarketplaceRevenueShareTagList(v.Tags); err != nil {
+		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -625,8 +746,8 @@ func validateOpGetMarketplaceRevenueShareAllocationInput(v *GetMarketplaceRevenu
 	if len(v.Catalog) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
 	}
-	if v.ProductId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	if v.MarketplaceRevenueShareIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MarketplaceRevenueShareIdentifier"))
 	}
 	if v.MarketplaceRevenueShareAllocationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MarketplaceRevenueShareAllocationId"))
@@ -646,8 +767,8 @@ func validateOpGetMarketplaceRevenueShareInput(v *GetMarketplaceRevenueShareInpu
 	if len(v.Catalog) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
 	}
-	if v.ProductId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -721,8 +842,8 @@ func validateOpListMarketplaceRevenueShareAllocationsInput(v *ListMarketplaceRev
 	if len(v.Catalog) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
 	}
-	if v.ProductId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	if v.MarketplaceRevenueShareIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MarketplaceRevenueShareIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -771,6 +892,11 @@ func validateOpListRevenueAttributionsInput(v *ListRevenueAttributionsInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "ListRevenueAttributionsInput"}
 	if len(v.Catalog) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.ContextFilters != nil {
+		if err := validateContextFilterList(v.ContextFilters); err != nil {
+			invalidParams.AddNested("ContextFilters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -870,14 +996,42 @@ func validateOpUpdateMarketplaceRevenueShareAllocationInput(v *UpdateMarketplace
 	if len(v.Catalog) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
 	}
-	if v.ProductId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductId"))
+	if v.MarketplaceRevenueShareIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MarketplaceRevenueShareIdentifier"))
 	}
 	if v.MarketplaceRevenueShareAllocationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MarketplaceRevenueShareAllocationId"))
 	}
 	if v.MarketplaceRevenueShareRevision == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MarketplaceRevenueShareRevision"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMarketplaceRevenueShareInput(v *UpdateMarketplaceRevenueShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMarketplaceRevenueShareInput"}
+	if len(v.Catalog) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Catalog"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.Revision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
+	}
+	if v.Products == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Products"))
+	} else if v.Products != nil {
+		if err := validateMarketplaceRevenueShareProductEntryList(v.Products); err != nil {
+			invalidParams.AddNested("Products", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

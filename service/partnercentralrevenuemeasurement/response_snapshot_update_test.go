@@ -143,14 +143,44 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 }
 func TestUpdateResponseSnapshot_CreateMarketplaceRevenueShare(t *testing.T) {
 	want := &CreateMarketplaceRevenueShareOutput{
-		ProductId:        ptr.String("__ProductId__"),
-		Arn:              ptr.String("__Arn__"),
-		Catalog:          types.CatalogName("AWS"),
-		ProductCode:      ptr.String("__ProductCode__"),
-		ProductName:      ptr.String("__ProductName__"),
+		Id:      ptr.String("__Id__"),
+		Arn:     ptr.String("__Arn__"),
+		Catalog: types.CatalogName("AWS"),
+		Products: []types.MarketplaceRevenueShareProductSummary{
+			{
+				ProductId:   ptr.String("__ProductId__"),
+				ProductCode: ptr.String("__ProductCode__"),
+				ProductName: ptr.String("__ProductName__"),
+				Accounts: []types.RevenueShareProductAccountSummary{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						Count:       ptr.Int32(1),
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						Count:       ptr.Int32(1),
+					},
+				},
+			},
+			{
+				ProductId:   ptr.String("__ProductId__"),
+				ProductCode: ptr.String("__ProductCode__"),
+				ProductName: ptr.String("__ProductName__"),
+				Accounts: []types.RevenueShareProductAccountSummary{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						Count:       ptr.Int32(1),
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						Count:       ptr.Int32(1),
+					},
+				},
+			},
+		},
 		CreatedDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Revision:         ptr.Int32(1),
+		Revision:         ptr.String("__Revision__"),
 	}
 	proto := rpcv2.NewCBOR(schemas.PartnerCentralRevenueMeasurement)
 	opSchema := smithy.NewOperationSchema(schemas.CreateMarketplaceRevenueShare, schemas.CreateMarketplaceRevenueShareOutput, schemas.CreateMarketplaceRevenueShareOutput)
@@ -175,16 +205,15 @@ func TestUpdateResponseSnapshot_CreateMarketplaceRevenueShare(t *testing.T) {
 func TestUpdateResponseSnapshot_CreateMarketplaceRevenueShareAllocation(t *testing.T) {
 	want := &CreateMarketplaceRevenueShareAllocationOutput{
 		MarketplaceRevenueShareAllocationId:   ptr.String("__MarketplaceRevenueShareAllocationId__"),
-		ProductId:                             ptr.String("__ProductId__"),
-		ProductName:                           ptr.String("__ProductName__"),
-		Arn:                                   ptr.String("__Arn__"),
+		MarketplaceRevenueShareIdentifier:     ptr.String("__MarketplaceRevenueShareIdentifier__"),
 		EffectiveFrom:                         ptr.String("__EffectiveFrom__"),
 		EffectiveUntil:                        ptr.String("__EffectiveUntil__"),
 		RevenueSharePercent:                   ptr.String("__RevenueSharePercent__"),
 		Status:                                types.AllocationStatus("ACTIVE"),
 		CreatedDate:                           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedDate:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		LatestMarketplaceRevenueShareRevision: ptr.String("__LatestMarketplaceRevenueShareRevision__"),
+		MarketplaceRevenueShareRevision:       ptr.String("__MarketplaceRevenueShareRevision__"),
+		MarketplaceRevenueShareLatestRevision: ptr.String("__MarketplaceRevenueShareLatestRevision__"),
 	}
 	proto := rpcv2.NewCBOR(schemas.PartnerCentralRevenueMeasurement)
 	opSchema := smithy.NewOperationSchema(schemas.CreateMarketplaceRevenueShareAllocation, schemas.CreateMarketplaceRevenueShareAllocationOutput, schemas.CreateMarketplaceRevenueShareAllocationOutput)
@@ -219,6 +248,9 @@ func TestUpdateResponseSnapshot_CreateRevenueAttribution(t *testing.T) {
 			ProductName: ptr.String("__ProductName__"),
 		},
 		Revision: ptr.String("__Revision__"),
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PartnerCentralRevenueMeasurement)
 	opSchema := smithy.NewOperationSchema(schemas.CreateRevenueAttribution, schemas.CreateRevenueAttributionOutput, schemas.CreateRevenueAttributionOutput)
@@ -242,15 +274,63 @@ func TestUpdateResponseSnapshot_CreateRevenueAttribution(t *testing.T) {
 
 func TestUpdateResponseSnapshot_GetMarketplaceRevenueShare(t *testing.T) {
 	want := &GetMarketplaceRevenueShareOutput{
-		ProductId:        ptr.String("__ProductId__"),
-		Arn:              ptr.String("__Arn__"),
-		Catalog:          types.CatalogName("AWS"),
-		ProductCode:      ptr.String("__ProductCode__"),
-		ProductName:      ptr.String("__ProductName__"),
+		Id:      ptr.String("__Id__"),
+		Arn:     ptr.String("__Arn__"),
+		Catalog: types.CatalogName("AWS"),
+		Products: []types.MarketplaceRevenueShareProductDetail{
+			{
+				ProductId:   ptr.String("__ProductId__"),
+				ProductCode: ptr.String("__ProductCode__"),
+				ProductName: ptr.String("__ProductName__"),
+				Accounts: []types.RevenueShareProductAccountDetail{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						Count:       ptr.Int32(1),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						Count:       ptr.Int32(1),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				ProductId:   ptr.String("__ProductId__"),
+				ProductCode: ptr.String("__ProductCode__"),
+				ProductName: ptr.String("__ProductName__"),
+				Accounts: []types.RevenueShareProductAccountDetail{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						Count:       ptr.Int32(1),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						Count:       ptr.Int32(1),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
 		CreatedDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		Revision:         ptr.Int32(1),
-		LatestRevision:   ptr.Int32(1),
+		Revision:         ptr.String("__Revision__"),
+		LatestRevision:   ptr.String("__LatestRevision__"),
+		EffectiveFrom:    ptr.String("__EffectiveFrom__"),
+		EffectiveUntil:   ptr.String("__EffectiveUntil__"),
 		TotalActiveMarketplaceRevenueShareAllocationCount: ptr.Int32(1),
 		TotalMarketplaceRevenueShareAllocationCount:       ptr.Int32(1),
 	}
@@ -277,16 +357,15 @@ func TestUpdateResponseSnapshot_GetMarketplaceRevenueShare(t *testing.T) {
 func TestUpdateResponseSnapshot_GetMarketplaceRevenueShareAllocation(t *testing.T) {
 	want := &GetMarketplaceRevenueShareAllocationOutput{
 		MarketplaceRevenueShareAllocationId:   ptr.String("__MarketplaceRevenueShareAllocationId__"),
-		ProductId:                             ptr.String("__ProductId__"),
-		ProductName:                           ptr.String("__ProductName__"),
-		Arn:                                   ptr.String("__Arn__"),
+		MarketplaceRevenueShareIdentifier:     ptr.String("__MarketplaceRevenueShareIdentifier__"),
 		EffectiveFrom:                         ptr.String("__EffectiveFrom__"),
 		EffectiveUntil:                        ptr.String("__EffectiveUntil__"),
 		RevenueSharePercent:                   ptr.String("__RevenueSharePercent__"),
 		Status:                                types.AllocationStatus("ACTIVE"),
 		CreatedDate:                           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedDate:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		LatestMarketplaceRevenueShareRevision: ptr.String("__LatestMarketplaceRevenueShareRevision__"),
+		MarketplaceRevenueShareRevision:       ptr.String("__MarketplaceRevenueShareRevision__"),
+		MarketplaceRevenueShareLatestRevision: ptr.String("__MarketplaceRevenueShareLatestRevision__"),
 	}
 	proto := rpcv2.NewCBOR(schemas.PartnerCentralRevenueMeasurement)
 	opSchema := smithy.NewOperationSchema(schemas.GetMarketplaceRevenueShareAllocation, schemas.GetMarketplaceRevenueShareAllocationOutput, schemas.GetMarketplaceRevenueShareAllocationOutput)
@@ -329,6 +408,9 @@ func TestUpdateResponseSnapshot_GetRevenueAttribution(t *testing.T) {
 		EffectiveUntil:   ptr.String("__EffectiveUntil__"),
 		TotalActiveRevenueAttributionAllocationCount: ptr.Int32(1),
 		TotalRevenueAttributionAllocationCount:       ptr.Int32(1),
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PartnerCentralRevenueMeasurement)
 	opSchema := smithy.NewOperationSchema(schemas.GetRevenueAttribution, schemas.GetRevenueAttributionOutput, schemas.GetRevenueAttributionOutput)
@@ -448,9 +530,7 @@ func TestUpdateResponseSnapshot_ListMarketplaceRevenueShareAllocations(t *testin
 		MarketplaceRevenueShareAllocationSummaries: []types.MarketplaceRevenueShareAllocationSummary{
 			{
 				MarketplaceRevenueShareAllocationId: ptr.String("__MarketplaceRevenueShareAllocationId__"),
-				ProductId:                           ptr.String("__ProductId__"),
-				ProductName:                         ptr.String("__ProductName__"),
-				Arn:                                 ptr.String("__Arn__"),
+				MarketplaceRevenueShareIdentifier:   ptr.String("__MarketplaceRevenueShareIdentifier__"),
 				EffectiveFrom:                       ptr.String("__EffectiveFrom__"),
 				EffectiveUntil:                      ptr.String("__EffectiveUntil__"),
 				RevenueSharePercent:                 ptr.String("__RevenueSharePercent__"),
@@ -460,9 +540,7 @@ func TestUpdateResponseSnapshot_ListMarketplaceRevenueShareAllocations(t *testin
 			},
 			{
 				MarketplaceRevenueShareAllocationId: ptr.String("__MarketplaceRevenueShareAllocationId__"),
-				ProductId:                           ptr.String("__ProductId__"),
-				ProductName:                         ptr.String("__ProductName__"),
-				Arn:                                 ptr.String("__Arn__"),
+				MarketplaceRevenueShareIdentifier:   ptr.String("__MarketplaceRevenueShareIdentifier__"),
 				EffectiveFrom:                       ptr.String("__EffectiveFrom__"),
 				EffectiveUntil:                      ptr.String("__EffectiveUntil__"),
 				RevenueSharePercent:                 ptr.String("__RevenueSharePercent__"),
@@ -497,26 +575,90 @@ func TestUpdateResponseSnapshot_ListMarketplaceRevenueShares(t *testing.T) {
 	want := &ListMarketplaceRevenueSharesOutput{
 		MarketplaceRevenueShareSummaries: []types.MarketplaceRevenueShareSummary{
 			{
-				ProductId:        ptr.String("__ProductId__"),
-				Arn:              ptr.String("__Arn__"),
-				Catalog:          types.CatalogName("AWS"),
-				ProductCode:      ptr.String("__ProductCode__"),
-				ProductName:      ptr.String("__ProductName__"),
+				Id:      ptr.String("__Id__"),
+				Arn:     ptr.String("__Arn__"),
+				Catalog: types.CatalogName("AWS"),
+				Products: []types.MarketplaceRevenueShareProductSummary{
+					{
+						ProductId:   ptr.String("__ProductId__"),
+						ProductCode: ptr.String("__ProductCode__"),
+						ProductName: ptr.String("__ProductName__"),
+						Accounts: []types.RevenueShareProductAccountSummary{
+							{
+								AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+								Count:       ptr.Int32(1),
+							},
+							{
+								AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+								Count:       ptr.Int32(1),
+							},
+						},
+					},
+					{
+						ProductId:   ptr.String("__ProductId__"),
+						ProductCode: ptr.String("__ProductCode__"),
+						ProductName: ptr.String("__ProductName__"),
+						Accounts: []types.RevenueShareProductAccountSummary{
+							{
+								AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+								Count:       ptr.Int32(1),
+							},
+							{
+								AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+								Count:       ptr.Int32(1),
+							},
+						},
+					},
+				},
 				CreatedDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LatestRevision:   ptr.Int32(1),
+				LatestRevision:   ptr.String("__LatestRevision__"),
+				EffectiveFrom:    ptr.String("__EffectiveFrom__"),
+				EffectiveUntil:   ptr.String("__EffectiveUntil__"),
 				TotalActiveMarketplaceRevenueShareAllocationCount: ptr.Int32(1),
 				TotalMarketplaceRevenueShareAllocationCount:       ptr.Int32(1),
 			},
 			{
-				ProductId:        ptr.String("__ProductId__"),
-				Arn:              ptr.String("__Arn__"),
-				Catalog:          types.CatalogName("AWS"),
-				ProductCode:      ptr.String("__ProductCode__"),
-				ProductName:      ptr.String("__ProductName__"),
+				Id:      ptr.String("__Id__"),
+				Arn:     ptr.String("__Arn__"),
+				Catalog: types.CatalogName("AWS"),
+				Products: []types.MarketplaceRevenueShareProductSummary{
+					{
+						ProductId:   ptr.String("__ProductId__"),
+						ProductCode: ptr.String("__ProductCode__"),
+						ProductName: ptr.String("__ProductName__"),
+						Accounts: []types.RevenueShareProductAccountSummary{
+							{
+								AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+								Count:       ptr.Int32(1),
+							},
+							{
+								AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+								Count:       ptr.Int32(1),
+							},
+						},
+					},
+					{
+						ProductId:   ptr.String("__ProductId__"),
+						ProductCode: ptr.String("__ProductCode__"),
+						ProductName: ptr.String("__ProductName__"),
+						Accounts: []types.RevenueShareProductAccountSummary{
+							{
+								AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+								Count:       ptr.Int32(1),
+							},
+							{
+								AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+								Count:       ptr.Int32(1),
+							},
+						},
+					},
+				},
 				CreatedDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				LatestRevision:   ptr.Int32(1),
+				LatestRevision:   ptr.String("__LatestRevision__"),
+				EffectiveFrom:    ptr.String("__EffectiveFrom__"),
+				EffectiveUntil:   ptr.String("__EffectiveUntil__"),
 				TotalActiveMarketplaceRevenueShareAllocationCount: ptr.Int32(1),
 				TotalMarketplaceRevenueShareAllocationCount:       ptr.Int32(1),
 			},
@@ -614,6 +756,9 @@ func TestUpdateResponseSnapshot_ListRevenueAttributions(t *testing.T) {
 				EffectiveUntil:   ptr.String("__EffectiveUntil__"),
 				TotalActiveRevenueAttributionAllocationCount: ptr.Int32(1),
 				TotalRevenueAttributionAllocationCount:       ptr.Int32(1),
+				Context: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			{
 				Arn:          ptr.String("__Arn__"),
@@ -633,6 +778,9 @@ func TestUpdateResponseSnapshot_ListRevenueAttributions(t *testing.T) {
 				EffectiveUntil:   ptr.String("__EffectiveUntil__"),
 				TotalActiveRevenueAttributionAllocationCount: ptr.Int32(1),
 				TotalRevenueAttributionAllocationCount:       ptr.Int32(1),
+				Context: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -763,19 +911,77 @@ func TestUpdateResponseSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateMarketplaceRevenueShare(t *testing.T) {
+	want := &UpdateMarketplaceRevenueShareOutput{
+		Id:  ptr.String("__Id__"),
+		Arn: ptr.String("__Arn__"),
+		Products: []types.MarketplaceRevenueShareProductSummary{
+			{
+				ProductId:   ptr.String("__ProductId__"),
+				ProductCode: ptr.String("__ProductCode__"),
+				ProductName: ptr.String("__ProductName__"),
+				Accounts: []types.RevenueShareProductAccountSummary{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						Count:       ptr.Int32(1),
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						Count:       ptr.Int32(1),
+					},
+				},
+			},
+			{
+				ProductId:   ptr.String("__ProductId__"),
+				ProductCode: ptr.String("__ProductCode__"),
+				ProductName: ptr.String("__ProductName__"),
+				Accounts: []types.RevenueShareProductAccountSummary{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						Count:       ptr.Int32(1),
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						Count:       ptr.Int32(1),
+					},
+				},
+			},
+		},
+		LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LatestRevision:   ptr.String("__LatestRevision__"),
+	}
+	proto := rpcv2.NewCBOR(schemas.PartnerCentralRevenueMeasurement)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateMarketplaceRevenueShare, schemas.UpdateMarketplaceRevenueShareOutput, schemas.UpdateMarketplaceRevenueShareOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateMarketplaceRevenueShare.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateMarketplaceRevenueShareAllocation(t *testing.T) {
 	want := &UpdateMarketplaceRevenueShareAllocationOutput{
 		MarketplaceRevenueShareAllocationId:   ptr.String("__MarketplaceRevenueShareAllocationId__"),
-		ProductId:                             ptr.String("__ProductId__"),
-		ProductName:                           ptr.String("__ProductName__"),
-		Arn:                                   ptr.String("__Arn__"),
+		MarketplaceRevenueShareIdentifier:     ptr.String("__MarketplaceRevenueShareIdentifier__"),
 		EffectiveFrom:                         ptr.String("__EffectiveFrom__"),
 		EffectiveUntil:                        ptr.String("__EffectiveUntil__"),
 		RevenueSharePercent:                   ptr.String("__RevenueSharePercent__"),
 		Status:                                types.AllocationStatus("ACTIVE"),
 		CreatedDate:                           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedDate:                      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		LatestMarketplaceRevenueShareRevision: ptr.String("__LatestMarketplaceRevenueShareRevision__"),
+		MarketplaceRevenueShareRevision:       ptr.String("__MarketplaceRevenueShareRevision__"),
+		MarketplaceRevenueShareLatestRevision: ptr.String("__MarketplaceRevenueShareLatestRevision__"),
 	}
 	proto := rpcv2.NewCBOR(schemas.PartnerCentralRevenueMeasurement)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateMarketplaceRevenueShareAllocation, schemas.UpdateMarketplaceRevenueShareAllocationOutput, schemas.UpdateMarketplaceRevenueShareAllocationOutput)
@@ -804,6 +1010,9 @@ func TestUpdateResponseSnapshot_UpdateRevenueAttribution(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LatestRevision:   ptr.String("__LatestRevision__"),
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	proto := rpcv2.NewCBOR(schemas.PartnerCentralRevenueMeasurement)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateRevenueAttribution, schemas.UpdateRevenueAttributionOutput, schemas.UpdateRevenueAttributionOutput)

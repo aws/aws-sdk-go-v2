@@ -176,12 +176,28 @@ func TestCheckResponseSnapshot_BatchGetDiscoverableRegistryRecord(t *testing.T) 
 							},
 						},
 					},
+					SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+						Data:              ptr.String("__Data__"),
+						DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+						AdditionalData: &types.SignatureAgentCardAdditionalData{
+							Category: types.BotCategory("advertising"),
+						},
+					},
 				},
 				RecordVersion:  ptr.String("__RecordVersion__"),
 				Status:         types.RegistryRecordStatus("DRAFT"),
 				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				CustomMetadata: document.NewLazyDocument("__Document__"),
+				Artifact: &types.RegistryRecordArtifactDownload{
+					Sha256:      ptr.String("__Sha256__"),
+					DownloadUrl: ptr.String("__DownloadUrl__"),
+				},
 			},
 			{
 				RegistryArn: ptr.String("__RegistryArn__"),
@@ -248,12 +264,28 @@ func TestCheckResponseSnapshot_BatchGetDiscoverableRegistryRecord(t *testing.T) 
 							},
 						},
 					},
+					SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+						Data:              ptr.String("__Data__"),
+						DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+						AdditionalData: &types.SignatureAgentCardAdditionalData{
+							Category: types.BotCategory("advertising"),
+						},
+					},
 				},
 				RecordVersion:  ptr.String("__RecordVersion__"),
 				Status:         types.RegistryRecordStatus("DRAFT"),
 				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				CustomMetadata: document.NewLazyDocument("__Document__"),
+				Artifact: &types.RegistryRecordArtifactDownload{
+					Sha256:      ptr.String("__Sha256__"),
+					DownloadUrl: ptr.String("__DownloadUrl__"),
+				},
 			},
 		},
 		Errors: []types.BatchGetDiscoverableRegistryRecordError{
@@ -450,12 +482,28 @@ func TestCheckResponseSnapshot_SearchDiscoverableRegistryRecords(t *testing.T) {
 							},
 						},
 					},
+					SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+						Data:              ptr.String("__Data__"),
+						DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+						AdditionalData: &types.SignatureAgentCardAdditionalData{
+							Category: types.BotCategory("advertising"),
+						},
+					},
 				},
 				RecordVersion:  ptr.String("__RecordVersion__"),
 				Status:         types.RegistryRecordStatus("DRAFT"),
 				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				CustomMetadata: document.NewLazyDocument("__Document__"),
+				Artifact: &types.RegistryRecordArtifactDownload{
+					Sha256:      ptr.String("__Sha256__"),
+					DownloadUrl: ptr.String("__DownloadUrl__"),
+				},
 			},
 			{
 				RegistryArn: ptr.String("__RegistryArn__"),
@@ -522,14 +570,32 @@ func TestCheckResponseSnapshot_SearchDiscoverableRegistryRecords(t *testing.T) {
 							},
 						},
 					},
+					SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+						Data:              ptr.String("__Data__"),
+						DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+							},
+						},
+						AdditionalData: &types.SignatureAgentCardAdditionalData{
+							Category: types.BotCategory("advertising"),
+						},
+					},
 				},
 				RecordVersion:  ptr.String("__RecordVersion__"),
 				Status:         types.RegistryRecordStatus("DRAFT"),
 				CreatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				CustomMetadata: document.NewLazyDocument("__Document__"),
+				Artifact: &types.RegistryRecordArtifactDownload{
+					Sha256:      ptr.String("__Sha256__"),
+					DownloadUrl: ptr.String("__DownloadUrl__"),
+				},
 			},
 		},
+		SearchType: types.SearchType("HYBRID"),
+		NextToken:  ptr.String("__NextToken__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("SearchDiscoverableRegistryRecords.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -547,6 +613,8 @@ func TestCheckResponseSnapshot_SearchDiscoverableRegistryRecords(t *testing.T) {
 		},
 		MaxResults: ptr.Int32(1),
 		Filters:    document.NewLazyDocument("__Document__"),
+		SearchType: types.SearchType("HYBRID"),
+		NextToken:  ptr.String("__NextToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)

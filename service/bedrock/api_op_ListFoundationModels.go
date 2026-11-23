@@ -52,6 +52,16 @@ type ListFoundationModelsInput struct {
 	// Return models belonging to the model provider that you specify.
 	ByProvider *string
 
+	// The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock uses the
+	// project's trusted access program participation when determining which models to
+	// return. The project must belong to your account in the same AWS Region and
+	// partition as the request.
+	//
+	// If you omit this parameter or specify default , Amazon Bedrock uses your
+	// account's participation, including organization inheritance. A project that
+	// doesn't exist or is archived causes a ValidationException .
+	ProjectIdentifier *string
+
 	noSmithyDocumentSerde
 }
 
@@ -73,6 +83,9 @@ func (v *ListFoundationModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.ByProvider != nil {
 		s.WriteString(schemas.ListFoundationModelsRequest_byProvider, *v.ByProvider)
+	}
+	if v.ProjectIdentifier != nil {
+		s.WriteString(schemas.ListFoundationModelsRequest_projectIdentifier, *v.ProjectIdentifier)
 	}
 }
 

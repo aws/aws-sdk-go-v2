@@ -289,6 +289,14 @@ func TestCheckResponseSnapshot_GetListing(t *testing.T) {
 				},
 			},
 		},
+		PurchaseIndicators: []types.PurchaseIndicator{
+			{
+				IndicatorType: types.PurchaseIndicatorType("NOT_AVAILABLE_FOR_SUBSCRIPTION"),
+			},
+			{
+				IndicatorType: types.PurchaseIndicatorType("NOT_AVAILABLE_FOR_SUBSCRIPTION"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetListing.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -599,6 +607,14 @@ func TestCheckResponseSnapshot_GetProduct(t *testing.T) {
 			},
 		},
 		ListingId: ptr.String("__ListingId__"),
+		PurchaseIndicators: []types.PurchaseIndicator{
+			{
+				IndicatorType: types.PurchaseIndicatorType("NOT_AVAILABLE_FOR_SUBSCRIPTION"),
+			},
+			{
+				IndicatorType: types.PurchaseIndicatorType("NOT_AVAILABLE_FOR_SUBSCRIPTION"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetProduct.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -762,6 +778,97 @@ func TestCheckResponseSnapshot_ListFulfillmentOptions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListFulfillmentOptions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListListingAttributes(t *testing.T) {
+	want := &ListListingAttributesOutput{
+		Locale: ptr.String("__Locale__"),
+		ListingAttributes: []types.ListingAttributeResults{
+			&types.ListingAttributeResultsMemberCaseStudy{
+				Value: types.CaseStudy{
+					CaseStudyId:      ptr.String("__CaseStudyId__"),
+					CaseStudyName:    ptr.String("__CaseStudyName__"),
+					ShortDescription: ptr.String("__ShortDescription__"),
+					EngagementDates: &types.EngagementDates{
+						StartDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						CompletionDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					Challenge:              ptr.String("__Challenge__"),
+					Resolution:             ptr.String("__Resolution__"),
+					ImplementationApproach: ptr.String("__ImplementationApproach__"),
+					Outcome:                ptr.String("__Outcome__"),
+					Resources: []types.CaseStudyResource{
+						{
+							ContentType:  types.ResourceContentType("EMAIL"),
+							Value:        ptr.String("__Value__"),
+							DisplayName:  ptr.String("__DisplayName__"),
+							ResourceType: types.CaseStudyResourceType("CASE_STUDY_WEBSITE"),
+						},
+						{
+							ContentType:  types.ResourceContentType("EMAIL"),
+							Value:        ptr.String("__Value__"),
+							DisplayName:  ptr.String("__DisplayName__"),
+							ResourceType: types.CaseStudyResourceType("CASE_STUDY_WEBSITE"),
+						},
+					},
+				},
+			},
+			&types.ListingAttributeResultsMemberCaseStudy{
+				Value: types.CaseStudy{
+					CaseStudyId:      ptr.String("__CaseStudyId__"),
+					CaseStudyName:    ptr.String("__CaseStudyName__"),
+					ShortDescription: ptr.String("__ShortDescription__"),
+					EngagementDates: &types.EngagementDates{
+						StartDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						CompletionDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					Challenge:              ptr.String("__Challenge__"),
+					Resolution:             ptr.String("__Resolution__"),
+					ImplementationApproach: ptr.String("__ImplementationApproach__"),
+					Outcome:                ptr.String("__Outcome__"),
+					Resources: []types.CaseStudyResource{
+						{
+							ContentType:  types.ResourceContentType("EMAIL"),
+							Value:        ptr.String("__Value__"),
+							DisplayName:  ptr.String("__DisplayName__"),
+							ResourceType: types.CaseStudyResourceType("CASE_STUDY_WEBSITE"),
+						},
+						{
+							ContentType:  types.ResourceContentType("EMAIL"),
+							Value:        ptr.String("__Value__"),
+							DisplayName:  ptr.String("__DisplayName__"),
+							ResourceType: types.CaseStudyResourceType("CASE_STUDY_WEBSITE"),
+						},
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListListingAttributes.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListListingAttributes(context.Background(), &ListListingAttributesInput{
+		Locale:    ptr.String("__Locale__"),
+		ListingId: ptr.String("__ListingId__"),
+		AttributeTypes: []types.ListingAttributeType{
+			types.ListingAttributeType("CASE_STUDY"),
+			types.ListingAttributeType("CASE_STUDY"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListListingAttributes.response", err)
 	}
 }
 
@@ -1122,6 +1229,66 @@ func TestCheckResponseSnapshot_SearchListings(t *testing.T) {
 						},
 					},
 				},
+				TrustCenterSummary: &types.TrustCenterSummary{
+					SourceSummaries: []types.TrustCenterSourceSummary{
+						{
+							ContentType: types.ResourceContentType("EMAIL"),
+							Value:       ptr.String("__Value__"),
+							DisplayName: ptr.String("__DisplayName__"),
+							Provider:    types.TrustCenterProvider("DRATA"),
+						},
+						{
+							ContentType: types.ResourceContentType("EMAIL"),
+							Value:       ptr.String("__Value__"),
+							DisplayName: ptr.String("__DisplayName__"),
+							Provider:    types.TrustCenterProvider("DRATA"),
+						},
+					},
+					CertificationSummaries: []types.TrustCenterCertificationSummary{
+						{
+							CertificationType: ptr.String("__CertificationType__"),
+							DisplayName:       ptr.String("__DisplayName__"),
+							LogoUrl:           ptr.String("__LogoUrl__"),
+						},
+						{
+							CertificationType: ptr.String("__CertificationType__"),
+							DisplayName:       ptr.String("__DisplayName__"),
+							LogoUrl:           ptr.String("__LogoUrl__"),
+						},
+					},
+					TotalCertificationCount: ptr.Int64(1),
+				},
+				CaseStudiesSummary: &types.CaseStudiesSummary{
+					CaseStudyCount: ptr.Int64(1),
+				},
+				UseCaseSummary: &types.UseCaseSummary{
+					UseCases: []types.UseCaseSummaryEntry{
+						{
+							UseCase: &types.UseCaseInformation{
+								DisplayName: ptr.String("__DisplayName__"),
+								Value:       ptr.String("__Value__"),
+							},
+						},
+						{
+							UseCase: &types.UseCaseInformation{
+								DisplayName: ptr.String("__DisplayName__"),
+								Value:       ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				SellerEngagements: []types.SellerEngagement{
+					{
+						EngagementType: types.SellerEngagementType("REQUEST_FOR_PRIVATE_OFFER"),
+						ContentType:    types.SellerEngagementContentType("LINK"),
+						Value:          ptr.String("__Value__"),
+					},
+					{
+						EngagementType: types.SellerEngagementType("REQUEST_FOR_PRIVATE_OFFER"),
+						ContentType:    types.SellerEngagementContentType("LINK"),
+						Value:          ptr.String("__Value__"),
+					},
+				},
 			},
 			{
 				ListingId:   ptr.String("__ListingId__"),
@@ -1221,6 +1388,66 @@ func TestCheckResponseSnapshot_SearchListings(t *testing.T) {
 								DisplayName:     ptr.String("__DisplayName__"),
 							},
 						},
+					},
+				},
+				TrustCenterSummary: &types.TrustCenterSummary{
+					SourceSummaries: []types.TrustCenterSourceSummary{
+						{
+							ContentType: types.ResourceContentType("EMAIL"),
+							Value:       ptr.String("__Value__"),
+							DisplayName: ptr.String("__DisplayName__"),
+							Provider:    types.TrustCenterProvider("DRATA"),
+						},
+						{
+							ContentType: types.ResourceContentType("EMAIL"),
+							Value:       ptr.String("__Value__"),
+							DisplayName: ptr.String("__DisplayName__"),
+							Provider:    types.TrustCenterProvider("DRATA"),
+						},
+					},
+					CertificationSummaries: []types.TrustCenterCertificationSummary{
+						{
+							CertificationType: ptr.String("__CertificationType__"),
+							DisplayName:       ptr.String("__DisplayName__"),
+							LogoUrl:           ptr.String("__LogoUrl__"),
+						},
+						{
+							CertificationType: ptr.String("__CertificationType__"),
+							DisplayName:       ptr.String("__DisplayName__"),
+							LogoUrl:           ptr.String("__LogoUrl__"),
+						},
+					},
+					TotalCertificationCount: ptr.Int64(1),
+				},
+				CaseStudiesSummary: &types.CaseStudiesSummary{
+					CaseStudyCount: ptr.Int64(1),
+				},
+				UseCaseSummary: &types.UseCaseSummary{
+					UseCases: []types.UseCaseSummaryEntry{
+						{
+							UseCase: &types.UseCaseInformation{
+								DisplayName: ptr.String("__DisplayName__"),
+								Value:       ptr.String("__Value__"),
+							},
+						},
+						{
+							UseCase: &types.UseCaseInformation{
+								DisplayName: ptr.String("__DisplayName__"),
+								Value:       ptr.String("__Value__"),
+							},
+						},
+					},
+				},
+				SellerEngagements: []types.SellerEngagement{
+					{
+						EngagementType: types.SellerEngagementType("REQUEST_FOR_PRIVATE_OFFER"),
+						ContentType:    types.SellerEngagementContentType("LINK"),
+						Value:          ptr.String("__Value__"),
+					},
+					{
+						EngagementType: types.SellerEngagementType("REQUEST_FOR_PRIVATE_OFFER"),
+						ContentType:    types.SellerEngagementContentType("LINK"),
+						Value:          ptr.String("__Value__"),
 					},
 				},
 			},

@@ -1088,6 +1088,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the host associated with the connection.</p>"
                     }
+                },
+                "ProviderEndpoint": {
+                    "target": "com.amazonaws.codeconnections#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint of the ghe.com tenant where your organization resides. This value is populated only for a connection with a <code>ProviderType</code> of <code>GitHubEnterpriseCloudDataResidency</code>. It is empty for all other provider types.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1101,7 +1107,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+$"
+                "smithy.api#pattern": "^arn:aws(-[\\w]+)*:(codestar-connections|codeconnections):[a-z0-9\\-]+:[0-9]{12}:connection\\/[\\w\\-]+$"
             }
         },
         "com.amazonaws.codeconnections#ConnectionList": {
@@ -1153,6 +1159,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.codeconnections#InvalidInputException"
+                },
+                {
                     "target": "com.amazonaws.codeconnections#LimitExceededException"
                 },
                 {
@@ -1160,6 +1169,9 @@
                 },
                 {
                     "target": "com.amazonaws.codeconnections#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.codeconnections#UnsupportedProviderTypeException"
                 }
             ],
             "traits": {
@@ -1192,6 +1204,12 @@
                     "target": "com.amazonaws.codeconnections#HostArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the host associated with the connection to be created.</p>"
+                    }
+                },
+                "ProviderEndpoint": {
+                    "target": "com.amazonaws.codeconnections#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint of the ghe.com tenant where your organization resides. Provide this parameter only when <code>ProviderType</code> is <code>GitHubEnterpriseCloudDataResidency</code>. Leave this parameter empty for all other provider types.</p>"
                     }
                 }
             },
@@ -1326,6 +1344,9 @@
                     "target": "com.amazonaws.codeconnections#ResourceAlreadyExistsException"
                 },
                 {
+                    "target": "com.amazonaws.codeconnections#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.codeconnections#ThrottlingException"
                 }
             ],
@@ -1415,6 +1436,9 @@
                 },
                 {
                     "target": "com.amazonaws.codeconnections#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.codeconnections#ResourceNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.codeconnections#ThrottlingException"
@@ -2388,16 +2412,16 @@
         "com.amazonaws.codeconnections#ListConnectionsInput": {
             "type": "structure",
             "members": {
-                "ProviderTypeFilter": {
-                    "target": "com.amazonaws.codeconnections#ProviderType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Filters the list of connections to those associated with a specified provider, such as\n      Bitbucket.</p>"
-                    }
-                },
                 "HostArnFilter": {
                     "target": "com.amazonaws.codeconnections#HostArn",
                     "traits": {
                         "smithy.api#documentation": "<p>Filters the list of connections to those associated with a specified host.</p>"
+                    }
+                },
+                "ProviderTypeFilter": {
+                    "target": "com.amazonaws.codeconnections#ProviderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of connections to those associated with a specified provider, such as\n      Bitbucket.</p>"
                     }
                 },
                 "MaxResults": {
@@ -2798,7 +2822,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
+                    "max": 2048
                 },
                 "smithy.api#pattern": "^.*$"
             }
@@ -2853,6 +2877,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AzureDevOps"
+                    }
+                },
+                "GITHUB_ENTERPRISE_CLOUD_DATA_RESIDENCY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GitHubEnterpriseCloudDataResidency"
                     }
                 }
             }

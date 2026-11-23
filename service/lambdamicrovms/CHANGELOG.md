@@ -1,3 +1,7 @@
+# v1.13.0 (2026-11-20)
+
+* **Feature**: AWS Lambda MicroVMs now supports customer managed keys (CMK) in AWS Key Management Service (AWS KMS), enabling you to encrypt Lambda MicroVM data at rest using keys you control.
+
 # v1.12.2 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

@@ -108,6 +108,84 @@ func serdeRespClient(status int, header http.Header, body []byte) *Client {
 		},
 	})
 }
+func TestCheckResponseSnapshot_AssociatePublisher(t *testing.T) {
+	want := &AssociatePublisherOutput{
+		RecordArn:        ptr.String("__RecordArn__"),
+		PublicIdentifier: ptr.String("__PublicIdentifier__"),
+		Publisher:        ptr.String("__Publisher__"),
+		Status:           types.AssociationStatus("PENDING_APPROVAL"),
+		StatusReason:     ptr.String("__StatusReason__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("AssociatePublisher.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AssociatePublisher(context.Background(), &AssociatePublisherInput{
+		RecordArn:    ptr.String("__RecordArn__"),
+		PublisherArn: ptr.String("__PublisherArn__"),
+		Subdomain:    ptr.String("__Subdomain__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AssociatePublisher.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CreatePublisher(t *testing.T) {
+	want := &CreatePublisherOutput{
+		Value: &types.IdentifierMemberDomain{
+			Value: "__IdentifierMemberDomain__",
+		},
+		IdentifierType: types.IdentifierType("DOMAIN"),
+		Status:         types.VerificationStatus("ACTION_REQUIRED"),
+		StatusReason:   ptr.String("__StatusReason__"),
+		DomainChallenge: &types.DomainChallenge{
+			RecordName:  ptr.String("__RecordName__"),
+			RecordValue: ptr.String("__RecordValue__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PublisherArn: ptr.String("__PublisherArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreatePublisher.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreatePublisher(context.Background(), &CreatePublisherInput{
+		Value: &types.IdentifierMemberDomain{
+			Value: "__IdentifierMemberDomain__",
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreatePublisher.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateRegistry(t *testing.T) {
 	want := &CreateRegistryOutput{
 		RegistryArn: ptr.String("__RegistryArn__"),
@@ -231,6 +309,14 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 	want := &CreateRegistryRecordOutput{
 		RecordArn: ptr.String("__RecordArn__"),
 		Status:    types.RegistryRecordStatus("DRAFT"),
+		AuthorizationData: &types.AuthorizationDataMemberOauth2{
+			Value: types.OAuth2AuthorizationData{
+				AuthorizationUrl:       ptr.String("__AuthorizationUrl__"),
+				UserId:                 ptr.String("__UserId__"),
+				AuthorizationAttemptId: ptr.String("__AuthorizationAttemptId__"),
+				ExpiresAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateRegistryRecord.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -273,6 +359,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -289,6 +376,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -316,6 +404,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -332,6 +421,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -363,6 +453,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
@@ -379,11 +470,61 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
 								},
 							},
+						},
+					},
+					SkillPackage: &types.AgentSkillsPackageDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+								CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					RepositoryProvider: types.AgentSkillsRepositoryProvider("GITHUB"),
+					SourceConfiguration: &types.AgentSkillsSourceConfigurationMemberS3{
+						Value: types.S3SourceConfiguration{
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -409,6 +550,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -425,6 +567,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -450,6 +593,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -466,6 +610,7 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -473,6 +618,58 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 					},
 				},
 			},
+			SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+						},
+					},
+				},
+				AdditionalData: &types.SignatureAgentCardAdditionalData{
+					Category: types.BotCategory("advertising"),
+				},
+			},
+		},
+		Artifact: &types.RegistryRecordArtifactUpload{
+			Content: []byte("blob"),
+			Sha256:  ptr.String("__Sha256__"),
 		},
 		RecordVersion: ptr.String("__RecordVersion__"),
 		ClientToken:   ptr.String("__ClientToken__"),
@@ -645,6 +842,27 @@ func TestCheckResponseSnapshot_CreateRegistryRecord(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeletePublisher(t *testing.T) {
+	want := &DeletePublisherOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeletePublisher.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeletePublisher(context.Background(), &DeletePublisherInput{
+		PublisherArn: ptr.String("__PublisherArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeletePublisher.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteRegistry(t *testing.T) {
 	want := &DeleteRegistryOutput{
 		Status: types.RegistryStatus("CREATING"),
@@ -687,6 +905,65 @@ func TestCheckResponseSnapshot_DeleteRegistryRecord(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DeleteRegistryRecord.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DisassociatePublisher(t *testing.T) {
+	want := &DisassociatePublisherOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DisassociatePublisher.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociatePublisher(context.Background(), &DisassociatePublisherInput{
+		RecordArn: ptr.String("__RecordArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociatePublisher.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetPublisher(t *testing.T) {
+	want := &GetPublisherOutput{
+		Value: &types.IdentifierMemberDomain{
+			Value: "__IdentifierMemberDomain__",
+		},
+		IdentifierType: types.IdentifierType("DOMAIN"),
+		Status:         types.VerificationStatus("ACTION_REQUIRED"),
+		StatusReason:   ptr.String("__StatusReason__"),
+		DomainChallenge: &types.DomainChallenge{
+			RecordName:  ptr.String("__RecordName__"),
+			RecordValue: ptr.String("__RecordValue__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PublisherArn: ptr.String("__PublisherArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetPublisher.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetPublisher(context.Background(), &GetPublisherInput{
+		PublisherArn: ptr.String("__PublisherArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetPublisher.response", err)
 	}
 }
 
@@ -851,6 +1128,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -867,6 +1145,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -894,6 +1173,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -910,6 +1190,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -941,6 +1222,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
@@ -957,11 +1239,61 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
 								},
 							},
+						},
+					},
+					SkillPackage: &types.AgentSkillsPackageDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+								CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					RepositoryProvider: types.AgentSkillsRepositoryProvider("GITHUB"),
+					SourceConfiguration: &types.AgentSkillsSourceConfigurationMemberS3{
+						Value: types.S3SourceConfiguration{
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -987,6 +1319,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1003,6 +1336,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1028,6 +1362,7 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1044,11 +1379,60 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
 						},
 					},
+				},
+			},
+			SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+						},
+					},
+				},
+				AdditionalData: &types.SignatureAgentCardAdditionalData{
+					Category: types.BotCategory("advertising"),
 				},
 			},
 		},
@@ -1217,6 +1601,18 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 		CreatedBy:                            ptr.String("__CreatedBy__"),
 		CustomMetadata:                       document.NewLazyDocument("__Document__"),
 		CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
+		Artifact: &types.RegistryRecordArtifactDownload{
+			Sha256:      ptr.String("__Sha256__"),
+			DownloadUrl: ptr.String("__DownloadUrl__"),
+		},
+		SynchronizedSource: &types.RegistryRecordSynchronizedSourceMemberS3{
+			Value: types.S3SynchronizedSource{
+				Url:            ptr.String("__Url__"),
+				SynchronizedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				VersionId:      ptr.String("__VersionId__"),
+				ETag:           ptr.String("__ETag__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetRegistryRecord.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1235,6 +1631,95 @@ func TestCheckResponseSnapshot_GetRegistryRecord(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetRegistryRecord.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListPublisherAssociations(t *testing.T) {
+	want := &ListPublisherAssociationsOutput{
+		Items: []types.PublisherAssociation{
+			{
+				RecordArn:        ptr.String("__RecordArn__"),
+				PublicIdentifier: ptr.String("__PublicIdentifier__"),
+				Publisher:        ptr.String("__Publisher__"),
+				Status:           types.AssociationStatus("PENDING_APPROVAL"),
+				StatusReason:     ptr.String("__StatusReason__"),
+			},
+			{
+				RecordArn:        ptr.String("__RecordArn__"),
+				PublicIdentifier: ptr.String("__PublicIdentifier__"),
+				Publisher:        ptr.String("__Publisher__"),
+				Status:           types.AssociationStatus("PENDING_APPROVAL"),
+				StatusReason:     ptr.String("__StatusReason__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListPublisherAssociations.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListPublisherAssociations(context.Background(), &ListPublisherAssociationsInput{
+		PublisherArn: ptr.String("__PublisherArn__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListPublisherAssociations.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListPublishers(t *testing.T) {
+	want := &ListPublishersOutput{
+		Items: []types.PublisherSummary{
+			{
+				Value: &types.IdentifierMemberDomain{
+					Value: "__IdentifierMemberDomain__",
+				},
+				IdentifierType:                  types.IdentifierType("DOMAIN"),
+				Status:                          types.VerificationStatus("ACTION_REQUIRED"),
+				CreatedAt:                       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PublisherArn:                    ptr.String("__PublisherArn__"),
+				AssociationCount:                ptr.Int32(1),
+				PendingAssociationApprovalCount: ptr.Int32(1),
+			},
+			{
+				Value: &types.IdentifierMemberDomain{
+					Value: "__IdentifierMemberDomain__",
+				},
+				IdentifierType:                  types.IdentifierType("DOMAIN"),
+				Status:                          types.VerificationStatus("ACTION_REQUIRED"),
+				CreatedAt:                       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				PublisherArn:                    ptr.String("__PublisherArn__"),
+				AssociationCount:                ptr.Int32(1),
+				PendingAssociationApprovalCount: ptr.Int32(1),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListPublishers.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListPublishers(context.Background(), &ListPublishersInput{
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListPublishers.response", err)
 	}
 }
 
@@ -1647,6 +2132,29 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdatePublisherAssociationApprovalStatus(t *testing.T) {
+	want := &UpdatePublisherAssociationApprovalStatusOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdatePublisherAssociationApprovalStatus.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdatePublisherAssociationApprovalStatus(context.Background(), &UpdatePublisherAssociationApprovalStatusInput{
+		RecordArn:            ptr.String("__RecordArn__"),
+		ApprovalStatus:       types.AssociationApprovalStatus("APPROVED"),
+		ApprovalStatusReason: ptr.String("__ApprovalStatusReason__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdatePublisherAssociationApprovalStatus.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateRegistry(t *testing.T) {
 	want := &UpdateRegistryOutput{
 		Name:        ptr.String("__Name__"),
@@ -1907,6 +2415,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1923,6 +2432,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1950,6 +2460,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1966,6 +2477,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -1997,6 +2509,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
@@ -2013,11 +2526,61 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
 								},
 							},
+						},
+					},
+					SkillPackage: &types.AgentSkillsPackageDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+								CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					RepositoryProvider: types.AgentSkillsRepositoryProvider("GITHUB"),
+					SourceConfiguration: &types.AgentSkillsSourceConfigurationMemberS3{
+						Value: types.S3SourceConfiguration{
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -2043,6 +2606,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2059,6 +2623,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2084,6 +2649,7 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2100,11 +2666,60 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
 						},
 					},
+				},
+			},
+			SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+						},
+					},
+				},
+				AdditionalData: &types.SignatureAgentCardAdditionalData{
+					Category: types.BotCategory("advertising"),
 				},
 			},
 		},
@@ -2273,6 +2888,14 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 		CreatedBy:                            ptr.String("__CreatedBy__"),
 		CustomMetadata:                       document.NewLazyDocument("__Document__"),
 		CustomMetadataSchemaComplianceStatus: types.CustomMetadataSchemaComplianceStatus("COMPLIANT"),
+		AuthorizationData: &types.AuthorizationDataMemberOauth2{
+			Value: types.OAuth2AuthorizationData{
+				AuthorizationUrl:       ptr.String("__AuthorizationUrl__"),
+				UserId:                 ptr.String("__UserId__"),
+				AuthorizationAttemptId: ptr.String("__AuthorizationAttemptId__"),
+				ExpiresAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateRegistryRecord.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -2369,30 +2992,19 @@ func TestCheckResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 				Agui: &types.UpdatedAgUiDescriptor{
 					OptionalValue: nil,
 				},
+				SignatureAgentCard: nil,
 			},
 		},
-		RecordVersion: ptr.String("__RecordVersion__"),
-		CustomMetadata: &types.UpdatedCustomMetadataMap{
-			OptionalValue: document.NewLazyDocument("__Document__"),
+		Artifact: &types.UpdatedRegistryRecordArtifact{
+			OptionalValue: nil,
 		},
+		RecordVersion:          ptr.String("__RecordVersion__"),
+		CustomMetadata:         nil,
 		TriggerSynchronization: ptr.Bool(true),
+		ForceAuthentication:    ptr.Bool(true),
 		Provenance: []types.Provenance{
-			{
-				Relation:   types.ProvenanceRelation("DETECTED_FROM"),
-				SourceId:   ptr.String("__SourceId__"),
-				SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
-				SourceDetails: &types.SourceDetailsMemberAgentcoreRuntime{
-					Value: types.AgentCoreRuntimeSourceDetails{},
-				},
-			},
-			{
-				Relation:   types.ProvenanceRelation("DETECTED_FROM"),
-				SourceId:   ptr.String("__SourceId__"),
-				SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
-				SourceDetails: &types.SourceDetailsMemberAgentcoreRuntime{
-					Value: types.AgentCoreRuntimeSourceDetails{},
-				},
-			},
+			{},
+			{},
 		},
 	})
 	if err != nil {
@@ -2434,6 +3046,44 @@ func TestCheckResponseSnapshot_UpdateRegistryRecordStatus(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ValidatePublisher(t *testing.T) {
+	want := &ValidatePublisherOutput{
+		Value: &types.IdentifierMemberDomain{
+			Value: "__IdentifierMemberDomain__",
+		},
+		IdentifierType: types.IdentifierType("DOMAIN"),
+		Status:         types.VerificationStatus("ACTION_REQUIRED"),
+		StatusReason:   ptr.String("__StatusReason__"),
+		DomainChallenge: &types.DomainChallenge{
+			RecordName:  ptr.String("__RecordName__"),
+			RecordValue: ptr.String("__RecordValue__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		PublisherArn: ptr.String("__PublisherArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ValidatePublisher.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ValidatePublisher(context.Background(), &ValidatePublisherInput{
+		PublisherArn: ptr.String("__PublisherArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ValidatePublisher.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 	want := &types.AccessDeniedException{
 		Message: ptr.String("__Message__"),
@@ -2446,104 +3096,15 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
-		Name:        ptr.String("__Name__"),
-		Description: ptr.String("__Description__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			KmsKeyArn: ptr.String("__KmsKeyArn__"),
-		},
-		DiscoveryConfiguration: &types.DiscoveryConfiguration{
-			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
-				Value: types.CustomJWTAuthorizerConfiguration{
-					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
-					AllowedAudience: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AllowedClients: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AllowedScopes: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CustomClaims: []types.CustomClaimValidationType{
-						{
-							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
-							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
-							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
-								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
-									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
-								},
-								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
-							},
-						},
-						{
-							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
-							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
-							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
-								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
-									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
-								},
-								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
-							},
-						},
-					},
-					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-						},
-					},
-					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
-						{
-							Domain: ptr.String("__Domain__"),
-							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-								},
-							},
-						},
-						{
-							Domain: ptr.String("__Domain__"),
-							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-								},
-							},
-						},
-					},
-				},
-			},
-			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+	_, opErr := svc.AssociatePublisher(context.Background(), &AssociatePublisherInput{
+		RecordArn:    ptr.String("__RecordArn__"),
+		PublisherArn: ptr.String("__PublisherArn__"),
+		Subdomain:    ptr.String("__Subdomain__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		ApprovalConfiguration: &types.ApprovalConfiguration{
-			AutoApprovalRules: []types.AutoApprovalRule{
-				types.AutoApprovalRule("APPROVE_ALL"),
-				types.AutoApprovalRule("APPROVE_ALL"),
-			},
-		},
-		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
-			DefaultSchema: ptr.String("__DefaultSchema__"),
-			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
-				{
-					RecordType: types.RecordType("MCP"),
-					Schema:     ptr.String("__Schema__"),
-				},
-				{
-					RecordType: types.RecordType("MCP"),
-					Schema:     ptr.String("__Schema__"),
-				},
-			},
-		},
-		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
-			Scope:   types.AutoDetectionScope("ORGANIZATION"),
-			Enabled: ptr.Bool(true),
-		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2569,104 +3130,15 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
-		Name:        ptr.String("__Name__"),
-		Description: ptr.String("__Description__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			KmsKeyArn: ptr.String("__KmsKeyArn__"),
-		},
-		DiscoveryConfiguration: &types.DiscoveryConfiguration{
-			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
-				Value: types.CustomJWTAuthorizerConfiguration{
-					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
-					AllowedAudience: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AllowedClients: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AllowedScopes: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CustomClaims: []types.CustomClaimValidationType{
-						{
-							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
-							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
-							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
-								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
-									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
-								},
-								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
-							},
-						},
-						{
-							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
-							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
-							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
-								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
-									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
-								},
-								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
-							},
-						},
-					},
-					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-						},
-					},
-					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
-						{
-							Domain: ptr.String("__Domain__"),
-							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-								},
-							},
-						},
-						{
-							Domain: ptr.String("__Domain__"),
-							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-								},
-							},
-						},
-					},
-				},
-			},
-			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+	_, opErr := svc.AssociatePublisher(context.Background(), &AssociatePublisherInput{
+		RecordArn:    ptr.String("__RecordArn__"),
+		PublisherArn: ptr.String("__PublisherArn__"),
+		Subdomain:    ptr.String("__Subdomain__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		ApprovalConfiguration: &types.ApprovalConfiguration{
-			AutoApprovalRules: []types.AutoApprovalRule{
-				types.AutoApprovalRule("APPROVE_ALL"),
-				types.AutoApprovalRule("APPROVE_ALL"),
-			},
-		},
-		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
-			DefaultSchema: ptr.String("__DefaultSchema__"),
-			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
-				{
-					RecordType: types.RecordType("MCP"),
-					Schema:     ptr.String("__Schema__"),
-				},
-				{
-					RecordType: types.RecordType("MCP"),
-					Schema:     ptr.String("__Schema__"),
-				},
-			},
-		},
-		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
-			Scope:   types.AutoDetectionScope("ORGANIZATION"),
-			Enabled: ptr.Bool(true),
-		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2677,6 +3149,40 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ConflictException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_DependencyException(t *testing.T) {
+	want := &types.DependencyException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DependencyException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.AssociatePublisher(context.Background(), &AssociatePublisherInput{
+		RecordArn:    ptr.String("__RecordArn__"),
+		PublisherArn: ptr.String("__PublisherArn__"),
+		Subdomain:    ptr.String("__Subdomain__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.DependencyException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.DependencyException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "DependencyException.error", err)
 	}
 }
 
@@ -2692,104 +3198,15 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
-		Name:        ptr.String("__Name__"),
-		Description: ptr.String("__Description__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			KmsKeyArn: ptr.String("__KmsKeyArn__"),
-		},
-		DiscoveryConfiguration: &types.DiscoveryConfiguration{
-			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
-				Value: types.CustomJWTAuthorizerConfiguration{
-					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
-					AllowedAudience: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AllowedClients: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AllowedScopes: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CustomClaims: []types.CustomClaimValidationType{
-						{
-							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
-							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
-							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
-								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
-									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
-								},
-								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
-							},
-						},
-						{
-							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
-							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
-							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
-								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
-									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
-								},
-								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
-							},
-						},
-					},
-					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-						},
-					},
-					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
-						{
-							Domain: ptr.String("__Domain__"),
-							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-								},
-							},
-						},
-						{
-							Domain: ptr.String("__Domain__"),
-							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-								},
-							},
-						},
-					},
-				},
-			},
-			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+	_, opErr := svc.AssociatePublisher(context.Background(), &AssociatePublisherInput{
+		RecordArn:    ptr.String("__RecordArn__"),
+		PublisherArn: ptr.String("__PublisherArn__"),
+		Subdomain:    ptr.String("__Subdomain__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		ApprovalConfiguration: &types.ApprovalConfiguration{
-			AutoApprovalRules: []types.AutoApprovalRule{
-				types.AutoApprovalRule("APPROVE_ALL"),
-				types.AutoApprovalRule("APPROVE_ALL"),
-			},
-		},
-		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
-			DefaultSchema: ptr.String("__DefaultSchema__"),
-			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
-				{
-					RecordType: types.RecordType("MCP"),
-					Schema:     ptr.String("__Schema__"),
-				},
-				{
-					RecordType: types.RecordType("MCP"),
-					Schema:     ptr.String("__Schema__"),
-				},
-			},
-		},
-		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
-			Scope:   types.AutoDetectionScope("ORGANIZATION"),
-			Enabled: ptr.Bool(true),
-		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2848,6 +3265,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2864,6 +3282,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2891,6 +3310,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2907,6 +3327,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -2938,6 +3359,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
@@ -2954,11 +3376,61 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 												CustomParameters: map[string]string{
 													"key0": "__Value__",
 												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
 											},
 										},
 									},
 								},
 							},
+						},
+					},
+					SkillPackage: &types.AgentSkillsPackageDescriptor{
+						Source: &types.DescriptorSource{
+							FromUrl: &types.DescriptorSourceFromUrl{
+								Url: ptr.String("__Url__"),
+								CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+									{
+										CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+										CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+											Value: types.RegistryRecordOAuthCredentialProvider{
+												ProviderArn: ptr.String("__ProviderArn__"),
+												GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+												Scopes: []string{
+													"__Member__",
+													"__Member__",
+												},
+												CustomParameters: map[string]string{
+													"key0": "__Value__",
+												},
+												ReturnUrl: ptr.String("__ReturnUrl__"),
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+					RepositoryProvider: types.AgentSkillsRepositoryProvider("GITHUB"),
+					SourceConfiguration: &types.AgentSkillsSourceConfigurationMemberS3{
+						Value: types.S3SourceConfiguration{
+							BucketOwnerAccountId: ptr.String("__BucketOwnerAccountId__"),
 						},
 					},
 				},
@@ -2984,6 +3456,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -3000,6 +3473,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -3025,6 +3499,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -3041,6 +3516,7 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 										CustomParameters: map[string]string{
 											"key0": "__Value__",
 										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
 									},
 								},
 							},
@@ -3048,6 +3524,58 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 					},
 				},
 			},
+			SignatureAgentCard: &types.SignatureAgentCardDescriptor{
+				Data:              ptr.String("__Data__"),
+				DataSchemaVersion: ptr.String("__DataSchemaVersion__"),
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+										ReturnUrl: ptr.String("__ReturnUrl__"),
+									},
+								},
+							},
+						},
+					},
+				},
+				AdditionalData: &types.SignatureAgentCardAdditionalData{
+					Category: types.BotCategory("advertising"),
+				},
+			},
+		},
+		Artifact: &types.RegistryRecordArtifactUpload{
+			Content: []byte("blob"),
+			Sha256:  ptr.String("__Sha256__"),
 		},
 		RecordVersion: ptr.String("__RecordVersion__"),
 		ClientToken:   ptr.String("__ClientToken__"),
@@ -3236,104 +3764,15 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
-		Name:        ptr.String("__Name__"),
-		Description: ptr.String("__Description__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			KmsKeyArn: ptr.String("__KmsKeyArn__"),
-		},
-		DiscoveryConfiguration: &types.DiscoveryConfiguration{
-			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
-				Value: types.CustomJWTAuthorizerConfiguration{
-					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
-					AllowedAudience: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AllowedClients: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AllowedScopes: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CustomClaims: []types.CustomClaimValidationType{
-						{
-							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
-							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
-							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
-								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
-									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
-								},
-								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
-							},
-						},
-						{
-							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
-							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
-							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
-								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
-									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
-								},
-								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
-							},
-						},
-					},
-					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-						},
-					},
-					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
-						{
-							Domain: ptr.String("__Domain__"),
-							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-								},
-							},
-						},
-						{
-							Domain: ptr.String("__Domain__"),
-							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-								},
-							},
-						},
-					},
-				},
-			},
-			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+	_, opErr := svc.AssociatePublisher(context.Background(), &AssociatePublisherInput{
+		RecordArn:    ptr.String("__RecordArn__"),
+		PublisherArn: ptr.String("__PublisherArn__"),
+		Subdomain:    ptr.String("__Subdomain__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		ApprovalConfiguration: &types.ApprovalConfiguration{
-			AutoApprovalRules: []types.AutoApprovalRule{
-				types.AutoApprovalRule("APPROVE_ALL"),
-				types.AutoApprovalRule("APPROVE_ALL"),
-			},
-		},
-		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
-			DefaultSchema: ptr.String("__DefaultSchema__"),
-			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
-				{
-					RecordType: types.RecordType("MCP"),
-					Schema:     ptr.String("__Schema__"),
-				},
-				{
-					RecordType: types.RecordType("MCP"),
-					Schema:     ptr.String("__Schema__"),
-				},
-			},
-		},
-		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
-			Scope:   types.AutoDetectionScope("ORGANIZATION"),
-			Enabled: ptr.Bool(true),
-		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -3359,104 +3798,15 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
-		Name:        ptr.String("__Name__"),
-		Description: ptr.String("__Description__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			KmsKeyArn: ptr.String("__KmsKeyArn__"),
-		},
-		DiscoveryConfiguration: &types.DiscoveryConfiguration{
-			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
-				Value: types.CustomJWTAuthorizerConfiguration{
-					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
-					AllowedAudience: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AllowedClients: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AllowedScopes: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CustomClaims: []types.CustomClaimValidationType{
-						{
-							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
-							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
-							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
-								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
-									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
-								},
-								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
-							},
-						},
-						{
-							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
-							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
-							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
-								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
-									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
-								},
-								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
-							},
-						},
-					},
-					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-						},
-					},
-					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
-						{
-							Domain: ptr.String("__Domain__"),
-							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-								},
-							},
-						},
-						{
-							Domain: ptr.String("__Domain__"),
-							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-								},
-							},
-						},
-					},
-				},
-			},
-			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+	_, opErr := svc.AssociatePublisher(context.Background(), &AssociatePublisherInput{
+		RecordArn:    ptr.String("__RecordArn__"),
+		PublisherArn: ptr.String("__PublisherArn__"),
+		Subdomain:    ptr.String("__Subdomain__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		ApprovalConfiguration: &types.ApprovalConfiguration{
-			AutoApprovalRules: []types.AutoApprovalRule{
-				types.AutoApprovalRule("APPROVE_ALL"),
-				types.AutoApprovalRule("APPROVE_ALL"),
-			},
-		},
-		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
-			DefaultSchema: ptr.String("__DefaultSchema__"),
-			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
-				{
-					RecordType: types.RecordType("MCP"),
-					Schema:     ptr.String("__Schema__"),
-				},
-				{
-					RecordType: types.RecordType("MCP"),
-					Schema:     ptr.String("__Schema__"),
-				},
-			},
-		},
-		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
-			Scope:   types.AutoDetectionScope("ORGANIZATION"),
-			Enabled: ptr.Bool(true),
-		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -3493,104 +3843,15 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateRegistry(context.Background(), &CreateRegistryInput{
-		Name:        ptr.String("__Name__"),
-		Description: ptr.String("__Description__"),
-		EncryptionConfiguration: &types.EncryptionConfiguration{
-			KmsKeyArn: ptr.String("__KmsKeyArn__"),
-		},
-		DiscoveryConfiguration: &types.DiscoveryConfiguration{
-			AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
-				Value: types.CustomJWTAuthorizerConfiguration{
-					DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
-					AllowedAudience: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AllowedClients: []string{
-						"__Member__",
-						"__Member__",
-					},
-					AllowedScopes: []string{
-						"__Member__",
-						"__Member__",
-					},
-					CustomClaims: []types.CustomClaimValidationType{
-						{
-							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
-							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
-							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
-								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
-									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
-								},
-								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
-							},
-						},
-						{
-							InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
-							InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
-							AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
-								ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
-									Value: "__ClaimMatchValueTypeMemberMatchValueString__",
-								},
-								ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
-							},
-						},
-					},
-					PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-						Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-							Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-						},
-					},
-					PrivateEndpointOverrides: []types.PrivateEndpointOverride{
-						{
-							Domain: ptr.String("__Domain__"),
-							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-								},
-							},
-						},
-						{
-							Domain: ptr.String("__Domain__"),
-							PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
-								Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
-									Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
-								},
-							},
-						},
-					},
-				},
-			},
-			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
+	_, opErr := svc.AssociatePublisher(context.Background(), &AssociatePublisherInput{
+		RecordArn:    ptr.String("__RecordArn__"),
+		PublisherArn: ptr.String("__PublisherArn__"),
+		Subdomain:    ptr.String("__Subdomain__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
 		},
 		ClientToken: ptr.String("__ClientToken__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		ApprovalConfiguration: &types.ApprovalConfiguration{
-			AutoApprovalRules: []types.AutoApprovalRule{
-				types.AutoApprovalRule("APPROVE_ALL"),
-				types.AutoApprovalRule("APPROVE_ALL"),
-			},
-		},
-		CustomMetadataSchemaConfiguration: &types.CustomMetadataSchemaConfiguration{
-			DefaultSchema: ptr.String("__DefaultSchema__"),
-			RecordTypeSchemaOverrides: []types.RecordTypeSchemaOverride{
-				{
-					RecordType: types.RecordType("MCP"),
-					Schema:     ptr.String("__Schema__"),
-				},
-				{
-					RecordType: types.RecordType("MCP"),
-					Schema:     ptr.String("__Schema__"),
-				},
-			},
-		},
-		AutoDetectionConfiguration: &types.AutoDetectionConfiguration{
-			Scope:   types.AutoDetectionScope("ORGANIZATION"),
-			Enabled: ptr.Bool(true),
-		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

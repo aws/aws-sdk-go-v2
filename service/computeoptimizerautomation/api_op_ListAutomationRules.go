@@ -32,8 +32,8 @@ type ListAutomationRulesInput struct {
 	//  The filters to apply to the list of automation rules.
 	Filters []types.Filter
 
-	// The maximum number of automation rules to return in a single response. Valid
-	// range is 1-1000.
+	// The maximum number of automation rules to return in a single response. If you
+	// don't specify a value, the default is 100.
 	MaxResults *int32
 
 	// A token used for pagination to retrieve the next set of results when the
@@ -149,8 +149,8 @@ func (c *Client) addOperationListAutomationRulesMiddlewares(stack *middleware.St
 // ListAutomationRulesPaginatorOptions is the paginator options for
 // ListAutomationRules
 type ListAutomationRulesPaginatorOptions struct {
-	// The maximum number of automation rules to return in a single response. Valid
-	// range is 1-1000.
+	// The maximum number of automation rules to return in a single response. If you
+	// don't specify a value, the default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

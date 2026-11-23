@@ -903,6 +903,44 @@ func (InstrumentBalanceToken) Values() []InstrumentBalanceToken {
 	}
 }
 
+type JwkEllipticCurve string
+
+// Enum values for JwkEllipticCurve
+const (
+	JwkEllipticCurveP256 JwkEllipticCurve = "P-256"
+	JwkEllipticCurveP384 JwkEllipticCurve = "P-384"
+	JwkEllipticCurveP521 JwkEllipticCurve = "P-521"
+)
+
+// Values returns all known values for JwkEllipticCurve. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JwkEllipticCurve) Values() []JwkEllipticCurve {
+	return []JwkEllipticCurve{
+		"P-256",
+		"P-384",
+		"P-521",
+	}
+}
+
+type JwkKeyType string
+
+// Enum values for JwkKeyType
+const (
+	JwkKeyTypeEc JwkKeyType = "EC"
+)
+
+// Values returns all known values for JwkKeyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JwkKeyType) Values() []JwkKeyType {
+	return []JwkKeyType{
+		"EC",
+	}
+}
+
 type LanguageRuntime string
 
 // Enum values for LanguageRuntime
@@ -1171,8 +1209,9 @@ type PaymentType string
 
 // Enum values for PaymentType
 const (
-	PaymentTypeCryptoX402 PaymentType = "CRYPTO_X402"
-	PaymentTypeMpp        PaymentType = "MPP"
+	PaymentTypeCryptoX402     PaymentType = "CRYPTO_X402"
+	PaymentTypeMpp            PaymentType = "MPP"
+	PaymentTypeAwsBillingX402 PaymentType = "AWS_BILLING_X402"
 )
 
 // Values returns all known values for PaymentType. Note that this can be expanded
@@ -1183,6 +1222,7 @@ func (PaymentType) Values() []PaymentType {
 	return []PaymentType{
 		"CRYPTO_X402",
 		"MPP",
+		"AWS_BILLING_X402",
 	}
 }
 

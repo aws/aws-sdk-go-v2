@@ -2027,16 +2027,17 @@ func (v *CodeLocation) Deserialize(d smithy.ShapeDeserializer) error {
 // Represents a code remediation task that was initiated to fix a security finding.
 type CodeRemediationTask struct {
 
-	// The current status of the code remediation task.
+	// The current status of the overall code remediation task.
 	//
 	// This member is required.
 	Status CodeRemediationTaskStatus
 
-	// The reason for the current status of the code remediation task.
+	// The reason for the current status of the overall code remediation task.
 	StatusReason *string
 
-	// The list of details for the code remediation task, including repository name,
-	// code diff link, and pull request link.
+	// The list of details for a code remediation task, including repository names,
+	// status of code remediation for each associated repository, and generated code
+	// diff or pull request links.
 	TaskDetails []CodeRemediationTaskDetails
 
 	noSmithyDocumentSerde
@@ -2089,8 +2090,17 @@ type CodeRemediationTaskDetails struct {
 	// The link to the pull request created for the remediation.
 	PullRequestLink *string
 
-	// The name of the repository where the remediation was applied.
+	// The name of an associated repository where the remediation was applied.
 	RepoName *string
+
+	// The current status of the code remediation task for the particular repository.
+	Status CodeRemediationJobStatus
+
+	// A category classifier if a repository's code remediation fails.
+	StatusCode *string
+
+	// A descriptive reason when a repository's code remediation fails.
+	StatusReason *string
 
 	noSmithyDocumentSerde
 }
@@ -2111,6 +2121,15 @@ func (v *CodeRemediationTaskDetails) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RepoName != nil {
 		s.WriteString(schemas.CodeRemediationTaskDetails_repoName, *v.RepoName)
 	}
+	if v.Status != "" {
+		s.WriteString(schemas.CodeRemediationTaskDetails_status, string(v.Status))
+	}
+	if v.StatusCode != nil {
+		s.WriteString(schemas.CodeRemediationTaskDetails_statusCode, *v.StatusCode)
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.CodeRemediationTaskDetails_statusReason, *v.StatusReason)
+	}
 }
 func (v *CodeRemediationTaskDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CodeRemediationTaskDetails, func(s *smithy.Schema) error {
@@ -2124,6 +2143,19 @@ func (v *CodeRemediationTaskDetails) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.CodeRemediationTaskDetails_repoName:
 			v.RepoName = new(string)
 			return d.ReadString(schemas.CodeRemediationTaskDetails_repoName, v.RepoName)
+		case schemas.CodeRemediationTaskDetails_status:
+			var ev string
+			if err := d.ReadString(schemas.CodeRemediationTaskDetails_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CodeRemediationJobStatus(ev)
+			return nil
+		case schemas.CodeRemediationTaskDetails_statusCode:
+			v.StatusCode = new(string)
+			return d.ReadString(schemas.CodeRemediationTaskDetails_statusCode, v.StatusCode)
+		case schemas.CodeRemediationTaskDetails_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.CodeRemediationTaskDetails_statusReason, v.StatusReason)
 		}
 		return nil
 	})

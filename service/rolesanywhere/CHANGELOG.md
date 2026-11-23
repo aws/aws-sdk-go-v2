@@ -1,3 +1,7 @@
+# v1.35.0 (2026-11-19)
+
+* **Feature**: Adds the tipConfiguration field to profiles to turn on trusted identity propagation, which adds the identity from an X.509 certificate to sessions as origin identity condition keys.
+
 # v1.34.0 (2026-11-13)
 
 * **Feature**: This release adds resource aliases for IAM Roles Anywhere trust anchors, profiles, and certificate revocation lists (CRLs). Assign an optional, unique alias name to a resource and use its alias ARN wherever an identifier is accepted, including CreateSession.

@@ -2,4 +2,4 @@
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSGlue.SearchAssets
 
-{"Items":[{"AssetDescription":"__AssetDescription__","AssetName":"__AssetName__","AssetTypeId":"__AssetTypeId__","Id":"__Id__","UpdatedAt":946684800},{"AssetDescription":"__AssetDescription__","AssetName":"__AssetName__","AssetTypeId":"__AssetTypeId__","Id":"__Id__","UpdatedAt":946684800}],"NextToken":"__NextToken__"}
+{"Items":[{"AssetTypeId":"__AssetTypeId__","CreatedAt":946684800,"Description":"__Description__","Id":"__Id__","Name":"__Name__","UpdatedAt":946684800},{"AssetTypeId":"__AssetTypeId__","CreatedAt":946684800,"Description":"__Description__","Id":"__Id__","Name":"__Name__","UpdatedAt":946684800}],"NextToken":"__NextToken__"}

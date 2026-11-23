@@ -29,6 +29,7 @@ func (c *Client) ListEngagements(ctx context.Context, params *ListEngagementsInp
 	return out, nil
 }
 
+// Contains the request parameters for the ListEngagements operation.
 type ListEngagementsInput struct {
 
 	//  Specifies the catalog related to the request.
@@ -65,7 +66,7 @@ type ListEngagementsInput struct {
 	// call.
 	NextToken *string
 
-	// Specifies the sorting parameters for listing Engagements.
+	// Specifies how to sort the returned engagements.
 	Sort *types.EngagementSort
 
 	noSmithyDocumentSerde
@@ -109,6 +110,7 @@ func (v *ListEngagementsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
+// Contains the response that the ListEngagements action returns.
 type ListEngagementsOutput struct {
 
 	// An array of engagement summary objects.

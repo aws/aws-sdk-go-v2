@@ -33,6 +33,19 @@ type GetFoundationModelInput struct {
 	// This member is required.
 	ModelIdentifier *string
 
+	// The ID or Amazon Resource Name (ARN) of a project. Amazon Bedrock uses the
+	// project's trusted access program participation when determining whether to
+	// return the model. The project must belong to your account in the same AWS Region
+	// and partition as the request.
+	//
+	// If you omit this parameter or specify default , Amazon Bedrock uses your
+	// account's participation, including organization inheritance.
+	//
+	// A project that doesn't exist or is archived causes a ValidationException . A
+	// model outside the project's available model catalog causes a
+	// ResourceNotFoundException .
+	ProjectIdentifier *string
+
 	noSmithyDocumentSerde
 }
 
@@ -45,6 +58,9 @@ func (v *GetFoundationModelInput) Serialize(s smithy.ShapeSerializer) {
 func (v *GetFoundationModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelIdentifier != nil {
 		s.WriteString(schemas.GetFoundationModelRequest_modelIdentifier, *v.ModelIdentifier)
+	}
+	if v.ProjectIdentifier != nil {
+		s.WriteString(schemas.GetFoundationModelRequest_projectIdentifier, *v.ProjectIdentifier)
 	}
 }
 

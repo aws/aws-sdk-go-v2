@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.SearchOpportunities
+
+{"Catalog":"__Catalog__","Filter":{"AndAllFilters":[{},{}],"ContainsAll":{"Key":"OpportunityId","Value":{"StringValue":"__OpportunitySearchFilterValueMemberStringValue__"}},"ContainsAny":{"Key":"OpportunityId","Value":{"StringValue":"__OpportunitySearchFilterValueMemberStringValue__"}},"EqualsTo":{"Key":"OpportunityId","Value":{"StringValue":"__OpportunitySearchFilterValueMemberStringValue__"}},"GreaterThan":{"Key":"OpportunityId","Value":{"StringValue":"__OpportunitySearchFilterValueMemberStringValue__"}},"GreaterThanOrEquals":{"Key":"OpportunityId","Value":{"StringValue":"__OpportunitySearchFilterValueMemberStringValue__"}},"LessThan":{"Key":"OpportunityId","Value":{"StringValue":"__OpportunitySearchFilterValueMemberStringValue__"}},"LessThanOrEquals":{"Key":"OpportunityId","Value":{"StringValue":"__OpportunitySearchFilterValueMemberStringValue__"}},"OrAllFilters":[{},{}]},"Keyword":"__Keyword__","MaxResults":1,"NextToken":"__NextToken__","Sort":{"SortBy":"OpportunityId","SortOrder":"ASCENDING"}}

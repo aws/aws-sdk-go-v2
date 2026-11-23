@@ -159,7 +159,13 @@ func TestCheckResponseSnapshot_CreateEventSource(t *testing.T) {
 		Name:           ptr.String("__Name__"),
 		EventBusArn:    ptr.String("__EventBusArn__"),
 		State:          types.EventSourceState("CREATING"),
-		CreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EventSourceDetails: &types.EventSourceDetails{
+			WebhookDetails: &types.WebhookDetails{
+				WebhookUrl: ptr.String("__WebhookUrl__"),
+				SecretArn:  ptr.String("__SecretArn__"),
+			},
+		},
+		CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateEventSource.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -209,6 +215,13 @@ func TestCheckResponseSnapshot_CreateSubscriber(t *testing.T) {
 		},
 		State:        types.SubscriberState("RUNNING"),
 		CreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SubscriberDetails: &types.SubscriberDetails{
+			MskDetails: &types.MskDetails{
+				ConnectivityState: types.ConnectivityState("PROVISIONING"),
+				StateReason:       ptr.String("__StateReason__"),
+				VpcConnectionArn:  ptr.String("__VpcConnectionArn__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateSubscriber.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -300,6 +313,24 @@ func TestCheckResponseSnapshot_CreateSubscriber(t *testing.T) {
 				DeduplicationConfiguration: &types.DeduplicationConfiguration{
 					DeduplicationType: types.DeduplicationType("CONTENT_BASED"),
 				},
+			},
+			MskParameters: &types.MskParameters{
+				TopicName:    ptr.String("__TopicName__"),
+				Compression:  types.MskCompression("NONE"),
+				Acks:         types.MskAcks("ALL"),
+				PartitionKey: ptr.String("__PartitionKey__"),
+				Headers: []types.MskHeader{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ClientId:     ptr.String("__ClientId__"),
+				Connectivity: types.MskConnectivity("PUBLIC"),
 			},
 			TargetArn: ptr.String("__TargetArn__"),
 		},
@@ -498,9 +529,15 @@ func TestCheckResponseSnapshot_DescribeEventSource(t *testing.T) {
 				},
 			},
 		},
-		Description:      ptr.String("__Description__"),
-		State:            types.EventSourceState("CREATING"),
-		Revoked:          ptr.Bool(true),
+		Description: ptr.String("__Description__"),
+		State:       types.EventSourceState("CREATING"),
+		Revoked:     ptr.Bool(true),
+		EventSourceDetails: &types.EventSourceDetails{
+			WebhookDetails: &types.WebhookDetails{
+				WebhookUrl: ptr.String("__WebhookUrl__"),
+				SecretArn:  ptr.String("__SecretArn__"),
+			},
+		},
 		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
@@ -608,6 +645,24 @@ func TestCheckResponseSnapshot_DescribeSubscriber(t *testing.T) {
 					DeduplicationType: types.DeduplicationType("CONTENT_BASED"),
 				},
 			},
+			MskParameters: &types.MskParameters{
+				TopicName:    ptr.String("__TopicName__"),
+				Compression:  types.MskCompression("NONE"),
+				Acks:         types.MskAcks("ALL"),
+				PartitionKey: ptr.String("__PartitionKey__"),
+				Headers: []types.MskHeader{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ClientId:     ptr.String("__ClientId__"),
+				Connectivity: types.MskConnectivity("PUBLIC"),
+			},
 			TargetArn: ptr.String("__TargetArn__"),
 		},
 		Description: ptr.String("__Description__"),
@@ -657,6 +712,13 @@ func TestCheckResponseSnapshot_DescribeSubscriber(t *testing.T) {
 		Revoked:          ptr.Bool(true),
 		CreationTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SubscriberDetails: &types.SubscriberDetails{
+			MskDetails: &types.MskDetails{
+				ConnectivityState: types.ConnectivityState("PROVISIONING"),
+				StateReason:       ptr.String("__StateReason__"),
+				VpcConnectionArn:  ptr.String("__VpcConnectionArn__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeSubscriber.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1109,6 +1171,33 @@ func TestCheckResponseSnapshot_RevokeResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_RotateWebhookCredentials(t *testing.T) {
+	want := &RotateWebhookCredentialsOutput{
+		SecretArn: ptr.String("__SecretArn__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RotateWebhookCredentials.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RotateWebhookCredentials(context.Background(), &RotateWebhookCredentialsInput{
+		EventSourceArn: ptr.String("__EventSourceArn__"),
+		Credential: &types.WebhookCredentialMemberStaticTokenSecretValue{
+			Value: "__WebhookCredentialMemberStaticTokenSecretValue__",
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RotateWebhookCredentials.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	want := &TagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("TagResource.response")
@@ -1251,6 +1340,13 @@ func TestCheckResponseSnapshot_UpdateSubscriber(t *testing.T) {
 		},
 		State:            types.SubscriberState("RUNNING"),
 		LastModifiedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		SubscriberDetails: &types.SubscriberDetails{
+			MskDetails: &types.MskDetails{
+				ConnectivityState: types.ConnectivityState("PROVISIONING"),
+				StateReason:       ptr.String("__StateReason__"),
+				VpcConnectionArn:  ptr.String("__VpcConnectionArn__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateSubscriber.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1344,6 +1440,24 @@ func TestCheckResponseSnapshot_UpdateSubscriber(t *testing.T) {
 				DeduplicationConfiguration: &types.DeduplicationConfiguration{
 					DeduplicationType: types.DeduplicationType("CONTENT_BASED"),
 				},
+			},
+			MskParameters: &types.MskParameters{
+				TopicName:    ptr.String("__TopicName__"),
+				Compression:  types.MskCompression("NONE"),
+				Acks:         types.MskAcks("ALL"),
+				PartitionKey: ptr.String("__PartitionKey__"),
+				Headers: []types.MskHeader{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ClientId:     ptr.String("__ClientId__"),
+				Connectivity: types.MskConnectivity("PUBLIC"),
 			},
 		},
 		FilterConfiguration: &types.FilterConfiguration{

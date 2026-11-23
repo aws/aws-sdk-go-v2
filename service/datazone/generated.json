@@ -182,6 +182,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateAccountPool.go",
         "api_op_UpdateAssetFilter.go",
+        "api_op_UpdateAssetOwner.go",
         "api_op_UpdateConnection.go",
         "api_op_UpdateDataSource.go",
         "api_op_UpdateDesignation.go",

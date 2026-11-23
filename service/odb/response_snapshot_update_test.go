@@ -2780,6 +2780,44 @@ func TestUpdateResponseSnapshot_ListAutonomousDatabasePeers(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ListAutonomousDatabaseRefreshableClones(t *testing.T) {
+	want := &ListAutonomousDatabaseRefreshableClonesOutput{
+		NextToken: ptr.String("__NextToken__"),
+		AutonomousDatabaseRefreshableClones: []types.AutonomousDatabaseRefreshableCloneSummary{
+			{
+				AutonomousDatabaseId:  ptr.String("__AutonomousDatabaseId__"),
+				AutonomousDatabaseArn: ptr.String("__AutonomousDatabaseArn__"),
+				Ocid:                  ptr.String("__Ocid__"),
+				Region:                ptr.String("__Region__"),
+			},
+			{
+				AutonomousDatabaseId:  ptr.String("__AutonomousDatabaseId__"),
+				AutonomousDatabaseArn: ptr.String("__AutonomousDatabaseArn__"),
+				Ocid:                  ptr.String("__Ocid__"),
+				Region:                ptr.String("__Region__"),
+			},
+		},
+	}
+	proto := awsjson.New10(schemas.Odb)
+	opSchema := smithy.NewOperationSchema(schemas.ListAutonomousDatabaseRefreshableClones, schemas.ListAutonomousDatabaseRefreshableClonesOutput, schemas.ListAutonomousDatabaseRefreshableClonesOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListAutonomousDatabaseRefreshableClones.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListAutonomousDatabaseVersions(t *testing.T) {
 	want := &ListAutonomousDatabaseVersionsOutput{
 		NextToken: ptr.String("__NextToken__"),
@@ -5272,6 +5310,34 @@ func TestUpdateResponseSnapshot_StartAutonomousDatabase(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StartAutonomousDatabase.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_StartAutonomousDatabaseRefresh(t *testing.T) {
+	want := &StartAutonomousDatabaseRefreshOutput{
+		AutonomousDatabaseId: ptr.String("__AutonomousDatabaseId__"),
+		DisplayName:          ptr.String("__DisplayName__"),
+		Status:               types.AutonomousDatabaseResourceStatus("AVAILABLE"),
+		StatusReason:         ptr.String("__StatusReason__"),
+		RefreshableStatus:    types.RefreshableStatus("REFRESHING"),
+	}
+	proto := awsjson.New10(schemas.Odb)
+	opSchema := smithy.NewOperationSchema(schemas.StartAutonomousDatabaseRefresh, schemas.StartAutonomousDatabaseRefreshOutput, schemas.StartAutonomousDatabaseRefreshOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartAutonomousDatabaseRefresh.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

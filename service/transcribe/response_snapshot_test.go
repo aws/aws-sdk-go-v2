@@ -2459,6 +2459,205 @@ func TestCheckResponseSnapshot_TagResource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_TranscribeAudio(t *testing.T) {
+	want := &TranscribeAudioOutput{
+		OutputConfiguration: &types.SyncOutputConfiguration{
+			OutputMediaFileUri: ptr.String("__OutputMediaFileUri__"),
+		},
+		TranscriptResponse: &types.TranscriptResponse{
+			Metadata: &types.TranscribeAudioMetadata{
+				LanguageCode: types.SyncLanguageCode("en-US"),
+				LanguageCodes: []types.SyncLanguageCodeItem{
+					{
+						LanguageCode:      types.SyncLanguageCode("en-US"),
+						DurationInSeconds: ptr.Float32(1.0),
+					},
+					{
+						LanguageCode:      types.SyncLanguageCode("en-US"),
+						DurationInSeconds: ptr.Float32(1.0),
+					},
+				},
+				MediaFormat:          types.MediaFormat("mp3"),
+				MediaSampleRateHertz: ptr.Int32(1),
+				SpeakersCount:        ptr.Int32(1),
+				NumberOfChannels:     ptr.Int32(1),
+			},
+			Results: &types.TranscribeAudioResults{
+				Transcript: ptr.String("__Transcript__"),
+				Items: []types.SyncItem{
+					{
+						Id:                    ptr.Int32(1),
+						Content:               ptr.String("__Content__"),
+						StartTime:             ptr.Float64(1.0),
+						EndTime:               ptr.Float64(1.0),
+						LanguageCode:          types.SyncLanguageCode("en-US"),
+						ChannelLabel:          ptr.String("__ChannelLabel__"),
+						SpeakerLabel:          ptr.String("__SpeakerLabel__"),
+						VocabularyFilterMatch: ptr.Bool(true),
+						Redactions: []types.SyncRedaction{
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+						},
+					},
+					{
+						Id:                    ptr.Int32(1),
+						Content:               ptr.String("__Content__"),
+						StartTime:             ptr.Float64(1.0),
+						EndTime:               ptr.Float64(1.0),
+						LanguageCode:          types.SyncLanguageCode("en-US"),
+						ChannelLabel:          ptr.String("__ChannelLabel__"),
+						SpeakerLabel:          ptr.String("__SpeakerLabel__"),
+						VocabularyFilterMatch: ptr.Bool(true),
+						Redactions: []types.SyncRedaction{
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+						},
+					},
+				},
+			},
+			RedactedResults: &types.TranscribeAudioResults{
+				Transcript: ptr.String("__Transcript__"),
+				Items: []types.SyncItem{
+					{
+						Id:                    ptr.Int32(1),
+						Content:               ptr.String("__Content__"),
+						StartTime:             ptr.Float64(1.0),
+						EndTime:               ptr.Float64(1.0),
+						LanguageCode:          types.SyncLanguageCode("en-US"),
+						ChannelLabel:          ptr.String("__ChannelLabel__"),
+						SpeakerLabel:          ptr.String("__SpeakerLabel__"),
+						VocabularyFilterMatch: ptr.Bool(true),
+						Redactions: []types.SyncRedaction{
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+						},
+					},
+					{
+						Id:                    ptr.Int32(1),
+						Content:               ptr.String("__Content__"),
+						StartTime:             ptr.Float64(1.0),
+						EndTime:               ptr.Float64(1.0),
+						LanguageCode:          types.SyncLanguageCode("en-US"),
+						ChannelLabel:          ptr.String("__ChannelLabel__"),
+						SpeakerLabel:          ptr.String("__SpeakerLabel__"),
+						VocabularyFilterMatch: ptr.Bool(true),
+						Redactions: []types.SyncRedaction{
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+							{
+								Type: types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("TranscribeAudio.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.TranscribeAudio(context.Background(), &TranscribeAudioInput{
+		Media: &types.SyncMediaMemberMediaBytes{
+			Value: []byte("blob"),
+		},
+		Language:              types.SyncLanguage("en"),
+		LanguageDetectionMode: types.LanguageDetectionMode("IDENTIFY_LANGUAGE"),
+		LanguageOptions: []types.SyncLanguage{
+			types.SyncLanguage("en"),
+			types.SyncLanguage("en"),
+		},
+		ChannelIdentification: ptr.Bool(true),
+		ShowSpeakerLabels:     ptr.Bool(true),
+		MaxSpeakerLabels:      ptr.Int32(1),
+		VocabularySettings: []types.VocabularySettingsEntry{
+			{
+				Language:       types.SyncLanguage("en"),
+				VocabularyName: ptr.String("__VocabularyName__"),
+				Phrases: []types.VocabularyPhrase{
+					{
+						Text:      ptr.String("__Text__"),
+						DisplayAs: ptr.String("__DisplayAs__"),
+					},
+					{
+						Text:      ptr.String("__Text__"),
+						DisplayAs: ptr.String("__DisplayAs__"),
+					},
+				},
+			},
+			{
+				Language:       types.SyncLanguage("en"),
+				VocabularyName: ptr.String("__VocabularyName__"),
+				Phrases: []types.VocabularyPhrase{
+					{
+						Text:      ptr.String("__Text__"),
+						DisplayAs: ptr.String("__DisplayAs__"),
+					},
+					{
+						Text:      ptr.String("__Text__"),
+						DisplayAs: ptr.String("__DisplayAs__"),
+					},
+				},
+			},
+		},
+		VocabularyFilterSettings: &types.VocabularyFilterSettings{
+			VocabularyFilterMethod: types.VocabularyFilterMethod("remove"),
+			Filters: []types.VocabularyFilterEntry{
+				{
+					Language:             types.SyncLanguage("en"),
+					VocabularyFilterName: ptr.String("__VocabularyFilterName__"),
+					Words: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Language:             types.SyncLanguage("en"),
+					VocabularyFilterName: ptr.String("__VocabularyFilterName__"),
+					Words: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ContentRedaction: &types.ContentRedaction{
+			RedactionType:   types.RedactionType("PII"),
+			RedactionOutput: types.RedactionOutput("redacted"),
+			PiiEntityTypes: []types.PiiEntityType{
+				types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+				types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+			},
+		},
+		OutputConfiguration: &types.SyncOutputConfiguration{
+			OutputMediaFileUri: ptr.String("__OutputMediaFileUri__"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "TranscribeAudio.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 	want := &UntagResourceOutput{}
 	status, header, body, err := serdeRespReadSnapshot("UntagResource.response")
@@ -2738,6 +2937,7 @@ func TestCheckResponseSnapshot_UpdateVocabularyFilter(t *testing.T) {
 func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 	want := &types.BadRequestException{
 		Message: ptr.String("__Message__"),
+		Reason:  types.BadRequestExceptionReason("audioTooLong"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("BadRequestException.error")
 	if errors.Is(err, fs.ErrNotExist) {

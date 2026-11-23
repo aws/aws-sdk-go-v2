@@ -1,0 +1,3 @@
+GET /available-modules?maxResults=1&nextToken=__NextToken__&subscriptionType=MARKETPLACE
+
+

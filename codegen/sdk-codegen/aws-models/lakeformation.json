@@ -7975,6 +7975,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The filter predicate, written in a SQL-like syntax, that determines which rows are returned to the principal.</p>"
                     }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lakeformation#RLSPolicyStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the row-level security policy can be evaluated. <code>VALID</code> means that every lookup table and user-defined function the filter expression references exists. <code>INVALID</code> means that a lookup table or user-defined function the filter expression references was deleted.</p>"
+                    }
+                },
+                "StatusReason": {
+                    "target": "com.amazonaws.lakeformation#RLSPolicyStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the row-level security policy is <code>INVALID</code>. <code>REFERENCED_LOOKUP_TABLE_DELETED</code> means that a lookup table the filter expression references was deleted. <code>REFERENCED_UDF_DELETED</code> means that a user-defined function the filter expression references was deleted. Not returned when the status is <code>VALID</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8062,6 +8074,40 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A structure that identifies a row-level security policy as a resource, used when granting permissions on the policy.</p>"
+            }
+        },
+        "com.amazonaws.lakeformation#RLSPolicyStatus": {
+            "type": "enum",
+            "members": {
+                "VALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALID"
+                    }
+                },
+                "INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#RLSPolicyStatusReason": {
+            "type": "enum",
+            "members": {
+                "REFERENCED_UDF_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REFERENCED_UDF_DELETED"
+                    }
+                },
+                "REFERENCED_LOOKUP_TABLE_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REFERENCED_LOOKUP_TABLE_DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.lakeformation#RedshiftConnect": {

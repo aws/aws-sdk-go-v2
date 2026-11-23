@@ -98,6 +98,11 @@ var GetPreferences = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GetPreferences",
 }, smithy.ShapeTypeOperation, 0)
 
+var GetUsageLinesEstimatedCost = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bcmpricingcalculator",
+	Name:      "GetUsageLinesEstimatedCost",
+}, smithy.ShapeTypeOperation, 0)
+
 var GetWorkloadEstimate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bcmpricingcalculator",
 	Name:      "GetWorkloadEstimate",
@@ -1046,6 +1051,97 @@ var FilterTimestamp = smithy.NewSchema(smithy.ShapeID{
 var FilterTimestamp_afterTimestamp *smithy.Schema
 
 var FilterTimestamp_beforeTimestamp *smithy.Schema
+
+var _GetUsageLinesEstimatedCostAmount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bcmpricingcalculator",
+	Name:      "GetUsageLinesEstimatedCostAmount",
+}, smithy.ShapeTypeDouble, 0)
+
+var GetUsageLinesEstimatedCostError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bcmpricingcalculator",
+	Name:      "GetUsageLinesEstimatedCostError",
+}, smithy.ShapeTypeStructure, 6)
+var GetUsageLinesEstimatedCostError_key *smithy.Schema
+
+var GetUsageLinesEstimatedCostError_serviceCode *smithy.Schema
+
+var GetUsageLinesEstimatedCostError_usageType *smithy.Schema
+
+var GetUsageLinesEstimatedCostError_operation *smithy.Schema
+
+var GetUsageLinesEstimatedCostError_errorCode *smithy.Schema
+
+var GetUsageLinesEstimatedCostError_errorMessage *smithy.Schema
+
+var GetUsageLinesEstimatedCostErrorCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bcmpricingcalculator",
+	Name:      "GetUsageLinesEstimatedCostErrorCode",
+}, smithy.ShapeTypeEnum, 4)
+var GetUsageLinesEstimatedCostErrorCode_BAD_REQUEST *smithy.Schema
+
+var GetUsageLinesEstimatedCostErrorCode_NOT_FOUND *smithy.Schema
+
+var GetUsageLinesEstimatedCostErrorCode_CONFLICT *smithy.Schema
+
+var GetUsageLinesEstimatedCostErrorCode_INTERNAL_SERVER_ERROR *smithy.Schema
+
+var _GetUsageLinesEstimatedCostErrors = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bcmpricingcalculator",
+	Name:      "GetUsageLinesEstimatedCostErrors",
+}, smithy.ShapeTypeList, 1)
+var _GetUsageLinesEstimatedCostErrors_member *smithy.Schema
+
+var GetUsageLinesEstimatedCostEstimatedCost = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bcmpricingcalculator",
+	Name:      "GetUsageLinesEstimatedCostEstimatedCost",
+}, smithy.ShapeTypeStructure, 4)
+var GetUsageLinesEstimatedCostEstimatedCost_usageAmount *smithy.Schema
+
+var GetUsageLinesEstimatedCostEstimatedCost_usageUnit *smithy.Schema
+
+var GetUsageLinesEstimatedCostEstimatedCost_cost *smithy.Schema
+
+var GetUsageLinesEstimatedCostEstimatedCost_currency *smithy.Schema
+
+var GetUsageLinesEstimatedCostInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bcmpricingcalculator",
+	Name:      "GetUsageLinesEstimatedCostInput",
+}, smithy.ShapeTypeStructure, 5)
+var GetUsageLinesEstimatedCostInput_serviceCode *smithy.Schema
+
+var GetUsageLinesEstimatedCostInput_usageType *smithy.Schema
+
+var GetUsageLinesEstimatedCostInput_operation *smithy.Schema
+
+var GetUsageLinesEstimatedCostInput_key *smithy.Schema
+
+var GetUsageLinesEstimatedCostInput_amount *smithy.Schema
+
+var _GetUsageLinesEstimatedCostInputList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bcmpricingcalculator",
+	Name:      "GetUsageLinesEstimatedCostInputList",
+}, smithy.ShapeTypeList, 1)
+var _GetUsageLinesEstimatedCostInputList_member *smithy.Schema
+
+var GetUsageLinesEstimatedCostLineItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bcmpricingcalculator",
+	Name:      "GetUsageLinesEstimatedCostLineItem",
+}, smithy.ShapeTypeStructure, 5)
+var GetUsageLinesEstimatedCostLineItem_key *smithy.Schema
+
+var GetUsageLinesEstimatedCostLineItem_serviceCode *smithy.Schema
+
+var GetUsageLinesEstimatedCostLineItem_usageType *smithy.Schema
+
+var GetUsageLinesEstimatedCostLineItem_operation *smithy.Schema
+
+var GetUsageLinesEstimatedCostLineItem_estimatedCost *smithy.Schema
+
+var _GetUsageLinesEstimatedCostLineItemList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bcmpricingcalculator",
+	Name:      "GetUsageLinesEstimatedCostLineItemList",
+}, smithy.ShapeTypeList, 1)
+var _GetUsageLinesEstimatedCostLineItemList_member *smithy.Schema
 
 var GroupSharingPreferenceEnum = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bcmpricingcalculator",
@@ -2021,6 +2117,28 @@ var GetPreferencesResponse_memberAccountRateTypeSelections *smithy.Schema
 
 var GetPreferencesResponse_standaloneAccountRateTypeSelections *smithy.Schema
 
+var GetUsageLinesEstimatedCostRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bcmpricingcalculator",
+	Name:      "GetUsageLinesEstimatedCostRequest",
+}, smithy.ShapeTypeStructure, 2)
+var GetUsageLinesEstimatedCostRequest_usage *smithy.Schema
+
+var GetUsageLinesEstimatedCostRequest_rateType *smithy.Schema
+
+var GetUsageLinesEstimatedCostResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bcmpricingcalculator",
+	Name:      "GetUsageLinesEstimatedCostResponse",
+}, smithy.ShapeTypeStructure, 5)
+var GetUsageLinesEstimatedCostResponse_rateType *smithy.Schema
+
+var GetUsageLinesEstimatedCostResponse_totalCost *smithy.Schema
+
+var GetUsageLinesEstimatedCostResponse_currency *smithy.Schema
+
+var GetUsageLinesEstimatedCostResponse_lineItems *smithy.Schema
+
+var GetUsageLinesEstimatedCostResponse_errors *smithy.Schema
+
 var GetWorkloadEstimateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bcmpricingcalculator",
 	Name:      "GetWorkloadEstimateRequest",
@@ -2984,6 +3102,60 @@ func init() {
 
 	FilterTimestamp_beforeTimestamp = FilterTimestamp.AddMember("beforeTimestamp", smithyprelude.Timestamp)
 
+	GetUsageLinesEstimatedCostErrorCode_BAD_REQUEST = GetUsageLinesEstimatedCostErrorCode.AddMember("BAD_REQUEST", smithyprelude.Unit)
+
+	GetUsageLinesEstimatedCostErrorCode_NOT_FOUND = GetUsageLinesEstimatedCostErrorCode.AddMember("NOT_FOUND", smithyprelude.Unit)
+
+	GetUsageLinesEstimatedCostErrorCode_CONFLICT = GetUsageLinesEstimatedCostErrorCode.AddMember("CONFLICT", smithyprelude.Unit)
+
+	GetUsageLinesEstimatedCostErrorCode_INTERNAL_SERVER_ERROR = GetUsageLinesEstimatedCostErrorCode.AddMember("INTERNAL_SERVER_ERROR", smithyprelude.Unit)
+
+	GetUsageLinesEstimatedCostError_key = GetUsageLinesEstimatedCostError.AddMember("key", _Key)
+
+	GetUsageLinesEstimatedCostError_serviceCode = GetUsageLinesEstimatedCostError.AddMember("serviceCode", _ServiceCode)
+
+	GetUsageLinesEstimatedCostError_usageType = GetUsageLinesEstimatedCostError.AddMember("usageType", _UsageType)
+
+	GetUsageLinesEstimatedCostError_operation = GetUsageLinesEstimatedCostError.AddMember("operation", _Operation)
+
+	GetUsageLinesEstimatedCostError_errorCode = GetUsageLinesEstimatedCostError.AddMember("errorCode", GetUsageLinesEstimatedCostErrorCode)
+
+	GetUsageLinesEstimatedCostError_errorMessage = GetUsageLinesEstimatedCostError.AddMember("errorMessage", smithyprelude.String)
+
+	_GetUsageLinesEstimatedCostErrors_member = _GetUsageLinesEstimatedCostErrors.AddMember("member", GetUsageLinesEstimatedCostError)
+
+	GetUsageLinesEstimatedCostEstimatedCost_usageAmount = GetUsageLinesEstimatedCostEstimatedCost.AddMember("usageAmount", smithyprelude.Double)
+
+	GetUsageLinesEstimatedCostEstimatedCost_usageUnit = GetUsageLinesEstimatedCostEstimatedCost.AddMember("usageUnit", smithyprelude.String)
+
+	GetUsageLinesEstimatedCostEstimatedCost_cost = GetUsageLinesEstimatedCostEstimatedCost.AddMember("cost", smithyprelude.Double)
+
+	GetUsageLinesEstimatedCostEstimatedCost_currency = GetUsageLinesEstimatedCostEstimatedCost.AddMember("currency", CurrencyCode)
+
+	GetUsageLinesEstimatedCostInput_serviceCode = GetUsageLinesEstimatedCostInput.AddMember("serviceCode", _ServiceCode)
+
+	GetUsageLinesEstimatedCostInput_usageType = GetUsageLinesEstimatedCostInput.AddMember("usageType", _UsageType)
+
+	GetUsageLinesEstimatedCostInput_operation = GetUsageLinesEstimatedCostInput.AddMember("operation", _Operation)
+
+	GetUsageLinesEstimatedCostInput_key = GetUsageLinesEstimatedCostInput.AddMember("key", _Key)
+
+	GetUsageLinesEstimatedCostInput_amount = GetUsageLinesEstimatedCostInput.AddMember("amount", _GetUsageLinesEstimatedCostAmount)
+
+	_GetUsageLinesEstimatedCostInputList_member = _GetUsageLinesEstimatedCostInputList.AddMember("member", GetUsageLinesEstimatedCostInput)
+
+	GetUsageLinesEstimatedCostLineItem_key = GetUsageLinesEstimatedCostLineItem.AddMember("key", _Key)
+
+	GetUsageLinesEstimatedCostLineItem_serviceCode = GetUsageLinesEstimatedCostLineItem.AddMember("serviceCode", _ServiceCode)
+
+	GetUsageLinesEstimatedCostLineItem_usageType = GetUsageLinesEstimatedCostLineItem.AddMember("usageType", _UsageType)
+
+	GetUsageLinesEstimatedCostLineItem_operation = GetUsageLinesEstimatedCostLineItem.AddMember("operation", _Operation)
+
+	GetUsageLinesEstimatedCostLineItem_estimatedCost = GetUsageLinesEstimatedCostLineItem.AddMember("estimatedCost", GetUsageLinesEstimatedCostEstimatedCost)
+
+	_GetUsageLinesEstimatedCostLineItemList_member = _GetUsageLinesEstimatedCostLineItemList.AddMember("member", GetUsageLinesEstimatedCostLineItem)
+
 	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
 
 	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
@@ -3431,6 +3603,20 @@ func init() {
 	GetPreferencesResponse_memberAccountRateTypeSelections = GetPreferencesResponse.AddMember("memberAccountRateTypeSelections", _RateTypes)
 
 	GetPreferencesResponse_standaloneAccountRateTypeSelections = GetPreferencesResponse.AddMember("standaloneAccountRateTypeSelections", _RateTypes)
+
+	GetUsageLinesEstimatedCostRequest_usage = GetUsageLinesEstimatedCostRequest.AddMember("usage", _GetUsageLinesEstimatedCostInputList)
+
+	GetUsageLinesEstimatedCostRequest_rateType = GetUsageLinesEstimatedCostRequest.AddMember("rateType", RateType)
+
+	GetUsageLinesEstimatedCostResponse_rateType = GetUsageLinesEstimatedCostResponse.AddMember("rateType", RateType)
+
+	GetUsageLinesEstimatedCostResponse_totalCost = GetUsageLinesEstimatedCostResponse.AddMember("totalCost", smithyprelude.Double)
+
+	GetUsageLinesEstimatedCostResponse_currency = GetUsageLinesEstimatedCostResponse.AddMember("currency", CurrencyCode)
+
+	GetUsageLinesEstimatedCostResponse_lineItems = GetUsageLinesEstimatedCostResponse.AddMember("lineItems", _GetUsageLinesEstimatedCostLineItemList)
+
+	GetUsageLinesEstimatedCostResponse_errors = GetUsageLinesEstimatedCostResponse.AddMember("errors", _GetUsageLinesEstimatedCostErrors)
 
 	GetWorkloadEstimateRequest_identifier = GetWorkloadEstimateRequest.AddMember("identifier", _ResourceId)
 

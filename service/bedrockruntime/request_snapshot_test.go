@@ -333,6 +333,7 @@ func TestCheckRequestSnapshot_Converse(t *testing.T) {
 			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
 			Trace:               types.GuardrailTrace("enabled"),
 		},
+		ProjectIdentifier:            ptr.String("__ProjectIdentifier__"),
 		AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 		PromptVariables: map[string]types.PromptVariableValues{
 			"key0": &types.PromptVariableValuesMemberText{
@@ -542,6 +543,7 @@ func TestCheckRequestSnapshot_InvokeModel(t *testing.T) {
 		PerformanceConfigLatency: types.PerformanceConfigLatency("standard"),
 		ServiceTier:              types.ServiceTierType("priority"),
 		RequestMetadata:          ptr.String("__RequestMetadata__"),
+		ProjectIdentifier:        ptr.String("__ProjectIdentifier__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -770,6 +772,7 @@ func TestUpdateRequestSnapshot_Converse(t *testing.T) {
 			GuardrailVersion:    ptr.String("__GuardrailVersion__"),
 			Trace:               types.GuardrailTrace("enabled"),
 		},
+		ProjectIdentifier:            ptr.String("__ProjectIdentifier__"),
 		AdditionalModelRequestFields: document.NewLazyDocument("__Document__"),
 		PromptVariables: map[string]types.PromptVariableValues{
 			"key0": &types.PromptVariableValuesMemberText{
@@ -979,6 +982,7 @@ func TestUpdateRequestSnapshot_InvokeModel(t *testing.T) {
 		PerformanceConfigLatency: types.PerformanceConfigLatency("standard"),
 		ServiceTier:              types.ServiceTierType("priority"),
 		RequestMetadata:          ptr.String("__RequestMetadata__"),
+		ProjectIdentifier:        ptr.String("__ProjectIdentifier__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

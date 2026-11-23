@@ -1,3 +1,7 @@
+# v1.31.0 (2026-11-19)
+
+* **Feature**: Adds the Leads APIs (SearchEngagements, ListEngagementGroups), customer account APIs with statistics and bulk jobs, SearchOpportunities, opportunity bulk jobs, account planning invitations, co-sell motion reason on AWS opportunity summaries, and channel recommendations on lead insights.
+
 # v1.30.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

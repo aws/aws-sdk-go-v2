@@ -1,0 +1,3 @@
+GET /api-inventory/item?host=__Host__&method=GET&path=__Path__&port=1&resourceArn=__ResourceArn__
+
+

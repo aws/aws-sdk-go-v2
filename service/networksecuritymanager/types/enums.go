@@ -21,6 +21,46 @@ func (AdminAccountStatus) Values() []AdminAccountStatus {
 	}
 }
 
+type CoverageStatus string
+
+// Enum values for CoverageStatus
+const (
+	CoverageStatusInEffect   CoverageStatus = "IN_EFFECT"
+	CoverageStatusSuperseded CoverageStatus = "SUPERSEDED"
+)
+
+// Values returns all known values for CoverageStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CoverageStatus) Values() []CoverageStatus {
+	return []CoverageStatus{
+		"IN_EFFECT",
+		"SUPERSEDED",
+	}
+}
+
+type DefaultSubnetConnectivity string
+
+// Enum values for DefaultSubnetConnectivity
+const (
+	DefaultSubnetConnectivityFlexible      DefaultSubnetConnectivity = "flexible"
+	DefaultSubnetConnectivityBidirectional DefaultSubnetConnectivity = "bidirectional"
+	DefaultSubnetConnectivityOutboundOnly  DefaultSubnetConnectivity = "outbound-only"
+)
+
+// Values returns all known values for DefaultSubnetConnectivity. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultSubnetConnectivity) Values() []DefaultSubnetConnectivity {
+	return []DefaultSubnetConnectivity{
+		"flexible",
+		"bidirectional",
+		"outbound-only",
+	}
+}
+
 type EntityStatus string
 
 // Enum values for EntityStatus
@@ -112,6 +152,7 @@ type PolicyFirewallType string
 const (
 	PolicyFirewallTypeWaf            PolicyFirewallType = "WAF"
 	PolicyFirewallTypeShieldAdvanced PolicyFirewallType = "SHIELD_ADVANCED"
+	PolicyFirewallTypeIgwFirewall    PolicyFirewallType = "IGW_FIREWALL"
 )
 
 // Values returns all known values for PolicyFirewallType. Note that this can be
@@ -122,6 +163,7 @@ func (PolicyFirewallType) Values() []PolicyFirewallType {
 	return []PolicyFirewallType{
 		"WAF",
 		"SHIELD_ADVANCED",
+		"IGW_FIREWALL",
 	}
 }
 
@@ -137,6 +179,7 @@ const (
 	ResourceTypeWafV2Webacl              ResourceType = "AWS::WAFv2::WebACL"
 	ResourceTypeShieldProtection         ResourceType = "AWS::Shield::Protection"
 	ResourceTypeShieldregionalProtection ResourceType = "AWS::ShieldRegional::Protection"
+	ResourceTypeVpc                      ResourceType = "AWS::EC2::VPC"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -153,6 +196,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::WAFv2::WebACL",
 		"AWS::Shield::Protection",
 		"AWS::ShieldRegional::Protection",
+		"AWS::EC2::VPC",
 	}
 }
 
@@ -160,7 +204,8 @@ type RuleFirewallType string
 
 // Enum values for RuleFirewallType
 const (
-	RuleFirewallTypeWaf RuleFirewallType = "WAF"
+	RuleFirewallTypeWaf         RuleFirewallType = "WAF"
+	RuleFirewallTypeIgwFirewall RuleFirewallType = "IGW_FIREWALL"
 )
 
 // Values returns all known values for RuleFirewallType. Note that this can be
@@ -170,6 +215,7 @@ const (
 func (RuleFirewallType) Values() []RuleFirewallType {
 	return []RuleFirewallType{
 		"WAF",
+		"IGW_FIREWALL",
 	}
 }
 
@@ -215,11 +261,13 @@ type ScopeResourceType string
 
 // Enum values for ScopeResourceType
 const (
-	ScopeResourceTypeApigw ScopeResourceType = "AWS::ApiGateway::Stage"
-	ScopeResourceTypeCfd   ScopeResourceType = "AWS::CloudFront::Distribution"
-	ScopeResourceTypeEip   ScopeResourceType = "AWS::EC2::EIP"
-	ScopeResourceTypeAlb   ScopeResourceType = "AWS::ElasticLoadBalancingV2::LoadBalancer::application"
-	ScopeResourceTypeClb   ScopeResourceType = "AWS::ElasticLoadBalancing::LoadBalancer"
+	ScopeResourceTypeApigw  ScopeResourceType = "AWS::ApiGateway::Stage"
+	ScopeResourceTypeCfd    ScopeResourceType = "AWS::CloudFront::Distribution"
+	ScopeResourceTypeEip    ScopeResourceType = "AWS::EC2::EIP"
+	ScopeResourceTypeAlb    ScopeResourceType = "AWS::ElasticLoadBalancingV2::LoadBalancer::application"
+	ScopeResourceTypeClb    ScopeResourceType = "AWS::ElasticLoadBalancing::LoadBalancer"
+	ScopeResourceTypeVpc    ScopeResourceType = "AWS::EC2::VPC"
+	ScopeResourceTypeSubnet ScopeResourceType = "AWS::EC2::Subnet"
 )
 
 // Values returns all known values for ScopeResourceType. Note that this can be
@@ -233,6 +281,8 @@ func (ScopeResourceType) Values() []ScopeResourceType {
 		"AWS::EC2::EIP",
 		"AWS::ElasticLoadBalancingV2::LoadBalancer::application",
 		"AWS::ElasticLoadBalancing::LoadBalancer",
+		"AWS::EC2::VPC",
+		"AWS::EC2::Subnet",
 	}
 }
 
@@ -261,6 +311,46 @@ func (ServiceResourceType) Values() []ServiceResourceType {
 	}
 }
 
+type SpecializedScopeType string
+
+// Enum values for SpecializedScopeType
+const (
+	SpecializedScopeTypeIgwFirewallSubnetConnectivityOverride SpecializedScopeType = "IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE"
+)
+
+// Values returns all known values for SpecializedScopeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpecializedScopeType) Values() []SpecializedScopeType {
+	return []SpecializedScopeType{
+		"IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE",
+	}
+}
+
+type SubnetConnectivity string
+
+// Enum values for SubnetConnectivity
+const (
+	SubnetConnectivityFlexible      SubnetConnectivity = "flexible"
+	SubnetConnectivityBidirectional SubnetConnectivity = "bidirectional"
+	SubnetConnectivityOutboundOnly  SubnetConnectivity = "outbound-only"
+	SubnetConnectivityExclude       SubnetConnectivity = "exclude"
+)
+
+// Values returns all known values for SubnetConnectivity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubnetConnectivity) Values() []SubnetConnectivity {
+	return []SubnetConnectivity{
+		"flexible",
+		"bidirectional",
+		"outbound-only",
+		"exclude",
+	}
+}
+
 type SynchronizationStatus string
 
 // Enum values for SynchronizationStatus
@@ -286,7 +376,8 @@ type TemplateFirewallType string
 
 // Enum values for TemplateFirewallType
 const (
-	TemplateFirewallTypeWaf TemplateFirewallType = "WAF"
+	TemplateFirewallTypeWaf         TemplateFirewallType = "WAF"
+	TemplateFirewallTypeIgwFirewall TemplateFirewallType = "IGW_FIREWALL"
 )
 
 // Values returns all known values for TemplateFirewallType. Note that this can be
@@ -296,6 +387,26 @@ const (
 func (TemplateFirewallType) Values() []TemplateFirewallType {
 	return []TemplateFirewallType{
 		"WAF",
+		"IGW_FIREWALL",
+	}
+}
+
+type TemplateOwner string
+
+// Enum values for TemplateOwner
+const (
+	TemplateOwnerCustomer TemplateOwner = "CUSTOMER"
+	TemplateOwnerAws      TemplateOwner = "AWS"
+)
+
+// Values returns all known values for TemplateOwner. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TemplateOwner) Values() []TemplateOwner {
+	return []TemplateOwner{
+		"CUSTOMER",
+		"AWS",
 	}
 }
 

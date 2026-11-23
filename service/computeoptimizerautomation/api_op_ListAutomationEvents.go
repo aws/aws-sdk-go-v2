@@ -37,11 +37,18 @@ type ListAutomationEventsInput struct {
 	//  The filters to apply to the list of automation events.
 	Filters []types.AutomationEventFilter
 
-	//  The maximum number of results to return in a single call.
+	//  The maximum number of automation events to return in a single response. If you
+	// don't specify a value, the default is 100.
 	MaxResults *int32
 
 	//  The token for the next page of results.
 	NextToken *string
+
+	//  The organizational unit (OU) or organization root IDs to use to filter the
+	// results. The response includes events for accounts in the specified OUs and
+	// their child OUs. Only the management account or a delegated administrator can
+	// specify this parameter.
+	OrganizationalUnitIds []string
 
 	//  The start of the time range to query for events.
 	StartTimeInclusive *time.Time
@@ -67,6 +74,9 @@ func (v *ListAutomationEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutomationEventsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrganizationalUnitIds != nil {
+		serializeOrganizationalUnitIds(s, schemas.ListAutomationEventsRequest_organizationalUnitIds, v.OrganizationalUnitIds)
 	}
 	if v.StartTimeInclusive != nil {
 		s.WriteTime(schemas.ListAutomationEventsRequest_startTimeInclusive, *v.StartTimeInclusive)
@@ -160,7 +170,8 @@ func (c *Client) addOperationListAutomationEventsMiddlewares(stack *middleware.S
 // ListAutomationEventsPaginatorOptions is the paginator options for
 // ListAutomationEvents
 type ListAutomationEventsPaginatorOptions struct {
-	//  The maximum number of results to return in a single call.
+	//  The maximum number of automation events to return in a single response. If you
+	// don't specify a value, the default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

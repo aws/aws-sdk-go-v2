@@ -1,0 +1,3 @@
+DELETE /accounts/__AwsAccountId__/access-control-applications?ApplicationId=__ApplicationId__&IdcApplicationArn=__IdcApplicationArn__
+
+

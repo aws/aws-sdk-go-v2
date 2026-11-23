@@ -173,6 +173,15 @@ type UpdateHealthCheckInput struct {
 	// Type is TCP , Route 53 doesn't pass a Host header.
 	FullyQualifiedDomainName *string
 
+	// The ID of the health check source from which Route 53 sends requests to the
+	// endpoint. Applies only to health checks that have an EndpointType of PRIVATE .
+	// The health check source must be in the same account and have a status of
+	// CREATE_COMPLETED .
+	//
+	// Each health check source supports a limited number of active health checks. If
+	// you reach that limit, specify a different health check source.
+	HealthCheckSourceId *string
+
 	// A sequential counter that Amazon Route 53 sets to 1 when you create a health
 	// check and increments by 1 each time you update settings for the health check.
 	//
@@ -221,10 +230,11 @@ type UpdateHealthCheckInput struct {
 	//   shorten IPv6 addresses as described in RFC 5952, for example,
 	//   2001:db8:85a3::abcd:1:2345 .
 	//
-	// If the endpoint is an EC2 instance, we recommend that you create an Elastic IP
-	// address, associate it with your EC2 instance, and specify the Elastic IP address
-	// for IPAddress . This ensures that the IP address of your instance never changes.
-	// For more information, see the applicable documentation:
+	// For a public health check, if the endpoint is an EC2 instance, we recommend
+	// that you create an Elastic IP address, associate it with your EC2 instance, and
+	// specify the Elastic IP address for IPAddress . This ensures that the IP address
+	// of your instance never changes. For more information, see the applicable
+	// documentation:
 	//
 	//   - Linux: [Elastic IP Addresses (EIP)]in the Amazon EC2 User Guide for Linux Instances
 	//
@@ -236,16 +246,22 @@ type UpdateHealthCheckInput struct {
 	//
 	// For more information, see [FullyQualifiedDomainName].
 	//
-	// Constraints: Route 53 can't check the health of endpoints for which the IP
-	// address is in local, private, non-routable, or multicast ranges. For more
-	// information about IP addresses for which you can't create health checks, see the
-	// following documents:
+	// Constraints: For a public health check ( EndpointType of PUBLIC , the default),
+	// Route 53 can't check the health of endpoints for which the IP address is in
+	// local, private, non-routable, or multicast ranges. For more information about IP
+	// addresses for which you can't create public health checks, see the following
+	// documents:
 	//
 	// [RFC 5735, Special Use IPv4 Addresses]
 	//
 	// [RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space]
 	//
 	// [RFC 5156, Special-Use IPv6 Addresses]
+	//
+	// For a private endpoint health check ( EndpointType of PRIVATE ), if you specify
+	// IPAddress , it must be a private IPv4 or IPv6 address. Route 53 sends health
+	// checks to it from the health check source that you specify in
+	// HealthCheckSourceId .
 	//
 	// [RFC 5735, Special Use IPv4 Addresses]: https://tools.ietf.org/html/rfc5735
 	// [FullyQualifiedDomainName]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName

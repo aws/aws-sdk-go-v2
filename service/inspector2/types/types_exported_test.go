@@ -199,6 +199,9 @@ func ExampleCreateIntegrationDetail_outputUsage() {
 	var union types.CreateIntegrationDetail
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.CreateIntegrationDetailMemberGithubEnterprise:
+		_ = v.Value // Value is types.CreateGitHubEnterpriseIntegrationDetail
+
 	case *types.CreateIntegrationDetailMemberGitlabSelfManaged:
 		_ = v.Value // Value is types.CreateGitLabSelfManagedIntegrationDetail
 
@@ -211,6 +214,7 @@ func ExampleCreateIntegrationDetail_outputUsage() {
 	}
 }
 
+var _ *types.CreateGitHubEnterpriseIntegrationDetail
 var _ *types.CreateGitLabSelfManagedIntegrationDetail
 
 func ExampleProviderDetailCreate_outputUsage() {
@@ -287,12 +291,37 @@ var _ *types.WeeklySchedule
 var _ *types.OneTimeSchedule
 var _ *types.MonthlySchedule
 
+func ExampleUpdateGitHubEnterpriseServerIntegrationDetail_outputUsage() {
+	var union types.UpdateGitHubEnterpriseServerIntegrationDetail
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UpdateGitHubEnterpriseServerIntegrationDetailMemberAppInstallation:
+		_ = v.Value // Value is types.UpdateGitHubEnterpriseServerAppInstallationDetail
+
+	case *types.UpdateGitHubEnterpriseServerIntegrationDetailMemberAppRegistration:
+		_ = v.Value // Value is types.GitHubEnterpriseServerAppRegistrationDetail
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.GitHubEnterpriseServerAppRegistrationDetail
+var _ *types.UpdateGitHubEnterpriseServerAppInstallationDetail
+
 func ExampleUpdateIntegrationDetails_outputUsage() {
 	var union types.UpdateIntegrationDetails
 	// type switches can be used to check the union value
 	switch v := union.(type) {
 	case *types.UpdateIntegrationDetailsMemberGithub:
 		_ = v.Value // Value is types.UpdateGitHubIntegrationDetail
+
+	case *types.UpdateIntegrationDetailsMemberGithubEnterpriseServer:
+		_ = v.Value // Value is types.UpdateGitHubEnterpriseServerIntegrationDetail
 
 	case *types.UpdateIntegrationDetailsMemberGitlabSelfManaged:
 		_ = v.Value // Value is types.UpdateGitLabSelfManagedIntegrationDetail
@@ -306,5 +335,6 @@ func ExampleUpdateIntegrationDetails_outputUsage() {
 	}
 }
 
+var _ types.UpdateGitHubEnterpriseServerIntegrationDetail
 var _ *types.UpdateGitLabSelfManagedIntegrationDetail
 var _ *types.UpdateGitHubIntegrationDetail

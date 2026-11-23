@@ -209,6 +209,14 @@ type AdditionalInfoRequest struct {
 	// Additional tax information to specify for a TRN in Monaco.
 	MonacoAdditionalInfo *MonacoAdditionalInfo
 
+	// Additional tax information to specify for a Tax Registration Number (TRN) in
+	// New Zealand.
+	NewZealandAdditionalInfo *NewZealandAdditionalInfo
+
+	// Additional tax information to specify for a Tax Registration Number (TRN) in
+	// Norway.
+	NorwayAdditionalInfo *NorwayAdditionalInfo
+
 	// Additional tax information to specify for a TRN in the Philippines.
 	PhilippinesAdditionalInfo *PhilippinesAdditionalInfo
 
@@ -232,6 +240,10 @@ type AdditionalInfoRequest struct {
 
 	//  Additional tax information associated with your TRN in Ukraine.
 	UkraineAdditionalInfo *UkraineAdditionalInfo
+
+	// Additional tax information to specify for a Tax Registration Number (TRN) in
+	// the United Arab Emirates.
+	UnitedArabEmiratesAdditionalInfo *UnitedArabEmiratesAdditionalInfo
 
 	//  Additional tax information to specify for a TRN in Uzbekistan.
 	UzbekistanAdditionalInfo *UzbekistanAdditionalInfo
@@ -329,6 +341,16 @@ func (v *AdditionalInfoRequest) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MonacoAdditionalInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.NewZealandAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_newZealandAdditionalInfo)
+		v.NewZealandAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NorwayAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_norwayAdditionalInfo)
+		v.NorwayAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.PhilippinesAdditionalInfo != nil {
 		s.WriteStruct(schemas.AdditionalInfoRequest_philippinesAdditionalInfo)
 		v.PhilippinesAdditionalInfo.SerializeMembers(s)
@@ -367,6 +389,11 @@ func (v *AdditionalInfoRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UkraineAdditionalInfo != nil {
 		s.WriteStruct(schemas.AdditionalInfoRequest_ukraineAdditionalInfo)
 		v.UkraineAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UnitedArabEmiratesAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoRequest_unitedArabEmiratesAdditionalInfo)
+		v.UnitedArabEmiratesAdditionalInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.UzbekistanAdditionalInfo != nil {
@@ -431,6 +458,12 @@ func (v *AdditionalInfoRequest) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AdditionalInfoRequest_monacoAdditionalInfo:
 			v.MonacoAdditionalInfo = &MonacoAdditionalInfo{}
 			return v.MonacoAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_newZealandAdditionalInfo:
+			v.NewZealandAdditionalInfo = &NewZealandAdditionalInfo{}
+			return v.NewZealandAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_norwayAdditionalInfo:
+			v.NorwayAdditionalInfo = &NorwayAdditionalInfo{}
+			return v.NorwayAdditionalInfo.Deserialize(d)
 		case schemas.AdditionalInfoRequest_philippinesAdditionalInfo:
 			v.PhilippinesAdditionalInfo = &PhilippinesAdditionalInfo{}
 			return v.PhilippinesAdditionalInfo.Deserialize(d)
@@ -455,6 +488,9 @@ func (v *AdditionalInfoRequest) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AdditionalInfoRequest_ukraineAdditionalInfo:
 			v.UkraineAdditionalInfo = &UkraineAdditionalInfo{}
 			return v.UkraineAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoRequest_unitedArabEmiratesAdditionalInfo:
+			v.UnitedArabEmiratesAdditionalInfo = &UnitedArabEmiratesAdditionalInfo{}
+			return v.UnitedArabEmiratesAdditionalInfo.Deserialize(d)
 		case schemas.AdditionalInfoRequest_uzbekistanAdditionalInfo:
 			v.UzbekistanAdditionalInfo = &UzbekistanAdditionalInfo{}
 			return v.UzbekistanAdditionalInfo.Deserialize(d)
@@ -534,6 +570,14 @@ type AdditionalInfoResponse struct {
 	// Additional tax information associated with your TRN in Monaco.
 	MonacoAdditionalInfo *MonacoAdditionalInfo
 
+	// Additional tax information associated with your Tax Registration Number (TRN)
+	// in New Zealand.
+	NewZealandAdditionalInfo *NewZealandAdditionalInfo
+
+	// Additional tax information associated with your Tax Registration Number (TRN)
+	// in Norway.
+	NorwayAdditionalInfo *NorwayAdditionalInfo
+
 	// Additional tax information associated with your TRN in the Philippines.
 	PhilippinesAdditionalInfo *PhilippinesAdditionalInfo
 
@@ -557,6 +601,10 @@ type AdditionalInfoResponse struct {
 
 	//  Additional tax information associated with your TRN in Ukraine.
 	UkraineAdditionalInfo *UkraineAdditionalInfo
+
+	// Additional tax information associated with your Tax Registration Number (TRN)
+	// in the United Arab Emirates.
+	UnitedArabEmiratesAdditionalInfo *UnitedArabEmiratesAdditionalInfo
 
 	//  Additional tax information associated with your TRN in Uzbekistan.
 	UzbekistanAdditionalInfo *UzbekistanAdditionalInfo
@@ -669,6 +717,16 @@ func (v *AdditionalInfoResponse) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MonacoAdditionalInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.NewZealandAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_newZealandAdditionalInfo)
+		v.NewZealandAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NorwayAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_norwayAdditionalInfo)
+		v.NorwayAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.PhilippinesAdditionalInfo != nil {
 		s.WriteStruct(schemas.AdditionalInfoResponse_philippinesAdditionalInfo)
 		v.PhilippinesAdditionalInfo.SerializeMembers(s)
@@ -707,6 +765,11 @@ func (v *AdditionalInfoResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UkraineAdditionalInfo != nil {
 		s.WriteStruct(schemas.AdditionalInfoResponse_ukraineAdditionalInfo)
 		v.UkraineAdditionalInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UnitedArabEmiratesAdditionalInfo != nil {
+		s.WriteStruct(schemas.AdditionalInfoResponse_unitedArabEmiratesAdditionalInfo)
+		v.UnitedArabEmiratesAdditionalInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.UzbekistanAdditionalInfo != nil {
@@ -780,6 +843,12 @@ func (v *AdditionalInfoResponse) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AdditionalInfoResponse_monacoAdditionalInfo:
 			v.MonacoAdditionalInfo = &MonacoAdditionalInfo{}
 			return v.MonacoAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_newZealandAdditionalInfo:
+			v.NewZealandAdditionalInfo = &NewZealandAdditionalInfo{}
+			return v.NewZealandAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_norwayAdditionalInfo:
+			v.NorwayAdditionalInfo = &NorwayAdditionalInfo{}
+			return v.NorwayAdditionalInfo.Deserialize(d)
 		case schemas.AdditionalInfoResponse_philippinesAdditionalInfo:
 			v.PhilippinesAdditionalInfo = &PhilippinesAdditionalInfo{}
 			return v.PhilippinesAdditionalInfo.Deserialize(d)
@@ -804,6 +873,9 @@ func (v *AdditionalInfoResponse) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AdditionalInfoResponse_ukraineAdditionalInfo:
 			v.UkraineAdditionalInfo = &UkraineAdditionalInfo{}
 			return v.UkraineAdditionalInfo.Deserialize(d)
+		case schemas.AdditionalInfoResponse_unitedArabEmiratesAdditionalInfo:
+			v.UnitedArabEmiratesAdditionalInfo = &UnitedArabEmiratesAdditionalInfo{}
+			return v.UnitedArabEmiratesAdditionalInfo.Deserialize(d)
 		case schemas.AdditionalInfoResponse_uzbekistanAdditionalInfo:
 			v.UzbekistanAdditionalInfo = &UzbekistanAdditionalInfo{}
 			return v.UzbekistanAdditionalInfo.Deserialize(d)
@@ -2118,6 +2190,88 @@ func (v *MonacoAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.MonacoAdditionalInfo_businessNumber:
 			v.BusinessNumber = new(string)
 			return d.ReadString(schemas.MonacoAdditionalInfo_businessNumber, v.BusinessNumber)
+		}
+		return nil
+	})
+}
+
+// Contains additional tax information associated with your Tax Registration
+// Number (TRN) in New Zealand, such as the Peppol ID used for electronic invoicing
+// (e-invoicing).
+type NewZealandAdditionalInfo struct {
+
+	// The Peppol ID used for electronic invoicing (e-invoicing) in New Zealand. Must
+	// be your 13-digit New Zealand Business Number (NZBN), without the 0088 scheme
+	// prefix. Only accepted when the sector is Government .
+	PeppolId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NewZealandAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NewZealandAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NewZealandAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PeppolId != nil {
+		s.WriteString(schemas.NewZealandAdditionalInfo_peppolId, *v.PeppolId)
+	}
+}
+func (v *NewZealandAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NewZealandAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NewZealandAdditionalInfo_peppolId:
+			v.PeppolId = new(string)
+			return d.ReadString(schemas.NewZealandAdditionalInfo_peppolId, v.PeppolId)
+		}
+		return nil
+	})
+}
+
+// Contains additional tax information associated with your Tax Registration
+// Number (TRN) in Norway, such as the tax registration number type and the Peppol
+// ID used for electronic invoicing (e-invoicing).
+type NorwayAdditionalInfo struct {
+
+	// The Peppol ID used for electronic invoicing (e-invoicing) in Norway. Must be a
+	// valid 9-digit Norwegian Organisation Number, without the 0192 scheme prefix.
+	PeppolId *string
+
+	// Treated as TaxRegistrationNumber when absent.
+	TaxRegistrationNumberType NorwayTaxRegistrationNumberType
+
+	noSmithyDocumentSerde
+}
+
+func (v *NorwayAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NorwayAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NorwayAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PeppolId != nil {
+		s.WriteString(schemas.NorwayAdditionalInfo_peppolId, *v.PeppolId)
+	}
+	if v.TaxRegistrationNumberType != "" {
+		s.WriteString(schemas.NorwayAdditionalInfo_taxRegistrationNumberType, string(v.TaxRegistrationNumberType))
+	}
+}
+func (v *NorwayAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NorwayAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NorwayAdditionalInfo_peppolId:
+			v.PeppolId = new(string)
+			return d.ReadString(schemas.NorwayAdditionalInfo_peppolId, v.PeppolId)
+		case schemas.NorwayAdditionalInfo_taxRegistrationNumberType:
+			var ev string
+			if err := d.ReadString(schemas.NorwayAdditionalInfo_taxRegistrationNumberType, &ev); err != nil {
+				return err
+			}
+			v.TaxRegistrationNumberType = NorwayTaxRegistrationNumberType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -3540,6 +3694,74 @@ func (v *UkraineAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains additional tax information associated with your Tax Registration
+// Number (TRN) in the United Arab Emirates, such as the TRN type and the Peppol ID
+// used for electronic invoicing (e-invoicing).
+type UnitedArabEmiratesAdditionalInfo struct {
+
+	// Your Emirates ID. Optional. Must be in the format 784-YYYY-NNNNNNN-N .
+	EmiratesId *string
+
+	// The Peppol ID used for electronic invoicing (e-invoicing) in the United Arab
+	// Emirates. Optional. Must be a 10-digit number.
+	PeppolId *string
+
+	// The type of your TRN in the United Arab Emirates. Valid values are
+	// VATTaxRegistrationNumber and LocalTaxRegistrationNumber (Corporate Tax). This
+	// field must be provided.
+	TaxRegistrationNumberType UaeTaxRegistrationNumberType
+
+	// Your trade license number in the United Arab Emirates. Optional. Must be a
+	// 10-digit number.
+	TradeLicenseNumber *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *UnitedArabEmiratesAdditionalInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnitedArabEmiratesAdditionalInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnitedArabEmiratesAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmiratesId != nil {
+		s.WriteString(schemas.UnitedArabEmiratesAdditionalInfo_emiratesId, *v.EmiratesId)
+	}
+	if v.PeppolId != nil {
+		s.WriteString(schemas.UnitedArabEmiratesAdditionalInfo_peppolId, *v.PeppolId)
+	}
+	if v.TaxRegistrationNumberType != "" {
+		s.WriteString(schemas.UnitedArabEmiratesAdditionalInfo_taxRegistrationNumberType, string(v.TaxRegistrationNumberType))
+	}
+	if v.TradeLicenseNumber != nil {
+		s.WriteString(schemas.UnitedArabEmiratesAdditionalInfo_tradeLicenseNumber, *v.TradeLicenseNumber)
+	}
+}
+func (v *UnitedArabEmiratesAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnitedArabEmiratesAdditionalInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnitedArabEmiratesAdditionalInfo_emiratesId:
+			v.EmiratesId = new(string)
+			return d.ReadString(schemas.UnitedArabEmiratesAdditionalInfo_emiratesId, v.EmiratesId)
+		case schemas.UnitedArabEmiratesAdditionalInfo_peppolId:
+			v.PeppolId = new(string)
+			return d.ReadString(schemas.UnitedArabEmiratesAdditionalInfo_peppolId, v.PeppolId)
+		case schemas.UnitedArabEmiratesAdditionalInfo_taxRegistrationNumberType:
+			var ev string
+			if err := d.ReadString(schemas.UnitedArabEmiratesAdditionalInfo_taxRegistrationNumberType, &ev); err != nil {
+				return err
+			}
+			v.TaxRegistrationNumberType = UaeTaxRegistrationNumberType(ev)
+			return nil
+		case schemas.UnitedArabEmiratesAdditionalInfo_tradeLicenseNumber:
+			v.TradeLicenseNumber = new(string)
+			return d.ReadString(schemas.UnitedArabEmiratesAdditionalInfo_tradeLicenseNumber, v.TradeLicenseNumber)
+		}
+		return nil
+	})
+}
+
 // Additional tax information to specify for a TRN in Uzbekistan.
 type UzbekistanAdditionalInfo struct {
 
@@ -3663,21 +3885,26 @@ func (v *VerificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
 // Additional tax information to specify for a TRN in Vietnam.
 type VietnamAdditionalInfo struct {
 
-	// The electronic transaction code number on the tax return document. This field
-	// must be provided for successful API operation.
+	// The electronic transaction code number on the tax return document. Required
+	// when vatCreditMethod is true ; must not be specified when it is false .
 	ElectronicTransactionCodeNumber *string
 
-	// The enterprise identification number for tax registration. This field must be
-	// provided for successful API operation.
+	// The enterprise identification number for tax registration. Required when
+	// vatCreditMethod is true ; must not be specified when it is false .
 	EnterpriseIdentificationNumber *string
 
-	// The payment voucher number on the tax return payment document. This field must
-	// be provided for successful API operation.
+	// The payment voucher number on the tax return payment document. Required when
+	// vatCreditMethod is true ; must not be specified when it is false .
 	PaymentVoucherNumber *string
 
-	// The date on the tax return payment document. This field must be provided for
-	// successful API operation.
+	// The date on the tax return payment document. Required when vatCreditMethod is
+	// true ; must not be specified when it is false .
 	PaymentVoucherNumberDate *string
+
+	// Whether your business applies the VAT credit method in Vietnam. Specify true
+	// for a business (sector Business ) or false for an individual (sector Individual
+	// ).
+	VatCreditMethod *bool
 
 	noSmithyDocumentSerde
 }
@@ -3701,6 +3928,9 @@ func (v *VietnamAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PaymentVoucherNumberDate != nil {
 		s.WriteString(schemas.VietnamAdditionalInfo_paymentVoucherNumberDate, *v.PaymentVoucherNumberDate)
 	}
+	if v.VatCreditMethod != nil {
+		s.WriteBool(schemas.VietnamAdditionalInfo_vatCreditMethod, *v.VatCreditMethod)
+	}
 }
 func (v *VietnamAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VietnamAdditionalInfo, func(s *smithy.Schema) error {
@@ -3717,6 +3947,9 @@ func (v *VietnamAdditionalInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.VietnamAdditionalInfo_paymentVoucherNumberDate:
 			v.PaymentVoucherNumberDate = new(string)
 			return d.ReadString(schemas.VietnamAdditionalInfo_paymentVoucherNumberDate, v.PaymentVoucherNumberDate)
+		case schemas.VietnamAdditionalInfo_vatCreditMethod:
+			v.VatCreditMethod = new(bool)
+			return d.ReadBool(schemas.VietnamAdditionalInfo_vatCreditMethod, v.VatCreditMethod)
 		}
 		return nil
 	})

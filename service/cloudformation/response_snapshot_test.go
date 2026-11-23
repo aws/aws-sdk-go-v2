@@ -738,6 +738,9 @@ func TestCheckResponseSnapshot_CreateStackSet(t *testing.T) {
 		ManagedExecution: &types.ManagedExecution{
 			Active: ptr.Bool(true),
 		},
+		ExecutionRoleTemplateBody: ptr.String("__ExecutionRoleTemplateBody__"),
+		ExecutionRoleTemplateUrl:  ptr.String("__ExecutionRoleTemplateUrl__"),
+		StackSetOutputBucket:      ptr.String("__StackSetOutputBucket__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -2093,6 +2096,7 @@ func TestCheckResponseSnapshot_DescribeStackSet(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+			StackSetOutputBucketPath: ptr.String("__StackSetOutputBucketPath__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeStackSet.response")
@@ -4967,6 +4971,10 @@ func TestCheckResponseSnapshot_UpdateStackSet(t *testing.T) {
 		ManagedExecution: &types.ManagedExecution{
 			Active: ptr.Bool(true),
 		},
+		ExecutionRoleTemplateBody: ptr.String("__ExecutionRoleTemplateBody__"),
+		ExecutionRoleTemplateUrl:  ptr.String("__ExecutionRoleTemplateUrl__"),
+		UseAdminExecutionRole:     ptr.Bool(true),
+		StackSetOutputBucket:      ptr.String("__StackSetOutputBucket__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5335,6 +5343,9 @@ func TestCheckResponseSnapshot_Error_CreatedButModifiedException(t *testing.T) {
 		ManagedExecution: &types.ManagedExecution{
 			Active: ptr.Bool(true),
 		},
+		ExecutionRoleTemplateBody: ptr.String("__ExecutionRoleTemplateBody__"),
+		ExecutionRoleTemplateUrl:  ptr.String("__ExecutionRoleTemplateUrl__"),
+		StackSetOutputBucket:      ptr.String("__StackSetOutputBucket__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -5768,6 +5779,9 @@ func TestCheckResponseSnapshot_Error_NameAlreadyExistsException(t *testing.T) {
 		ManagedExecution: &types.ManagedExecution{
 			Active: ptr.Bool(true),
 		},
+		ExecutionRoleTemplateBody: ptr.String("__ExecutionRoleTemplateBody__"),
+		ExecutionRoleTemplateUrl:  ptr.String("__ExecutionRoleTemplateUrl__"),
+		StackSetOutputBucket:      ptr.String("__StackSetOutputBucket__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

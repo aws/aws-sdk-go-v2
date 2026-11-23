@@ -216,9 +216,10 @@ func TestCheckRequestSnapshot_CreateCentralizationRuleForOrganization(t *testing
 				},
 				Scope: ptr.String("__Scope__"),
 				SourceLogsConfiguration: &types.SourceLogsConfiguration{
-					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
-					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
-					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+					LogGroupSelectionCriteria:    ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria:  ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:    types.EncryptedLogGroupStrategy("ALLOW"),
+					CentralizeWithDataProtection: types.CentralizeWithDataProtection("ENABLED"),
 				},
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
@@ -2402,9 +2403,10 @@ func TestCheckRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testing
 				},
 				Scope: ptr.String("__Scope__"),
 				SourceLogsConfiguration: &types.SourceLogsConfiguration{
-					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
-					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
-					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+					LogGroupSelectionCriteria:    ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria:  ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:    types.EncryptedLogGroupStrategy("ALLOW"),
+					CentralizeWithDataProtection: types.CentralizeWithDataProtection("ENABLED"),
 				},
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
@@ -3088,9 +3090,10 @@ func TestUpdateRequestSnapshot_CreateCentralizationRuleForOrganization(t *testin
 				},
 				Scope: ptr.String("__Scope__"),
 				SourceLogsConfiguration: &types.SourceLogsConfiguration{
-					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
-					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
-					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+					LogGroupSelectionCriteria:    ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria:  ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:    types.EncryptedLogGroupStrategy("ALLOW"),
+					CentralizeWithDataProtection: types.CentralizeWithDataProtection("ENABLED"),
 				},
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),
@@ -5274,9 +5277,10 @@ func TestUpdateRequestSnapshot_UpdateCentralizationRuleForOrganization(t *testin
 				},
 				Scope: ptr.String("__Scope__"),
 				SourceLogsConfiguration: &types.SourceLogsConfiguration{
-					LogGroupSelectionCriteria:   ptr.String("__LogGroupSelectionCriteria__"),
-					DataSourceSelectionCriteria: ptr.String("__DataSourceSelectionCriteria__"),
-					EncryptedLogGroupStrategy:   types.EncryptedLogGroupStrategy("ALLOW"),
+					LogGroupSelectionCriteria:    ptr.String("__LogGroupSelectionCriteria__"),
+					DataSourceSelectionCriteria:  ptr.String("__DataSourceSelectionCriteria__"),
+					EncryptedLogGroupStrategy:    types.EncryptedLogGroupStrategy("ALLOW"),
+					CentralizeWithDataProtection: types.CentralizeWithDataProtection("ENABLED"),
 				},
 				SourceMetricsConfiguration: &types.SourceMetricsConfiguration{
 					MetricsSelectionCriteria: ptr.String("__MetricsSelectionCriteria__"),

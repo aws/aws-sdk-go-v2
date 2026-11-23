@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPayments.ListPaymentInstruments
+
+{"nextToken":"__NextToken__","paymentInstrumentSummaries":[{"arn":"__Arn__","createdAt":946684800,"id":"__Id__","paymentMethod":"CARD","status":"ACTIVE","updatedAt":946684800},{"arn":"__Arn__","createdAt":946684800,"id":"__Id__","paymentMethod":"CARD","status":"ACTIVE","updatedAt":946684800}]}

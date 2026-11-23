@@ -21,6 +21,7 @@
         "api_op_DeleteTableBucketReplication.go",
         "api_op_DeleteTablePolicy.go",
         "api_op_DeleteTableReplication.go",
+        "api_op_DisassociateTableReplication.go",
         "api_op_GetNamespace.go",
         "api_op_GetTable.go",
         "api_op_GetTableBucket.go",

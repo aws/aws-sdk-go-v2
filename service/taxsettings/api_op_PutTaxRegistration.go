@@ -142,6 +142,26 @@ import (
 //
 //   - The sector valid values are Business and Individual .
 //
+// New Zealand
+//
+//   - You can optionally specify the sector . Valid values are Government and
+//     Business . Non-government customers use Business .
+//
+//   - If your sector is Government , you can optionally specify the peppolId in
+//     the newZealandAdditionalInfo field of the additionalTaxInformation object.
+//
+// Norway
+//
+//   - You can optionally specify the taxRegistrationNumberType in the
+//     norwayAdditionalInfo field of the additionalTaxInformation object. Valid
+//     values are TaxRegistrationNumber and LocalRegistrationNumber . Use
+//     LocalRegistrationNumber to register a Norwegian Organisation Number for a
+//     business that isn't VAT registered. In that case, the registrationId must be
+//     the 9-digit Organisation Number.
+//
+//   - You can optionally specify the peppolId in the norwayAdditionalInfo field of
+//     the additionalTaxInformation object.
+//
 // Saudi Arabia
 //
 //   - For address , you must specify addressLine3 .
@@ -194,10 +214,33 @@ import (
 //
 //   - The sector valid values are Business and Individual .
 //
+// United Arab Emirates
+//
+//   - You must specify the taxRegistrationNumberType in the
+//     unitedArabEmiratesAdditionalInfo field of the additionalTaxInformation object.
+//     Valid values are VATTaxRegistrationNumber and LocalTaxRegistrationNumber
+//     (Corporate Tax).
+//
+//   - You can optionally specify the peppolId , tradeLicenseNumber , and
+//     emiratesId in the unitedArabEmiratesAdditionalInfo field.
+//
 // Uruguay
 //
 //   - RegistrationType valid values are RUT (Registro Único Tributario), NIE
 //     (Numero de Identificacion del Extranjero), and CI (Cedula Identidad).
+//
+// Vietnam
+//
+//   - You must specify the vatCreditMethod in the vietnamAdditionalInfo field of
+//     the additionalTaxInformation object.
+//
+//   - If vatCreditMethod is true , the sector must be Business , and you must
+//     specify the enterpriseIdentificationNumber , electronicTransactionCodeNumber ,
+//     paymentVoucherNumber , and paymentVoucherNumberDate .
+//
+//   - If vatCreditMethod is false , the sector must be Individual , and you must
+//     not specify those four fields. The tax registration number can also be 12
+//     digits.
 //
 // Philippines
 //

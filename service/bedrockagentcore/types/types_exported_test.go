@@ -1209,6 +1209,9 @@ func ExamplePaymentInput_outputUsage() {
 	var union types.PaymentInput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.PaymentInputMemberAwsBillingX402:
+		_ = v.Value // Value is types.AwsBillingX402PaymentInput
+
 	case *types.PaymentInputMemberCryptoX402:
 		_ = v.Value // Value is types.CryptoX402PaymentInput
 
@@ -1224,6 +1227,7 @@ func ExamplePaymentInput_outputUsage() {
 	}
 }
 
+var _ *types.AwsBillingX402PaymentInput
 var _ *types.MppPaymentInput
 var _ *types.CryptoX402PaymentInput
 
@@ -1249,6 +1253,9 @@ func ExamplePaymentOutput_outputUsage() {
 	var union types.PaymentOutput
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.PaymentOutputMemberAwsBillingX402:
+		_ = v.Value // Value is types.AwsBillingX402PaymentOutput
+
 	case *types.PaymentOutputMemberCryptoX402:
 		_ = v.Value // Value is types.CryptoX402PaymentOutput
 
@@ -1265,6 +1272,7 @@ func ExamplePaymentOutput_outputUsage() {
 }
 
 var _ *types.CryptoX402PaymentOutput
+var _ *types.AwsBillingX402PaymentOutput
 var _ *types.MppPaymentOutput
 
 func ExamplePaymentTokenRequestInput_outputUsage() {

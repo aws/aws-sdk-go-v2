@@ -4201,6 +4201,12 @@
                 "smithy.api#documentation": "<p>The metadata for a cluster.</p>"
             }
         },
+        "com.amazonaws.inspector2#CodeConnectionsHostArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(-[\\w]+)*:(codestar-connections|codeconnections):.+:[0-9]{12}:host\\/.+$"
+            }
+        },
         "com.amazonaws.inspector2#CodeFilePath": {
             "type": "structure",
             "members": {
@@ -4627,6 +4633,52 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A summary of information about a code security integration.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CodeSecurityIntegrationVpcConfiguration": {
+            "type": "structure",
+            "members": {
+                "vpcId": {
+                    "target": "com.amazonaws.inspector2#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC that Amazon Inspector connects through to reach the repository provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpcEndpointId": {
+                    "target": "com.amazonaws.inspector2#VpcEndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC endpoint used for the connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "codeConnectionsHostArn": {
+                    "target": "com.amazonaws.inspector2#CodeConnectionsHostArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS CodeConnections host used for the connection.</p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.inspector2#SubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the subnets used for the connection.</p>"
+                    }
+                },
+                "securityGroups": {
+                    "target": "com.amazonaws.inspector2#SecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the security groups used for the connection.</p>"
+                    }
+                },
+                "tlsCertificate": {
+                    "target": "com.amazonaws.inspector2#TlsCertificate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TLS certificate used to establish a trusted connection to the repository provider.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPC configuration that Amazon Inspector uses to connect to a source code repository provider that is hosted in a private network.</p>"
             }
         },
         "com.amazonaws.inspector2#CodeSecurityResource": {
@@ -7118,6 +7170,27 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#CreateGitHubEnterpriseIntegrationDetail": {
+            "type": "structure",
+            "members": {
+                "instanceUrl": {
+                    "target": "com.amazonaws.inspector2#InstanceUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the GitHub Enterprise Server instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpcConfiguration": {
+                    "target": "com.amazonaws.inspector2#CodeSecurityIntegrationVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration used to connect to the GitHub Enterprise Server instance in a private network. For publicly accessible instances, omit this field.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details required to create an integration with a GitHub Enterprise Server instance.</p>"
+            }
+        },
         "com.amazonaws.inspector2#CreateGitLabSelfManagedIntegrationDetail": {
             "type": "structure",
             "members": {
@@ -7134,6 +7207,12 @@
                         "smithy.api#documentation": "<p>The personal access token used to authenticate with the self-managed GitLab instance.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "vpcConfiguration": {
+                    "target": "com.amazonaws.inspector2#CodeSecurityIntegrationVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration used to connect to the self-managed GitLab instance in a private network. For publicly accessible instances, omit this field.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7147,6 +7226,12 @@
                     "target": "com.amazonaws.inspector2#CreateGitLabSelfManagedIntegrationDetail",
                     "traits": {
                         "smithy.api#documentation": "<p>Details specific to creating an integration with a self-managed GitLab instance.</p>"
+                    }
+                },
+                "githubEnterprise": {
+                    "target": "com.amazonaws.inspector2#CreateGitHubEnterpriseIntegrationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details specific to creating an integration with a GitHub Enterprise Server instance.</p>"
                     }
                 }
             },
@@ -11396,6 +11481,18 @@
                         "smithy.api#documentation": "<p>The URL used to authorize the integration with the repository provider. This is only returned if reauthorization is required to fix a connection issue. Otherwise, it is null.</p>"
                     }
                 },
+                "vpcConfiguration": {
+                    "target": "com.amazonaws.inspector2#CodeSecurityIntegrationVpcConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration associated with the integration, if it connects to a repository provider in a private network.</p>"
+                    }
+                },
+                "instanceUrl": {
+                    "target": "com.amazonaws.inspector2#InstanceUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the self-managed GitLab or GitHub Enterprise Server instance associated with the integration.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.inspector2#TagMap",
                     "traits": {
@@ -12260,6 +12357,32 @@
                     "min": 1,
                     "max": 1024
                 },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.inspector2#GitHubEnterpriseServerAppRegistrationDetail": {
+            "type": "structure",
+            "members": {
+                "manifestCode": {
+                    "target": "com.amazonaws.inspector2#GitHubEnterpriseServerManifestCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The manifest code used to register the GitHub App on the GitHub Enterprise Server instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details required to register the GitHub App on the GitHub Enterprise Server instance.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#GitHubEnterpriseServerManifestCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9._~+/-]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -13935,6 +14058,42 @@
                     "traits": {
                         "smithy.api#enumValue": "DISABLING"
                     }
+                },
+                "ESTABLISHING_CONNECTION_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ESTABLISHING_CONNECTION_IN_PROGRESS"
+                    }
+                },
+                "ESTABLISHING_CONNECTION_COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ESTABLISHING_CONNECTION_COMPLETED"
+                    }
+                },
+                "ESTABLISHING_CONNECTION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ESTABLISHING_CONNECTION_FAILED"
+                    }
+                },
+                "PENDING_MANIFEST_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_MANIFEST_CODE"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
                 }
             }
         },
@@ -13964,6 +14123,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GITHUB"
+                    }
+                },
+                "GITHUB_ENTERPRISE_SERVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GITHUB_ENTERPRISE_SERVER"
                     }
                 }
             }
@@ -16577,7 +16742,7 @@
                 "machineImageId": {
                     "target": "com.amazonaws.inspector2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "The machine image ID (e.g., ami-0abcdef1234567890)",
+                        "smithy.api#documentation": "<p>The ID of the machine image, for example <code>ami-0abcdef1234567890</code>.</p>",
                         "smithy.api#pattern": "^ami-[0-9a-f]{8,17}$",
                         "smithy.api#required": {}
                     }
@@ -16585,67 +16750,67 @@
                 "name": {
                     "target": "com.amazonaws.inspector2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "Human-readable image name"
+                        "smithy.api#documentation": "<p>The name of the machine image.</p>"
                     }
                 },
                 "ownerAccountId": {
                     "target": "com.amazonaws.inspector2#ProviderAccountId",
                     "traits": {
-                        "smithy.api#documentation": "Account ID that owns the image"
+                        "smithy.api#documentation": "<p>The ID of the account that owns the machine image.</p>"
                     }
                 },
                 "platform": {
                     "target": "com.amazonaws.inspector2#Platform",
                     "traits": {
-                        "smithy.api#documentation": "OS platform (Linux/Windows)"
+                        "smithy.api#documentation": "<p>The operating system platform of the machine image.</p>"
                     }
                 },
                 "architecture": {
                     "target": "com.amazonaws.inspector2#Architecture",
                     "traits": {
-                        "smithy.api#documentation": "CPU architecture (x86_64/arm64)"
+                        "smithy.api#documentation": "<p>The CPU architecture of the machine image, for example <code>x86_64</code> or <code>arm64</code>.</p>"
                     }
                 },
                 "creationDate": {
                     "target": "com.amazonaws.inspector2#DateTimeTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "When the image was created"
+                        "smithy.api#documentation": "<p>The date and time that the machine image was created.</p>"
                     }
                 },
                 "state": {
                     "target": "com.amazonaws.inspector2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "Image state (available/pending/deregistered)"
+                        "smithy.api#documentation": "<p>The state of the machine image, for example <code>available</code>, <code>pending</code>, or <code>deregistered</code>.</p>"
                     }
                 },
                 "isPublic": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "Whether the image is publicly shared"
+                        "smithy.api#documentation": "<p>Indicates whether the machine image is shared publicly.</p>"
                     }
                 },
                 "rootDeviceType": {
                     "target": "com.amazonaws.inspector2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "Root device type (ebs/instance-store) — AWS-specific"
+                        "smithy.api#documentation": "<p>The root device type of the machine image, either <code>ebs</code> or <code>instance-store</code>.</p>"
                     }
                 },
                 "virtualizationType": {
                     "target": "com.amazonaws.inspector2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "Virtualization type (hvm/paravirtual) — AWS-specific"
+                        "smithy.api#documentation": "<p>The virtualization type of the machine image, either <code>hvm</code> or <code>paravirtual</code>.</p>"
                     }
                 },
                 "sourceResourceId": {
                     "target": "com.amazonaws.inspector2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "Source resource the image was created from (nullable)",
+                        "smithy.api#documentation": "<p>The ID of the Amazon EC2 instance that the machine image was created from, if available.</p>",
                         "smithy.api#pattern": "^i-[0-9a-f]{8,17}$"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Details about a machine image resource scanned directly by Inspector."
+                "smithy.api#documentation": "<p>Contains details about an Amazon Machine Image (AMI) that Amazon Inspector scanned directly.</p>"
             }
         },
         "com.amazonaws.inspector2#MachineImageMetadata": {
@@ -17344,6 +17509,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains details on the package file path to filter on.</p>"
                     }
+                },
+                "runtimeReachability": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachabilityFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details on the runtime reachability status of the package to filter on. For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html\">Understanding runtime reachability</a> in the Amazon Inspector user guide.</p>"
+                    }
+                },
+                "runtimeReachabilityReason": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachabilityReasonFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details on the runtime reachability reason of the package to filter on. For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html\">Understanding runtime reachability</a> in the Amazon Inspector user guide.</p>"
+                    }
+                },
+                "purlQualifier": {
+                    "target": "com.amazonaws.inspector2#PurlQualifierFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details on the package URL (purl) qualifier to filter on.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17491,6 +17674,15 @@
                         "name": "ZIP"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#PackageUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.inspector2#PackageVersion": {
@@ -17668,6 +17860,17 @@
                     "min": 0,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.inspector2#PkceState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_-]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.inspector2#Platform": {
@@ -18000,6 +18203,105 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^([a-z]{2}(-[a-z]+)+-\\d+|[a-z][a-z0-9]+|[a-z]+-[a-z]+[0-9]+(-[a-z])?)$"
+            }
+        },
+        "com.amazonaws.inspector2#PurlQualifierFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#MapComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use when comparing values in the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.inspector2#PurlQualifierKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package URL (purl) qualifier key to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#MapValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package URL (purl) qualifier value to filter on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that describes the details of a package URL (purl) qualifier filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#PurlQualifierKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "arch",
+                        "name": "ARCH"
+                    },
+                    {
+                        "value": "collector",
+                        "name": "COLLECTOR"
+                    },
+                    {
+                        "value": "dev_dependency",
+                        "name": "DEV_DEPENDENCY"
+                    },
+                    {
+                        "value": "distro",
+                        "name": "DISTRO"
+                    },
+                    {
+                        "value": "epoch",
+                        "name": "EPOCH"
+                    },
+                    {
+                        "value": "go_toolchain",
+                        "name": "GO_TOOLCHAIN"
+                    },
+                    {
+                        "value": "hardened",
+                        "name": "HARDENED"
+                    },
+                    {
+                        "value": "private",
+                        "name": "PRIVATE"
+                    },
+                    {
+                        "value": "rust_toolchain",
+                        "name": "RUST_TOOLCHAIN"
+                    },
+                    {
+                        "value": "scope",
+                        "name": "SCOPE"
+                    },
+                    {
+                        "value": "skip_chromium_download",
+                        "name": "SKIP_CHROMIUM_DOWNLOAD"
+                    },
+                    {
+                        "value": "source",
+                        "name": "SOURCE"
+                    },
+                    {
+                        "value": "stream",
+                        "name": "STREAM"
+                    },
+                    {
+                        "value": "transitive_dependency",
+                        "name": "TRANSITIVE_DEPENDENCY"
+                    },
+                    {
+                        "value": "unresolved",
+                        "name": "UNRESOLVED"
+                    },
+                    {
+                        "value": "vendor",
+                        "name": "VENDOR"
+                    }
+                ]
             }
         },
         "com.amazonaws.inspector2#Reason": {
@@ -18463,7 +18765,10 @@
                     }
                 },
                 "machineImage": {
-                    "target": "com.amazonaws.inspector2#MachineImageDetails"
+                    "target": "com.amazonaws.inspector2#MachineImageDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about the Amazon Machine Image (AMI) involved in the finding.</p>"
+                    }
                 },
                 "vm": {
                     "target": "com.amazonaws.inspector2#Vm",
@@ -19203,6 +19508,107 @@
                         "name": "NODEJS_20_X"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#RuntimeReachability": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "REACHABLE",
+                        "name": "REACHABLE"
+                    },
+                    {
+                        "value": "NOT_REACHABLE",
+                        "name": "NOT_REACHABLE"
+                    },
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#RuntimeReachabilityComparison": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EQUALS",
+                        "name": "EQUALS"
+                    },
+                    {
+                        "value": "NOT_EQUALS",
+                        "name": "NOT_EQUALS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#RuntimeReachabilityFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachabilityComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use when comparing values in the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime reachability status to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that describes the details of a runtime reachability filter.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#RuntimeReachabilityReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH",
+                        "name": "PACKAGE_IN_DOCKERFILE_WORKLOAD_PATH"
+                    },
+                    {
+                        "value": "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH",
+                        "name": "PACKAGE_NOT_IN_DOCKERFILE_WORKLOAD_PATH"
+                    },
+                    {
+                        "value": "PROCESS_OBSERVED_IN_EC2_RUNTIME",
+                        "name": "PROCESS_OBSERVED_IN_EC2_RUNTIME"
+                    },
+                    {
+                        "value": "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME",
+                        "name": "PROCESS_NOT_OBSERVED_IN_EC2_RUNTIME"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#RuntimeReachabilityReasonFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachabilityComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use when comparing values in the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachabilityReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime reachability reason to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that describes the details of a runtime reachability reason filter.</p>"
             }
         },
         "com.amazonaws.inspector2#SbomReportFormat": {
@@ -21696,6 +22102,17 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#TlsCertificate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16384
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.inspector2#Tool": {
             "type": "string",
             "traits": {
@@ -22602,6 +23019,54 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#UpdateGitHubEnterpriseServerAppInstallationDetail": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.inspector2#GitHubAuthCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization code received from GitHub Enterprise Server.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "installationId": {
+                    "target": "com.amazonaws.inspector2#GitHubInstallationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The installation ID of the GitHub App associated with the integration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stateToken": {
+                    "target": "com.amazonaws.inspector2#PkceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PKCE state token used to validate the authorization request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details required to complete the GitHub App installation for a GitHub Enterprise Server integration.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#UpdateGitHubEnterpriseServerIntegrationDetail": {
+            "type": "union",
+            "members": {
+                "appInstallation": {
+                    "target": "com.amazonaws.inspector2#UpdateGitHubEnterpriseServerAppInstallationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for completing the GitHub App installation step of the GitHub Enterprise Server integration.</p>"
+                    }
+                },
+                "appRegistration": {
+                    "target": "com.amazonaws.inspector2#GitHubEnterpriseServerAppRegistrationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for completing the GitHub App manifest registration step of the GitHub Enterprise Server integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the details required to update an integration with a GitHub Enterprise Server instance. Provide one of the following, depending on the step of the setup flow.</p>"
+            }
+        },
         "com.amazonaws.inspector2#UpdateGitHubIntegrationDetail": {
             "type": "structure",
             "members": {
@@ -22618,6 +23083,12 @@
                         "smithy.api#documentation": "<p>The installation ID of the GitHub App associated with the integration.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "stateToken": {
+                    "target": "com.amazonaws.inspector2#PkceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PKCE state token used to validate the authorization request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -22632,6 +23103,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The authorization code received from the self-managed GitLab instance to update the integration.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "stateToken": {
+                    "target": "com.amazonaws.inspector2#PkceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PKCE state token used to validate the authorization request.</p>"
                     }
                 }
             },
@@ -22652,6 +23129,12 @@
                     "target": "com.amazonaws.inspector2#UpdateGitHubIntegrationDetail",
                     "traits": {
                         "smithy.api#documentation": "<p>Details specific to updating an integration with GitHub.</p>"
+                    }
+                },
+                "githubEnterpriseServer": {
+                    "target": "com.amazonaws.inspector2#UpdateGitHubEnterpriseServerIntegrationDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details specific to updating an integration with a GitHub Enterprise Server instance.</p>"
                     }
                 }
             },
@@ -23425,6 +23908,12 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#VpcEndpointId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^vpce-[0-9a-f]{8}([0-9a-f]{9})?$"
+            }
+        },
         "com.amazonaws.inspector2#VpcId": {
             "type": "string",
             "traits": {
@@ -23705,6 +24194,24 @@
                     "target": "com.amazonaws.inspector2#LambdaLayerArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the Amazon Web Services Lambda function affected by a finding.</p>"
+                    }
+                },
+                "runtimeReachability": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime reachability status of the vulnerable package. For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html\">Understanding runtime reachability</a> in the Amazon Inspector user guide.</p>"
+                    }
+                },
+                "runtimeReachabilityReason": {
+                    "target": "com.amazonaws.inspector2#RuntimeReachabilityReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the runtime reachability status of the vulnerable package. For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-runtime-reachability.html\">Understanding runtime reachability</a> in the Amazon Inspector user guide.</p>"
+                    }
+                },
+                "purl": {
+                    "target": "com.amazonaws.inspector2#PackageUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package URL (purl) of the vulnerable package.</p>"
                     }
                 }
             },

@@ -1159,8 +1159,10 @@ var IntegrationStatus_FAILED *smithy.Schema
 var IntegrationType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatchomni",
 	Name:      "IntegrationType",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var IntegrationType_AWS_CONFIG_SLREC *smithy.Schema
+
+var IntegrationType_AWS_CONFIG_AZURE_SLREC *smithy.Schema
 
 var IntegrationType_SLACK *smithy.Schema
 
@@ -4072,6 +4074,8 @@ func init() {
 	Field_children = Field.AddMember("children", _FieldList)
 
 	IntegrationType_AWS_CONFIG_SLREC = IntegrationType.AddMember("AWS_CONFIG_SLREC", smithyprelude.Unit)
+
+	IntegrationType_AWS_CONFIG_AZURE_SLREC = IntegrationType.AddMember("AWS_CONFIG_AZURE_SLREC", smithyprelude.Unit)
 
 	IntegrationType_SLACK = IntegrationType.AddMember("SLACK", smithyprelude.Unit)
 

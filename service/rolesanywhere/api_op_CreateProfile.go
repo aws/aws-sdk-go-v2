@@ -89,6 +89,13 @@ type CreateProfileInput struct {
 	// The tags to attach to the profile.
 	Tags []types.Tag
 
+	// The trusted identity propagation (TIP) settings for the profile. When you
+	// enable TIP, sessions from the profile include the identity from the certificate
+	// in aws:OriginIdentity condition keys.
+	//
+	// If you omit this parameter, the profile doesn't use TIP.
+	TipConfiguration *types.TipConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -129,6 +136,11 @@ func (v *CreateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Tags != nil {
 		serializeTagList(s, schemas.CreateProfileRequest_tags, v.Tags)
 	}
+	if v.TipConfiguration != nil {
+		s.WriteStruct(schemas.CreateProfileRequest_tipConfiguration)
+		v.TipConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *CreateProfileInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateProfileRequest, func(s *smithy.Schema) error {
@@ -160,6 +172,9 @@ func (v *CreateProfileInput) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.CreateProfileRequest_sessionPolicy, v.SessionPolicy)
 		case schemas.CreateProfileRequest_tags:
 			return deserializeTagList(d, schemas.CreateProfileRequest_tags, &v.Tags)
+		case schemas.CreateProfileRequest_tipConfiguration:
+			v.TipConfiguration = &types.TipConfiguration{}
+			return v.TipConfiguration.Deserialize(d)
 		}
 		return nil
 	})

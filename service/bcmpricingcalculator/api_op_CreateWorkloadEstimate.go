@@ -38,7 +38,9 @@ type CreateWorkloadEstimateInput struct {
 	//  A unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
 
-	//  The type of pricing rates to use for the estimate.
+	//  The type of pricing rates for the estimate. You can only use a rate type that
+	// your Pricing Calculator rate preferences allow. If you use billing transfer as a
+	// bill source account, you can only use BEFORE_DISCOUNTS.
 	RateType types.WorkloadEstimateRateType
 
 	//  The tags to apply to the workload estimate.

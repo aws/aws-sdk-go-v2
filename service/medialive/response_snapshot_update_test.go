@@ -1680,7 +1680,9 @@ func TestUpdateResponseSnapshot_CreateChannel(t *testing.T) {
 								Position: &types.EmbeddedCaptionPositionSettings{
 									YPositionLine: ptr.Int32(1),
 								},
-								StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+								StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+								CaptionServiceChannel: ptr.Int32(1),
+								EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 							},
 							EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 							RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -1775,7 +1777,9 @@ func TestUpdateResponseSnapshot_CreateChannel(t *testing.T) {
 								Position: &types.EmbeddedCaptionPositionSettings{
 									YPositionLine: ptr.Int32(1),
 								},
-								StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+								StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+								CaptionServiceChannel: ptr.Int32(1),
+								EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 							},
 							EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 							RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -4749,7 +4753,8 @@ func TestUpdateResponseSnapshot_CreateChannel(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			InferenceSettings: nil,
+			InferenceSettings:        nil,
+			JpegXsInputSpecification: nil,
 		},
 	}
 	proto := restjson1.New(schemas.MediaLive)
@@ -6529,7 +6534,9 @@ func TestUpdateResponseSnapshot_DeleteChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -6624,7 +6631,9 @@ func TestUpdateResponseSnapshot_DeleteChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -9604,7 +9613,8 @@ func TestUpdateResponseSnapshot_DeleteChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	proto := restjson1.New(schemas.MediaLive)
 	opSchema := smithy.NewOperationSchema(schemas.DeleteChannel, schemas.DeleteChannelResponse, schemas.DeleteChannelResponse)
@@ -10824,7 +10834,9 @@ func TestUpdateResponseSnapshot_DescribeChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -10919,7 +10931,9 @@ func TestUpdateResponseSnapshot_DescribeChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -13899,7 +13913,8 @@ func TestUpdateResponseSnapshot_DescribeChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	proto := restjson1.New(schemas.MediaLive)
 	opSchema := smithy.NewOperationSchema(schemas.DescribeChannel, schemas.DescribeChannelResponse, schemas.DescribeChannelResponse)
@@ -15893,7 +15908,8 @@ func TestUpdateResponseSnapshot_ListChannels(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
-				InferenceSettings: nil,
+				InferenceSettings:        nil,
+				JpegXsInputSpecification: nil,
 			},
 			{},
 		},
@@ -18328,7 +18344,9 @@ func TestUpdateResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -18423,7 +18441,9 @@ func TestUpdateResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -21404,7 +21424,8 @@ func TestUpdateResponseSnapshot_RestartChannelPipelines(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	proto := restjson1.New(schemas.MediaLive)
 	opSchema := smithy.NewOperationSchema(schemas.RestartChannelPipelines, schemas.RestartChannelPipelinesResponse, schemas.RestartChannelPipelinesResponse)
@@ -21972,7 +21993,9 @@ func TestUpdateResponseSnapshot_StartChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -22067,7 +22090,9 @@ func TestUpdateResponseSnapshot_StartChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -25047,7 +25072,8 @@ func TestUpdateResponseSnapshot_StartChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	proto := restjson1.New(schemas.MediaLive)
 	opSchema := smithy.NewOperationSchema(schemas.StartChannel, schemas.StartChannelResponse, schemas.StartChannelResponse)
@@ -26025,7 +26051,9 @@ func TestUpdateResponseSnapshot_StopChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -26120,7 +26148,9 @@ func TestUpdateResponseSnapshot_StopChannel(t *testing.T) {
 							Position: &types.EmbeddedCaptionPositionSettings{
 								YPositionLine: ptr.Int32(1),
 							},
-							StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+							StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+							CaptionServiceChannel: ptr.Int32(1),
+							EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 						},
 						EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 						RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -29100,7 +29130,8 @@ func TestUpdateResponseSnapshot_StopChannel(t *testing.T) {
 			"__Member__",
 			"__Member__",
 		},
-		InferenceSettings: nil,
+		InferenceSettings:        nil,
+		JpegXsInputSpecification: nil,
 	}
 	proto := restjson1.New(schemas.MediaLive)
 	opSchema := smithy.NewOperationSchema(schemas.StopChannel, schemas.StopChannelResponse, schemas.StopChannelResponse)
@@ -29793,7 +29824,9 @@ func TestUpdateResponseSnapshot_UpdateChannel(t *testing.T) {
 								Position: &types.EmbeddedCaptionPositionSettings{
 									YPositionLine: ptr.Int32(1),
 								},
-								StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+								StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+								CaptionServiceChannel: ptr.Int32(1),
+								EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 							},
 							EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 							RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -29888,7 +29921,9 @@ func TestUpdateResponseSnapshot_UpdateChannel(t *testing.T) {
 								Position: &types.EmbeddedCaptionPositionSettings{
 									YPositionLine: ptr.Int32(1),
 								},
-								StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+								StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+								CaptionServiceChannel: ptr.Int32(1),
+								EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 							},
 							EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 							RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -32862,7 +32897,8 @@ func TestUpdateResponseSnapshot_UpdateChannel(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			InferenceSettings: nil,
+			InferenceSettings:        nil,
+			JpegXsInputSpecification: nil,
 		},
 	}
 	proto := restjson1.New(schemas.MediaLive)
@@ -33432,7 +33468,9 @@ func TestUpdateResponseSnapshot_UpdateChannelClass(t *testing.T) {
 								Position: &types.EmbeddedCaptionPositionSettings{
 									YPositionLine: ptr.Int32(1),
 								},
-								StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+								StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+								CaptionServiceChannel: ptr.Int32(1),
+								EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 							},
 							EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 							RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -33527,7 +33565,9 @@ func TestUpdateResponseSnapshot_UpdateChannelClass(t *testing.T) {
 								Position: &types.EmbeddedCaptionPositionSettings{
 									YPositionLine: ptr.Int32(1),
 								},
-								StyleControl: types.EmbeddedDestinationStyleControl("MANUAL"),
+								StyleControl:          types.EmbeddedDestinationStyleControl("MANUAL"),
+								CaptionServiceChannel: ptr.Int32(1),
+								EmbeddedMode:          types.EmbeddedModeType("EMBEDDED_608_AND_708"),
 							},
 							EmbeddedPlusScte20DestinationSettings: &types.EmbeddedPlusScte20DestinationSettings{},
 							RtmpCaptionInfoDestinationSettings:    &types.RtmpCaptionInfoDestinationSettings{},
@@ -36501,7 +36541,8 @@ func TestUpdateResponseSnapshot_UpdateChannelClass(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
-			InferenceSettings: nil,
+			InferenceSettings:        nil,
+			JpegXsInputSpecification: nil,
 		},
 	}
 	proto := restjson1.New(schemas.MediaLive)

@@ -438,6 +438,28 @@ func TestUpdateResponseSnapshot_DeleteTableReplication(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DisassociateTableReplication(t *testing.T) {
+	want := &DisassociateTableReplicationOutput{}
+	proto := restjson1.New(schemas.S3TableBuckets)
+	opSchema := smithy.NewOperationSchema(schemas.DisassociateTableReplication, schemas.DisassociateTableReplicationResponse, schemas.DisassociateTableReplicationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DisassociateTableReplication.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetNamespace(t *testing.T) {
 	want := &GetNamespaceOutput{
 		Namespace: []string{

@@ -197,7 +197,46 @@ func TestCheckRequestSnapshot_CreateMarketplaceRevenueShare(t *testing.T) {
 	input := &CreateMarketplaceRevenueShareInput{
 		Catalog:     types.CatalogName("AWS"),
 		ClientToken: ptr.String("__ClientToken__"),
-		ProductId:   ptr.String("__ProductId__"),
+		Products: []types.MarketplaceRevenueShareProductEntry{
+			{
+				ProductId: ptr.String("__ProductId__"),
+				Accounts: []types.RevenueShareProductAccountEntry{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				ProductId: ptr.String("__ProductId__"),
+				Accounts: []types.RevenueShareProductAccountEntry{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -234,12 +273,13 @@ func TestCheckRequestSnapshot_CreateMarketplaceRevenueShare(t *testing.T) {
 
 func TestCheckRequestSnapshot_CreateMarketplaceRevenueShareAllocation(t *testing.T) {
 	input := &CreateMarketplaceRevenueShareAllocationInput{
-		Catalog:             types.CatalogName("AWS"),
-		ProductId:           ptr.String("__ProductId__"),
-		ClientToken:         ptr.String("__ClientToken__"),
-		EffectiveFrom:       ptr.String("__EffectiveFrom__"),
-		EffectiveUntil:      ptr.String("__EffectiveUntil__"),
-		RevenueSharePercent: ptr.String("__RevenueSharePercent__"),
+		Catalog:                           types.CatalogName("AWS"),
+		MarketplaceRevenueShareIdentifier: ptr.String("__MarketplaceRevenueShareIdentifier__"),
+		ClientToken:                       ptr.String("__ClientToken__"),
+		MarketplaceRevenueShareRevision:   ptr.String("__MarketplaceRevenueShareRevision__"),
+		EffectiveFrom:                     ptr.String("__EffectiveFrom__"),
+		EffectiveUntil:                    ptr.String("__EffectiveUntil__"),
+		RevenueSharePercent:               ptr.String("__RevenueSharePercent__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -282,6 +322,9 @@ func TestCheckRequestSnapshot_CreateRevenueAttribution(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -308,9 +351,9 @@ func TestCheckRequestSnapshot_CreateRevenueAttribution(t *testing.T) {
 
 func TestCheckRequestSnapshot_GetMarketplaceRevenueShare(t *testing.T) {
 	input := &GetMarketplaceRevenueShareInput{
-		Catalog:   types.CatalogName("AWS"),
-		ProductId: ptr.String("__ProductId__"),
-		Revision:  ptr.Int32(1),
+		Catalog:    types.CatalogName("AWS"),
+		Identifier: ptr.String("__Identifier__"),
+		Revision:   ptr.String("__Revision__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -338,7 +381,7 @@ func TestCheckRequestSnapshot_GetMarketplaceRevenueShare(t *testing.T) {
 func TestCheckRequestSnapshot_GetMarketplaceRevenueShareAllocation(t *testing.T) {
 	input := &GetMarketplaceRevenueShareAllocationInput{
 		Catalog:                             types.CatalogName("AWS"),
-		ProductId:                           ptr.String("__ProductId__"),
+		MarketplaceRevenueShareIdentifier:   ptr.String("__MarketplaceRevenueShareIdentifier__"),
 		MarketplaceRevenueShareAllocationId: ptr.String("__MarketplaceRevenueShareAllocationId__"),
 		MarketplaceRevenueShareRevision:     ptr.String("__MarketplaceRevenueShareRevision__"),
 	}
@@ -454,16 +497,18 @@ func TestCheckRequestSnapshot_GetRevenueAttributionAllocationsTask(t *testing.T)
 
 func TestCheckRequestSnapshot_ListMarketplaceRevenueShareAllocations(t *testing.T) {
 	input := &ListMarketplaceRevenueShareAllocationsInput{
-		Catalog:                         types.CatalogName("AWS"),
-		ProductId:                       ptr.String("__ProductId__"),
-		Status:                          types.AllocationStatus("ACTIVE"),
-		AfterEffectiveFrom:              ptr.String("__AfterEffectiveFrom__"),
-		BeforeEffectiveFrom:             ptr.String("__BeforeEffectiveFrom__"),
-		SortBy:                          types.MarketplaceRevenueShareAllocationSortField("EffectiveFrom"),
-		SortOrder:                       types.SortOrder("ASCENDING"),
-		MaxResults:                      ptr.Int32(1),
-		NextToken:                       ptr.String("__NextToken__"),
-		MarketplaceRevenueShareRevision: ptr.String("__MarketplaceRevenueShareRevision__"),
+		Catalog:                           types.CatalogName("AWS"),
+		MarketplaceRevenueShareIdentifier: ptr.String("__MarketplaceRevenueShareIdentifier__"),
+		StatusFilter:                      types.AllocationStatus("ACTIVE"),
+		AfterEffectiveFrom:                ptr.String("__AfterEffectiveFrom__"),
+		BeforeEffectiveFrom:               ptr.String("__BeforeEffectiveFrom__"),
+		AfterEffectiveUntil:               ptr.String("__AfterEffectiveUntil__"),
+		BeforeEffectiveUntil:              ptr.String("__BeforeEffectiveUntil__"),
+		SortBy:                            types.MarketplaceRevenueShareAllocationSortField("EffectiveFrom"),
+		SortOrder:                         types.SortOrder("ASCENDING"),
+		MaxResults:                        ptr.Int32(1),
+		NextToken:                         ptr.String("__NextToken__"),
+		MarketplaceRevenueShareRevision:   ptr.String("__MarketplaceRevenueShareRevision__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -491,6 +536,10 @@ func TestCheckRequestSnapshot_ListMarketplaceRevenueShareAllocations(t *testing.
 func TestCheckRequestSnapshot_ListMarketplaceRevenueShares(t *testing.T) {
 	input := &ListMarketplaceRevenueSharesInput{
 		Catalog: types.CatalogName("AWS"),
+		Identifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
 		ProductIds: []string{
 			"__Member__",
 			"__Member__",
@@ -592,6 +641,22 @@ func TestCheckRequestSnapshot_ListRevenueAttributions(t *testing.T) {
 		SortOrder:     types.SortOrder("ASCENDING"),
 		MaxResults:    ptr.Int32(1),
 		NextToken:     ptr.String("__NextToken__"),
+		ContextFilters: []types.ContextFilter{
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -766,15 +831,83 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateMarketplaceRevenueShare(t *testing.T) {
+	input := &UpdateMarketplaceRevenueShareInput{
+		Catalog:     types.CatalogName("AWS"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Revision:    ptr.String("__Revision__"),
+		Products: []types.MarketplaceRevenueShareProductEntry{
+			{
+				ProductId: ptr.String("__ProductId__"),
+				Accounts: []types.RevenueShareProductAccountEntry{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				ProductId: ptr.String("__ProductId__"),
+				Accounts: []types.RevenueShareProductAccountEntry{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateMarketplaceRevenueShare(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMarketplaceRevenueShare"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateMarketplaceRevenueShareAllocation(t *testing.T) {
 	input := &UpdateMarketplaceRevenueShareAllocationInput{
 		Catalog:                             types.CatalogName("AWS"),
-		ProductId:                           ptr.String("__ProductId__"),
+		MarketplaceRevenueShareIdentifier:   ptr.String("__MarketplaceRevenueShareIdentifier__"),
 		MarketplaceRevenueShareAllocationId: ptr.String("__MarketplaceRevenueShareAllocationId__"),
 		MarketplaceRevenueShareRevision:     ptr.String("__MarketplaceRevenueShareRevision__"),
 		ClientToken:                         ptr.String("__ClientToken__"),
-		EffectiveFrom:                       ptr.String("__EffectiveFrom__"),
-		EffectiveUntil:                      ptr.String("__EffectiveUntil__"),
 		RevenueSharePercent:                 ptr.String("__RevenueSharePercent__"),
 		Status:                              types.AllocationStatus("ACTIVE"),
 	}
@@ -808,6 +941,9 @@ func TestCheckRequestSnapshot_UpdateRevenueAttribution(t *testing.T) {
 		ClientToken: ptr.String("__ClientToken__"),
 		Description: ptr.String("__Description__"),
 		Revision:    ptr.String("__Revision__"),
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -835,7 +971,46 @@ func TestUpdateRequestSnapshot_CreateMarketplaceRevenueShare(t *testing.T) {
 	input := &CreateMarketplaceRevenueShareInput{
 		Catalog:     types.CatalogName("AWS"),
 		ClientToken: ptr.String("__ClientToken__"),
-		ProductId:   ptr.String("__ProductId__"),
+		Products: []types.MarketplaceRevenueShareProductEntry{
+			{
+				ProductId: ptr.String("__ProductId__"),
+				Accounts: []types.RevenueShareProductAccountEntry{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				ProductId: ptr.String("__ProductId__"),
+				Accounts: []types.RevenueShareProductAccountEntry{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
 		Tags: []types.Tag{
 			{
 				Key:   ptr.String("__Key__"),
@@ -872,12 +1047,13 @@ func TestUpdateRequestSnapshot_CreateMarketplaceRevenueShare(t *testing.T) {
 
 func TestUpdateRequestSnapshot_CreateMarketplaceRevenueShareAllocation(t *testing.T) {
 	input := &CreateMarketplaceRevenueShareAllocationInput{
-		Catalog:             types.CatalogName("AWS"),
-		ProductId:           ptr.String("__ProductId__"),
-		ClientToken:         ptr.String("__ClientToken__"),
-		EffectiveFrom:       ptr.String("__EffectiveFrom__"),
-		EffectiveUntil:      ptr.String("__EffectiveUntil__"),
-		RevenueSharePercent: ptr.String("__RevenueSharePercent__"),
+		Catalog:                           types.CatalogName("AWS"),
+		MarketplaceRevenueShareIdentifier: ptr.String("__MarketplaceRevenueShareIdentifier__"),
+		ClientToken:                       ptr.String("__ClientToken__"),
+		MarketplaceRevenueShareRevision:   ptr.String("__MarketplaceRevenueShareRevision__"),
+		EffectiveFrom:                     ptr.String("__EffectiveFrom__"),
+		EffectiveUntil:                    ptr.String("__EffectiveUntil__"),
+		RevenueSharePercent:               ptr.String("__RevenueSharePercent__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -920,6 +1096,9 @@ func TestUpdateRequestSnapshot_CreateRevenueAttribution(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -946,9 +1125,9 @@ func TestUpdateRequestSnapshot_CreateRevenueAttribution(t *testing.T) {
 
 func TestUpdateRequestSnapshot_GetMarketplaceRevenueShare(t *testing.T) {
 	input := &GetMarketplaceRevenueShareInput{
-		Catalog:   types.CatalogName("AWS"),
-		ProductId: ptr.String("__ProductId__"),
-		Revision:  ptr.Int32(1),
+		Catalog:    types.CatalogName("AWS"),
+		Identifier: ptr.String("__Identifier__"),
+		Revision:   ptr.String("__Revision__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -976,7 +1155,7 @@ func TestUpdateRequestSnapshot_GetMarketplaceRevenueShare(t *testing.T) {
 func TestUpdateRequestSnapshot_GetMarketplaceRevenueShareAllocation(t *testing.T) {
 	input := &GetMarketplaceRevenueShareAllocationInput{
 		Catalog:                             types.CatalogName("AWS"),
-		ProductId:                           ptr.String("__ProductId__"),
+		MarketplaceRevenueShareIdentifier:   ptr.String("__MarketplaceRevenueShareIdentifier__"),
 		MarketplaceRevenueShareAllocationId: ptr.String("__MarketplaceRevenueShareAllocationId__"),
 		MarketplaceRevenueShareRevision:     ptr.String("__MarketplaceRevenueShareRevision__"),
 	}
@@ -1092,16 +1271,18 @@ func TestUpdateRequestSnapshot_GetRevenueAttributionAllocationsTask(t *testing.T
 
 func TestUpdateRequestSnapshot_ListMarketplaceRevenueShareAllocations(t *testing.T) {
 	input := &ListMarketplaceRevenueShareAllocationsInput{
-		Catalog:                         types.CatalogName("AWS"),
-		ProductId:                       ptr.String("__ProductId__"),
-		Status:                          types.AllocationStatus("ACTIVE"),
-		AfterEffectiveFrom:              ptr.String("__AfterEffectiveFrom__"),
-		BeforeEffectiveFrom:             ptr.String("__BeforeEffectiveFrom__"),
-		SortBy:                          types.MarketplaceRevenueShareAllocationSortField("EffectiveFrom"),
-		SortOrder:                       types.SortOrder("ASCENDING"),
-		MaxResults:                      ptr.Int32(1),
-		NextToken:                       ptr.String("__NextToken__"),
-		MarketplaceRevenueShareRevision: ptr.String("__MarketplaceRevenueShareRevision__"),
+		Catalog:                           types.CatalogName("AWS"),
+		MarketplaceRevenueShareIdentifier: ptr.String("__MarketplaceRevenueShareIdentifier__"),
+		StatusFilter:                      types.AllocationStatus("ACTIVE"),
+		AfterEffectiveFrom:                ptr.String("__AfterEffectiveFrom__"),
+		BeforeEffectiveFrom:               ptr.String("__BeforeEffectiveFrom__"),
+		AfterEffectiveUntil:               ptr.String("__AfterEffectiveUntil__"),
+		BeforeEffectiveUntil:              ptr.String("__BeforeEffectiveUntil__"),
+		SortBy:                            types.MarketplaceRevenueShareAllocationSortField("EffectiveFrom"),
+		SortOrder:                         types.SortOrder("ASCENDING"),
+		MaxResults:                        ptr.Int32(1),
+		NextToken:                         ptr.String("__NextToken__"),
+		MarketplaceRevenueShareRevision:   ptr.String("__MarketplaceRevenueShareRevision__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1129,6 +1310,10 @@ func TestUpdateRequestSnapshot_ListMarketplaceRevenueShareAllocations(t *testing
 func TestUpdateRequestSnapshot_ListMarketplaceRevenueShares(t *testing.T) {
 	input := &ListMarketplaceRevenueSharesInput{
 		Catalog: types.CatalogName("AWS"),
+		Identifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
 		ProductIds: []string{
 			"__Member__",
 			"__Member__",
@@ -1230,6 +1415,22 @@ func TestUpdateRequestSnapshot_ListRevenueAttributions(t *testing.T) {
 		SortOrder:     types.SortOrder("ASCENDING"),
 		MaxResults:    ptr.Int32(1),
 		NextToken:     ptr.String("__NextToken__"),
+		ContextFilters: []types.ContextFilter{
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Key: ptr.String("__Key__"),
+				Values: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1404,15 +1605,83 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateMarketplaceRevenueShare(t *testing.T) {
+	input := &UpdateMarketplaceRevenueShareInput{
+		Catalog:     types.CatalogName("AWS"),
+		Identifier:  ptr.String("__Identifier__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		Revision:    ptr.String("__Revision__"),
+		Products: []types.MarketplaceRevenueShareProductEntry{
+			{
+				ProductId: ptr.String("__ProductId__"),
+				Accounts: []types.RevenueShareProductAccountEntry{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+			{
+				ProductId: ptr.String("__ProductId__"),
+				Accounts: []types.RevenueShareProductAccountEntry{
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AccountType: types.RevenueShareProductAccountType("DEPLOYMENT"),
+						AccountIds: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateMarketplaceRevenueShare(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateMarketplaceRevenueShare"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateMarketplaceRevenueShareAllocation(t *testing.T) {
 	input := &UpdateMarketplaceRevenueShareAllocationInput{
 		Catalog:                             types.CatalogName("AWS"),
-		ProductId:                           ptr.String("__ProductId__"),
+		MarketplaceRevenueShareIdentifier:   ptr.String("__MarketplaceRevenueShareIdentifier__"),
 		MarketplaceRevenueShareAllocationId: ptr.String("__MarketplaceRevenueShareAllocationId__"),
 		MarketplaceRevenueShareRevision:     ptr.String("__MarketplaceRevenueShareRevision__"),
 		ClientToken:                         ptr.String("__ClientToken__"),
-		EffectiveFrom:                       ptr.String("__EffectiveFrom__"),
-		EffectiveUntil:                      ptr.String("__EffectiveUntil__"),
 		RevenueSharePercent:                 ptr.String("__RevenueSharePercent__"),
 		Status:                              types.AllocationStatus("ACTIVE"),
 	}
@@ -1446,6 +1715,9 @@ func TestUpdateRequestSnapshot_UpdateRevenueAttribution(t *testing.T) {
 		ClientToken: ptr.String("__ClientToken__"),
 		Description: ptr.String("__Description__"),
 		Revision:    ptr.String("__Revision__"),
+		Context: map[string]string{
+			"key0": "__Value__",
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

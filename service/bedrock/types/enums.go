@@ -498,6 +498,100 @@ func (DataRetentionMode) Values() []DataRetentionMode {
 	}
 }
 
+type DataRetentionStorageDestination string
+
+// Enum values for DataRetentionStorageDestination
+const (
+	// Stores retained data in the Amazon S3 bucket you specify and encrypts it with
+	// the AWS KMS key you specify. You must provide storageConfiguration .
+	DataRetentionStorageDestinationCustomerManaged DataRetentionStorageDestination = "customer_managed"
+	// Retained data uses Amazon-managed storage. Do not provide storageConfiguration .
+	DataRetentionStorageDestinationAmazonManaged DataRetentionStorageDestination = "amazon_managed"
+)
+
+// Values returns all known values for DataRetentionStorageDestination. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataRetentionStorageDestination) Values() []DataRetentionStorageDestination {
+	return []DataRetentionStorageDestination{
+		"customer_managed",
+		"amazon_managed",
+	}
+}
+
+type DataRetentionStorageModelProvider string
+
+// Enum values for DataRetentionStorageModelProvider
+const (
+	// The Anthropic model provider.
+	DataRetentionStorageModelProviderAnthropic DataRetentionStorageModelProvider = "anthropic"
+	// The OpenAI model provider.
+	DataRetentionStorageModelProviderOpenai DataRetentionStorageModelProvider = "openai"
+)
+
+// Values returns all known values for DataRetentionStorageModelProvider. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataRetentionStorageModelProvider) Values() []DataRetentionStorageModelProvider {
+	return []DataRetentionStorageModelProvider{
+		"anthropic",
+		"openai",
+	}
+}
+
+type DataRetentionStorageResourceStatus string
+
+// Enum values for DataRetentionStorageResourceStatus
+const (
+	// Validation of the destination resource is pending.
+	DataRetentionStorageResourceStatusPending DataRetentionStorageResourceStatus = "pending"
+	// The destination resource has passed validation.
+	DataRetentionStorageResourceStatusActive DataRetentionStorageResourceStatus = "active"
+	// Access to the destination resource was denied.
+	DataRetentionStorageResourceStatusAccessDenied DataRetentionStorageResourceStatus = "access_denied"
+)
+
+// Values returns all known values for DataRetentionStorageResourceStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataRetentionStorageResourceStatus) Values() []DataRetentionStorageResourceStatus {
+	return []DataRetentionStorageResourceStatus{
+		"pending",
+		"active",
+		"access_denied",
+	}
+}
+
+type DataRetentionStorageScope string
+
+// Enum values for DataRetentionStorageScope
+const (
+	// The calling AWS account.
+	DataRetentionStorageScopeAccount DataRetentionStorageScope = "account"
+	// The calling account's organization.
+	DataRetentionStorageScopeOrganization DataRetentionStorageScope = "organization"
+	// The named project addressed by the request.
+	DataRetentionStorageScopeProject DataRetentionStorageScope = "project"
+)
+
+// Values returns all known values for DataRetentionStorageScope. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataRetentionStorageScope) Values() []DataRetentionStorageScope {
+	return []DataRetentionStorageScope{
+		"account",
+		"organization",
+		"project",
+	}
+}
+
 type EntitlementAvailability string
 
 // Enum values for EntitlementAvailability
@@ -1361,6 +1455,28 @@ func (PerformanceConfigLatency) Values() []PerformanceConfigLatency {
 	}
 }
 
+type ProjectStatus string
+
+// Enum values for ProjectStatus
+const (
+	// The project has not been archived.
+	ProjectStatusActive ProjectStatus = "active"
+	// The project rejects new inference requests and mutations. Its stored data
+	// remains readable until it expires.
+	ProjectStatusArchived ProjectStatus = "archived"
+)
+
+// Values returns all known values for ProjectStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectStatus) Values() []ProjectStatus {
+	return []ProjectStatus{
+		"active",
+		"archived",
+	}
+}
+
 type PromptRouterStatus string
 
 // Enum values for PromptRouterStatus
@@ -1657,6 +1773,92 @@ func (Status) Values() []Status {
 	return []Status{
 		"REGISTERED",
 		"INCOMPATIBLE_ENDPOINT",
+	}
+}
+
+type TrustedAccessProgramOptIn string
+
+// Enum values for TrustedAccessProgramOptIn
+const (
+	// Defer to a broader scope without accepting or declining the program at this
+	// scope.
+	TrustedAccessProgramOptInInherit TrustedAccessProgramOptIn = "inherit"
+	// Accept the program's terms and opt in at this scope.
+	TrustedAccessProgramOptInEnabled TrustedAccessProgramOptIn = "enabled"
+	// Explicitly opt out at this scope.
+	TrustedAccessProgramOptInDisabled TrustedAccessProgramOptIn = "disabled"
+)
+
+// Values returns all known values for TrustedAccessProgramOptIn. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrustedAccessProgramOptIn) Values() []TrustedAccessProgramOptIn {
+	return []TrustedAccessProgramOptIn{
+		"inherit",
+		"enabled",
+		"disabled",
+	}
+}
+
+type TrustedAccessProgramScope string
+
+// Enum values for TrustedAccessProgramScope
+const (
+	// The calling account's current organization.
+	TrustedAccessProgramScopeOrganization TrustedAccessProgramScope = "organization"
+	// The calling AWS account.
+	TrustedAccessProgramScopeAccount TrustedAccessProgramScope = "account"
+	// The named project addressed by the request.
+	TrustedAccessProgramScopeProject TrustedAccessProgramScope = "project"
+	// Program fallback when no stored record decides the status. This is not a
+	// writable scope.
+	TrustedAccessProgramScopeProgramDefault TrustedAccessProgramScope = "program_default"
+)
+
+// Values returns all known values for TrustedAccessProgramScope. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrustedAccessProgramScope) Values() []TrustedAccessProgramScope {
+	return []TrustedAccessProgramScope{
+		"organization",
+		"account",
+		"project",
+		"program_default",
+	}
+}
+
+type TrustedAccessProgramStatus string
+
+// Enum values for TrustedAccessProgramStatus
+const (
+	// No applicable approval or revocation exists. The status reason explains how to
+	// request access.
+	TrustedAccessProgramStatusRequestable TrustedAccessProgramStatus = "requestable"
+	// Approved with no resolved enabled or disabled preference, or qualified by a
+	// read-only automatic eligibility preview.
+	TrustedAccessProgramStatusEligible TrustedAccessProgramStatus = "eligible"
+	// Approved and opted in for the evaluated context.
+	TrustedAccessProgramStatusEnabled TrustedAccessProgramStatus = "enabled"
+	// Approved and explicitly opted out at the deciding enrollment scope.
+	TrustedAccessProgramStatusDisabled TrustedAccessProgramStatus = "disabled"
+	// An applicable revocation removes eligibility. The saved opt-in preference is
+	// preserved.
+	TrustedAccessProgramStatusRevoked TrustedAccessProgramStatus = "revoked"
+)
+
+// Values returns all known values for TrustedAccessProgramStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TrustedAccessProgramStatus) Values() []TrustedAccessProgramStatus {
+	return []TrustedAccessProgramStatus{
+		"requestable",
+		"eligible",
+		"enabled",
+		"disabled",
+		"revoked",
 	}
 }
 

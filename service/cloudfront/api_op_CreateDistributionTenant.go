@@ -63,6 +63,18 @@ type CreateDistributionTenantInput struct {
 	// The configuration for the CloudFront managed ACM certificate request.
 	ManagedCertificateRequest *types.ManagedCertificateRequest
 
+	// Specifies whether CloudFront moves a domain in this request to this
+	// distribution tenant when the domain is already associated with another standard
+	// distribution or distribution tenant. Valid values are:
+	//
+	//   - allow – CloudFront moves the domain to this distribution tenant when the
+	//   domain's DNS points to this distribution tenant.
+	//
+	//   - reject – CloudFront doesn't move the domain, and the request fails if the
+	//   domain is associated with another resource. This is the default if you don't
+	//   specify a value.
+	OnDomainTakeover types.OnDomainTakeover
+
 	// A list of parameter values to add to the resource. A parameter is specified as
 	// a key-value pair. A valid parameter value must exist for any parameter that is
 	// marked as required in the multi-tenant distribution.

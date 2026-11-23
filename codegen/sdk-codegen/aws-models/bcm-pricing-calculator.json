@@ -9,6 +9,9 @@
                     "target": "com.amazonaws.bcmpricingcalculator#GetPreferences"
                 },
                 {
+                    "target": "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCost"
+                },
+                {
                     "target": "com.amazonaws.bcmpricingcalculator#ListTagsForResource"
                 },
                 {
@@ -530,7 +533,7 @@
                     "code": "AccessDeniedCode",
                     "httpResponseCode": 403
                 },
-                "smithy.api#documentation": "<p> You do not have sufficient access to perform this action. </p>",
+                "smithy.api#documentation": "<p> The request is denied because you don't have sufficient permissions to perform this operation. Verify that you have the required permissions and try again. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -577,7 +580,7 @@
                 "commitment": {
                     "target": "com.amazonaws.bcmpricingcalculator#SavingsPlanCommitment",
                     "traits": {
-                        "smithy.api#documentation": "<p> The hourly commitment, in the same currency of the <code>savingsPlanOfferingId</code>. This is a value between 0.001 and 1 million. You cannot specify more than five digits after the decimal point. </p>"
+                        "smithy.api#documentation": "<p> The hourly commitment, in the same currency of the <code>savingsPlanOfferingId</code>. This is a value between 0.001 and 1 million. You can't specify more than five digits after the decimal point. </p>"
                     }
                 }
             },
@@ -825,7 +828,7 @@
                 "errors": {
                     "target": "com.amazonaws.bcmpricingcalculator#BatchCreateBillScenarioCommitmentModificationErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p> Returns the list of errors reason and the commitment item keys that cannot be created in the Bill Scenario. </p>"
+                        "smithy.api#documentation": "<p> Returns the list of errors reason and the commitment item keys that can't be created in the Bill Scenario. </p>"
                     }
                 }
             },
@@ -1130,7 +1133,7 @@
                 "errors": {
                     "target": "com.amazonaws.bcmpricingcalculator#BatchCreateBillScenarioUsageModificationErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p> Returns the list of errors reason and the usage item keys that cannot be created in the Bill Scenario. </p>"
+                        "smithy.api#documentation": "<p> Returns the list of errors reason and the usage item keys that can't be created in the Bill Scenario. </p>"
                     }
                 }
             },
@@ -1442,7 +1445,7 @@
                 "errors": {
                     "target": "com.amazonaws.bcmpricingcalculator#BatchCreateWorkloadEstimateUsageErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p> Returns the list of errors reason and the usage item keys that cannot be created in the Workload estimate. </p>"
+                        "smithy.api#documentation": "<p> Returns the list of errors reason and the usage item keys that can't be created in the Workload estimate. </p>"
                     }
                 }
             },
@@ -1474,7 +1477,7 @@
                     "name": "DeleteBillScenarioCommitmentModification",
                     "documentation": "Grants permission to delete newly added commitments from the specified bill scenario"
                 },
-                "smithy.api#documentation": "<p> Delete commitment that you have created in a Bill Scenario. You can only delete a commitment that you had added and cannot model deletion (or removal) of a existing commitment. If you want model deletion of an existing commitment, see the negate <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AWSBCMPricingCalculator_BillScenarioCommitmentModificationAction.html\"> BillScenarioCommitmentModificationAction</a> of <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AWSBCMPricingCalculator_BatchCreateBillScenarioUsageModification.html\"> BatchCreateBillScenarioCommitmentModification</a> operation. </p> <note> <p>The <code>BatchDeleteBillScenarioCommitmentModification</code> operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission <code>bcm-pricing-calculator:DeleteBillScenarioCommitmentModification</code> in your policies.</p> </note>",
+                "smithy.api#documentation": "<p> Delete commitment that you have created in a Bill Scenario. You can only delete a commitment that you had added and can't model deletion (or removal) of a existing commitment. If you want model deletion of an existing commitment, see the negate <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AWSBCMPricingCalculator_BillScenarioCommitmentModificationAction.html\"> BillScenarioCommitmentModificationAction</a> of <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AWSBCMPricingCalculator_BatchCreateBillScenarioUsageModification.html\"> BatchCreateBillScenarioCommitmentModification</a> operation. </p> <note> <p>The <code>BatchDeleteBillScenarioCommitmentModification</code> operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission <code>bcm-pricing-calculator:DeleteBillScenarioCommitmentModification</code> in your policies.</p> </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1573,7 +1576,7 @@
                 "errors": {
                     "target": "com.amazonaws.bcmpricingcalculator#BatchDeleteBillScenarioCommitmentModificationErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p> Returns the list of errors reason and the commitment item keys that cannot be deleted from the Bill Scenario. </p>"
+                        "smithy.api#documentation": "<p> Returns the list of errors reason and the commitment item keys that can't be deleted from the Bill Scenario. </p>"
                     }
                 }
             },
@@ -1608,7 +1611,7 @@
                     "name": "DeleteBillScenarioUsageModification",
                     "documentation": "Grants permission to delete newly added usage from the specified bill scenario"
                 },
-                "smithy.api#documentation": "<p> Delete usage that you have created in a Bill Scenario. You can only delete usage that you had added and cannot model deletion (or removal) of a existing usage. If you want model removal of an existing usage, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AWSBCMPricingCalculator_BatchUpdateBillScenarioUsageModification.html\"> BatchUpdateBillScenarioUsageModification</a>. </p> <note> <p>The <code>BatchDeleteBillScenarioUsageModification</code> operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission <code>bcm-pricing-calculator:DeleteBillScenarioUsageModification</code> in your policies.</p> </note>",
+                "smithy.api#documentation": "<p> Delete usage that you have created in a Bill Scenario. You can only delete usage that you had added and can't model deletion (or removal) of a existing usage. If you want model removal of an existing usage, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AWSBCMPricingCalculator_BatchUpdateBillScenarioUsageModification.html\"> BatchUpdateBillScenarioUsageModification</a>. </p> <note> <p>The <code>BatchDeleteBillScenarioUsageModification</code> operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission <code>bcm-pricing-calculator:DeleteBillScenarioUsageModification</code> in your policies.</p> </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1707,7 +1710,7 @@
                 "errors": {
                     "target": "com.amazonaws.bcmpricingcalculator#BatchDeleteBillScenarioUsageModificationErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p> Returns the list of errors reason and the usage item keys that cannot be deleted from the Bill Scenario. </p>"
+                        "smithy.api#documentation": "<p> Returns the list of errors reason and the usage item keys that can't be deleted from the Bill Scenario. </p>"
                     }
                 }
             },
@@ -1739,7 +1742,7 @@
                     "name": "DeleteWorkloadEstimateUsage",
                     "documentation": "Grants permission to delete newly added usage from the specified workload estimate"
                 },
-                "smithy.api#documentation": "<p> Delete usage that you have created in a Workload estimate. You can only delete usage that you had added and cannot model deletion (or removal) of a existing usage. If you want model removal of an existing usage, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AWSBCMPricingCalculator_BatchUpdateWorkloadEstimateUsage.html\"> BatchUpdateWorkloadEstimateUsage</a>. </p> <note> <p>The <code>BatchDeleteWorkloadEstimateUsage</code> operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission <code>bcm-pricing-calculator:DeleteWorkloadEstimateUsage</code> in your policies.</p> </note>",
+                "smithy.api#documentation": "<p> Delete usage that you have created in a Workload estimate. You can only delete usage that you had added and can't model deletion (or removal) of a existing usage. If you want model removal of an existing usage, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AWSBCMPricingCalculator_BatchUpdateWorkloadEstimateUsage.html\"> BatchUpdateWorkloadEstimateUsage</a>. </p> <note> <p>The <code>BatchDeleteWorkloadEstimateUsage</code> operation doesn't have its own IAM permission. To authorize this operation for Amazon Web Services principals, include the permission <code>bcm-pricing-calculator:DeleteWorkloadEstimateUsage</code> in your policies.</p> </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1815,7 +1818,7 @@
                 "errors": {
                     "target": "com.amazonaws.bcmpricingcalculator#BatchDeleteWorkloadEstimateUsageErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p> Returns the list of errors reason and the usage item keys that cannot be deleted from the Workload estimate. </p>"
+                        "smithy.api#documentation": "<p> Returns the list of errors reason and the usage item keys that can't be deleted from the Workload estimate. </p>"
                     }
                 }
             },
@@ -1979,7 +1982,7 @@
                 "errors": {
                     "target": "com.amazonaws.bcmpricingcalculator#BatchUpdateBillScenarioCommitmentModificationErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p> Returns the list of error reasons and commitment line item IDs that could not be updated for the Bill Scenario. </p>"
+                        "smithy.api#documentation": "<p> Returns the list of error reasons and commitment line item IDs that couldn't be updated for the Bill Scenario. </p>"
                     }
                 }
             },
@@ -2152,7 +2155,7 @@
                 "errors": {
                     "target": "com.amazonaws.bcmpricingcalculator#BatchUpdateBillScenarioUsageModificationErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p> Returns the list of error reasons and usage line item IDs that could not be updated for the Bill Scenario. </p>"
+                        "smithy.api#documentation": "<p> Returns the list of error reasons and usage line item IDs that couldn't be updated for the Bill Scenario. </p>"
                     }
                 }
             },
@@ -2293,7 +2296,7 @@
                 "errors": {
                     "target": "com.amazonaws.bcmpricingcalculator#BatchUpdateWorkloadEstimateUsageErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p> Returns the list of error reasons and usage line item IDs that could not be updated for the Workload estimate. </p>"
+                        "smithy.api#documentation": "<p> Returns the list of error reasons and usage line item IDs that couldn't be updated for the Workload estimate. </p>"
                     }
                 }
             },
@@ -2371,7 +2374,8 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "bill-estimate/{billEstimateId}"
+                    "template": "bill-estimate/{billEstimateId}",
+                    "noRegion": true
                 },
                 "aws.api#taggable": {},
                 "aws.iam#disableConditionKeyInference": {},
@@ -2924,7 +2928,8 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "bill-scenario/{billScenarioId}"
+                    "template": "bill-scenario/{billScenarioId}",
+                    "noRegion": true
                 },
                 "aws.api#taggable": {},
                 "aws.iam#iamResource": {
@@ -3266,14 +3271,14 @@
                 "resourceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier of the resource that was not found. </p>",
+                        "smithy.api#documentation": "<p> The identifier of the resource that is in a conflicting state. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of the resource that was not found. </p>",
+                        "smithy.api#documentation": "<p> The type of the resource that is in a conflicting state. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3283,7 +3288,7 @@
                     "code": "ConflictCode",
                     "httpResponseCode": 409
                 },
-                "smithy.api#documentation": "<p> The request could not be processed because of conflict in the current state of the resource. </p>",
+                "smithy.api#documentation": "<p> The request couldn't be processed because the resource is in a conflicting state. Verify the resource's current state and retry the request. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -3465,7 +3470,7 @@
                 "groupSharingPreference": {
                     "target": "com.amazonaws.bcmpricingcalculator#GroupSharingPreferenceEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>"
+                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plans group sharing used in this estimate.</p>"
                     }
                 },
                 "costCategoryGroupSharingPreferenceArn": {
@@ -3541,7 +3546,7 @@
                 "groupSharingPreference": {
                     "target": "com.amazonaws.bcmpricingcalculator#GroupSharingPreferenceEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>"
+                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plans group sharing used in this estimate.</p>"
                     }
                 },
                 "costCategoryGroupSharingPreferenceArn": {
@@ -3605,7 +3610,7 @@
                 "groupSharingPreference": {
                     "target": "com.amazonaws.bcmpricingcalculator#GroupSharingPreferenceEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>"
+                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plans group sharing used in this estimate.</p>"
                     }
                 },
                 "costCategoryGroupSharingPreferenceArn": {
@@ -3668,7 +3673,7 @@
                 "rateType": {
                     "target": "com.amazonaws.bcmpricingcalculator#WorkloadEstimateRateType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of pricing rates to use for the estimate. </p>",
+                        "smithy.api#documentation": "<p> The type of pricing rates for the estimate. You can only use a rate type that your Pricing Calculator rate preferences allow. If you use billing transfer as a bill source account, you can only use BEFORE_DISCOUNTS. </p>",
                         "smithy.api#notProperty": {}
                     }
                 },
@@ -4112,7 +4117,7 @@
                 "groupSharingPreference": {
                     "target": "com.amazonaws.bcmpricingcalculator#GroupSharingPreferenceEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>"
+                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plans group sharing used in this estimate.</p>"
                     }
                 },
                 "costCategoryGroupSharingPreferenceArn": {
@@ -4222,7 +4227,7 @@
                 "groupSharingPreference": {
                     "target": "com.amazonaws.bcmpricingcalculator#GroupSharingPreferenceEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>"
+                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plans group sharing used in this estimate.</p>"
                     }
                 },
                 "costCategoryGroupSharingPreferenceArn": {
@@ -4283,6 +4288,322 @@
                     "target": "com.amazonaws.bcmpricingcalculator#RateTypes",
                     "traits": {
                         "smithy.api#documentation": "<p> The preferred rate types for a standalone account. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCost": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bcmpricingcalculator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bcmpricingcalculator#DataUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.bcmpricingcalculator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bcmpricingcalculator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bcmpricingcalculator#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to estimate the cost of usage lines without creating a workload estimate."
+                },
+                "smithy.api#documentation": "<p> Retrieves the estimated cost of a list of usage lines. Each usage line identifies a billing line by its service code, usage type, and operation, and includes the usage amount to price. The estimate is based on Amazon Web Services pricing data and the rate type you choose. It doesn't include taxes, and your actual charges depend on your usage. </p> <p> The response includes the estimated cost of each usage line that was priced. It also includes each usage line that couldn't be priced, and the reason it couldn't be priced. </p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostAmount": {
+            "type": "double",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0.0
+                }
+            }
+        },
+        "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostError": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.bcmpricingcalculator#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The key of the usage line in the request that couldn't be priced. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "com.amazonaws.bcmpricingcalculator#ServiceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Web Services service code of the usage line that couldn't be priced. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "usageType": {
+                    "target": "com.amazonaws.bcmpricingcalculator#UsageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The usage type of the usage line that couldn't be priced. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operation": {
+                    "target": "com.amazonaws.bcmpricingcalculator#Operation",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The operation of the usage line that couldn't be priced. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The code associated with the error. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The message that describes the error. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Represents a usage line that couldn't be priced. </p>"
+            }
+        },
+        "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostErrorCode": {
+            "type": "enum",
+            "members": {
+                "BAD_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BAD_REQUEST"
+                    }
+                },
+                "NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_FOUND"
+                    }
+                },
+                "CONFLICT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONFLICT"
+                    }
+                },
+                "INTERNAL_SERVER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVER_ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostError"
+            }
+        },
+        "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostEstimatedCost": {
+            "type": "structure",
+            "members": {
+                "usageAmount": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The usage amount that was priced. </p>"
+                    }
+                },
+                "usageUnit": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unit of the usage amount, for example <code>Hrs</code> or <code>GB-Mo</code>. </p>"
+                    }
+                },
+                "cost": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The estimated cost for the given usage amount. </p>"
+                    }
+                },
+                "currency": {
+                    "target": "com.amazonaws.bcmpricingcalculator#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The currency of the estimated cost. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Represents the estimated cost of the usage amount for a usage line. </p>"
+            }
+        },
+        "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostInput": {
+            "type": "structure",
+            "members": {
+                "serviceCode": {
+                    "target": "com.amazonaws.bcmpricingcalculator#ServiceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Web Services service code of the usage line, for example <code>AmazonEC2</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "usageType": {
+                    "target": "com.amazonaws.bcmpricingcalculator#UsageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The usage type of the usage line, for example <code>BoxUsage:t3.micro</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operation": {
+                    "target": "com.amazonaws.bcmpricingcalculator#Operation",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The operation of the usage line, for example <code>RunInstances</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.bcmpricingcalculator#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique identifier for the usage line in the request. Use the key to match the usage line with its result in <code>lineItems</code> or <code>errors</code> in the response. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "amount": {
+                    "target": "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostAmount",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The usage amount to price for the usage line in the usage type's pricing unit. This value must be 0 or greater. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Represents a usage line that you want to estimate. </p>"
+            }
+        },
+        "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostInputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostInput"
+            }
+        },
+        "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostLineItem": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.bcmpricingcalculator#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The key of the usage line in the request. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "com.amazonaws.bcmpricingcalculator#ServiceCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Web Services service code of the usage line. </p>"
+                    }
+                },
+                "usageType": {
+                    "target": "com.amazonaws.bcmpricingcalculator#UsageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The usage type of the usage line. </p>"
+                    }
+                },
+                "operation": {
+                    "target": "com.amazonaws.bcmpricingcalculator#Operation",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The operation of the usage line. </p>"
+                    }
+                },
+                "estimatedCost": {
+                    "target": "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostEstimatedCost",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The estimated cost of the usage amount in the request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Represents the estimated cost of a usage line that was priced. </p>"
+            }
+        },
+        "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostLineItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostLineItem"
+            }
+        },
+        "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostRequest": {
+            "type": "structure",
+            "members": {
+                "usage": {
+                    "target": "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostInputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The usage lines that you want to estimate. You can include up to 500 usage lines in a request. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 500
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "rateType": {
+                    "target": "com.amazonaws.bcmpricingcalculator#RateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of pricing rates to use to estimate the cost of the usage lines. You can only use a rate type that your Pricing Calculator rate preferences allow. If you use billing transfer as a bill source account, you can only use BEFORE_DISCOUNTS </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostResponse": {
+            "type": "structure",
+            "members": {
+                "rateType": {
+                    "target": "com.amazonaws.bcmpricingcalculator#RateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of pricing rates used to estimate the cost of the usage lines. </p>"
+                    }
+                },
+                "totalCost": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The sum of the estimated costs of all usage lines that were priced. Usage lines returned in <code>errors</code> aren't included. </p>"
+                    }
+                },
+                "currency": {
+                    "target": "com.amazonaws.bcmpricingcalculator#CurrencyCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The currency of the costs in the response. </p>"
+                    }
+                },
+                "lineItems": {
+                    "target": "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostLineItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The estimated cost of each usage line that was priced. </p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.bcmpricingcalculator#GetUsageLinesEstimatedCostErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The usage lines that couldn't be priced, and the reason that each one couldn't be priced. </p>"
                     }
                 }
             },
@@ -5929,14 +6250,14 @@
                 "resourceId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The identifier of the resource that was not found. </p>",
+                        "smithy.api#documentation": "<p> The identifier of the resource that wasn't found. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of the resource that was not found. </p>",
+                        "smithy.api#documentation": "<p> The type of the resource that wasn't found. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5946,7 +6267,7 @@
                     "code": "ResourceNotFoundCode",
                     "httpResponseCode": 404
                 },
-                "smithy.api#documentation": "<p> The specified resource was not found. </p>",
+                "smithy.api#documentation": "<p> The specified resource wasn't found. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -6336,7 +6657,7 @@
                 "groupSharingPreference": {
                     "target": "com.amazonaws.bcmpricingcalculator#GroupSharingPreferenceEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>"
+                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plans group sharing used in this estimate.</p>"
                     }
                 },
                 "costCategoryGroupSharingPreferenceArn": {
@@ -6409,7 +6730,7 @@
                 "groupSharingPreference": {
                     "target": "com.amazonaws.bcmpricingcalculator#GroupSharingPreferenceEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>"
+                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plans group sharing used in this estimate.</p>"
                     }
                 },
                 "costCategoryGroupSharingPreferenceArn": {
@@ -6473,7 +6794,7 @@
                 "groupSharingPreference": {
                     "target": "com.amazonaws.bcmpricingcalculator#GroupSharingPreferenceEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>"
+                        "smithy.api#documentation": "<p>The setting for the reserved instance and savings plans group sharing used in this estimate.</p>"
                     }
                 },
                 "costCategoryGroupSharingPreferenceArn": {
@@ -6954,7 +7275,8 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "workload-estimate/{workloadEstimateId}"
+                    "template": "workload-estimate/{workloadEstimateId}",
+                    "noRegion": true
                 },
                 "aws.api#taggable": {},
                 "aws.iam#iamResource": {

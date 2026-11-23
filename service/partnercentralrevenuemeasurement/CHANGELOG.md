@@ -1,3 +1,7 @@
+# v1.7.0 (2026-11-19)
+
+* **Feature**: Marketplace revenue shares are now identified by a marketplace revenue share ID. Adds the UpdateMarketplaceRevenueShare API, optional grouping of AWS Marketplace products that run on the same backend AWS infrastructure, and context attributes for revenue attributions.
+
 # v1.6.12 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

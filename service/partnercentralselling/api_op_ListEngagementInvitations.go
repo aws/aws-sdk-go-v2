@@ -29,6 +29,7 @@ func (c *Client) ListEngagementInvitations(ctx context.Context, params *ListEnga
 	return out, nil
 }
 
+// Contains the request parameters for the ListEngagementInvitations operation.
 type ListEngagementInvitationsInput struct {
 
 	// Specifies the catalog from which to list the engagement invitations. Use AWS
@@ -43,11 +44,11 @@ type ListEngagementInvitationsInput struct {
 	// This member is required.
 	ParticipantType types.ParticipantType
 
-	//  Retrieves a list of engagement invitation summaries based on specified
-	// filters. The ListEngagementInvitations operation allows you to view all
-	// invitations that you have sent or received. You must specify the ParticipantType
-	// to filter invitations where you are either the SENDER or the RECEIVER.
-	// Invitations will automatically expire if not accepted within 15 days.
+	// Retrieves a list of engagement invitation summaries based on specified filters.
+	// The ListEngagementInvitations operation allows you to view all invitations that
+	// you have sent or received. You must specify the ParticipantType to filter
+	// invitations where you are either the SENDER or the RECEIVER. Invitations will
+	// automatically expire if not accepted within 15 days.
 	EngagementIdentifier []string
 
 	// Specifies the maximum number of engagement invitations to return in the
@@ -64,7 +65,7 @@ type ListEngagementInvitationsInput struct {
 	// the invitation.
 	PayloadType []types.EngagementInvitationPayloadType
 
-	//  List of sender AWS account IDs to filter the invitations.
+	// List of sender AWS account IDs to filter the invitations.
 	SenderAwsAccountId []string
 
 	// Specifies the sorting options for listing engagement invitations. Invitations
@@ -116,6 +117,7 @@ func (v *ListEngagementInvitationsInput) SerializeMembers(s smithy.ShapeSerializ
 	}
 }
 
+// Contains the response that the ListEngagementInvitations action returns.
 type ListEngagementInvitationsOutput struct {
 
 	// An array containing summaries of engagement invitations. Each summary includes

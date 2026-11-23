@@ -34,10 +34,10 @@ type GetListingInput struct {
 	// This member is required.
 	ListingId *string
 
-	// A BCP 47 language tag or comma-separated priority list specifying the preferred
-	// locale for response content. See Locale for supported values, constraints,
-	// fallback behavior, and the default locale. If omitted, the service returns
-	// content in the default locale.
+	// The preferred locale for response content, as a Best Current Practice 47 (BCP
+	// 47) language tag or a comma-separated priority list of language tags. See Locale
+	// for supported values, constraints, fallback behavior, and the default locale. If
+	// you omit this field, the service returns content in the default locale.
 	Locale *string
 
 	noSmithyDocumentSerde
@@ -77,13 +77,14 @@ type GetListingOutput struct {
 	// This member is required.
 	Catalog *string
 
-	// The categories used to classify this listing into logical groups.
+	// The categories that classify this listing into logical groups.
 	//
 	// This member is required.
 	Categories []types.Category
 
 	// A summary of fulfillment options available for deploying or accessing the
-	// listing, such as AMI, SaaS, or Container.
+	// listing, such as Amazon Machine Image (AMI), Software as a Service (SaaS), or
+	// Container.
 	//
 	// This member is required.
 	FulfillmentOptionSummaries []types.FulfillmentOptionSummary
@@ -114,7 +115,7 @@ type GetListingOutput struct {
 	LongDescription *string
 
 	// The pricing models for offers associated with this listing, such as
-	// usage-based, contract, BYOL, or free.
+	// usage-based, contract, Bring Your Own License (BYOL), or free.
 	//
 	// This member is required.
 	PricingModels []types.PricingModel
@@ -136,6 +137,13 @@ type GetListingOutput struct {
 	// This member is required.
 	Publisher *types.SellerInformation
 
+	// Indicators describing purchase characteristics of this listing, such as whether
+	// you can subscribe to it or use it without a subscription. The list is empty when
+	// no special purchase conditions apply.
+	//
+	// This member is required.
+	PurchaseIndicators []types.PurchaseIndicator
+
 	// Resources that provide further information about using the product or
 	// requesting support, such as documentation links, support contacts, and usage
 	// instructions.
@@ -143,8 +151,8 @@ type GetListingOutput struct {
 	// This member is required.
 	Resources []types.Resource
 
-	// Engagement options available to potential buyers, such as requesting a private
-	// offer or requesting a demo.
+	// The engagement options available to you, such as buying now, requesting a
+	// private offer, or requesting a demo.
 	//
 	// This member is required.
 	SellerEngagements []types.SellerEngagement
@@ -154,8 +162,8 @@ type GetListingOutput struct {
 	// This member is required.
 	ShortDescription *string
 
-	// Use cases associated with the listing, describing scenarios where the product
-	// can be applied.
+	// Use cases associated with the listing, describing scenarios where you can apply
+	// the product.
 	//
 	// This member is required.
 	UseCases []types.UseCaseEntry
@@ -164,9 +172,9 @@ type GetListingOutput struct {
 	// how to integrate with a multi-product listing.
 	IntegrationGuide *string
 
-	// The locale of the returned content. Indicates whether the response contains
-	// content in the requested locale, or fell back to the default locale. See Locale
-	// for details.
+	// The locale of the returned content. This value indicates whether the response
+	// contains content in the requested locale or fell back to the default locale. See
+	// Locale for details.
 	Locale *string
 
 	// A summary of customer reviews available for the listing, including average
@@ -236,6 +244,9 @@ func (v *GetListingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Publisher.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.PurchaseIndicators != nil {
+		serializePurchaseIndicatorList(s, schemas.GetListingOutput_purchaseIndicators, v.PurchaseIndicators)
+	}
 	if v.Resources != nil {
 		serializeResourceList(s, schemas.GetListingOutput_resources, v.Resources)
 	}
@@ -297,6 +308,8 @@ func (v *GetListingOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetListingOutput_publisher:
 			v.Publisher = &types.SellerInformation{}
 			return v.Publisher.Deserialize(d)
+		case schemas.GetListingOutput_purchaseIndicators:
+			return deserializePurchaseIndicatorList(d, schemas.GetListingOutput_purchaseIndicators, &v.PurchaseIndicators)
 		case schemas.GetListingOutput_resources:
 			return deserializeResourceList(d, schemas.GetListingOutput_resources, &v.Resources)
 		case schemas.GetListingOutput_reviewSummary:

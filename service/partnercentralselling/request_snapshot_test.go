@@ -299,6 +299,61 @@ func TestCheckRequestSnapshot_AssociateOpportunity(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateCustomerAccount(t *testing.T) {
+	input := &CreateCustomerAccountInput{
+		Catalog: ptr.String("__Catalog__"),
+		Account: &types.CustomerAccountData{
+			CompanyName: ptr.String("__CompanyName__"),
+			WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+			Duns:        ptr.String("__Duns__"),
+			Address: &types.Address{
+				City:          ptr.String("__City__"),
+				PostalCode:    ptr.String("__PostalCode__"),
+				StateOrRegion: ptr.String("__StateOrRegion__"),
+				CountryCode:   types.CountryCode("US"),
+				StreetAddress: ptr.String("__StreetAddress__"),
+			},
+			Industry:          ptr.String("__Industry__"),
+			OtherIndustry:     ptr.String("__OtherIndustry__"),
+			Domain:            ptr.String("__Domain__"),
+			ParentCompanyName: ptr.String("__ParentCompanyName__"),
+		},
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateCustomerAccount(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCustomerAccount"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateEngagement(t *testing.T) {
 	input := &CreateEngagementInput{
 		Catalog:     ptr.String("__Catalog__"),
@@ -476,6 +531,7 @@ func TestCheckRequestSnapshot_CreateEngagementInvitation(t *testing.T) {
 							},
 						},
 					},
+					OpportunityType: types.OpportunityType("Net New Business"),
 				},
 			},
 		},
@@ -756,6 +812,34 @@ func TestCheckRequestSnapshot_CreateResourceSnapshotJob(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteCustomerAccount(t *testing.T) {
+	input := &DeleteCustomerAccountInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteCustomerAccount(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCustomerAccount"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteResourceSnapshotJob(t *testing.T) {
 	input := &DeleteResourceSnapshotJobInput{
 		Catalog:                       ptr.String("__Catalog__"),
@@ -842,6 +926,186 @@ func TestCheckRequestSnapshot_GetAwsOpportunitySummary(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetCustomerAccount(t *testing.T) {
+	input := &GetCustomerAccountInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCustomerAccount(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCustomerAccount"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetCustomerAccountBulkJob(t *testing.T) {
+	input := &GetCustomerAccountBulkJobInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCustomerAccountBulkJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCustomerAccountBulkJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetCustomerAccountBulkJobReportUrl(t *testing.T) {
+	input := &GetCustomerAccountBulkJobReportUrlInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		ReportType: types.BulkReportType("FAILED_RECORDS"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCustomerAccountBulkJobReportUrl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCustomerAccountBulkJobReportUrl"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetCustomerAccountStatistics(t *testing.T) {
+	input := &GetCustomerAccountStatisticsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Filter: &types.Filter{
+			AndAllFilters: []types.Filter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.Filter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+		},
+		Aggregations: []types.AggregationRequest{
+			{
+				GroupBy: []types.AggregatableField{
+					types.AggregatableField("ENRICHMENT_STATUS"),
+					types.AggregatableField("ENRICHMENT_STATUS"),
+				},
+			},
+			{
+				GroupBy: []types.AggregatableField{
+					types.AggregatableField("ENRICHMENT_STATUS"),
+					types.AggregatableField("ENRICHMENT_STATUS"),
+				},
+			},
+		},
+		IncludeMissing: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCustomerAccountStatistics(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCustomerAccountStatistics"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetEngagement(t *testing.T) {
 	input := &GetEngagementInput{
 		Catalog:    ptr.String("__Catalog__"),
@@ -922,6 +1186,36 @@ func TestCheckRequestSnapshot_GetOpportunity(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOpportunity"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetOpportunityBulkJobReportUrl(t *testing.T) {
+	input := &GetOpportunityBulkJobReportUrlInput{
+		Catalog:      ptr.String("__Catalog__"),
+		JobId:        ptr.String("__JobId__"),
+		ReportFormat: types.BulkFileFormat("CSV"),
+		ReportType:   types.BulkReportType("FAILED_RECORDS"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetOpportunityBulkJobReportUrl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOpportunityBulkJobReportUrl"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1041,6 +1335,70 @@ func TestCheckRequestSnapshot_GetSellingSystemSettings(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListCustomerAccountBulkJobResults(t *testing.T) {
+	input := &ListCustomerAccountBulkJobResultsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		Status:     types.BulkRecordStatus("SUCCEEDED"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListCustomerAccountBulkJobResults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCustomerAccountBulkJobResults"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListCustomerAccountBulkJobs(t *testing.T) {
+	input := &ListCustomerAccountBulkJobsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Filter: &types.CustomerAccountBulkJobFilter{
+			Identifier: ptr.String("__Identifier__"),
+			Status:     types.BulkJobStatus("SUBMITTED"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListCustomerAccountBulkJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCustomerAccountBulkJobs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListEngagementByAcceptingInvitationTasks(t *testing.T) {
 	input := &ListEngagementByAcceptingInvitationTasksInput{
 		MaxResults: ptr.Int32(1),
@@ -1135,6 +1493,44 @@ func TestCheckRequestSnapshot_ListEngagementFromOpportunityTasks(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEngagementFromOpportunityTasks"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListEngagementGroups(t *testing.T) {
+	input := &ListEngagementGroupsInput{
+		Catalog:        ptr.String("__Catalog__"),
+		ReadinessLevel: types.ReadinessLevel("SalesReady"),
+		Sort: &types.EngagementGroupSort{
+			SortBy:    types.EngagementGroupSortName("Count"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		EngagementGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEngagementGroups(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEngagementGroups"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1362,6 +1758,68 @@ func TestCheckRequestSnapshot_ListOpportunities(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOpportunities"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListOpportunityBulkJobResults(t *testing.T) {
+	input := &ListOpportunityBulkJobResultsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		JobId:      ptr.String("__JobId__"),
+		Status:     types.BulkRecordStatus("SUCCEEDED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListOpportunityBulkJobResults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOpportunityBulkJobResults"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListOpportunityBulkJobs(t *testing.T) {
+	input := &ListOpportunityBulkJobsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		JobId:      ptr.String("__JobId__"),
+		Status:     types.BulkJobStatus("SUBMITTED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListOpportunityBulkJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOpportunityBulkJobs"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1664,6 +2122,296 @@ func TestCheckRequestSnapshot_RejectEngagementInvitation(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_SearchCustomerAccounts(t *testing.T) {
+	input := &SearchCustomerAccountsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Filter: &types.Filter{
+			AndAllFilters: []types.Filter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.Filter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+		},
+		Sort: &types.CustomerAccountSort{
+			SortBy:    types.SortableField("COMPANY_NAME"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchCustomerAccounts(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchCustomerAccounts"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_SearchEngagements(t *testing.T) {
+	input := &SearchEngagementsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Keyword: ptr.String("__Keyword__"),
+		Filter: &types.EngagementSearchFilter{
+			AndAllFilters: []types.EngagementSearchFilter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.EngagementSearchFilter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+		},
+		GroupId: ptr.String("__GroupId__"),
+		Sort: &types.EngagementSearchSort{
+			SortBy:    types.EngagementSearchSortName("EngagementId"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchEngagements(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchEngagements"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_SearchOpportunities(t *testing.T) {
+	input := &SearchOpportunitiesInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Keyword:    ptr.String("__Keyword__"),
+		Filter: &types.OpportunitySearchFilter{
+			AndAllFilters: []types.OpportunitySearchFilter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.OpportunitySearchFilter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+		},
+		Sort: &types.OpportunitySearchSort{
+			SortBy:    types.OpportunitySearchSortName("OpportunityId"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchOpportunities(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchOpportunities"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartCustomerAccountBulkJob(t *testing.T) {
+	input := &StartCustomerAccountBulkJobInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		FileUri:     ptr.String("__FileUri__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartCustomerAccountBulkJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartCustomerAccountBulkJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StartEngagementByAcceptingInvitationTask(t *testing.T) {
 	input := &StartEngagementByAcceptingInvitationTaskInput{
 		Catalog:     ptr.String("__Catalog__"),
@@ -1742,6 +2490,36 @@ func TestCheckRequestSnapshot_StartEngagementFromOpportunityTask(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartEngagementFromOpportunityTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_StartOpportunityBulkJob(t *testing.T) {
+	input := &StartOpportunityBulkJobInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		FileURI:     ptr.String("__FileURI__"),
+		FileFormat:  types.BulkFileFormat("CSV"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartOpportunityBulkJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartOpportunityBulkJob"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1973,6 +2751,52 @@ func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateCustomerAccount(t *testing.T) {
+	input := &UpdateCustomerAccountInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		Account: &types.CustomerAccountData{
+			CompanyName: ptr.String("__CompanyName__"),
+			WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+			Duns:        ptr.String("__Duns__"),
+			Address: &types.Address{
+				City:          ptr.String("__City__"),
+				PostalCode:    ptr.String("__PostalCode__"),
+				StateOrRegion: ptr.String("__StateOrRegion__"),
+				CountryCode:   types.CountryCode("US"),
+				StreetAddress: ptr.String("__StreetAddress__"),
+			},
+			Industry:          ptr.String("__Industry__"),
+			OtherIndustry:     ptr.String("__OtherIndustry__"),
+			Domain:            ptr.String("__Domain__"),
+			ParentCompanyName: ptr.String("__ParentCompanyName__"),
+		},
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		LastModifiedDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCustomerAccount(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCustomerAccount"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateEngagementContext(t *testing.T) {
 	input := &UpdateEngagementContextInput{
 		Catalog:                  ptr.String("__Catalog__"),
@@ -2014,6 +2838,21 @@ func TestCheckRequestSnapshot_UpdateEngagementContext(t *testing.T) {
 				},
 				Insights: &types.LeadInsights{
 					LeadReadinessScore: ptr.String("__LeadReadinessScore__"),
+					ChannelRecommendation: &types.ChannelRecommendation{
+						RecommendedChannel: ptr.String("__RecommendedChannel__"),
+						BestOutreachWindows: []types.BestOutreachWindow{
+							{
+								Day:          types.DayOfWeek("MONDAY"),
+								StartTimeUtc: ptr.String("__StartTimeUtc__"),
+								EndTimeUtc:   ptr.String("__EndTimeUtc__"),
+							},
+							{
+								Day:          types.DayOfWeek("MONDAY"),
+								StartTimeUtc: ptr.String("__StartTimeUtc__"),
+								EndTimeUtc:   ptr.String("__EndTimeUtc__"),
+							},
+						},
+					},
 				},
 			},
 		},
@@ -2286,6 +3125,61 @@ func TestUpdateRequestSnapshot_AssociateOpportunity(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateCustomerAccount(t *testing.T) {
+	input := &CreateCustomerAccountInput{
+		Catalog: ptr.String("__Catalog__"),
+		Account: &types.CustomerAccountData{
+			CompanyName: ptr.String("__CompanyName__"),
+			WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+			Duns:        ptr.String("__Duns__"),
+			Address: &types.Address{
+				City:          ptr.String("__City__"),
+				PostalCode:    ptr.String("__PostalCode__"),
+				StateOrRegion: ptr.String("__StateOrRegion__"),
+				CountryCode:   types.CountryCode("US"),
+				StreetAddress: ptr.String("__StreetAddress__"),
+			},
+			Industry:          ptr.String("__Industry__"),
+			OtherIndustry:     ptr.String("__OtherIndustry__"),
+			Domain:            ptr.String("__Domain__"),
+			ParentCompanyName: ptr.String("__ParentCompanyName__"),
+		},
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateCustomerAccount(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateCustomerAccount"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateEngagement(t *testing.T) {
 	input := &CreateEngagementInput{
 		Catalog:     ptr.String("__Catalog__"),
@@ -2463,6 +3357,7 @@ func TestUpdateRequestSnapshot_CreateEngagementInvitation(t *testing.T) {
 							},
 						},
 					},
+					OpportunityType: types.OpportunityType("Net New Business"),
 				},
 			},
 		},
@@ -2743,6 +3638,34 @@ func TestUpdateRequestSnapshot_CreateResourceSnapshotJob(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteCustomerAccount(t *testing.T) {
+	input := &DeleteCustomerAccountInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteCustomerAccount(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteCustomerAccount"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteResourceSnapshotJob(t *testing.T) {
 	input := &DeleteResourceSnapshotJobInput{
 		Catalog:                       ptr.String("__Catalog__"),
@@ -2829,6 +3752,186 @@ func TestUpdateRequestSnapshot_GetAwsOpportunitySummary(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetCustomerAccount(t *testing.T) {
+	input := &GetCustomerAccountInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCustomerAccount(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCustomerAccount"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetCustomerAccountBulkJob(t *testing.T) {
+	input := &GetCustomerAccountBulkJobInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCustomerAccountBulkJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCustomerAccountBulkJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetCustomerAccountBulkJobReportUrl(t *testing.T) {
+	input := &GetCustomerAccountBulkJobReportUrlInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		ReportType: types.BulkReportType("FAILED_RECORDS"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCustomerAccountBulkJobReportUrl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCustomerAccountBulkJobReportUrl"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetCustomerAccountStatistics(t *testing.T) {
+	input := &GetCustomerAccountStatisticsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Filter: &types.Filter{
+			AndAllFilters: []types.Filter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.Filter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+		},
+		Aggregations: []types.AggregationRequest{
+			{
+				GroupBy: []types.AggregatableField{
+					types.AggregatableField("ENRICHMENT_STATUS"),
+					types.AggregatableField("ENRICHMENT_STATUS"),
+				},
+			},
+			{
+				GroupBy: []types.AggregatableField{
+					types.AggregatableField("ENRICHMENT_STATUS"),
+					types.AggregatableField("ENRICHMENT_STATUS"),
+				},
+			},
+		},
+		IncludeMissing: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCustomerAccountStatistics(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCustomerAccountStatistics"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetEngagement(t *testing.T) {
 	input := &GetEngagementInput{
 		Catalog:    ptr.String("__Catalog__"),
@@ -2909,6 +4012,36 @@ func TestUpdateRequestSnapshot_GetOpportunity(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOpportunity"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetOpportunityBulkJobReportUrl(t *testing.T) {
+	input := &GetOpportunityBulkJobReportUrlInput{
+		Catalog:      ptr.String("__Catalog__"),
+		JobId:        ptr.String("__JobId__"),
+		ReportFormat: types.BulkFileFormat("CSV"),
+		ReportType:   types.BulkReportType("FAILED_RECORDS"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetOpportunityBulkJobReportUrl(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetOpportunityBulkJobReportUrl"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3028,6 +4161,70 @@ func TestUpdateRequestSnapshot_GetSellingSystemSettings(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListCustomerAccountBulkJobResults(t *testing.T) {
+	input := &ListCustomerAccountBulkJobResultsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		Status:     types.BulkRecordStatus("SUCCEEDED"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListCustomerAccountBulkJobResults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCustomerAccountBulkJobResults"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListCustomerAccountBulkJobs(t *testing.T) {
+	input := &ListCustomerAccountBulkJobsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Filter: &types.CustomerAccountBulkJobFilter{
+			Identifier: ptr.String("__Identifier__"),
+			Status:     types.BulkJobStatus("SUBMITTED"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListCustomerAccountBulkJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListCustomerAccountBulkJobs"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListEngagementByAcceptingInvitationTasks(t *testing.T) {
 	input := &ListEngagementByAcceptingInvitationTasksInput{
 		MaxResults: ptr.Int32(1),
@@ -3122,6 +4319,44 @@ func TestUpdateRequestSnapshot_ListEngagementFromOpportunityTasks(t *testing.T) 
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEngagementFromOpportunityTasks"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListEngagementGroups(t *testing.T) {
+	input := &ListEngagementGroupsInput{
+		Catalog:        ptr.String("__Catalog__"),
+		ReadinessLevel: types.ReadinessLevel("SalesReady"),
+		Sort: &types.EngagementGroupSort{
+			SortBy:    types.EngagementGroupSortName("Count"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		EngagementGroupIdentifiers: []string{
+			"__Member__",
+			"__Member__",
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListEngagementGroups(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListEngagementGroups"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3349,6 +4584,68 @@ func TestUpdateRequestSnapshot_ListOpportunities(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOpportunities"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListOpportunityBulkJobResults(t *testing.T) {
+	input := &ListOpportunityBulkJobResultsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		JobId:      ptr.String("__JobId__"),
+		Status:     types.BulkRecordStatus("SUCCEEDED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListOpportunityBulkJobResults(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOpportunityBulkJobResults"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListOpportunityBulkJobs(t *testing.T) {
+	input := &ListOpportunityBulkJobsInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		JobId:      ptr.String("__JobId__"),
+		Status:     types.BulkJobStatus("SUBMITTED"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListOpportunityBulkJobs(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListOpportunityBulkJobs"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3651,6 +4948,296 @@ func TestUpdateRequestSnapshot_RejectEngagementInvitation(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_SearchCustomerAccounts(t *testing.T) {
+	input := &SearchCustomerAccountsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Filter: &types.Filter{
+			AndAllFilters: []types.Filter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.Filter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.FilterCondition{
+				Key: types.FilterableField("ENRICHMENT_STATUS"),
+				Value: &types.FilterValueMemberStringValue{
+					Value: "__FilterValueMemberStringValue__",
+				},
+			},
+		},
+		Sort: &types.CustomerAccountSort{
+			SortBy:    types.SortableField("COMPANY_NAME"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchCustomerAccounts(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchCustomerAccounts"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_SearchEngagements(t *testing.T) {
+	input := &SearchEngagementsInput{
+		Catalog: ptr.String("__Catalog__"),
+		Keyword: ptr.String("__Keyword__"),
+		Filter: &types.EngagementSearchFilter{
+			AndAllFilters: []types.EngagementSearchFilter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.EngagementSearchFilter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.EngagementSearchPredicate{
+				Key: types.EngagementSearchFilterName("EngagementId"),
+				Value: &types.EngagementSearchFilterValueMemberStringValue{
+					Value: "__EngagementSearchFilterValueMemberStringValue__",
+				},
+			},
+		},
+		GroupId: ptr.String("__GroupId__"),
+		Sort: &types.EngagementSearchSort{
+			SortBy:    types.EngagementSearchSortName("EngagementId"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchEngagements(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchEngagements"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_SearchOpportunities(t *testing.T) {
+	input := &SearchOpportunitiesInput{
+		Catalog:    ptr.String("__Catalog__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		Keyword:    ptr.String("__Keyword__"),
+		Filter: &types.OpportunitySearchFilter{
+			AndAllFilters: []types.OpportunitySearchFilter{
+				{},
+				{},
+			},
+			OrAllFilters: []types.OpportunitySearchFilter{
+				{},
+				{},
+			},
+			NotFilter: nil,
+			EqualsTo: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			ContainsAny: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			ContainsAll: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			GreaterThan: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			GreaterThanOrEquals: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			LessThan: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+			LessThanOrEquals: &types.OpportunitySearchPredicate{
+				Key: types.OpportunitySearchFilterName("OpportunityId"),
+				Value: &types.OpportunitySearchFilterValueMemberStringValue{
+					Value: "__OpportunitySearchFilterValueMemberStringValue__",
+				},
+			},
+		},
+		Sort: &types.OpportunitySearchSort{
+			SortBy:    types.OpportunitySearchSortName("OpportunityId"),
+			SortOrder: types.SortOrder("ASCENDING"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SearchOpportunities(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SearchOpportunities"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartCustomerAccountBulkJob(t *testing.T) {
+	input := &StartCustomerAccountBulkJobInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		FileUri:     ptr.String("__FileUri__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartCustomerAccountBulkJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartCustomerAccountBulkJob"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StartEngagementByAcceptingInvitationTask(t *testing.T) {
 	input := &StartEngagementByAcceptingInvitationTaskInput{
 		Catalog:     ptr.String("__Catalog__"),
@@ -3729,6 +5316,36 @@ func TestUpdateRequestSnapshot_StartEngagementFromOpportunityTask(t *testing.T) 
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartEngagementFromOpportunityTask"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_StartOpportunityBulkJob(t *testing.T) {
+	input := &StartOpportunityBulkJobInput{
+		Catalog:     ptr.String("__Catalog__"),
+		ClientToken: ptr.String("__ClientToken__"),
+		FileURI:     ptr.String("__FileURI__"),
+		FileFormat:  types.BulkFileFormat("CSV"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.StartOpportunityBulkJob(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartOpportunityBulkJob"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3960,6 +5577,52 @@ func TestUpdateRequestSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_UpdateCustomerAccount(t *testing.T) {
+	input := &UpdateCustomerAccountInput{
+		Catalog:    ptr.String("__Catalog__"),
+		Identifier: ptr.String("__Identifier__"),
+		Account: &types.CustomerAccountData{
+			CompanyName: ptr.String("__CompanyName__"),
+			WebsiteUrl:  ptr.String("__WebsiteUrl__"),
+			Duns:        ptr.String("__Duns__"),
+			Address: &types.Address{
+				City:          ptr.String("__City__"),
+				PostalCode:    ptr.String("__PostalCode__"),
+				StateOrRegion: ptr.String("__StateOrRegion__"),
+				CountryCode:   types.CountryCode("US"),
+				StreetAddress: ptr.String("__StreetAddress__"),
+			},
+			Industry:          ptr.String("__Industry__"),
+			OtherIndustry:     ptr.String("__OtherIndustry__"),
+			Domain:            ptr.String("__Domain__"),
+			ParentCompanyName: ptr.String("__ParentCompanyName__"),
+		},
+		PartnerAccountIdentifier: ptr.String("__PartnerAccountIdentifier__"),
+		LastModifiedDate:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateCustomerAccount(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateCustomerAccount"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_UpdateEngagementContext(t *testing.T) {
 	input := &UpdateEngagementContextInput{
 		Catalog:                  ptr.String("__Catalog__"),
@@ -4001,6 +5664,21 @@ func TestUpdateRequestSnapshot_UpdateEngagementContext(t *testing.T) {
 				},
 				Insights: &types.LeadInsights{
 					LeadReadinessScore: ptr.String("__LeadReadinessScore__"),
+					ChannelRecommendation: &types.ChannelRecommendation{
+						RecommendedChannel: ptr.String("__RecommendedChannel__"),
+						BestOutreachWindows: []types.BestOutreachWindow{
+							{
+								Day:          types.DayOfWeek("MONDAY"),
+								StartTimeUtc: ptr.String("__StartTimeUtc__"),
+								EndTimeUtc:   ptr.String("__EndTimeUtc__"),
+							},
+							{
+								Day:          types.DayOfWeek("MONDAY"),
+								StartTimeUtc: ptr.String("__StartTimeUtc__"),
+								EndTimeUtc:   ptr.String("__EndTimeUtc__"),
+							},
+						},
+					},
 				},
 			},
 		},

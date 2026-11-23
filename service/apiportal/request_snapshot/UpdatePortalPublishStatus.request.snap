@@ -1,0 +1,5 @@
+POST /portals/__PortalId__/publish
+
+Content-Type: application/json
+
+{"description":"__Description__","status":"PUBLISHED"}

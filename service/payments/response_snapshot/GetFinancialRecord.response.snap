@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPayments.GetFinancialRecord
+
+{"financialRecord":{"amount":{"currency":"__Currency__","value":"__Value__"},"balances":{"canceled":{"currency":"__Currency__","value":"__Value__"},"outstanding":{"currency":"__Currency__","value":"__Value__"},"processing":{"currency":"__Currency__","value":"__Value__"},"settled":{"currency":"__Currency__","value":"__Value__"}},"businessUnit":{"lineOfBusiness":"AWS_CLOUD_SERVICES","merchantOfRecord":"__MerchantOfRecord__"},"closedAt":946684800,"details":{"invoiceDetails":{"billingPeriod":{"endDate":946684800,"startDate":946684800},"dueDate":946684800,"dueStatus":"DUE","invoiceFrequency":"ONE_TIME","invoiceId":"__InvoiceId__","paymentTerms":"__PaymentTerms__"}},"id":"__Id__","issuedAt":946684800,"settlementStatus":"OPEN","status":"OUTSTANDING","type":"INVOICE"}}

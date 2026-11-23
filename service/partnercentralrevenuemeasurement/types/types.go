@@ -23,6 +23,9 @@ type AttributionSummary struct {
 	// The catalog that the revenue attribution belongs to.
 	Catalog CatalogName
 
+	// Program-defined key-value attributes for the revenue attribution.
+	Context map[string]string
+
 	// The date when the revenue attribution was created.
 	CreatedDate *time.Time
 
@@ -73,6 +76,9 @@ func (v *AttributionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != "" {
 		s.WriteString(schemas.AttributionSummary_Catalog, string(v.Catalog))
 	}
+	if v.Context != nil {
+		serializeRevenueAttributionContext(s, schemas.AttributionSummary_Context, v.Context)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.AttributionSummary_CreatedDate, *v.CreatedDate)
 	}
@@ -122,6 +128,8 @@ func (v *AttributionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Catalog = CatalogName(ev)
 			return nil
+		case schemas.AttributionSummary_Context:
+			return deserializeRevenueAttributionContext(d, schemas.AttributionSummary_Context, &v.Context)
 		case schemas.AttributionSummary_CreatedDate:
 			v.CreatedDate = new(time.Time)
 			return d.ReadTime(schemas.AttributionSummary_CreatedDate, v.CreatedDate)
@@ -159,6 +167,48 @@ func (v *AttributionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AttributionSummary_TotalRevenueAttributionAllocationCount:
 			v.TotalRevenueAttributionAllocationCount = new(int32)
 			return d.ReadInt32(schemas.AttributionSummary_TotalRevenueAttributionAllocationCount, v.TotalRevenueAttributionAllocationCount)
+		}
+		return nil
+	})
+}
+
+// Filters revenue attributions by a context key and, optionally, a set of values.
+type ContextFilter struct {
+
+	// The context key to filter on.
+	//
+	// This member is required.
+	Key *string
+
+	// Matches when the stored value equals any of these values. When omitted, matches
+	// when the key is present.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ContextFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ContextFilter_Key, *v.Key)
+	}
+	if v.Values != nil {
+		serializeContextFilterValueList(s, schemas.ContextFilter_Values, v.Values)
+	}
+}
+func (v *ContextFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextFilter_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ContextFilter_Key, v.Key)
+		case schemas.ContextFilter_Values:
+			return deserializeContextFilterValueList(d, schemas.ContextFilter_Values, &v.Values)
 		}
 		return nil
 	})
@@ -217,25 +267,35 @@ func (v *MarketplaceProductSummary) Deserialize(d smithy.ShapeDeserializer) erro
 // Summary information about a marketplace revenue share allocation.
 type MarketplaceRevenueShareAllocationSummary struct {
 
-	// The Amazon Resource Name (ARN) of the parent marketplace revenue share.
+	// The date when the allocation was created.
 	//
 	// This member is required.
-	Arn *string
+	CreatedDate *time.Time
 
 	// The effective start date of the allocation.
 	//
 	// This member is required.
 	EffectiveFrom *string
 
+	// The effective end date of the allocation.
+	//
+	// This member is required.
+	EffectiveUntil *string
+
+	// The date when the allocation was last modified.
+	//
+	// This member is required.
+	LastModifiedDate *time.Time
+
 	// The unique identifier of the allocation.
 	//
 	// This member is required.
 	MarketplaceRevenueShareAllocationId *string
 
-	// The AWS Marketplace product identifier.
+	// The parent marketplace revenue share, short ID form (mrs-...).
 	//
 	// This member is required.
-	ProductId *string
+	MarketplaceRevenueShareIdentifier *string
 
 	// The revenue share percentage.
 	//
@@ -247,18 +307,6 @@ type MarketplaceRevenueShareAllocationSummary struct {
 	// This member is required.
 	Status AllocationStatus
 
-	// The date when the allocation was created.
-	CreatedDate *time.Time
-
-	// The effective end date of the allocation, or null if open-ended.
-	EffectiveUntil *string
-
-	// The date when the allocation was last modified.
-	LastModifiedDate *time.Time
-
-	// The display name of the AWS Marketplace product.
-	ProductName *string
-
 	noSmithyDocumentSerde
 }
 
@@ -269,9 +317,6 @@ func (v *MarketplaceRevenueShareAllocationSummary) Serialize(s smithy.ShapeSeria
 }
 
 func (v *MarketplaceRevenueShareAllocationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Arn != nil {
-		s.WriteString(schemas.MarketplaceRevenueShareAllocationSummary_Arn, *v.Arn)
-	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.MarketplaceRevenueShareAllocationSummary_CreatedDate, *v.CreatedDate)
 	}
@@ -287,11 +332,8 @@ func (v *MarketplaceRevenueShareAllocationSummary) SerializeMembers(s smithy.Sha
 	if v.MarketplaceRevenueShareAllocationId != nil {
 		s.WriteString(schemas.MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareAllocationId, *v.MarketplaceRevenueShareAllocationId)
 	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.MarketplaceRevenueShareAllocationSummary_ProductId, *v.ProductId)
-	}
-	if v.ProductName != nil {
-		s.WriteString(schemas.MarketplaceRevenueShareAllocationSummary_ProductName, *v.ProductName)
+	if v.MarketplaceRevenueShareIdentifier != nil {
+		s.WriteString(schemas.MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareIdentifier, *v.MarketplaceRevenueShareIdentifier)
 	}
 	if v.RevenueSharePercent != nil {
 		s.WriteString(schemas.MarketplaceRevenueShareAllocationSummary_RevenueSharePercent, *v.RevenueSharePercent)
@@ -303,9 +345,6 @@ func (v *MarketplaceRevenueShareAllocationSummary) SerializeMembers(s smithy.Sha
 func (v *MarketplaceRevenueShareAllocationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MarketplaceRevenueShareAllocationSummary, func(s *smithy.Schema) error {
 		switch s {
-		case schemas.MarketplaceRevenueShareAllocationSummary_Arn:
-			v.Arn = new(string)
-			return d.ReadString(schemas.MarketplaceRevenueShareAllocationSummary_Arn, v.Arn)
 		case schemas.MarketplaceRevenueShareAllocationSummary_CreatedDate:
 			v.CreatedDate = new(time.Time)
 			return d.ReadTime(schemas.MarketplaceRevenueShareAllocationSummary_CreatedDate, v.CreatedDate)
@@ -321,12 +360,9 @@ func (v *MarketplaceRevenueShareAllocationSummary) Deserialize(d smithy.ShapeDes
 		case schemas.MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareAllocationId:
 			v.MarketplaceRevenueShareAllocationId = new(string)
 			return d.ReadString(schemas.MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareAllocationId, v.MarketplaceRevenueShareAllocationId)
-		case schemas.MarketplaceRevenueShareAllocationSummary_ProductId:
-			v.ProductId = new(string)
-			return d.ReadString(schemas.MarketplaceRevenueShareAllocationSummary_ProductId, v.ProductId)
-		case schemas.MarketplaceRevenueShareAllocationSummary_ProductName:
-			v.ProductName = new(string)
-			return d.ReadString(schemas.MarketplaceRevenueShareAllocationSummary_ProductName, v.ProductName)
+		case schemas.MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareIdentifier:
+			v.MarketplaceRevenueShareIdentifier = new(string)
+			return d.ReadString(schemas.MarketplaceRevenueShareAllocationSummary_MarketplaceRevenueShareIdentifier, v.MarketplaceRevenueShareIdentifier)
 		case schemas.MarketplaceRevenueShareAllocationSummary_RevenueSharePercent:
 			v.RevenueSharePercent = new(string)
 			return d.ReadString(schemas.MarketplaceRevenueShareAllocationSummary_RevenueSharePercent, v.RevenueSharePercent)
@@ -342,6 +378,172 @@ func (v *MarketplaceRevenueShareAllocationSummary) Deserialize(d smithy.ShapeDes
 	})
 }
 
+// A product in a marketplace revenue share, as returned by
+// GetMarketplaceRevenueShare, with the full typed account lists.
+type MarketplaceRevenueShareProductDetail struct {
+
+	// The AWS Marketplace product identifier.
+	//
+	// This member is required.
+	ProductId *string
+
+	// The typed account lists for this product, each with its count and full list of
+	// IDs.
+	Accounts []RevenueShareProductAccountDetail
+
+	// The AWS Marketplace product code, resolved by the service.
+	ProductCode *string
+
+	// The display name of the AWS Marketplace product, resolved by the service.
+	ProductName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MarketplaceRevenueShareProductDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarketplaceRevenueShareProductDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarketplaceRevenueShareProductDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accounts != nil {
+		serializeRevenueShareProductAccountDetailList(s, schemas.MarketplaceRevenueShareProductDetail_Accounts, v.Accounts)
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.MarketplaceRevenueShareProductDetail_ProductCode, *v.ProductCode)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.MarketplaceRevenueShareProductDetail_ProductId, *v.ProductId)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.MarketplaceRevenueShareProductDetail_ProductName, *v.ProductName)
+	}
+}
+func (v *MarketplaceRevenueShareProductDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarketplaceRevenueShareProductDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MarketplaceRevenueShareProductDetail_Accounts:
+			return deserializeRevenueShareProductAccountDetailList(d, schemas.MarketplaceRevenueShareProductDetail_Accounts, &v.Accounts)
+		case schemas.MarketplaceRevenueShareProductDetail_ProductCode:
+			v.ProductCode = new(string)
+			return d.ReadString(schemas.MarketplaceRevenueShareProductDetail_ProductCode, v.ProductCode)
+		case schemas.MarketplaceRevenueShareProductDetail_ProductId:
+			v.ProductId = new(string)
+			return d.ReadString(schemas.MarketplaceRevenueShareProductDetail_ProductId, v.ProductId)
+		case schemas.MarketplaceRevenueShareProductDetail_ProductName:
+			v.ProductName = new(string)
+			return d.ReadString(schemas.MarketplaceRevenueShareProductDetail_ProductName, v.ProductName)
+		}
+		return nil
+	})
+}
+
+// A product and its typed account lists as supplied in a
+// CreateMarketplaceRevenueShare or UpdateMarketplaceRevenueShare request.
+type MarketplaceRevenueShareProductEntry struct {
+
+	// The AWS Marketplace product ID or product ARN. The share stores and returns the
+	// product ID.
+	//
+	// This member is required.
+	ProductId *string
+
+	// The typed account lists for this product. Omit to have the service determine
+	// the accounts. At most one entry per type; each entry must carry at least one
+	// account. An empty list is the same as omitting the field.
+	Accounts []RevenueShareProductAccountEntry
+
+	noSmithyDocumentSerde
+}
+
+func (v *MarketplaceRevenueShareProductEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarketplaceRevenueShareProductEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarketplaceRevenueShareProductEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accounts != nil {
+		serializeRevenueShareProductAccountEntryList(s, schemas.MarketplaceRevenueShareProductEntry_Accounts, v.Accounts)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.MarketplaceRevenueShareProductEntry_ProductId, *v.ProductId)
+	}
+}
+func (v *MarketplaceRevenueShareProductEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarketplaceRevenueShareProductEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MarketplaceRevenueShareProductEntry_Accounts:
+			return deserializeRevenueShareProductAccountEntryList(d, schemas.MarketplaceRevenueShareProductEntry_Accounts, &v.Accounts)
+		case schemas.MarketplaceRevenueShareProductEntry_ProductId:
+			v.ProductId = new(string)
+			return d.ReadString(schemas.MarketplaceRevenueShareProductEntry_ProductId, v.ProductId)
+		}
+		return nil
+	})
+}
+
+// A product in a marketplace revenue share, as returned in Create, Update and
+// List responses, with per-type account counts but no account IDs.
+type MarketplaceRevenueShareProductSummary struct {
+
+	// The AWS Marketplace product identifier.
+	//
+	// This member is required.
+	ProductId *string
+
+	// Per-type counts of the accounts associated with this product.
+	Accounts []RevenueShareProductAccountSummary
+
+	// The AWS Marketplace product code, resolved by the service.
+	ProductCode *string
+
+	// The display name of the AWS Marketplace product, resolved by the service.
+	ProductName *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MarketplaceRevenueShareProductSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarketplaceRevenueShareProductSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarketplaceRevenueShareProductSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accounts != nil {
+		serializeRevenueShareProductAccountSummaryList(s, schemas.MarketplaceRevenueShareProductSummary_Accounts, v.Accounts)
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.MarketplaceRevenueShareProductSummary_ProductCode, *v.ProductCode)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.MarketplaceRevenueShareProductSummary_ProductId, *v.ProductId)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.MarketplaceRevenueShareProductSummary_ProductName, *v.ProductName)
+	}
+}
+func (v *MarketplaceRevenueShareProductSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarketplaceRevenueShareProductSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MarketplaceRevenueShareProductSummary_Accounts:
+			return deserializeRevenueShareProductAccountSummaryList(d, schemas.MarketplaceRevenueShareProductSummary_Accounts, &v.Accounts)
+		case schemas.MarketplaceRevenueShareProductSummary_ProductCode:
+			v.ProductCode = new(string)
+			return d.ReadString(schemas.MarketplaceRevenueShareProductSummary_ProductCode, v.ProductCode)
+		case schemas.MarketplaceRevenueShareProductSummary_ProductId:
+			v.ProductId = new(string)
+			return d.ReadString(schemas.MarketplaceRevenueShareProductSummary_ProductId, v.ProductId)
+		case schemas.MarketplaceRevenueShareProductSummary_ProductName:
+			v.ProductName = new(string)
+			return d.ReadString(schemas.MarketplaceRevenueShareProductSummary_ProductName, v.ProductName)
+		}
+		return nil
+	})
+}
+
 // Summary information about a marketplace revenue share.
 type MarketplaceRevenueShareSummary struct {
 
@@ -350,34 +552,54 @@ type MarketplaceRevenueShareSummary struct {
 	// This member is required.
 	Arn *string
 
-	// The AWS Marketplace product identifier.
+	// The catalog that the marketplace revenue share belongs to.
 	//
 	// This member is required.
-	ProductId *string
-
-	// The catalog that the marketplace revenue share belongs to.
 	Catalog CatalogName
 
 	// The date when the marketplace revenue share was created.
+	//
+	// This member is required.
 	CreatedDate *time.Time
 
+	// The unique identifier of the marketplace revenue share, short ID form (mrs-...).
+	//
+	// This member is required.
+	Id *string
+
 	// The date when the marketplace revenue share was last modified.
+	//
+	// This member is required.
 	LastModifiedDate *time.Time
 
-	// The latest revision number of the marketplace revenue share.
-	LatestRevision *int32
+	// The latest revision of the marketplace revenue share.
+	//
+	// This member is required.
+	LatestRevision *string
 
-	// The AWS Marketplace product code.
-	ProductCode *string
-
-	// The display name of the AWS Marketplace product.
-	ProductName *string
+	// The products in the marketplace revenue share, each with per-type account
+	// counts. Empty when the share is closed.
+	//
+	// This member is required.
+	Products []MarketplaceRevenueShareProductSummary
 
 	// The number of active allocations under this share.
+	//
+	// This member is required.
 	TotalActiveMarketplaceRevenueShareAllocationCount *int32
 
 	// The total number of allocations under this share.
+	//
+	// This member is required.
 	TotalMarketplaceRevenueShareAllocationCount *int32
+
+	// The date from which this share is effective, derived from the earliest ACTIVE
+	// allocation start date (YYYY-MM-DD). Absent when no ACTIVE allocation remains.
+	EffectiveFrom *string
+
+	// The date until which this share is effective, derived from the latest ACTIVE
+	// allocation end date (YYYY-MM-DD). Absent when no ACTIVE allocation remains.
+	EffectiveUntil *string
 
 	noSmithyDocumentSerde
 }
@@ -398,20 +620,23 @@ func (v *MarketplaceRevenueShareSummary) SerializeMembers(s smithy.ShapeSerializ
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.MarketplaceRevenueShareSummary_CreatedDate, *v.CreatedDate)
 	}
+	if v.EffectiveFrom != nil {
+		s.WriteString(schemas.MarketplaceRevenueShareSummary_EffectiveFrom, *v.EffectiveFrom)
+	}
+	if v.EffectiveUntil != nil {
+		s.WriteString(schemas.MarketplaceRevenueShareSummary_EffectiveUntil, *v.EffectiveUntil)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.MarketplaceRevenueShareSummary_Id, *v.Id)
+	}
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.MarketplaceRevenueShareSummary_LastModifiedDate, *v.LastModifiedDate)
 	}
 	if v.LatestRevision != nil {
-		s.WriteInt32(schemas.MarketplaceRevenueShareSummary_LatestRevision, *v.LatestRevision)
+		s.WriteString(schemas.MarketplaceRevenueShareSummary_LatestRevision, *v.LatestRevision)
 	}
-	if v.ProductCode != nil {
-		s.WriteString(schemas.MarketplaceRevenueShareSummary_ProductCode, *v.ProductCode)
-	}
-	if v.ProductId != nil {
-		s.WriteString(schemas.MarketplaceRevenueShareSummary_ProductId, *v.ProductId)
-	}
-	if v.ProductName != nil {
-		s.WriteString(schemas.MarketplaceRevenueShareSummary_ProductName, *v.ProductName)
+	if v.Products != nil {
+		serializeMarketplaceRevenueShareProductSummaryList(s, schemas.MarketplaceRevenueShareSummary_Products, v.Products)
 	}
 	if v.TotalActiveMarketplaceRevenueShareAllocationCount != nil {
 		s.WriteInt32(schemas.MarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount, *v.TotalActiveMarketplaceRevenueShareAllocationCount)
@@ -436,21 +661,23 @@ func (v *MarketplaceRevenueShareSummary) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.MarketplaceRevenueShareSummary_CreatedDate:
 			v.CreatedDate = new(time.Time)
 			return d.ReadTime(schemas.MarketplaceRevenueShareSummary_CreatedDate, v.CreatedDate)
+		case schemas.MarketplaceRevenueShareSummary_EffectiveFrom:
+			v.EffectiveFrom = new(string)
+			return d.ReadString(schemas.MarketplaceRevenueShareSummary_EffectiveFrom, v.EffectiveFrom)
+		case schemas.MarketplaceRevenueShareSummary_EffectiveUntil:
+			v.EffectiveUntil = new(string)
+			return d.ReadString(schemas.MarketplaceRevenueShareSummary_EffectiveUntil, v.EffectiveUntil)
+		case schemas.MarketplaceRevenueShareSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MarketplaceRevenueShareSummary_Id, v.Id)
 		case schemas.MarketplaceRevenueShareSummary_LastModifiedDate:
 			v.LastModifiedDate = new(time.Time)
 			return d.ReadTime(schemas.MarketplaceRevenueShareSummary_LastModifiedDate, v.LastModifiedDate)
 		case schemas.MarketplaceRevenueShareSummary_LatestRevision:
-			v.LatestRevision = new(int32)
-			return d.ReadInt32(schemas.MarketplaceRevenueShareSummary_LatestRevision, v.LatestRevision)
-		case schemas.MarketplaceRevenueShareSummary_ProductCode:
-			v.ProductCode = new(string)
-			return d.ReadString(schemas.MarketplaceRevenueShareSummary_ProductCode, v.ProductCode)
-		case schemas.MarketplaceRevenueShareSummary_ProductId:
-			v.ProductId = new(string)
-			return d.ReadString(schemas.MarketplaceRevenueShareSummary_ProductId, v.ProductId)
-		case schemas.MarketplaceRevenueShareSummary_ProductName:
-			v.ProductName = new(string)
-			return d.ReadString(schemas.MarketplaceRevenueShareSummary_ProductName, v.ProductName)
+			v.LatestRevision = new(string)
+			return d.ReadString(schemas.MarketplaceRevenueShareSummary_LatestRevision, v.LatestRevision)
+		case schemas.MarketplaceRevenueShareSummary_Products:
+			return deserializeMarketplaceRevenueShareProductSummaryList(d, schemas.MarketplaceRevenueShareSummary_Products, &v.Products)
 		case schemas.MarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount:
 			v.TotalActiveMarketplaceRevenueShareAllocationCount = new(int32)
 			return d.ReadInt32(schemas.MarketplaceRevenueShareSummary_TotalActiveMarketplaceRevenueShareAllocationCount, v.TotalActiveMarketplaceRevenueShareAllocationCount)
@@ -857,6 +1084,162 @@ func (v *RevenueShareAllocation) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.Status = AllocationStatus(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// A typed account list returned by GetMarketplaceRevenueShare, with its count and
+// full list of IDs.
+type RevenueShareProductAccountDetail struct {
+
+	// The full list of AWS account identifiers of this type.
+	//
+	// This member is required.
+	AccountIds []string
+
+	// The type of account list.
+	//
+	// This member is required.
+	AccountType RevenueShareProductAccountType
+
+	// The number of accounts of this type.
+	//
+	// This member is required.
+	Count *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *RevenueShareProductAccountDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevenueShareProductAccountDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevenueShareProductAccountDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountIds != nil {
+		serializeRevenueShareProductAccountIdList(s, schemas.RevenueShareProductAccountDetail_AccountIds, v.AccountIds)
+	}
+	if v.AccountType != "" {
+		s.WriteString(schemas.RevenueShareProductAccountDetail_AccountType, string(v.AccountType))
+	}
+	if v.Count != nil {
+		s.WriteInt32(schemas.RevenueShareProductAccountDetail_Count, *v.Count)
+	}
+}
+func (v *RevenueShareProductAccountDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevenueShareProductAccountDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevenueShareProductAccountDetail_AccountIds:
+			return deserializeRevenueShareProductAccountIdList(d, schemas.RevenueShareProductAccountDetail_AccountIds, &v.AccountIds)
+		case schemas.RevenueShareProductAccountDetail_AccountType:
+			var ev string
+			if err := d.ReadString(schemas.RevenueShareProductAccountDetail_AccountType, &ev); err != nil {
+				return err
+			}
+			v.AccountType = RevenueShareProductAccountType(ev)
+			return nil
+		case schemas.RevenueShareProductAccountDetail_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.RevenueShareProductAccountDetail_Count, v.Count)
+		}
+		return nil
+	})
+}
+
+// A typed account list supplied for a product in a CreateMarketplaceRevenueShare
+// or UpdateMarketplaceRevenueShare request.
+type RevenueShareProductAccountEntry struct {
+
+	// The AWS account identifiers for this type. Each ID must be a 12-digit AWS
+	// account ID. Account ownership is verified after the request is accepted.
+	//
+	// This member is required.
+	AccountIds []string
+
+	// The type of account list.
+	//
+	// This member is required.
+	AccountType RevenueShareProductAccountType
+
+	noSmithyDocumentSerde
+}
+
+func (v *RevenueShareProductAccountEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevenueShareProductAccountEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevenueShareProductAccountEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountIds != nil {
+		serializeRevenueShareProductAccountIdList(s, schemas.RevenueShareProductAccountEntry_AccountIds, v.AccountIds)
+	}
+	if v.AccountType != "" {
+		s.WriteString(schemas.RevenueShareProductAccountEntry_AccountType, string(v.AccountType))
+	}
+}
+func (v *RevenueShareProductAccountEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevenueShareProductAccountEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevenueShareProductAccountEntry_AccountIds:
+			return deserializeRevenueShareProductAccountIdList(d, schemas.RevenueShareProductAccountEntry_AccountIds, &v.AccountIds)
+		case schemas.RevenueShareProductAccountEntry_AccountType:
+			var ev string
+			if err := d.ReadString(schemas.RevenueShareProductAccountEntry_AccountType, &ev); err != nil {
+				return err
+			}
+			v.AccountType = RevenueShareProductAccountType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// A per-type count of accounts associated with a product.
+type RevenueShareProductAccountSummary struct {
+
+	// The type of account list.
+	//
+	// This member is required.
+	AccountType RevenueShareProductAccountType
+
+	// The number of accounts of this type.
+	//
+	// This member is required.
+	Count *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *RevenueShareProductAccountSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevenueShareProductAccountSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevenueShareProductAccountSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountType != "" {
+		s.WriteString(schemas.RevenueShareProductAccountSummary_AccountType, string(v.AccountType))
+	}
+	if v.Count != nil {
+		s.WriteInt32(schemas.RevenueShareProductAccountSummary_Count, *v.Count)
+	}
+}
+func (v *RevenueShareProductAccountSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevenueShareProductAccountSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevenueShareProductAccountSummary_AccountType:
+			var ev string
+			if err := d.ReadString(schemas.RevenueShareProductAccountSummary_AccountType, &ev); err != nil {
+				return err
+			}
+			v.AccountType = RevenueShareProductAccountType(ev)
+			return nil
+		case schemas.RevenueShareProductAccountSummary_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.RevenueShareProductAccountSummary_Count, v.Count)
 		}
 		return nil
 	})

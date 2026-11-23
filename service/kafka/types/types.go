@@ -86,6 +86,288 @@ func (v *ApacheKafkaCluster) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A single finding from an assessment, describing a specific issue or observation.
+type AssessmentFinding struct {
+
+	// The category of this finding.
+	//
+	// This member is required.
+	Category FindingCategory
+
+	// A deterministic content-based identifier for this finding. Generated from
+	// hash(category + resource + check_type). The same resource with the same problem
+	// always produces the same findingId across assessment runs.
+	//
+	// This member is required.
+	FindingId *string
+
+	// Human-readable description of what is wrong, why it matters, and what to do.
+	//
+	// This member is required.
+	Message *string
+
+	// The severity of this finding.
+	//
+	// This member is required.
+	Severity FindingSeverity
+
+	// Guidance for resolving this finding. Absent when no specific remediation
+	// applies.
+	Remediation *FindingRemediation
+
+	// The specific resource affected (e.g., topic name). Absent for cluster-level
+	// findings.
+	Resource *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AssessmentFinding) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentFinding)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentFinding) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != "" {
+		s.WriteString(schemas.AssessmentFinding_Category, string(v.Category))
+	}
+	if v.FindingId != nil {
+		s.WriteString(schemas.AssessmentFinding_FindingId, *v.FindingId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AssessmentFinding_Message, *v.Message)
+	}
+	if v.Remediation != nil {
+		s.WriteStruct(schemas.AssessmentFinding_Remediation)
+		v.Remediation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.AssessmentFinding_Resource, *v.Resource)
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.AssessmentFinding_Severity, string(v.Severity))
+	}
+}
+func (v *AssessmentFinding) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentFinding, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentFinding_Category:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentFinding_Category, &ev); err != nil {
+				return err
+			}
+			v.Category = FindingCategory(ev)
+			return nil
+		case schemas.AssessmentFinding_FindingId:
+			v.FindingId = new(string)
+			return d.ReadString(schemas.AssessmentFinding_FindingId, v.FindingId)
+		case schemas.AssessmentFinding_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AssessmentFinding_Message, v.Message)
+		case schemas.AssessmentFinding_Remediation:
+			v.Remediation = &FindingRemediation{}
+			return v.Remediation.Deserialize(d)
+		case schemas.AssessmentFinding_Resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.AssessmentFinding_Resource, v.Resource)
+		case schemas.AssessmentFinding_Severity:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentFinding_Severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = FindingSeverity(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Summary information about an assessment, returned by ListAssessments.
+type AssessmentInfo struct {
+
+	// The Amazon Resource Name (ARN) of the assessment.
+	AssessmentArn *string
+
+	// The type of assessment.
+	AssessmentType AssessmentType
+
+	// The Amazon Resource Name (ARN) of the cluster that was assessed.
+	ClusterArn *string
+
+	// The time when the assessment was created.
+	CreationTime *time.Time
+
+	// The current status of the assessment.
+	Status AssessmentStatus
+
+	// The tags attached to the assessment.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AssessmentInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.AssessmentInfo_AssessmentArn, *v.AssessmentArn)
+	}
+	if v.AssessmentType != "" {
+		s.WriteString(schemas.AssessmentInfo_AssessmentType, string(v.AssessmentType))
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.AssessmentInfo_ClusterArn, *v.ClusterArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.AssessmentInfo_CreationTime, *v.CreationTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AssessmentInfo_Status, string(v.Status))
+	}
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.AssessmentInfo_Tags, v.Tags)
+	}
+}
+func (v *AssessmentInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentInfo_AssessmentArn:
+			v.AssessmentArn = new(string)
+			return d.ReadString(schemas.AssessmentInfo_AssessmentArn, v.AssessmentArn)
+		case schemas.AssessmentInfo_AssessmentType:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentInfo_AssessmentType, &ev); err != nil {
+				return err
+			}
+			v.AssessmentType = AssessmentType(ev)
+			return nil
+		case schemas.AssessmentInfo_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.AssessmentInfo_ClusterArn, v.ClusterArn)
+		case schemas.AssessmentInfo_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.AssessmentInfo_CreationTime, v.CreationTime)
+		case schemas.AssessmentInfo_Status:
+			var ev string
+			if err := d.ReadString(schemas.AssessmentInfo_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AssessmentStatus(ev)
+			return nil
+		case schemas.AssessmentInfo_Tags:
+			return deserialize__mapOf__string(d, schemas.AssessmentInfo_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// Type-specific parameters for the assessment. All fields are optional.
+type AssessmentParameters struct {
+
+	// The target instance type to assess against (for example, express.m7g.large).
+	// Optional: when omitted, the assessment reports a recommended instance type as a
+	// CAPACITY finding. Supply it to assess readiness for a specific instance type.
+	TargetInstanceType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AssessmentParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetInstanceType != nil {
+		s.WriteString(schemas.AssessmentParameters_TargetInstanceType, *v.TargetInstanceType)
+	}
+}
+func (v *AssessmentParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentParameters_TargetInstanceType:
+			v.TargetInstanceType = new(string)
+			return d.ReadString(schemas.AssessmentParameters_TargetInstanceType, v.TargetInstanceType)
+		}
+		return nil
+	})
+}
+
+// Summary of assessment findings broken down by category and severity.
+type AssessmentSummary struct {
+
+	// Count of findings grouped by category.
+	ByCategory map[string]int32
+
+	// Count of findings grouped by severity.
+	BySeverity map[string]int32
+
+	// True when the assessment detected more findings than it stores. Resolve the
+	// reported findings and re-run the assessment to surface the remaining ones.
+	FindingsCapped *bool
+
+	// True when the assessment detected at least one ERROR-severity finding. ERROR
+	// findings block the migration until resolved.
+	HasBlockingFindings *bool
+
+	// The total number of findings detected by the assessment, including any findings
+	// beyond the stored-findings cap.
+	TotalFindings *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *AssessmentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByCategory != nil {
+		serialize__mapOf__integer(s, schemas.AssessmentSummary_ByCategory, v.ByCategory)
+	}
+	if v.BySeverity != nil {
+		serialize__mapOf__integer(s, schemas.AssessmentSummary_BySeverity, v.BySeverity)
+	}
+	if v.FindingsCapped != nil {
+		s.WriteBool(schemas.AssessmentSummary_FindingsCapped, *v.FindingsCapped)
+	}
+	if v.HasBlockingFindings != nil {
+		s.WriteBool(schemas.AssessmentSummary_HasBlockingFindings, *v.HasBlockingFindings)
+	}
+	if v.TotalFindings != nil {
+		s.WriteInt32(schemas.AssessmentSummary_TotalFindings, *v.TotalFindings)
+	}
+}
+func (v *AssessmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentSummary_ByCategory:
+			return deserialize__mapOf__integer(d, schemas.AssessmentSummary_ByCategory, &v.ByCategory)
+		case schemas.AssessmentSummary_BySeverity:
+			return deserialize__mapOf__integer(d, schemas.AssessmentSummary_BySeverity, &v.BySeverity)
+		case schemas.AssessmentSummary_FindingsCapped:
+			v.FindingsCapped = new(bool)
+			return d.ReadBool(schemas.AssessmentSummary_FindingsCapped, v.FindingsCapped)
+		case schemas.AssessmentSummary_HasBlockingFindings:
+			v.HasBlockingFindings = new(bool)
+			return d.ReadBool(schemas.AssessmentSummary_HasBlockingFindings, v.HasBlockingFindings)
+		case schemas.AssessmentSummary_TotalFindings:
+			v.TotalFindings = new(int32)
+			return d.ReadInt32(schemas.AssessmentSummary_TotalFindings, v.TotalFindings)
+		}
+		return nil
+	})
+}
+
 // The authorizer logs configuration for this MSK cluster.
 type AuthorizerLogs struct {
 
@@ -402,6 +684,12 @@ type BrokerNodeInfo struct {
 	// The ID of the broker.
 	BrokerId *float64
 
+	// Whether this broker is a Standard broker or an Express broker. While an
+	// UpdateBrokerType operation upgrades a cluster in place from Standard brokers to
+	// Express brokers, the cluster contains brokers of both types and this field tells
+	// them apart.
+	BrokerNodeType BrokerNodeType
+
 	// The client subnet to which this broker node belongs.
 	ClientSubnet *string
 
@@ -431,6 +719,9 @@ func (v *BrokerNodeInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BrokerId != nil {
 		s.WriteFloat64(schemas.BrokerNodeInfo_BrokerId, *v.BrokerId)
 	}
+	if v.BrokerNodeType != "" {
+		s.WriteString(schemas.BrokerNodeInfo_BrokerNodeType, string(v.BrokerNodeType))
+	}
 	if v.ClientSubnet != nil {
 		s.WriteString(schemas.BrokerNodeInfo_ClientSubnet, *v.ClientSubnet)
 	}
@@ -455,6 +746,13 @@ func (v *BrokerNodeInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.BrokerNodeInfo_BrokerId:
 			v.BrokerId = new(float64)
 			return d.ReadFloat64(schemas.BrokerNodeInfo_BrokerId, v.BrokerId)
+		case schemas.BrokerNodeInfo_BrokerNodeType:
+			var ev string
+			if err := d.ReadString(schemas.BrokerNodeInfo_BrokerNodeType, &ev); err != nil {
+				return err
+			}
+			v.BrokerNodeType = BrokerNodeType(ev)
+			return nil
 		case schemas.BrokerNodeInfo_ClientSubnet:
 			v.ClientSubnet = new(string)
 			return d.ReadString(schemas.BrokerNodeInfo_ClientSubnet, v.ClientSubnet)
@@ -517,6 +815,54 @@ func (v *BrokerSoftwareInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.BrokerSoftwareInfo_KafkaVersion:
 			v.KafkaVersion = new(string)
 			return d.ReadString(schemas.BrokerSoftwareInfo_KafkaVersion, v.KafkaVersion)
+		}
+		return nil
+	})
+}
+
+// Information about the topic reassignment of an UpdateBrokerType operation that
+// upgrades a cluster from Standard brokers to Express brokers. Present only on the
+// operation that initiated the upgrade.
+type BrokerTypeUpgradeInfo struct {
+
+	// How topics are reassigned to the Express brokers.
+	TopicReassignmentMode TopicReassignmentMode
+
+	// The Amazon Resource Name (ARN) of the topic reassignment operation that Amazon
+	// MSK started for this upgrade. Present once that reassignment has started. Under
+	// MANUAL you start reassignments yourself, so Amazon MSK starts none.
+	TopicReassignmentOperationArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BrokerTypeUpgradeInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BrokerTypeUpgradeInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BrokerTypeUpgradeInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TopicReassignmentMode != "" {
+		s.WriteString(schemas.BrokerTypeUpgradeInfo_TopicReassignmentMode, string(v.TopicReassignmentMode))
+	}
+	if v.TopicReassignmentOperationArn != nil {
+		s.WriteString(schemas.BrokerTypeUpgradeInfo_TopicReassignmentOperationArn, *v.TopicReassignmentOperationArn)
+	}
+}
+func (v *BrokerTypeUpgradeInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BrokerTypeUpgradeInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BrokerTypeUpgradeInfo_TopicReassignmentMode:
+			var ev string
+			if err := d.ReadString(schemas.BrokerTypeUpgradeInfo_TopicReassignmentMode, &ev); err != nil {
+				return err
+			}
+			v.TopicReassignmentMode = TopicReassignmentMode(ev)
+			return nil
+		case schemas.BrokerTypeUpgradeInfo_TopicReassignmentOperationArn:
+			v.TopicReassignmentOperationArn = new(string)
+			return d.ReadString(schemas.BrokerTypeUpgradeInfo_TopicReassignmentOperationArn, v.TopicReassignmentOperationArn)
 		}
 		return nil
 	})
@@ -1312,6 +1658,10 @@ func (v *ClusterInfo) Deserialize(d smithy.ShapeDeserializer) error {
 // Returns information about a cluster operation.
 type ClusterOperationInfo struct {
 
+	// Topic reassignment details of the UpdateBrokerType operation that started an
+	// upgrade from Standard brokers to Express brokers.
+	BrokerTypeUpgradeInfo *BrokerTypeUpgradeInfo
+
 	// The ID of the API request that triggered this operation.
 	ClientRequestId *string
 
@@ -1359,6 +1709,11 @@ func (v *ClusterOperationInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ClusterOperationInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerTypeUpgradeInfo != nil {
+		s.WriteStruct(schemas.ClusterOperationInfo_BrokerTypeUpgradeInfo)
+		v.BrokerTypeUpgradeInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ClientRequestId != nil {
 		s.WriteString(schemas.ClusterOperationInfo_ClientRequestId, *v.ClientRequestId)
 	}
@@ -1407,6 +1762,9 @@ func (v *ClusterOperationInfo) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ClusterOperationInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterOperationInfo, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ClusterOperationInfo_BrokerTypeUpgradeInfo:
+			v.BrokerTypeUpgradeInfo = &BrokerTypeUpgradeInfo{}
+			return v.BrokerTypeUpgradeInfo.Deserialize(d)
 		case schemas.ClusterOperationInfo_ClientRequestId:
 			v.ClientRequestId = new(string)
 			return d.ReadString(schemas.ClusterOperationInfo_ClientRequestId, v.ClientRequestId)
@@ -1645,6 +2003,10 @@ func (v *ClusterOperationV2) Deserialize(d smithy.ShapeDeserializer) error {
 // Returns information about a provisioned cluster operation.
 type ClusterOperationV2Provisioned struct {
 
+	// Topic reassignment details of the UpdateBrokerType operation that started an
+	// upgrade from Standard brokers to Express brokers.
+	BrokerTypeUpgradeInfo *BrokerTypeUpgradeInfo
+
 	// Steps completed during the operation.
 	OperationSteps []ClusterOperationStep
 
@@ -1668,6 +2030,11 @@ func (v *ClusterOperationV2Provisioned) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ClusterOperationV2Provisioned) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrokerTypeUpgradeInfo != nil {
+		s.WriteStruct(schemas.ClusterOperationV2Provisioned_BrokerTypeUpgradeInfo)
+		v.BrokerTypeUpgradeInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.OperationSteps != nil {
 		serialize__listOfClusterOperationStep(s, schemas.ClusterOperationV2Provisioned_OperationSteps, v.OperationSteps)
 	}
@@ -1690,6 +2057,9 @@ func (v *ClusterOperationV2Provisioned) SerializeMembers(s smithy.ShapeSerialize
 func (v *ClusterOperationV2Provisioned) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterOperationV2Provisioned, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ClusterOperationV2Provisioned_BrokerTypeUpgradeInfo:
+			v.BrokerTypeUpgradeInfo = &BrokerTypeUpgradeInfo{}
+			return v.BrokerTypeUpgradeInfo.Deserialize(d)
 		case schemas.ClusterOperationV2Provisioned_OperationSteps:
 			return deserialize__listOfClusterOperationStep(d, schemas.ClusterOperationV2Provisioned_OperationSteps, &v.OperationSteps)
 		case schemas.ClusterOperationV2Provisioned_SourceClusterInfo:
@@ -2683,6 +3053,47 @@ func (v *ErrorInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ErrorInfo_ErrorString:
 			v.ErrorString = new(string)
 			return d.ReadString(schemas.ErrorInfo_ErrorString, v.ErrorString)
+		}
+		return nil
+	})
+}
+
+// Guidance for resolving a finding.
+type FindingRemediation struct {
+
+	// The recommended action to resolve this finding.
+	Action *string
+
+	// A link to documentation with more detail about this finding and how to resolve
+	// it.
+	DocumentationUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FindingRemediation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FindingRemediation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FindingRemediation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.FindingRemediation_Action, *v.Action)
+	}
+	if v.DocumentationUrl != nil {
+		s.WriteString(schemas.FindingRemediation_DocumentationUrl, *v.DocumentationUrl)
+	}
+}
+func (v *FindingRemediation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FindingRemediation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FindingRemediation_Action:
+			v.Action = new(string)
+			return d.ReadString(schemas.FindingRemediation_Action, v.Action)
+		case schemas.FindingRemediation_DocumentationUrl:
+			v.DocumentationUrl = new(string)
+			return d.ReadString(schemas.FindingRemediation_DocumentationUrl, v.DocumentationUrl)
 		}
 		return nil
 	})
@@ -6285,6 +6696,9 @@ type TopicInfo struct {
 	// Partition count for a topic.
 	PartitionCount *int32
 
+	// The broker IDs hosting replicas of this topic's partitions.
+	ReplicaIds []int32
+
 	// Replication factor for a topic.
 	ReplicationFactor *int32
 
@@ -6310,6 +6724,9 @@ func (v *TopicInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PartitionCount != nil {
 		s.WriteInt32(schemas.TopicInfo_PartitionCount, *v.PartitionCount)
 	}
+	if v.ReplicaIds != nil {
+		serialize__listOf__integer(s, schemas.TopicInfo_ReplicaIds, v.ReplicaIds)
+	}
 	if v.ReplicationFactor != nil {
 		s.WriteInt32(schemas.TopicInfo_ReplicationFactor, *v.ReplicationFactor)
 	}
@@ -6329,6 +6746,8 @@ func (v *TopicInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.TopicInfo_PartitionCount:
 			v.PartitionCount = new(int32)
 			return d.ReadInt32(schemas.TopicInfo_PartitionCount, v.PartitionCount)
+		case schemas.TopicInfo_ReplicaIds:
+			return deserialize__listOf__integer(d, schemas.TopicInfo_ReplicaIds, &v.ReplicaIds)
 		case schemas.TopicInfo_ReplicationFactor:
 			v.ReplicationFactor = new(int32)
 			return d.ReadInt32(schemas.TopicInfo_ReplicationFactor, v.ReplicationFactor)
@@ -6394,6 +6813,86 @@ func (v *TopicPartitionInfo) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadInt32(schemas.TopicPartitionInfo_Partition, v.Partition)
 		case schemas.TopicPartitionInfo_Replicas:
 			return deserialize__listOf__integer(d, schemas.TopicPartitionInfo_Replicas, &v.Replicas)
+		}
+		return nil
+	})
+}
+
+// Summary information about a topic reassignment operation.
+type TopicReassignmentInfo struct {
+
+	// Number of topics fully migrated.
+	CompletedTopics *int32
+
+	// When the operation was created.
+	CreationTime *time.Time
+
+	// The current status of the reassignment operation.
+	Status TopicReassignmentStatus
+
+	// The target broker instance type for this reassignment.
+	TargetInstanceType *string
+
+	// The Amazon Resource Name (ARN) of the topic reassignment operation.
+	TopicReassignmentOperationArn *string
+
+	// Total number of topics matching the selector.
+	TotalTopics *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *TopicReassignmentInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TopicReassignmentInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TopicReassignmentInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedTopics != nil {
+		s.WriteInt32(schemas.TopicReassignmentInfo_CompletedTopics, *v.CompletedTopics)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.TopicReassignmentInfo_CreationTime, *v.CreationTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TopicReassignmentInfo_Status, string(v.Status))
+	}
+	if v.TargetInstanceType != nil {
+		s.WriteString(schemas.TopicReassignmentInfo_TargetInstanceType, *v.TargetInstanceType)
+	}
+	if v.TopicReassignmentOperationArn != nil {
+		s.WriteString(schemas.TopicReassignmentInfo_TopicReassignmentOperationArn, *v.TopicReassignmentOperationArn)
+	}
+	if v.TotalTopics != nil {
+		s.WriteInt32(schemas.TopicReassignmentInfo_TotalTopics, *v.TotalTopics)
+	}
+}
+func (v *TopicReassignmentInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TopicReassignmentInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TopicReassignmentInfo_CompletedTopics:
+			v.CompletedTopics = new(int32)
+			return d.ReadInt32(schemas.TopicReassignmentInfo_CompletedTopics, v.CompletedTopics)
+		case schemas.TopicReassignmentInfo_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.TopicReassignmentInfo_CreationTime, v.CreationTime)
+		case schemas.TopicReassignmentInfo_Status:
+			var ev string
+			if err := d.ReadString(schemas.TopicReassignmentInfo_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = TopicReassignmentStatus(ev)
+			return nil
+		case schemas.TopicReassignmentInfo_TargetInstanceType:
+			v.TargetInstanceType = new(string)
+			return d.ReadString(schemas.TopicReassignmentInfo_TargetInstanceType, v.TargetInstanceType)
+		case schemas.TopicReassignmentInfo_TopicReassignmentOperationArn:
+			v.TopicReassignmentOperationArn = new(string)
+			return d.ReadString(schemas.TopicReassignmentInfo_TopicReassignmentOperationArn, v.TopicReassignmentOperationArn)
+		case schemas.TopicReassignmentInfo_TotalTopics:
+			v.TotalTopics = new(int32)
+			return d.ReadInt32(schemas.TopicReassignmentInfo_TotalTopics, v.TotalTopics)
 		}
 		return nil
 	})

@@ -3842,7 +3842,7 @@ var _Stacks_member *smithy.Schema
 var StackSet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "StackSet",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var StackSet_StackSetName *smithy.Schema
 
 var StackSet_StackSetId *smithy.Schema
@@ -3876,6 +3876,8 @@ var StackSet_OrganizationalUnitIds *smithy.Schema
 var StackSet_ManagedExecution *smithy.Schema
 
 var StackSet_Regions *smithy.Schema
+
+var StackSet_StackSetOutputBucketPath *smithy.Schema
 
 var _StackSetARN = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -4142,6 +4144,16 @@ var _StackSetOperationTotalStackInstancesCount = smithy.NewSchema(smithy.ShapeID
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "StackSetOperationTotalStackInstancesCount",
 }, smithy.ShapeTypeInteger, 0)
+
+var _StackSetOutputBucket = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "StackSetOutputBucket",
+}, smithy.ShapeTypeString, 0)
+
+var _StackSetOutputBucketPath = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "StackSetOutputBucketPath",
+}, smithy.ShapeTypeString, 0)
 
 var StackSetStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -4751,6 +4763,11 @@ var _Url = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Url",
 }, smithy.ShapeTypeString, 0)
 
+var _UseAdminExecutionRoleNullable = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudformation",
+	Name:      "UseAdminExecutionRoleNullable",
+}, smithy.ShapeTypeBoolean, 0)
+
 var _UsePreviousTemplate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "UsePreviousTemplate",
@@ -5116,7 +5133,7 @@ var CreateStackRefactorOutput_StackRefactorId *smithy.Schema
 var CreateStackSetInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "CreateStackSetInput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 18)
 var CreateStackSetInput_StackSetName *smithy.Schema
 
 var CreateStackSetInput_Description *smithy.Schema
@@ -5146,6 +5163,12 @@ var CreateStackSetInput_CallAs *smithy.Schema
 var CreateStackSetInput_ClientRequestToken *smithy.Schema
 
 var CreateStackSetInput_ManagedExecution *smithy.Schema
+
+var CreateStackSetInput_ExecutionRoleTemplateBody *smithy.Schema
+
+var CreateStackSetInput_ExecutionRoleTemplateUrl *smithy.Schema
+
+var CreateStackSetInput_StackSetOutputBucket *smithy.Schema
 
 var CreateStackSetOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -6752,7 +6775,7 @@ var UpdateStackOutput_OperationId *smithy.Schema
 var UpdateStackSetInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
 	Name:      "UpdateStackSetInput",
-}, smithy.ShapeTypeStructure, 19)
+}, smithy.ShapeTypeStructure, 23)
 var UpdateStackSetInput_StackSetName *smithy.Schema
 
 var UpdateStackSetInput_Description *smithy.Schema
@@ -6790,6 +6813,14 @@ var UpdateStackSetInput_Regions *smithy.Schema
 var UpdateStackSetInput_CallAs *smithy.Schema
 
 var UpdateStackSetInput_ManagedExecution *smithy.Schema
+
+var UpdateStackSetInput_ExecutionRoleTemplateBody *smithy.Schema
+
+var UpdateStackSetInput_ExecutionRoleTemplateUrl *smithy.Schema
+
+var UpdateStackSetInput_UseAdminExecutionRole *smithy.Schema
+
+var UpdateStackSetInput_StackSetOutputBucket *smithy.Schema
 
 var UpdateStackSetOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudformation",
@@ -8524,6 +8555,8 @@ func init() {
 
 	StackSet_Regions = StackSet.AddMember("Regions", _RegionList)
 
+	StackSet_StackSetOutputBucketPath = StackSet.AddMember("StackSetOutputBucketPath", _StackSetOutputBucketPath)
+
 	StackSetAutoDeploymentTargetSummary_OrganizationalUnitId = StackSetAutoDeploymentTargetSummary.AddMember("OrganizationalUnitId", _OrganizationalUnitId)
 
 	StackSetAutoDeploymentTargetSummary_Regions = StackSetAutoDeploymentTargetSummary.AddMember("Regions", _RegionList)
@@ -9053,6 +9086,12 @@ func init() {
 	CreateStackSetInput_ClientRequestToken = CreateStackSetInput.AddMember("ClientRequestToken", _ClientRequestToken)
 
 	CreateStackSetInput_ManagedExecution = CreateStackSetInput.AddMember("ManagedExecution", ManagedExecution)
+
+	CreateStackSetInput_ExecutionRoleTemplateBody = CreateStackSetInput.AddMember("ExecutionRoleTemplateBody", _TemplateBody)
+
+	CreateStackSetInput_ExecutionRoleTemplateUrl = CreateStackSetInput.AddMember("ExecutionRoleTemplateUrl", _TemplateURL)
+
+	CreateStackSetInput_StackSetOutputBucket = CreateStackSetInput.AddMember("StackSetOutputBucket", _StackSetOutputBucket)
 
 	CreateStackSetOutput_StackSetId = CreateStackSetOutput.AddMember("StackSetId", _StackSetId)
 
@@ -10083,6 +10122,14 @@ func init() {
 	UpdateStackSetInput_CallAs = UpdateStackSetInput.AddMember("CallAs", CallAs)
 
 	UpdateStackSetInput_ManagedExecution = UpdateStackSetInput.AddMember("ManagedExecution", ManagedExecution)
+
+	UpdateStackSetInput_ExecutionRoleTemplateBody = UpdateStackSetInput.AddMember("ExecutionRoleTemplateBody", _TemplateBody)
+
+	UpdateStackSetInput_ExecutionRoleTemplateUrl = UpdateStackSetInput.AddMember("ExecutionRoleTemplateUrl", _TemplateURL)
+
+	UpdateStackSetInput_UseAdminExecutionRole = UpdateStackSetInput.AddMember("UseAdminExecutionRole", _UseAdminExecutionRoleNullable)
+
+	UpdateStackSetInput_StackSetOutputBucket = UpdateStackSetInput.AddMember("StackSetOutputBucket", _StackSetOutputBucket)
 
 	UpdateStackSetOutput_OperationId = UpdateStackSetOutput.AddMember("OperationId", _ClientRequestToken)
 

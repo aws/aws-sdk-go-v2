@@ -1,0 +1,5 @@
+PATCH /associations/__RecordArn__
+
+Content-Type: application/json
+
+{"approvalStatus":"APPROVED","approvalStatusReason":"__ApprovalStatusReason__"}

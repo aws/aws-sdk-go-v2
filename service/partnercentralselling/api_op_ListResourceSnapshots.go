@@ -38,6 +38,7 @@ func (c *Client) ListResourceSnapshots(ctx context.Context, params *ListResource
 	return out, nil
 }
 
+// Contains the request parameters for the ListResourceSnapshots operation.
 type ListResourceSnapshotsInput struct {
 
 	//  Specifies the catalog related to the request.
@@ -106,6 +107,7 @@ func (v *ListResourceSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 }
 
+// Contains the response that the ListResourceSnapshots action returns.
 type ListResourceSnapshotsOutput struct {
 
 	//  An array of resource snapshot summary objects.

@@ -107,6 +107,11 @@ type UpdateDataSetInput struct {
 	// preparation experience.
 	SemanticModelConfiguration *types.SemanticModelConfiguration
 
+	// A list of unmaterialized calculated columns for the dataset. These columns are
+	// computed at analysis time and are not stored in the prepared data. You can only
+	// use this with the new data preparation experience.
+	UnmaterializedCalculatedColumns []types.UnmaterializedCalculatedColumn
+
 	noSmithyDocumentSerde
 }
 
@@ -176,6 +181,9 @@ func (v *UpdateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteStruct(schemas.UpdateDataSetRequest_SemanticModelConfiguration)
 		v.SemanticModelConfiguration.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	if v.UnmaterializedCalculatedColumns != nil {
+		serializeUnmaterializedCalculatedColumnList(s, schemas.UpdateDataSetRequest_UnmaterializedCalculatedColumns, v.UnmaterializedCalculatedColumns)
 	}
 }
 

@@ -653,6 +653,8 @@ func TestUpdateResponseSnapshot_DescribeCertificate(t *testing.T) {
 			CertificateKeyPairOrigin: types.CertificateKeyPairOrigin("AWS_MANAGED"),
 			AcmeEndpointArn:          ptr.String("__AcmeEndpointArn__"),
 			AcmeAccountId:            ptr.String("__AcmeAccountId__"),
+			CertificateUsage:         types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+			RootHierarchyType:        types.RootHierarchyType("N2_AMAZON_MANAGED"),
 		},
 	}
 	proto := awsjson.New11(schemas.CertificateManager)
@@ -1178,6 +1180,8 @@ func TestUpdateResponseSnapshot_ListCertificates(t *testing.T) {
 				RevokedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ManagedBy:                types.CertificateManagedBy("CLOUDFRONT"),
 				CertificateKeyPairOrigin: types.CertificateKeyPairOrigin("AWS_MANAGED"),
+				CertificateUsage:         types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+				RootHierarchyType:        types.RootHierarchyType("N2_AMAZON_MANAGED"),
 			},
 			{
 				CertificateArn: ptr.String("__CertificateArn__"),
@@ -1210,6 +1214,8 @@ func TestUpdateResponseSnapshot_ListCertificates(t *testing.T) {
 				RevokedAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ManagedBy:                types.CertificateManagedBy("CLOUDFRONT"),
 				CertificateKeyPairOrigin: types.CertificateKeyPairOrigin("AWS_MANAGED"),
+				CertificateUsage:         types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+				RootHierarchyType:        types.RootHierarchyType("N2_AMAZON_MANAGED"),
 			},
 		},
 	}
@@ -1642,6 +1648,8 @@ func TestUpdateResponseSnapshot_SearchCertificates(t *testing.T) {
 						CertificateKeyPairOrigin: types.CertificateKeyPairOrigin("AWS_MANAGED"),
 						AcmeEndpointArn:          ptr.String("__AcmeEndpointArn__"),
 						AcmeAccountId:            ptr.String("__AcmeAccountId__"),
+						CertificateUsage:         types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+						RootHierarchyType:        types.RootHierarchyType("N2_AMAZON_MANAGED"),
 					},
 				},
 			},
@@ -1805,6 +1813,8 @@ func TestUpdateResponseSnapshot_SearchCertificates(t *testing.T) {
 						CertificateKeyPairOrigin: types.CertificateKeyPairOrigin("AWS_MANAGED"),
 						AcmeEndpointArn:          ptr.String("__AcmeEndpointArn__"),
 						AcmeAccountId:            ptr.String("__AcmeAccountId__"),
+						CertificateUsage:         types.CertificateUsage("CLIENT_AND_SERVER_AUTH"),
+						RootHierarchyType:        types.RootHierarchyType("N2_AMAZON_MANAGED"),
 					},
 				},
 			},

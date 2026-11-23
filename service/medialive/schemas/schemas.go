@@ -1191,6 +1191,11 @@ var ___integerMin1Max6 = smithy.NewSchema(smithy.ShapeID{
 	Name:      "__integerMin1Max6",
 }, smithy.ShapeTypeInteger, 0)
 
+var ___integerMin1Max63 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "__integerMin1Max63",
+}, smithy.ShapeTypeInteger, 0)
+
 var ___integerMin1Max65535 = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "__integerMin1Max65535",
@@ -3291,7 +3296,7 @@ var CaptionSelector_SelectorSettings *smithy.Schema
 var CaptionSelectorSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "CaptionSelectorSettings",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var CaptionSelectorSettings_AncillarySourceSettings *smithy.Schema
 
 var CaptionSelectorSettings_AribSourceSettings *smithy.Schema
@@ -3307,6 +3312,8 @@ var CaptionSelectorSettings_Scte27SourceSettings *smithy.Schema
 var CaptionSelectorSettings_TeletextSourceSettings *smithy.Schema
 
 var CaptionSelectorSettings_SmartSubtitleSourceSettings *smithy.Schema
+
+var CaptionSelectorSettings_WebvttSourceSettings *smithy.Schema
 
 var CaptionSynchronizationMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -3337,7 +3344,7 @@ var CdiInputSpecification_Resolution *smithy.Schema
 var Channel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "Channel",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var Channel_Arn *smithy.Schema
 
 var Channel_CdiInputSpecification *smithy.Schema
@@ -3383,6 +3390,8 @@ var Channel_LinkedChannelSettings *smithy.Schema
 var Channel_ChannelSecurityGroups *smithy.Schema
 
 var Channel_InferenceSettings *smithy.Schema
+
+var Channel_JpegXsInputSpecification *smithy.Schema
 
 var ChannelAlert = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -3493,7 +3502,7 @@ var ChannelState_UPDATE_FAILED *smithy.Schema
 var ChannelSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "ChannelSummary",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var ChannelSummary_Arn *smithy.Schema
 
 var ChannelSummary_CdiInputSpecification *smithy.Schema
@@ -3537,6 +3546,8 @@ var ChannelSummary_LinkedChannelSettings *smithy.Schema
 var ChannelSummary_ChannelSecurityGroups *smithy.Schema
 
 var ChannelSummary_InferenceSettings *smithy.Schema
+
+var ChannelSummary_JpegXsInputSpecification *smithy.Schema
 
 var CloudWatchAlarmTemplateComparisonOperator = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -4644,10 +4655,14 @@ var EmbeddedConvert608To708_UPCONVERT *smithy.Schema
 var EmbeddedDestinationSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "EmbeddedDestinationSettings",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var EmbeddedDestinationSettings_Position *smithy.Schema
 
 var EmbeddedDestinationSettings_StyleControl *smithy.Schema
+
+var EmbeddedDestinationSettings_CaptionServiceChannel *smithy.Schema
+
+var EmbeddedDestinationSettings_EmbeddedMode *smithy.Schema
 
 var EmbeddedDestinationStyleControl = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -4656,6 +4671,16 @@ var EmbeddedDestinationStyleControl = smithy.NewSchema(smithy.ShapeID{
 var EmbeddedDestinationStyleControl_MANUAL *smithy.Schema
 
 var EmbeddedDestinationStyleControl_PASSTHROUGH *smithy.Schema
+
+var EmbeddedModeType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "EmbeddedModeType",
+}, smithy.ShapeTypeEnum, 3)
+var EmbeddedModeType_EMBEDDED_608_AND_708 *smithy.Schema
+
+var EmbeddedModeType_EMBEDDED_608_ONLY *smithy.Schema
+
+var EmbeddedModeType_EMBEDDED_708_ONLY *smithy.Schema
 
 var EmbeddedPlusScte20DestinationSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -6363,12 +6388,14 @@ var InputClippingSettings_StopTimecode *smithy.Schema
 var InputCodec = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "InputCodec",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var InputCodec_MPEG2 *smithy.Schema
 
 var InputCodec_AVC *smithy.Schema
 
 var InputCodec_HEVC *smithy.Schema
+
+var InputCodec_JPEGXS *smithy.Schema
 
 var InputDeblockFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -7119,6 +7146,28 @@ var IpPoolUpdateRequest = smithy.NewSchema(smithy.ShapeID{
 	Name:      "IpPoolUpdateRequest",
 }, smithy.ShapeTypeStructure, 1)
 var IpPoolUpdateRequest_Cidr *smithy.Schema
+
+var JpegXsInputMaximumBitrate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "JpegXsInputMaximumBitrate",
+}, smithy.ShapeTypeEnum, 1)
+var JpegXsInputMaximumBitrate_MAX_500_MBPS *smithy.Schema
+
+var JpegXsInputResolution = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "JpegXsInputResolution",
+}, smithy.ShapeTypeEnum, 1)
+var JpegXsInputResolution_HD *smithy.Schema
+
+var JpegXsInputSpecification = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "JpegXsInputSpecification",
+}, smithy.ShapeTypeStructure, 3)
+var JpegXsInputSpecification_Codec *smithy.Schema
+
+var JpegXsInputSpecification_MaximumBitrate *smithy.Schema
+
+var JpegXsInputSpecification_Resolution *smithy.Schema
 
 var KeyProviderSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -8948,7 +8997,7 @@ var ReservationAutomaticRenewal_UNAVAILABLE *smithy.Schema
 var ReservationCodec = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "ReservationCodec",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 7)
 var ReservationCodec_MPEG2 *smithy.Schema
 
 var ReservationCodec_AVC *smithy.Schema
@@ -8961,15 +9010,19 @@ var ReservationCodec_LINK *smithy.Schema
 
 var ReservationCodec_AV1 *smithy.Schema
 
+var ReservationCodec_JPEGXS *smithy.Schema
+
 var ReservationMaximumBitrate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "ReservationMaximumBitrate",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var ReservationMaximumBitrate_MAX_10_MBPS *smithy.Schema
 
 var ReservationMaximumBitrate_MAX_20_MBPS *smithy.Schema
 
 var ReservationMaximumBitrate_MAX_50_MBPS *smithy.Schema
+
+var ReservationMaximumBitrate_MAX_500_MBPS *smithy.Schema
 
 var ReservationMaximumFramerate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -10538,6 +10591,14 @@ var WebvttDestinationStyleControl_PASSTHROUGH *smithy.Schema
 
 var WebvttDestinationStyleControl_MANUAL *smithy.Schema
 
+var WebvttSourceSettings = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.medialive",
+	Name:      "WebvttSourceSettings",
+}, smithy.ShapeTypeStructure, 2)
+var WebvttSourceSettings_GroupId *smithy.Schema
+
+var WebvttSourceSettings_Name *smithy.Schema
+
 var AcceptInputDeviceTransferRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "AcceptInputDeviceTransferRequest",
@@ -10644,7 +10705,7 @@ var ClaimDeviceResponse = smithy.NewSchema(smithy.ShapeID{
 var CreateChannelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "CreateChannelRequest",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var CreateChannelRequest_CdiInputSpecification *smithy.Schema
 
 var CreateChannelRequest_ChannelClass *smithy.Schema
@@ -10684,6 +10745,8 @@ var CreateChannelRequest_LinkedChannelSettings *smithy.Schema
 var CreateChannelRequest_ChannelSecurityGroups *smithy.Schema
 
 var CreateChannelRequest_InferenceSettings *smithy.Schema
+
+var CreateChannelRequest_JpegXsInputSpecification *smithy.Schema
 
 var CreateChannelResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -11234,7 +11297,7 @@ var DeleteChannelRequest_ChannelId *smithy.Schema
 var DeleteChannelResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "DeleteChannelResponse",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var DeleteChannelResponse_Arn *smithy.Schema
 
 var DeleteChannelResponse_CdiInputSpecification *smithy.Schema
@@ -11280,6 +11343,8 @@ var DeleteChannelResponse_LinkedChannelSettings *smithy.Schema
 var DeleteChannelResponse_ChannelSecurityGroups *smithy.Schema
 
 var DeleteChannelResponse_InferenceSettings *smithy.Schema
+
+var DeleteChannelResponse_JpegXsInputSpecification *smithy.Schema
 
 var DeleteChannelPlacementGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -11594,7 +11659,7 @@ var DescribeChannelRequest_ChannelId *smithy.Schema
 var DescribeChannelResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "DescribeChannelResponse",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var DescribeChannelResponse_Arn *smithy.Schema
 
 var DescribeChannelResponse_CdiInputSpecification *smithy.Schema
@@ -11640,6 +11705,8 @@ var DescribeChannelResponse_LinkedChannelSettings *smithy.Schema
 var DescribeChannelResponse_ChannelSecurityGroups *smithy.Schema
 
 var DescribeChannelResponse_InferenceSettings *smithy.Schema
+
+var DescribeChannelResponse_JpegXsInputSpecification *smithy.Schema
 
 var DescribeChannelPlacementGroupRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -12749,7 +12816,7 @@ var RestartChannelPipelinesRequest_PipelineIds *smithy.Schema
 var RestartChannelPipelinesResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "RestartChannelPipelinesResponse",
-}, smithy.ShapeTypeStructure, 24)
+}, smithy.ShapeTypeStructure, 25)
 var RestartChannelPipelinesResponse_Arn *smithy.Schema
 
 var RestartChannelPipelinesResponse_CdiInputSpecification *smithy.Schema
@@ -12798,6 +12865,8 @@ var RestartChannelPipelinesResponse_ChannelSecurityGroups *smithy.Schema
 
 var RestartChannelPipelinesResponse_InferenceSettings *smithy.Schema
 
+var RestartChannelPipelinesResponse_JpegXsInputSpecification *smithy.Schema
+
 var StartChannelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "StartChannelRequest",
@@ -12807,7 +12876,7 @@ var StartChannelRequest_ChannelId *smithy.Schema
 var StartChannelResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "StartChannelResponse",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var StartChannelResponse_Arn *smithy.Schema
 
 var StartChannelResponse_CdiInputSpecification *smithy.Schema
@@ -12853,6 +12922,8 @@ var StartChannelResponse_LinkedChannelSettings *smithy.Schema
 var StartChannelResponse_ChannelSecurityGroups *smithy.Schema
 
 var StartChannelResponse_InferenceSettings *smithy.Schema
+
+var StartChannelResponse_JpegXsInputSpecification *smithy.Schema
 
 var StartDeleteMonitorDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -13067,7 +13138,7 @@ var StopChannelRequest_ChannelId *smithy.Schema
 var StopChannelResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "StopChannelResponse",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var StopChannelResponse_Arn *smithy.Schema
 
 var StopChannelResponse_CdiInputSpecification *smithy.Schema
@@ -13113,6 +13184,8 @@ var StopChannelResponse_LinkedChannelSettings *smithy.Schema
 var StopChannelResponse_ChannelSecurityGroups *smithy.Schema
 
 var StopChannelResponse_InferenceSettings *smithy.Schema
+
+var StopChannelResponse_JpegXsInputSpecification *smithy.Schema
 
 var StopInputDeviceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -13203,7 +13276,7 @@ var UpdateChannelClassResponse_Channel *smithy.Schema
 var UpdateChannelRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "UpdateChannelRequest",
-}, smithy.ShapeTypeStructure, 17)
+}, smithy.ShapeTypeStructure, 18)
 var UpdateChannelRequest_CdiInputSpecification *smithy.Schema
 
 var UpdateChannelRequest_ChannelId *smithy.Schema
@@ -13237,6 +13310,8 @@ var UpdateChannelRequest_ChannelSecurityGroups *smithy.Schema
 var UpdateChannelRequest_InferenceSettings *smithy.Schema
 
 var UpdateChannelRequest_SpecialRouterSettings *smithy.Schema
+
+var UpdateChannelRequest_JpegXsInputSpecification *smithy.Schema
 
 var UpdateChannelResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -14567,9 +14642,19 @@ func init() {
 
 	EmbeddedDestinationStyleControl_PASSTHROUGH = EmbeddedDestinationStyleControl.AddMember("PASSTHROUGH", smithyprelude.Unit)
 
+	EmbeddedModeType_EMBEDDED_608_AND_708 = EmbeddedModeType.AddMember("EMBEDDED_608_AND_708", smithyprelude.Unit)
+
+	EmbeddedModeType_EMBEDDED_608_ONLY = EmbeddedModeType.AddMember("EMBEDDED_608_ONLY", smithyprelude.Unit)
+
+	EmbeddedModeType_EMBEDDED_708_ONLY = EmbeddedModeType.AddMember("EMBEDDED_708_ONLY", smithyprelude.Unit)
+
 	EmbeddedDestinationSettings_Position = EmbeddedDestinationSettings.AddMember("Position", EmbeddedCaptionPositionSettings, &smithytraits.JSONName{Name: "position"})
 
 	EmbeddedDestinationSettings_StyleControl = EmbeddedDestinationSettings.AddMember("StyleControl", EmbeddedDestinationStyleControl, &smithytraits.JSONName{Name: "styleControl"})
+
+	EmbeddedDestinationSettings_CaptionServiceChannel = EmbeddedDestinationSettings.AddMember("CaptionServiceChannel", ___integerMin1Max63, &smithytraits.JSONName{Name: "captionServiceChannel"})
+
+	EmbeddedDestinationSettings_EmbeddedMode = EmbeddedDestinationSettings.AddMember("EmbeddedMode", EmbeddedModeType, &smithytraits.JSONName{Name: "embeddedMode"})
 
 	TtmlDestinationStyleControl_PASSTHROUGH = TtmlDestinationStyleControl.AddMember("PASSTHROUGH", smithyprelude.Unit)
 
@@ -14751,6 +14836,10 @@ func init() {
 
 	SmartSubtitleSourceSettings_InferenceFeedOutput = SmartSubtitleSourceSettings.AddMember("InferenceFeedOutput", ___string, &smithytraits.JSONName{Name: "inferenceFeedOutput"})
 
+	WebvttSourceSettings_GroupId = WebvttSourceSettings.AddMember("GroupId", ___stringMin1, &smithytraits.JSONName{Name: "groupId"})
+
+	WebvttSourceSettings_Name = WebvttSourceSettings.AddMember("Name", ___stringMin1, &smithytraits.JSONName{Name: "name"})
+
 	CaptionSelectorSettings_AncillarySourceSettings = CaptionSelectorSettings.AddMember("AncillarySourceSettings", AncillarySourceSettings, &smithytraits.JSONName{Name: "ancillarySourceSettings"})
 
 	CaptionSelectorSettings_AribSourceSettings = CaptionSelectorSettings.AddMember("AribSourceSettings", AribSourceSettings, &smithytraits.JSONName{Name: "aribSourceSettings"})
@@ -14766,6 +14855,8 @@ func init() {
 	CaptionSelectorSettings_TeletextSourceSettings = CaptionSelectorSettings.AddMember("TeletextSourceSettings", TeletextSourceSettings, &smithytraits.JSONName{Name: "teletextSourceSettings"})
 
 	CaptionSelectorSettings_SmartSubtitleSourceSettings = CaptionSelectorSettings.AddMember("SmartSubtitleSourceSettings", SmartSubtitleSourceSettings, &smithytraits.JSONName{Name: "smartSubtitleSourceSettings"})
+
+	CaptionSelectorSettings_WebvttSourceSettings = CaptionSelectorSettings.AddMember("WebvttSourceSettings", WebvttSourceSettings, &smithytraits.JSONName{Name: "webvttSourceSettings"})
 
 	CaptionSelector_LanguageCode = CaptionSelector.AddMember("LanguageCode", ___string, &smithytraits.JSONName{Name: "languageCode"})
 
@@ -15051,6 +15142,8 @@ func init() {
 
 	InputCodec_HEVC = InputCodec.AddMember("HEVC", smithyprelude.Unit)
 
+	InputCodec_JPEGXS = InputCodec.AddMember("JPEGXS", smithyprelude.Unit)
+
 	InputMaximumBitrate_MAX_10_MBPS = InputMaximumBitrate.AddMember("MAX_10_MBPS", smithyprelude.Unit)
 
 	InputMaximumBitrate_MAX_20_MBPS = InputMaximumBitrate.AddMember("MAX_20_MBPS", smithyprelude.Unit)
@@ -15165,6 +15258,16 @@ func init() {
 
 	DescribeInferenceSettings_EnrichmentMethods = DescribeInferenceSettings.AddMember("EnrichmentMethods", ___listOfEnrichmentMethod, &smithytraits.JSONName{Name: "enrichmentMethods"})
 
+	JpegXsInputMaximumBitrate_MAX_500_MBPS = JpegXsInputMaximumBitrate.AddMember("MAX_500_MBPS", smithyprelude.Unit)
+
+	JpegXsInputResolution_HD = JpegXsInputResolution.AddMember("HD", smithyprelude.Unit)
+
+	JpegXsInputSpecification_Codec = JpegXsInputSpecification.AddMember("Codec", InputCodec, &smithytraits.JSONName{Name: "codec"})
+
+	JpegXsInputSpecification_MaximumBitrate = JpegXsInputSpecification.AddMember("MaximumBitrate", JpegXsInputMaximumBitrate, &smithytraits.JSONName{Name: "maximumBitrate"})
+
+	JpegXsInputSpecification_Resolution = JpegXsInputSpecification.AddMember("Resolution", JpegXsInputResolution, &smithytraits.JSONName{Name: "resolution"})
+
 	ChannelSummary_Arn = ChannelSummary.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
 
 	ChannelSummary_CdiInputSpecification = ChannelSummary.AddMember("CdiInputSpecification", CdiInputSpecification, &smithytraits.JSONName{Name: "cdiInputSpecification"})
@@ -15208,6 +15311,8 @@ func init() {
 	ChannelSummary_ChannelSecurityGroups = ChannelSummary.AddMember("ChannelSecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "channelSecurityGroups"})
 
 	ChannelSummary_InferenceSettings = ChannelSummary.AddMember("InferenceSettings", DescribeInferenceSettings, &smithytraits.JSONName{Name: "inferenceSettings"})
+
+	ChannelSummary_JpegXsInputSpecification = ChannelSummary.AddMember("JpegXsInputSpecification", JpegXsInputSpecification, &smithytraits.JSONName{Name: "jpegXsInputSpecification"})
 
 	___listOfChannelSummary_member = ___listOfChannelSummary.AddMember("member", ChannelSummary)
 
@@ -16263,11 +16368,15 @@ func init() {
 
 	ReservationCodec_AV1 = ReservationCodec.AddMember("AV1", smithyprelude.Unit)
 
+	ReservationCodec_JPEGXS = ReservationCodec.AddMember("JPEGXS", smithyprelude.Unit)
+
 	ReservationMaximumBitrate_MAX_10_MBPS = ReservationMaximumBitrate.AddMember("MAX_10_MBPS", smithyprelude.Unit)
 
 	ReservationMaximumBitrate_MAX_20_MBPS = ReservationMaximumBitrate.AddMember("MAX_20_MBPS", smithyprelude.Unit)
 
 	ReservationMaximumBitrate_MAX_50_MBPS = ReservationMaximumBitrate.AddMember("MAX_50_MBPS", smithyprelude.Unit)
+
+	ReservationMaximumBitrate_MAX_500_MBPS = ReservationMaximumBitrate.AddMember("MAX_500_MBPS", smithyprelude.Unit)
 
 	ReservationMaximumFramerate_MAX_30_FPS = ReservationMaximumFramerate.AddMember("MAX_30_FPS", smithyprelude.Unit)
 
@@ -19109,6 +19218,8 @@ func init() {
 
 	Channel_InferenceSettings = Channel.AddMember("InferenceSettings", DescribeInferenceSettings, &smithytraits.JSONName{Name: "inferenceSettings"})
 
+	Channel_JpegXsInputSpecification = Channel.AddMember("JpegXsInputSpecification", JpegXsInputSpecification, &smithytraits.JSONName{Name: "jpegXsInputSpecification"})
+
 	ChannelEngineVersionRequest_Version = ChannelEngineVersionRequest.AddMember("Version", ___string, &smithytraits.JSONName{Name: "version"})
 
 	ClusterNetworkSettingsCreateRequest_DefaultRoute = ClusterNetworkSettingsCreateRequest.AddMember("DefaultRoute", ___string, &smithytraits.JSONName{Name: "defaultRoute"})
@@ -19462,6 +19573,8 @@ func init() {
 	CreateChannelRequest_ChannelSecurityGroups = CreateChannelRequest.AddMember("ChannelSecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "channelSecurityGroups"})
 
 	CreateChannelRequest_InferenceSettings = CreateChannelRequest.AddMember("InferenceSettings", InferenceSettings, &smithytraits.JSONName{Name: "inferenceSettings"})
+
+	CreateChannelRequest_JpegXsInputSpecification = CreateChannelRequest.AddMember("JpegXsInputSpecification", JpegXsInputSpecification, &smithytraits.JSONName{Name: "jpegXsInputSpecification"})
 
 	CreateChannelResponse_Channel = CreateChannelResponse.AddMember("Channel", Channel, &smithytraits.JSONName{Name: "channel"})
 
@@ -19915,6 +20028,8 @@ func init() {
 
 	DeleteChannelResponse_InferenceSettings = DeleteChannelResponse.AddMember("InferenceSettings", DescribeInferenceSettings, &smithytraits.JSONName{Name: "inferenceSettings"})
 
+	DeleteChannelResponse_JpegXsInputSpecification = DeleteChannelResponse.AddMember("JpegXsInputSpecification", JpegXsInputSpecification, &smithytraits.JSONName{Name: "jpegXsInputSpecification"})
+
 	DeleteChannelPlacementGroupRequest_ChannelPlacementGroupId = DeleteChannelPlacementGroupRequest.AddMember("ChannelPlacementGroupId", ___string, &smithytraits.HTTPLabel{})
 
 	DeleteChannelPlacementGroupRequest_ClusterId = DeleteChannelPlacementGroupRequest.AddMember("ClusterId", ___string, &smithytraits.HTTPLabel{})
@@ -20142,6 +20257,8 @@ func init() {
 	DescribeChannelResponse_ChannelSecurityGroups = DescribeChannelResponse.AddMember("ChannelSecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "channelSecurityGroups"})
 
 	DescribeChannelResponse_InferenceSettings = DescribeChannelResponse.AddMember("InferenceSettings", DescribeInferenceSettings, &smithytraits.JSONName{Name: "inferenceSettings"})
+
+	DescribeChannelResponse_JpegXsInputSpecification = DescribeChannelResponse.AddMember("JpegXsInputSpecification", JpegXsInputSpecification, &smithytraits.JSONName{Name: "jpegXsInputSpecification"})
 
 	DescribeChannelPlacementGroupRequest_ChannelPlacementGroupId = DescribeChannelPlacementGroupRequest.AddMember("ChannelPlacementGroupId", ___string, &smithytraits.HTTPLabel{})
 
@@ -20915,6 +21032,8 @@ func init() {
 
 	RestartChannelPipelinesResponse_InferenceSettings = RestartChannelPipelinesResponse.AddMember("InferenceSettings", DescribeInferenceSettings, &smithytraits.JSONName{Name: "inferenceSettings"})
 
+	RestartChannelPipelinesResponse_JpegXsInputSpecification = RestartChannelPipelinesResponse.AddMember("JpegXsInputSpecification", JpegXsInputSpecification, &smithytraits.JSONName{Name: "jpegXsInputSpecification"})
+
 	StartChannelRequest_ChannelId = StartChannelRequest.AddMember("ChannelId", ___string, &smithytraits.HTTPLabel{})
 
 	StartChannelResponse_Arn = StartChannelResponse.AddMember("Arn", ___string, &smithytraits.JSONName{Name: "arn"})
@@ -20962,6 +21081,8 @@ func init() {
 	StartChannelResponse_ChannelSecurityGroups = StartChannelResponse.AddMember("ChannelSecurityGroups", ___listOf__string, &smithytraits.JSONName{Name: "channelSecurityGroups"})
 
 	StartChannelResponse_InferenceSettings = StartChannelResponse.AddMember("InferenceSettings", DescribeInferenceSettings, &smithytraits.JSONName{Name: "inferenceSettings"})
+
+	StartChannelResponse_JpegXsInputSpecification = StartChannelResponse.AddMember("JpegXsInputSpecification", JpegXsInputSpecification, &smithytraits.JSONName{Name: "jpegXsInputSpecification"})
 
 	StartDeleteMonitorDeploymentRequest_Identifier = StartDeleteMonitorDeploymentRequest.AddMember("Identifier", ___string, &smithytraits.HTTPLabel{})
 
@@ -21165,6 +21286,8 @@ func init() {
 
 	StopChannelResponse_InferenceSettings = StopChannelResponse.AddMember("InferenceSettings", DescribeInferenceSettings, &smithytraits.JSONName{Name: "inferenceSettings"})
 
+	StopChannelResponse_JpegXsInputSpecification = StopChannelResponse.AddMember("JpegXsInputSpecification", JpegXsInputSpecification, &smithytraits.JSONName{Name: "jpegXsInputSpecification"})
+
 	StopInputDeviceRequest_InputDeviceId = StopInputDeviceRequest.AddMember("InputDeviceId", ___string, &smithytraits.HTTPLabel{})
 
 	StopMultiplexRequest_MultiplexId = StopMultiplexRequest.AddMember("MultiplexId", ___string, &smithytraits.HTTPLabel{})
@@ -21242,6 +21365,8 @@ func init() {
 	UpdateChannelRequest_InferenceSettings = UpdateChannelRequest.AddMember("InferenceSettings", InferenceSettings, &smithytraits.JSONName{Name: "inferenceSettings"})
 
 	UpdateChannelRequest_SpecialRouterSettings = UpdateChannelRequest.AddMember("SpecialRouterSettings", SpecialRouterSettings, &smithytraits.JSONName{Name: "specialRouterSettings"})
+
+	UpdateChannelRequest_JpegXsInputSpecification = UpdateChannelRequest.AddMember("JpegXsInputSpecification", JpegXsInputSpecification, &smithytraits.JSONName{Name: "jpegXsInputSpecification"})
 
 	UpdateChannelResponse_Channel = UpdateChannelResponse.AddMember("Channel", Channel, &smithytraits.JSONName{Name: "channel"})
 

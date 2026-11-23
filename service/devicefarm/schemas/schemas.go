@@ -652,7 +652,7 @@ var _DateTime = smithy.NewSchema(smithy.ShapeID{
 var Device = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "Device",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var Device_arn *smithy.Schema
 
 var Device_name *smithy.Schema
@@ -666,6 +666,8 @@ var Device_modelId *smithy.Schema
 var Device_formFactor *smithy.Schema
 
 var Device_platform *smithy.Schema
+
+var Device_type *smithy.Schema
 
 var Device_os *smithy.Schema
 
@@ -698,12 +700,14 @@ var Device_availability *smithy.Schema
 var DeviceAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "DeviceAttribute",
-}, smithy.ShapeTypeEnum, 13)
+}, smithy.ShapeTypeEnum, 14)
 var DeviceAttribute_ARN *smithy.Schema
 
 var DeviceAttribute_PLATFORM *smithy.Schema
 
 var DeviceAttribute_FORM_FACTOR *smithy.Schema
+
+var DeviceAttribute_DEVICE_TYPE *smithy.Schema
 
 var DeviceAttribute_MANUFACTURER *smithy.Schema
 
@@ -755,7 +759,7 @@ var DeviceFilter_values *smithy.Schema
 var DeviceFilterAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
 	Name:      "DeviceFilterAttribute",
-}, smithy.ShapeTypeEnum, 12)
+}, smithy.ShapeTypeEnum, 13)
 var DeviceFilterAttribute_ARN *smithy.Schema
 
 var DeviceFilterAttribute_PLATFORM *smithy.Schema
@@ -767,6 +771,8 @@ var DeviceFilterAttribute_MODEL *smithy.Schema
 var DeviceFilterAttribute_AVAILABILITY *smithy.Schema
 
 var DeviceFilterAttribute_FORM_FACTOR *smithy.Schema
+
+var DeviceFilterAttribute_DEVICE_TYPE *smithy.Schema
 
 var DeviceFilterAttribute_MANUFACTURER *smithy.Schema
 
@@ -933,6 +939,14 @@ var DeviceSelectionResult_filters *smithy.Schema
 var DeviceSelectionResult_matchedDevicesCount *smithy.Schema
 
 var DeviceSelectionResult_maxDevices *smithy.Schema
+
+var DeviceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.devicefarm",
+	Name:      "DeviceType",
+}, smithy.ShapeTypeEnum, 2)
+var DeviceType_PHYSICAL *smithy.Schema
+
+var DeviceType_VIRTUAL *smithy.Schema
 
 var _Double = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.devicefarm",
@@ -3898,6 +3912,10 @@ func init() {
 
 	DeviceFormFactor_TABLET = DeviceFormFactor.AddMember("TABLET", smithyprelude.Unit)
 
+	DeviceType_PHYSICAL = DeviceType.AddMember("PHYSICAL", smithyprelude.Unit)
+
+	DeviceType_VIRTUAL = DeviceType.AddMember("VIRTUAL", smithyprelude.Unit)
+
 	Resolution_width = Resolution.AddMember("width", _Integer)
 
 	Resolution_height = Resolution.AddMember("height", _Integer)
@@ -3962,6 +3980,8 @@ func init() {
 
 	Device_platform = Device.AddMember("platform", DevicePlatform)
 
+	Device_type = Device.AddMember("type", DeviceType)
+
 	Device_os = Device.AddMember("os", _String)
 
 	Device_cpu = Device.AddMember("cpu", CPU)
@@ -3996,6 +4016,8 @@ func init() {
 
 	DeviceAttribute_FORM_FACTOR = DeviceAttribute.AddMember("FORM_FACTOR", smithyprelude.Unit)
 
+	DeviceAttribute_DEVICE_TYPE = DeviceAttribute.AddMember("DEVICE_TYPE", smithyprelude.Unit)
+
 	DeviceAttribute_MANUFACTURER = DeviceAttribute.AddMember("MANUFACTURER", smithyprelude.Unit)
 
 	DeviceAttribute_REMOTE_ACCESS_ENABLED = DeviceAttribute.AddMember("REMOTE_ACCESS_ENABLED", smithyprelude.Unit)
@@ -4027,6 +4049,8 @@ func init() {
 	DeviceFilterAttribute_AVAILABILITY = DeviceFilterAttribute.AddMember("AVAILABILITY", smithyprelude.Unit)
 
 	DeviceFilterAttribute_FORM_FACTOR = DeviceFilterAttribute.AddMember("FORM_FACTOR", smithyprelude.Unit)
+
+	DeviceFilterAttribute_DEVICE_TYPE = DeviceFilterAttribute.AddMember("DEVICE_TYPE", smithyprelude.Unit)
 
 	DeviceFilterAttribute_MANUFACTURER = DeviceFilterAttribute.AddMember("MANUFACTURER", smithyprelude.Unit)
 

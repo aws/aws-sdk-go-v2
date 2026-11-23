@@ -28,6 +28,8 @@ func (c *Client) ListEngagementResourceAssociations(ctx context.Context, params 
 	return out, nil
 }
 
+// Contains the request parameters for the ListEngagementResourceAssociations
+// operation.
 type ListEngagementResourceAssociationsInput struct {
 
 	// Specifies the catalog in which to search for engagement-resource associations.
@@ -100,6 +102,8 @@ func (v *ListEngagementResourceAssociationsInput) SerializeMembers(s smithy.Shap
 	}
 }
 
+// Contains the response that the ListEngagementResourceAssociations action
+// returns.
 type ListEngagementResourceAssociationsOutput struct {
 
 	//  A list of engagement-resource association summaries.

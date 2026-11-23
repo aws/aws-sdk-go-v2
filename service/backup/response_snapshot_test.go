@@ -1678,6 +1678,9 @@ func TestCheckResponseSnapshot_DescribeRegionSettings(t *testing.T) {
 		ResourceTypeManagementPreference: map[string]bool{
 			"key0": true,
 		},
+		ResourceTypeOptInIncremental: map[string]bool{
+			"key0": true,
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeRegionSettings.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -5910,6 +5913,9 @@ func TestCheckResponseSnapshot_UpdateRegionSettings(t *testing.T) {
 			"key0": true,
 		},
 		ResourceTypeManagementPreference: map[string]bool{
+			"key0": true,
+		},
+		ResourceTypeOptInIncremental: map[string]bool{
 			"key0": true,
 		},
 	})

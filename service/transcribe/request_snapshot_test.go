@@ -1599,6 +1599,106 @@ func TestCheckRequestSnapshot_TagResource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_TranscribeAudio(t *testing.T) {
+	input := &TranscribeAudioInput{
+		Media: &types.SyncMediaMemberMediaBytes{
+			Value: []byte("blob"),
+		},
+		Language:              types.SyncLanguage("en"),
+		LanguageDetectionMode: types.LanguageDetectionMode("IDENTIFY_LANGUAGE"),
+		LanguageOptions: []types.SyncLanguage{
+			types.SyncLanguage("en"),
+			types.SyncLanguage("en"),
+		},
+		ChannelIdentification: ptr.Bool(true),
+		ShowSpeakerLabels:     ptr.Bool(true),
+		MaxSpeakerLabels:      ptr.Int32(1),
+		VocabularySettings: []types.VocabularySettingsEntry{
+			{
+				Language:       types.SyncLanguage("en"),
+				VocabularyName: ptr.String("__VocabularyName__"),
+				Phrases: []types.VocabularyPhrase{
+					{
+						Text:      ptr.String("__Text__"),
+						DisplayAs: ptr.String("__DisplayAs__"),
+					},
+					{
+						Text:      ptr.String("__Text__"),
+						DisplayAs: ptr.String("__DisplayAs__"),
+					},
+				},
+			},
+			{
+				Language:       types.SyncLanguage("en"),
+				VocabularyName: ptr.String("__VocabularyName__"),
+				Phrases: []types.VocabularyPhrase{
+					{
+						Text:      ptr.String("__Text__"),
+						DisplayAs: ptr.String("__DisplayAs__"),
+					},
+					{
+						Text:      ptr.String("__Text__"),
+						DisplayAs: ptr.String("__DisplayAs__"),
+					},
+				},
+			},
+		},
+		VocabularyFilterSettings: &types.VocabularyFilterSettings{
+			VocabularyFilterMethod: types.VocabularyFilterMethod("remove"),
+			Filters: []types.VocabularyFilterEntry{
+				{
+					Language:             types.SyncLanguage("en"),
+					VocabularyFilterName: ptr.String("__VocabularyFilterName__"),
+					Words: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Language:             types.SyncLanguage("en"),
+					VocabularyFilterName: ptr.String("__VocabularyFilterName__"),
+					Words: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ContentRedaction: &types.ContentRedaction{
+			RedactionType:   types.RedactionType("PII"),
+			RedactionOutput: types.RedactionOutput("redacted"),
+			PiiEntityTypes: []types.PiiEntityType{
+				types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+				types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+			},
+		},
+		OutputConfiguration: &types.SyncOutputConfiguration{
+			OutputMediaFileUri: ptr.String("__OutputMediaFileUri__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.TranscribeAudio(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TranscribeAudio"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UntagResource(t *testing.T) {
 	input := &UntagResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -3240,6 +3340,106 @@ func TestUpdateRequestSnapshot_TagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TagResource"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_TranscribeAudio(t *testing.T) {
+	input := &TranscribeAudioInput{
+		Media: &types.SyncMediaMemberMediaBytes{
+			Value: []byte("blob"),
+		},
+		Language:              types.SyncLanguage("en"),
+		LanguageDetectionMode: types.LanguageDetectionMode("IDENTIFY_LANGUAGE"),
+		LanguageOptions: []types.SyncLanguage{
+			types.SyncLanguage("en"),
+			types.SyncLanguage("en"),
+		},
+		ChannelIdentification: ptr.Bool(true),
+		ShowSpeakerLabels:     ptr.Bool(true),
+		MaxSpeakerLabels:      ptr.Int32(1),
+		VocabularySettings: []types.VocabularySettingsEntry{
+			{
+				Language:       types.SyncLanguage("en"),
+				VocabularyName: ptr.String("__VocabularyName__"),
+				Phrases: []types.VocabularyPhrase{
+					{
+						Text:      ptr.String("__Text__"),
+						DisplayAs: ptr.String("__DisplayAs__"),
+					},
+					{
+						Text:      ptr.String("__Text__"),
+						DisplayAs: ptr.String("__DisplayAs__"),
+					},
+				},
+			},
+			{
+				Language:       types.SyncLanguage("en"),
+				VocabularyName: ptr.String("__VocabularyName__"),
+				Phrases: []types.VocabularyPhrase{
+					{
+						Text:      ptr.String("__Text__"),
+						DisplayAs: ptr.String("__DisplayAs__"),
+					},
+					{
+						Text:      ptr.String("__Text__"),
+						DisplayAs: ptr.String("__DisplayAs__"),
+					},
+				},
+			},
+		},
+		VocabularyFilterSettings: &types.VocabularyFilterSettings{
+			VocabularyFilterMethod: types.VocabularyFilterMethod("remove"),
+			Filters: []types.VocabularyFilterEntry{
+				{
+					Language:             types.SyncLanguage("en"),
+					VocabularyFilterName: ptr.String("__VocabularyFilterName__"),
+					Words: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Language:             types.SyncLanguage("en"),
+					VocabularyFilterName: ptr.String("__VocabularyFilterName__"),
+					Words: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
+		},
+		ContentRedaction: &types.ContentRedaction{
+			RedactionType:   types.RedactionType("PII"),
+			RedactionOutput: types.RedactionOutput("redacted"),
+			PiiEntityTypes: []types.PiiEntityType{
+				types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+				types.PiiEntityType("BANK_ACCOUNT_NUMBER"),
+			},
+		},
+		OutputConfiguration: &types.SyncOutputConfiguration{
+			OutputMediaFileUri: ptr.String("__OutputMediaFileUri__"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.TranscribeAudio(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "TranscribeAudio"); err != nil {
 		t.Fatal(err)
 	}
 }

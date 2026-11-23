@@ -4979,6 +4979,10 @@ type Contact struct {
 	// Total pause duration for a contact in seconds.
 	TotalPauseDurationInSeconds *int32
 
+	// If one or more voicemails were recorded for the contact, this contains
+	// information about the voicemails.
+	VoicemailInfo *VoicemailInfo
+
 	// Information about Connect Customer Wisdom.
 	WisdomInfo *WisdomInfo
 
@@ -5173,6 +5177,11 @@ func (v *Contact) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TotalPauseDurationInSeconds != nil {
 		s.WriteInt32(schemas.Contact_TotalPauseDurationInSeconds, *v.TotalPauseDurationInSeconds)
 	}
+	if v.VoicemailInfo != nil {
+		s.WriteStruct(schemas.Contact_VoicemailInfo)
+		v.VoicemailInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.WisdomInfo != nil {
 		s.WriteStruct(schemas.Contact_WisdomInfo)
 		v.WisdomInfo.SerializeMembers(s)
@@ -5334,6 +5343,9 @@ func (v *Contact) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Contact_TotalPauseDurationInSeconds:
 			v.TotalPauseDurationInSeconds = new(int32)
 			return d.ReadInt32(schemas.Contact_TotalPauseDurationInSeconds, v.TotalPauseDurationInSeconds)
+		case schemas.Contact_VoicemailInfo:
+			v.VoicemailInfo = &VoicemailInfo{}
+			return v.VoicemailInfo.Deserialize(d)
 		case schemas.Contact_WisdomInfo:
 			v.WisdomInfo = &WisdomInfo{}
 			return v.WisdomInfo.Deserialize(d)
@@ -28482,6 +28494,10 @@ func (v *Reference) Deserialize(d smithy.ShapeDeserializer) error {
 //	ReferenceSummaryMemberNumber
 //	ReferenceSummaryMemberString
 //	ReferenceSummaryMemberUrl
+//	ReferenceSummaryMemberVoicemailAnalysis
+//	ReferenceSummaryMemberVoicemailAnalysisRedacted
+//	ReferenceSummaryMemberVoicemailRecording
+//	ReferenceSummaryMemberVoicemailRecordingRedacted
 type ReferenceSummary interface {
 	isReferenceSummary()
 }
@@ -28676,6 +28692,78 @@ func (v *ReferenceSummaryMemberUrl) Serialize(s smithy.ShapeSerializer) {
 	s.CloseStruct()
 }
 func (v *ReferenceSummaryMemberUrl) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Information about the reference when the referenceType is VOICEMAIL_ANALYSIS .
+// Otherwise, null.
+type ReferenceSummaryMemberVoicemailAnalysis struct {
+	Value VoicemailAnalysisReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberVoicemailAnalysis) isReferenceSummary() {}
+func (v *ReferenceSummaryMemberVoicemailAnalysis) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceSummary_VoicemailAnalysis)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ReferenceSummaryMemberVoicemailAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Information about the reference when the referenceType is
+// VOICEMAIL_ANALYSIS_REDACTED . Otherwise, null.
+type ReferenceSummaryMemberVoicemailAnalysisRedacted struct {
+	Value VoicemailAnalysisReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberVoicemailAnalysisRedacted) isReferenceSummary() {}
+func (v *ReferenceSummaryMemberVoicemailAnalysisRedacted) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceSummary_VoicemailAnalysisRedacted)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ReferenceSummaryMemberVoicemailAnalysisRedacted) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Information about the reference when the referenceType is VOICEMAIL_RECORDING .
+// Otherwise, null.
+type ReferenceSummaryMemberVoicemailRecording struct {
+	Value VoicemailRecordingReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberVoicemailRecording) isReferenceSummary() {}
+func (v *ReferenceSummaryMemberVoicemailRecording) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceSummary_VoicemailRecording)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ReferenceSummaryMemberVoicemailRecording) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Information about the reference when the referenceType is
+// VOICEMAIL_RECORDING_REDACTED . Otherwise, null.
+type ReferenceSummaryMemberVoicemailRecordingRedacted struct {
+	Value VoicemailRecordingReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberVoicemailRecordingRedacted) isReferenceSummary() {}
+func (v *ReferenceSummaryMemberVoicemailRecordingRedacted) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceSummary_VoicemailRecordingRedacted)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ReferenceSummaryMemberVoicemailRecordingRedacted) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -37374,6 +37462,163 @@ func (v *VoiceEnhancementConfig) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.VoiceEnhancementMode = VoiceEnhancementMode(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Information about a reference when the referenceType is VOICEMAIL_ANALYSIS or
+// VOICEMAIL_ANALYSIS_REDACTED . Otherwise, null.
+type VoicemailAnalysisReference struct {
+
+	// The Amazon Resource Name (ARN) of the voicemail analysis reference.
+	Arn *string
+
+	// Identifier of the voicemail analysis reference.
+	Name *string
+
+	// Status of the voicemail analysis reference type.
+	Status ReferenceStatus
+
+	// The location path of the voicemail analysis reference.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *VoicemailAnalysisReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoicemailAnalysisReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoicemailAnalysisReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.VoicemailAnalysisReference_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.VoicemailAnalysisReference_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.VoicemailAnalysisReference_Status, string(v.Status))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.VoicemailAnalysisReference_Value, *v.Value)
+	}
+}
+func (v *VoicemailAnalysisReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoicemailAnalysisReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoicemailAnalysisReference_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.VoicemailAnalysisReference_Arn, v.Arn)
+		case schemas.VoicemailAnalysisReference_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.VoicemailAnalysisReference_Name, v.Name)
+		case schemas.VoicemailAnalysisReference_Status:
+			var ev string
+			if err := d.ReadString(schemas.VoicemailAnalysisReference_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReferenceStatus(ev)
+			return nil
+		case schemas.VoicemailAnalysisReference_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.VoicemailAnalysisReference_Value, v.Value)
+		}
+		return nil
+	})
+}
+
+// Information about the voicemails recorded for a voice contact.
+type VoicemailInfo struct {
+
+	// The number of voicemails recorded for the contact. Valid range is 1-3.
+	NumberOfVoicemails *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *VoicemailInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoicemailInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoicemailInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NumberOfVoicemails != nil {
+		s.WriteInt32(schemas.VoicemailInfo_NumberOfVoicemails, *v.NumberOfVoicemails)
+	}
+}
+func (v *VoicemailInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoicemailInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoicemailInfo_NumberOfVoicemails:
+			v.NumberOfVoicemails = new(int32)
+			return d.ReadInt32(schemas.VoicemailInfo_NumberOfVoicemails, v.NumberOfVoicemails)
+		}
+		return nil
+	})
+}
+
+// Information about a reference when the referenceType is VOICEMAIL_RECORDING or
+// VOICEMAIL_RECORDING_REDACTED . Otherwise, null.
+type VoicemailRecordingReference struct {
+
+	// The Amazon Resource Name (ARN) of the voicemail recording reference.
+	Arn *string
+
+	// Identifier of the voicemail recording reference.
+	Name *string
+
+	// Status of the voicemail recording reference type.
+	Status ReferenceStatus
+
+	// The location path of the voicemail recording reference.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *VoicemailRecordingReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoicemailRecordingReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoicemailRecordingReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.VoicemailRecordingReference_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.VoicemailRecordingReference_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.VoicemailRecordingReference_Status, string(v.Status))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.VoicemailRecordingReference_Value, *v.Value)
+	}
+}
+func (v *VoicemailRecordingReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoicemailRecordingReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VoicemailRecordingReference_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.VoicemailRecordingReference_Arn, v.Arn)
+		case schemas.VoicemailRecordingReference_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.VoicemailRecordingReference_Name, v.Name)
+		case schemas.VoicemailRecordingReference_Status:
+			var ev string
+			if err := d.ReadString(schemas.VoicemailRecordingReference_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReferenceStatus(ev)
+			return nil
+		case schemas.VoicemailRecordingReference_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.VoicemailRecordingReference_Value, v.Value)
 		}
 		return nil
 	})

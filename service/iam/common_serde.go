@@ -239,6 +239,24 @@ func serializeinstanceProfileListType(s smithy.ShapeSerializer, schema *smithy.S
 	s.CloseList()
 }
 
+func serializekeyDefinitionListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContextProviderKeyDefinition) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeKeyHashListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializelistPolicyGrantingServiceAccessResponseListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ListPoliciesGrantingServiceAccessEntry) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -476,6 +494,16 @@ func serializerolePermissionRestrictionArnListType(s smithy.ShapeSerializer, sch
 }
 
 func serializeRoleUsageListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RoleUsageType) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeSAMLKeyHashListType(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SAMLKeyHashEntry) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1090,6 +1118,49 @@ func deserializeinstanceProfileListType(d smithy.ShapeDeserializer, s *smithy.Sc
 	})
 }
 
+func deserializekeyDefinitionListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ContextProviderKeyDefinition) error {
+	*v = make([]types.ContextProviderKeyDefinition, 0)
+	var vv types.ContextProviderKeyDefinition
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ContextProviderKeyDefinition
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ContextProviderKeyDefinition{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeKeyHashListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializelistPolicyGrantingServiceAccessResponseListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ListPoliciesGrantingServiceAccessEntry) error {
 	*v = make([]types.ListPoliciesGrantingServiceAccessEntry, 0)
 	var vv types.ListPoliciesGrantingServiceAccessEntry
@@ -1646,6 +1717,28 @@ func deserializeRoleUsageListType(d smithy.ShapeDeserializer, s *smithy.Schema, 
 		}
 
 		vv = types.RoleUsageType{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSAMLKeyHashListType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SAMLKeyHashEntry) error {
+	*v = make([]types.SAMLKeyHashEntry, 0)
+	var vv types.SAMLKeyHashEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SAMLKeyHashEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.SAMLKeyHashEntry{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

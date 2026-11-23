@@ -59,6 +59,19 @@ type DescribeRegionSettingsOutput struct {
 	// [Backup's advanced DynamoDB backup features]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli
 	ResourceTypeManagementPreference map[string]bool
 
+	// Specifies whether you have opted in to incremental backups for each resource
+	// type in the Region. When you opt in, each backup captures only the changes made
+	// since your previous backup. Incremental backup opt-in is currently available for
+	// Amazon DynamoDB.
+	//
+	// Consider opting in if your resources are large and change infrequently, because
+	// incremental backups can reduce your backup storage and backup time. To opt in,
+	// use the UpdateRegionSettings API. For a list of the Backup features that each
+	// resource type supports, see [Feature availability by resource].
+	//
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-feature-availability.html#features-by-resource
+	ResourceTypeOptInIncremental map[string]bool
+
 	// The services along with the opt-in preferences in the Region.
 	ResourceTypeOptInPreference map[string]bool
 
@@ -78,6 +91,9 @@ func (v *DescribeRegionSettingsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ResourceTypeManagementPreference != nil {
 		serializeResourceTypeManagementPreference(s, schemas.DescribeRegionSettingsOutput_ResourceTypeManagementPreference, v.ResourceTypeManagementPreference)
 	}
+	if v.ResourceTypeOptInIncremental != nil {
+		serializeResourceTypeOptInIncremental(s, schemas.DescribeRegionSettingsOutput_ResourceTypeOptInIncremental, v.ResourceTypeOptInIncremental)
+	}
 	if v.ResourceTypeOptInPreference != nil {
 		serializeResourceTypeOptInPreference(s, schemas.DescribeRegionSettingsOutput_ResourceTypeOptInPreference, v.ResourceTypeOptInPreference)
 	}
@@ -87,6 +103,8 @@ func (v *DescribeRegionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) e
 		switch s {
 		case schemas.DescribeRegionSettingsOutput_ResourceTypeManagementPreference:
 			return deserializeResourceTypeManagementPreference(d, schemas.DescribeRegionSettingsOutput_ResourceTypeManagementPreference, &v.ResourceTypeManagementPreference)
+		case schemas.DescribeRegionSettingsOutput_ResourceTypeOptInIncremental:
+			return deserializeResourceTypeOptInIncremental(d, schemas.DescribeRegionSettingsOutput_ResourceTypeOptInIncremental, &v.ResourceTypeOptInIncremental)
 		case schemas.DescribeRegionSettingsOutput_ResourceTypeOptInPreference:
 			return deserializeResourceTypeOptInPreference(d, schemas.DescribeRegionSettingsOutput_ResourceTypeOptInPreference, &v.ResourceTypeOptInPreference)
 		}

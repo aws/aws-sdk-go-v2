@@ -86,6 +86,9 @@ type GetRevenueAttributionOutput struct {
 	// This member is required.
 	TenancyModel types.TenancyModel
 
+	// Program-defined key-value attributes for the revenue attribution.
+	Context map[string]string
+
 	// The date when the revenue attribution was created.
 	CreatedDate *time.Time
 
@@ -142,6 +145,9 @@ func (v *GetRevenueAttributionOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Catalog != "" {
 		s.WriteString(schemas.GetRevenueAttributionOutput_Catalog, string(v.Catalog))
 	}
+	if v.Context != nil {
+		serializeRevenueAttributionContext(s, schemas.GetRevenueAttributionOutput_Context, v.Context)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.GetRevenueAttributionOutput_CreatedDate, *v.CreatedDate)
 	}
@@ -197,6 +203,8 @@ func (v *GetRevenueAttributionOutput) Deserialize(d smithy.ShapeDeserializer) er
 			}
 			v.Catalog = types.CatalogName(ev)
 			return nil
+		case schemas.GetRevenueAttributionOutput_Context:
+			return deserializeRevenueAttributionContext(d, schemas.GetRevenueAttributionOutput_Context, &v.Context)
 		case schemas.GetRevenueAttributionOutput_CreatedDate:
 			v.CreatedDate = new(time.Time)
 			return d.ReadTime(schemas.GetRevenueAttributionOutput_CreatedDate, v.CreatedDate)

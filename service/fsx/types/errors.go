@@ -382,6 +382,53 @@ func (v *BadRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// No Amazon FSx cluster peers were found based on the supplied parameters.
+type ClusterPeerNotFound struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ClusterPeerNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ClusterPeerNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ClusterPeerNotFound) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ClusterPeerNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ClusterPeerNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ClusterPeerNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterPeerNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterPeerNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ClusterPeerNotFound_Message, *v.Message)
+	}
+}
+func (v *ClusterPeerNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterPeerNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterPeerNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClusterPeerNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
+
 // No data repository associations were found based upon the supplied parameters.
 type DataRepositoryAssociationNotFound struct {
 	Message *string
@@ -1743,6 +1790,101 @@ func (v *ServiceLimitExceeded) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// No Amazon FSx SnapMirror policies were found based on the supplied parameters.
+type SnapmirrorPolicyNotFound struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SnapmirrorPolicyNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SnapmirrorPolicyNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SnapmirrorPolicyNotFound) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SnapmirrorPolicyNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SnapmirrorPolicyNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SnapmirrorPolicyNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapmirrorPolicyNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapmirrorPolicyNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SnapmirrorPolicyNotFound_Message, *v.Message)
+	}
+}
+func (v *SnapmirrorPolicyNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapmirrorPolicyNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapmirrorPolicyNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SnapmirrorPolicyNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// No Amazon FSx SnapMirror relationships were found based on the supplied
+// parameters.
+type SnapmirrorRelationshipNotFound struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SnapmirrorRelationshipNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SnapmirrorRelationshipNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SnapmirrorRelationshipNotFound) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SnapmirrorRelationshipNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SnapmirrorRelationshipNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SnapmirrorRelationshipNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapmirrorRelationshipNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapmirrorRelationshipNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SnapmirrorRelationshipNotFound_Message, *v.Message)
+	}
+}
+func (v *SnapmirrorRelationshipNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapmirrorRelationshipNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapmirrorRelationshipNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SnapmirrorRelationshipNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
+
 // No Amazon FSx snapshots were found based on the supplied parameters.
 type SnapshotNotFound struct {
 	Message *string
@@ -1785,6 +1927,53 @@ func (v *SnapshotNotFound) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.SnapshotNotFound_Message:
 			v.Message = new(string)
 			return d.ReadString(schemas.SnapshotNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// No Amazon FSx snapshot policies were found based on the supplied parameters.
+type SnapshotPolicyNotFound struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SnapshotPolicyNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SnapshotPolicyNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SnapshotPolicyNotFound) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SnapshotPolicyNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SnapshotPolicyNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SnapshotPolicyNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotPolicyNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotPolicyNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SnapshotPolicyNotFound_Message, *v.Message)
+	}
+}
+func (v *SnapshotPolicyNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotPolicyNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotPolicyNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SnapshotPolicyNotFound_Message, v.Message)
 		}
 		return nil
 	})
@@ -1888,6 +2077,54 @@ func (v *StorageVirtualMachineNotFound) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.StorageVirtualMachineNotFound_Message:
 			v.Message = new(string)
 			return d.ReadString(schemas.StorageVirtualMachineNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// No Amazon FSx storage virtual machine (SVM) peers were found based on the
+// supplied parameters.
+type StorageVirtualMachinePeerNotFound struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *StorageVirtualMachinePeerNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *StorageVirtualMachinePeerNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *StorageVirtualMachinePeerNotFound) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "StorageVirtualMachinePeerNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *StorageVirtualMachinePeerNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *StorageVirtualMachinePeerNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorageVirtualMachinePeerNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorageVirtualMachinePeerNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.StorageVirtualMachinePeerNotFound_Message, *v.Message)
+	}
+}
+func (v *StorageVirtualMachinePeerNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorageVirtualMachinePeerNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorageVirtualMachinePeerNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StorageVirtualMachinePeerNotFound_Message, v.Message)
 		}
 		return nil
 	})

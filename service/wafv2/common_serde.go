@@ -35,6 +35,34 @@ func serializeAPIKeyTokenDomains(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.CloseList()
 }
 
+func serializeApiPatternDomainList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeApiPatternFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ApiPatternFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeApiPatternList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ApiPattern) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeApplicationAttributes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ApplicationAttribute) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -167,6 +195,82 @@ func serializeDisallowedFeatures(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.CloseList()
 }
 
+func serializeDomainList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeEventActorChangeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EventActorChange) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeEventActorReferenceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EventActorReference) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeEventActorSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EventActorSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeEventDetailSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EventDetailSummary) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeEventFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EventFilter) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeEventIncludeFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EventIncludeField) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeEventTimelineEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EventTimelineEntry) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeExcludedRules(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExcludedRule) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -191,6 +295,14 @@ func serializeFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -436,6 +548,16 @@ func serializeRegexPatternSetSummaries(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeRegularExpressionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Regex) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRelatedEventList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RelatedEvent) {
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -720,6 +842,71 @@ func deserializeAPIKeyTokenDomains(d smithy.ShapeDeserializer, s *smithy.Schema,
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeApiPatternDomainList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeApiPatternFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ApiPatternFilter) error {
+	*v = make([]types.ApiPatternFilter, 0)
+	var vv types.ApiPatternFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ApiPatternFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ApiPatternFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeApiPatternList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ApiPattern) error {
+	*v = make([]types.ApiPattern, 0)
+	var vv types.ApiPattern
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ApiPattern
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ApiPattern{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -1032,6 +1219,180 @@ func deserializeDisallowedFeatures(d smithy.ShapeDeserializer, s *smithy.Schema,
 	})
 }
 
+func deserializeDomainList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEventActorChangeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventActorChange) error {
+	*v = make([]types.EventActorChange, 0)
+	var vv types.EventActorChange
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EventActorChange
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.EventActorChange{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEventActorReferenceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventActorReference) error {
+	*v = make([]types.EventActorReference, 0)
+	var vv types.EventActorReference
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EventActorReference
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.EventActorReference{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEventActorSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventActorSummary) error {
+	*v = make([]types.EventActorSummary, 0)
+	var vv types.EventActorSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EventActorSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.EventActorSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEventDetailSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventDetailSummary) error {
+	*v = make([]types.EventDetailSummary, 0)
+	var vv types.EventDetailSummary
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EventDetailSummary
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.EventDetailSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEventFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventFilter) error {
+	*v = make([]types.EventFilter, 0)
+	var vv types.EventFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EventFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.EventFilter{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeEventIncludeFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventIncludeField) error {
+	*v = make([]types.EventIncludeField, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EventIncludeField
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.EventIncludeField(vv))
+		return nil
+	})
+}
+
+func deserializeEventTimelineEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EventTimelineEntry) error {
+	*v = make([]types.EventTimelineEntry, 0)
+	var vv types.EventTimelineEntry
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.EventTimelineEntry
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.EventTimelineEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeExcludedRules(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExcludedRule) error {
 	*v = make([]types.ExcludedRule, 0)
 	var vv types.ExcludedRule
@@ -1089,6 +1450,27 @@ func deserializeFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 
 		vv = types.Filter{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 
@@ -1655,6 +2037,28 @@ func deserializeRegularExpressionList(d smithy.ShapeDeserializer, s *smithy.Sche
 		}
 
 		vv = types.Regex{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRelatedEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RelatedEvent) error {
+	*v = make([]types.RelatedEvent, 0)
+	var vv types.RelatedEvent
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.RelatedEvent
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.RelatedEvent{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

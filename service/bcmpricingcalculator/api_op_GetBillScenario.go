@@ -71,7 +71,7 @@ type GetBillScenarioOutput struct {
 	//  An error message if the bill scenario retrieval failed.
 	FailureMessage *string
 
-	// The setting for the reserved instance and savings plan group sharing used in
+	// The setting for the reserved instance and savings plans group sharing used in
 	// this estimate.
 	GroupSharingPreference types.GroupSharingPreferenceEnum
 

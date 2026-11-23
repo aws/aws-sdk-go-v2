@@ -40,6 +40,11 @@ type CreateConnectionInput struct {
 	// created.
 	HostArn *string
 
+	// The endpoint of the ghe.com tenant where your organization resides. Provide
+	// this parameter only when ProviderType is GitHubEnterpriseCloudDataResidency .
+	// Leave this parameter empty for all other provider types.
+	ProviderEndpoint *string
+
 	// The name of the external provider where your third-party code repository is
 	// configured.
 	ProviderType types.ProviderType
@@ -62,6 +67,9 @@ func (v *CreateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.HostArn != nil {
 		s.WriteString(schemas.CreateConnectionInput_HostArn, *v.HostArn)
+	}
+	if v.ProviderEndpoint != nil {
+		s.WriteString(schemas.CreateConnectionInput_ProviderEndpoint, *v.ProviderEndpoint)
 	}
 	if v.ProviderType != "" {
 		s.WriteString(schemas.CreateConnectionInput_ProviderType, string(v.ProviderType))
