@@ -1720,6 +1720,9 @@ func TestCheckRequestSnapshot_InvokeWebSearch(t *testing.T) {
 				PublishedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
+		UserLocation: &types.WebSearchUserLocation{
+			Country: ptr.String("__Country__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4802,6 +4805,9 @@ func TestUpdateRequestSnapshot_InvokeWebSearch(t *testing.T) {
 				PublishedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				PublishedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
+		},
+		UserLocation: &types.WebSearchUserLocation{
+			Country: ptr.String("__Country__"),
 		},
 	}
 	body := &bytes.Buffer{}

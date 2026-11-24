@@ -12,7 +12,7 @@ import (
 )
 
 // Provides a complete mapping from the public accelerator IP address and port to
-// destination EC2 instance IP addresses and ports in the virtual public cloud
+// destination EC2 instance IP addresses and ports in the virtual private cloud
 // (VPC) subnet endpoint for a custom routing accelerator. For each subnet endpoint
 // that you add, Global Accelerator creates a new static port mapping for the
 // accelerator. The port mappings don't change after Global Accelerator generates

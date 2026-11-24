@@ -388,7 +388,7 @@ func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The endpoint that you specified doesn't exist.
+// The endpoint that you specified already exists.
 type EndpointAlreadyExistsException struct {
 	Message *string
 

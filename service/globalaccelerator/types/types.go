@@ -24,8 +24,8 @@ type Accelerator struct {
 	// to an accelerator's static IPv4 addresses.
 	//
 	// The naming convention for the DNS name for an accelerator is the following: A
-	// lowercase letter a, followed by a 16-bit random hex string, followed by
-	// .awsglobalaccelerator.com. For example:
+	// lowercase letter a, followed by a 16-character random hexadecimal string,
+	// followed by .awsglobalaccelerator.com. For example:
 	// a1234567890abcdef.awsglobalaccelerator.com.
 	//
 	// If you have a dual-stack accelerator, you also have a second DNS name,
@@ -44,7 +44,7 @@ type Accelerator struct {
 	// two IPv6 addresses.
 	//
 	// The naming convention for the dual-stack DNS name is the following: A lowercase
-	// letter a, followed by a 16-bit random hex string, followed by
+	// letter a, followed by a 16-character random hexadecimal string, followed by
 	// .dualstack.awsglobalaccelerator.com. For example:
 	// a1234567890abcdef.dualstack.awsglobalaccelerator.com.
 	//
@@ -632,8 +632,9 @@ type CustomRoutingAccelerator struct {
 	// to an accelerator's static IPv4 addresses.
 	//
 	// The naming convention for the DNS name is the following: A lowercase letter a,
-	// followed by a 16-bit random hex string, followed by .awsglobalaccelerator.com.
-	// For example: a1234567890abcdef.awsglobalaccelerator.com.
+	// followed by a 16-character random hexadecimal string, followed by
+	// .awsglobalaccelerator.com. For example:
+	// a1234567890abcdef.awsglobalaccelerator.com.
 	//
 	// If you have a dual-stack accelerator, you also have a second DNS name,
 	// DualStackDnsName , that points to both the A record and the AAAA record for all
@@ -1228,15 +1229,17 @@ type EndpointConfiguration struct {
 	// The value is true or false. The default value is true for Application Load
 	// Balancer endpoints.
 	//
-	// If the value is set to true, the client's IP address is preserved in the
-	// X-Forwarded-For request header as traffic travels to applications on the
-	// endpoint fronted by the accelerator.
+	// If the value is set to true, the client's IP address is preserved in packets
+	// that arrive at the endpoint. For Amazon EC2 instance and Network Load Balancer
+	// endpoints, the client IP address is the source address in the IP header of the
+	// packet. For Application Load Balancer endpoints, because the Application Load
+	// Balancer terminates the incoming TCP connection, the client IP address is
+	// available in the X-Forwarded-For request header.
 	//
-	// Client IP address preservation is supported, in specific Amazon Web Services
-	// Regions, for endpoints that are Application Load Balancers, Amazon EC2
-	// instances, and Network Load Balancers with security groups. IMPORTANT: You
-	// cannot use client IP address preservation with Network Load Balancers with TLS
-	// listeners.
+	// Client IP address preservation is supported in all Amazon Web Services Regions
+	// where Global Accelerator is supported, for endpoints that are Application Load
+	// Balancers, Amazon EC2 instances, and Network Load Balancers with security
+	// groups. This includes Network Load Balancers that have TLS listeners.
 	//
 	// For more information, see [Preserve client IP addresses in Global Accelerator] in the Global Accelerator Developer Guide.
 	//
@@ -1314,15 +1317,17 @@ type EndpointDescription struct {
 	// The value is true or false. The default value is true for Application Load
 	// Balancers endpoints.
 	//
-	// If the value is set to true, the client's IP address is preserved in the
-	// X-Forwarded-For request header as traffic travels to applications on the
-	// endpoint fronted by the accelerator.
+	// If the value is set to true, the client's IP address is preserved in packets
+	// that arrive at the endpoint. For Amazon EC2 instance and Network Load Balancer
+	// endpoints, the client IP address is the source address in the IP header of the
+	// packet. For Application Load Balancer endpoints, because the Application Load
+	// Balancer terminates the incoming TCP connection, the client IP address is
+	// available in the X-Forwarded-For request header.
 	//
-	// Client IP address preservation is supported, in specific Amazon Web Services
-	// Regions, for endpoints that are Application Load Balancers, Amazon EC2
-	// instances, and Network Load Balancers with security groups. IMPORTANT: You
-	// cannot use client IP address preservation with Network Load Balancers with TLS
-	// listeners.
+	// Client IP address preservation is supported in all Amazon Web Services Regions
+	// where Global Accelerator is supported, for endpoints that are Application Load
+	// Balancers, Amazon EC2 instances, and Network Load Balancers with security
+	// groups. This includes Network Load Balancers that have TLS listeners.
 	//
 	// For more information, see [Preserve client IP addresses in Global Accelerator] in the Global Accelerator Developer Guide.
 	//
@@ -1560,9 +1565,12 @@ type EndpointIdentifier struct {
 	// Indicates whether client IP address preservation is enabled for an endpoint.
 	// The value is true or false.
 	//
-	// If the value is set to true, the client's IP address is preserved in the
-	// X-Forwarded-For request header as traffic travels to applications on the
-	// endpoint fronted by the accelerator.
+	// If the value is set to true, the client's IP address is preserved in packets
+	// that arrive at the endpoint. For Amazon EC2 instance and Network Load Balancer
+	// endpoints, the client IP address is the source address in the IP header of the
+	// packet. For Application Load Balancer endpoints, because the Application Load
+	// Balancer terminates the incoming TCP connection, the client IP address is
+	// available in the X-Forwarded-For request header.
 	ClientIPPreservationEnabled *bool
 
 	noSmithyDocumentSerde
@@ -1806,7 +1814,7 @@ type PortMapping struct {
 	// The Amazon Resource Name (ARN) of the endpoint group.
 	EndpointGroupArn *string
 
-	// The IP address of the VPC subnet (the subnet ID).
+	// The ID of the virtual private cloud (VPC) subnet.
 	EndpointId *string
 
 	// The protocols supported by the endpoint group.
@@ -1967,9 +1975,9 @@ func (v *PortRange) Deserialize(d smithy.ShapeDeserializer) error {
 // range that specifies a bring your own IP (BYOIP) address pool.
 type Resource struct {
 
-	// An IP address range, in CIDR format, that is specified as resource. The address
-	// must be provisioned and advertised in Global Accelerator by following the bring
-	// your own IP address (BYOIP) process for Global Accelerator
+	// An IP address range, in CIDR format, that is specified as a resource. The
+	// address must be provisioned and advertised in Global Accelerator by following
+	// the bring your own IP address (BYOIP) process for Global Accelerator
 	//
 	// For more information, see [Bring your own IP addresses (BYOIP)] in the Global Accelerator Developer Guide.
 	//

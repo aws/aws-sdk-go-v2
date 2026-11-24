@@ -53,6 +53,15 @@ type InvokeWebSearchInput struct {
 	// The maximum number of results to return. Defaults to 25.
 	MaxResults *int32
 
+	// userLocation may allow for Web Search results to be refined for that location.
+	// This is done by supplying a country . The field is optional.
+	//
+	// The value is checked against assigned ISO 3166-1 alpha-2 codes, so unassigned
+	// and user-assigned codes such as UK and XK , empty or whitespace-only values are
+	// rejected. An omitted value is treated as absent. Without location, as a fallback
+	// Web Search may use your query to localize results or default to en_US .
+	UserLocation *types.WebSearchUserLocation
+
 	noSmithyDocumentSerde
 }
 
@@ -73,6 +82,11 @@ func (v *InvokeWebSearchInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.SearchQuery != nil {
 		s.WriteString(schemas.InvokeWebSearchInput_searchQuery, *v.SearchQuery)
+	}
+	if v.UserLocation != nil {
+		s.WriteStruct(schemas.InvokeWebSearchInput_userLocation)
+		v.UserLocation.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.WebSearchId != nil {
 		s.WriteString(schemas.InvokeWebSearchInput_webSearchId, *v.WebSearchId)

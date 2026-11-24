@@ -6486,6 +6486,11 @@ var _ViewPortWidth = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ViewPortWidth",
 }, smithy.ShapeTypeInteger, 0)
 
+var _WebSearchCountryCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "WebSearchCountryCode",
+}, smithy.ShapeTypeString, 0)
+
 var WebSearchFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "WebSearchFilters",
@@ -6516,6 +6521,12 @@ var _WebSearchResultList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "WebSearchResultList",
 }, smithy.ShapeTypeList, 1)
 var _WebSearchResultList_member *smithy.Schema
+
+var WebSearchUserLocation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcore",
+	Name:      "WebSearchUserLocation",
+}, smithy.ShapeTypeStructure, 1)
+var WebSearchUserLocation_country *smithy.Schema
 
 var _WorkloadIdentityNameType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -7618,7 +7629,7 @@ var InvokeHarnessResponse_stream *smithy.Schema
 var InvokeWebSearchInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "InvokeWebSearchInput",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var InvokeWebSearchInput_webSearchId *smithy.Schema
 
 var InvokeWebSearchInput_searchQuery *smithy.Schema
@@ -7626,6 +7637,8 @@ var InvokeWebSearchInput_searchQuery *smithy.Schema
 var InvokeWebSearchInput_maxResults *smithy.Schema
 
 var InvokeWebSearchInput_filters *smithy.Schema
+
+var InvokeWebSearchInput_userLocation *smithy.Schema
 
 var InvokeWebSearchOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
@@ -11300,6 +11313,8 @@ func init() {
 
 	_WebSearchResultList_member = _WebSearchResultList.AddMember("member", WebSearchResult)
 
+	WebSearchUserLocation_country = WebSearchUserLocation.AddMember("country", _WebSearchCountryCode)
+
 	BatchCreateMemoryRecordsInput_memoryId = BatchCreateMemoryRecordsInput.AddMember("memoryId", _MemoryId, &smithytraits.HTTPLabel{})
 
 	BatchCreateMemoryRecordsInput_records = BatchCreateMemoryRecordsInput.AddMember("records", _MemoryRecordsCreateInputList)
@@ -12039,6 +12054,8 @@ func init() {
 	InvokeWebSearchInput_maxResults = InvokeWebSearchInput.AddMember("maxResults", smithyprelude.Integer)
 
 	InvokeWebSearchInput_filters = InvokeWebSearchInput.AddMember("filters", WebSearchFilters)
+
+	InvokeWebSearchInput_userLocation = InvokeWebSearchInput.AddMember("userLocation", WebSearchUserLocation)
 
 	InvokeWebSearchOutput_results = InvokeWebSearchOutput.AddMember("results", _WebSearchResultList)
 

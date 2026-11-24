@@ -1,0 +1,8 @@
+{
+    "id": "3c011ce3-9d97-4aae-93d2-7e58cdf7988e",
+    "type": "documentation",
+    "description": "AWS Global Accelerator supports Client IP Preservation for NLBs with TLS Listener endpoints.",
+    "modules": [
+        "service/globalaccelerator"
+    ]
+}

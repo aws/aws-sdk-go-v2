@@ -65,7 +65,17 @@ type UpdateAcceleratorInput struct {
 	// the value can be IPV4 or DUAL_STACK.
 	IpAddressType types.IpAddressType
 
-	// The IP addresses for an accelerator.
+	// The IP addresses for an accelerator. Specify one or two IPv4 addresses. Do not
+	// include the /32 suffix.
+	//
+	// You can update IP addresses only for an accelerator that you created with at
+	// least one BYOIP address. You can't update an accelerator that has only IP
+	// addresses provided by Global Accelerator to use BYOIP addresses. Instead, create
+	// a new accelerator with your BYOIP addresses.
+	//
+	// For more information, see [Update an accelerator to change your IP addresses] in the Global Accelerator Developer Guide.
+	//
+	// [Update an accelerator to change your IP addresses]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.update-accelerator.html
 	IpAddresses []string
 
 	// The name of the accelerator. The name can have a maximum of 64 characters, must

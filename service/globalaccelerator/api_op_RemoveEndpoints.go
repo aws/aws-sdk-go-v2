@@ -14,8 +14,8 @@ import (
 //
 // The RemoveEndpoints API operation is the recommended option for removing
 // endpoints. The alternative is to remove endpoints by updating an endpoint group
-// by using the [UpdateEndpointGroup]API operation. There are two advantages to using AddEndpoints to
-// remove endpoints instead:
+// by using the [UpdateEndpointGroup]API operation. There are two advantages to using RemoveEndpoints
+// to remove endpoints instead:
 //
 //   - It's more convenient, because you only need to specify the endpoints that
 //     you want to remove. With the UpdateEndpointGroup API operation, you must

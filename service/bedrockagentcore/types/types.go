@@ -17066,6 +17066,37 @@ func (v *WebSearchResult) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The geographic location to use for the web search.
+type WebSearchUserLocation struct {
+
+	// The two-letter ISO 3166-1 alpha-2 country code. The code is case-insensitive.
+	Country *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *WebSearchUserLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebSearchUserLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebSearchUserLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Country != nil {
+		s.WriteString(schemas.WebSearchUserLocation_country, *v.Country)
+	}
+}
+func (v *WebSearchUserLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebSearchUserLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebSearchUserLocation_country:
+			v.Country = new(string)
+			return d.ReadString(schemas.WebSearchUserLocation_country, v.Country)
+		}
+		return nil
+	})
+}
+
 type Unit struct {
 	noSmithyDocumentSerde
 }

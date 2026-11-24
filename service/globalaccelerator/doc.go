@@ -36,7 +36,7 @@
 // Accelerator provides, you can configure these entry points to be IPv4 addresses
 // from your own IP address ranges that you bring to Global Accelerator (BYOIP).
 //
-// For a standard accelerator, they distribute incoming application traffic across
+// For a standard accelerator, it distributes incoming application traffic across
 // multiple endpoint resources in multiple Amazon Web Services Regions , which
 // increases the availability of your applications. Endpoints for standard
 // accelerators can be Network Load Balancers, Application Load Balancers, Amazon

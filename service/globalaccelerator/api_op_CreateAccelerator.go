@@ -75,12 +75,15 @@ type CreateAcceleratorInput struct {
 	// You can specify one or two addresses, separated by a space. Do not include the
 	// /32 suffix.
 	//
-	// Note that you can't update IP addresses for an existing accelerator. To change
-	// them, you must create a new accelerator with the new addresses.
+	// If you create an accelerator with only IP addresses provided by Global
+	// Accelerator, you can't update it later to use BYOIP addresses. If you create an
+	// accelerator with at least one BYOIP address, you can update its IP addresses
+	// later. For more information, see [Update an accelerator to change your IP addresses]in the Global Accelerator Developer Guide.
 	//
 	// For more information, see [Bring your own IP addresses (BYOIP)] in the Global Accelerator Developer Guide.
 	//
 	// [Bring your own IP addresses (BYOIP)]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+	// [Update an accelerator to change your IP addresses]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.update-accelerator.html
 	IpAddresses []string
 
 	// Create tags for an accelerator.

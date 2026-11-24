@@ -3789,6 +3789,9 @@ func TestCheckResponseSnapshot_InvokeWebSearch(t *testing.T) {
 				PublishedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
+		UserLocation: &types.WebSearchUserLocation{
+			Country: ptr.String("__Country__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -6581,6 +6584,9 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 				PublishedAfter:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				PublishedBefore: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
+		},
+		UserLocation: &types.WebSearchUserLocation{
+			Country: ptr.String("__Country__"),
 		},
 	})
 	if opErr == nil {
