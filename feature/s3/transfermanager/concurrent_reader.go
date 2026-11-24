@@ -43,9 +43,12 @@ type concurrentReader struct {
 	invocations      int32
 	etag             *string
 
-	ctx context.Context
-	m   sync.Mutex
-	wg  sync.WaitGroup
+	ctx  context.Context
+	m    sync.Mutex
+	wg   sync.WaitGroup
+	wake chan struct{}
+
+	dispatchWaits int
 
 	err error
 }
@@ -70,6 +73,10 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 				addFeatureUserAgent,
 			)
 		}}
+
+	if r.wake == nil {
+		r.wake = make(chan struct{}, 1)
+	}
 
 	var written int
 	var err error
@@ -96,6 +103,8 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 		}
 
 		if r.index == atomic.LoadInt32(&r.capacity) {
+			r.dispatchWaits++
+			<-r.wake
 			continue
 		}
 
@@ -373,7 +382,7 @@ func (r *concurrentReader) maybeGrowCapacity() {
 	// dispatched but not yet received, using the first part's size per part.
 	committed := r.buffered + int64(c-r.receiveCount)*r.partSize
 	if c <= r.consecutiveIndex || committed < r.bufferThreshold {
-		atomic.StoreInt32(&r.capacity, c+1)
+		r.setCapacity(c + 1)
 	}
 }
 
@@ -404,8 +413,7 @@ func (r *concurrentReader) rangeRead(p []byte) (int, error) {
 				r.readCount++
 				delete(r.buf, i)
 				if r.readCount == atomic.LoadInt32(&r.capacity) {
-					capacity := min(atomic.LoadInt32(&r.capacity)+r.sectionParts, r.partsCount)
-					atomic.StoreInt32(&r.capacity, capacity)
+					r.setCapacity(min(atomic.LoadInt32(&r.capacity)+r.sectionParts, r.partsCount))
 				}
 				if r.readCount >= r.partsCount {
 					r.setErr(io.EOF)
@@ -444,8 +452,7 @@ func (r *concurrentReader) rangeRead(p []byte) (int, error) {
 		} else {
 			r.readCount++
 			if r.readCount == atomic.LoadInt32(&r.capacity) {
-				capacity := min(atomic.LoadInt32(&r.capacity)+r.sectionParts, r.partsCount)
-				atomic.StoreInt32(&r.capacity, capacity)
+				r.setCapacity(min(atomic.LoadInt32(&r.capacity)+r.sectionParts, r.partsCount))
 			}
 			if r.readCount >= r.partsCount {
 				r.setErr(io.EOF)
@@ -456,11 +463,25 @@ func (r *concurrentReader) rangeRead(p []byte) (int, error) {
 	return written, r.getErr()
 }
 
+// setCapacity raises the dispatch ceiling and wakes the dispatcher waiting for it.
+func (r *concurrentReader) setCapacity(capacity int32) {
+	atomic.StoreInt32(&r.capacity, capacity)
+	r.signal()
+}
+
+// signal wakes the dispatcher in Read if it is waiting for capacity, an error or the end of a read.
+func (r *concurrentReader) signal() {
+	select {
+	case r.wake <- struct{}{}:
+	default:
+	}
+}
+
 func (r *concurrentReader) setDone(done bool) {
 	r.m.Lock()
-	defer r.m.Unlock()
-
 	r.done = done
+	r.m.Unlock()
+	r.signal()
 }
 
 func (r *concurrentReader) getDone() bool {
@@ -472,11 +493,11 @@ func (r *concurrentReader) getDone() bool {
 
 func (r *concurrentReader) setErr(err error) {
 	r.m.Lock()
-	defer r.m.Unlock()
-
 	if r.err == nil {
 		r.err = err
 	}
+	r.m.Unlock()
+	r.signal()
 }
 
 func (r *concurrentReader) getErr() error {
