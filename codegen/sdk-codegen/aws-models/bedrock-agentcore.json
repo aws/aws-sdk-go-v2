@@ -13747,6 +13747,9 @@
                                 "publishedDateFilter": {
                                     "publishedAfter": "2026-01-01T00:00:00Z"
                                 }
+                            },
+                            "userLocation": {
+                                "country": "US"
                             }
                         },
                         "output": {
@@ -13804,6 +13807,12 @@
                     "target": "com.amazonaws.bedrockagentcore#WebSearchFilters",
                     "traits": {
                         "smithy.api#documentation": "<p>The filters to apply to the search results.</p>"
+                    }
+                },
+                "userLocation": {
+                    "target": "com.amazonaws.bedrockagentcore#WebSearchUserLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p> <code>userLocation</code> may allow for Web Search results to be refined for that location. This is done by supplying a <code>country</code>. The field is optional.</p> <p>The value is checked against assigned ISO 3166-1 alpha-2 codes, so unassigned and user-assigned codes such as <code>UK</code> and <code>XK</code>, empty or whitespace-only values are rejected. An omitted value is treated as absent. Without location, as a fallback Web Search may use your query to localize results or default to <code>en_US</code>.</p>"
                     }
                 }
             },
@@ -24370,6 +24379,17 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcore#WebSearchCountryCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A two-letter ISO 3166-1 alpha-2 country code.</p>",
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                },
+                "smithy.api#pattern": "^[A-Za-z]{2}$"
+            }
+        },
         "com.amazonaws.bedrockagentcore#WebSearchFilters": {
             "type": "structure",
             "members": {
@@ -24441,6 +24461,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of web search results, in ranked order.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#WebSearchUserLocation": {
+            "type": "structure",
+            "members": {
+                "country": {
+                    "target": "com.amazonaws.bedrockagentcore#WebSearchCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The two-letter ISO 3166-1 alpha-2 country code. The code is case-insensitive.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The geographic location to use for the web search.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#WorkloadIdentityNameType": {
