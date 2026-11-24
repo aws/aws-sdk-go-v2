@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.12
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.12
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.11.13
-	github.com/aws/smithy-go v1.28.9
+	github.com/aws/smithy-go v1.28.10
 )
 
 require github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.12 // indirect
