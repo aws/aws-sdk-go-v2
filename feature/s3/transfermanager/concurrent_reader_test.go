@@ -601,3 +601,128 @@ func TestConcurrentReaderSmallReadsNoDeadlock(t *testing.T) {
 		t.Fatalf("expect downloaded stream to equal assembled parts")
 	}
 }
+
+// TestConcurrentReaderZeroLengthReadNoDeadlock guards against the deadlock in
+// GH #3641: a zero-length Read (e.g. Read(make([]byte, 0))) started the download
+// pipeline (the dispatch loop plus Concurrency download workers), but the inner
+// read returned immediately without ever draining r.ch. Once more than r.ch's
+// buffer (Concurrency) parts had been downloaded, a producer blocked forever on
+// its r.ch send and Read's r.wg.Wait() hung; cancelling the context could not
+// unblock the bare channel send. The fix short-circuits zero-length reads in
+// Read before any goroutine is started.
+//
+// The deadlock was a race on an instantly-set done flag, so reliably
+// reproducing the hang from outside Read isn't practical. Instead this asserts
+// the fix's invariant: a zero-length read does no work at all — it returns
+// (0, nil) and spins up none of the download pipeline (zero GetObject calls),
+// which is precisely what makes it impossible to orphan a producer on a full
+// r.ch. The timeout guards remain as a backstop so a regression that
+// reintroduces the hang surfaces as a failure, not a wedged test binary. Both
+// GetObject branches are covered since each has its own dispatch path in Read.
+func TestConcurrentReaderZeroLengthReadNoDeadlock(t *testing.T) {
+	const (
+		partSize        = 1 << 10
+		bufferThreshold = 6 * partSize
+		sectionParts    = 6 // dispatch ceiling, > Concurrency so >r.ch-buffer parts are dispatched
+		concurrency     = 2 // r.ch buffer size
+		partsCount      = 8 // the 8-part object from the issue
+	)
+
+	cases := map[string]struct {
+		getType     types.GetObjectType
+		getObjectFn func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
+	}{
+		"parts":  {getType: types.GetObjectParts, getObjectFn: s3testing.ReaderPartGetObjectFn},
+		"ranges": {getType: types.GetObjectRanges, getObjectFn: s3testing.RangeGetObjectFn},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			s3Client := &s3testing.TransferManagerLoggingClient{}
+			s3Client.GetObjectFn = c.getObjectFn
+			s3Client.PartsCount = partsCount
+
+			var expect []byte
+			partsData := make([][]byte, partsCount)
+			for i := int32(0); i < partsCount; i++ {
+				b := bytes.Repeat([]byte{byte('A' + i%26)}, partSize)
+				expect = append(expect, b...)
+				partsData[i] = b
+			}
+			s3Client.Data = expect
+			s3Client.PartsData = partsData
+
+			r := &concurrentReader{
+				partSize:        partSize,
+				partsCount:      partsCount,
+				sectionParts:    sectionParts,
+				getType:         c.getType,
+				bufferThreshold: bufferThreshold,
+				options: Options{
+					GetObjectType: c.getType,
+					Concurrency:   concurrency,
+					S3:            s3Client,
+				},
+				in:         &GetObjectInput{Bucket: aws.String("bucket"), Key: aws.String("key")},
+				capacity:   sectionParts,
+				buf:        make(map[int32]*outChunk),
+				ctx:        context.Background(),
+				ch:         make(chan outChunk, concurrency),
+				totalBytes: int64(len(expect)),
+			}
+
+			// (1) A zero-length read must return (0, nil) promptly without
+			// spinning up the download pipeline. Before the fix this blocks
+			// forever.
+			type readResult struct {
+				n   int
+				err error
+			}
+			zero := make(chan readResult, 1)
+			go func() {
+				n, err := r.Read(make([]byte, 0))
+				zero <- readResult{n, err}
+			}()
+			select {
+			case res := <-zero:
+				if res.n != 0 || res.err != nil {
+					t.Fatalf("zero-length Read = (%d, %v), want (0, nil)", res.n, res.err)
+				}
+			case <-time.After(10 * time.Second):
+				t.Fatal("DEADLOCK: zero-length Read did not return within 10s (GH #3641)")
+			}
+
+			// A zero-length read must not engage the download pipeline at all.
+			// Zero GetObject calls is the deterministic signature of the fix and
+			// the reason no producer can be left blocked on r.ch.
+			if got := s3Client.GetObjectInvocations; got != 0 {
+				t.Fatalf("zero-length Read scheduled %d GetObject call(s), want 0", got)
+			}
+
+			// (2) The same reader must still stream the whole object afterwards.
+			type readAllResult struct {
+				b   []byte
+				err error
+			}
+			all := make(chan readAllResult, 1)
+			go func() {
+				b, err := io.ReadAll(r)
+				all <- readAllResult{b, err}
+			}()
+			select {
+			case res := <-all:
+				if res.err != nil {
+					t.Fatalf("io.ReadAll after zero-length read: %v", res.err)
+				}
+				if e, a := len(expect), len(res.b); e != a {
+					t.Fatalf("expect %d bytes, got %d", e, a)
+				}
+				if !bytes.Equal(expect, res.b) {
+					t.Fatal("expect streamed bytes to equal the assembled object")
+				}
+			case <-time.After(15 * time.Second):
+				t.Fatal("io.ReadAll did not complete within 15s after a zero-length read")
+			}
+		})
+	}
+}
