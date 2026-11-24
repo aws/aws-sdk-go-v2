@@ -1,3 +1,7 @@
+# v1.45.12 (2026-11-24)
+
+* **Documentation**: AWS Global Accelerator supports Client IP Preservation for NLBs with TLS Listener endpoints.
+
 # v1.45.11 (2026-11-10)
 
 * **Dependency Update**: Update to smithy-go v1.28.9.

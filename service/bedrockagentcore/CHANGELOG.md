@@ -1,3 +1,7 @@
+# v1.61.0 (2026-11-24)
+
+* **Feature**: Adds the optional userLocation parameter to InvokeWebSearch. Specify a two-letter ISO 3166-1 alpha-2 country code to refine web search results for that country. InvokeWebSearch also accepts search queries in languages other than English.
+
 # v1.60.0 (2026-11-19)
 
 * **Feature**: Adds the AWS Billing x402 payment type to ProcessPayment. Agents can purchase x402-enabled AWS Marketplace products and have the charges billed to the AWS account, without a wallet. Requests use the service-managed payment instrument ID aws.agentcorepayments.awsbilling.v1.

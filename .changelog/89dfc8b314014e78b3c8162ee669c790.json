@@ -1,8 +1,0 @@
-{
-    "id": "89dfc8b3-1401-4e78-b3c8-162ee669c790",
-    "type": "bugfix",
-    "description": "Retry part body read failures in `GetObject` up to `PartBodyMaxRetries`, matching `DownloadObject`.",
-    "modules": [
-        "feature/s3/transfermanager"
-    ]
-}

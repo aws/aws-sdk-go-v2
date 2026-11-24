@@ -1,3 +1,16 @@
+# Release (2026-11-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.5.12](feature/s3/transfermanager/CHANGELOG.md#v0512-2026-11-24)
+  * **Bug Fix**: Fix GetObject and DownloadObject failing or reporting an incorrect length when the requested byte range extends past the end of an S3 object.
+  * **Bug Fix**: Preserve the abort error alongside the original upload error when an S3 multipart upload and its cleanup both fail.
+  * **Bug Fix**: Quick exit GetObject body read for empty buffer so it does not cause deadlock
+  * **Bug Fix**: Retry part body read failures in `GetObject` up to `PartBodyMaxRetries`, matching `DownloadObject`.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.61.0](service/bedrockagentcore/CHANGELOG.md#v1610-2026-11-24)
+  * **Feature**: Adds the optional userLocation parameter to InvokeWebSearch. Specify a two-letter ISO 3166-1 alpha-2 country code to refine web search results for that country. InvokeWebSearch also accepts search queries in languages other than English.
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.45.12](service/globalaccelerator/CHANGELOG.md#v14512-2026-11-24)
+  * **Documentation**: AWS Global Accelerator supports Client IP Preservation for NLBs with TLS Listener endpoints.
+
 # Release (2026-11-23)
 
 ## Module Highlights

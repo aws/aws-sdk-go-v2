@@ -1,8 +1,0 @@
-{
-    "id": "c3e3b00e-5dde-46b5-9656-a7f5002d2213",
-    "type": "bugfix",
-    "description": "Quick exit GetObject body read for empty buffer so it does not cause deadlock",
-    "modules": [
-        "feature/s3/transfermanager"
-    ]
-}

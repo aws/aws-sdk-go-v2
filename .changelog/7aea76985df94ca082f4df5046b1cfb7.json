@@ -1,8 +1,0 @@
-{
-    "id": "7aea7698-5df9-4ca0-82f4-df5046b1cfb7",
-    "type": "feature",
-    "description": "Adds the optional userLocation parameter to InvokeWebSearch. Specify a two-letter ISO 3166-1 alpha-2 country code to refine web search results for that country. InvokeWebSearch also accepts search queries in languages other than English.",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}
