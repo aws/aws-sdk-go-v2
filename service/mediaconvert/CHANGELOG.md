@@ -1,3 +1,8 @@
+# v1.109.1 (2026-11-25)
+
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.109.0 (2026-11-20)
 
 * **Feature**: This release adds support for the DTS-X and DTS audio codecs, AV1 encoding improvements including Fast decode, GOP size in seconds, and temporal adaptive quantization, and Dynamic Multiview for H.264 and H.265 outputs.

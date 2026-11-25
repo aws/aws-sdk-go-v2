@@ -1,3 +1,8 @@
+# v1.78.1 (2026-11-25)
+
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.78.0 (2026-11-23)
 
 * **Feature**: Launch CloudFront in AWS European Sovereign Cloud.

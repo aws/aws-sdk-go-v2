@@ -1,3 +1,8 @@
+# v1.18.1 (2026-11-25)
+
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2026-11-16)
 
 * **Feature**: Amazon S3 Vectors now supports hybrid search, providing metadata text search along with vector search.

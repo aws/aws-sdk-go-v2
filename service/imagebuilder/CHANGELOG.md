@@ -1,3 +1,8 @@
+# v1.70.1 (2026-11-25)
+
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.70.0 (2026-11-13)
 
 * **Feature**: Add documentation clarification around List API behavior, and add image available waiter

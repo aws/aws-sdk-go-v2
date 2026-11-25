@@ -1,8 +1,0 @@
-{
-    "id": "51b257ce-64ad-40ec-ba97-54c275fafb5b",
-    "type": "bugfix",
-    "description": "Validate event stream message prelude lengths when decoding.",
-    "modules": [
-        "aws/protocol/eventstream"
-    ]
-}

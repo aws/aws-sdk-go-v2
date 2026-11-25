@@ -1,3 +1,8 @@
+# v1.61.1 (2026-11-25)
+
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.0 (2026-11-18)
 
 * **Feature**: Adds support for populating intermediate tables with results from PySpark analysis templates.

@@ -1,3 +1,8 @@
+# v1.74.1 (2026-11-25)
+
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.74.0 (2026-11-12)
 
 * **Feature**: Add post origin manifest hook, add HLS tag processor

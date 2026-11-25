@@ -1,3 +1,19 @@
+# Release (2026-11-25)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream`: [v1.7.28](aws/protocol/eventstream/CHANGELOG.md#v1728-2026-11-25)
+  * **Bug Fix**: Return an error when encoding an event stream message too long for its 32-bit length field instead of writing a truncated length.
+  * **Bug Fix**: Validate event stream message prelude lengths when decoding.
+* `github.com/aws/aws-sdk-go-v2/service/elbproxy`: [v1.0.0](service/elbproxy/CHANGELOG.md#v100-2026-11-25)
+  * **Release**: New AWS service client module
+  * **Feature**: Introducing Elastic Load Balancing for Envoy. Run your existing Envoy configurations with AWS integrations, managed scaling, and automatic patching.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.88.0](service/wafv2/CHANGELOG.md#v1880-2026-11-25)
+  * **Feature**: AWS WAF added support for associating AWS WAF web ACLs with Elastic Load Balancing proxies. You can now use AssociateWebACL, DisassociateWebACL, GetWebACLForResource, and ListResourcesForWebACL with the ELB PROXY resource type to protect your proxies with AWS WAF
+
 # Release (2026-11-24)
 
 ## Module Highlights

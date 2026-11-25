@@ -1,3 +1,8 @@
+# v1.54.1 (2026-11-25)
+
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2026-11-20)
 
 * **Feature**: Add support for the use of virtual devices on Device Farm.

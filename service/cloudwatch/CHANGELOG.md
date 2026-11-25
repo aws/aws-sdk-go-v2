@@ -1,3 +1,8 @@
+# v1.76.1 (2026-11-25)
+
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.76.0 (2026-11-12)
 
 * **Feature**: Adds support for saving, retrieving, listing, and deleting CloudWatch metric data query definitions.

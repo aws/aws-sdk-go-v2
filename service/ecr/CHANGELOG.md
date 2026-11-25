@@ -1,3 +1,8 @@
+# v1.69.1 (2026-11-25)
+
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.69.0 (2026-11-17)
 
 * **Feature**: Adds a new image scan status for images that exceed the maximum size supported by Amazon ECR enhanced scanning.

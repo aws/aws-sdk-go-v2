@@ -1,3 +1,8 @@
+# v0.5.13 (2026-11-25)
+
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v0.5.12 (2026-11-24)
 
 * **Bug Fix**: Fix GetObject and DownloadObject failing or reporting an incorrect length when the requested byte range extends past the end of an S3 object.

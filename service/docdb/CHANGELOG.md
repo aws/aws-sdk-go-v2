@@ -1,3 +1,8 @@
+# v1.59.2 (2026-11-25)
+
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.59.1 (2026-11-13)
 
 * **Documentation**: Update the documentation for the --engine-version flag for cluster creation

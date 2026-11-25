@@ -1,3 +1,8 @@
+# v1.74.2 (2026-11-25)
+
+* **Dependency Update**: Update to smithy-go v1.28.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.74.1 (2026-11-17)
 
 * **Bug Fix**: Fail DynamoDB operations, and retry them, when the response body does not match the `X-Amz-Crc32` header instead of returning the corrupted output.
