@@ -1,0 +1,8 @@
+{
+    "id": "8ce772c1-2766-4ff1-a66c-43e7a9562b26",
+    "type": "feature",
+    "description": "Introducing Elastic Load Balancing for Envoy. Run your existing Envoy configurations with AWS integrations, managed scaling, and automatic patching.",
+    "modules": [
+        "service/elbproxy"
+    ]
+}

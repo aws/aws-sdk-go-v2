@@ -20,9 +20,10 @@ import (
 // combination of the types Rule, RuleGroup, and managed rule group. You can associate a web
 // ACL with one or more Amazon Web Services resources to protect. The resource
 // types include Amazon CloudFront distribution, Amazon API Gateway REST API,
-// Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App
-// Runner service, Amplify application, Amazon Web Services Verified Access
-// instance, and Amazon Bedrock AgentCore Gateway.
+// Application Load Balancer, Elastic Load Balancing for Envoy proxy, AppSync
+// GraphQL API, Amazon Cognito user pool, App Runner service, Amplify application,
+// Amazon Web Services Verified Access instance, and Amazon Bedrock AgentCore
+// Gateway.
 func (c *Client) CreateWebACL(ctx context.Context, params *CreateWebACLInput, optFns ...func(*Options)) (*CreateWebACLOutput, error) {
 	if params == nil {
 		params = &CreateWebACLInput{}
@@ -86,8 +87,9 @@ type CreateWebACLInput struct {
 	// Use this to customize the maximum size of the request body that your protected
 	// resources forward to WAF for inspection. You can customize this setting for
 	// Application Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner,
-	// or Verified Access resources. The default setting is 8 KB (8,192 bytes) for
-	// Application Load Balancer and 16 KB (16,384 bytes) for the other resource types.
+	// Verified Access, or Elastic Load Balancing for Envoy resources. The default
+	// setting is 8 KB (8,192 bytes) for Application Load Balancer and 16 KB (16,384
+	// bytes) for the other resource types.
 	//
 	// You are charged additional fees when your protected resources forward body
 	// sizes that are larger than the default. For more information, see [WAF Pricing].

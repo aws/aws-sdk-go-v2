@@ -53,6 +53,9 @@ type GetWebACLForResourceInput struct {
 	//   - For an Application Load Balancer:
 	//   arn:partition:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
 	//
+	//   - For an Elastic Load Balancing for Envoy proxy:
+	//   arn:partition:elasticloadbalancing:region:account-id:proxy/proxy-name:proxy-id
+	//
 	//   - For an Amazon API Gateway REST API:
 	//   arn:partition:apigateway:region::/restapis/api-id/stages/stage-name
 	//

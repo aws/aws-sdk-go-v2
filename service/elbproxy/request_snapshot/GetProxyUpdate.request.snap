@@ -1,0 +1,7 @@
+POST /service/ELBProxy/operation/GetProxyUpdate
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿oproxyIdentifiers__ProxyIdentifier__pupdateIdentifiert__UpdateIdentifier__ÿ

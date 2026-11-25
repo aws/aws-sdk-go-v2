@@ -683,8 +683,9 @@ func (v *AsnMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
 // Use this to customize the maximum size of the request body that your protected
 // resources forward to WAF for inspection. You can customize this setting for
 // Application Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner,
-// or Verified Access resources. The default setting is 8 KB (8,192 bytes) for
-// Application Load Balancer and 16 KB (16,384 bytes) for the other resource types.
+// Verified Access, or Elastic Load Balancing for Envoy resources. The default
+// setting is 8 KB (8,192 bytes) for Application Load Balancer and 16 KB (16,384
+// bytes) for the other resource types.
 //
 // You are charged additional fees when your protected resources forward body
 // sizes that are larger than the default. For more information, see [WAF Pricing].
@@ -734,11 +735,11 @@ type AssociationConfig struct {
 	ChallengeJavascriptSdkInjection map[string]ChallengeJavascriptSdkInjectionConfig
 
 	// Customizes the maximum size of the request body that your protected Application
-	// Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
-	// Access resources forward to WAF for inspection. The default size is 8 KB (8,192
-	// bytes) for Application Load Balancer and 16 KB (16,384 bytes) for the other
-	// resource types. You can change the setting for any of the available resource
-	// types.
+	// Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner, Verified
+	// Access, and Elastic Load Balancing for Envoy resources forward to WAF for
+	// inspection. The default size is 8 KB (8,192 bytes) for Application Load Balancer
+	// and 16 KB (16,384 bytes) for the other resource types. You can change the
+	// setting for any of the available resource types.
 	//
 	// You are charged additional fees when your protected resources forward body
 	// sizes that are larger than the default. For more information, see [WAF Pricing].
@@ -1387,10 +1388,10 @@ type Body struct {
 	//   - For Application Load Balancer, the default limit is 8 KB (8,192 bytes), and
 	//   you can change the limit in the web ACL AssociationConfig .
 	//
-	//   - For CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
-	//   Access, the default limit is 16 KB (16,384 bytes), and you can increase the
-	//   limit for each resource type in the web ACL AssociationConfig , for additional
-	//   processing fees.
+	//   - For CloudFront, API Gateway, Amazon Cognito, App Runner, Verified Access,
+	//   and Elastic Load Balancing for Envoy, the default limit is 16 KB (16,384 bytes),
+	//   and you can increase the limit for each resource type in the web ACL
+	//   AssociationConfig , for additional processing fees.
 	//
 	//   - For Amplify, use the CloudFront limit.
 	//
@@ -1558,14 +1559,14 @@ type ByteMatchStatement struct {
 	//   - UriPath : The value that you want WAF to search for in the URI path, for
 	//   example, /images/daily-ad.jpg .
 	//
-	//   - JA3Fingerprint : Available for use with Amazon CloudFront distributions and
-	//   Application Load Balancers. Match against the request's JA3 fingerprint. The JA3
-	//   fingerprint is a 32-character hash derived from the TLS Client Hello of an
-	//   incoming request. This fingerprint serves as a unique identifier for the
-	//   client's TLS configuration. You can use this choice with a ByteMatchStatement
-	//   , RegexMatchStatement , RegexPatternSetReferenceStatement , or
-	//   SizeConstraintStatement . You can't use it with SqliMatchStatement or
-	//   XssMatchStatement .
+	//   - JA3Fingerprint : Available for use with Amazon CloudFront distributions,
+	//   Application Load Balancers, and Elastic Load Balancing for Envoy proxies. Match
+	//   against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character
+	//   hash derived from the TLS Client Hello of an incoming request. This fingerprint
+	//   serves as a unique identifier for the client's TLS configuration. You can use
+	//   this choice with a ByteMatchStatement , RegexMatchStatement ,
+	//   RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
+	//   it with SqliMatchStatement or XssMatchStatement .
 	//
 	// You can obtain the JA3 fingerprint for client requests from the web ACL logs.
 	//   If WAF is able to calculate the fingerprint, it includes it in the logs. For
@@ -3975,10 +3976,10 @@ type FieldToMatch struct {
 	//   - For Application Load Balancer, the default limit is 8 KB (8,192 bytes), and
 	//   you can change the limit in the web ACL AssociationConfig .
 	//
-	//   - For CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
-	//   Access, the default limit is 16 KB (16,384 bytes), and you can increase the
-	//   limit for each resource type in the web ACL AssociationConfig , for additional
-	//   processing fees.
+	//   - For CloudFront, API Gateway, Amazon Cognito, App Runner, Verified Access,
+	//   and Elastic Load Balancing for Envoy, the default limit is 16 KB (16,384 bytes),
+	//   and you can increase the limit for each resource type in the web ACL
+	//   AssociationConfig , for additional processing fees.
 	//
 	//   - For Amplify, use the CloudFront limit.
 	//
@@ -4015,13 +4016,13 @@ type FieldToMatch struct {
 	// the underlying host service.
 	Headers *Headers
 
-	// Available for use with Amazon CloudFront distributions and Application Load
-	// Balancers. Match against the request's JA3 fingerprint. The JA3 fingerprint is a
-	// 32-character hash derived from the TLS Client Hello of an incoming request. This
-	// fingerprint serves as a unique identifier for the client's TLS configuration.
-	// WAF calculates and logs this fingerprint for each request that has enough TLS
-	// Client Hello information for the calculation. Almost all web requests include
-	// this information.
+	// Available for use with Amazon CloudFront distributions, Application Load
+	// Balancers, and Elastic Load Balancing for Envoy proxies. Match against the
+	// request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived
+	// from the TLS Client Hello of an incoming request. This fingerprint serves as a
+	// unique identifier for the client's TLS configuration. WAF calculates and logs
+	// this fingerprint for each request that has enough TLS Client Hello information
+	// for the calculation. Almost all web requests include this information.
 	//
 	// You can use this choice with a ByteMatchStatement , RegexMatchStatement ,
 	// RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
@@ -4039,13 +4040,13 @@ type FieldToMatch struct {
 	// [Log fields]: https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html
 	JA3Fingerprint *JA3Fingerprint
 
-	// Available for use with Amazon CloudFront distributions and Application Load
-	// Balancers. Match against the request's JA4 fingerprint. The JA4 fingerprint is a
-	// 36-character hash derived from the TLS Client Hello of an incoming request. This
-	// fingerprint serves as a unique identifier for the client's TLS configuration.
-	// WAF calculates and logs this fingerprint for each request that has enough TLS
-	// Client Hello information for the calculation. Almost all web requests include
-	// this information.
+	// Available for use with Amazon CloudFront distributions, Application Load
+	// Balancers, and Elastic Load Balancing for Envoy proxies. Match against the
+	// request's JA4 fingerprint. The JA4 fingerprint is a 36-character hash derived
+	// from the TLS Client Hello of an incoming request. This fingerprint serves as a
+	// unique identifier for the client's TLS configuration. WAF calculates and logs
+	// this fingerprint for each request that has enough TLS Client Hello information
+	// for the calculation. Almost all web requests include this information.
 	//
 	// You can use this choice with a ByteMatchStatement , RegexMatchStatement ,
 	// RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
@@ -4078,10 +4079,10 @@ type FieldToMatch struct {
 	//   - For Application Load Balancer, the default limit is 8 KB (8,192 bytes), and
 	//   you can change the limit in the web ACL AssociationConfig .
 	//
-	//   - For CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
-	//   Access, the default limit is 16 KB (16,384 bytes), and you can increase the
-	//   limit for each resource type in the web ACL AssociationConfig , for additional
-	//   processing fees.
+	//   - For CloudFront, API Gateway, Amazon Cognito, App Runner, Verified Access,
+	//   and Elastic Load Balancing for Envoy, the default limit is 16 KB (16,384 bytes),
+	//   and you can increase the limit for each resource type in the web ACL
+	//   AssociationConfig , for additional processing fees.
 	//
 	//   - For Amplify, use the CloudFront limit.
 	//
@@ -5489,13 +5490,13 @@ func (v *IPSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Available for use with Amazon CloudFront distributions and Application Load
-// Balancers. Match against the request's JA3 fingerprint. The JA3 fingerprint is a
-// 32-character hash derived from the TLS Client Hello of an incoming request. This
-// fingerprint serves as a unique identifier for the client's TLS configuration.
-// WAF calculates and logs this fingerprint for each request that has enough TLS
-// Client Hello information for the calculation. Almost all web requests include
-// this information.
+// Available for use with Amazon CloudFront distributions, Application Load
+// Balancers, and Elastic Load Balancing for Envoy proxies. Match against the
+// request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived
+// from the TLS Client Hello of an incoming request. This fingerprint serves as a
+// unique identifier for the client's TLS configuration. WAF calculates and logs
+// this fingerprint for each request that has enough TLS Client Hello information
+// for the calculation. Almost all web requests include this information.
 //
 // You can use this choice with a ByteMatchStatement , RegexMatchStatement ,
 // RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
@@ -5555,13 +5556,13 @@ func (v *JA3Fingerprint) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Available for use with Amazon CloudFront distributions and Application Load
-// Balancers. Match against the request's JA4 fingerprint. The JA4 fingerprint is a
-// 36-character hash derived from the TLS Client Hello of an incoming request. This
-// fingerprint serves as a unique identifier for the client's TLS configuration.
-// WAF calculates and logs this fingerprint for each request that has enough TLS
-// Client Hello information for the calculation. Almost all web requests include
-// this information.
+// Available for use with Amazon CloudFront distributions, Application Load
+// Balancers, and Elastic Load Balancing for Envoy proxies. Match against the
+// request's JA4 fingerprint. The JA4 fingerprint is a 36-character hash derived
+// from the TLS Client Hello of an incoming request. This fingerprint serves as a
+// unique identifier for the client's TLS configuration. WAF calculates and logs
+// this fingerprint for each request that has enough TLS Client Hello information
+// for the calculation. Almost all web requests include this information.
 //
 // You can use this choice with a ByteMatchStatement , RegexMatchStatement ,
 // RegexPatternSetReferenceStatement , or SizeConstraintStatement . You can't use
@@ -5691,10 +5692,10 @@ type JsonBody struct {
 	//   - For Application Load Balancer, the default limit is 8 KB (8,192 bytes), and
 	//   you can change the limit in the web ACL AssociationConfig .
 	//
-	//   - For CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
-	//   Access, the default limit is 16 KB (16,384 bytes), and you can increase the
-	//   limit for each resource type in the web ACL AssociationConfig , for additional
-	//   processing fees.
+	//   - For CloudFront, API Gateway, Amazon Cognito, App Runner, Verified Access,
+	//   and Elastic Load Balancing for Envoy, the default limit is 16 KB (16,384 bytes),
+	//   and you can increase the limit for each resource type in the web ACL
+	//   AssociationConfig , for additional processing fees.
 	//
 	//   - For Amplify, use the CloudFront limit.
 	//
@@ -9539,11 +9540,11 @@ func (v *ReleaseSummary) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // Customizes the maximum size of the request body that your protected Application
-// Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified
-// Access resources forward to WAF for inspection. The default size is 8 KB (8,192
-// bytes) for Application Load Balancer and 16 KB (16,384 bytes) for the other
-// resource types. You can change the setting for any of the available resource
-// types.
+// Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner, Verified
+// Access, and Elastic Load Balancing for Envoy resources forward to WAF for
+// inspection. The default size is 8 KB (8,192 bytes) for Application Load Balancer
+// and 16 KB (16,384 bytes) for the other resource types. You can change the
+// setting for any of the available resource types.
 //
 // You are charged additional fees when your protected resources forward body
 // sizes that are larger than the default. For more information, see [WAF Pricing].
@@ -9560,8 +9561,9 @@ type RequestBodyAssociatedResourceTypeConfig struct {
 
 	// Specifies the maximum size of the web request body component that an associated
 	// Application Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner,
-	// or Verified Access resource should send to WAF for inspection. This applies to
-	// statements in the web ACL that inspect the body or JSON body.
+	// Verified Access, or Elastic Load Balancing for Envoy resource should send to WAF
+	// for inspection. This applies to statements in the web ACL that inspect the body
+	// or JSON body.
 	//
 	// You can specify KB_8 only for Application Load Balancer, with the
 	// APPLICATION_LOAD_BALANCER resource type.
@@ -12771,9 +12773,10 @@ func (v *VisibilityConfig) Deserialize(d smithy.ShapeDeserializer) error {
 // combination of the types Rule, RuleGroup, and managed rule group. You can associate a web
 // ACL with one or more Amazon Web Services resources to protect. The resource
 // types include Amazon CloudFront distribution, Amazon API Gateway REST API,
-// Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App
-// Runner service, Amplify application, Amazon Web Services Verified Access
-// instance, and Amazon Bedrock AgentCore Gateway.
+// Application Load Balancer, Elastic Load Balancing for Envoy proxy, AppSync
+// GraphQL API, Amazon Cognito user pool, App Runner service, Amplify application,
+// Amazon Web Services Verified Access instance, and Amazon Bedrock AgentCore
+// Gateway.
 type WebACL struct {
 
 	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with
@@ -12819,8 +12822,9 @@ type WebACL struct {
 	// Use this to customize the maximum size of the request body that your protected
 	// resources forward to WAF for inspection. You can customize this setting for
 	// Application Load Balancer, CloudFront, API Gateway, Amazon Cognito, App Runner,
-	// or Verified Access resources. The default setting is 8 KB (8,192 bytes) for
-	// Application Load Balancer and 16 KB (16,384 bytes) for the other resource types.
+	// Verified Access, or Elastic Load Balancing for Envoy resources. The default
+	// setting is 8 KB (8,192 bytes) for Application Load Balancer and 16 KB (16,384
+	// bytes) for the other resource types.
 	//
 	// You are charged additional fees when your protected resources forward body
 	// sizes that are larger than the default. For more information, see [WAF Pricing].

@@ -556,7 +556,7 @@ var _AsnString = smithy.NewSchema(smithy.ShapeID{
 var AssociatedResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "AssociatedResourceType",
-}, smithy.ShapeTypeEnum, 7)
+}, smithy.ShapeTypeEnum, 8)
 var AssociatedResourceType_CLOUDFRONT *smithy.Schema
 
 var AssociatedResourceType_API_GATEWAY *smithy.Schema
@@ -566,6 +566,8 @@ var AssociatedResourceType_COGNITO_USER_POOL *smithy.Schema
 var AssociatedResourceType_APP_RUNNER_SERVICE *smithy.Schema
 
 var AssociatedResourceType_VERIFIED_ACCESS_INSTANCE *smithy.Schema
+
+var AssociatedResourceType_ELB_PROXY *smithy.Schema
 
 var AssociatedResourceType_AGENTCORE_GATEWAY *smithy.Schema
 
@@ -3626,7 +3628,7 @@ var _ResourceArns_member *smithy.Schema
 var ResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 8)
+}, smithy.ShapeTypeEnum, 9)
 var ResourceType_APPLICATION_LOAD_BALANCER *smithy.Schema
 
 var ResourceType_API_GATEWAY *smithy.Schema
@@ -3640,6 +3642,8 @@ var ResourceType_APP_RUNNER_SERVICE *smithy.Schema
 var ResourceType_VERIFIED_ACCESS_INSTANCE *smithy.Schema
 
 var ResourceType_AMPLIFY *smithy.Schema
+
+var ResourceType_ELB_PROXY *smithy.Schema
 
 var ResourceType_AGENTCORE_GATEWAY *smithy.Schema
 
@@ -7256,6 +7260,8 @@ func init() {
 
 	AssociatedResourceType_VERIFIED_ACCESS_INSTANCE = AssociatedResourceType.AddMember("VERIFIED_ACCESS_INSTANCE", smithyprelude.Unit)
 
+	AssociatedResourceType_ELB_PROXY = AssociatedResourceType.AddMember("ELB_PROXY", smithyprelude.Unit)
+
 	AssociatedResourceType_AGENTCORE_GATEWAY = AssociatedResourceType.AddMember("AGENTCORE_GATEWAY", smithyprelude.Unit)
 
 	AssociatedResourceType_APPLICATION_LOAD_BALANCER = AssociatedResourceType.AddMember("APPLICATION_LOAD_BALANCER", smithyprelude.Unit)
@@ -8077,6 +8083,8 @@ func init() {
 	ResourceType_VERIFIED_ACCESS_INSTANCE = ResourceType.AddMember("VERIFIED_ACCESS_INSTANCE", smithyprelude.Unit)
 
 	ResourceType_AMPLIFY = ResourceType.AddMember("AMPLIFY", smithyprelude.Unit)
+
+	ResourceType_ELB_PROXY = ResourceType.AddMember("ELB_PROXY", smithyprelude.Unit)
 
 	ResourceType_AGENTCORE_GATEWAY = ResourceType.AddMember("AGENTCORE_GATEWAY", smithyprelude.Unit)
 

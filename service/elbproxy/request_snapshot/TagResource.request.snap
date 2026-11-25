@@ -1,0 +1,7 @@
+POST /service/ELBProxy/operation/TagResource
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kresourceArno__ResourceArn__dtags¿dkey0i__Value__ÿÿ

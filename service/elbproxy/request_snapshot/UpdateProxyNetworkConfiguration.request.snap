@@ -1,0 +1,7 @@
+POST /service/ELBProxy/operation/UpdateProxyNetworkConfiguration
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿oproxyIdentifiers__ProxyIdentifier__pvpcConfiguration¿nsecurityGroupsŸ¿osecurityGroupIds__SecurityGroupId__ÿ¿osecurityGroupIds__SecurityGroupId__ÿÿgsubnetsŸ¿hsubnetIdl__SubnetId__ÿ¿hsubnetIdl__SubnetId__ÿÿÿÿ

@@ -59,6 +59,7 @@ const (
 	AssociatedResourceTypeCognitoUserPool         AssociatedResourceType = "COGNITO_USER_POOL"
 	AssociatedResourceTypeAppRunnerService        AssociatedResourceType = "APP_RUNNER_SERVICE"
 	AssociatedResourceTypeVerifiedAccessInstance  AssociatedResourceType = "VERIFIED_ACCESS_INSTANCE"
+	AssociatedResourceTypeElbProxy                AssociatedResourceType = "ELB_PROXY"
 	AssociatedResourceTypeAgentcoreGateway        AssociatedResourceType = "AGENTCORE_GATEWAY"
 	AssociatedResourceTypeApplicationLoadBalancer AssociatedResourceType = "APPLICATION_LOAD_BALANCER"
 )
@@ -74,6 +75,7 @@ func (AssociatedResourceType) Values() []AssociatedResourceType {
 		"COGNITO_USER_POOL",
 		"APP_RUNNER_SERVICE",
 		"VERIFIED_ACCESS_INSTANCE",
+		"ELB_PROXY",
 		"AGENTCORE_GATEWAY",
 		"APPLICATION_LOAD_BALANCER",
 	}
@@ -1581,6 +1583,7 @@ const (
 	ResourceTypeAppRunnerService        ResourceType = "APP_RUNNER_SERVICE"
 	ResourceTypeVerifiedAccessInstance  ResourceType = "VERIFIED_ACCESS_INSTANCE"
 	ResourceTypeAmplify                 ResourceType = "AMPLIFY"
+	ResourceTypeElbProxy                ResourceType = "ELB_PROXY"
 	ResourceTypeAgentcoreGateway        ResourceType = "AGENTCORE_GATEWAY"
 )
 
@@ -1597,6 +1600,7 @@ func (ResourceType) Values() []ResourceType {
 		"APP_RUNNER_SERVICE",
 		"VERIFIED_ACCESS_INSTANCE",
 		"AMPLIFY",
+		"ELB_PROXY",
 		"AGENTCORE_GATEWAY",
 	}
 }

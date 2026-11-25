@@ -1,0 +1,8 @@
+{
+    "id": "809a7c40-aac9-4bc9-aed4-1084ac8832e5",
+    "type": "feature",
+    "description": "AWS WAF added support for associating AWS WAF web ACLs with Elastic Load Balancing proxies. You can now use AssociateWebACL, DisassociateWebACL, GetWebACLForResource, and ListResourcesForWebACL with the ELB PROXY resource type to protect your proxies with AWS WAF",
+    "modules": [
+        "service/wafv2"
+    ]
+}
