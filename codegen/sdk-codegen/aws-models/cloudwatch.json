@@ -829,6 +829,9 @@
                 "target": "com.amazonaws.cloudwatch#PartialFailure"
             }
         },
+        "com.amazonaws.cloudwatch#Boolean": {
+            "type": "boolean"
+        },
         "com.amazonaws.cloudwatch#ComparisonOperator": {
             "type": "enum",
             "members": {
@@ -3829,6 +3832,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the enrichment configuration for the account was last\n            stored.</p>"
                     }
+                },
+                "EnableTagEnrichment": {
+                    "target": "com.amazonaws.cloudwatch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether enriched metrics include resource tag labels for the account.\n            This parameter is omitted when enrichment is stopped.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6054,7 +6063,7 @@
                 "RecentlyActive": {
                     "target": "com.amazonaws.cloudwatch#RecentlyActive",
                     "traits": {
-                        "smithy.api#documentation": "<p>To filter the results to show only metrics that have had data points published in the\n            past three hours, specify this parameter with a value of <code>PT3H</code>. This is the\n            only valid value for this parameter.</p>\n         <p>The results that are returned are an approximation of the value you specify. There is\n            a low probability that the returned results include metrics with last published data as\n            much as 50 minutes more than the specified time interval.</p>"
+                        "smithy.api#documentation": "<p>To filter the results to show only metrics that have had data points published in the\n            past three hours, specify this parameter with a value of <code>PT3H</code>. This is the\n            only valid value for this parameter.</p>\n         <p>The results that are returned are an approximation of the value you specify. There is\n            a low probability that the returned results include metrics with last published data as\n            much as 50 minutes more than the specified time interval.</p>\n         <p>A namespace can contain many metrics that published data in the past two weeks but not\n            in the past three hours. In this case, a page of results can contain few or no\n            metrics and still include a <code>NextToken</code>. You need to continue making calls\n            with the returned <code>NextToken</code> until no token is returned. If you need a\n            continuous feed of active metrics across namespaces, use metric streams. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html\">Use metric\n                streams</a>.</p>"
                     }
                 },
                 "IncludeLinkedAccounts": {
@@ -9362,7 +9371,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables enrichment and PromQL access for CloudWatch vended metrics for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html\">supported Amazon Web Services resources</a> in the account. Once enabled,\n            metrics that contain a resource identifier dimension (for example, EC2\n                <code>CPUUtilization</code> with an <code>InstanceId</code> dimension) are enriched\n            with resource ARN and resource tag labels and become queryable using PromQL.</p>\n         <p>Before calling this operation, you must enable resource tags on telemetry for your\n            account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EnableResourceTagsOnTelemetry.html\">Enable\n                resource tags on telemetry</a>.</p>\n         <p>Optionally, <code>IncludeFilters</code> and <code>ExcludeFilters</code> limit\n            enrichment to a subset of the account's metrics. These filters are stored only when this\n            operation starts enrichment. Calling <code>StartOTelEnrichment</code> for an account\n            where enrichment is already running has no effect and does not modify the filters that\n            are applied. To change them, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html\">UpdateOTelEnrichment</a>.</p>"
+                "smithy.api#documentation": "<p>Enables enrichment and PromQL access for CloudWatch vended metrics for <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html\">supported Amazon Web Services resources</a> in the account. Once enabled,\n            metrics that contain a resource identifier dimension (for example, EC2\n                <code>CPUUtilization</code> with an <code>InstanceId</code> dimension) are enriched\n            with resource ARN labels and, optionally, resource tag labels, and become queryable\n            using PromQL.</p>\n         <p>To include resource tag labels, you must also enable resource tags on telemetry for\n            the account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EnableResourceTagsOnTelemetry.html\">Enable\n                resource tags on telemetry</a>. If <code>EnableTagEnrichment</code> is\n                <code>false</code>, enrichment reads no resource tags, so it does not require\n            resource tags on telemetry.</p>\n         <p>Optionally, <code>IncludeFilters</code> and <code>ExcludeFilters</code> limit\n            enrichment to a subset of the account's metrics, and <code>EnableTagEnrichment</code>\n            controls whether enriched metrics include resource tag labels. These settings are\n            stored only when this operation starts enrichment. Calling\n                <code>StartOTelEnrichment</code> for an account where enrichment is already running\n            has no effect and does not modify the filters or the tag enrichment setting that are\n            applied. To change them, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html\">UpdateOTelEnrichment</a>.</p>"
             }
         },
         "com.amazonaws.cloudwatch#StartOTelEnrichmentInput": {
@@ -9378,6 +9387,12 @@
                     "target": "com.amazonaws.cloudwatch#OTelEnrichmentMetricSelectorList",
                     "traits": {
                         "smithy.api#documentation": "<p>The metric namespaces, and the metric names, to leave unenriched. If this parameter\n            is omitted, nothing is excluded.</p>\n         <p>Amazon CloudWatch applies <code>ExcludeFilters</code> after\n                <code>IncludeFilters</code>, so a metric that both parameters match is not\n            enriched.</p>\n         <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and\n                <code>ExcludeFilters</code> combined.</p>"
+                    }
+                },
+                "EnableTagEnrichment": {
+                    "target": "com.amazonaws.cloudwatch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether enriched metrics include resource tag labels. If\n                <code>true</code>, enriched metrics include resource tag labels. If\n                <code>false</code>, they include resource ARN labels but no resource tag labels. If\n            you omit this parameter, the default is <code>true</code>.</p>\n         <p>When <code>EnableTagEnrichment</code> is <code>true</code>, enriched metrics that\n            carry resource tag labels are charged at the OTel enrichment rate. For more information,\n            see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch\n                Pricing</a>.</p>"
                     }
                 }
             },
@@ -9410,6 +9425,12 @@
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the enrichment configuration for the account was last\n            stored.</p>"
+                    }
+                },
+                "EnableTagEnrichment": {
+                    "target": "com.amazonaws.cloudwatch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether enriched metrics include resource tag labels for the\n            account.</p>"
                     }
                 }
             },
@@ -9923,6 +9944,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The metric namespaces, and the metric names, to leave unenriched. If this parameter\n            is omitted, nothing is excluded.</p>\n         <p>Amazon CloudWatch applies <code>ExcludeFilters</code> after\n                <code>IncludeFilters</code>, so a metric that both parameters match is not\n            enriched.</p>\n         <p>A maximum of 100 filters is allowed across <code>IncludeFilters</code> and\n                <code>ExcludeFilters</code> combined.</p>"
                     }
+                },
+                "EnableTagEnrichment": {
+                    "target": "com.amazonaws.cloudwatch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether enriched metrics include resource tag labels. If\n                <code>true</code>, enriched metrics include resource tag labels. If\n                <code>false</code>, they include resource ARN labels but no resource tag labels. If\n            you omit this parameter, the stored value is not changed. The operation also replaces\n            the stored filters, so to change only this setting, specify the current\n                <code>IncludeFilters</code> and <code>ExcludeFilters</code> in the same\n            request.</p>\n         <p>When <code>EnableTagEnrichment</code> is <code>true</code>, enriched metrics that\n            carry resource tag labels are charged at the OTel enrichment rate. For more information,\n            see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch\n                Pricing</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9954,6 +9981,12 @@
                     "target": "com.amazonaws.cloudwatch#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the enrichment configuration for the account was last\n            stored.</p>"
+                    }
+                },
+                "EnableTagEnrichment": {
+                    "target": "com.amazonaws.cloudwatch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether enriched metrics include resource tag labels for the account\n            after the update. If the request omits <code>EnableTagEnrichment</code>, this is the\n            value that was already stored.</p>"
                     }
                 }
             },

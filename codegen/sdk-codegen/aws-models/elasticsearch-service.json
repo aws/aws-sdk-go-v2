@@ -2584,6 +2584,61 @@
                 "target": "com.amazonaws.elasticsearchservice#CancelledChangeProperty"
             }
         },
+        "com.amazonaws.elasticsearchservice#CatalogConfiguration": {
+            "type": "union",
+            "members": {
+                "ServiceManagedS3Tables": {
+                    "target": "com.amazonaws.elasticsearchservice#ServiceManagedS3TablesCatalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon S3 Tables catalog that the service creates and manages for the domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The catalog that a domain publishes to. Specify exactly one catalog type.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#CatalogOptions": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.elasticsearchservice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the domain publishes data to the catalog. Accepted values true or false</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Catalog": {
+                    "target": "com.amazonaws.elasticsearchservice#CatalogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog that the domain publishes to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration for integrating the domain with a data catalog, so that the domain can publish its data as tables. The only supported catalog is an Amazon S3 Tables catalog that the service creates and manages for the domain.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#CatalogOptionsStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.elasticsearchservice#CatalogOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog options configured for the domain.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.elasticsearchservice#OptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the catalog options for the domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configured catalog options for the domain and their current status.</p>"
+            }
+        },
         "com.amazonaws.elasticsearchservice#ChangeProgressDetails": {
             "type": "structure",
             "members": {
@@ -3150,6 +3205,12 @@
                     "target": "com.amazonaws.elasticsearchservice#LogPublishingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.</p>"
+                    }
+                },
+                "CatalogOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#CatalogOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options for publishing the domain's data to a data catalog, such as a service-managed Amazon S3 Tables catalog.</p>"
                     }
                 },
                 "DomainEndpointOptions": {
@@ -6147,6 +6208,12 @@
                         "smithy.api#documentation": "<p>Log publishing options for the given domain.</p>"
                     }
                 },
+                "CatalogOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#CatalogOptionsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog options configured for the given domain and their current status.</p>"
+                    }
+                },
                 "DomainEndpointOptions": {
                     "target": "com.amazonaws.elasticsearchservice#DomainEndpointOptionsStatus",
                     "traits": {
@@ -6328,6 +6395,12 @@
                     "target": "com.amazonaws.elasticsearchservice#LogPublishingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Log publishing options for the given domain.</p>"
+                    }
+                },
+                "CatalogOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#CatalogOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog options for the given domain.</p>"
                     }
                 },
                 "ServiceSoftwareOptions": {
@@ -7162,6 +7235,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.elasticsearchservice#Issue"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
         "com.amazonaws.elasticsearchservice#KmsKeyId": {
@@ -9281,6 +9364,26 @@
         "com.amazonaws.elasticsearchservice#S3Key": {
             "type": "string"
         },
+        "com.amazonaws.elasticsearchservice#S3TablesEncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.elasticsearchservice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to encrypt the tables with the AWS KMS key specified in <code>KmsKeyArn</code>. Accepted values true or false</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.elasticsearchservice#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the AWS KMS key to encrypt the tables with. Takes the form <code>arn:aws:kms:region:account-id:key/key-id</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the encryption settings for the tables in a service-managed Amazon S3 Tables catalog.</p>"
+            }
+        },
         "com.amazonaws.elasticsearchservice#SAMLEntityId": {
             "type": "string",
             "traits": {
@@ -9491,6 +9594,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. </p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ServiceManagedS3TablesCatalog": {
+            "type": "structure",
+            "members": {
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.elasticsearchservice#S3TablesEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encryption settings for the tables in the catalog.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration for an Amazon S3 Tables catalog that the service creates and manages for the domain.</p>"
             }
         },
         "com.amazonaws.elasticsearchservice#ServiceSoftwareOptions": {
@@ -10172,6 +10289,12 @@
                     "target": "com.amazonaws.elasticsearchservice#LogPublishingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Map of <code>LogType</code> and <code>LogPublishingOption</code>, each containing options to publish a given type of Elasticsearch log.</p>"
+                    }
+                },
+                "CatalogOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#CatalogOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options for publishing the domain's data to a data catalog, such as a service-managed Amazon S3 Tables catalog.</p>"
                     }
                 },
                 "DomainEndpointOptions": {

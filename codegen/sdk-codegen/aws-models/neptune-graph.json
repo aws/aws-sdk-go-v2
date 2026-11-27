@@ -2092,6 +2092,26 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.neptunegraph#ComputeConfiguration": {
+            "type": "union",
+            "members": {
+                "provisionedGraph": {
+                    "target": "com.amazonaws.neptunegraph#ProvisionedGraphConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for a provisioned graph. A provisioned graph uses dedicated compute that is always available. Use provisioned graphs for workloads that require higher memory or predictable latency.</p>"
+                    }
+                },
+                "graphSession": {
+                    "target": "com.amazonaws.neptunegraph#GraphSessionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for a graph session. A graph session uses ephemeral compute that is bootstrapped when a query is sent to the graph. The compute is automatically stopped after a few minutes with no traffic; the next query bootstraps the compute again. Queries that bootstrap the compute are subject to cold start latency.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The compute configuration of a graph. A graph is either a provisioned graph or a graph session.</p>"
+            }
+        },
         "com.amazonaws.neptunegraph#ConflictException": {
             "type": "structure",
             "members": {
@@ -2153,7 +2173,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Creates a new Neptune Analytics graph.</p>",
+                "smithy.api#documentation": "<p>Creates a new Neptune Analytics graph.</p> <p>Neptune Analytics supports two types of graphs, selected using <code>computeConfiguration</code>:</p> <ul> <li> <p> <i>Provisioned graphs</i> use dedicated compute that is always available. Use provisioned graphs for workloads that require higher memory or predictable latency.</p> </li> <li> <p> <i>Graph sessions</i> use ephemeral compute that is bootstrapped when a query is sent to the graph. The compute is automatically stopped after a few minutes with no traffic. The next query sent to the graph bootstraps the compute again, so queries that bootstrap the compute are subject to cold start latency.</p> </li> </ul>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -2215,8 +2235,17 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Min = 16</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "since": "2026-11-25",
+                            "message": "ProvisionedMemory is deprecated. Use ComputeConfiguration instead."
+                        },
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph. Min = 16</p> <note> <p>This field is deprecated. We recommend using <code>computeConfiguration</code> instead.</p> </note>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration for the new graph. Specify <code>provisionedGraph</code> to create a provisioned graph with dedicated, always-available compute, or <code>graphSession</code> to create a graph session that uses ephemeral compute bootstrapped on demand when a query is sent, and is subject to cold start latency.</p>"
                     }
                 }
             },
@@ -2269,7 +2298,17 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p> <p>Min = 16</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-11-25",
+                            "message": "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead."
+                        },
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p> <p>Min = 16</p> <note> <p>This field is deprecated. For backward compatibility, it returns <code>memory</code> for a <code>provisionedGraph</code> and <code>minMemory</code> for a <code>graphSession</code>. Use <code>computeConfiguration</code> instead.</p> </note>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the graph: either a provisioned graph or a graph session.</p>"
                     }
                 },
                 "endpoint": {
@@ -2476,7 +2515,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Creates a new Neptune Analytics graph and imports data into it, either from Amazon Simple Storage Service (S3) or from a Neptune database or a Neptune database snapshot.</p> <p>The data can be loaded from files in S3 that in either the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin CSV format</a> or the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher load format</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a new Neptune Analytics graph and imports data into it, either from Amazon Simple Storage Service (S3) or from a Neptune database or a Neptune database snapshot.</p> <p>The data can be loaded from files in S3 that in either the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html\">Gremlin CSV format</a> or the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html\">openCypher load format</a>.</p> <note> <p>Graph session cannot be created using this API. Create an empty Graph Session using <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/apiref/API_CreateGraph.html\">CreateGraph</a> or restore a snapshot as Graph Session using <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/apiref/API_RestoreGraphFromSnapshot.html\">RestoreGraphFromSnapshot</a> and use <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/batch-load.html\">neptune.load CALL procedure</a> to load data into the Graph Session instead.</p> </note>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -2877,7 +2916,17 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-11-25",
+                            "message": "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead."
+                        },
+                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p> <note> <p>This field is deprecated. For backward compatibility, it returns <code>memory</code> for a <code>provisionedGraph</code> and <code>minMemory</code> for a <code>graphSession</code>. Use <code>computeConfiguration</code> instead.</p> </note>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the graph: either a provisioned graph or a graph session.</p>"
                     }
                 },
                 "endpoint": {
@@ -2893,7 +2942,10 @@
                     }
                 },
                 "vectorSearchConfiguration": {
-                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration"
+                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector-search configuration for the graph, which specifies the vector dimension to use in the vector index, if any.</p>"
+                    }
                 },
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
@@ -4056,7 +4108,17 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-11-25",
+                            "message": "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead."
+                        },
+                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p> <note> <p>This field is deprecated. For backward compatibility, it returns <code>memory</code> for a <code>provisionedGraph</code> and <code>minMemory</code> for a <code>graphSession</code>. Use <code>computeConfiguration</code> instead.</p> </note>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the graph: either a provisioned graph or a graph session.</p>"
                     }
                 },
                 "endpoint": {
@@ -4072,7 +4134,10 @@
                     }
                 },
                 "vectorSearchConfiguration": {
-                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration"
+                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector-search configuration for the graph, which specifies the vector dimension to use in the vector index, if any.</p>"
+                    }
                 },
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
@@ -5003,6 +5068,29 @@
                 }
             ]
         },
+        "com.amazonaws.neptunegraph#GraphSessionConfiguration": {
+            "type": "structure",
+            "members": {
+                "minMemory": {
+                    "target": "com.amazonaws.neptunegraph#GraphSessionMemory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum Session Neptune Capacity Units (s-NCUs) available to the graph session.</p> <p>A graph session can burst up to 2x the configured min memory. For example, a <code>minMemory</code> of 4 can burst up to 8 s-NCUs, and a <code>minMemory</code> of 8 can burst up to 16 s-NCUs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The compute configuration for a graph session.</p>"
+            }
+        },
+        "com.amazonaws.neptunegraph#GraphSessionMemory": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 4,
+                    "max": 8
+                }
+            }
+        },
         "com.amazonaws.neptunegraph#GraphSnapshotSummary": {
             "type": "structure",
             "members": {
@@ -5166,7 +5254,11 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-11-25",
+                            "message": "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead."
+                        },
+                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p> <note> <p>This field is deprecated. For backward compatibility, it returns <code>memory</code> for a <code>provisionedGraph</code> and <code>minMemory</code> for a <code>graphSession</code>. Use <code>computeConfiguration</code> instead.</p> </note>"
                     }
                 },
                 "publicConnectivity": {
@@ -5197,6 +5289,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>If <code>true</code>, deletion protection is enabled for the graph.</p>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the graph: either a provisioned graph or a graph session.</p>"
                     }
                 }
             },
@@ -6342,11 +6440,26 @@
                 "target": "com.amazonaws.neptunegraph#PrivateGraphEndpointSummary"
             }
         },
+        "com.amazonaws.neptunegraph#ProvisionedGraphConfiguration": {
+            "type": "structure",
+            "members": {
+                "memory": {
+                    "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The compute configuration for a provisioned graph.</p>"
+            }
+        },
         "com.amazonaws.neptunegraph#ProvisionedMemory": {
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 16,
+                    "min": 1,
                     "max": 24576
                 }
             }
@@ -6581,7 +6694,17 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-11-25",
+                            "message": "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead."
+                        },
+                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p> <note> <p>This field is deprecated. For backward compatibility, it returns <code>memory</code> for a <code>provisionedGraph</code> and <code>minMemory</code> for a <code>graphSession</code>. Use <code>computeConfiguration</code> instead.</p> </note>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the graph: either a provisioned graph or a graph session.</p>"
                     }
                 },
                 "endpoint": {
@@ -6597,7 +6720,10 @@
                     }
                 },
                 "vectorSearchConfiguration": {
-                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration"
+                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector-search configuration for the graph, which specifies the vector dimension to use in the vector index, if any.</p>"
+                    }
                 },
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
@@ -6715,7 +6841,17 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p> <p>Min = 16</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-11-25",
+                            "message": "ProvisionedMemory is deprecated. Use ComputeConfiguration instead."
+                        },
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p> <p>Min = 16</p> <note> <p>This field is deprecated. We recommend using <code>computeConfiguration</code> instead.</p> </note>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration for the restored graph. A snapshot can be restored into either a provisioned graph or a graph session, regardless of the compute type of the source graph. A snapshot taken from a provisioned graph can be restored into a graph session as long as the data in the snapshot fits within the graph session.</p>"
                     }
                 },
                 "deletionProtection": {
@@ -6792,7 +6928,17 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-11-25",
+                            "message": "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead."
+                        },
+                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p> <note> <p>This field is deprecated. For backward compatibility, it returns <code>memory</code> for a <code>provisionedGraph</code> and <code>minMemory</code> for a <code>graphSession</code>. Use <code>computeConfiguration</code> instead.</p> </note>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the graph: either a provisioned graph or a graph session.</p>"
                     }
                 },
                 "endpoint": {
@@ -6808,7 +6954,10 @@
                     }
                 },
                 "vectorSearchConfiguration": {
-                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration"
+                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector-search configuration for the graph, which specifies the vector dimension to use in the vector index, if any.</p>"
+                    }
                 },
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
@@ -6876,6 +7025,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>A message describing the problem.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7189,7 +7339,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Starts the specific graph.</p>",
+                "smithy.api#documentation": "<p>Starts the specific graph.</p> <note> <p>Graph sessions are started automatically when a query is sent to the graph. While this API is supported for graph sessions, it isn't required.</p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -7263,7 +7413,17 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-11-25",
+                            "message": "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead."
+                        },
+                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p> <note> <p>This field is deprecated. For backward compatibility, it returns <code>memory</code> for a <code>provisionedGraph</code> and <code>minMemory</code> for a <code>graphSession</code>. Use <code>computeConfiguration</code> instead.</p> </note>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the graph: either a provisioned graph or a graph session.</p>"
                     }
                 },
                 "endpoint": {
@@ -7279,7 +7439,10 @@
                     }
                 },
                 "vectorSearchConfiguration": {
-                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration"
+                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector-search configuration for the graph, which specifies the vector dimension to use in the vector index, if any.</p>"
+                    }
                 },
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
@@ -7343,7 +7506,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Import data into existing Neptune Analytics graph from Amazon Simple Storage Service (S3). The graph needs to be empty and in the AVAILABLE state.</p>",
+                "smithy.api#documentation": "<p>Import data into existing Neptune Analytics graph from Amazon Simple Storage Service (S3). The graph needs to be empty and in the AVAILABLE state.</p> <note> <p>Graph sessions don't support this API. Use <a href=\"https://docs.aws.amazon.com/neptune-analytics/latest/userguide/batch-load.html\">neptune.load CALL procedure</a> to load data into the Graph Session instead.</p> </note>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -7360,7 +7523,10 @@
             "type": "structure",
             "members": {
                 "importOptions": {
-                    "target": "com.amazonaws.neptunegraph#ImportOptions"
+                    "target": "com.amazonaws.neptunegraph#ImportOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains options for controlling the import process. For example, if the <code>failOnError</code> key is set to <code>false</code>, the import skips problem data and attempts to continue (whereas if set to <code>true</code>, the default, or if omitted, the import operation halts immediately when an error is encountered.</p>"
+                    }
                 },
                 "failOnError": {
                     "target": "smithy.api#Boolean",
@@ -7463,7 +7629,10 @@
                     }
                 },
                 "importOptions": {
-                    "target": "com.amazonaws.neptunegraph#ImportOptions"
+                    "target": "com.amazonaws.neptunegraph#ImportOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains options for controlling the import process. For example, if the <code>failOnError</code> key is set to <code>false</code>, the import skips problem data and attempts to continue (whereas if set to <code>true</code>, the default, or if omitted, the import operation halts immediately when an error is encountered.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7497,7 +7666,7 @@
             ],
             "traits": {
                 "aws.api#controlPlane": {},
-                "smithy.api#documentation": "<p>Stops the specific graph.</p>",
+                "smithy.api#documentation": "<p>Stops the specific graph.</p> <note> <p>Graph sessions are stopped automatically after a few minutes with no traffic. While this API is supported for graph sessions, it isn't required.</p> </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -7571,7 +7740,17 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-11-25",
+                            "message": "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead."
+                        },
+                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p> <note> <p>This field is deprecated. For backward compatibility, it returns <code>memory</code> for a <code>provisionedGraph</code> and <code>minMemory</code> for a <code>graphSession</code>. Use <code>computeConfiguration</code> instead.</p> </note>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the graph: either a provisioned graph or a graph session.</p>"
                     }
                 },
                 "endpoint": {
@@ -7587,7 +7766,10 @@
                     }
                 },
                 "vectorSearchConfiguration": {
-                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration"
+                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector-search configuration for the graph, which specifies the vector dimension to use in the vector index, if any.</p>"
+                    }
                 },
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",
@@ -7820,6 +8002,7 @@
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>A message describing the problem.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8000,7 +8183,17 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p> <p>Min = 16</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-11-25",
+                            "message": "ProvisionedMemory is deprecated. Use ComputeConfiguration instead."
+                        },
+                        "smithy.api#documentation": "<p>The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the graph.</p> <p>Min = 16</p> <note> <p>This field is deprecated. We recommend using <code>computeConfiguration</code> instead.</p> </note>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated compute configuration for the graph. A graph session can be scaled up to a provisioned graph, and a provisioned graph can be scaled down to a graph session, as long as the data in the graph fits within the graph session.</p>"
                     }
                 },
                 "deletionProtection": {
@@ -8059,7 +8252,17 @@
                 "provisionedMemory": {
                     "target": "com.amazonaws.neptunegraph#ProvisionedMemory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p>"
+                        "smithy.api#deprecated": {
+                            "since": "2026-11-25",
+                            "message": "ProvisionedMemory is deprecated. Refer to ComputeConfiguration instead."
+                        },
+                        "smithy.api#documentation": "<p>The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the graph.</p> <note> <p>This field is deprecated. For backward compatibility, it returns <code>memory</code> for a <code>provisionedGraph</code> and <code>minMemory</code> for a <code>graphSession</code>. Use <code>computeConfiguration</code> instead.</p> </note>"
+                    }
+                },
+                "computeConfiguration": {
+                    "target": "com.amazonaws.neptunegraph#ComputeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute configuration of the graph: either a provisioned graph or a graph session.</p>"
                     }
                 },
                 "endpoint": {
@@ -8075,7 +8278,10 @@
                     }
                 },
                 "vectorSearchConfiguration": {
-                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration"
+                    "target": "com.amazonaws.neptunegraph#VectorSearchConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The vector-search configuration for the graph, which specifies the vector dimension to use in the vector index, if any.</p>"
+                    }
                 },
                 "replicaCount": {
                     "target": "com.amazonaws.neptunegraph#ReplicaCount",

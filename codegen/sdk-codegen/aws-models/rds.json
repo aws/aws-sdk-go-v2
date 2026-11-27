@@ -14176,7 +14176,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.</p> <p>If you're deleting a Multi-AZ DB cluster with read replicas, all cluster members are terminated and read replicas are promoted to standalone instances.</p> <p>For more information on Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <p>For more information on Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\"> Multi-AZ DB cluster deployments</a> in the <i>Amazon RDS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.</p> <p>If you're deleting a Multi-AZ DB cluster with read replicas, all cluster members are terminated and read replicas are promoted to standalone instances.</p> <p>To delete an Amazon Aurora DB cluster and all of its DB instances in a single call, set <code>DeleteDBInstances</code> to <code>true</code>. Otherwise, delete each DB instance in the DB cluster before you delete the DB cluster.</p> <p>For more information on Amazon Aurora, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\"> What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <p>For more information on Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\"> Multi-AZ DB cluster deployments</a> in the <i>Amazon RDS User Guide</i>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To delete a DB cluster",
@@ -14199,6 +14199,79 @@
                                 "DBClusterParameterGroup": "default.aurora-postgresql10",
                                 "DBSubnetGroup": "default-vpc-aa11bb22",
                                 "Status": "available"
+                            }
+                        }
+                    },
+                    {
+                        "title": "To delete a DB cluster and all of its DB instances",
+                        "documentation": "The following example deletes the Aurora DB cluster named sample-cluster and all of the DB instances in it in a single call.",
+                        "input": {
+                            "DBClusterIdentifier": "sample-cluster",
+                            "DeleteDBInstances": true,
+                            "SkipFinalSnapshot": true
+                        },
+                        "output": {
+                            "DBCluster": {
+                                "AllocatedStorage": 1,
+                                "AvailabilityZones": [
+                                    "us-east-1a",
+                                    "us-east-1d",
+                                    "us-east-1c"
+                                ],
+                                "BackupRetentionPeriod": 7,
+                                "DBClusterIdentifier": "sample-cluster",
+                                "DBClusterParameterGroup": "default.aurora-postgresql17",
+                                "Status": "deleting",
+                                "EarliestRestorableTime": "2026-10-24T05:19:19.661Z",
+                                "Endpoint": "sample-cluster.cluster-############.us-east-1.rds.amazonaws.com",
+                                "ReaderEndpoint": "sample-cluster.cluster-ro-############.us-east-1.rds.amazonaws.com",
+                                "MultiAZ": false,
+                                "Engine": "aurora-postgresql",
+                                "EngineVersion": "17.9",
+                                "LatestRestorableTime": "2026-10-24T05:19:19.661Z",
+                                "Port": 5432,
+                                "MasterUsername": "postgres",
+                                "PreferredBackupWindow": "05:05-05:35",
+                                "PreferredMaintenanceWindow": "wed:09:32-wed:10:02",
+                                "UpgradeRolloutOrder": "second",
+                                "ReadReplicaIdentifiers": [],
+                                "DBClusterMembers": [
+                                    {
+                                        "DBInstanceIdentifier": "sample-cluster-instance-1",
+                                        "IsClusterWriter": true,
+                                        "DBClusterParameterGroupStatus": "in-sync",
+                                        "PromotionTier": 1
+                                    }
+                                ],
+                                "VpcSecurityGroups": [],
+                                "HostedZoneId": "Z1RLNU0EXAMPLE",
+                                "StorageEncrypted": false,
+                                "StorageEncryptionType": "sse-rds",
+                                "DbClusterResourceId": "cluster-EXAMPLE123456789",
+                                "DBClusterArn": "arn:aws:rds:us-east-1:123456789012:cluster:sample-cluster",
+                                "AssociatedRoles": [],
+                                "IAMDatabaseAuthenticationEnabled": true,
+                                "ClusterCreateTime": "2026-10-24T05:19:14.105Z",
+                                "EngineMode": "provisioned",
+                                "AutoMinorVersionUpgrade": true,
+                                "DeletionProtection": false,
+                                "HttpEndpointEnabled": false,
+                                "CopyTagsToSnapshot": false,
+                                "CrossAccountClone": false,
+                                "DomainMemberships": [],
+                                "TagList": [],
+                                "ServerlessV2ScalingConfiguration": {
+                                    "MinCapacity": 0.0,
+                                    "MaxCapacity": 16.0,
+                                    "SecondsUntilAutoPause": 300
+                                },
+                                "ServerlessV2PlatformVersion": "4",
+                                "DatabaseInsightsMode": "standard",
+                                "PerformanceInsightsEnabled": false,
+                                "LocalWriteForwardingStatus": "disabled",
+                                "EngineLifecycleSupport": "open-source-rds-extended-support",
+                                "VPCNetworkingEnabled": false,
+                                "InternetAccessGatewayEnabled": true
                             }
                         }
                     }
@@ -14343,6 +14416,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to remove automated backups immediately after the DB cluster is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB cluster is deleted, unless the Amazon Web Services Backup policy specifies a point-in-time restore rule.</p>"
+                    }
+                },
+                "DeleteDBInstances": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to delete all DB instances in the DB cluster together with the DB cluster. If you set this value to <code>true</code>, RDS deletes every DB instance in the DB cluster and then deletes the DB cluster. You don't need to call <code>DeleteDBInstance</code> for each DB instance first. If you set this value to <code>false</code> or don't specify it, RDS deletes the DB cluster only after you delete each of its DB instances.</p> <p>You must have permission to call <code>DeleteDBInstance</code> on every DB instance in the DB cluster. If RDS can't delete a DB instance in the DB cluster, the request fails and RDS doesn't delete the DB cluster or any of its DB instances.</p> <p>Constraints:</p> <ul> <li> <p>You can't specify this parameter for a DB cluster that is a member of an Aurora global database. Remove the DB cluster from the global database first.</p> </li> <li> <p>You can't specify this parameter for an Aurora Limitless Database DB cluster.</p> </li> <li> <p>Deletion protection must be turned off for the DB cluster.</p> </li> <li> <p>No DB instance in the DB cluster can be in the <code>deleting</code> state or be switching over, be the blue DB instance of an active blue/green deployment, or have an active zero-ETL integration.</p> </li> <li> <p>No DB instance in the DB cluster can be the source of an Aurora read replica DB cluster, or have a read replica that is being created or a cross-Region read replica that is being restored.</p> </li> <li> <p>The DB cluster can't be in the <code>stopping</code> state.</p> </li> </ul> <p>If the DB cluster doesn't contain any DB instances, RDS deletes the DB cluster the same way as when you don't specify this parameter.</p> <p>Default: <code>false</code> </p> <p>Valid for Cluster Type: Aurora MySQL and Aurora PostgreSQL DB clusters only</p>"
                     }
                 }
             },

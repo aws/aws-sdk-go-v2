@@ -3857,6 +3857,61 @@
                 "smithy.api#documentation": "<p>The status of a capability. Possible values: <code>creating</code>, <code>create_failed</code>, <code>active</code>, <code>updating</code>, <code>update_failed</code>, <code>deleting</code>, <code>delete_failed</code>.</p>"
             }
         },
+        "com.amazonaws.opensearch#CatalogConfiguration": {
+            "type": "union",
+            "members": {
+                "ServiceManagedS3Tables": {
+                    "target": "com.amazonaws.opensearch#ServiceManagedS3TablesCatalog",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon S3 Tables catalog that OpenSearch Service creates and manages for the\n            domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The catalog that a domain publishes to. Specify exactly one catalog type.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#CatalogOptions": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the domain publishes data to the catalog.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Catalog": {
+                    "target": "com.amazonaws.opensearch#CatalogConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog that the domain publishes to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters that configure the domain's integration with a data\n            catalog, so that the domain can publish its data as tables. The only supported\n            catalog is an Amazon S3 Tables catalog that OpenSearch Service creates and manages\n            for the domain.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#CatalogOptionsStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.opensearch#CatalogOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog options configured for the domain.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.opensearch#OptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the catalog options for the domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configured catalog options for the domain and their current status.</p>"
+            }
+        },
         "com.amazonaws.opensearch#CategoryDiffResult": {
             "type": "structure",
             "members": {
@@ -4924,6 +4979,12 @@
                     "target": "com.amazonaws.opensearch#LogPublishingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs to configure log publishing.</p>"
+                    }
+                },
+                "CatalogOptions": {
+                    "target": "com.amazonaws.opensearch#CatalogOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options for publishing the domain's data to a data catalog, such as a\n            service-managed Amazon S3 Tables catalog.</p>"
                     }
                 },
                 "DomainEndpointOptions": {
@@ -8675,6 +8736,12 @@
                         "smithy.api#documentation": "<p>Key-value pairs to configure log publishing.</p>"
                     }
                 },
+                "CatalogOptions": {
+                    "target": "com.amazonaws.opensearch#CatalogOptionsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog options configured for the domain and their current status.</p>"
+                    }
+                },
                 "DomainEndpointOptions": {
                     "target": "com.amazonaws.opensearch#DomainEndpointOptionsStatus",
                     "traits": {
@@ -9385,6 +9452,12 @@
                     "target": "com.amazonaws.opensearch#LogPublishingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Log publishing options for the domain.</p>"
+                    }
+                },
+                "CatalogOptions": {
+                    "target": "com.amazonaws.opensearch#CatalogOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog options for the domain.</p>"
                     }
                 },
                 "ServiceSoftwareOptions": {
@@ -17403,6 +17476,26 @@
                 }
             }
         },
+        "com.amazonaws.opensearch#S3TablesEncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.opensearch#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to encrypt the tables with the AWS KMS key specified in\n            <code>KmsKeyArn</code>.</p>"
+                    }
+                },
+                "KmsKeyArn": {
+                    "target": "com.amazonaws.opensearch#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the AWS KMS key to encrypt the tables with. Takes the form\n            <code>arn:aws:kms:region:account-id:key/key-id</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Encryption settings for the tables in a service-managed Amazon S3 Tables\n            catalog.</p>"
+            }
+        },
         "com.amazonaws.opensearch#S3VectorsEngine": {
             "type": "structure",
             "members": {
@@ -17796,6 +17889,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for serverless vector acceleration, which provides <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/gpu-acceleration-vector-index.html\">GPU-accelerated</a> vector\n         search capabilities for improved performance on vector workloads.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#ServiceManagedS3TablesCatalog": {
+            "type": "structure",
+            "members": {
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.opensearch#S3TablesEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encryption settings for the tables in the catalog.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for an Amazon S3 Tables catalog that OpenSearch Service creates and\n            manages for the domain.</p>"
             }
         },
         "com.amazonaws.opensearch#ServiceOptions": {
@@ -19253,6 +19360,12 @@
                     "target": "com.amazonaws.opensearch#LogPublishingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Options to publish OpenSearch logs to Amazon CloudWatch Logs.</p>"
+                    }
+                },
+                "CatalogOptions": {
+                    "target": "com.amazonaws.opensearch#CatalogOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options for publishing the domain's data to a data catalog, such as a\n            service-managed Amazon S3 Tables catalog.</p>"
                     }
                 },
                 "EncryptionAtRestOptions": {
