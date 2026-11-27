@@ -20,7 +20,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sso v1.39.6 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.44.6 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.53.1 // indirect
-	github.com/aws/smithy-go v1.28.10 // indirect
+	github.com/aws/smithy-go v1.28.11 // indirect
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../

@@ -14,7 +14,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.48.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.26 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.13.13 // indirect
-	github.com/aws/smithy-go v1.28.10 // indirect
+	github.com/aws/smithy-go v1.28.11 // indirect
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
