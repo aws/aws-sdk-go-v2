@@ -35,6 +35,11 @@ type UpdateGraphInput struct {
 	// This member is required.
 	GraphIdentifier *string
 
+	// The updated compute configuration for the graph. A graph session can be scaled
+	// up to a provisioned graph, and a provisioned graph can be scaled down to a graph
+	// session, as long as the data in the graph fits within the graph session.
+	ComputeConfiguration types.ComputeConfiguration
+
 	// A value that indicates whether the graph has deletion protection enabled. The
 	// graph can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool
@@ -43,6 +48,10 @@ type UpdateGraphInput struct {
 	// graph.
 	//
 	// Min = 16
+	//
+	// This field is deprecated. We recommend using computeConfiguration instead.
+	//
+	// Deprecated: ProvisionedMemory is deprecated. Use ComputeConfiguration instead.
 	ProvisionedMemory *int32
 
 	// Specifies whether or not the graph can be reachable over the internet. All
@@ -59,6 +68,9 @@ func (v *UpdateGraphInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.UpdateGraphInput_computeConfiguration, v.ComputeConfiguration)
+	}
 	if v.DeletionProtection != nil {
 		s.WriteBool(schemas.UpdateGraphInput_deletionProtection, *v.DeletionProtection)
 	}
@@ -97,6 +109,10 @@ type UpdateGraphOutput struct {
 	// The build number of the graph.
 	BuildNumber *string
 
+	// The compute configuration of the graph: either a provisioned graph or a graph
+	// session.
+	ComputeConfiguration types.ComputeConfiguration
+
 	// The time at which the graph was created.
 	CreateTime *time.Time
 
@@ -111,6 +127,13 @@ type UpdateGraphOutput struct {
 
 	// The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the
 	// graph.
+	//
+	// This field is deprecated. For backward compatibility, it returns memory for a
+	// provisionedGraph and minMemory for a graphSession . Use computeConfiguration
+	// instead.
+	//
+	// Deprecated: ProvisionedMemory is deprecated. Refer to ComputeConfiguration
+	// instead.
 	ProvisionedMemory *int32
 
 	// If true , the graph has a public endpoint, otherwise not.
@@ -128,8 +151,8 @@ type UpdateGraphOutput struct {
 	// The reason that the graph has this status.
 	StatusReason *string
 
-	// Specifies the number of dimensions for vector embeddings loaded into the graph.
-	// Max = 65535
+	// The vector-search configuration for the graph, which specifies the vector
+	// dimension to use in the vector index, if any.
 	VectorSearchConfiguration *types.VectorSearchConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -150,6 +173,9 @@ func (v *UpdateGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.BuildNumber != nil {
 		s.WriteString(schemas.UpdateGraphOutput_buildNumber, *v.BuildNumber)
+	}
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.UpdateGraphOutput_computeConfiguration, v.ComputeConfiguration)
 	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.UpdateGraphOutput_createTime, *v.CreateTime)
@@ -202,6 +228,8 @@ func (v *UpdateGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpdateGraphOutput_buildNumber:
 			v.BuildNumber = new(string)
 			return d.ReadString(schemas.UpdateGraphOutput_buildNumber, v.BuildNumber)
+		case schemas.UpdateGraphOutput_computeConfiguration:
+			return deserializeComputeConfiguration(d, schemas.UpdateGraphOutput_computeConfiguration, &v.ComputeConfiguration)
 		case schemas.UpdateGraphOutput_createTime:
 			v.CreateTime = new(time.Time)
 			return d.ReadTime(schemas.UpdateGraphOutput_createTime, v.CreateTime)

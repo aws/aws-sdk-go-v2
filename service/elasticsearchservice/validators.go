@@ -1050,6 +1050,21 @@ func validateAutomatedSnapshotPauseRequestOptions(v *types.AutomatedSnapshotPaus
 	}
 }
 
+func validateCatalogOptions(v *types.CatalogOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CatalogOptions"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateColdStorageOptions(v *types.ColdStorageOptions) error {
 	if v == nil {
 		return nil
@@ -1341,6 +1356,11 @@ func validateOpCreateElasticsearchDomainInput(v *CreateElasticsearchDomainInput)
 	if v.ElasticsearchClusterConfig != nil {
 		if err := validateElasticsearchClusterConfig(v.ElasticsearchClusterConfig); err != nil {
 			invalidParams.AddNested("ElasticsearchClusterConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogOptions != nil {
+		if err := validateCatalogOptions(v.CatalogOptions); err != nil {
+			invalidParams.AddNested("CatalogOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AdvancedSecurityOptions != nil {
@@ -1894,6 +1914,11 @@ func validateOpUpdateElasticsearchDomainConfigInput(v *UpdateElasticsearchDomain
 	if v.ElasticsearchClusterConfig != nil {
 		if err := validateElasticsearchClusterConfig(v.ElasticsearchClusterConfig); err != nil {
 			invalidParams.AddNested("ElasticsearchClusterConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogOptions != nil {
+		if err := validateCatalogOptions(v.CatalogOptions); err != nil {
+			invalidParams.AddNested("CatalogOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AdvancedSecurityOptions != nil {

@@ -7,6 +7,17 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeCatalogConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v CatalogConfiguration) {
+	switch vv := v.(type) {
+	case *CatalogConfigurationMemberServiceManagedS3Tables:
+		s.WriteUnion(schema, schemas.CatalogConfiguration_ServiceManagedS3Tables)
+		s.WriteStruct(schemas.CatalogConfiguration_ServiceManagedS3Tables)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeRetentionOptions(s smithy.ShapeSerializer, schema *smithy.Schema, v RetentionOptions) {
 	switch vv := v.(type) {
 	case *RetentionOptionsMemberRetentionAction:
@@ -18,6 +29,18 @@ func serializeRetentionOptions(s smithy.ShapeSerializer, schema *smithy.Schema, 
 		s.WriteInt32(schemas.RetentionOptions_RetentionInHours, vv.Value)
 		s.CloseUnion()
 	}
+}
+
+func deserializeCatalogConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *CatalogConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.CatalogConfiguration_ServiceManagedS3Tables:
+			vv := &CatalogConfigurationMemberServiceManagedS3Tables{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 func deserializeRetentionOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *RetentionOptions) error {

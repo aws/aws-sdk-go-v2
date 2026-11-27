@@ -1,0 +1,8 @@
+{
+    "id": "a357650b-732a-4fdd-b49c-fdcd60532227",
+    "type": "feature",
+    "description": "Catalog APIs for Optimized engine domains",
+    "modules": [
+        "service/elasticsearchservice"
+    ]
+}

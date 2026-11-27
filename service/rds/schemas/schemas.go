@@ -7458,7 +7458,7 @@ var DeleteDBClusterEndpointMessage_DBClusterEndpointIdentifier *smithy.Schema
 var DeleteDBClusterMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rds",
 	Name:      "DeleteDBClusterMessage",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var DeleteDBClusterMessage_DBClusterIdentifier *smithy.Schema
 
 var DeleteDBClusterMessage_SkipFinalSnapshot *smithy.Schema
@@ -7466,6 +7466,8 @@ var DeleteDBClusterMessage_SkipFinalSnapshot *smithy.Schema
 var DeleteDBClusterMessage_FinalDBSnapshotIdentifier *smithy.Schema
 
 var DeleteDBClusterMessage_DeleteAutomatedBackups *smithy.Schema
+
+var DeleteDBClusterMessage_DeleteDBInstances *smithy.Schema
 
 var DeleteDBClusterResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.rds",
@@ -14237,6 +14239,8 @@ func init() {
 	DeleteDBClusterMessage_FinalDBSnapshotIdentifier = DeleteDBClusterMessage.AddMember("FinalDBSnapshotIdentifier", _String)
 
 	DeleteDBClusterMessage_DeleteAutomatedBackups = DeleteDBClusterMessage.AddMember("DeleteAutomatedBackups", _BooleanOptional)
+
+	DeleteDBClusterMessage_DeleteDBInstances = DeleteDBClusterMessage.AddMember("DeleteDBInstances", _BooleanOptional)
 
 	DeleteDBClusterResult_DBCluster = DeleteDBClusterResult.AddMember("DBCluster", DBCluster)
 

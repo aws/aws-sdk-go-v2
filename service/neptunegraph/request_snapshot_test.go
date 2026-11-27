@@ -302,6 +302,11 @@ func TestCheckRequestSnapshot_CreateGraph(t *testing.T) {
 		ReplicaCount:       ptr.Int32(1),
 		DeletionProtection: ptr.Bool(true),
 		ProvisionedMemory:  ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -989,6 +994,11 @@ func TestCheckRequestSnapshot_RestoreGraphFromSnapshot(t *testing.T) {
 		SnapshotIdentifier: ptr.String("__SnapshotIdentifier__"),
 		GraphName:          ptr.String("__GraphName__"),
 		ProvisionedMemory:  ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		DeletionProtection: ptr.Bool(true),
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -1239,6 +1249,11 @@ func TestCheckRequestSnapshot_UpdateGraph(t *testing.T) {
 		GraphIdentifier:    ptr.String("__GraphIdentifier__"),
 		PublicConnectivity: ptr.Bool(true),
 		ProvisionedMemory:  ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		DeletionProtection: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
@@ -1359,6 +1374,11 @@ func TestUpdateRequestSnapshot_CreateGraph(t *testing.T) {
 		ReplicaCount:       ptr.Int32(1),
 		DeletionProtection: ptr.Bool(true),
 		ProvisionedMemory:  ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2046,6 +2066,11 @@ func TestUpdateRequestSnapshot_RestoreGraphFromSnapshot(t *testing.T) {
 		SnapshotIdentifier: ptr.String("__SnapshotIdentifier__"),
 		GraphName:          ptr.String("__GraphName__"),
 		ProvisionedMemory:  ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		DeletionProtection: ptr.Bool(true),
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -2296,6 +2321,11 @@ func TestUpdateRequestSnapshot_UpdateGraph(t *testing.T) {
 		GraphIdentifier:    ptr.String("__GraphIdentifier__"),
 		PublicConnectivity: ptr.Bool(true),
 		ProvisionedMemory:  ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		DeletionProtection: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}

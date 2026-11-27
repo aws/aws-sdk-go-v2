@@ -13,6 +13,11 @@ import (
 
 // Import data into existing Neptune Analytics graph from Amazon Simple Storage
 // Service (S3). The graph needs to be empty and in the AVAILABLE state.
+//
+// Graph sessions don't support this API. Use [neptune.load CALL procedure] to load data into the Graph Session
+// instead.
+//
+// [neptune.load CALL procedure]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/batch-load.html
 func (c *Client) StartImportTask(ctx context.Context, params *StartImportTaskInput, optFns ...func(*Options)) (*StartImportTaskOutput, error) {
 	if params == nil {
 		params = &StartImportTaskInput{}
@@ -63,7 +68,10 @@ type StartImportTaskInput struct {
 	// openCypher load format.
 	Format types.Format
 
-	// Options for how to perform an import.
+	// Contains options for controlling the import process. For example, if the
+	// failOnError key is set to false , the import skips problem data and attempts to
+	// continue (whereas if set to true , the default, or if omitted, the import
+	// operation halts immediately when an error is encountered.
 	ImportOptions types.ImportOptions
 
 	// The parquet type of the import task.
@@ -141,7 +149,10 @@ type StartImportTaskOutput struct {
 	// The unique identifier of the Neptune Analytics graph.
 	GraphId *string
 
-	// Options for how to perform an import.
+	// Contains options for controlling the import process. For example, if the
+	// failOnError key is set to false , the import skips problem data and attempts to
+	// continue (whereas if set to true , the default, or if omitted, the import
+	// operation halts immediately when an error is encountered.
 	ImportOptions types.ImportOptions
 
 	// The parquet type of the import task.

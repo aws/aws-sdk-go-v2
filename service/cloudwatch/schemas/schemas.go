@@ -669,6 +669,11 @@ var _BatchFailures = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _BatchFailures_member *smithy.Schema
 
+var _Boolean = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.cloudwatch",
+	Name:      "Boolean",
+}, smithy.ShapeTypeBoolean, 0)
+
 var ComparisonOperator = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "ComparisonOperator",
@@ -3087,7 +3092,7 @@ var GetOTelEnrichmentInput = smithy.NewSchema(smithy.ShapeID{
 var GetOTelEnrichmentOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "GetOTelEnrichmentOutput",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var GetOTelEnrichmentOutput_Status *smithy.Schema
 
 var GetOTelEnrichmentOutput_IncludeFilters *smithy.Schema
@@ -3097,6 +3102,8 @@ var GetOTelEnrichmentOutput_ExcludeFilters *smithy.Schema
 var GetOTelEnrichmentOutput_CreatedAt *smithy.Schema
 
 var GetOTelEnrichmentOutput_UpdatedAt *smithy.Schema
+
+var GetOTelEnrichmentOutput_EnableTagEnrichment *smithy.Schema
 
 var GetResourceMetricsConfigurationInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -3549,15 +3556,17 @@ var StartMetricStreamsOutput = smithy.NewSchema(smithy.ShapeID{
 var StartOTelEnrichmentInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "StartOTelEnrichmentInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var StartOTelEnrichmentInput_IncludeFilters *smithy.Schema
 
 var StartOTelEnrichmentInput_ExcludeFilters *smithy.Schema
 
+var StartOTelEnrichmentInput_EnableTagEnrichment *smithy.Schema
+
 var StartOTelEnrichmentOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "StartOTelEnrichmentOutput",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var StartOTelEnrichmentOutput_IncludeFilters *smithy.Schema
 
 var StartOTelEnrichmentOutput_ExcludeFilters *smithy.Schema
@@ -3565,6 +3574,8 @@ var StartOTelEnrichmentOutput_ExcludeFilters *smithy.Schema
 var StartOTelEnrichmentOutput_CreatedAt *smithy.Schema
 
 var StartOTelEnrichmentOutput_UpdatedAt *smithy.Schema
+
+var StartOTelEnrichmentOutput_EnableTagEnrichment *smithy.Schema
 
 var StopMetricStreamsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -3616,15 +3627,17 @@ var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
 var UpdateOTelEnrichmentInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "UpdateOTelEnrichmentInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var UpdateOTelEnrichmentInput_IncludeFilters *smithy.Schema
 
 var UpdateOTelEnrichmentInput_ExcludeFilters *smithy.Schema
 
+var UpdateOTelEnrichmentInput_EnableTagEnrichment *smithy.Schema
+
 var UpdateOTelEnrichmentOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
 	Name:      "UpdateOTelEnrichmentOutput",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateOTelEnrichmentOutput_IncludeFilters *smithy.Schema
 
 var UpdateOTelEnrichmentOutput_ExcludeFilters *smithy.Schema
@@ -3632,6 +3645,8 @@ var UpdateOTelEnrichmentOutput_ExcludeFilters *smithy.Schema
 var UpdateOTelEnrichmentOutput_CreatedAt *smithy.Schema
 
 var UpdateOTelEnrichmentOutput_UpdatedAt *smithy.Schema
+
+var UpdateOTelEnrichmentOutput_EnableTagEnrichment *smithy.Schema
 
 var UpdateResourceMetricsConfigurationInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cloudwatch",
@@ -4840,6 +4855,8 @@ func init() {
 
 	GetOTelEnrichmentOutput_UpdatedAt = GetOTelEnrichmentOutput.AddMember("UpdatedAt", _Timestamp)
 
+	GetOTelEnrichmentOutput_EnableTagEnrichment = GetOTelEnrichmentOutput.AddMember("EnableTagEnrichment", _Boolean)
+
 	GetResourceMetricsConfigurationInput_ResourceArn = GetResourceMetricsConfigurationInput.AddMember("ResourceArn", _ResourceArn)
 
 	GetResourceMetricsConfigurationOutput_ResourceMetricsConfiguration = GetResourceMetricsConfigurationOutput.AddMember("ResourceMetricsConfiguration", ResourceMetricsConfiguration)
@@ -5146,6 +5163,8 @@ func init() {
 
 	StartOTelEnrichmentInput_ExcludeFilters = StartOTelEnrichmentInput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
 
+	StartOTelEnrichmentInput_EnableTagEnrichment = StartOTelEnrichmentInput.AddMember("EnableTagEnrichment", _Boolean)
+
 	StartOTelEnrichmentOutput_IncludeFilters = StartOTelEnrichmentOutput.AddMember("IncludeFilters", _OTelEnrichmentMetricSelectorList)
 
 	StartOTelEnrichmentOutput_ExcludeFilters = StartOTelEnrichmentOutput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
@@ -5153,6 +5172,8 @@ func init() {
 	StartOTelEnrichmentOutput_CreatedAt = StartOTelEnrichmentOutput.AddMember("CreatedAt", _Timestamp)
 
 	StartOTelEnrichmentOutput_UpdatedAt = StartOTelEnrichmentOutput.AddMember("UpdatedAt", _Timestamp)
+
+	StartOTelEnrichmentOutput_EnableTagEnrichment = StartOTelEnrichmentOutput.AddMember("EnableTagEnrichment", _Boolean)
 
 	StopMetricStreamsInput_Names = StopMetricStreamsInput.AddMember("Names", _MetricStreamNames)
 
@@ -5168,6 +5189,8 @@ func init() {
 
 	UpdateOTelEnrichmentInput_ExcludeFilters = UpdateOTelEnrichmentInput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
 
+	UpdateOTelEnrichmentInput_EnableTagEnrichment = UpdateOTelEnrichmentInput.AddMember("EnableTagEnrichment", _Boolean)
+
 	UpdateOTelEnrichmentOutput_IncludeFilters = UpdateOTelEnrichmentOutput.AddMember("IncludeFilters", _OTelEnrichmentMetricSelectorList)
 
 	UpdateOTelEnrichmentOutput_ExcludeFilters = UpdateOTelEnrichmentOutput.AddMember("ExcludeFilters", _OTelEnrichmentMetricSelectorList)
@@ -5175,6 +5198,8 @@ func init() {
 	UpdateOTelEnrichmentOutput_CreatedAt = UpdateOTelEnrichmentOutput.AddMember("CreatedAt", _Timestamp)
 
 	UpdateOTelEnrichmentOutput_UpdatedAt = UpdateOTelEnrichmentOutput.AddMember("UpdatedAt", _Timestamp)
+
+	UpdateOTelEnrichmentOutput_EnableTagEnrichment = UpdateOTelEnrichmentOutput.AddMember("EnableTagEnrichment", _Boolean)
 
 	UpdateResourceMetricsConfigurationInput_ResourceArn = UpdateResourceMetricsConfigurationInput.AddMember("ResourceArn", _ResourceArn)
 

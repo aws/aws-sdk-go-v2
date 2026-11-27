@@ -85,6 +85,10 @@ type DeleteGraphOutput struct {
 	// The build number associated with the graph.
 	BuildNumber *string
 
+	// The compute configuration of the graph: either a provisioned graph or a graph
+	// session.
+	ComputeConfiguration types.ComputeConfiguration
+
 	// The time at which the graph was created.
 	CreateTime *time.Time
 
@@ -99,6 +103,13 @@ type DeleteGraphOutput struct {
 
 	// The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the
 	// graph.
+	//
+	// This field is deprecated. For backward compatibility, it returns memory for a
+	// provisionedGraph and minMemory for a graphSession . Use computeConfiguration
+	// instead.
+	//
+	// Deprecated: ProvisionedMemory is deprecated. Refer to ComputeConfiguration
+	// instead.
 	ProvisionedMemory *int32
 
 	// If true , the graph has a public endpoint, otherwise not.
@@ -117,8 +128,8 @@ type DeleteGraphOutput struct {
 	// The reason for the status of the graph.
 	StatusReason *string
 
-	// Specifies the number of dimensions for vector embeddings loaded into the graph.
-	// Max = 65535
+	// The vector-search configuration for the graph, which specifies the vector
+	// dimension to use in the vector index, if any.
 	VectorSearchConfiguration *types.VectorSearchConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -139,6 +150,9 @@ func (v *DeleteGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.BuildNumber != nil {
 		s.WriteString(schemas.DeleteGraphOutput_buildNumber, *v.BuildNumber)
+	}
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.DeleteGraphOutput_computeConfiguration, v.ComputeConfiguration)
 	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.DeleteGraphOutput_createTime, *v.CreateTime)
@@ -191,6 +205,8 @@ func (v *DeleteGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.DeleteGraphOutput_buildNumber:
 			v.BuildNumber = new(string)
 			return d.ReadString(schemas.DeleteGraphOutput_buildNumber, v.BuildNumber)
+		case schemas.DeleteGraphOutput_computeConfiguration:
+			return deserializeComputeConfiguration(d, schemas.DeleteGraphOutput_computeConfiguration, &v.ComputeConfiguration)
 		case schemas.DeleteGraphOutput_createTime:
 			v.CreateTime = new(time.Time)
 			return d.ReadTime(schemas.DeleteGraphOutput_createTime, v.CreateTime)

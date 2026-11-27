@@ -64,6 +64,10 @@ type CreateElasticsearchDomainInput struct {
 	// Maximum suspension duration: 3 days.
 	AutomatedSnapshotPauseOptions *types.AutomatedSnapshotPauseRequestOptions
 
+	// Options for publishing the domain's data to a data catalog, such as a
+	// service-managed Amazon S3 Tables catalog.
+	CatalogOptions *types.CatalogOptions
+
 	// Options to specify the Cognito user and identity pools for Kibana
 	// authentication. For more information, see [Amazon Cognito Authentication for Kibana].
 	//
@@ -150,6 +154,11 @@ func (v *CreateElasticsearchDomainInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.AutomatedSnapshotPauseOptions != nil {
 		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_AutomatedSnapshotPauseOptions)
 		v.AutomatedSnapshotPauseOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogOptions != nil {
+		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_CatalogOptions)
+		v.CatalogOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.CognitoOptions != nil {

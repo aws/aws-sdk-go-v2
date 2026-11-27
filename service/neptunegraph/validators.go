@@ -730,6 +730,25 @@ func addOpUpdateGraphValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateGraph{}, middleware.After)
 }
 
+func validateComputeConfiguration(v types.ComputeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComputeConfiguration"}
+	switch uv := v.(type) {
+	case *types.ComputeConfigurationMemberProvisionedGraph:
+		if err := validateProvisionedGraphConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[provisionedGraph]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImportOptions(v types.ImportOptions) error {
 	if v == nil {
 		return nil
@@ -759,6 +778,21 @@ func validateNeptuneImportOptions(v *types.NeptuneImportOptions) error {
 	}
 	if v.S3ExportKmsKeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3ExportKmsKeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProvisionedGraphConfiguration(v *types.ProvisionedGraphConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProvisionedGraphConfiguration"}
+	if v.Memory == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Memory"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -843,8 +877,10 @@ func validateOpCreateGraphInput(v *CreateGraphInput) error {
 			invalidParams.AddNested("VectorSearchConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ProvisionedMemory == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedMemory"))
+	if v.ComputeConfiguration != nil {
+		if err := validateComputeConfiguration(v.ComputeConfiguration); err != nil {
+			invalidParams.AddNested("ComputeConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1177,6 +1213,11 @@ func validateOpRestoreGraphFromSnapshotInput(v *RestoreGraphFromSnapshotInput) e
 	if v.GraphName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GraphName"))
 	}
+	if v.ComputeConfiguration != nil {
+		if err := validateComputeConfiguration(v.ComputeConfiguration); err != nil {
+			invalidParams.AddNested("ComputeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1310,6 +1351,11 @@ func validateOpUpdateGraphInput(v *UpdateGraphInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateGraphInput"}
 	if v.GraphIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GraphIdentifier"))
+	}
+	if v.ComputeConfiguration != nil {
+		if err := validateComputeConfiguration(v.ComputeConfiguration); err != nil {
+			invalidParams.AddNested("ComputeConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

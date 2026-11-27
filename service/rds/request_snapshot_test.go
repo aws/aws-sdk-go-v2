@@ -2042,6 +2042,7 @@ func TestCheckRequestSnapshot_DeleteDBCluster(t *testing.T) {
 		SkipFinalSnapshot:         ptr.Bool(true),
 		FinalDBSnapshotIdentifier: ptr.String("__FinalDBSnapshotIdentifier__"),
 		DeleteAutomatedBackups:    ptr.Bool(true),
+		DeleteDBInstances:         ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9646,6 +9647,7 @@ func TestUpdateRequestSnapshot_DeleteDBCluster(t *testing.T) {
 		SkipFinalSnapshot:         ptr.Bool(true),
 		FinalDBSnapshotIdentifier: ptr.String("__FinalDBSnapshotIdentifier__"),
 		DeleteAutomatedBackups:    ptr.Bool(true),
+		DeleteDBInstances:         ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

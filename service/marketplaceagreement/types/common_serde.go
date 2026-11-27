@@ -878,6 +878,16 @@ func serializeRateCardList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 	s.CloseList()
 }
 
+func serializeRegionalPriceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RegionalPrice) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeRequestedTermList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RequestedTerm) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1743,6 +1753,28 @@ func deserializeRateCardList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 		}
 
 		vv = RateCardItem{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRegionalPriceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]RegionalPrice) error {
+	*v = make([]RegionalPrice, 0)
+	var vv RegionalPrice
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero RegionalPrice
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = RegionalPrice{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

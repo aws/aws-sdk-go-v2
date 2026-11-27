@@ -40,6 +40,17 @@ func serializeCapabilityExtendedResponseConfig(s smithy.ShapeSerializer, schema 
 	}
 }
 
+func serializeCatalogConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v CatalogConfiguration) {
+	switch vv := v.(type) {
+	case *CatalogConfigurationMemberServiceManagedS3Tables:
+		s.WriteUnion(schema, schemas.CatalogConfiguration_ServiceManagedS3Tables)
+		s.WriteStruct(schemas.CatalogConfiguration_ServiceManagedS3Tables)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeDataSourceType(s smithy.ShapeSerializer, schema *smithy.Schema, v DataSourceType) {
 	switch vv := v.(type) {
 	case *DataSourceTypeMemberS3GlueDataCatalog:
@@ -116,6 +127,18 @@ func deserializeCapabilityExtendedResponseConfig(d smithy.ShapeDeserializer, s *
 		switch ms {
 		case schemas.CapabilityExtendedResponseConfig_aiConfig:
 			vv := &CapabilityExtendedResponseConfigMemberAiConfig{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeCatalogConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *CatalogConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.CatalogConfiguration_ServiceManagedS3Tables:
+			vv := &CatalogConfigurationMemberServiceManagedS3Tables{}
 			*v = vv
 			return vv.Deserialize(d)
 		}

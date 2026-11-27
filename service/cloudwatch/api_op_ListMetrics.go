@@ -82,6 +82,15 @@ type ListMetricsInput struct {
 	// The results that are returned are an approximation of the value you specify.
 	// There is a low probability that the returned results include metrics with last
 	// published data as much as 50 minutes more than the specified time interval.
+	//
+	// A namespace can contain many metrics that published data in the past two weeks
+	// but not in the past three hours. In this case, a page of results can contain few
+	// or no metrics and still include a NextToken . You need to continue making calls
+	// with the returned NextToken until no token is returned. If you need a
+	// continuous feed of active metrics across namespaces, use metric streams. For
+	// more information, see [Use metric streams].
+	//
+	// [Use metric streams]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
 	RecentlyActive types.RecentlyActive
 
 	noSmithyDocumentSerde

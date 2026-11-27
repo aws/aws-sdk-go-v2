@@ -2242,8 +2242,9 @@ func TestUpdateResponseSnapshot_GetOTelEnrichment(t *testing.T) {
 				},
 			},
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EnableTagEnrichment: ptr.Bool(true),
 	}
 	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
 	opSchema := smithy.NewOperationSchema(schemas.GetOTelEnrichment, schemas.GetOTelEnrichmentOutput, schemas.GetOTelEnrichmentOutput)
@@ -2958,8 +2959,9 @@ func TestUpdateResponseSnapshot_StartOTelEnrichment(t *testing.T) {
 				},
 			},
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EnableTagEnrichment: ptr.Bool(true),
 	}
 	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
 	opSchema := smithy.NewOperationSchema(schemas.StartOTelEnrichment, schemas.StartOTelEnrichmentOutput, schemas.StartOTelEnrichmentOutput)
@@ -3103,8 +3105,9 @@ func TestUpdateResponseSnapshot_UpdateOTelEnrichment(t *testing.T) {
 				},
 			},
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EnableTagEnrichment: ptr.Bool(true),
 	}
 	proto := rpcv2.NewCBOR(schemas.GraniteServiceVersion20100801)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateOTelEnrichment, schemas.UpdateOTelEnrichmentOutput, schemas.UpdateOTelEnrichmentOutput)

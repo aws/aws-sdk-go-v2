@@ -13,6 +13,18 @@ import (
 )
 
 // Creates a new Neptune Analytics graph.
+//
+// Neptune Analytics supports two types of graphs, selected using
+// computeConfiguration :
+//
+//   - Provisioned graphs use dedicated compute that is always available. Use
+//     provisioned graphs for workloads that require higher memory or predictable
+//     latency.
+//
+//   - Graph sessions use ephemeral compute that is bootstrapped when a query is
+//     sent to the graph. The compute is automatically stopped after a few minutes with
+//     no traffic. The next query sent to the graph bootstraps the compute again, so
+//     queries that bootstrap the compute are subject to cold start latency.
 func (c *Client) CreateGraph(ctx context.Context, params *CreateGraphInput, optFns ...func(*Options)) (*CreateGraphOutput, error) {
 	if params == nil {
 		params = &CreateGraphInput{}
@@ -39,11 +51,11 @@ type CreateGraphInput struct {
 	// This member is required.
 	GraphName *string
 
-	// The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the
-	// graph. Min = 16
-	//
-	// This member is required.
-	ProvisionedMemory *int32
+	// The compute configuration for the new graph. Specify provisionedGraph to create
+	// a provisioned graph with dedicated, always-available compute, or graphSession
+	// to create a graph session that uses ephemeral compute bootstrapped on demand
+	// when a query is sent, and is subject to cold start latency.
+	ComputeConfiguration types.ComputeConfiguration
 
 	// Indicates whether or not to enable deletion protection on the graph. The graph
 	// can’t be deleted when deletion protection is enabled. ( true or false ).
@@ -51,6 +63,14 @@ type CreateGraphInput struct {
 
 	// Specifies a KMS key to use to encrypt data in the new graph.
 	KmsKeyIdentifier *string
+
+	// The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the
+	// graph. Min = 16
+	//
+	// This field is deprecated. We recommend using computeConfiguration instead.
+	//
+	// Deprecated: ProvisionedMemory is deprecated. Use ComputeConfiguration instead.
+	ProvisionedMemory *int32
 
 	// Specifies whether or not the graph can be reachable over the internet. All
 	// access to graphs is IAM authenticated. ( true to enable, or false to disable.
@@ -80,6 +100,9 @@ func (v *CreateGraphInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.CreateGraphInput_computeConfiguration, v.ComputeConfiguration)
+	}
 	if v.DeletionProtection != nil {
 		s.WriteBool(schemas.CreateGraphInput_deletionProtection, *v.DeletionProtection)
 	}
@@ -136,6 +159,10 @@ type CreateGraphOutput struct {
 	// The build number of the graph software.
 	BuildNumber *string
 
+	// The compute configuration of the graph: either a provisioned graph or a graph
+	// session.
+	ComputeConfiguration types.ComputeConfiguration
+
 	// The time when the graph was created.
 	CreateTime *time.Time
 
@@ -153,6 +180,13 @@ type CreateGraphOutput struct {
 	// graph.
 	//
 	// Min = 16
+	//
+	// This field is deprecated. For backward compatibility, it returns memory for a
+	// provisionedGraph and minMemory for a graphSession . Use computeConfiguration
+	// instead.
+	//
+	// Deprecated: ProvisionedMemory is deprecated. Refer to ComputeConfiguration
+	// instead.
 	ProvisionedMemory *int32
 
 	// Specifies whether or not the graph can be reachable over the internet. All
@@ -198,6 +232,9 @@ func (v *CreateGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.BuildNumber != nil {
 		s.WriteString(schemas.CreateGraphOutput_buildNumber, *v.BuildNumber)
+	}
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.CreateGraphOutput_computeConfiguration, v.ComputeConfiguration)
 	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.CreateGraphOutput_createTime, *v.CreateTime)
@@ -250,6 +287,8 @@ func (v *CreateGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CreateGraphOutput_buildNumber:
 			v.BuildNumber = new(string)
 			return d.ReadString(schemas.CreateGraphOutput_buildNumber, v.BuildNumber)
+		case schemas.CreateGraphOutput_computeConfiguration:
+			return deserializeComputeConfiguration(d, schemas.CreateGraphOutput_computeConfiguration, &v.ComputeConfiguration)
 		case schemas.CreateGraphOutput_createTime:
 			v.CreateTime = new(time.Time)
 			return d.ReadTime(schemas.CreateGraphOutput_createTime, v.CreateTime)

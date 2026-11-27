@@ -39,6 +39,19 @@ func (c *Client) UpdateOTelEnrichment(ctx context.Context, params *UpdateOTelEnr
 
 type UpdateOTelEnrichmentInput struct {
 
+	// Specifies whether enriched metrics include resource tag labels. If true ,
+	// enriched metrics include resource tag labels. If false , they include resource
+	// ARN labels but no resource tag labels. If you omit this parameter, the stored
+	// value is not changed. The operation also replaces the stored filters, so to
+	// change only this setting, specify the current IncludeFilters and ExcludeFilters
+	// in the same request.
+	//
+	// When EnableTagEnrichment is true , enriched metrics that carry resource tag
+	// labels are charged at the OTel enrichment rate. For more information, see [Amazon CloudWatch Pricing].
+	//
+	// [Amazon CloudWatch Pricing]: https://aws.amazon.com/cloudwatch/pricing/
+	EnableTagEnrichment *bool
+
 	// The metric namespaces, and the metric names, to leave unenriched. If this
 	// parameter is omitted, nothing is excluded.
 	//
@@ -67,6 +80,9 @@ func (v *UpdateOTelEnrichmentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateOTelEnrichmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableTagEnrichment != nil {
+		s.WriteBool(schemas.UpdateOTelEnrichmentInput_EnableTagEnrichment, *v.EnableTagEnrichment)
+	}
 	if v.ExcludeFilters != nil {
 		serializeOTelEnrichmentMetricSelectorList(s, schemas.UpdateOTelEnrichmentInput_ExcludeFilters, v.ExcludeFilters)
 	}
@@ -79,6 +95,11 @@ type UpdateOTelEnrichmentOutput struct {
 
 	// The date and time that enrichment started for the account.
 	CreatedAt *time.Time
+
+	// Specifies whether enriched metrics include resource tag labels for the account
+	// after the update. If the request omits EnableTagEnrichment , this is the value
+	// that was already stored.
+	EnableTagEnrichment *bool
 
 	// The exclude filters that are stored for the account after the replacement. This
 	// parameter is omitted when the request cleared the exclude filters, which means
@@ -110,6 +131,9 @@ func (v *UpdateOTelEnrichmentOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateOTelEnrichmentOutput_CreatedAt, *v.CreatedAt)
 	}
+	if v.EnableTagEnrichment != nil {
+		s.WriteBool(schemas.UpdateOTelEnrichmentOutput_EnableTagEnrichment, *v.EnableTagEnrichment)
+	}
 	if v.ExcludeFilters != nil {
 		serializeOTelEnrichmentMetricSelectorList(s, schemas.UpdateOTelEnrichmentOutput_ExcludeFilters, v.ExcludeFilters)
 	}
@@ -126,6 +150,9 @@ func (v *UpdateOTelEnrichmentOutput) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.UpdateOTelEnrichmentOutput_CreatedAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.UpdateOTelEnrichmentOutput_CreatedAt, v.CreatedAt)
+		case schemas.UpdateOTelEnrichmentOutput_EnableTagEnrichment:
+			v.EnableTagEnrichment = new(bool)
+			return d.ReadBool(schemas.UpdateOTelEnrichmentOutput_EnableTagEnrichment, v.EnableTagEnrichment)
 		case schemas.UpdateOTelEnrichmentOutput_ExcludeFilters:
 			return deserializeOTelEnrichmentMetricSelectorList(d, schemas.UpdateOTelEnrichmentOutput_ExcludeFilters, &v.ExcludeFilters)
 		case schemas.UpdateOTelEnrichmentOutput_IncludeFilters:

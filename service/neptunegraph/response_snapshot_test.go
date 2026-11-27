@@ -192,13 +192,18 @@ func TestCheckResponseSnapshot_CancelQuery(t *testing.T) {
 
 func TestCheckResponseSnapshot_CreateGraph(t *testing.T) {
 	want := &CreateGraphOutput{
-		Id:                 ptr.String("__Id__"),
-		Name:               ptr.String("__Name__"),
-		Arn:                ptr.String("__Arn__"),
-		Status:             types.GraphStatus("CREATING"),
-		StatusReason:       ptr.String("__StatusReason__"),
-		CreateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ProvisionedMemory:  ptr.Int32(1),
+		Id:                ptr.String("__Id__"),
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		Status:            types.GraphStatus("CREATING"),
+		StatusReason:      ptr.String("__StatusReason__"),
+		CreateTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ProvisionedMemory: ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		Endpoint:           ptr.String("__Endpoint__"),
 		PublicConnectivity: ptr.Bool(true),
 		VectorSearchConfiguration: &types.VectorSearchConfiguration{
@@ -231,6 +236,11 @@ func TestCheckResponseSnapshot_CreateGraph(t *testing.T) {
 		ReplicaCount:       ptr.Int32(1),
 		DeletionProtection: ptr.Bool(true),
 		ProvisionedMemory:  ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -376,13 +386,18 @@ func TestCheckResponseSnapshot_CreatePrivateGraphEndpoint(t *testing.T) {
 
 func TestCheckResponseSnapshot_DeleteGraph(t *testing.T) {
 	want := &DeleteGraphOutput{
-		Id:                 ptr.String("__Id__"),
-		Name:               ptr.String("__Name__"),
-		Arn:                ptr.String("__Arn__"),
-		Status:             types.GraphStatus("CREATING"),
-		StatusReason:       ptr.String("__StatusReason__"),
-		CreateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ProvisionedMemory:  ptr.Int32(1),
+		Id:                ptr.String("__Id__"),
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		Status:            types.GraphStatus("CREATING"),
+		StatusReason:      ptr.String("__StatusReason__"),
+		CreateTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ProvisionedMemory: ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		Endpoint:           ptr.String("__Endpoint__"),
 		PublicConnectivity: ptr.Bool(true),
 		VectorSearchConfiguration: &types.VectorSearchConfiguration{
@@ -568,13 +583,18 @@ func TestCheckResponseSnapshot_GetExportTask(t *testing.T) {
 
 func TestCheckResponseSnapshot_GetGraph(t *testing.T) {
 	want := &GetGraphOutput{
-		Id:                 ptr.String("__Id__"),
-		Name:               ptr.String("__Name__"),
-		Arn:                ptr.String("__Arn__"),
-		Status:             types.GraphStatus("CREATING"),
-		StatusReason:       ptr.String("__StatusReason__"),
-		CreateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ProvisionedMemory:  ptr.Int32(1),
+		Id:                ptr.String("__Id__"),
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		Status:            types.GraphStatus("CREATING"),
+		StatusReason:      ptr.String("__StatusReason__"),
+		CreateTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ProvisionedMemory: ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		Endpoint:           ptr.String("__Endpoint__"),
 		PublicConnectivity: ptr.Bool(true),
 		VectorSearchConfiguration: &types.VectorSearchConfiguration{
@@ -948,6 +968,11 @@ func TestCheckResponseSnapshot_ListGraphs(t *testing.T) {
 				ReplicaCount:       ptr.Int32(1),
 				KmsKeyIdentifier:   ptr.String("__KmsKeyIdentifier__"),
 				DeletionProtection: ptr.Bool(true),
+				ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+					Value: types.ProvisionedGraphConfiguration{
+						Memory: ptr.Int32(1),
+					},
+				},
 			},
 			{
 				Id:                 ptr.String("__Id__"),
@@ -960,6 +985,11 @@ func TestCheckResponseSnapshot_ListGraphs(t *testing.T) {
 				ReplicaCount:       ptr.Int32(1),
 				KmsKeyIdentifier:   ptr.String("__KmsKeyIdentifier__"),
 				DeletionProtection: ptr.Bool(true),
+				ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+					Value: types.ProvisionedGraphConfiguration{
+						Memory: ptr.Int32(1),
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1141,13 +1171,18 @@ func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 
 func TestCheckResponseSnapshot_ResetGraph(t *testing.T) {
 	want := &ResetGraphOutput{
-		Id:                 ptr.String("__Id__"),
-		Name:               ptr.String("__Name__"),
-		Arn:                ptr.String("__Arn__"),
-		Status:             types.GraphStatus("CREATING"),
-		StatusReason:       ptr.String("__StatusReason__"),
-		CreateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ProvisionedMemory:  ptr.Int32(1),
+		Id:                ptr.String("__Id__"),
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		Status:            types.GraphStatus("CREATING"),
+		StatusReason:      ptr.String("__StatusReason__"),
+		CreateTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ProvisionedMemory: ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		Endpoint:           ptr.String("__Endpoint__"),
 		PublicConnectivity: ptr.Bool(true),
 		VectorSearchConfiguration: &types.VectorSearchConfiguration{
@@ -1181,13 +1216,18 @@ func TestCheckResponseSnapshot_ResetGraph(t *testing.T) {
 
 func TestCheckResponseSnapshot_RestoreGraphFromSnapshot(t *testing.T) {
 	want := &RestoreGraphFromSnapshotOutput{
-		Id:                 ptr.String("__Id__"),
-		Name:               ptr.String("__Name__"),
-		Arn:                ptr.String("__Arn__"),
-		Status:             types.GraphStatus("CREATING"),
-		StatusReason:       ptr.String("__StatusReason__"),
-		CreateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ProvisionedMemory:  ptr.Int32(1),
+		Id:                ptr.String("__Id__"),
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		Status:            types.GraphStatus("CREATING"),
+		StatusReason:      ptr.String("__StatusReason__"),
+		CreateTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ProvisionedMemory: ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		Endpoint:           ptr.String("__Endpoint__"),
 		PublicConnectivity: ptr.Bool(true),
 		VectorSearchConfiguration: &types.VectorSearchConfiguration{
@@ -1211,6 +1251,11 @@ func TestCheckResponseSnapshot_RestoreGraphFromSnapshot(t *testing.T) {
 		SnapshotIdentifier: ptr.String("__SnapshotIdentifier__"),
 		GraphName:          ptr.String("__GraphName__"),
 		ProvisionedMemory:  ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		DeletionProtection: ptr.Bool(true),
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -1315,13 +1360,18 @@ func TestCheckResponseSnapshot_StartExportTask(t *testing.T) {
 
 func TestCheckResponseSnapshot_StartGraph(t *testing.T) {
 	want := &StartGraphOutput{
-		Id:                 ptr.String("__Id__"),
-		Name:               ptr.String("__Name__"),
-		Arn:                ptr.String("__Arn__"),
-		Status:             types.GraphStatus("CREATING"),
-		StatusReason:       ptr.String("__StatusReason__"),
-		CreateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ProvisionedMemory:  ptr.Int32(1),
+		Id:                ptr.String("__Id__"),
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		Status:            types.GraphStatus("CREATING"),
+		StatusReason:      ptr.String("__StatusReason__"),
+		CreateTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ProvisionedMemory: ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		Endpoint:           ptr.String("__Endpoint__"),
 		PublicConnectivity: ptr.Bool(true),
 		VectorSearchConfiguration: &types.VectorSearchConfiguration{
@@ -1405,13 +1455,18 @@ func TestCheckResponseSnapshot_StartImportTask(t *testing.T) {
 
 func TestCheckResponseSnapshot_StopGraph(t *testing.T) {
 	want := &StopGraphOutput{
-		Id:                 ptr.String("__Id__"),
-		Name:               ptr.String("__Name__"),
-		Arn:                ptr.String("__Arn__"),
-		Status:             types.GraphStatus("CREATING"),
-		StatusReason:       ptr.String("__StatusReason__"),
-		CreateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ProvisionedMemory:  ptr.Int32(1),
+		Id:                ptr.String("__Id__"),
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		Status:            types.GraphStatus("CREATING"),
+		StatusReason:      ptr.String("__StatusReason__"),
+		CreateTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ProvisionedMemory: ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		Endpoint:           ptr.String("__Endpoint__"),
 		PublicConnectivity: ptr.Bool(true),
 		VectorSearchConfiguration: &types.VectorSearchConfiguration{
@@ -1493,13 +1548,18 @@ func TestCheckResponseSnapshot_UntagResource(t *testing.T) {
 
 func TestCheckResponseSnapshot_UpdateGraph(t *testing.T) {
 	want := &UpdateGraphOutput{
-		Id:                 ptr.String("__Id__"),
-		Name:               ptr.String("__Name__"),
-		Arn:                ptr.String("__Arn__"),
-		Status:             types.GraphStatus("CREATING"),
-		StatusReason:       ptr.String("__StatusReason__"),
-		CreateTime:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ProvisionedMemory:  ptr.Int32(1),
+		Id:                ptr.String("__Id__"),
+		Name:              ptr.String("__Name__"),
+		Arn:               ptr.String("__Arn__"),
+		Status:            types.GraphStatus("CREATING"),
+		StatusReason:      ptr.String("__StatusReason__"),
+		CreateTime:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ProvisionedMemory: ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		Endpoint:           ptr.String("__Endpoint__"),
 		PublicConnectivity: ptr.Bool(true),
 		VectorSearchConfiguration: &types.VectorSearchConfiguration{
@@ -1523,6 +1583,11 @@ func TestCheckResponseSnapshot_UpdateGraph(t *testing.T) {
 		GraphIdentifier:    ptr.String("__GraphIdentifier__"),
 		PublicConnectivity: ptr.Bool(true),
 		ProvisionedMemory:  ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 		DeletionProtection: ptr.Bool(true),
 	})
 	if err != nil {
@@ -1672,6 +1737,11 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		ReplicaCount:       ptr.Int32(1),
 		DeletionProtection: ptr.Bool(true),
 		ProvisionedMemory:  ptr.Int32(1),
+		ComputeConfiguration: &types.ComputeConfigurationMemberProvisionedGraph{
+			Value: types.ProvisionedGraphConfiguration{
+				Memory: ptr.Int32(1),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

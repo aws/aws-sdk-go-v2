@@ -4296,6 +4296,7 @@ func TestCheckResponseSnapshot_DeleteDBCluster(t *testing.T) {
 		SkipFinalSnapshot:         ptr.Bool(true),
 		FinalDBSnapshotIdentifier: ptr.String("__FinalDBSnapshotIdentifier__"),
 		DeleteAutomatedBackups:    ptr.Bool(true),
+		DeleteDBInstances:         ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -23499,6 +23500,7 @@ func TestCheckResponseSnapshot_Error_DBClusterAutomatedBackupQuotaExceededFault(
 		SkipFinalSnapshot:         ptr.Bool(true),
 		FinalDBSnapshotIdentifier: ptr.String("__FinalDBSnapshotIdentifier__"),
 		DeleteAutomatedBackups:    ptr.Bool(true),
+		DeleteDBInstances:         ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

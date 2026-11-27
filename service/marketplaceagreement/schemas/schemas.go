@@ -893,6 +893,11 @@ var AwsOrganizationApproverOutcome_approverOutcomeId *smithy.Schema
 
 var AwsOrganizationApproverOutcome_purchaseOrders *smithy.Schema
 
+var _AWSRegion = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "AWSRegion",
+}, smithy.ShapeTypeString, 0)
+
 var BatchCreateBillingAdjustmentError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "BatchCreateBillingAdjustmentError",
@@ -1982,10 +1987,12 @@ var _PurchaseOrders_member *smithy.Schema
 var RateCardItem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
 	Name:      "RateCardItem",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var RateCardItem_dimensionKey *smithy.Schema
 
 var RateCardItem_price *smithy.Schema
+
+var RateCardItem_regionalPrices *smithy.Schema
 
 var _RateCardList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -2006,6 +2013,20 @@ var RecurringPaymentTerm_currencyCode *smithy.Schema
 var RecurringPaymentTerm_billingPeriod *smithy.Schema
 
 var RecurringPaymentTerm_price *smithy.Schema
+
+var RegionalPrice = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "RegionalPrice",
+}, smithy.ShapeTypeStructure, 2)
+var RegionalPrice_region *smithy.Schema
+
+var RegionalPrice_price *smithy.Schema
+
+var _RegionalPriceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplaceagreement",
+	Name:      "RegionalPriceList",
+}, smithy.ShapeTypeList, 1)
+var _RegionalPriceList_member *smithy.Schema
 
 var _RegistrationToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplaceagreement",
@@ -3483,9 +3504,17 @@ func init() {
 
 	RenewalTerm_termTemplates = RenewalTerm.AddMember("termTemplates", _TermTemplateList)
 
+	RegionalPrice_region = RegionalPrice.AddMember("region", _AWSRegion)
+
+	RegionalPrice_price = RegionalPrice.AddMember("price", _BoundedString)
+
+	_RegionalPriceList_member = _RegionalPriceList.AddMember("member", RegionalPrice)
+
 	RateCardItem_dimensionKey = RateCardItem.AddMember("dimensionKey", _BoundedString)
 
 	RateCardItem_price = RateCardItem.AddMember("price", _BoundedString)
+
+	RateCardItem_regionalPrices = RateCardItem.AddMember("regionalPrices", _RegionalPriceList)
 
 	_RateCardList_member = _RateCardList.AddMember("member", RateCardItem)
 

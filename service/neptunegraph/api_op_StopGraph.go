@@ -13,6 +13,9 @@ import (
 )
 
 // Stops the specific graph.
+//
+// Graph sessions are stopped automatically after a few minutes with no traffic.
+// While this API is supported for graph sessions, it isn't required.
 func (c *Client) StopGraph(ctx context.Context, params *StopGraphInput, optFns ...func(*Options)) (*StopGraphOutput, error) {
 	if params == nil {
 		params = &StopGraphInput{}
@@ -74,6 +77,10 @@ type StopGraphOutput struct {
 	// The build number of the graph.
 	BuildNumber *string
 
+	// The compute configuration of the graph: either a provisioned graph or a graph
+	// session.
+	ComputeConfiguration types.ComputeConfiguration
+
 	// The time at which the graph was created.
 	CreateTime *time.Time
 
@@ -88,6 +95,13 @@ type StopGraphOutput struct {
 
 	// The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the
 	// graph.
+	//
+	// This field is deprecated. For backward compatibility, it returns memory for a
+	// provisionedGraph and minMemory for a graphSession . Use computeConfiguration
+	// instead.
+	//
+	// Deprecated: ProvisionedMemory is deprecated. Refer to ComputeConfiguration
+	// instead.
 	ProvisionedMemory *int32
 
 	// If true, the graph has a public endpoint, otherwise not.
@@ -106,8 +120,8 @@ type StopGraphOutput struct {
 	// The reason that the graph has this status.
 	StatusReason *string
 
-	// Specifies the number of dimensions for vector embeddings loaded into the graph.
-	// Max = 65535
+	// The vector-search configuration for the graph, which specifies the vector
+	// dimension to use in the vector index, if any.
 	VectorSearchConfiguration *types.VectorSearchConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -128,6 +142,9 @@ func (v *StopGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.BuildNumber != nil {
 		s.WriteString(schemas.StopGraphOutput_buildNumber, *v.BuildNumber)
+	}
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.StopGraphOutput_computeConfiguration, v.ComputeConfiguration)
 	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.StopGraphOutput_createTime, *v.CreateTime)
@@ -180,6 +197,8 @@ func (v *StopGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.StopGraphOutput_buildNumber:
 			v.BuildNumber = new(string)
 			return d.ReadString(schemas.StopGraphOutput_buildNumber, v.BuildNumber)
+		case schemas.StopGraphOutput_computeConfiguration:
+			return deserializeComputeConfiguration(d, schemas.StopGraphOutput_computeConfiguration, &v.ComputeConfiguration)
 		case schemas.StopGraphOutput_createTime:
 			v.CreateTime = new(time.Time)
 			return d.ReadTime(schemas.StopGraphOutput_createTime, v.CreateTime)

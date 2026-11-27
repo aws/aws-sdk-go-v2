@@ -44,6 +44,13 @@ type RestoreGraphFromSnapshotInput struct {
 	// This member is required.
 	SnapshotIdentifier *string
 
+	// The compute configuration for the restored graph. A snapshot can be restored
+	// into either a provisioned graph or a graph session, regardless of the compute
+	// type of the source graph. A snapshot taken from a provisioned graph can be
+	// restored into a graph session as long as the data in the snapshot fits within
+	// the graph session.
+	ComputeConfiguration types.ComputeConfiguration
+
 	// A value that indicates whether the graph has deletion protection enabled. The
 	// graph can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool
@@ -52,6 +59,10 @@ type RestoreGraphFromSnapshotInput struct {
 	// graph.
 	//
 	// Min = 16
+	//
+	// This field is deprecated. We recommend using computeConfiguration instead.
+	//
+	// Deprecated: ProvisionedMemory is deprecated. Use ComputeConfiguration instead.
 	ProvisionedMemory *int32
 
 	// Specifies whether or not the graph can be reachable over the internet. All
@@ -78,6 +89,9 @@ func (v *RestoreGraphFromSnapshotInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RestoreGraphFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.RestoreGraphFromSnapshotInput_computeConfiguration, v.ComputeConfiguration)
+	}
 	if v.DeletionProtection != nil {
 		s.WriteBool(schemas.RestoreGraphFromSnapshotInput_deletionProtection, *v.DeletionProtection)
 	}
@@ -125,6 +139,10 @@ type RestoreGraphFromSnapshotOutput struct {
 	// The build number of the graph.
 	BuildNumber *string
 
+	// The compute configuration of the graph: either a provisioned graph or a graph
+	// session.
+	ComputeConfiguration types.ComputeConfiguration
+
 	// The time at which the graph was created.
 	CreateTime *time.Time
 
@@ -139,6 +157,13 @@ type RestoreGraphFromSnapshotOutput struct {
 
 	// The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the
 	// graph.
+	//
+	// This field is deprecated. For backward compatibility, it returns memory for a
+	// provisionedGraph and minMemory for a graphSession . Use computeConfiguration
+	// instead.
+	//
+	// Deprecated: ProvisionedMemory is deprecated. Refer to ComputeConfiguration
+	// instead.
 	ProvisionedMemory *int32
 
 	// If true , the graph has a public endpoint, otherwise not.
@@ -156,8 +181,8 @@ type RestoreGraphFromSnapshotOutput struct {
 	// The reason that the graph has this status.
 	StatusReason *string
 
-	// Specifies the number of dimensions for vector embeddings loaded into the graph.
-	// Max = 65535
+	// The vector-search configuration for the graph, which specifies the vector
+	// dimension to use in the vector index, if any.
 	VectorSearchConfiguration *types.VectorSearchConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -178,6 +203,9 @@ func (v *RestoreGraphFromSnapshotOutput) SerializeMembers(s smithy.ShapeSerializ
 	}
 	if v.BuildNumber != nil {
 		s.WriteString(schemas.RestoreGraphFromSnapshotOutput_buildNumber, *v.BuildNumber)
+	}
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.RestoreGraphFromSnapshotOutput_computeConfiguration, v.ComputeConfiguration)
 	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.RestoreGraphFromSnapshotOutput_createTime, *v.CreateTime)
@@ -230,6 +258,8 @@ func (v *RestoreGraphFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer)
 		case schemas.RestoreGraphFromSnapshotOutput_buildNumber:
 			v.BuildNumber = new(string)
 			return d.ReadString(schemas.RestoreGraphFromSnapshotOutput_buildNumber, v.BuildNumber)
+		case schemas.RestoreGraphFromSnapshotOutput_computeConfiguration:
+			return deserializeComputeConfiguration(d, schemas.RestoreGraphFromSnapshotOutput_computeConfiguration, &v.ComputeConfiguration)
 		case schemas.RestoreGraphFromSnapshotOutput_createTime:
 			v.CreateTime = new(time.Time)
 			return d.ReadTime(schemas.RestoreGraphFromSnapshotOutput_createTime, v.CreateTime)

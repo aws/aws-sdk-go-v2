@@ -1065,6 +1065,119 @@ func (v *CancelledChangeProperty) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// The catalog that a domain publishes to. Specify exactly one catalog type.
+//
+// The following types satisfy this interface:
+//
+//	CatalogConfigurationMemberServiceManagedS3Tables
+type CatalogConfiguration interface {
+	isCatalogConfiguration()
+}
+
+// An Amazon S3 Tables catalog that the service creates and manages for the domain.
+type CatalogConfigurationMemberServiceManagedS3Tables struct {
+	Value ServiceManagedS3TablesCatalog
+
+	noSmithyDocumentSerde
+}
+
+func (*CatalogConfigurationMemberServiceManagedS3Tables) isCatalogConfiguration() {}
+func (v *CatalogConfigurationMemberServiceManagedS3Tables) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CatalogConfiguration_ServiceManagedS3Tables)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CatalogConfigurationMemberServiceManagedS3Tables) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Specifies the configuration for integrating the domain with a data catalog, so
+// that the domain can publish its data as tables. The only supported catalog is an
+// Amazon S3 Tables catalog that the service creates and manages for the domain.
+type CatalogOptions struct {
+
+	// Whether the domain publishes data to the catalog. Accepted values true or false
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The catalog that the domain publishes to.
+	Catalog CatalogConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *CatalogOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CatalogOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CatalogOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		serializeCatalogConfiguration(s, schemas.CatalogOptions_Catalog, v.Catalog)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CatalogOptions_Enabled, *v.Enabled)
+	}
+}
+func (v *CatalogOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CatalogOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CatalogOptions_Catalog:
+			return deserializeCatalogConfiguration(d, schemas.CatalogOptions_Catalog, &v.Catalog)
+		case schemas.CatalogOptions_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.CatalogOptions_Enabled, v.Enabled)
+		}
+		return nil
+	})
+}
+
+// The configured catalog options for the domain and their current status.
+type CatalogOptionsStatus struct {
+
+	// The catalog options configured for the domain.
+	Options *CatalogOptions
+
+	// The status of the catalog options for the domain.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
+func (v *CatalogOptionsStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CatalogOptionsStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CatalogOptionsStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != nil {
+		s.WriteStruct(schemas.CatalogOptionsStatus_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.CatalogOptionsStatus_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CatalogOptionsStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CatalogOptionsStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CatalogOptionsStatus_Options:
+			v.Options = &CatalogOptions{}
+			return v.Options.Deserialize(d)
+		case schemas.CatalogOptionsStatus_Status:
+			v.Status = &OptionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies change details of the domain configuration change.
 type ChangeProgressDetails struct {
 
@@ -2706,6 +2819,9 @@ type ElasticsearchDomainConfig struct {
 	// Specifies AutomatedSnapshotPauseOptions for the domain.
 	AutomatedSnapshotPauseOptions *AutomatedSnapshotPauseOptionsStatus
 
+	// The catalog options configured for the given domain and their current status.
+	CatalogOptions *CatalogOptionsStatus
+
 	// Specifies change details of the domain configuration change.
 	ChangeProgressDetails *ChangeProgressDetails
 
@@ -2788,6 +2904,11 @@ func (v *ElasticsearchDomainConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AutomatedSnapshotPauseOptions != nil {
 		s.WriteStruct(schemas.ElasticsearchDomainConfig_AutomatedSnapshotPauseOptions)
 		v.AutomatedSnapshotPauseOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogOptions != nil {
+		s.WriteStruct(schemas.ElasticsearchDomainConfig_CatalogOptions)
+		v.CatalogOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.ChangeProgressDetails != nil {
@@ -2882,6 +3003,9 @@ func (v *ElasticsearchDomainConfig) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.ElasticsearchDomainConfig_AutomatedSnapshotPauseOptions:
 			v.AutomatedSnapshotPauseOptions = &AutomatedSnapshotPauseOptionsStatus{}
 			return v.AutomatedSnapshotPauseOptions.Deserialize(d)
+		case schemas.ElasticsearchDomainConfig_CatalogOptions:
+			v.CatalogOptions = &CatalogOptionsStatus{}
+			return v.CatalogOptions.Deserialize(d)
 		case schemas.ElasticsearchDomainConfig_ChangeProgressDetails:
 			v.ChangeProgressDetails = &ChangeProgressDetails{}
 			return v.ChangeProgressDetails.Deserialize(d)
@@ -2975,6 +3099,9 @@ type ElasticsearchDomainStatus struct {
 	// The current status of the Elasticsearch domain's automated snapshot pause
 	// options.
 	AutomatedSnapshotPauseOptions *AutomatedSnapshotPauseOptions
+
+	// The catalog options for the given domain.
+	CatalogOptions *CatalogOptions
 
 	// Specifies change details of the domain configuration change.
 	ChangeProgressDetails *ChangeProgressDetails
@@ -3090,6 +3217,11 @@ func (v *ElasticsearchDomainStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AutomatedSnapshotPauseOptions != nil {
 		s.WriteStruct(schemas.ElasticsearchDomainStatus_AutomatedSnapshotPauseOptions)
 		v.AutomatedSnapshotPauseOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogOptions != nil {
+		s.WriteStruct(schemas.ElasticsearchDomainStatus_CatalogOptions)
+		v.CatalogOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.ChangeProgressDetails != nil {
@@ -3210,6 +3342,9 @@ func (v *ElasticsearchDomainStatus) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.ElasticsearchDomainStatus_AutomatedSnapshotPauseOptions:
 			v.AutomatedSnapshotPauseOptions = &AutomatedSnapshotPauseOptions{}
 			return v.AutomatedSnapshotPauseOptions.Deserialize(d)
+		case schemas.ElasticsearchDomainStatus_CatalogOptions:
+			v.CatalogOptions = &CatalogOptions{}
+			return v.CatalogOptions.Deserialize(d)
 		case schemas.ElasticsearchDomainStatus_ChangeProgressDetails:
 			v.ChangeProgressDetails = &ChangeProgressDetails{}
 			return v.ChangeProgressDetails.Deserialize(d)
@@ -4849,6 +4984,49 @@ func (v *RetentionOptionsMemberRetentionInHours) Deserialize(d smithy.ShapeDeser
 	return d.ReadInt32(schemas.RetentionOptions_RetentionInHours, &v.Value)
 }
 
+// Specifies the encryption settings for the tables in a service-managed Amazon S3
+// Tables catalog.
+type S3TablesEncryptionConfiguration struct {
+
+	// Whether to encrypt the tables with the AWS KMS key specified in KmsKeyArn .
+	// Accepted values true or false
+	Enabled *bool
+
+	// The ARN of the AWS KMS key to encrypt the tables with. Takes the form
+	// arn:aws:kms:region:account-id:key/key-id .
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *S3TablesEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3TablesEncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3TablesEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.S3TablesEncryptionConfiguration_Enabled, *v.Enabled)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.S3TablesEncryptionConfiguration_KmsKeyArn, *v.KmsKeyArn)
+	}
+}
+func (v *S3TablesEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3TablesEncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3TablesEncryptionConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.S3TablesEncryptionConfiguration_Enabled, v.Enabled)
+		case schemas.S3TablesEncryptionConfiguration_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.S3TablesEncryptionConfiguration_KmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
+}
+
 // Specifies the SAML Identity Provider's information.
 type SAMLIdp struct {
 
@@ -5116,6 +5294,40 @@ func (v *ScheduledAutoTuneDetails) Deserialize(d smithy.ShapeDeserializer) error
 			}
 			v.Severity = ScheduledAutoTuneSeverityType(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// Specifies the configuration for an Amazon S3 Tables catalog that the service
+// creates and manages for the domain.
+type ServiceManagedS3TablesCatalog struct {
+
+	// Encryption settings for the tables in the catalog.
+	EncryptionConfiguration *S3TablesEncryptionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *ServiceManagedS3TablesCatalog) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceManagedS3TablesCatalog)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceManagedS3TablesCatalog) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.ServiceManagedS3TablesCatalog_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ServiceManagedS3TablesCatalog) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceManagedS3TablesCatalog, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceManagedS3TablesCatalog_EncryptionConfiguration:
+			v.EncryptionConfiguration = &S3TablesEncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
 		}
 		return nil
 	})
@@ -6203,4 +6415,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isRetentionOptions() {}
+func (*UnknownUnionMember) isCatalogConfiguration() {}
+func (*UnknownUnionMember) isRetentionOptions()     {}

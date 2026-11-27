@@ -10,6 +10,23 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+func serializeComputeConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v ComputeConfiguration) {
+	switch vv := v.(type) {
+	case *ComputeConfigurationMemberGraphSession:
+		s.WriteUnion(schema, schemas.ComputeConfiguration_graphSession)
+		s.WriteStruct(schemas.ComputeConfiguration_graphSession)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ComputeConfigurationMemberProvisionedGraph:
+		s.WriteUnion(schema, schemas.ComputeConfiguration_provisionedGraph)
+		s.WriteStruct(schemas.ComputeConfiguration_provisionedGraph)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeImportOptions(s smithy.ShapeSerializer, schema *smithy.Schema, v ImportOptions) {
 	switch vv := v.(type) {
 	case *ImportOptionsMemberNeptune:
@@ -19,6 +36,22 @@ func serializeImportOptions(s smithy.ShapeSerializer, schema *smithy.Schema, v I
 		s.CloseStruct()
 		s.CloseUnion()
 	}
+}
+
+func deserializeComputeConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *ComputeConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.ComputeConfiguration_graphSession:
+			vv := &ComputeConfigurationMemberGraphSession{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ComputeConfiguration_provisionedGraph:
+			vv := &ComputeConfigurationMemberProvisionedGraph{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 func deserializeImportOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v *ImportOptions) error {

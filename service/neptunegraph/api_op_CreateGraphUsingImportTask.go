@@ -17,8 +17,15 @@ import (
 //
 // The data can be loaded from files in S3 that in either the [Gremlin CSV format] or the [openCypher load format].
 //
+// Graph session cannot be created using this API. Create an empty Graph Session
+// using [CreateGraph]or restore a snapshot as Graph Session using [RestoreGraphFromSnapshot] and use [neptune.load CALL procedure] to load data into
+// the Graph Session instead.
+//
 // [Gremlin CSV format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
+// [RestoreGraphFromSnapshot]: https://docs.aws.amazon.com/neptune-analytics/latest/apiref/API_RestoreGraphFromSnapshot.html
+// [neptune.load CALL procedure]: https://docs.aws.amazon.com/neptune-analytics/latest/userguide/batch-load.html
 // [openCypher load format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
+// [CreateGraph]: https://docs.aws.amazon.com/neptune-analytics/latest/apiref/API_CreateGraph.html
 func (c *Client) CreateGraphUsingImportTask(ctx context.Context, params *CreateGraphUsingImportTaskInput, optFns ...func(*Options)) (*CreateGraphUsingImportTaskOutput, error) {
 	if params == nil {
 		params = &CreateGraphUsingImportTaskInput{}

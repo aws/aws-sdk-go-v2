@@ -90,6 +90,10 @@ type UpdateDomainConfigInput struct {
 	// Maximum suspension duration: 3 days.
 	AutomatedSnapshotPauseOptions *types.AutomatedSnapshotPauseRequestOptions
 
+	// Options for publishing the domain's data to a data catalog, such as a
+	// service-managed Amazon S3 Tables catalog.
+	CatalogOptions *types.CatalogOptions
+
 	// Changes that you want to make to the cluster configuration, such as the
 	// instance type and number of EC2 instances.
 	ClusterConfig *types.ClusterConfig
@@ -202,6 +206,11 @@ func (v *UpdateDomainConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AutomatedSnapshotPauseOptions != nil {
 		s.WriteStruct(schemas.UpdateDomainConfigRequest_AutomatedSnapshotPauseOptions)
 		v.AutomatedSnapshotPauseOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogOptions != nil {
+		s.WriteStruct(schemas.UpdateDomainConfigRequest_CatalogOptions)
+		v.CatalogOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.ClusterConfig != nil {

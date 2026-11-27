@@ -57,6 +57,10 @@ type GetOTelEnrichmentOutput struct {
 	// omitted when enrichment is stopped.
 	CreatedAt *time.Time
 
+	// Specifies whether enriched metrics include resource tag labels for the account.
+	// This parameter is omitted when enrichment is stopped.
+	EnableTagEnrichment *bool
+
 	// The metric namespaces, and the metric names, that are left unenriched. This
 	// parameter is omitted when enrichment is stopped, and when enrichment is running
 	// with no exclude filters, which means that nothing is excluded.
@@ -87,6 +91,9 @@ func (v *GetOTelEnrichmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetOTelEnrichmentOutput_CreatedAt, *v.CreatedAt)
 	}
+	if v.EnableTagEnrichment != nil {
+		s.WriteBool(schemas.GetOTelEnrichmentOutput_EnableTagEnrichment, *v.EnableTagEnrichment)
+	}
 	if v.ExcludeFilters != nil {
 		serializeOTelEnrichmentMetricSelectorList(s, schemas.GetOTelEnrichmentOutput_ExcludeFilters, v.ExcludeFilters)
 	}
@@ -106,6 +113,9 @@ func (v *GetOTelEnrichmentOutput) Deserialize(d smithy.ShapeDeserializer) error 
 		case schemas.GetOTelEnrichmentOutput_CreatedAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.GetOTelEnrichmentOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetOTelEnrichmentOutput_EnableTagEnrichment:
+			v.EnableTagEnrichment = new(bool)
+			return d.ReadBool(schemas.GetOTelEnrichmentOutput_EnableTagEnrichment, v.EnableTagEnrichment)
 		case schemas.GetOTelEnrichmentOutput_ExcludeFilters:
 			return deserializeOTelEnrichmentMetricSelectorList(d, schemas.GetOTelEnrichmentOutput_ExcludeFilters, &v.ExcludeFilters)
 		case schemas.GetOTelEnrichmentOutput_IncludeFilters:

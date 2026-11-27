@@ -1322,6 +1322,28 @@ var CapabilityStatus_DELETING *smithy.Schema
 
 var CapabilityStatus_DELETE_FAILED *smithy.Schema
 
+var CatalogConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "CatalogConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var CatalogConfiguration_ServiceManagedS3Tables *smithy.Schema
+
+var CatalogOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "CatalogOptions",
+}, smithy.ShapeTypeStructure, 2)
+var CatalogOptions_Enabled *smithy.Schema
+
+var CatalogOptions_Catalog *smithy.Schema
+
+var CatalogOptionsStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "CatalogOptionsStatus",
+}, smithy.ShapeTypeStructure, 2)
+var CatalogOptionsStatus_Options *smithy.Schema
+
+var CatalogOptionsStatus_Status *smithy.Schema
+
 var CategoryDiffResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "CategoryDiffResult",
@@ -2006,7 +2028,7 @@ var _DomainArn = smithy.NewSchema(smithy.ShapeID{
 var DomainConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DomainConfig",
-}, smithy.ShapeTypeStructure, 25)
+}, smithy.ShapeTypeStructure, 26)
 var DomainConfig_EngineVersion *smithy.Schema
 
 var DomainConfig_ClusterConfig *smithy.Schema
@@ -2030,6 +2052,8 @@ var DomainConfig_NodeToNodeEncryptionOptions *smithy.Schema
 var DomainConfig_AdvancedOptions *smithy.Schema
 
 var DomainConfig_LogPublishingOptions *smithy.Schema
+
+var DomainConfig_CatalogOptions *smithy.Schema
 
 var DomainConfig_DomainEndpointOptions *smithy.Schema
 
@@ -2261,7 +2285,7 @@ var DomainState_NotAvailable *smithy.Schema
 var DomainStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DomainStatus",
-}, smithy.ShapeTypeStructure, 38)
+}, smithy.ShapeTypeStructure, 39)
 var DomainStatus_DomainId *smithy.Schema
 
 var DomainStatus_DomainName *smithy.Schema
@@ -2307,6 +2331,8 @@ var DomainStatus_NodeToNodeEncryptionOptions *smithy.Schema
 var DomainStatus_AdvancedOptions *smithy.Schema
 
 var DomainStatus_LogPublishingOptions *smithy.Schema
+
+var DomainStatus_CatalogOptions *smithy.Schema
 
 var DomainStatus_ServiceSoftwareOptions *smithy.Schema
 
@@ -4361,6 +4387,14 @@ var _S3Key = smithy.NewSchema(smithy.ShapeID{
 	Name:      "S3Key",
 }, smithy.ShapeTypeString, 0)
 
+var S3TablesEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "S3TablesEncryptionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var S3TablesEncryptionConfiguration_Enabled *smithy.Schema
+
+var S3TablesEncryptionConfiguration_KmsKeyArn *smithy.Schema
+
 var S3VectorsEngine = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "S3VectorsEngine",
@@ -4523,6 +4557,12 @@ var ServerlessVectorAcceleration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ServerlessVectorAcceleration",
 }, smithy.ShapeTypeStructure, 1)
 var ServerlessVectorAcceleration_Enabled *smithy.Schema
+
+var ServiceManagedS3TablesCatalog = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ServiceManagedS3TablesCatalog",
+}, smithy.ShapeTypeStructure, 1)
+var ServiceManagedS3TablesCatalog_EncryptionConfiguration *smithy.Schema
 
 var ServiceOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -5384,7 +5424,7 @@ var CreateApplicationResponse_kmsKeyArn *smithy.Schema
 var CreateDomainRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "CreateDomainRequest",
-}, smithy.ShapeTypeStructure, 25)
+}, smithy.ShapeTypeStructure, 26)
 var CreateDomainRequest_DomainName *smithy.Schema
 
 var CreateDomainRequest_EngineVersion *smithy.Schema
@@ -5410,6 +5450,8 @@ var CreateDomainRequest_NodeToNodeEncryptionOptions *smithy.Schema
 var CreateDomainRequest_AdvancedOptions *smithy.Schema
 
 var CreateDomainRequest_LogPublishingOptions *smithy.Schema
+
+var CreateDomainRequest_CatalogOptions *smithy.Schema
 
 var CreateDomainRequest_DomainEndpointOptions *smithy.Schema
 
@@ -6857,7 +6899,7 @@ var UpdateDirectQueryDataSourceResponse_DataSourceArn *smithy.Schema
 var UpdateDomainConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "UpdateDomainConfigRequest",
-}, smithy.ShapeTypeStructure, 26)
+}, smithy.ShapeTypeStructure, 27)
 var UpdateDomainConfigRequest_DomainName *smithy.Schema
 
 var UpdateDomainConfigRequest_ClusterConfig *smithy.Schema
@@ -6877,6 +6919,8 @@ var UpdateDomainConfigRequest_AccessPolicies *smithy.Schema
 var UpdateDomainConfigRequest_IPAddressType *smithy.Schema
 
 var UpdateDomainConfigRequest_LogPublishingOptions *smithy.Schema
+
+var UpdateDomainConfigRequest_CatalogOptions *smithy.Schema
 
 var UpdateDomainConfigRequest_EncryptionAtRestOptions *smithy.Schema
 
@@ -7504,6 +7548,22 @@ func init() {
 	CapabilityStatus_DELETING = CapabilityStatus.AddMember("DELETING", smithyprelude.Unit)
 
 	CapabilityStatus_DELETE_FAILED = CapabilityStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
+
+	S3TablesEncryptionConfiguration_Enabled = S3TablesEncryptionConfiguration.AddMember("Enabled", _Boolean)
+
+	S3TablesEncryptionConfiguration_KmsKeyArn = S3TablesEncryptionConfiguration.AddMember("KmsKeyArn", _KmsKeyArn)
+
+	ServiceManagedS3TablesCatalog_EncryptionConfiguration = ServiceManagedS3TablesCatalog.AddMember("EncryptionConfiguration", S3TablesEncryptionConfiguration)
+
+	CatalogConfiguration_ServiceManagedS3Tables = CatalogConfiguration.AddMember("ServiceManagedS3Tables", ServiceManagedS3TablesCatalog)
+
+	CatalogOptions_Enabled = CatalogOptions.AddMember("Enabled", _Boolean)
+
+	CatalogOptions_Catalog = CatalogOptions.AddMember("Catalog", CatalogConfiguration)
+
+	CatalogOptionsStatus_Options = CatalogOptionsStatus.AddMember("Options", CatalogOptions)
+
+	CatalogOptionsStatus_Status = CatalogOptionsStatus.AddMember("Status", OptionStatus)
 
 	DiffStatus_COMPARED = DiffStatus.AddMember("COMPARED", smithyprelude.Unit)
 
@@ -8335,6 +8395,8 @@ func init() {
 
 	DomainConfig_LogPublishingOptions = DomainConfig.AddMember("LogPublishingOptions", LogPublishingOptionsStatus)
 
+	DomainConfig_CatalogOptions = DomainConfig.AddMember("CatalogOptions", CatalogOptionsStatus)
+
 	DomainConfig_DomainEndpointOptions = DomainConfig.AddMember("DomainEndpointOptions", DomainEndpointOptionsStatus)
 
 	DomainConfig_AdvancedSecurityOptions = DomainConfig.AddMember("AdvancedSecurityOptions", AdvancedSecurityOptionsStatus)
@@ -8588,6 +8650,8 @@ func init() {
 	DomainStatus_AdvancedOptions = DomainStatus.AddMember("AdvancedOptions", _AdvancedOptions)
 
 	DomainStatus_LogPublishingOptions = DomainStatus.AddMember("LogPublishingOptions", _LogPublishingOptions)
+
+	DomainStatus_CatalogOptions = DomainStatus.AddMember("CatalogOptions", CatalogOptions)
 
 	DomainStatus_ServiceSoftwareOptions = DomainStatus.AddMember("ServiceSoftwareOptions", ServiceSoftwareOptions)
 
@@ -9497,6 +9561,8 @@ func init() {
 
 	CreateDomainRequest_LogPublishingOptions = CreateDomainRequest.AddMember("LogPublishingOptions", _LogPublishingOptions)
 
+	CreateDomainRequest_CatalogOptions = CreateDomainRequest.AddMember("CatalogOptions", CatalogOptions)
+
 	CreateDomainRequest_DomainEndpointOptions = CreateDomainRequest.AddMember("DomainEndpointOptions", DomainEndpointOptions)
 
 	CreateDomainRequest_AdvancedSecurityOptions = CreateDomainRequest.AddMember("AdvancedSecurityOptions", AdvancedSecurityOptionsInput)
@@ -10304,6 +10370,8 @@ func init() {
 	UpdateDomainConfigRequest_IPAddressType = UpdateDomainConfigRequest.AddMember("IPAddressType", IPAddressType)
 
 	UpdateDomainConfigRequest_LogPublishingOptions = UpdateDomainConfigRequest.AddMember("LogPublishingOptions", _LogPublishingOptions)
+
+	UpdateDomainConfigRequest_CatalogOptions = UpdateDomainConfigRequest.AddMember("CatalogOptions", CatalogOptions)
 
 	UpdateDomainConfigRequest_EncryptionAtRestOptions = UpdateDomainConfigRequest.AddMember("EncryptionAtRestOptions", EncryptionAtRestOptions)
 

@@ -445,6 +445,17 @@ func TestCheckRequestSnapshot_CreateElasticsearchDomain(t *testing.T) {
 				Enabled:                   ptr.Bool(true),
 			},
 		},
+		CatalogOptions: &types.CatalogOptions{
+			Enabled: ptr.Bool(true),
+			Catalog: &types.CatalogConfigurationMemberServiceManagedS3Tables{
+				Value: types.ServiceManagedS3TablesCatalog{
+					EncryptionConfiguration: &types.S3TablesEncryptionConfiguration{
+						Enabled:   ptr.Bool(true),
+						KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					},
+				},
+			},
+		},
 		DomainEndpointOptions: &types.DomainEndpointOptions{
 			EnforceHTTPS:                 ptr.Bool(true),
 			TLSSecurityPolicy:            types.TLSSecurityPolicy("Policy-Min-TLS-1-0-2019-07"),
@@ -1825,6 +1836,17 @@ func TestCheckRequestSnapshot_UpdateElasticsearchDomainConfig(t *testing.T) {
 				Enabled:                   ptr.Bool(true),
 			},
 		},
+		CatalogOptions: &types.CatalogOptions{
+			Enabled: ptr.Bool(true),
+			Catalog: &types.CatalogConfigurationMemberServiceManagedS3Tables{
+				Value: types.ServiceManagedS3TablesCatalog{
+					EncryptionConfiguration: &types.S3TablesEncryptionConfiguration{
+						Enabled:   ptr.Bool(true),
+						KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					},
+				},
+			},
+		},
 		DomainEndpointOptions: &types.DomainEndpointOptions{
 			EnforceHTTPS:                 ptr.Bool(true),
 			TLSSecurityPolicy:            types.TLSSecurityPolicy("Policy-Min-TLS-1-0-2019-07"),
@@ -2261,6 +2283,17 @@ func TestUpdateRequestSnapshot_CreateElasticsearchDomain(t *testing.T) {
 			"key0": {
 				CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
 				Enabled:                   ptr.Bool(true),
+			},
+		},
+		CatalogOptions: &types.CatalogOptions{
+			Enabled: ptr.Bool(true),
+			Catalog: &types.CatalogConfigurationMemberServiceManagedS3Tables{
+				Value: types.ServiceManagedS3TablesCatalog{
+					EncryptionConfiguration: &types.S3TablesEncryptionConfiguration{
+						Enabled:   ptr.Bool(true),
+						KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					},
+				},
 			},
 		},
 		DomainEndpointOptions: &types.DomainEndpointOptions{
@@ -3641,6 +3674,17 @@ func TestUpdateRequestSnapshot_UpdateElasticsearchDomainConfig(t *testing.T) {
 			"key0": {
 				CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
 				Enabled:                   ptr.Bool(true),
+			},
+		},
+		CatalogOptions: &types.CatalogOptions{
+			Enabled: ptr.Bool(true),
+			Catalog: &types.CatalogConfigurationMemberServiceManagedS3Tables{
+				Value: types.ServiceManagedS3TablesCatalog{
+					EncryptionConfiguration: &types.S3TablesEncryptionConfiguration{
+						Enabled:   ptr.Bool(true),
+						KmsKeyArn: ptr.String("__KmsKeyArn__"),
+					},
+				},
 			},
 		},
 		DomainEndpointOptions: &types.DomainEndpointOptions{

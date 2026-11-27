@@ -1,0 +1,8 @@
+{
+    "id": "866c0995-182d-4593-89bf-a105a5807892",
+    "type": "feature",
+    "description": "Aurora PostgreSQL and Aurora MySQL now let you delete a DB cluster and all its instances in a single API call or console action, without deleting each instance first. Cluster deletion also completes faster.",
+    "modules": [
+        "service/rds"
+    ]
+}

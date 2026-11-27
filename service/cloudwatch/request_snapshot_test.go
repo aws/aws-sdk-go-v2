@@ -2681,6 +2681,7 @@ func TestCheckRequestSnapshot_StartOTelEnrichment(t *testing.T) {
 				},
 			},
 		},
+		EnableTagEnrichment: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2862,6 +2863,7 @@ func TestCheckRequestSnapshot_UpdateOTelEnrichment(t *testing.T) {
 				},
 			},
 		},
+		EnableTagEnrichment: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5414,6 +5416,7 @@ func TestUpdateRequestSnapshot_StartOTelEnrichment(t *testing.T) {
 				},
 			},
 		},
+		EnableTagEnrichment: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5595,6 +5598,7 @@ func TestUpdateRequestSnapshot_UpdateOTelEnrichment(t *testing.T) {
 				},
 			},
 		},
+		EnableTagEnrichment: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

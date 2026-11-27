@@ -787,6 +787,17 @@ func TestUpdateResponseSnapshot_CreateDomain(t *testing.T) {
 					Enabled:                   ptr.Bool(true),
 				},
 			},
+			CatalogOptions: &types.CatalogOptions{
+				Enabled: ptr.Bool(true),
+				Catalog: &types.CatalogConfigurationMemberServiceManagedS3Tables{
+					Value: types.ServiceManagedS3TablesCatalog{
+						EncryptionConfiguration: &types.S3TablesEncryptionConfiguration{
+							Enabled:   ptr.Bool(true),
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
+						},
+					},
+				},
+			},
 			ServiceSoftwareOptions: &types.ServiceSoftwareOptions{
 				CurrentVersion:      ptr.String("__CurrentVersion__"),
 				NewVersion:          ptr.String("__NewVersion__"),
@@ -1280,6 +1291,17 @@ func TestUpdateResponseSnapshot_DeleteDomain(t *testing.T) {
 				"key0": {
 					CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
 					Enabled:                   ptr.Bool(true),
+				},
+			},
+			CatalogOptions: &types.CatalogOptions{
+				Enabled: ptr.Bool(true),
+				Catalog: &types.CatalogConfigurationMemberServiceManagedS3Tables{
+					Value: types.ServiceManagedS3TablesCatalog{
+						EncryptionConfiguration: &types.S3TablesEncryptionConfiguration{
+							Enabled:   ptr.Bool(true),
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
+						},
+					},
 				},
 			},
 			ServiceSoftwareOptions: &types.ServiceSoftwareOptions{
@@ -1791,6 +1813,17 @@ func TestUpdateResponseSnapshot_DescribeDomain(t *testing.T) {
 					Enabled:                   ptr.Bool(true),
 				},
 			},
+			CatalogOptions: &types.CatalogOptions{
+				Enabled: ptr.Bool(true),
+				Catalog: &types.CatalogConfigurationMemberServiceManagedS3Tables{
+					Value: types.ServiceManagedS3TablesCatalog{
+						EncryptionConfiguration: &types.S3TablesEncryptionConfiguration{
+							Enabled:   ptr.Bool(true),
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
+						},
+					},
+				},
+			},
 			ServiceSoftwareOptions: &types.ServiceSoftwareOptions{
 				CurrentVersion:      ptr.String("__CurrentVersion__"),
 				NewVersion:          ptr.String("__NewVersion__"),
@@ -2249,6 +2282,26 @@ func TestUpdateResponseSnapshot_DescribeDomainConfig(t *testing.T) {
 					"key0": {
 						CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
 						Enabled:                   ptr.Bool(true),
+					},
+				},
+				Status: &types.OptionStatus{
+					CreationDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					UpdateDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					UpdateVersion:   1,
+					State:           types.OptionState("RequiresIndexDocuments"),
+					PendingDeletion: ptr.Bool(true),
+				},
+			},
+			CatalogOptions: &types.CatalogOptionsStatus{
+				Options: &types.CatalogOptions{
+					Enabled: ptr.Bool(true),
+					Catalog: &types.CatalogConfigurationMemberServiceManagedS3Tables{
+						Value: types.ServiceManagedS3TablesCatalog{
+							EncryptionConfiguration: &types.S3TablesEncryptionConfiguration{
+								Enabled:   ptr.Bool(true),
+								KmsKeyArn: ptr.String("__KmsKeyArn__"),
+							},
+						},
 					},
 				},
 				Status: &types.OptionStatus{
@@ -2772,6 +2825,17 @@ func TestUpdateResponseSnapshot_DescribeDomains(t *testing.T) {
 						Enabled:                   ptr.Bool(true),
 					},
 				},
+				CatalogOptions: &types.CatalogOptions{
+					Enabled: ptr.Bool(true),
+					Catalog: &types.CatalogConfigurationMemberServiceManagedS3Tables{
+						Value: types.ServiceManagedS3TablesCatalog{
+							EncryptionConfiguration: &types.S3TablesEncryptionConfiguration{
+								Enabled:   ptr.Bool(true),
+								KmsKeyArn: ptr.String("__KmsKeyArn__"),
+							},
+						},
+					},
+				},
 				ServiceSoftwareOptions: &types.ServiceSoftwareOptions{
 					CurrentVersion:      ptr.String("__CurrentVersion__"),
 					NewVersion:          ptr.String("__NewVersion__"),
@@ -2991,6 +3055,17 @@ func TestUpdateResponseSnapshot_DescribeDomains(t *testing.T) {
 					"key0": {
 						CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
 						Enabled:                   ptr.Bool(true),
+					},
+				},
+				CatalogOptions: &types.CatalogOptions{
+					Enabled: ptr.Bool(true),
+					Catalog: &types.CatalogConfigurationMemberServiceManagedS3Tables{
+						Value: types.ServiceManagedS3TablesCatalog{
+							EncryptionConfiguration: &types.S3TablesEncryptionConfiguration{
+								Enabled:   ptr.Bool(true),
+								KmsKeyArn: ptr.String("__KmsKeyArn__"),
+							},
+						},
 					},
 				},
 				ServiceSoftwareOptions: &types.ServiceSoftwareOptions{
@@ -3258,6 +3333,17 @@ func TestUpdateResponseSnapshot_DescribeDryRunProgress(t *testing.T) {
 				"key0": {
 					CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
 					Enabled:                   ptr.Bool(true),
+				},
+			},
+			CatalogOptions: &types.CatalogOptions{
+				Enabled: ptr.Bool(true),
+				Catalog: &types.CatalogConfigurationMemberServiceManagedS3Tables{
+					Value: types.ServiceManagedS3TablesCatalog{
+						EncryptionConfiguration: &types.S3TablesEncryptionConfiguration{
+							Enabled:   ptr.Bool(true),
+							KmsKeyArn: ptr.String("__KmsKeyArn__"),
+						},
+					},
 				},
 			},
 			ServiceSoftwareOptions: &types.ServiceSoftwareOptions{
@@ -6174,6 +6260,26 @@ func TestUpdateResponseSnapshot_UpdateDomainConfig(t *testing.T) {
 					"key0": {
 						CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
 						Enabled:                   ptr.Bool(true),
+					},
+				},
+				Status: &types.OptionStatus{
+					CreationDate:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					UpdateDate:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					UpdateVersion:   1,
+					State:           types.OptionState("RequiresIndexDocuments"),
+					PendingDeletion: ptr.Bool(true),
+				},
+			},
+			CatalogOptions: &types.CatalogOptionsStatus{
+				Options: &types.CatalogOptions{
+					Enabled: ptr.Bool(true),
+					Catalog: &types.CatalogConfigurationMemberServiceManagedS3Tables{
+						Value: types.ServiceManagedS3TablesCatalog{
+							EncryptionConfiguration: &types.S3TablesEncryptionConfiguration{
+								Enabled:   ptr.Bool(true),
+								KmsKeyArn: ptr.String("__KmsKeyArn__"),
+							},
+						},
 					},
 				},
 				Status: &types.OptionStatus{

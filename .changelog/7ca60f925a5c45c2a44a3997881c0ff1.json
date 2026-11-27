@@ -1,0 +1,8 @@
+{
+    "id": "7ca60f92-5a5c-45c2-a44a-3997881c0ff1",
+    "type": "feature",
+    "description": "Adds support for Graph Sessions, a new offering backed by on-demand ephemeral compute.",
+    "modules": [
+        "service/neptunegraph"
+    ]
+}

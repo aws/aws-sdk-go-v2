@@ -271,6 +271,14 @@ var BlankNodeHandling = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var BlankNodeHandling_CONVERT_TO_IRI *smithy.Schema
 
+var ComputeConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunegraph",
+	Name:      "ComputeConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var ComputeConfiguration_provisionedGraph *smithy.Schema
+
+var ComputeConfiguration_graphSession *smithy.Schema
+
 var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "ConflictException",
@@ -520,6 +528,17 @@ var _GraphName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "GraphName",
 }, smithy.ShapeTypeString, 0)
 
+var GraphSessionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunegraph",
+	Name:      "GraphSessionConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var GraphSessionConfiguration_minMemory *smithy.Schema
+
+var _GraphSessionMemory = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunegraph",
+	Name:      "GraphSessionMemory",
+}, smithy.ShapeTypeInteger, 0)
+
 var GraphSnapshotSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "GraphSnapshotSummary",
@@ -573,7 +592,7 @@ var GraphStatus_STOPPED *smithy.Schema
 var GraphSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "GraphSummary",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var GraphSummary_id *smithy.Schema
 
 var GraphSummary_name *smithy.Schema
@@ -593,6 +612,8 @@ var GraphSummary_replicaCount *smithy.Schema
 var GraphSummary_kmsKeyIdentifier *smithy.Schema
 
 var GraphSummary_deletionProtection *smithy.Schema
+
+var GraphSummary_computeConfiguration *smithy.Schema
 
 var _GraphSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
@@ -819,6 +840,12 @@ var _PrivateGraphEndpointSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PrivateGraphEndpointSummaryList",
 }, smithy.ShapeTypeList, 1)
 var _PrivateGraphEndpointSummaryList_member *smithy.Schema
+
+var ProvisionedGraphConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunegraph",
+	Name:      "ProvisionedGraphConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var ProvisionedGraphConfiguration_memory *smithy.Schema
 
 var _ProvisionedMemory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
@@ -1129,7 +1156,7 @@ var CancelQueryInput_queryId *smithy.Schema
 var CreateGraphInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "CreateGraphInput",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var CreateGraphInput_graphName *smithy.Schema
 
 var CreateGraphInput_tags *smithy.Schema
@@ -1146,10 +1173,12 @@ var CreateGraphInput_deletionProtection *smithy.Schema
 
 var CreateGraphInput_provisionedMemory *smithy.Schema
 
+var CreateGraphInput_computeConfiguration *smithy.Schema
+
 var CreateGraphOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "CreateGraphOutput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var CreateGraphOutput_id *smithy.Schema
 
 var CreateGraphOutput_name *smithy.Schema
@@ -1163,6 +1192,8 @@ var CreateGraphOutput_statusReason *smithy.Schema
 var CreateGraphOutput_createTime *smithy.Schema
 
 var CreateGraphOutput_provisionedMemory *smithy.Schema
+
+var CreateGraphOutput_computeConfiguration *smithy.Schema
 
 var CreateGraphOutput_endpoint *smithy.Schema
 
@@ -1299,7 +1330,7 @@ var DeleteGraphInput_skipSnapshot *smithy.Schema
 var DeleteGraphOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "DeleteGraphOutput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var DeleteGraphOutput_id *smithy.Schema
 
 var DeleteGraphOutput_name *smithy.Schema
@@ -1313,6 +1344,8 @@ var DeleteGraphOutput_statusReason *smithy.Schema
 var DeleteGraphOutput_createTime *smithy.Schema
 
 var DeleteGraphOutput_provisionedMemory *smithy.Schema
+
+var DeleteGraphOutput_computeConfiguration *smithy.Schema
 
 var DeleteGraphOutput_endpoint *smithy.Schema
 
@@ -1439,7 +1472,7 @@ var GetGraphInput_graphIdentifier *smithy.Schema
 var GetGraphOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "GetGraphOutput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var GetGraphOutput_id *smithy.Schema
 
 var GetGraphOutput_name *smithy.Schema
@@ -1453,6 +1486,8 @@ var GetGraphOutput_statusReason *smithy.Schema
 var GetGraphOutput_createTime *smithy.Schema
 
 var GetGraphOutput_provisionedMemory *smithy.Schema
+
+var GetGraphOutput_computeConfiguration *smithy.Schema
 
 var GetGraphOutput_endpoint *smithy.Schema
 
@@ -1713,7 +1748,7 @@ var ResetGraphInput_skipSnapshot *smithy.Schema
 var ResetGraphOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "ResetGraphOutput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var ResetGraphOutput_id *smithy.Schema
 
 var ResetGraphOutput_name *smithy.Schema
@@ -1727,6 +1762,8 @@ var ResetGraphOutput_statusReason *smithy.Schema
 var ResetGraphOutput_createTime *smithy.Schema
 
 var ResetGraphOutput_provisionedMemory *smithy.Schema
+
+var ResetGraphOutput_computeConfiguration *smithy.Schema
 
 var ResetGraphOutput_endpoint *smithy.Schema
 
@@ -1747,12 +1784,14 @@ var ResetGraphOutput_buildNumber *smithy.Schema
 var RestoreGraphFromSnapshotInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "RestoreGraphFromSnapshotInput",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var RestoreGraphFromSnapshotInput_snapshotIdentifier *smithy.Schema
 
 var RestoreGraphFromSnapshotInput_graphName *smithy.Schema
 
 var RestoreGraphFromSnapshotInput_provisionedMemory *smithy.Schema
+
+var RestoreGraphFromSnapshotInput_computeConfiguration *smithy.Schema
 
 var RestoreGraphFromSnapshotInput_deletionProtection *smithy.Schema
 
@@ -1765,7 +1804,7 @@ var RestoreGraphFromSnapshotInput_publicConnectivity *smithy.Schema
 var RestoreGraphFromSnapshotOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "RestoreGraphFromSnapshotOutput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var RestoreGraphFromSnapshotOutput_id *smithy.Schema
 
 var RestoreGraphFromSnapshotOutput_name *smithy.Schema
@@ -1779,6 +1818,8 @@ var RestoreGraphFromSnapshotOutput_statusReason *smithy.Schema
 var RestoreGraphFromSnapshotOutput_createTime *smithy.Schema
 
 var RestoreGraphFromSnapshotOutput_provisionedMemory *smithy.Schema
+
+var RestoreGraphFromSnapshotOutput_computeConfiguration *smithy.Schema
 
 var RestoreGraphFromSnapshotOutput_endpoint *smithy.Schema
 
@@ -1849,7 +1890,7 @@ var StartGraphInput_graphIdentifier *smithy.Schema
 var StartGraphOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "StartGraphOutput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var StartGraphOutput_id *smithy.Schema
 
 var StartGraphOutput_name *smithy.Schema
@@ -1863,6 +1904,8 @@ var StartGraphOutput_statusReason *smithy.Schema
 var StartGraphOutput_createTime *smithy.Schema
 
 var StartGraphOutput_provisionedMemory *smithy.Schema
+
+var StartGraphOutput_computeConfiguration *smithy.Schema
 
 var StartGraphOutput_endpoint *smithy.Schema
 
@@ -1929,7 +1972,7 @@ var StopGraphInput_graphIdentifier *smithy.Schema
 var StopGraphOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "StopGraphOutput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var StopGraphOutput_id *smithy.Schema
 
 var StopGraphOutput_name *smithy.Schema
@@ -1943,6 +1986,8 @@ var StopGraphOutput_statusReason *smithy.Schema
 var StopGraphOutput_createTime *smithy.Schema
 
 var StopGraphOutput_provisionedMemory *smithy.Schema
+
+var StopGraphOutput_computeConfiguration *smithy.Schema
 
 var StopGraphOutput_endpoint *smithy.Schema
 
@@ -1989,19 +2034,21 @@ var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
 var UpdateGraphInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "UpdateGraphInput",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var UpdateGraphInput_graphIdentifier *smithy.Schema
 
 var UpdateGraphInput_publicConnectivity *smithy.Schema
 
 var UpdateGraphInput_provisionedMemory *smithy.Schema
 
+var UpdateGraphInput_computeConfiguration *smithy.Schema
+
 var UpdateGraphInput_deletionProtection *smithy.Schema
 
 var UpdateGraphOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunegraph",
 	Name:      "UpdateGraphOutput",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var UpdateGraphOutput_id *smithy.Schema
 
 var UpdateGraphOutput_name *smithy.Schema
@@ -2015,6 +2062,8 @@ var UpdateGraphOutput_statusReason *smithy.Schema
 var UpdateGraphOutput_createTime *smithy.Schema
 
 var UpdateGraphOutput_provisionedMemory *smithy.Schema
+
+var UpdateGraphOutput_computeConfiguration *smithy.Schema
 
 var UpdateGraphOutput_endpoint *smithy.Schema
 
@@ -2038,6 +2087,14 @@ func init() {
 	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
 
 	BlankNodeHandling_CONVERT_TO_IRI = BlankNodeHandling.AddMember("CONVERT_TO_IRI", smithyprelude.Unit)
+
+	ProvisionedGraphConfiguration_memory = ProvisionedGraphConfiguration.AddMember("memory", _ProvisionedMemory)
+
+	GraphSessionConfiguration_minMemory = GraphSessionConfiguration.AddMember("minMemory", _GraphSessionMemory)
+
+	ComputeConfiguration_provisionedGraph = ComputeConfiguration.AddMember("provisionedGraph", ProvisionedGraphConfiguration)
+
+	ComputeConfiguration_graphSession = ComputeConfiguration.AddMember("graphSession", GraphSessionConfiguration)
 
 	ConflictExceptionReason_CONCURRENT_MODIFICATION = ConflictExceptionReason.AddMember("CONCURRENT_MODIFICATION", smithyprelude.Unit)
 
@@ -2258,6 +2315,8 @@ func init() {
 	GraphSummary_kmsKeyIdentifier = GraphSummary.AddMember("kmsKeyIdentifier", smithyprelude.String)
 
 	GraphSummary_deletionProtection = GraphSummary.AddMember("deletionProtection", smithyprelude.Boolean)
+
+	GraphSummary_computeConfiguration = GraphSummary.AddMember("computeConfiguration", ComputeConfiguration)
 
 	_GraphSummaryList_member = _GraphSummaryList.AddMember("member", GraphSummary)
 
@@ -2498,6 +2557,8 @@ func init() {
 
 	CreateGraphInput_provisionedMemory = CreateGraphInput.AddMember("provisionedMemory", _ProvisionedMemory)
 
+	CreateGraphInput_computeConfiguration = CreateGraphInput.AddMember("computeConfiguration", ComputeConfiguration)
+
 	CreateGraphOutput_id = CreateGraphOutput.AddMember("id", _GraphId)
 
 	CreateGraphOutput_name = CreateGraphOutput.AddMember("name", _GraphName)
@@ -2511,6 +2572,8 @@ func init() {
 	CreateGraphOutput_createTime = CreateGraphOutput.AddMember("createTime", smithyprelude.Timestamp)
 
 	CreateGraphOutput_provisionedMemory = CreateGraphOutput.AddMember("provisionedMemory", _ProvisionedMemory)
+
+	CreateGraphOutput_computeConfiguration = CreateGraphOutput.AddMember("computeConfiguration", ComputeConfiguration)
 
 	CreateGraphOutput_endpoint = CreateGraphOutput.AddMember("endpoint", smithyprelude.String)
 
@@ -2630,6 +2693,8 @@ func init() {
 
 	DeleteGraphOutput_provisionedMemory = DeleteGraphOutput.AddMember("provisionedMemory", _ProvisionedMemory)
 
+	DeleteGraphOutput_computeConfiguration = DeleteGraphOutput.AddMember("computeConfiguration", ComputeConfiguration)
+
 	DeleteGraphOutput_endpoint = DeleteGraphOutput.AddMember("endpoint", smithyprelude.String)
 
 	DeleteGraphOutput_publicConnectivity = DeleteGraphOutput.AddMember("publicConnectivity", smithyprelude.Boolean)
@@ -2730,6 +2795,8 @@ func init() {
 	GetGraphOutput_createTime = GetGraphOutput.AddMember("createTime", smithyprelude.Timestamp)
 
 	GetGraphOutput_provisionedMemory = GetGraphOutput.AddMember("provisionedMemory", _ProvisionedMemory)
+
+	GetGraphOutput_computeConfiguration = GetGraphOutput.AddMember("computeConfiguration", ComputeConfiguration)
 
 	GetGraphOutput_endpoint = GetGraphOutput.AddMember("endpoint", smithyprelude.String)
 
@@ -2904,6 +2971,8 @@ func init() {
 
 	ResetGraphOutput_provisionedMemory = ResetGraphOutput.AddMember("provisionedMemory", _ProvisionedMemory)
 
+	ResetGraphOutput_computeConfiguration = ResetGraphOutput.AddMember("computeConfiguration", ComputeConfiguration)
+
 	ResetGraphOutput_endpoint = ResetGraphOutput.AddMember("endpoint", smithyprelude.String)
 
 	ResetGraphOutput_publicConnectivity = ResetGraphOutput.AddMember("publicConnectivity", smithyprelude.Boolean)
@@ -2926,6 +2995,8 @@ func init() {
 
 	RestoreGraphFromSnapshotInput_provisionedMemory = RestoreGraphFromSnapshotInput.AddMember("provisionedMemory", _ProvisionedMemory)
 
+	RestoreGraphFromSnapshotInput_computeConfiguration = RestoreGraphFromSnapshotInput.AddMember("computeConfiguration", ComputeConfiguration)
+
 	RestoreGraphFromSnapshotInput_deletionProtection = RestoreGraphFromSnapshotInput.AddMember("deletionProtection", smithyprelude.Boolean)
 
 	RestoreGraphFromSnapshotInput_tags = RestoreGraphFromSnapshotInput.AddMember("tags", _TagMap)
@@ -2947,6 +3018,8 @@ func init() {
 	RestoreGraphFromSnapshotOutput_createTime = RestoreGraphFromSnapshotOutput.AddMember("createTime", smithyprelude.Timestamp)
 
 	RestoreGraphFromSnapshotOutput_provisionedMemory = RestoreGraphFromSnapshotOutput.AddMember("provisionedMemory", _ProvisionedMemory)
+
+	RestoreGraphFromSnapshotOutput_computeConfiguration = RestoreGraphFromSnapshotOutput.AddMember("computeConfiguration", ComputeConfiguration)
 
 	RestoreGraphFromSnapshotOutput_endpoint = RestoreGraphFromSnapshotOutput.AddMember("endpoint", smithyprelude.String)
 
@@ -3016,6 +3089,8 @@ func init() {
 
 	StartGraphOutput_provisionedMemory = StartGraphOutput.AddMember("provisionedMemory", _ProvisionedMemory)
 
+	StartGraphOutput_computeConfiguration = StartGraphOutput.AddMember("computeConfiguration", ComputeConfiguration)
+
 	StartGraphOutput_endpoint = StartGraphOutput.AddMember("endpoint", smithyprelude.String)
 
 	StartGraphOutput_publicConnectivity = StartGraphOutput.AddMember("publicConnectivity", smithyprelude.Boolean)
@@ -3080,6 +3155,8 @@ func init() {
 
 	StopGraphOutput_provisionedMemory = StopGraphOutput.AddMember("provisionedMemory", _ProvisionedMemory)
 
+	StopGraphOutput_computeConfiguration = StopGraphOutput.AddMember("computeConfiguration", ComputeConfiguration)
+
 	StopGraphOutput_endpoint = StopGraphOutput.AddMember("endpoint", smithyprelude.String)
 
 	StopGraphOutput_publicConnectivity = StopGraphOutput.AddMember("publicConnectivity", smithyprelude.Boolean)
@@ -3110,6 +3187,8 @@ func init() {
 
 	UpdateGraphInput_provisionedMemory = UpdateGraphInput.AddMember("provisionedMemory", _ProvisionedMemory)
 
+	UpdateGraphInput_computeConfiguration = UpdateGraphInput.AddMember("computeConfiguration", ComputeConfiguration)
+
 	UpdateGraphInput_deletionProtection = UpdateGraphInput.AddMember("deletionProtection", smithyprelude.Boolean)
 
 	UpdateGraphOutput_id = UpdateGraphOutput.AddMember("id", _GraphId)
@@ -3125,6 +3204,8 @@ func init() {
 	UpdateGraphOutput_createTime = UpdateGraphOutput.AddMember("createTime", smithyprelude.Timestamp)
 
 	UpdateGraphOutput_provisionedMemory = UpdateGraphOutput.AddMember("provisionedMemory", _ProvisionedMemory)
+
+	UpdateGraphOutput_computeConfiguration = UpdateGraphOutput.AddMember("computeConfiguration", ComputeConfiguration)
 
 	UpdateGraphOutput_endpoint = UpdateGraphOutput.AddMember("endpoint", smithyprelude.String)
 

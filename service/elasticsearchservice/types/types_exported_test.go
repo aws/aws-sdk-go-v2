@@ -7,6 +7,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 )
 
+func ExampleCatalogConfiguration_outputUsage() {
+	var union types.CatalogConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CatalogConfigurationMemberServiceManagedS3Tables:
+		_ = v.Value // Value is types.ServiceManagedS3TablesCatalog
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ServiceManagedS3TablesCatalog
+
 func ExampleRetentionOptions_outputUsage() {
 	var union types.RetentionOptions
 	// type switches can be used to check the union value

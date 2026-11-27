@@ -9,6 +9,57 @@ import (
 	"time"
 )
 
+// The compute configuration of a graph. A graph is either a provisioned graph or
+// a graph session.
+//
+// The following types satisfy this interface:
+//
+//	ComputeConfigurationMemberGraphSession
+//	ComputeConfigurationMemberProvisionedGraph
+type ComputeConfiguration interface {
+	isComputeConfiguration()
+}
+
+// Configuration for a graph session. A graph session uses ephemeral compute that
+// is bootstrapped when a query is sent to the graph. The compute is automatically
+// stopped after a few minutes with no traffic; the next query bootstraps the
+// compute again. Queries that bootstrap the compute are subject to cold start
+// latency.
+type ComputeConfigurationMemberGraphSession struct {
+	Value GraphSessionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ComputeConfigurationMemberGraphSession) isComputeConfiguration() {}
+func (v *ComputeConfigurationMemberGraphSession) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComputeConfiguration_graphSession)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ComputeConfigurationMemberGraphSession) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Configuration for a provisioned graph. A provisioned graph uses dedicated
+// compute that is always available. Use provisioned graphs for workloads that
+// require higher memory or predictable latency.
+type ComputeConfigurationMemberProvisionedGraph struct {
+	Value ProvisionedGraphConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ComputeConfigurationMemberProvisionedGraph) isComputeConfiguration() {}
+func (v *ComputeConfigurationMemberProvisionedGraph) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComputeConfiguration_provisionedGraph)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ComputeConfigurationMemberProvisionedGraph) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // Contains information about an edge in a Neptune Analytics graph.
 type EdgeStructure struct {
 
@@ -533,6 +584,42 @@ func (v *GraphDataSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The compute configuration for a graph session.
+type GraphSessionConfiguration struct {
+
+	// The minimum Session Neptune Capacity Units (s-NCUs) available to the graph
+	// session.
+	//
+	// A graph session can burst up to 2x the configured min memory. For example, a
+	// minMemory of 4 can burst up to 8 s-NCUs, and a minMemory of 8 can burst up to
+	// 16 s-NCUs.
+	MinMemory *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *GraphSessionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GraphSessionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GraphSessionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinMemory != nil {
+		s.WriteInt32(schemas.GraphSessionConfiguration_minMemory, *v.MinMemory)
+	}
+}
+func (v *GraphSessionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GraphSessionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GraphSessionConfiguration_minMemory:
+			v.MinMemory = new(int32)
+			return d.ReadInt32(schemas.GraphSessionConfiguration_minMemory, v.MinMemory)
+		}
+		return nil
+	})
+}
+
 // Details about a graph snapshot.
 type GraphSnapshotSummary struct {
 
@@ -650,6 +737,10 @@ type GraphSummary struct {
 	// This member is required.
 	Name *string
 
+	// The compute configuration of the graph: either a provisioned graph or a graph
+	// session.
+	ComputeConfiguration ComputeConfiguration
+
 	// If true , deletion protection is enabled for the graph.
 	DeletionProtection *bool
 
@@ -661,6 +752,13 @@ type GraphSummary struct {
 
 	// The number of memory-optimized Neptune Capacity Units (m-NCUs) allocated to the
 	// graph.
+	//
+	// This field is deprecated. For backward compatibility, it returns memory for a
+	// provisionedGraph and minMemory for a graphSession . Use computeConfiguration
+	// instead.
+	//
+	// Deprecated: ProvisionedMemory is deprecated. Refer to ComputeConfiguration
+	// instead.
 	ProvisionedMemory *int32
 
 	// If true , the graph has a public endpoint, otherwise not.
@@ -684,6 +782,9 @@ func (v *GraphSummary) Serialize(s smithy.ShapeSerializer) {
 func (v *GraphSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.GraphSummary_arn, *v.Arn)
+	}
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.GraphSummary_computeConfiguration, v.ComputeConfiguration)
 	}
 	if v.DeletionProtection != nil {
 		s.WriteBool(schemas.GraphSummary_deletionProtection, *v.DeletionProtection)
@@ -719,6 +820,8 @@ func (v *GraphSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GraphSummary_arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.GraphSummary_arn, v.Arn)
+		case schemas.GraphSummary_computeConfiguration:
+			return deserializeComputeConfiguration(d, schemas.GraphSummary_computeConfiguration, &v.ComputeConfiguration)
 		case schemas.GraphSummary_deletionProtection:
 			v.DeletionProtection = new(bool)
 			return d.ReadBool(schemas.GraphSummary_deletionProtection, v.DeletionProtection)
@@ -1186,6 +1289,40 @@ func (v *PrivateGraphEndpointSummary) Deserialize(d smithy.ShapeDeserializer) er
 	})
 }
 
+// The compute configuration for a provisioned graph.
+type ProvisionedGraphConfiguration struct {
+
+	// The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the
+	// graph.
+	//
+	// This member is required.
+	Memory *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProvisionedGraphConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProvisionedGraphConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProvisionedGraphConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Memory != nil {
+		s.WriteInt32(schemas.ProvisionedGraphConfiguration_memory, *v.Memory)
+	}
+}
+func (v *ProvisionedGraphConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProvisionedGraphConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProvisionedGraphConfiguration_memory:
+			v.Memory = new(int32)
+			return d.ReadInt32(schemas.ProvisionedGraphConfiguration_memory, v.Memory)
+		}
+		return nil
+	})
+}
+
 // Details of the query listed.
 type QuerySummary struct {
 
@@ -1304,4 +1441,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isImportOptions() {}
+func (*UnknownUnionMember) isComputeConfiguration() {}
+func (*UnknownUnionMember) isImportOptions()        {}

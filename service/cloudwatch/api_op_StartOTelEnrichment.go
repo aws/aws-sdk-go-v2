@@ -14,16 +14,20 @@ import (
 // Enables enrichment and PromQL access for CloudWatch vended metrics for [supported Amazon Web Services resources] in the
 // account. Once enabled, metrics that contain a resource identifier dimension (for
 // example, EC2 CPUUtilization with an InstanceId dimension) are enriched with
-// resource ARN and resource tag labels and become queryable using PromQL.
+// resource ARN labels and, optionally, resource tag labels, and become queryable
+// using PromQL.
 //
-// Before calling this operation, you must enable resource tags on telemetry for
-// your account. For more information, see [Enable resource tags on telemetry].
+// To include resource tag labels, you must also enable resource tags on telemetry
+// for the account. For more information, see [Enable resource tags on telemetry]. If EnableTagEnrichment is false ,
+// enrichment reads no resource tags, so it does not require resource tags on
+// telemetry.
 //
 // Optionally, IncludeFilters and ExcludeFilters limit enrichment to a subset of
-// the account's metrics. These filters are stored only when this operation starts
-// enrichment. Calling StartOTelEnrichment for an account where enrichment is
-// already running has no effect and does not modify the filters that are applied.
-// To change them, use [UpdateOTelEnrichment].
+// the account's metrics, and EnableTagEnrichment controls whether enriched
+// metrics include resource tag labels. These settings are stored only when this
+// operation starts enrichment. Calling StartOTelEnrichment for an account where
+// enrichment is already running has no effect and does not modify the filters or
+// the tag enrichment setting that are applied. To change them, use [UpdateOTelEnrichment].
 //
 // [supported Amazon Web Services resources]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html
 // [UpdateOTelEnrichment]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html
@@ -44,6 +48,17 @@ func (c *Client) StartOTelEnrichment(ctx context.Context, params *StartOTelEnric
 }
 
 type StartOTelEnrichmentInput struct {
+
+	// Specifies whether enriched metrics include resource tag labels. If true ,
+	// enriched metrics include resource tag labels. If false , they include resource
+	// ARN labels but no resource tag labels. If you omit this parameter, the default
+	// is true .
+	//
+	// When EnableTagEnrichment is true , enriched metrics that carry resource tag
+	// labels are charged at the OTel enrichment rate. For more information, see [Amazon CloudWatch Pricing].
+	//
+	// [Amazon CloudWatch Pricing]: https://aws.amazon.com/cloudwatch/pricing/
+	EnableTagEnrichment *bool
 
 	// The metric namespaces, and the metric names, to leave unenriched. If this
 	// parameter is omitted, nothing is excluded.
@@ -73,6 +88,9 @@ func (v *StartOTelEnrichmentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartOTelEnrichmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableTagEnrichment != nil {
+		s.WriteBool(schemas.StartOTelEnrichmentInput_EnableTagEnrichment, *v.EnableTagEnrichment)
+	}
 	if v.ExcludeFilters != nil {
 		serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentInput_ExcludeFilters, v.ExcludeFilters)
 	}
@@ -85,6 +103,9 @@ type StartOTelEnrichmentOutput struct {
 
 	// The date and time that enrichment started for the account.
 	CreatedAt *time.Time
+
+	// Specifies whether enriched metrics include resource tag labels for the account.
+	EnableTagEnrichment *bool
 
 	// The exclude filters that are stored for the account.
 	ExcludeFilters []types.OTelEnrichmentMetricSelector
@@ -112,6 +133,9 @@ func (v *StartOTelEnrichmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.StartOTelEnrichmentOutput_CreatedAt, *v.CreatedAt)
 	}
+	if v.EnableTagEnrichment != nil {
+		s.WriteBool(schemas.StartOTelEnrichmentOutput_EnableTagEnrichment, *v.EnableTagEnrichment)
+	}
 	if v.ExcludeFilters != nil {
 		serializeOTelEnrichmentMetricSelectorList(s, schemas.StartOTelEnrichmentOutput_ExcludeFilters, v.ExcludeFilters)
 	}
@@ -128,6 +152,9 @@ func (v *StartOTelEnrichmentOutput) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.StartOTelEnrichmentOutput_CreatedAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.StartOTelEnrichmentOutput_CreatedAt, v.CreatedAt)
+		case schemas.StartOTelEnrichmentOutput_EnableTagEnrichment:
+			v.EnableTagEnrichment = new(bool)
+			return d.ReadBool(schemas.StartOTelEnrichmentOutput_EnableTagEnrichment, v.EnableTagEnrichment)
 		case schemas.StartOTelEnrichmentOutput_ExcludeFilters:
 			return deserializeOTelEnrichmentMetricSelectorList(d, schemas.StartOTelEnrichmentOutput_ExcludeFilters, &v.ExcludeFilters)
 		case schemas.StartOTelEnrichmentOutput_IncludeFilters:

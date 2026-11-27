@@ -673,6 +673,28 @@ var _CancelledChangePropertyList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _CancelledChangePropertyList_member *smithy.Schema
 
+var CatalogConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticsearchservice",
+	Name:      "CatalogConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var CatalogConfiguration_ServiceManagedS3Tables *smithy.Schema
+
+var CatalogOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticsearchservice",
+	Name:      "CatalogOptions",
+}, smithy.ShapeTypeStructure, 2)
+var CatalogOptions_Enabled *smithy.Schema
+
+var CatalogOptions_Catalog *smithy.Schema
+
+var CatalogOptionsStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticsearchservice",
+	Name:      "CatalogOptionsStatus",
+}, smithy.ShapeTypeStructure, 2)
+var CatalogOptionsStatus_Options *smithy.Schema
+
+var CatalogOptionsStatus_Status *smithy.Schema
+
 var ChangeProgressDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "ChangeProgressDetails",
@@ -1263,7 +1285,7 @@ var ElasticsearchClusterConfigStatus_Status *smithy.Schema
 var ElasticsearchDomainConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "ElasticsearchDomainConfig",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var ElasticsearchDomainConfig_ElasticsearchVersion *smithy.Schema
 
 var ElasticsearchDomainConfig_ElasticsearchClusterConfig *smithy.Schema
@@ -1286,6 +1308,8 @@ var ElasticsearchDomainConfig_AdvancedOptions *smithy.Schema
 
 var ElasticsearchDomainConfig_LogPublishingOptions *smithy.Schema
 
+var ElasticsearchDomainConfig_CatalogOptions *smithy.Schema
+
 var ElasticsearchDomainConfig_DomainEndpointOptions *smithy.Schema
 
 var ElasticsearchDomainConfig_AdvancedSecurityOptions *smithy.Schema
@@ -1307,7 +1331,7 @@ var ElasticsearchDomainConfig_EngineMode *smithy.Schema
 var ElasticsearchDomainStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "ElasticsearchDomainStatus",
-}, smithy.ShapeTypeStructure, 31)
+}, smithy.ShapeTypeStructure, 32)
 var ElasticsearchDomainStatus_DomainId *smithy.Schema
 
 var ElasticsearchDomainStatus_DomainName *smithy.Schema
@@ -1347,6 +1371,8 @@ var ElasticsearchDomainStatus_NodeToNodeEncryptionOptions *smithy.Schema
 var ElasticsearchDomainStatus_AdvancedOptions *smithy.Schema
 
 var ElasticsearchDomainStatus_LogPublishingOptions *smithy.Schema
+
+var ElasticsearchDomainStatus_CatalogOptions *smithy.Schema
 
 var ElasticsearchDomainStatus_ServiceSoftwareOptions *smithy.Schema
 
@@ -1737,6 +1763,11 @@ var _Issues = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Issues",
 }, smithy.ShapeTypeList, 1)
 var _Issues_member *smithy.Schema
+
+var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticsearchservice",
+	Name:      "KmsKeyArn",
+}, smithy.ShapeTypeString, 0)
 
 var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
@@ -2276,6 +2307,14 @@ var _S3Key = smithy.NewSchema(smithy.ShapeID{
 	Name:      "S3Key",
 }, smithy.ShapeTypeString, 0)
 
+var S3TablesEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticsearchservice",
+	Name:      "S3TablesEncryptionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var S3TablesEncryptionConfiguration_Enabled *smithy.Schema
+
+var S3TablesEncryptionConfiguration_KmsKeyArn *smithy.Schema
+
 var _SAMLEntityId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "SAMLEntityId",
@@ -2360,6 +2399,12 @@ var ScheduledAutoTuneSeverityType_LOW *smithy.Schema
 var ScheduledAutoTuneSeverityType_MEDIUM *smithy.Schema
 
 var ScheduledAutoTuneSeverityType_HIGH *smithy.Schema
+
+var ServiceManagedS3TablesCatalog = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.elasticsearchservice",
+	Name:      "ServiceManagedS3TablesCatalog",
+}, smithy.ShapeTypeStructure, 1)
+var ServiceManagedS3TablesCatalog_EncryptionConfiguration *smithy.Schema
 
 var ServiceSoftwareOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
@@ -2879,7 +2924,7 @@ var CancelElasticsearchServiceSoftwareUpdateResponse_ServiceSoftwareOptions *smi
 var CreateElasticsearchDomainRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "CreateElasticsearchDomainRequest",
-}, smithy.ShapeTypeStructure, 20)
+}, smithy.ShapeTypeStructure, 21)
 var CreateElasticsearchDomainRequest_DomainName *smithy.Schema
 
 var CreateElasticsearchDomainRequest_ElasticsearchVersion *smithy.Schema
@@ -2903,6 +2948,8 @@ var CreateElasticsearchDomainRequest_NodeToNodeEncryptionOptions *smithy.Schema
 var CreateElasticsearchDomainRequest_AdvancedOptions *smithy.Schema
 
 var CreateElasticsearchDomainRequest_LogPublishingOptions *smithy.Schema
+
+var CreateElasticsearchDomainRequest_CatalogOptions *smithy.Schema
 
 var CreateElasticsearchDomainRequest_DomainEndpointOptions *smithy.Schema
 
@@ -3546,7 +3593,7 @@ var UpdateCloneResponse_RetentionOptions *smithy.Schema
 var UpdateElasticsearchDomainConfigRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.elasticsearchservice",
 	Name:      "UpdateElasticsearchDomainConfigRequest",
-}, smithy.ShapeTypeStructure, 19)
+}, smithy.ShapeTypeStructure, 20)
 var UpdateElasticsearchDomainConfigRequest_DomainName *smithy.Schema
 
 var UpdateElasticsearchDomainConfigRequest_ElasticsearchClusterConfig *smithy.Schema
@@ -3564,6 +3611,8 @@ var UpdateElasticsearchDomainConfigRequest_AdvancedOptions *smithy.Schema
 var UpdateElasticsearchDomainConfigRequest_AccessPolicies *smithy.Schema
 
 var UpdateElasticsearchDomainConfigRequest_LogPublishingOptions *smithy.Schema
+
+var UpdateElasticsearchDomainConfigRequest_CatalogOptions *smithy.Schema
 
 var UpdateElasticsearchDomainConfigRequest_DomainEndpointOptions *smithy.Schema
 
@@ -3893,6 +3942,22 @@ func init() {
 	CancelledChangeProperty_ActiveValue = CancelledChangeProperty.AddMember("ActiveValue", _String)
 
 	_CancelledChangePropertyList_member = _CancelledChangePropertyList.AddMember("member", CancelledChangeProperty)
+
+	S3TablesEncryptionConfiguration_Enabled = S3TablesEncryptionConfiguration.AddMember("Enabled", _Boolean)
+
+	S3TablesEncryptionConfiguration_KmsKeyArn = S3TablesEncryptionConfiguration.AddMember("KmsKeyArn", _KmsKeyArn)
+
+	ServiceManagedS3TablesCatalog_EncryptionConfiguration = ServiceManagedS3TablesCatalog.AddMember("EncryptionConfiguration", S3TablesEncryptionConfiguration)
+
+	CatalogConfiguration_ServiceManagedS3Tables = CatalogConfiguration.AddMember("ServiceManagedS3Tables", ServiceManagedS3TablesCatalog)
+
+	CatalogOptions_Enabled = CatalogOptions.AddMember("Enabled", _Boolean)
+
+	CatalogOptions_Catalog = CatalogOptions.AddMember("Catalog", CatalogConfiguration)
+
+	CatalogOptionsStatus_Options = CatalogOptionsStatus.AddMember("Options", CatalogOptions)
+
+	CatalogOptionsStatus_Status = CatalogOptionsStatus.AddMember("Status", OptionStatus)
 
 	ConfigChangeStatus_PENDING = ConfigChangeStatus.AddMember("PENDING", smithyprelude.Unit)
 
@@ -4454,6 +4519,8 @@ func init() {
 
 	ElasticsearchDomainConfig_LogPublishingOptions = ElasticsearchDomainConfig.AddMember("LogPublishingOptions", LogPublishingOptionsStatus)
 
+	ElasticsearchDomainConfig_CatalogOptions = ElasticsearchDomainConfig.AddMember("CatalogOptions", CatalogOptionsStatus)
+
 	ElasticsearchDomainConfig_DomainEndpointOptions = ElasticsearchDomainConfig.AddMember("DomainEndpointOptions", DomainEndpointOptionsStatus)
 
 	ElasticsearchDomainConfig_AdvancedSecurityOptions = ElasticsearchDomainConfig.AddMember("AdvancedSecurityOptions", AdvancedSecurityOptionsStatus)
@@ -4531,6 +4598,8 @@ func init() {
 	ElasticsearchDomainStatus_AdvancedOptions = ElasticsearchDomainStatus.AddMember("AdvancedOptions", _AdvancedOptions)
 
 	ElasticsearchDomainStatus_LogPublishingOptions = ElasticsearchDomainStatus.AddMember("LogPublishingOptions", _LogPublishingOptions)
+
+	ElasticsearchDomainStatus_CatalogOptions = ElasticsearchDomainStatus.AddMember("CatalogOptions", CatalogOptions)
 
 	ElasticsearchDomainStatus_ServiceSoftwareOptions = ElasticsearchDomainStatus.AddMember("ServiceSoftwareOptions", ServiceSoftwareOptions)
 
@@ -4950,6 +5019,8 @@ func init() {
 
 	CreateElasticsearchDomainRequest_LogPublishingOptions = CreateElasticsearchDomainRequest.AddMember("LogPublishingOptions", _LogPublishingOptions)
 
+	CreateElasticsearchDomainRequest_CatalogOptions = CreateElasticsearchDomainRequest.AddMember("CatalogOptions", CatalogOptions)
+
 	CreateElasticsearchDomainRequest_DomainEndpointOptions = CreateElasticsearchDomainRequest.AddMember("DomainEndpointOptions", DomainEndpointOptions)
 
 	CreateElasticsearchDomainRequest_AdvancedSecurityOptions = CreateElasticsearchDomainRequest.AddMember("AdvancedSecurityOptions", AdvancedSecurityOptionsInput)
@@ -5285,6 +5356,8 @@ func init() {
 	UpdateElasticsearchDomainConfigRequest_AccessPolicies = UpdateElasticsearchDomainConfigRequest.AddMember("AccessPolicies", _PolicyDocument)
 
 	UpdateElasticsearchDomainConfigRequest_LogPublishingOptions = UpdateElasticsearchDomainConfigRequest.AddMember("LogPublishingOptions", _LogPublishingOptions)
+
+	UpdateElasticsearchDomainConfigRequest_CatalogOptions = UpdateElasticsearchDomainConfigRequest.AddMember("CatalogOptions", CatalogOptions)
 
 	UpdateElasticsearchDomainConfigRequest_DomainEndpointOptions = UpdateElasticsearchDomainConfigRequest.AddMember("DomainEndpointOptions", DomainEndpointOptions)
 

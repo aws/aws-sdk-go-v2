@@ -5232,6 +5232,11 @@ type RateCardItem struct {
 	// to be charged.
 	Price *string
 
+	// The per-Region price overrides for the product dimension. When a Regional price
+	// is present for an AWS Region, it replaces the default price . This field is
+	// absent when the offer doesn't define regional price overrides.
+	RegionalPrices []RegionalPrice
+
 	noSmithyDocumentSerde
 }
 
@@ -5248,6 +5253,9 @@ func (v *RateCardItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Price != nil {
 		s.WriteString(schemas.RateCardItem_price, *v.Price)
 	}
+	if v.RegionalPrices != nil {
+		serializeRegionalPriceList(s, schemas.RateCardItem_regionalPrices, v.RegionalPrices)
+	}
 }
 func (v *RateCardItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RateCardItem, func(s *smithy.Schema) error {
@@ -5258,6 +5266,8 @@ func (v *RateCardItem) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RateCardItem_price:
 			v.Price = new(string)
 			return d.ReadString(schemas.RateCardItem_price, v.Price)
+		case schemas.RateCardItem_regionalPrices:
+			return deserializeRegionalPriceList(d, schemas.RateCardItem_regionalPrices, &v.RegionalPrices)
 		}
 		return nil
 	})
@@ -5326,6 +5336,50 @@ func (v *RecurringPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RecurringPaymentTerm_type:
 			v.Type = new(string)
 			return d.ReadString(schemas.RecurringPaymentTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
+// A per-Region price override for a product dimension in a rate card.
+type RegionalPrice struct {
+
+	// The per unit price for the product dimension in the specified AWS Region.
+	//
+	// This member is required.
+	Price *string
+
+	// The AWS Region that the price override applies to.
+	//
+	// This member is required.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RegionalPrice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionalPrice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionalPrice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Price != nil {
+		s.WriteString(schemas.RegionalPrice_price, *v.Price)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.RegionalPrice_region, *v.Region)
+	}
+}
+func (v *RegionalPrice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionalPrice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionalPrice_price:
+			v.Price = new(string)
+			return d.ReadString(schemas.RegionalPrice_price, v.Price)
+		case schemas.RegionalPrice_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.RegionalPrice_region, v.Region)
 		}
 		return nil
 	})

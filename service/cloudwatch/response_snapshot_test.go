@@ -2460,8 +2460,9 @@ func TestCheckResponseSnapshot_GetOTelEnrichment(t *testing.T) {
 				},
 			},
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EnableTagEnrichment: ptr.Bool(true),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetOTelEnrichment.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3922,8 +3923,9 @@ func TestCheckResponseSnapshot_StartOTelEnrichment(t *testing.T) {
 				},
 			},
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EnableTagEnrichment: ptr.Bool(true),
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartOTelEnrichment.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3966,6 +3968,7 @@ func TestCheckResponseSnapshot_StartOTelEnrichment(t *testing.T) {
 				},
 			},
 		},
+		EnableTagEnrichment: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -4108,8 +4111,9 @@ func TestCheckResponseSnapshot_UpdateOTelEnrichment(t *testing.T) {
 				},
 			},
 		},
-		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CreatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EnableTagEnrichment: ptr.Bool(true),
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateOTelEnrichment.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -4152,6 +4156,7 @@ func TestCheckResponseSnapshot_UpdateOTelEnrichment(t *testing.T) {
 				},
 			},
 		},
+		EnableTagEnrichment: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5242,6 +5247,7 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 				},
 			},
 		},
+		EnableTagEnrichment: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

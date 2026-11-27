@@ -2241,6 +2241,21 @@ func validateAWSDomainInformation(v *types.AWSDomainInformation) error {
 	}
 }
 
+func validateCatalogOptions(v *types.CatalogOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CatalogOptions"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCloudWatchDirectQueryDataSource(v *types.CloudWatchDirectQueryDataSource) error {
 	if v == nil {
 		return nil
@@ -3091,6 +3106,11 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	if v.ClusterConfig != nil {
 		if err := validateClusterConfig(v.ClusterConfig); err != nil {
 			invalidParams.AddNested("ClusterConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogOptions != nil {
+		if err := validateCatalogOptions(v.CatalogOptions); err != nil {
+			invalidParams.AddNested("CatalogOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AdvancedSecurityOptions != nil {
@@ -4352,6 +4372,11 @@ func validateOpUpdateDomainConfigInput(v *UpdateDomainConfigInput) error {
 	if v.ClusterConfig != nil {
 		if err := validateClusterConfig(v.ClusterConfig); err != nil {
 			invalidParams.AddNested("ClusterConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogOptions != nil {
+		if err := validateCatalogOptions(v.CatalogOptions); err != nil {
+			invalidParams.AddNested("CatalogOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.AdvancedSecurityOptions != nil {
