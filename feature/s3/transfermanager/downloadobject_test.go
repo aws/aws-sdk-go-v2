@@ -691,3 +691,189 @@ func TestDownloadObjectWithContextCanceled(t *testing.T) {
 		})
 	}
 }
+
+func TestGetRespRange(t *testing.T) {
+	cases := map[string]struct {
+		rng         string
+		expectStart int64
+		expectEnd   int64
+		expectErr   string
+	}{
+		"valid standard range": {
+			rng:         "bytes 0-9/100",
+			expectStart: 0,
+			expectEnd:   9,
+		},
+		"valid single byte range": {
+			rng:         "bytes 0-0/1",
+			expectStart: 0,
+			expectEnd:   0,
+		},
+		"valid non-zero start": {
+			rng:         "bytes 100-199/200",
+			expectStart: 100,
+			expectEnd:   199,
+		},
+		"valid large chunk range": {
+			rng:         "bytes 0-8388607/20971520",
+			expectStart: 0,
+			expectEnd:   8388607,
+		},
+		"valid unknown total": {
+			rng:         "bytes 0-9/*",
+			expectStart: 0,
+			expectEnd:   9,
+		},
+		"valid without total": {
+			rng:         "bytes 0-9",
+			expectStart: 0,
+			expectEnd:   9,
+		},
+		"valid empty total": {
+			rng:         "bytes 0-9/",
+			expectStart: 0,
+			expectEnd:   9,
+		},
+		"valid trailing token": {
+			rng:         "bytes 0-9/100 extra",
+			expectStart: 0,
+			expectEnd:   9,
+		},
+		"empty": {
+			rng:         "",
+			expectStart: -1,
+			expectEnd:   -1,
+			expectErr:   "invalid content range format",
+		},
+		"unit only without space": {
+			rng:         "bytes",
+			expectStart: -1,
+			expectEnd:   -1,
+			expectErr:   "invalid content range format",
+		},
+		"equals instead of space": {
+			rng:         "bytes=0-9/100",
+			expectStart: -1,
+			expectEnd:   -1,
+			expectErr:   "invalid content range format",
+		},
+		"missing dash in byte range": {
+			rng:         "bytes 5/10",
+			expectStart: -1,
+			expectEnd:   -1,
+			expectErr:   "invalid content range format",
+		},
+		"missing unit and space": {
+			rng:         "0-9/100",
+			expectStart: -1,
+			expectEnd:   -1,
+			expectErr:   "invalid content range format",
+		},
+		"space with empty range": {
+			rng:         "bytes ",
+			expectStart: -1,
+			expectEnd:   -1,
+			expectErr:   "invalid content range format",
+		},
+		"extra dash": {
+			rng:         "bytes 0-5-10/100",
+			expectStart: -1,
+			expectEnd:   -1,
+			expectErr:   "invalid content range format",
+		},
+		"unsatisfied wildcard range": {
+			rng:         "bytes */100",
+			expectStart: -1,
+			expectEnd:   -1,
+			expectErr:   "invalid content range format",
+		},
+		"non-numeric start": {
+			rng:         "bytes a-9/100",
+			expectStart: -1,
+			expectEnd:   -1,
+			expectErr:   "error when parsing response start",
+		},
+		"non-numeric end": {
+			rng:         "bytes 0-b/100",
+			expectStart: -1,
+			expectEnd:   -1,
+			expectErr:   "error when parsing response end",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			start, end, err := getRespRange(c.rng)
+			if c.expectErr != "" {
+				if err == nil {
+					t.Fatalf("expect error containing %q, got nil", c.expectErr)
+				}
+				if !strings.Contains(err.Error(), c.expectErr) {
+					t.Errorf("expect error containing %q, got %q", c.expectErr, err.Error())
+				}
+			} else if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			if e, a := c.expectStart, start; e != a {
+				t.Errorf("expect start %d, got %d", e, a)
+			}
+			if e, a := c.expectEnd, end; e != a {
+				t.Errorf("expect end %d, got %d", e, a)
+			}
+		})
+	}
+}
+
+func TestDownloadObjectMalformedContentRange(t *testing.T) {
+	cases := map[string]struct {
+		downloadType types.GetObjectType
+		contentRange string
+	}{
+		"range download empty content range": {
+			downloadType: types.GetObjectRanges,
+			contentRange: "",
+		},
+		"range download missing space": {
+			downloadType: types.GetObjectRanges,
+			contentRange: "bytes=0-9/100",
+		},
+		"part download missing dash": {
+			downloadType: types.GetObjectParts,
+			contentRange: "bytes 5/10",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			s3Client := &s3testing.TransferManagerLoggingClient{}
+			s3Client.GetObjectFn = func(_ *s3testing.TransferManagerLoggingClient, _ *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+				body := []byte("0123456789")
+				return &s3.GetObjectOutput{
+					Body:          io.NopCloser(bytes.NewReader(body)),
+					ContentLength: aws.Int64(int64(len(body))),
+					ContentRange:  aws.String(c.contentRange),
+					PartsCount:    aws.Int32(1),
+				}, nil
+			}
+
+			mgr := New(s3Client, func(o *Options) {
+				o.Concurrency = 1
+				o.GetObjectType = c.downloadType
+			})
+
+			w := types.NewWriteAtBuffer(make([]byte, 0))
+			_, err := mgr.DownloadObject(context.Background(), &DownloadObjectInput{
+				Bucket:   aws.String("bucket"),
+				Key:      aws.String("key"),
+				WriterAt: w,
+			})
+			if err == nil {
+				t.Fatalf("expected error for malformed Content-Range %q, got nil", c.contentRange)
+			}
+			if !strings.Contains(err.Error(), "invalid content range format") {
+				t.Errorf("expected invalid content range format error, got %q", err.Error())
+			}
+		})
+	}
+}
