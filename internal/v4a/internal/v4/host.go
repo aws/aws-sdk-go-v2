@@ -23,20 +23,15 @@ func getHost(r *http.Request) string {
 	return r.URL.Host
 }
 
-// Hostname returns u.Host, without any port number.
-//
-// If Host is an IPv6 literal with a port number, Hostname returns the
-// IPv6 literal without the square brackets. IPv6 literals may include
-// a zone identifier.
-//
-// Copied from the Go 1.8 standard library (net/url)
+// stripPort returns hostport without any port number, preserving brackets
+// around IPv6 literals for use in HTTP Host headers.
 func stripPort(hostport string) string {
 	colon := strings.IndexByte(hostport, ':')
 	if colon == -1 {
 		return hostport
 	}
 	if i := strings.IndexByte(hostport, ']'); i != -1 {
-		return strings.TrimPrefix(hostport[:i], "[")
+		return hostport[:i+1]
 	}
 	return hostport[:colon]
 }
