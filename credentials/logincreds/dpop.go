@@ -28,13 +28,21 @@ func mkdpop(token *loginToken, htu string) (string, error) {
 		return "", fmt.Errorf("parse key: %w", err)
 	}
 
+	// RFC 7518 §6.2.1.2/6.2.1.3 require the full coordinate size, including
+	// leading zero octets. big.Int.Bytes() omits those, which produces an
+	// invalid JWK for some P-256 points.
+	xb := make([]byte, curvelen)
+	yb := make([]byte, curvelen)
+	key.X.FillBytes(xb)
+	key.Y.FillBytes(yb)
+
 	header, err := jsonb64(&dpopHeader{
 		Typ: "dpop+jwt",
 		Alg: "ES256",
 		Jwk: &dpopHeaderJwk{
 			Kty: "EC",
-			X:   base64.RawURLEncoding.EncodeToString(key.X.Bytes()),
-			Y:   base64.RawURLEncoding.EncodeToString(key.Y.Bytes()),
+			X:   base64.RawURLEncoding.EncodeToString(xb),
+			Y:   base64.RawURLEncoding.EncodeToString(yb),
 			Crv: "P-256",
 		},
 	})
