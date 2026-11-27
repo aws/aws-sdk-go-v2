@@ -1,3 +1,8 @@
+# v1.88.1 (2026-11-27)
+
+* **Dependency Update**: Update smithy-go to v1.28.11
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.88.0 (2026-11-25)
 
 * **Feature**: AWS WAF added support for associating AWS WAF web ACLs with Elastic Load Balancing proxies. You can now use AssociateWebACL, DisassociateWebACL, GetWebACLForResource, and ListResourcesForWebACL with the ELB PROXY resource type to protect your proxies with AWS WAF

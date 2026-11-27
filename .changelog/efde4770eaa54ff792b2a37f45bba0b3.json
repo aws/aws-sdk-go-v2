@@ -1,8 +1,0 @@
-{
-    "id": "efde4770-eaa5-4ff7-92b2-a37f45bba0b3",
-    "type": "feature",
-    "description": "Catalog APIs for Optimized engine domains",
-    "modules": [
-        "service/opensearch"
-    ]
-}

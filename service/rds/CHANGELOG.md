@@ -1,3 +1,9 @@
+# v1.135.0 (2026-11-27)
+
+* **Feature**: Aurora PostgreSQL and Aurora MySQL now let you delete a DB cluster and all its instances in a single API call or console action, without deleting each instance first. Cluster deletion also completes faster.
+* **Dependency Update**: Update smithy-go to v1.28.11
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.134.1 (2026-11-25)
 
 * **Dependency Update**: Update to smithy-go v1.28.10.

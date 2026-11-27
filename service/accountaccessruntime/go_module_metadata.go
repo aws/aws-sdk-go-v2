@@ -3,4 +3,4 @@
 package accountaccessruntime
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.0.3"
+const goModuleVersion = "1.0.4"

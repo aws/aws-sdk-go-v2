@@ -1,3 +1,23 @@
+# Release (2026-11-27)
+
+## General Highlights
+* **Dependency Update**: Update smithy-go to v1.28.11
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.77.0](service/cloudwatch/CHANGELOG.md#v1770-2026-11-27)
+  * **Feature**: CloudWatch OTel enrichment supports a free basic option and a paid tag enrichment option, using the EnableTagEnrichment flag. Set it to true (default) to enrich vended metrics with resource ARN and tag labels for PromQL queries. Set it to false to get the free basic option without resource tags.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.53.0](service/elasticsearchservice/CHANGELOG.md#v1530-2026-11-27)
+  * **Feature**: Catalog APIs for Optimized engine domains
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.33.0](service/marketplaceagreement/CHANGELOG.md#v1330-2026-11-27)
+  * **Feature**: This release adds per-Region pricing to AWS Marketplace usage-based pricing terms. Rate card items can now include Region-specific price overrides. When a Regional price is present for an AWS Region, it replaces the default price for that dimension.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.32.0](service/neptunegraph/CHANGELOG.md#v1320-2026-11-27)
+  * **Feature**: Adds support for Graph Sessions, a new offering backed by on-demand ephemeral compute.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.89.0](service/opensearch/CHANGELOG.md#v1890-2026-11-27)
+  * **Feature**: Catalog APIs for Optimized engine domains
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.135.0](service/rds/CHANGELOG.md#v11350-2026-11-27)
+  * **Feature**: Aurora PostgreSQL and Aurora MySQL now let you delete a DB cluster and all its instances in a single API call or console action, without deleting each instance first. Cluster deletion also completes faster.
+
 # Release (2026-11-25)
 
 ## General Highlights

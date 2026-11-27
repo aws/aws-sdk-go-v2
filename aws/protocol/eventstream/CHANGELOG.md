@@ -1,3 +1,7 @@
+# v1.7.29 (2026-11-27)
+
+* **Dependency Update**: Update smithy-go to v1.28.11
+
 # v1.7.28 (2026-11-25)
 
 * **Bug Fix**: Return an error when encoding an event stream message too long for its 32-bit length field instead of writing a truncated length.

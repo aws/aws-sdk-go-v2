@@ -1,3 +1,9 @@
+# v1.32.0 (2026-11-27)
+
+* **Feature**: Adds support for Graph Sessions, a new offering backed by on-demand ephemeral compute.
+* **Dependency Update**: Update smithy-go to v1.28.11
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.12 (2026-11-25)
 
 * **Dependency Update**: Update to smithy-go v1.28.10.
