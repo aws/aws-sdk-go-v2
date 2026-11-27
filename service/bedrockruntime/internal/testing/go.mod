@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.28
 	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.64.1
 	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.7.23
-	github.com/aws/smithy-go v1.28.10
+	github.com/aws/smithy-go v1.28.11
 )
 
 require (

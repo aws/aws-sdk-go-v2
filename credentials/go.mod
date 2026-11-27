@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sso v1.39.6
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.44.6
 	github.com/aws/aws-sdk-go-v2/service/sts v1.53.1
-	github.com/aws/smithy-go v1.28.10
+	github.com/aws/smithy-go v1.28.11
 )
 
 require (

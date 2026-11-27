@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/credentials v1.21.4
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.116.1
 	github.com/aws/aws-sdk-go-v2/service/sts v1.53.1
-	github.com/aws/smithy-go v1.28.10
+	github.com/aws/smithy-go v1.28.11
 )
 
 require (
