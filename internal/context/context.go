@@ -10,6 +10,7 @@ import (
 type s3BackendKey struct{}
 type checksumInputAlgorithmKey struct{}
 type clockSkew struct{}
+type attemptNum struct{}
 
 const (
 	// S3BackendS3Express identifies the S3Express backend
@@ -61,5 +62,22 @@ func SetIsLongPolling(ctx context.Context, v bool) context.Context {
 // GetIsLongPolling returns whether the operation is long-polling.
 func GetIsLongPolling(ctx context.Context) bool {
 	v, _ := middleware.GetStackValue(ctx, longPollingKey{}).(bool)
+	return v
+}
+
+// SetAttemptNumberContext sets the retry attempt number on the context.
+// Recorded by the retryer for every attempt so loggers bound to the attempt
+// context can tell the request/response of one attempt from those of another.
+// Mirrors the attempt number of the retryMetadata recorded alongside it, which
+// is reported in the Amz-Sdk-Request header and in the attempt results.
+func SetAttemptNumberContext(ctx context.Context, v int) context.Context {
+	return middleware.WithStackValue(ctx, attemptNum{}, v)
+}
+
+// GetAttemptNumberContext gets the retry attempt number from the context.
+// Returns 0 if no attempt number is recorded, e.g. for stacks without a
+// retryer.
+func GetAttemptNumberContext(ctx context.Context) int {
+	v, _ := middleware.GetStackValue(ctx, attemptNum{}).(int)
 	return v
 }
