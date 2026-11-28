@@ -739,3 +739,74 @@ func TestGetObjectUnequalParts(t *testing.T) {
 		})
 	}
 }
+
+func TestGetObjectReadWaitsForCapacityWithoutPolling(t *testing.T) {
+	const partSize = 1024
+	const partsCount = 4
+	slow := func(fn func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)) func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+		return func(c *s3testing.TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+			time.Sleep(20 * time.Millisecond)
+			return fn(c, params)
+		}
+	}
+	cases := map[string]struct {
+		getObjectType types.GetObjectType
+		getObjectFn   func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
+	}{
+		"parts":  {getObjectType: types.GetObjectParts, getObjectFn: s3testing.UnequalPartGetObjectFn},
+		"ranges": {getObjectType: types.GetObjectRanges, getObjectFn: s3testing.RangeGetObjectFn},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			partsData := make([][]byte, partsCount)
+			var expect []byte
+			for i := range partsData {
+				partsData[i] = bytes.Repeat([]byte{byte('A' + i)}, partSize)
+				expect = append(expect, partsData[i]...)
+			}
+
+			s3Client, _, _, _, _, _ := s3testing.NewDownloadClient()
+			s3Client.Data = expect
+			s3Client.PartsData = partsData
+			s3Client.PartsCount = partsCount
+			s3Client.GetObjectFn = slow(c.getObjectFn)
+
+			mgr := New(s3Client, func(o *Options) {
+				o.GetObjectType = c.getObjectType
+				o.PartSizeBytes = partSize
+				o.GetObjectBufferSize = 1
+			})
+
+			out, err := mgr.GetObject(context.Background(), &GetObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			})
+			if err != nil {
+				t.Fatalf("expect no error getting object, got %v", err)
+			}
+
+			var got []byte
+			reads := 0
+			p := make([]byte, 512)
+			for {
+				n, err := out.Body.Read(p)
+				reads++
+				got = append(got, p[:n]...)
+				if err == io.EOF {
+					break
+				}
+				if err != nil {
+					t.Fatalf("expect no error reading body, got %v", err)
+				}
+			}
+
+			if !bytes.Equal(expect, got) {
+				t.Fatalf("expect downloaded object to equal the assembled parts")
+			}
+			if waits, limit := out.Body.(*concurrentReader).dispatchWaits, 4*(reads+partsCount); waits > limit {
+				t.Errorf("expect dispatcher to wait at most %d times while parts download, got %d", limit, waits)
+			}
+		})
+	}
+}
