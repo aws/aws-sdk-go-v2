@@ -1,0 +1,9 @@
+{
+    "id": "bdbbfdb4-5f4d-44a7-9474-9ed2f3121c41",
+    "type": "feature",
+    "description": "Add `AppID` to `Options`. When set, the client includes the app ID in the User-Agent header of every request. `NewFromConfig` sets it from `aws.Config`.",
+    "collapse": false,
+    "modules": [
+        "feature/ec2/imds"
+    ]
+}

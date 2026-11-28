@@ -48,6 +48,12 @@ var defaultAWSConfigResolvers = []awsConfigResolver{
 	// API client request pipeline middleware.
 	resolveAPIOptions,
 
+	// Sets the sdk app ID if present in env var or shared config profile.
+	//
+	// Comes before resolving the DefaultsMode and credentials so that clients
+	// they build from this config, such as EC2 IMDS and STS, include the app ID.
+	resolveAppID,
+
 	// Resolves the DefaultsMode that should be used by SDK clients. If this
 	// mode is set to DefaultsModeAuto.
 	//
@@ -69,9 +75,6 @@ var defaultAWSConfigResolvers = []awsConfigResolver{
 	// Sets the resolved bearer authentication token API clients will use for
 	// httpBearerAuth authentication scheme.
 	resolveBearerAuthToken,
-
-	// Sets the sdk app ID if present in env var or shared config profile
-	resolveAppID,
 
 	resolveBaseEndpoint,
 
